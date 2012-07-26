@@ -1,0 +1,36 @@
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xsi:schemaLocation="
+             http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd
+             http://www.springframework.org/schema/context classpath:/org/springframework/context/config/spring-context-3.1.xsd">
+
+    <beans:bean id="pdfGenUtils" class="org.lawrencebower.docgen.core.generator.utils.PDFGenUtilsImpl"/>
+
+    <beans:bean id="overlayTextRenderer"
+                class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayTextRenderer"/>
+
+    <beans:bean id="customTextRenderer"
+                class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomTextRenderer"/>
+
+    <beans:bean id="customComponentRenderer" class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomComponentRenderer"/>
+    <beans:bean id="overlayComponentRenderer" class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayComponentRenderer"/>
+
+    <beans:bean id="pdfGeneratorAbstract"
+                class="org.lawrencebower.docgen.core.generator.model.AbstractPDFGenerator"
+                abstract="true"/>
+
+    <beans:bean id="pdfGeneratorCustom"
+                class="org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator"
+                parent="pdfGeneratorAbstract"/>
+
+    <beans:bean id="pdfGeneratorOverlay"
+                class="org.lawrencebower.docgen.core.generator.overlay.OverlayPDFGenerator"
+                parent="pdfGeneratorAbstract"/>
+
+    <beans:bean id="overlayDocInfo" class="org.lawrencebower.docgen.core.document.OverlayDocumentInfo"/>
+    <beans:bean id="customDocInfo" class="org.lawrencebower.docgen.core.document.CustomDocumentInfo"/>
+
+    <context:component-scan base-package="org.lawrencebower.docgen.core"/>
+
+</beans:beans>

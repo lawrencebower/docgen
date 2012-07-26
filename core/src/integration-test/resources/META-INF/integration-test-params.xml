@@ -1,0 +1,15 @@
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd">
+
+    <beans:bean name="overlayPDFSourceExample" class="java.lang.String">
+        <beans:constructor-arg value="L:\work\p37.pdf"/>
+    </beans:bean>
+    <beans:bean name="overlayPDFTestOutput" class="java.lang.String">
+        <beans:constructor-arg value="L:\work\p37_example.pdf"/>
+    </beans:bean>
+    <beans:bean name="customPDFTestOutput" class="java.lang.String">
+        <beans:constructor-arg value="L:\work\custom_example.pdf"/>
+    </beans:bean>
+
+</beans:beans>
