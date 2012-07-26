@@ -24,7 +24,7 @@ public abstract class AbstractDocumentInfo implements DocumentInfo {
 
     @Override
     public void setComponents(List<DocComponent> components) {
-         this.components = components;
+        this.components = components;
     }
 
     @Override
