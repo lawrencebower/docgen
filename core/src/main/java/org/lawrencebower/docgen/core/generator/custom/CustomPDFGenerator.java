@@ -25,7 +25,6 @@ public class CustomPDFGenerator extends AbstractPDFGenerator<CustomDocumentInfo>
 
         checkRequiredValuesPresent();
 
-        //   comment
         resetPDFOutputStream();
 
         rendererInfo rendererInfo = getRendererInfo();

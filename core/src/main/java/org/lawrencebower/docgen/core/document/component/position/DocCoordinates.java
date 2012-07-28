@@ -6,7 +6,10 @@ public class DocCoordinates {
     private int width;
     private int height;
 
-    public DocCoordinates(int x, int y, int width, int height) {
+    public DocCoordinates(int x,
+                          int y,
+                          int width,
+                          int height) {
         this.x = x;
         this.y = y;
         this.width = width;

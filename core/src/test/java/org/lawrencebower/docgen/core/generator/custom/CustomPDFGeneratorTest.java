@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:META-INF/core-test-context.xml"})
-public class PDFGeneratorCustomImplTest {
+public class CustomPDFGeneratorTest {
 
     @Autowired
     private CustomPDFGenerator pdfGenerator;
