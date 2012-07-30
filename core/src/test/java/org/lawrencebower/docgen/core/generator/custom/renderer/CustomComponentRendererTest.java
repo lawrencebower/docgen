@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.DocComponentType;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.core.generator.custom.rendererInfo;
+import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
 
 public class CustomComponentRendererTest {
 
@@ -15,7 +15,7 @@ public class CustomComponentRendererTest {
 
         DocComponent unknownComponent = getUnknownComponent();
 
-        rendererInfo rendererInfo = new rendererInfo();
+        CustomComponentRendererInfo rendererInfo = new CustomComponentRendererInfo();
 
         renderer.renderComponent(unknownComponent, rendererInfo);
     }

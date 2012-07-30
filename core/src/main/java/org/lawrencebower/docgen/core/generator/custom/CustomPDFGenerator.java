@@ -27,7 +27,7 @@ public class CustomPDFGenerator extends AbstractPDFGenerator<CustomDocumentInfo>
 
         resetPDFOutputStream();
 
-        rendererInfo rendererInfo = getRendererInfo();
+        CustomComponentRendererInfo rendererInfo = getRendererInfo();
 
         preparePDFWriter(rendererInfo);
 
@@ -38,22 +38,22 @@ public class CustomPDFGenerator extends AbstractPDFGenerator<CustomDocumentInfo>
         return getPDFFromPDFStream();
     }
 
-    private rendererInfo getRendererInfo() {
-        return new rendererInfo();
+    private CustomComponentRendererInfo getRendererInfo() {
+        return new CustomComponentRendererInfo();
     }
 
-    private void closeDocument(rendererInfo rendererInfo) {
+    private void closeDocument(CustomComponentRendererInfo rendererInfo) {
         rendererInfo.closeDocument();
     }
 
-    private void renderComponents(rendererInfo rendererInfo) {
+    private void renderComponents(CustomComponentRendererInfo rendererInfo) {
 
         for (DocComponent docComponent : docInfo.getComponents()) {
             renderComponent(docComponent, rendererInfo);
         }
     }
 
-    private void preparePDFWriter(rendererInfo rendererInfo) {
+    private void preparePDFWriter(CustomComponentRendererInfo rendererInfo) {
         rendererInfo.preparePDFWriter(pdfOutStream);
     }
 
@@ -62,7 +62,7 @@ public class CustomPDFGenerator extends AbstractPDFGenerator<CustomDocumentInfo>
         pdfGenUtils.checkRequiredValuesPresent(docInfo);
     }
 
-    public void renderComponent(DocComponent component, rendererInfo rendererInfo) {
+    public void renderComponent(DocComponent component, CustomComponentRendererInfo rendererInfo) {
         componentRenderer.renderComponent(component, rendererInfo);
     }
 

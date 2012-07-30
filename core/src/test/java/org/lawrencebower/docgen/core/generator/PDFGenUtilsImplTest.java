@@ -1,11 +1,14 @@
 package org.lawrencebower.docgen.core.generator;
 
+import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfStamper;
 import org.lawrencebower.docgen.core.document.OverlayDocumentInfo;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.type.DocType;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtilsImpl;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +18,7 @@ import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class PDFGenUtilsTest {
+public class PDFGenUtilsImplTest {
 
     private PDFGenUtilsImpl pdfGenUtils;
     private OverlayDocumentInfo docInfo;
@@ -98,4 +101,5 @@ public class PDFGenUtilsTest {
         }
         fail();//should not get here
     }
+
 }

@@ -18,8 +18,12 @@ public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocumentInf
 
     private OverlayDocumentInfo docInfo;
 
-    @Autowired
     private OverlayComponentRenderer componentRenderer;
+
+    @Autowired
+    public void setComponentRenderer(OverlayComponentRenderer componentRenderer) {
+        this.componentRenderer = componentRenderer;
+    }
 
     @Override
     public PDFDocument generatePDF(OverlayDocumentInfo docInfo) {
@@ -42,11 +46,7 @@ public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocumentInf
     }
 
     private void closeStamper(PdfStamper pdfStamper) {
-        try {
-            pdfStamper.close();
-        } catch (DocumentException | IOException e) {
-            throw new DocGenException(e);
-        }
+        pdfGenUtils.closePDFStamper(pdfStamper);
     }
 
     private void drawComponentsWithStamper(PdfStamper pdfStamper) {
@@ -61,19 +61,11 @@ public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocumentInf
     }
 
     private PdfStamper getPDFStamper(PdfReader pdfReader) {
-        try {
-            return new PdfStamper(pdfReader, pdfOutStream);
-        } catch (DocumentException | IOException e) {
-            throw new DocGenException(e);
-        }
+        return pdfGenUtils.getPDFStamper(pdfReader, pdfOutStream);
     }
 
     private PdfReader getPDFReaderForSourcePDF(String sourcePDF) {
-        try {
-            return new PdfReader(sourcePDF);
-        } catch (IOException e) {
-            throw new DocGenException(e);
-        }
+        return pdfGenUtils.getPDFReaderForSourcePDF(sourcePDF);
     }
 
     @Override
