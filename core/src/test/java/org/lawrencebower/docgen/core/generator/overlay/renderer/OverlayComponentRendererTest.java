@@ -1,21 +1,21 @@
-package org.lawrencebower.docgen.core.generator.custom.renderer;
+package org.lawrencebower.docgen.core.generator.overlay.renderer;
 
 import org.junit.Test;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.DocComponentType;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
+import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererInfo;
 
-public class CustomComponentRendererTest {
+public class OverlayComponentRendererTest {
 
     @Test(expected = DocGenException.class)
     public void testRenderComponent_passUnknownComponent_throwsError() throws Exception {
 
-        CustomComponentRenderer renderer = new CustomComponentRenderer();
+        OverlayComponentRenderer renderer = new OverlayComponentRenderer();
 
         DocComponent unknownComponent = getUnknownComponent();
 
-        CustomComponentRendererInfo rendererInfo = new CustomComponentRendererInfo(null);
+        OverlayComponentRendererInfo rendererInfo = new OverlayComponentRendererInfo(null);
 
         renderer.renderComponent(unknownComponent, rendererInfo);
     }

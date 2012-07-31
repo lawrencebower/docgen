@@ -6,17 +6,17 @@ import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfWriter;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.DocComponentRendererInfo;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 
 public class CustomComponentRendererInfo implements DocComponentRendererInfo {
 
-    private Document document;
-    private boolean documentDataWritten;
+    protected Document document;
+    protected boolean documentDataWritten;
 
-    public CustomComponentRendererInfo() {
+    public CustomComponentRendererInfo(OutputStream pdfOutStream) {
         makeNewDocument();
+        preparePDFWriter(pdfOutStream);
     }
 
     /**
@@ -27,29 +27,34 @@ public class CustomComponentRendererInfo implements DocComponentRendererInfo {
         return document;
     }
 
-    public void preparePDFWriter(ByteArrayOutputStream pdfOutStream) {
+    private void preparePDFWriter(OutputStream pdfOutStream) {
         try {
             checkOutStreamValid(pdfOutStream);
-            PdfWriter.getInstance(document, pdfOutStream);
-            document.open();
+            PdfWriter instance = PdfWriter.getInstance(document, pdfOutStream);
+            instance.setCompressionLevel(0);
+            checkAndOpenDocument();
         } catch (DocumentException e) {
             throw new DocGenException(e);
         }
     }
 
-    private void checkOutStreamValid(ByteArrayOutputStream pdfOutStream) throws DocumentException {
+    private void checkOutStreamValid(OutputStream pdfOutStream) throws DocumentException {
         if(pdfOutStream == null){
             throw new DocumentException("Null outputStream");
         }
     }
 
-    public void makeNewDocument() {
+    private void makeNewDocument() {
         this.document = new Document();
     }
 
     public void closeDocument() {
-        if (documentDataWritten) {
-            document.close();
+        try {
+            if (documentDataWritten) {
+                document.close();
+            }
+        } catch (Exception e) {
+            throw new DocGenException(e);
         }
     }
 

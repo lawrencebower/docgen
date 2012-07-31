@@ -29,8 +29,6 @@ public class CustomPDFGenerator extends AbstractPDFGenerator<CustomDocumentInfo>
 
         CustomComponentRendererInfo rendererInfo = getRendererInfo();
 
-        preparePDFWriter(rendererInfo);
-
         renderComponents(rendererInfo);
 
         closeDocument(rendererInfo);
@@ -39,7 +37,8 @@ public class CustomPDFGenerator extends AbstractPDFGenerator<CustomDocumentInfo>
     }
 
     private CustomComponentRendererInfo getRendererInfo() {
-        return new CustomComponentRendererInfo();
+
+        return new CustomComponentRendererInfo(pdfOutStream);
     }
 
     private void closeDocument(CustomComponentRendererInfo rendererInfo) {
@@ -51,10 +50,6 @@ public class CustomPDFGenerator extends AbstractPDFGenerator<CustomDocumentInfo>
         for (DocComponent docComponent : docInfo.getComponents()) {
             renderComponent(docComponent, rendererInfo);
         }
-    }
-
-    private void preparePDFWriter(CustomComponentRendererInfo rendererInfo) {
-        rendererInfo.preparePDFWriter(pdfOutStream);
     }
 
     @Override

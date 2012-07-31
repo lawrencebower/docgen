@@ -8,6 +8,8 @@ import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
+import org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils;
+import org.lawrencebower.docgen.core.generator.utils.PDFToImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
@@ -15,6 +17,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.File;
 import java.util.Arrays;
+
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:META-INF/integration-test-config.xml"})
@@ -24,8 +28,19 @@ public class CustomDocumentInfoIntegrationTest {
     CustomDocumentInfo customDocumentInfo;
 
     @Autowired
+    DocGenFileUtils fileUtils;
+
+    @Autowired
     @Qualifier("customPDFTestOutput")
-    String testOutFile;
+    String testOutPDFFile;
+
+    @Autowired
+    @Qualifier("customPDFTestImageOutput")
+    String testOutImageFile;
+
+    @Autowired
+    @Qualifier("customPDFTestExample")
+    String testExampleFile;
 
     @Test
     public void testGeneratePDF_validObject_producesValidPDF() {
@@ -38,7 +53,35 @@ public class CustomDocumentInfoIntegrationTest {
 
         PDFDocument pdfDocument = customDocumentInfo.generatePDF();
 
-        pdfDocument.writeToFile(new File(testOutFile));
+        File outputFile = new File(testOutPDFFile);
+
+        fileUtils.deleteFileIfAlreadyExists(outputFile);
+
+        pdfDocument.writeToFile(outputFile);
+
+        convertToImage(outputFile, testOutImageFile);
+
+        File expectedImageFile = new File(testExampleFile);
+        File generatedImageFile = new File(testOutImageFile + "1.png");
+
+        boolean fileSameAsExpected = fileChecksumsAreSame(expectedImageFile, generatedImageFile);
+
+        assertTrue(fileSameAsExpected);
+    }
+
+    private void convertToImage(File pdfFile, String imageFile) {
+        PDFToImage.pdfToImage(pdfFile, imageFile);
+    }
+
+    private boolean fileChecksumsAreSame(File expectedFile, File outputFile) {
+
+        String expectedChecksum = fileUtils.getChecksum(expectedFile);
+        String outputChecksum = fileUtils.getChecksum(outputFile);
+
+        System.out.println("outputChecksum = " + outputChecksum);
+        System.out.println("expectedChecksum = " + expectedChecksum);
+
+        return expectedChecksum.equals(outputChecksum);
     }
 
     private DocComponent generateSimpleTextComponent() {

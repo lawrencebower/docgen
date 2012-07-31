@@ -2,14 +2,25 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd">
 
-    <beans:bean name="overlayPDFSourceExample" class="java.lang.String">
-        <beans:constructor-arg value="L:\work\p37.pdf"/>
+    <beans:bean name="overlayPDFTestExample" class="java.lang.String">
+        <beans:constructor-arg value="L:\work\overlay_example_input.pdf"/>
     </beans:bean>
     <beans:bean name="overlayPDFTestOutput" class="java.lang.String">
-        <beans:constructor-arg value="L:\work\p37_example.pdf"/>
+        <beans:constructor-arg value="L:\work\overlay_example_output.pdf"/>
+    </beans:bean>
+
+    <beans:bean name="customPDFTestExample" class="java.lang.String">
+        <beans:constructor-arg value="L:\work\custom_example.png"/>
     </beans:bean>
     <beans:bean name="customPDFTestOutput" class="java.lang.String">
-        <beans:constructor-arg value="L:\work\custom_example.pdf"/>
+        <beans:constructor-arg value="L:\work\custom_example_output.pdf"/>
+    </beans:bean>
+    <beans:bean name="customPDFTestImageOutput" class="java.lang.String">
+        <beans:constructor-arg value="L:\work\custom_example_output"/>
+    </beans:bean>
+
+    <beans:bean name="fileUtilsExampleFile" class="java.lang.String">
+        <beans:constructor-arg value="L:\work\example_file.pdf"/>
     </beans:bean>
 
 </beans:beans>

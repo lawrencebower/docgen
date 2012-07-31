@@ -5,6 +5,7 @@
              http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd
              http://www.springframework.org/schema/context classpath:/org/springframework/context/config/spring-context-3.1.xsd">
 
+    <beans:bean id="fileUtils" class="org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils"/>
     <beans:bean id="pdfGenUtils" class="org.lawrencebower.docgen.core.generator.utils.PDFGenUtilsImpl"/>
 
     <beans:bean id="overlayTextRenderer"

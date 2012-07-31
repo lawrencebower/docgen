@@ -24,7 +24,7 @@ public class OverlayDocumentInfoIntegrationTest {
     OverlayDocumentInfo overlayDocumentInfo;
 
     @Autowired
-    @Qualifier("overlayPDFSourceExample")
+    @Qualifier("overlayPDFTestExample")
     String exampleSourcePDF;
 
     @Autowired
