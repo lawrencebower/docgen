@@ -16,7 +16,7 @@
         <beans:constructor-arg value="C:\code\output\custom_example.pdf"/>
     </beans:bean>
     <beans:bean name="customPDFTestOutput" class="java.lang.String">
-        <beans:constructor-arg value="C:\code\output\custom_example_output.pdf"/>
+        <beans:constructor-arg value="C:\code\output\custom_test_output.pdf"/>
     </beans:bean>
 
     <beans:bean name="fileUtilsExampleFile" class="java.lang.String">

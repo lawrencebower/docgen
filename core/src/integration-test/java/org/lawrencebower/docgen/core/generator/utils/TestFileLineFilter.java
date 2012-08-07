@@ -21,14 +21,11 @@ public class TestFileLineFilter {
 
             long fileLength = inFile.length();
             System.out.println("fileLength = " + fileLength);
-            byte[] bytes = new byte[(int) fileLength];
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 
             BufferedReader reader = new BufferedReader(new FileReader(inFile));
 
             String currentLine;
-            int offset = 0;
-            int totalSize = 0;
-            FileOutputStream fos = new FileOutputStream("C:\\code\\output\\testy.pdf");
 
             while ((currentLine = reader.readLine()) != null) {
 
@@ -36,31 +33,12 @@ public class TestFileLineFilter {
 
                 if (includeLine) {
 
-                    byte[] lineBytes = currentLine.getBytes("UTF-8");
-                    fos.write(lineBytes);
-                    fos.write("\n".getBytes());
-
-
-                    int lineLength = lineBytes.length;
-//                    totalSize += lineLength;
-//                    System.out.println("totalSize = " + totalSize);
-
-//                    System.out.println("offset = " + offset);
-//                    System.out.println("lineLength = " + lineLength);
-
-                    System.arraycopy(lineBytes,
-                                     0,
-                                     bytes,
-                                     offset,
-                                     lineLength);
-
-                    offset += lineLength;
+                    byte[] lineBytes = currentLine.getBytes();
+                    bytes.write(lineBytes);
                 }
             }
 
-            fos.close();
-
-            return bytes;
+            return bytes.toByteArray();
 
         } catch (IOException e) {
             throw new DocGenException(e);
@@ -69,15 +47,13 @@ public class TestFileLineFilter {
 
     private boolean isLineIncluded(String currentLine) {
 
-//        System.out.println("currentLine = " + currentLine);
-
         String trimmedLine = currentLine.trim();
 
-//        for (String token : EXCLUDED_TOKENS) {
-//            if (trimmedLine.contains(token)) {
-//                return false;
-//            }
-//        }
+        for (String token : EXCLUDED_TOKENS) {
+            if (trimmedLine.contains(token)) {
+                return false;
+            }
+        }
 
         return true;
     }
