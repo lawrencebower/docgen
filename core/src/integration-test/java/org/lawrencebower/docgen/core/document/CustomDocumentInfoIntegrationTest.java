@@ -8,8 +8,8 @@ import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
+import org.lawrencebower.docgen.core.generator.utils.ChecksumUtils;
 import org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils;
-import org.lawrencebower.docgen.core.generator.utils.PDFToImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
@@ -31,12 +31,15 @@ public class CustomDocumentInfoIntegrationTest {
     DocGenFileUtils fileUtils;
 
     @Autowired
+    ChecksumUtils checksumUtils;
+
+    @Autowired
     @Qualifier("customPDFTestOutput")
     String testOutPDFFile;
 
-    @Autowired
-    @Qualifier("customPDFTestImageOutput")
-    String testOutImageFile;
+//    @Autowired
+//    @Qualifier("customPDFTestImageOutput")
+//    String testOutImageFile;
 
     @Autowired
     @Qualifier("customPDFTestExample")
@@ -59,29 +62,12 @@ public class CustomDocumentInfoIntegrationTest {
 
         pdfDocument.writeToFile(outputFile);
 
-        convertToImage(outputFile, testOutImageFile);
-
         File expectedImageFile = new File(testExampleFile);
-        File generatedImageFile = new File(testOutImageFile + "1.png");
+        File generatedImageFile = new File(testOutPDFFile);
 
-        boolean fileSameAsExpected = fileChecksumsAreSame(expectedImageFile, generatedImageFile);
+        boolean fileSameAsExpected = checksumUtils.filteredFileChecksumsAreSame(expectedImageFile, generatedImageFile);
 
         assertTrue(fileSameAsExpected);
-    }
-
-    private void convertToImage(File pdfFile, String imageFile) {
-        PDFToImage.pdfToImage(pdfFile, imageFile);
-    }
-
-    private boolean fileChecksumsAreSame(File expectedFile, File outputFile) {
-
-        String expectedChecksum = fileUtils.getChecksum(expectedFile);
-        String outputChecksum = fileUtils.getChecksum(outputFile);
-
-        System.out.println("outputChecksum = " + outputChecksum);
-        System.out.println("expectedChecksum = " + expectedChecksum);
-
-        return expectedChecksum.equals(outputChecksum);
     }
 
     private DocComponent generateSimpleTextComponent() {

@@ -22,6 +22,9 @@ public class DocGenFileUtilsIntegrationTest {
     DocGenFileUtils fileUtils;
 
     @Autowired
+    ChecksumUtils checksumUtils;
+
+    @Autowired
     @Qualifier("fileUtilsExampleFile")
     String exampleFileString;
 
@@ -44,7 +47,7 @@ public class DocGenFileUtilsIntegrationTest {
     @Test
     public void testGetChecksum_exampleFile_returnsExpectedChecksum() throws IOException {
         File exampleFile = createExampleFileAndCheckExists();
-        String checksum = fileUtils.getChecksum(exampleFile);
+        String checksum = checksumUtils.getChecksumFromFile(exampleFile);
         assertEquals("d41d8cd98f00b204e9800998ecf8427e", checksum);
     }
 

@@ -8,6 +8,8 @@ import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
+import org.lawrencebower.docgen.core.generator.utils.ChecksumUtils;
+import org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
@@ -15,6 +17,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.File;
 import java.util.Arrays;
+
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:META-INF/integration-test-config.xml"})
@@ -24,12 +28,22 @@ public class OverlayDocumentInfoIntegrationTest {
     OverlayDocumentInfo overlayDocumentInfo;
 
     @Autowired
-    @Qualifier("overlayPDFTestExample")
+    DocGenFileUtils fileUtils;
+
+    @Autowired
+    ChecksumUtils checksumUtils;
+
+    @Autowired
+    @Qualifier("overlayPDFTestInput")
     String exampleSourcePDF;
 
     @Autowired
     @Qualifier("overlayPDFTestOutput")
     String testOutFile;
+
+    @Autowired
+    @Qualifier("overlayPDFTestOutputExample")
+    String testExampleOutputFile;
 
     @Test
     public void testGeneratePDF_validObject_producesValidPDF() {
@@ -44,7 +58,16 @@ public class OverlayDocumentInfoIntegrationTest {
 
         PDFDocument pdfDocument = overlayDocumentInfo.generatePDF();
 
-        pdfDocument.writeToFile(new File(testOutFile));
+        File outputFile = new File(testOutFile);
+
+        pdfDocument.writeToFile(outputFile);
+
+        File expectedImageFile = new File(testExampleOutputFile);
+        File generatedImageFile = new File(testOutFile);
+
+        boolean fileSameAsExpected = checksumUtils.filteredFileChecksumsAreSame(expectedImageFile, generatedImageFile);
+
+        assertTrue(fileSameAsExpected);
     }
 
     private DocComponent generateSimpleTextComponent() {

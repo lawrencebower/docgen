@@ -1,17 +1,15 @@
 package org.lawrencebower.docgen.core.generator.overlay;
 
-import com.lowagie.text.DocumentException;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
 import org.lawrencebower.docgen.core.document.OverlayDocumentInfo;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
-import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.AbstractPDFGenerator;
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
 import org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayComponentRenderer;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocumentInfo> {
@@ -39,6 +37,12 @@ public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocumentInf
         PdfStamper pdfStamper = getPDFStamper(pdfReader);
 
         drawComponentsWithStamper(pdfStamper);
+
+        HashMap<String, String> info = (HashMap<String, String>) pdfReader.getInfo();
+        info.put("CreationDate", "hello");
+        info.put("ModDate", "hello");
+        info.put("Author", "Bruno Lowagie");
+        pdfStamper.setMoreInfo(info);
 
         closeStamper(pdfStamper);
 
@@ -76,7 +80,7 @@ public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocumentInf
     public void renderComponent(DocComponent component,
                                 OverlayComponentRendererInfo rendererInfo) {
 
-         componentRenderer.renderComponent(component, rendererInfo);
+        componentRenderer.renderComponent(component, rendererInfo);
     }
 
 }
