@@ -1,7 +1,9 @@
 package org.lawrencebower.docgen.core.document;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.lawrencebower.docgen.core.AbstractIntegrationTest;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
@@ -11,7 +13,6 @@ import org.lawrencebower.docgen.core.generator.model.PDFDocument;
 import org.lawrencebower.docgen.core.generator.utils.ChecksumUtils;
 import org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -22,7 +23,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:META-INF/integration-test-config.xml"})
-public class CustomDocumentInfoIntegrationTest {
+public class CustomDocumentInfoIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired
     CustomDocumentInfo customDocumentInfo;
@@ -33,20 +34,16 @@ public class CustomDocumentInfoIntegrationTest {
     @Autowired
     ChecksumUtils checksumUtils;
 
-    @Autowired
-    @Qualifier("customPDFTestOutput")
-    String testOutPDFFile;
-
-//    @Autowired
-//    @Qualifier("customPDFTestImageOutput")
-//    String testOutImageFile;
-
-    @Autowired
-    @Qualifier("customPDFTestExample")
-    String testExampleFile;
+    @Before
+    public void setup(){
+        super.prepareDirs();
+    }
 
     @Test
     public void testGeneratePDF_validObject_producesValidPDF() {
+
+        String outFilePath = outputPackage + "custom_output.pdf";
+        String expectedOutFilePath = inputPackage + "custom_expected_output.pdf";
 
         customDocumentInfo.setName("test name");
 
@@ -56,16 +53,11 @@ public class CustomDocumentInfoIntegrationTest {
 
         PDFDocument pdfDocument = customDocumentInfo.generatePDF();
 
-        File outputFile = new File(testOutPDFFile);
+        File outputFile = createOutputFilePathAndWriteFile(outFilePath, pdfDocument);
 
-        fileUtils.deleteFileIfAlreadyExists(outputFile);
+        File expectedFile = new File(expectedOutFilePath);
 
-        pdfDocument.writeToFile(outputFile);
-
-        File expectedImageFile = new File(testExampleFile);
-        File generatedImageFile = new File(testOutPDFFile);
-
-        boolean fileSameAsExpected = checksumUtils.filteredFileChecksumsAreSame(expectedImageFile, generatedImageFile);
+        boolean fileSameAsExpected = checksumUtils.filteredFileChecksumsAreSame(expectedFile, outputFile);
 
         assertTrue(fileSameAsExpected);
     }

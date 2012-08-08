@@ -1,17 +1,16 @@
 package org.lawrencebower.docgen.core.document;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.lawrencebower.docgen.core.AbstractIntegrationTest;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
-import org.lawrencebower.docgen.core.generator.utils.ChecksumUtils;
-import org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -22,35 +21,26 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:META-INF/integration-test-config.xml"})
-public class OverlayDocumentInfoIntegrationTest {
+public class OverlayDocumentInfoIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired
     OverlayDocumentInfo overlayDocumentInfo;
 
-    @Autowired
-    DocGenFileUtils fileUtils;
-
-    @Autowired
-    ChecksumUtils checksumUtils;
-
-    @Autowired
-    @Qualifier("overlayPDFTestInput")
-    String exampleSourcePDF;
-
-    @Autowired
-    @Qualifier("overlayPDFTestOutput")
-    String testOutFile;
-
-    @Autowired
-    @Qualifier("overlayPDFTestOutputExample")
-    String testExampleOutputFile;
+    @Before
+    public void setup(){
+        super.prepareDirs();
+    }
 
     @Test
     public void testGeneratePDF_validObject_producesValidPDF() {
 
+        String inputFilePath = inputPackage + "overlay_input.pdf";
+        String expectedOutputFilePath = inputPackage + "overlay_expected_output.pdf";
+        String outFilePath = outputPackage + "overlay_output.pdf";
+
         overlayDocumentInfo.setName("test name");
 
-        overlayDocumentInfo.setSourcePDF(exampleSourcePDF);
+        overlayDocumentInfo.setSourcePDF(inputFilePath);
 
         DocComponent textComponent = generateSimpleTextComponent();
 
@@ -58,14 +48,11 @@ public class OverlayDocumentInfoIntegrationTest {
 
         PDFDocument pdfDocument = overlayDocumentInfo.generatePDF();
 
-        File outputFile = new File(testOutFile);
+        File outputFile = createOutputFilePathAndWriteFile(outFilePath, pdfDocument);
 
-        pdfDocument.writeToFile(outputFile);
+        File expectedFile = new File(expectedOutputFilePath);
 
-        File expectedImageFile = new File(testExampleOutputFile);
-        File generatedImageFile = new File(testOutFile);
-
-        boolean fileSameAsExpected = checksumUtils.filteredFileChecksumsAreSame(expectedImageFile, generatedImageFile);
+        boolean fileSameAsExpected = checksumUtils.filteredFileChecksumsAreSame(expectedFile, outputFile);
 
         assertTrue(fileSameAsExpected);
     }

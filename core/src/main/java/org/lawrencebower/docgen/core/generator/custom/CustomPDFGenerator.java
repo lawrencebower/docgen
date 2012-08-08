@@ -57,7 +57,7 @@ public class CustomPDFGenerator extends AbstractPDFGenerator<CustomDocumentInfo>
         pdfGenUtils.checkRequiredValuesPresent(docInfo);
     }
 
-    public void renderComponent(DocComponent component, CustomComponentRendererInfo rendererInfo) {
+    private void renderComponent(DocComponent component, CustomComponentRendererInfo rendererInfo) {
         componentRenderer.renderComponent(component, rendererInfo);
     }
 

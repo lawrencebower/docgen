@@ -10,7 +10,7 @@ public class TestFileLineFilter {
 
     private static List<String> EXCLUDED_TOKENS;
 
-    static{
+    static {
         EXCLUDED_TOKENS = Arrays.asList("<</Producer",
                                         "<</Root");
     }

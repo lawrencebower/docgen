@@ -9,7 +9,6 @@ import org.lawrencebower.docgen.core.generator.model.PDFDocument;
 import org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayComponentRenderer;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocumentInfo> {
@@ -37,12 +36,6 @@ public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocumentInf
         PdfStamper pdfStamper = getPDFStamper(pdfReader);
 
         drawComponentsWithStamper(pdfStamper);
-
-        HashMap<String, String> info = (HashMap<String, String>) pdfReader.getInfo();
-        info.put("CreationDate", "hello");
-        info.put("ModDate", "hello");
-        info.put("Author", "Bruno Lowagie");
-        pdfStamper.setMoreInfo(info);
 
         closeStamper(pdfStamper);
 
@@ -77,8 +70,8 @@ public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocumentInf
         pdfGenUtils.checkRequiredValuesPresent(docInfo);
     }
 
-    public void renderComponent(DocComponent component,
-                                OverlayComponentRendererInfo rendererInfo) {
+    private void renderComponent(DocComponent component,
+                                 OverlayComponentRendererInfo rendererInfo) {
 
         componentRenderer.renderComponent(component, rendererInfo);
     }
