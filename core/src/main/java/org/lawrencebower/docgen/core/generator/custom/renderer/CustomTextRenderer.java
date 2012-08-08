@@ -33,8 +33,10 @@ public class CustomTextRenderer implements DocComponentRenderer<TextComponent, C
 
     private void drawBox(CustomComponentRendererInfo renderInfo,
                          String boxText,
-                         int boxAlignment) {//todo make use of alignment
+                         int boxAlignment) {
+
         Paragraph paragraph = new Paragraph(boxText);
+        paragraph.setAlignment(boxAlignment);
         renderInfo.addToDocument(paragraph);
     }
 

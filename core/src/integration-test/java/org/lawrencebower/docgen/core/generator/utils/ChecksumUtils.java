@@ -73,9 +73,6 @@ public class ChecksumUtils {
         String expectedChecksum = getChecksumFromFile(expectedFile);
         String outputChecksum = getChecksumFromFile(outputFile);
 
-        System.out.println("outputChecksum = " + outputChecksum);
-        System.out.println("expectedChecksum = " + expectedChecksum);
-
         return expectedChecksum.equals(outputChecksum);
     }
 
@@ -86,9 +83,6 @@ public class ChecksumUtils {
 
         byte[] filteredOutputFile = lineFilter.filterFileLines(outputFile);
         String outputChecksum = getChecksumFromBytes(filteredOutputFile);
-
-        System.out.println("outputChecksum =   " + outputChecksum);
-        System.out.println("expectedChecksum = " + expectedChecksum);
 
         return expectedChecksum.equals(outputChecksum);
     }

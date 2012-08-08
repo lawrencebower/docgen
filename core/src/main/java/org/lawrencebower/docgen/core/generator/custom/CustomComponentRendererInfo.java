@@ -2,6 +2,7 @@ package org.lawrencebower.docgen.core.generator.custom;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfWriter;
 import org.lawrencebower.docgen.core.exception.DocGenException;
@@ -45,7 +46,7 @@ public class CustomComponentRendererInfo implements DocComponentRendererInfo {
     }
 
     private void makeNewDocument() {
-        this.document = new Document();
+        this.document = new Document(PageSize.A4);//todo paramaterize page size
     }
 
     public void closeDocument() {
