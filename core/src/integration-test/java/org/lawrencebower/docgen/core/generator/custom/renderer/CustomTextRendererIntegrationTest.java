@@ -36,7 +36,7 @@ public class CustomTextRendererIntegrationTest extends AbstractCustomRendererTes
     }
 
     @Test
-    public void testRenderComponent_longtext_wrappsSuccessfully() {
+    public void testRenderComponent_longtext_wrapsSuccessfully() {
 
         String expectedOutputFilePath = inputPackage + "text_renderer_expected_output2.pdf";
         String outFilePath = outputPackage + "text_renderer_output2.pdf";

@@ -7,11 +7,8 @@ import org.lawrencebower.docgen.core.AbstractIntegrationTest;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
-import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
-import org.lawrencebower.docgen.core.generator.utils.ChecksumUtils;
-import org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -27,12 +24,6 @@ public class CustomDocumentInfoIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired
     CustomDocumentInfo customDocumentInfo;
-
-    @Autowired
-    DocGenFileUtils fileUtils;
-
-    @Autowired
-    ChecksumUtils checksumUtils;
 
     @Before
     public void setup(){
@@ -64,8 +55,7 @@ public class CustomDocumentInfoIntegrationTest extends AbstractIntegrationTest {
 
     private DocComponent generateSimpleTextComponent() {
 
-        DocCoordinates coordinates = new DocCoordinates(100, 675, 180, 81);
-        DocPosition position = new DocPosition(DocAlignment.LEFT, coordinates);
+        DocPosition position = new DocPosition(DocAlignment.LEFT);
 
         return new TextComponent("Address", position, "39 York Street");
     }

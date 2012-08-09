@@ -1,14 +1,15 @@
 package org.lawrencebower.docgen.core.generator;
 
-import com.lowagie.text.pdf.PdfReader;
-import com.lowagie.text.pdf.PdfStamper;
 import org.lawrencebower.docgen.core.document.OverlayDocumentInfo;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
+import org.lawrencebower.docgen.core.document.component.TextComponent;
+import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
+import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
+import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.type.DocType;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtilsImpl;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -97,6 +98,43 @@ public class PDFGenUtilsImplTest {
             pdfGenUtils.checkRequiredValuesPresent(testDoc);
         } catch (DocGenException e) {
             assertTrue(e.getMessage().equals("DocInfo Name must not be null"));
+            return;
+        }
+        fail();//should not get here
+    }
+
+    @org.junit.Test
+    public void testCheckCoordinates_validCoordinates_noError() {
+
+        DocPosition position = new DocPosition(DocAlignment.LEFT, new DocCoordinates(1, 1, 1, 1));
+        DocComponent component = new TextComponent("name", position, "value");
+        pdfGenUtils.checkCoordinates(Arrays.asList(component));
+    }
+
+    @org.junit.Test
+    public void testCheckCoordinates_nullPosition_throwsError() {
+
+        try {
+            DocComponent component = new TextComponent("name", null, "value");
+            pdfGenUtils.checkCoordinates(Arrays.asList(component));
+        } catch (DocGenException e) {
+            String message = e.getMessage();
+            assertTrue(message.startsWith("Position is null"));
+            return;
+        }
+        fail();//should not get here
+    }
+
+    @org.junit.Test
+    public void testCheckCoordinates_nullCoordinate_throwsError() {
+
+        try {
+            DocPosition position = new DocPosition(DocAlignment.LEFT, null);
+            DocComponent component = new TextComponent("name", position, "value");
+            pdfGenUtils.checkCoordinates(Arrays.asList(component));
+        } catch (DocGenException e) {
+            String message = e.getMessage();
+            assertTrue(message.startsWith("Coordinates are null"));
             return;
         }
         fail();//should not get here

@@ -6,10 +6,14 @@ import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
 import org.lawrencebower.docgen.core.document.DocumentInfo;
+import org.lawrencebower.docgen.core.document.component.DocComponent;
+import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
+import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 public class PDFGenUtilsImpl implements PDFGenUtils {
 
@@ -70,5 +74,21 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
         } catch (DocumentException | IOException e) {
             throw new DocGenException(e);
         }
+    }
+
+    @Override
+    public void checkCoordinates(List<DocComponent> components) {
+        for (DocComponent component : components) {
+            DocPosition position = component.getPosition();
+            if(position == null){
+                throw new DocGenException("Position is null for component " + component.getName());
+            }
+
+            DocCoordinates coordinates = position.getCoordinates();
+            if(coordinates == null){
+                throw new DocGenException("Coordinates are null for component " + component.getName());
+            }
+        }
+
     }
 }

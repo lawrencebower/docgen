@@ -31,4 +31,12 @@ public class DocCoordinates {
     public int getHeight() {
         return height;
     }
+
+    public int getXPlusWidth(){
+        return x + width;
+    }
+
+    public int getYPlusHeight(){
+        return y + height;
+    }
 }

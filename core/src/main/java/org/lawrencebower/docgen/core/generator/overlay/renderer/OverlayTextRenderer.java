@@ -34,10 +34,22 @@ public class OverlayTextRenderer implements DocComponentRenderer<TextComponent, 
 
         DocCoordinates boxCoordinates = position.getCoordinates();
 
+        drawRectangle(canvas, boxCoordinates);
+
         drawBox(canvas,
                 boxText,
                 boxAlignment,
                 boxCoordinates);
+    }
+
+    private void drawRectangle(PdfContentByte canvas, DocCoordinates boxCoordinates) {
+
+        canvas.rectangle(boxCoordinates.getX(),
+                         boxCoordinates.getY(),
+                         boxCoordinates.getWidth(),
+                         boxCoordinates.getHeight());
+        canvas.stroke();
+
     }
 
     private void drawBox(PdfContentByte canvas,
@@ -47,12 +59,18 @@ public class OverlayTextRenderer implements DocComponentRenderer<TextComponent, 
 
         Font font = pdfUtils.getDefaultFont();
         ColumnText column = new ColumnText(canvas);
+
+        int x1 = boxCoordinates.getX();
+        int y1 = boxCoordinates.getY();
+        int x2 = boxCoordinates.getXPlusWidth();
+        int y2 = boxCoordinates.getYPlusHeight();
+
         column.setSimpleColumn(
                 new Phrase(boxText, font),
-                boxCoordinates.getX(),
-                boxCoordinates.getY(),
-                boxCoordinates.getWidth(),
-                boxCoordinates.getHeight(),
+                x1,
+                y1,
+                x2,
+                y2,
                 pdfUtils.getLeading(),
                 boxAlignment);
 

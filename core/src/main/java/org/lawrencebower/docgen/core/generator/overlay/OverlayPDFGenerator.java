@@ -68,6 +68,7 @@ public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocumentInf
     @Override
     protected void checkRequiredValuesPresent() {
         pdfGenUtils.checkRequiredValuesPresent(docInfo);
+        pdfGenUtils.checkCoordinates(docInfo.getComponents());
     }
 
     private void renderComponent(DocComponent component,
