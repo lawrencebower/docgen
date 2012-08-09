@@ -13,6 +13,10 @@
                 class="org.lawrencebower.docgen.core.AbstractIntegrationTest"
                 abstract="true"/>
 
+    <beans:bean id="abstractCustomRendererTest"
+                class="org.lawrencebower.docgen.core.generator.custom.renderer.AbstractCustomRendererTest"
+                abstract="true"/>
+
     <beans:bean id="overlayDocumentInfoIntegrationTest"
                 class="org.lawrencebower.docgen.core.document.OverlayDocumentInfoIntegrationTest"
                 parent="abstractIntegrationTest"/>

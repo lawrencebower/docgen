@@ -3,32 +3,16 @@ package org.lawrencebower.docgen.core.generator.custom.renderer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lawrencebower.docgen.core.AbstractIntegrationTest;
-import org.lawrencebower.docgen.core.document.CustomDocumentInfo;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
-import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
-import org.lawrencebower.docgen.core.generator.model.PDFDocument;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.io.File;
-import java.util.Arrays;
-
-import static org.junit.Assert.assertTrue;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:META-INF/integration-test-config.xml"})
-public class CustomTextRendererIntegrationTest extends AbstractIntegrationTest {
-
-    @Autowired
-    private CustomDocumentInfo docInfo;
-
-    @Autowired
-    private CustomPDFGenerator customGenerator;
+public class CustomTextRendererIntegrationTest extends AbstractCustomRendererTest {
 
     private String longText = "value sssssssss sss ssssssss ssssssss sssssssss ssssssssssss ssssssss ssssssss ssssssss ssssssss sssss sss sssssss sssss ss ssssssss ss sssssss ssssssss ssss ssssssss ssss sssssssss sssssssss";
 
@@ -96,23 +80,5 @@ public class CustomTextRendererIntegrationTest extends AbstractIntegrationTest {
                                         centerComponent,
                                         leftComponent,
                                         rightComponent);
-    }
-
-    private void createPDFAndCompareWithExpected(String expectedOutputFilePath,
-                                                 String outFilePath,
-                                                 DocComponent... components) {
-
-        docInfo.setComponents(Arrays.asList(components));
-        docInfo.setName("Doc name");
-
-        PDFDocument pdfDocument = customGenerator.generatePDF(docInfo);
-
-        File outputFile = createOutputFilePathAndWriteFile(outFilePath, pdfDocument);
-
-        File expectedFile = new File(expectedOutputFilePath);
-
-        boolean fileSameAsExpected = checksumUtils.filteredFileChecksumsAreSame(expectedFile, outputFile);
-
-        assertTrue(fileSameAsExpected);
     }
 }
