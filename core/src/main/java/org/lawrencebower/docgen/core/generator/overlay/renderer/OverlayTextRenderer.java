@@ -20,26 +20,37 @@ public class OverlayTextRenderer implements DocComponentRenderer<TextComponent, 
     @Autowired
     private PDFGenUtils pdfUtils;
 
+    private TextComponent textComponent;
+
     @Override
     public void renderComponent(TextComponent component, OverlayComponentRendererInfo rendererInfo) {
-        drawTextBox(rendererInfo.getCanvas(), component);
+        this.textComponent = component;
+        drawTextBox(rendererInfo.getCanvas());
     }
 
-    private void drawTextBox(PdfContentByte canvas, TextComponent component) {
+    private void drawTextBox(PdfContentByte canvas) {
 
-        String boxText = component.getValue();
+        String boxText = textComponent.getValue();
 
-        DocPosition position = component.getPosition();
+        DocPosition position = textComponent.getPosition();
         int boxAlignment = DocAlignment.mapToITextAlignment(position.getAlignment());
 
         DocCoordinates boxCoordinates = position.getCoordinates();
 
-        drawRectangle(canvas, boxCoordinates);
+        renderBorderIfSet(canvas, boxCoordinates);
 
         drawBox(canvas,
                 boxText,
                 boxAlignment,
                 boxCoordinates);
+    }
+
+    private void renderBorderIfSet(PdfContentByte canvas,
+                                   DocCoordinates boxCoordinates) {
+
+        if (textComponent.isRenderBorder()) {
+            drawRectangle(canvas, boxCoordinates);
+        }
     }
 
     private void drawRectangle(PdfContentByte canvas, DocCoordinates boxCoordinates) {

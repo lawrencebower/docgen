@@ -3,7 +3,6 @@ package org.lawrencebower.docgen.core.generator.overlay.renderer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
@@ -32,15 +31,18 @@ public class OverlayTextRendererIntegrationTest extends AbstractOverlayRendererT
 
         DocCoordinates leftCoordinates = new DocCoordinates(10, 545, width, height);
         DocPosition leftPosition = new DocPosition(DocAlignment.LEFT, leftCoordinates);
-        DocComponent leftTextComponent = new TextComponent("Name", leftPosition, "left align");
+        TextComponent leftTextComponent = new TextComponent("Name", leftPosition, "left align");
+        leftTextComponent.setRenderBorder(true);
 
         DocCoordinates rightCoordinates = new DocCoordinates(150, 445, width, height);
         DocPosition rightPosition = new DocPosition(DocAlignment.RIGHT, rightCoordinates);
-        DocComponent rightTextComponent = new TextComponent("Name", rightPosition, "right align");
+        TextComponent rightTextComponent = new TextComponent("Name", rightPosition, "right align");
+        rightTextComponent.setRenderBorder(true);
 
         DocCoordinates centerCoordinates = new DocCoordinates(300, 345, width, height);
         DocPosition centerPosition = new DocPosition(DocAlignment.CENTER, centerCoordinates);
-        DocComponent centerTextComponent = new TextComponent("Name", centerPosition, "center align");
+        TextComponent centerTextComponent = new TextComponent("Name", centerPosition, "center align");
+        centerTextComponent.setRenderBorder(true);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
                                         outFilePath,

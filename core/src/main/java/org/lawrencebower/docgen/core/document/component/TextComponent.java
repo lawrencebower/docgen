@@ -5,6 +5,7 @@ import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 public class TextComponent extends DocComponent {
 
     private String value;
+    private boolean renderBorder;
 
     public TextComponent(String name,
                          String value) {
@@ -26,5 +27,13 @@ public class TextComponent extends DocComponent {
 
     public String getValue() {
         return value;
+    }
+
+    public boolean isRenderBorder() {
+        return renderBorder;
+    }
+
+    public void setRenderBorder(boolean renderBorder) {
+        this.renderBorder = renderBorder;
     }
 }

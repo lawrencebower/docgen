@@ -34,7 +34,7 @@ public class OverlayDocumentInfoIntegrationTest extends AbstractIntegrationTest 
     @Test
     public void testGeneratePDF_validObject_producesValidPDF() {
 
-        String inputFilePath = inputPackage + "text_renderer_input.pdf";
+        String inputFilePath = inputPackage + "overlay_input.pdf";
         String expectedOutputFilePath = inputPackage + "overlay_expected_output.pdf";
         String outFilePath = outputPackage + "overlay_output.pdf";
 
