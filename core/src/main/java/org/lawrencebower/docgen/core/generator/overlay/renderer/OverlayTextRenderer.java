@@ -54,13 +54,7 @@ public class OverlayTextRenderer implements DocComponentRenderer<TextComponent, 
     }
 
     private void drawRectangle(PdfContentByte canvas, DocCoordinates boxCoordinates) {
-
-        canvas.rectangle(boxCoordinates.getX(),
-                         boxCoordinates.getY(),
-                         boxCoordinates.getWidth(),
-                         boxCoordinates.getHeight());
-        canvas.stroke();
-
+        pdfUtils.drawRectangle(canvas, boxCoordinates);
     }
 
     private void drawBox(PdfContentByte canvas,

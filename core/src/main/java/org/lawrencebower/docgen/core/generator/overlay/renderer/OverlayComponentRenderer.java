@@ -2,6 +2,7 @@ package org.lawrencebower.docgen.core.generator.overlay.renderer;
 
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
+import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererInfo;
@@ -11,12 +12,16 @@ public class OverlayComponentRenderer implements DocComponentRenderer<DocCompone
 
     @Autowired
     private OverlayTextRenderer textRenderer;
+    @Autowired
+    private OverlayTableRenderer tableRenderer;
 
     @Override
     public void renderComponent(DocComponent component, OverlayComponentRendererInfo rendererInfo) {
 
         if (component instanceof TextComponent) {
             textRenderer.renderComponent((TextComponent) component, rendererInfo);
+        }else if (component instanceof TableComponent) {
+            tableRenderer.renderComponent((TableComponent) component, rendererInfo);
         } else {
             throw new DocGenException("Doc component not recognized " + component.getClass());
         }

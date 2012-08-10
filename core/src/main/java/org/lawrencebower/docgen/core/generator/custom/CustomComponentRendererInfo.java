@@ -2,8 +2,8 @@ package org.lawrencebower.docgen.core.generator.custom;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
 import com.lowagie.text.PageSize;
-import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfWriter;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.DocComponentRendererInfo;
@@ -59,7 +59,7 @@ public class CustomComponentRendererInfo implements DocComponentRendererInfo {
         }
     }
 
-    public void addToDocument(Paragraph paragraph) {
+    public void addToDocument(Element paragraph) {
         try {
             checkAndOpenDocument();
             document.add(paragraph);

@@ -2,13 +2,13 @@ package org.lawrencebower.docgen.core.generator.utils;
 
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
-import com.lowagie.text.pdf.BaseFont;
-import com.lowagie.text.pdf.PdfReader;
-import com.lowagie.text.pdf.PdfStamper;
+import com.lowagie.text.pdf.*;
 import org.lawrencebower.docgen.core.document.DocumentInfo;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
+import org.lawrencebower.docgen.core.document.component.table.TableCell;
+import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 
 import java.io.IOException;
@@ -90,5 +90,26 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
             }
         }
 
+    }
+
+    @Override
+    public PdfPTable generateTable(TableComponent component) {
+        int columnCount = component.getColumnCount();
+        PdfPTable table = new PdfPTable(columnCount);
+
+        for (TableCell tableCell : component.getAllCells()) {
+            table.addCell(tableCell.getValue());
+        }
+
+        return table;
+    }
+
+    @Override
+    public void drawRectangle(PdfContentByte canvas, DocCoordinates boxCoordinates) {
+        canvas.rectangle(boxCoordinates.getX(),
+                         boxCoordinates.getY(),
+                         boxCoordinates.getWidth(),
+                         boxCoordinates.getHeight());
+        canvas.stroke();
     }
 }

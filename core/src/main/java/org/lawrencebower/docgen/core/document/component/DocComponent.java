@@ -7,6 +7,7 @@ public abstract class DocComponent {
 
     private String name;
     private DocPosition position;
+    protected boolean renderBorder;
 
     protected DocComponent(String name) {
         this.name = name;
@@ -29,4 +30,11 @@ public abstract class DocComponent {
 
     public abstract DocComponentType getComponentType();
 
+    public void setRenderBorder(boolean renderBorder) {
+        this.renderBorder = renderBorder;
+    }
+
+    public boolean isRenderBorder() {
+        return renderBorder;
+    }
 }

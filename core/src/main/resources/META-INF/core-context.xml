@@ -14,6 +14,12 @@
     <beans:bean id="customTextRenderer"
                 class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomTextRenderer"/>
 
+    <beans:bean id="overlayTableRenderer"
+                class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayTableRenderer"/>
+
+    <beans:bean id="customTableRenderer"
+                class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomTableRenderer"/>
+
     <beans:bean id="customComponentRenderer" class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomComponentRenderer"/>
     <beans:bean id="overlayComponentRenderer" class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayComponentRenderer"/>
 

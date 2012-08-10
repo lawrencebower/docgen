@@ -14,7 +14,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath:META-INF/integration-test-config.xml"})
 public class CustomTextRendererIntegrationTest extends AbstractCustomRendererTest {
 
-    private String longText = "value sssssssss sss ssssssss ssssssss sssssssss ssssssssssss ssssssss ssssssss ssssssss ssssssss sssss sss sssssss sssss ss ssssssss ss sssssss ssssssss ssss ssssssss ssss sssssssss sssssssss";
+    private String longText = "value sssssssss sss ssssssss ssssssss sssssssss ssssssssssss " +
+                              "ssssssss ssssssss ssssssss ssssssss sssss sss sssssss sssss ss " +
+                              "ssssssss ss sssssss ssssssss ssss ssssssss ssss sssssssss sssssssss";
 
     @Before
     public void setup() {
@@ -49,7 +51,7 @@ public class CustomTextRendererIntegrationTest extends AbstractCustomRendererTes
     }
 
     @Test
-    public void testRenderComponent_alignedText_allignedCorrectly() {
+    public void testRenderComponent_alignedText_alignedCorrectly() {
 
         String expectedOutputFilePath = inputPackage + "text_renderer_expected_output3.pdf";
         String outFilePath = outputPackage + "text_renderer_output3.pdf";
