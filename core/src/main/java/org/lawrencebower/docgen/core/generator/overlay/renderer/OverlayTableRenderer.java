@@ -1,7 +1,6 @@
 package org.lawrencebower.docgen.core.generator.overlay.renderer;
 
 import com.lowagie.text.DocumentException;
-import com.lowagie.text.Element;
 import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfPTable;
@@ -65,7 +64,8 @@ public class OverlayTableRenderer implements DocComponentRenderer<TableComponent
 
         ColumnText column = new ColumnText(canvas);
 
-        column.setAlignment(Element.ALIGN_CENTER);
+        table.setWidthPercentage(100);
+
         column.setSimpleColumn(x1,y1,x2,y2);
         column.addElement(table);
 
