@@ -17,6 +17,9 @@
     <beans:bean id="overlayTableRenderer"
                 class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayTableRenderer"/>
 
+    <beans:bean id="checkBoxRenderer"
+                class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayCheckBoxRenderer"/>
+
     <beans:bean id="customTableRenderer"
                 class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomTableRenderer"/>
 

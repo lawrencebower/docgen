@@ -10,6 +10,11 @@ public class DocPosition {
         this.coordinates = coordinates;
     }
 
+    public DocPosition(DocCoordinates coordinates) {
+        this.coordinates = coordinates;
+        this.alignment = DocAlignment.LEFT;//default
+    }
+
     public DocPosition(DocAlignment alignment) {
         this.alignment = alignment;
     }

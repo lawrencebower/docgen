@@ -1,5 +1,6 @@
 package org.lawrencebower.docgen.core.generator.overlay.renderer;
 
+import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
@@ -14,6 +15,8 @@ public class OverlayComponentRenderer implements DocComponentRenderer<DocCompone
     private OverlayTextRenderer textRenderer;
     @Autowired
     private OverlayTableRenderer tableRenderer;
+    @Autowired
+    private OverlayCheckBoxRenderer checkBoxRenderer;
 
     @Override
     public void renderComponent(DocComponent component, OverlayComponentRendererInfo rendererInfo) {
@@ -22,6 +25,8 @@ public class OverlayComponentRenderer implements DocComponentRenderer<DocCompone
             textRenderer.renderComponent((TextComponent) component, rendererInfo);
         }else if (component instanceof TableComponent) {
             tableRenderer.renderComponent((TableComponent) component, rendererInfo);
+        }else if (component instanceof CheckBoxComponent) {
+            checkBoxRenderer.renderComponent((CheckBoxComponent) component, rendererInfo);
         } else {
             throw new DocGenException("Doc component not recognized " + component.getClass());
         }

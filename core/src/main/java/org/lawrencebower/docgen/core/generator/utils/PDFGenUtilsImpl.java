@@ -13,6 +13,7 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
 import java.util.List;
 
 public class PDFGenUtilsImpl implements PDFGenUtils {
@@ -52,10 +53,25 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
     @Override
     public PdfReader getPDFReaderForSourcePDF(String sourcePDF) {
         try {
-            return new PdfReader(sourcePDF);
+            PdfReader pdfReader = new PdfReader(sourcePDF);
+            unlockPdf(pdfReader);
+            return pdfReader;
         } catch (IOException e) {
             throw new DocGenException(e);
         }
+    }
+
+    public static PdfReader unlockPdf(PdfReader reader) {
+        if (reader == null) {
+            return reader;
+        }
+        try {
+            Field f = reader.getClass().getDeclaredField("encrypted");
+            f.setAccessible(true);
+            f.set(reader, false);
+        } catch (Exception e) { // ignore
+        }
+        return reader;
     }
 
     @Override

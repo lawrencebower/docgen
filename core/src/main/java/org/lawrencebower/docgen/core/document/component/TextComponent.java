@@ -19,9 +19,21 @@ public class TextComponent extends DocComponent {
         this.value = value;
     }
 
+    public TextComponent(String name) {
+        super(name);
+    }
+
+    public TextComponent(String name, DocPosition position) {
+        super(name, position);
+    }
+
     @Override
     public DocComponentType getComponentType() {
         return DocComponentType.TEXT;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String getValue() {
