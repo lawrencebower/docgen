@@ -57,6 +57,11 @@ public class OverlayTableRendererIntegrationTest extends AbstractOverlayRenderer
 
     public TableComponent getTableComponent(DocPosition position) {
         TableComponent tableComponent = new TableComponent("Table Name", position);
+
+        tableComponent.setHeaderRow(new TableCell("col 1"),
+                                    new TableCell("col 2"),
+                                    new TableCell("col 3"));
+
         tableComponent.addRow(getTableRow());
         tableComponent.addRow(getTableRow());
         tableComponent.addRow(getTableRow());

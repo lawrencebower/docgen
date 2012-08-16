@@ -19,12 +19,17 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
     }
 
     @Test
-    public void testRenderComponent_validComponent_createsFile() {
+    public void testRenderComponent_validComponent_createsValidFile() {
 
         String expectedOutputFilePath = inputPackage + "table_renderer_expected_output.pdf";
         String outFilePath = outputPackage + "table_renderer_output.pdf";
 
         TableComponent tableComponent = new TableComponent("Table Name");
+
+        tableComponent.setHeaderRow(new TableCell("col 1"),
+                                    new TableCell("col 2"),
+                                    new TableCell("col 3"));
+
         tableComponent.addRow(getTableRow());
         tableComponent.addRow(getTableRow());
         tableComponent.addRow(getTableRow());

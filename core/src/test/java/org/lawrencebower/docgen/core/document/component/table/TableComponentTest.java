@@ -16,7 +16,7 @@ public class TableComponentTest {
         row.addCell(new TableCell("name"));
         row.addCell(new TableCell("name"));
         row.addCell(new TableCell("name"));
-        component.addRow(row);
+        component.setHeaderRow(row);
 
         assertEquals(3, component.getColumnCount());
     }
