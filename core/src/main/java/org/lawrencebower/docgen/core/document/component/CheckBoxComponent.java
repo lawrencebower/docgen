@@ -29,7 +29,7 @@ public class CheckBoxComponent extends DocComponent {
 
     @Override
     public DocComponentType getComponentType() {
-        return DocComponentType.TEXT;
+        return DocComponentType.CHECKBOX;
     }
 
     public void setSelected(boolean selected) {

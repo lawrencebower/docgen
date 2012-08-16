@@ -18,7 +18,8 @@ import java.util.List;
 
 public class PDFGenUtilsImpl implements PDFGenUtils {
 
-    private float DEFAULT_LEADING = 9;
+    private static final float DEFAULT_LEADING = 9;
+    private static final int DEFAULT_FONT_SIZE = 10;
 
     @Override
     public void checkRequiredValuesPresent(DocumentInfo docInfo) {
@@ -39,7 +40,7 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
     public Font getDefaultFont() {
         try {
             BaseFont baseFont = BaseFont.createFont();
-            return new Font(baseFont, 10);
+            return new Font(baseFont, DEFAULT_FONT_SIZE);
         } catch (DocumentException | IOException e) {
             throw new DocGenException(e);
         }

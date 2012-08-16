@@ -2,6 +2,7 @@ package org.lawrencebower.docgen.core.generator.overlay.renderer;
 
 import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
+import org.lawrencebower.docgen.core.document.component.NewLineComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
@@ -27,6 +28,8 @@ public class OverlayComponentRenderer implements DocComponentRenderer<DocCompone
             tableRenderer.renderComponent((TableComponent) component, rendererInfo);
         }else if (component instanceof CheckBoxComponent) {
             checkBoxRenderer.renderComponent((CheckBoxComponent) component, rendererInfo);
+        }else if (component instanceof NewLineComponent) {
+            throw new UnsupportedOperationException("NewLine not supported by Overlay renderer");
         } else {
             throw new DocGenException("Doc component not recognized " + component.getClass());
         }
