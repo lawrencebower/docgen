@@ -7,6 +7,9 @@ public enum DocAlignment {
     LEFT,
     RIGHT,
     JUSTIFIED,
+    TOP,
+    BOTTOM,
+    MIDDLE,
     CENTER;
 
     public static int mapToITextAlignment(DocAlignment alignment){
@@ -15,6 +18,9 @@ public enum DocAlignment {
             case CENTER: return Element.ALIGN_CENTER;
             case JUSTIFIED: return Element.ALIGN_JUSTIFIED;
             case RIGHT: return Element.ALIGN_RIGHT;
+            case TOP: return Element.ALIGN_TOP;
+            case BOTTOM: return Element.ALIGN_BOTTOM;
+            case MIDDLE: return Element.ALIGN_MIDDLE;
         }
         throw new DocGenException("No mapping for alignment " + alignment);
     }

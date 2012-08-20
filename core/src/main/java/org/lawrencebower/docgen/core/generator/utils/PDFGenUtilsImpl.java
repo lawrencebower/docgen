@@ -7,9 +7,9 @@ import org.lawrencebower.docgen.core.document.DocumentInfo;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
-import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -17,6 +17,9 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public class PDFGenUtilsImpl implements PDFGenUtils {
+
+    @Autowired
+    private ITextTableGenerator iTextTableGenerator;
 
     private static final float DEFAULT_LEADING = 9;
     private static final int DEFAULT_FONT_SIZE = 10;
@@ -52,7 +55,7 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
     }
 
     @Override
-    public PdfReader getPDFReaderForSourcePDF(String sourcePDF) {
+    public PdfReader getPDFReaderAndUnlockForSourcePDF(String sourcePDF) {
         try {
             PdfReader pdfReader = new PdfReader(sourcePDF);
             unlockPdf(pdfReader);
@@ -70,7 +73,8 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
             Field f = reader.getClass().getDeclaredField("encrypted");
             f.setAccessible(true);
             f.set(reader, false);
-        } catch (Exception e) { // ignore
+        } catch (Exception e) {
+            throw new DocGenException(e);
         }
         return reader;
     }
@@ -97,28 +101,20 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
     public void checkCoordinates(List<DocComponent> components) {
         for (DocComponent component : components) {
             DocPosition position = component.getPosition();
-            if(position == null){
+            if (position == null) {
                 throw new DocGenException("Position is null for component " + component.getName());
             }
 
             DocCoordinates coordinates = position.getCoordinates();
-            if(coordinates == null){
+            if (coordinates == null) {
                 throw new DocGenException("Coordinates are null for component " + component.getName());
             }
         }
-
     }
 
     @Override
     public PdfPTable generateTable(TableComponent component) {
-        int columnCount = component.getColumnCount();
-        PdfPTable table = new PdfPTable(columnCount);
-
-        for (TableCell tableCell : component.getAllCells()) {
-            table.addCell(tableCell.getValue());
-        }
-
-        return table;
+        return new ITextTableGenerator().generateTable(component);
     }
 
     @Override

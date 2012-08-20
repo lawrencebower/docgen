@@ -6,9 +6,8 @@ import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
-import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
-import org.lawrencebower.docgen.core.document.component.table.TableRow;
+import org.lawrencebower.docgen.core.generator.utils.ITextTableGeneratorTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -56,24 +55,9 @@ public class OverlayTableRendererIntegrationTest extends AbstractOverlayRenderer
     }
 
     public TableComponent getTableComponent(DocPosition position) {
-        TableComponent tableComponent = new TableComponent("Table Name", position);
-
-        tableComponent.setHeaderRow(new TableCell("col 1"),
-                                    new TableCell("col 2"),
-                                    new TableCell("col 3"));
-
-        tableComponent.addRow(getTableRow());
-        tableComponent.addRow(getTableRow());
-        tableComponent.addRow(getTableRow());
-
+        TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        tableComponent.setPosition(position);
         return tableComponent;
     }
 
-    public TableRow getTableRow() {
-        TableRow tableRow = new TableRow();
-        tableRow.addCell(new TableCell("1"));
-        tableRow.addCell(new TableCell("2"));
-        tableRow.addCell(new TableCell("3"));
-        return tableRow;
-    }
 }

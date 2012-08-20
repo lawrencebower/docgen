@@ -53,7 +53,7 @@ public class OverlayPDFGeneratorTest {
 
         PdfStamper mockPdfStamper = mock(PdfStamper.class);
 
-        when(mockPDFUtils.getPDFReaderForSourcePDF(anyString())).thenReturn(mockPDFReader);
+        when(mockPDFUtils.getPDFReaderAndUnlockForSourcePDF(anyString())).thenReturn(mockPDFReader);
         when(mockPDFUtils.getPDFStamper(any(PdfReader.class), any(OutputStream.class))).thenReturn(mockPdfStamper);
 
         return mockPDFUtils;

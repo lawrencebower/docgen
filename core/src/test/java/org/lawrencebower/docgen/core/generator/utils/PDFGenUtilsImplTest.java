@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.core.generator;
+package org.lawrencebower.docgen.core.generator.utils;
 
 import org.lawrencebower.docgen.core.document.OverlayDocumentInfo;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
@@ -8,7 +8,6 @@ import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.type.DocType;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.core.generator.utils.PDFGenUtilsImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -138,6 +137,10 @@ public class PDFGenUtilsImplTest {
             return;
         }
         fail();//should not get here
+    }
+
+    public void testGetPDFReaderAndUnlockForSourcePDF_lockedPdf_isUnlocked(){
+        //todo
     }
 
 }

@@ -62,7 +62,7 @@ public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocumentInf
     }
 
     private PdfReader getPDFReaderForSourcePDF(String sourcePDF) {
-        return pdfGenUtils.getPDFReaderForSourcePDF(sourcePDF);
+        return pdfGenUtils.getPDFReaderAndUnlockForSourcePDF(sourcePDF);
     }
 
     @Override

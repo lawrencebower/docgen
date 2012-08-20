@@ -12,6 +12,7 @@ public class TableComponent extends DocComponent {
 
     private TableRow headerRow = new TableRow();
     private List<TableRow> rows = new ArrayList<>();
+    private float widthPercentage;
 
     public TableComponent(String name) {
         super(name);
@@ -59,4 +60,11 @@ public class TableComponent extends DocComponent {
         return DocComponentType.TABLE;
     }
 
+    public void setWidthPercentage(float widthPercentage) {
+        this.widthPercentage = widthPercentage;
+    }
+
+    public float getWithPercentage() {
+        return widthPercentage;
+    }
 }

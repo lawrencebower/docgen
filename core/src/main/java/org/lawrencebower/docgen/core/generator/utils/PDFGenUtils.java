@@ -21,7 +21,7 @@ public interface PDFGenUtils {
 
     float getLeading();
 
-    PdfReader getPDFReaderForSourcePDF(String sourcePDF);
+    PdfReader getPDFReaderAndUnlockForSourcePDF(String sourcePDF);
 
     PdfStamper getPDFStamper(PdfReader pdfReader, OutputStream pdfOutStream);
 

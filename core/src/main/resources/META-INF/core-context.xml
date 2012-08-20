@@ -6,6 +6,7 @@
              http://www.springframework.org/schema/context classpath:/org/springframework/context/config/spring-context-3.1.xsd">
 
     <beans:bean id="fileUtils" class="org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils"/>
+    <beans:bean id="iTextTableGenerator" class="org.lawrencebower.docgen.core.generator.utils.ITextTableGenerator"/>
     <beans:bean id="pdfGenUtils" class="org.lawrencebower.docgen.core.generator.utils.PDFGenUtilsImpl"/>
 
     <beans:bean id="overlayTextRenderer"

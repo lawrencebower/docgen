@@ -31,6 +31,24 @@ public class DocAlignmentTest {
         assertEquals(Element.ALIGN_JUSTIFIED, iTextAlignment);
     }
 
+    @Test
+    public void testMapToITextAlignment_top_returnsITextTop() throws Exception {
+        int iTextAlignment = mapAlignment(DocAlignment.TOP);
+        assertEquals(Element.ALIGN_TOP, iTextAlignment);
+    }
+
+    @Test
+    public void testMapToITextAlignment_bottom_returnsITextBottom() throws Exception {
+        int iTextAlignment = mapAlignment(DocAlignment.BOTTOM);
+        assertEquals(Element.ALIGN_BOTTOM, iTextAlignment);
+    }
+
+    @Test
+    public void testMapToITextAlignment_middle_returnsITextMiddle() throws Exception {
+        int iTextAlignment = mapAlignment(DocAlignment.MIDDLE);
+        assertEquals(Element.ALIGN_MIDDLE, iTextAlignment);
+    }
+
     private int mapAlignment(DocAlignment alignment) {
         return DocAlignment.mapToITextAlignment(alignment);
     }

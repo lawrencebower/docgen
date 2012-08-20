@@ -24,6 +24,10 @@ public abstract class DocComponent {
         return name;
     }
 
+    public void setPosition(DocPosition position) {
+        this.position = position;
+    }
+
     public DocPosition getPosition() {
         return position;
     }
