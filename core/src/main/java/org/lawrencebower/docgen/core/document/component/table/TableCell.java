@@ -10,6 +10,7 @@ public class TableCell {
     DocAlignment verticalAlignment = DocAlignment.TOP;//default
     DocAlignment horizontalAlignment = DocAlignment.LEFT;//default
     private Color backgroundColor;
+    private float padding = 3;//default
 
     public TableCell(String value) {
         this.value = value;
@@ -49,5 +50,13 @@ public class TableCell {
 
     public boolean hasBackgroundColor(){
         return backgroundColor != null;
+    }
+
+    public void setPadding(float padding) {
+        this.padding = padding;
+    }
+
+    public float getPadding() {
+        return padding;
     }
 }

@@ -58,8 +58,14 @@ public class ITextTableGenerator {
 
             setCellColor(tableCell, iTextCell);
 
+            setCellPadding(tableCell, iTextCell);
+
             iTextTable.addCell(iTextCell);
         }
+    }
+
+    private void setCellPadding(TableCell tableCell, PdfPCell iTextCell) {
+        iTextCell.setPadding(tableCell.getPadding());
     }
 
     private void setCellColor(TableCell tableCell, PdfPCell iTextCell) {
