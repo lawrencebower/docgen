@@ -111,4 +111,22 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
 
     }
 
+    @Test
+    public void testRenderComponent_cellPadding_createsValidFile() {
+
+        String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_5.pdf";
+        String outFilePath = outputPackage + "table_renderer_output_5.pdf";
+
+        TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        List<TableCell> allCells = tableComponent.getAllCells();
+        allCells.get(0).setPadding(0);
+        allCells.get(4).setPadding(20);
+        allCells.get(8).setPadding(50);
+
+        createPDFAndCompareWithExpected(expectedOutputFilePath,
+                                        outFilePath,
+                                        tableComponent);
+
+    }
+
 }
