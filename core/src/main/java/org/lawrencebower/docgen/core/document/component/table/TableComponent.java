@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TableComponent extends DocComponent {
 
-    private TableRow headerRow = new TableRow();
+    private TableHeaderRow headerRow = new TableHeaderRow();
     private List<TableRow> rows = new ArrayList<>();
     private float widthPercentage;
 
@@ -26,16 +26,16 @@ public class TableComponent extends DocComponent {
         return headerRow.getColumnCount();
     }
 
-    public void setHeaderRow(TableRow row) {
+    public void setHeaderRow(TableHeaderRow row) {
         this.headerRow = row;
     }
 
     public void setHeaderRow(TableCell... cells) {
-        this.headerRow = new TableRow();
+        this.headerRow = new TableHeaderRow();
         this.headerRow.setCells(Arrays.asList(cells));
     }
 
-    public TableRow getHeaderRow() {
+    public TableHeaderRow getHeaderRow() {
         return headerRow;
     }
 
@@ -66,5 +66,9 @@ public class TableComponent extends DocComponent {
 
     public float getWithPercentage() {
         return widthPercentage;
+    }
+
+    public int[] getColumnWidths() {
+        return headerRow.getColumnWidths();
     }
 }

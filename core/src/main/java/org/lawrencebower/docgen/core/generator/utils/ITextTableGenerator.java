@@ -1,11 +1,13 @@
 package org.lawrencebower.docgen.core.generator.utils;
 
+import com.lowagie.text.DocumentException;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
+import org.lawrencebower.docgen.core.exception.DocGenException;
 
 public class ITextTableGenerator {
 
@@ -17,9 +19,26 @@ public class ITextTableGenerator {
 
         setTableWidth(tableComponent);
 
+        setColumnWidths(tableComponent);
+
         mapCells(tableComponent);
 
         return iTextTable;
+    }
+
+    private void setColumnWidths(TableComponent tableComponent) {
+
+        int[] relativeWidths = tableComponent.getColumnWidths();
+
+        if(relativeWidths.length == 0){
+            return;
+        }
+
+        try {
+            iTextTable.setWidths(relativeWidths);
+        } catch (DocumentException e) {
+            throw new DocGenException(e);
+        }
     }
 
     private void setTableWidth(TableComponent tableComponent) {

@@ -3,6 +3,7 @@ package org.lawrencebower.docgen.core.generator.custom.renderer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.lawrencebower.docgen.core.document.component.NewLineComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
@@ -68,6 +69,26 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         createPDFAndCompareWithExpected(expectedOutputFilePath,
                                         outFilePath,
                                         tableComponent);
+
+    }
+
+    @Test
+    public void testRenderComponent_columnWidthsSet_createsValidFile() {
+
+        String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_3.pdf";
+        String outFilePath = outputPackage + "table_renderer_output_3.pdf";
+
+        TableComponent tableComponent1 = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        tableComponent1.getHeaderRow().setColumnWidths(20, 20, 60);
+
+        TableComponent tableComponent2 = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        tableComponent2.getHeaderRow().setColumnWidths(60, 10, 30);
+
+        createPDFAndCompareWithExpected(expectedOutputFilePath,
+                                        outFilePath,
+                                        tableComponent1,
+                                        new NewLineComponent(),
+                                        tableComponent2);
 
     }
 

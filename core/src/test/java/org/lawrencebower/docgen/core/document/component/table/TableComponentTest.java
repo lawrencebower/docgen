@@ -12,7 +12,7 @@ public class TableComponentTest {
     public void testGetColumnCount_hasColumns_returnsCorrectNumber() throws Exception {
 
         TableComponent component = new TableComponent("name");
-        TableRow row = new TableRow();
+        TableHeaderRow row = new TableHeaderRow();
         row.addCell(new TableCell("name"));
         row.addCell(new TableCell("name"));
         row.addCell(new TableCell("name"));
@@ -61,8 +61,35 @@ public class TableComponentTest {
         assertEquals("name5", allCells.get(4).getValue());
     }
 
+    @Test
+    public void testSetHeaderRow_validHeader_correctCount() throws Exception {
+        TableComponent component = new TableComponent("name");
+        component.setHeaderRow(new TableCell("cell1"),
+                               new TableCell("cell2"),
+                               new TableCell("cell3"));
+
+        assertEquals(3, component.getHeaderRow().getColumnCount());
+    }
+
+    @Test
+    public void testSetHeaderRow_validHeader_correctOrder() throws Exception {
+        TableComponent component = new TableComponent("name");
+        component.setHeaderRow(new TableCell("cell1"),
+                               new TableCell("cell2"),
+                               new TableCell("cell3"));
+
+        TableHeaderRow headerRow = component.getHeaderRow();
+        List<TableCell> headerCells = headerRow.getCells();
+        assertEquals("cell3", headerCells.get(2).getValue());
+    }
+
     private TableComponent makeTableComponentWith6Cells() {
         TableComponent component = new TableComponent("name");
+
+        TableHeaderRow headerRow = new TableHeaderRow();
+        headerRow.addCell(new TableCell("Col1"));
+        headerRow.addCell(new TableCell("Col2"));
+        headerRow.addCell(new TableCell("Col3"));
 
         TableRow row = new TableRow();
         row.addCell(new TableCell("name1"));
