@@ -2,11 +2,14 @@ package org.lawrencebower.docgen.core.document.component.table;
 
 import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 
+import java.awt.*;
+
 public class TableCell {
 
     private String value;
     DocAlignment verticalAlignment = DocAlignment.TOP;//default
     DocAlignment horizontalAlignment = DocAlignment.LEFT;//default
+    private Color backgroundColor;
 
     public TableCell(String value) {
         this.value = value;
@@ -34,5 +37,17 @@ public class TableCell {
 
     public void setHorizontalAlignment(DocAlignment horizontalAlignment) {
         this.horizontalAlignment = horizontalAlignment;
+    }
+
+    public void setBackgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
+    public Color getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public boolean hasBackgroundColor(){
+        return backgroundColor != null;
     }
 }

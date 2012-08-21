@@ -11,6 +11,7 @@ import org.lawrencebower.docgen.core.generator.utils.ITextTableGeneratorTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.awt.*;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -89,6 +90,24 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
                                         tableComponent1,
                                         new NewLineComponent(),
                                         tableComponent2);
+
+    }
+
+    @Test
+    public void testRenderComponent_cellBackgroundColor_createsValidFile() {
+
+        String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_4.pdf";
+        String outFilePath = outputPackage + "table_renderer_output_4.pdf";
+
+        TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        List<TableCell> allCells = tableComponent.getAllCells();
+        allCells.get(0).setBackgroundColor(Color.cyan);
+        allCells.get(2).setBackgroundColor(Color.pink);
+        allCells.get(4).setBackgroundColor(Color.gray);
+
+        createPDFAndCompareWithExpected(expectedOutputFilePath,
+                                        outFilePath,
+                                        tableComponent);
 
     }
 

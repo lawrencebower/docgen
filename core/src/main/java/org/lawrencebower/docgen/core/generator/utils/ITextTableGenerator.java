@@ -30,7 +30,7 @@ public class ITextTableGenerator {
 
         int[] relativeWidths = tableComponent.getColumnWidths();
 
-        if(relativeWidths.length == 0){
+        if (relativeWidths.length == 0) {
             return;
         }
 
@@ -56,7 +56,15 @@ public class ITextTableGenerator {
 
             mapCellAlignment(tableCell, iTextCell);
 
+            setCellColor(tableCell, iTextCell);
+
             iTextTable.addCell(iTextCell);
+        }
+    }
+
+    private void setCellColor(TableCell tableCell, PdfPCell iTextCell) {
+        if (tableCell.hasBackgroundColor()) {
+            iTextCell.setBackgroundColor(tableCell.getBackgroundColor());
         }
     }
 
