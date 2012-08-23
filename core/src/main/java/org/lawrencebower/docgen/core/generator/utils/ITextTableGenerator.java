@@ -8,8 +8,12 @@ import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class ITextTableGenerator {
+
+    @Autowired
+    private PDFGenUtils pdfUtils;
 
     private PdfPTable iTextTable;
 
@@ -24,6 +28,11 @@ public class ITextTableGenerator {
         mapCells(tableComponent);
 
         return iTextTable;
+    }
+
+    private void makeTable(TableComponent tableComponent) {
+        int columnCount = tableComponent.getColumnCount();
+        iTextTable = new PdfPTable(columnCount);
     }
 
     private void setColumnWidths(TableComponent tableComponent) {
@@ -96,11 +105,6 @@ public class ITextTableGenerator {
     }
 
     private Phrase getPhraseFromCell(TableCell tableCell) {
-        return new Phrase(tableCell.getValue());
-    }
-
-    private void makeTable(TableComponent tableComponent) {
-        int columnCount = tableComponent.getColumnCount();
-        iTextTable = new PdfPTable(columnCount);
+        return pdfUtils.mapTextBlock(tableCell.getText());
     }
 }

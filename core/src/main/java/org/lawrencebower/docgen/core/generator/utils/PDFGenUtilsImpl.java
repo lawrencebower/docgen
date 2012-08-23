@@ -1,13 +1,19 @@
 package org.lawrencebower.docgen.core.generator.utils;
 
+import com.lowagie.text.Chunk;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
+import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.*;
 import org.lawrencebower.docgen.core.document.DocumentInfo;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
+import org.lawrencebower.docgen.core.document.component.text.FontInfo;
+import org.lawrencebower.docgen.core.document.component.text.FontStyle;
+import org.lawrencebower.docgen.core.document.component.text.TextBlock;
+import org.lawrencebower.docgen.core.document.component.text.TextFragment;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,7 +28,10 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
     private ITextTableGenerator iTextTableGenerator;
 
     private static final float DEFAULT_LEADING = 9;
-    private static final int DEFAULT_FONT_SIZE = 10;
+
+    public static final int DEFAULT_FONT_SIZE = 10;
+    public static final int DEFAULT_FONT_STYLE = Font.BOLD;
+    public static final int DEFAULT_FONT = Font.HELVETICA;
 
     @Override
     public void checkRequiredValuesPresent(DocumentInfo docInfo) {
@@ -40,10 +49,11 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
     }
 
     @Override
-    public Font getDefaultFont() {
+    public Font getBaseFont() {
         try {
             BaseFont baseFont = BaseFont.createFont();
-            return new Font(baseFont, DEFAULT_FONT_SIZE);
+            Font font = new Font(baseFont, DEFAULT_FONT_SIZE);
+            return font;
         } catch (DocumentException | IOException e) {
             throw new DocGenException(e);
         }
@@ -114,7 +124,7 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
 
     @Override
     public PdfPTable generateTable(TableComponent component) {
-        return new ITextTableGenerator().generateTable(component);
+        return iTextTableGenerator.generateTable(component);
     }
 
     @Override
@@ -124,5 +134,46 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
                          boxCoordinates.getWidth(),
                          boxCoordinates.getHeight());
         canvas.stroke();
+    }
+
+    @Override
+    public Phrase mapTextBlock(TextBlock textBlock) {
+
+        Phrase iTextPhrase = new Phrase();
+
+        for (TextFragment textFragment : textBlock.getFragments()) {
+            Font iTextFont = mapFont(textFragment.getFontInfo());
+            Chunk iTextChunk = new Chunk(textFragment.getText(), iTextFont);
+            iTextPhrase.add(iTextChunk);
+        }
+
+        return iTextPhrase;
+    }
+
+    private Font mapFont(FontInfo fontInfo) {
+
+        int fontType = mapFontType(fontInfo.getFont());
+        int fontStyle = mapFontStyle(fontInfo.getStyle());
+
+        Font iTextFont = new Font(fontType,
+                                  fontInfo.getFontSize(),
+                                  fontStyle);
+
+        return iTextFont;
+    }
+
+    private int mapFontType(String font) {
+        return Font.HELVETICA;
+    }
+
+    private int mapFontStyle(FontStyle style) {
+        switch (style){
+            case BOLD : return Font.BOLD;
+            case ITALIC : return Font.ITALIC;
+            case PLAIN : return Font.NORMAL;
+            case BOLD_ITALIC : return Font.BOLDITALIC;
+            case UNDERLINE : return Font.UNDERLINE;
+        }
+        return Font.NORMAL;
     }
 }

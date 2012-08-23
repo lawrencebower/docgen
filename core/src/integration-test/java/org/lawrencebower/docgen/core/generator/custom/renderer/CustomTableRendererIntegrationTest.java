@@ -7,7 +7,9 @@ import org.lawrencebower.docgen.core.document.component.NewLineComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
+import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.utils.ITextTableGeneratorTest;
+import org.lawrencebower.docgen.core.generator.utils.TextGenerator;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -46,19 +48,19 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(4, 2);
         List<TableCell> allCells = tableComponent.getAllCells();
 
-        allCells.get(0).setValue("\n\n\n\n");//make the cell deep
+        allCells.get(0).setText("\n\n\n\n");//make the cell deep
 
         allCells.get(1).setVerticalAlignment(DocAlignment.TOP);
         allCells.get(2).setVerticalAlignment(DocAlignment.MIDDLE);
         allCells.get(3).setVerticalAlignment(DocAlignment.BOTTOM);
 
-        allCells.get(4).setValue("\n\n\n\n");//make the cell deep
+        allCells.get(4).setText("\n\n\n\n");//make the cell deep
 
         allCells.get(5).setHorizontalAlignment(DocAlignment.LEFT);
         allCells.get(6).setHorizontalAlignment(DocAlignment.CENTER);
         allCells.get(7).setHorizontalAlignment(DocAlignment.RIGHT);
 
-        allCells.get(8).setValue("\n\n\n\n");//make the cell deep
+        allCells.get(8).setText("\n\n\n\n");//make the cell deep
 
         allCells.get(9).setHorizontalAlignment(DocAlignment.LEFT);
         allCells.get(9).setVerticalAlignment(DocAlignment.BOTTOM);
@@ -122,6 +124,28 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         allCells.get(0).setPadding(0);
         allCells.get(4).setPadding(20);
         allCells.get(8).setPadding(50);
+
+        createPDFAndCompareWithExpected(expectedOutputFilePath,
+                                        outFilePath,
+                                        tableComponent);
+
+    }
+
+    @Test
+    public void testRenderComponent_variedFonts_createsValidFile() {
+
+        String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_6.pdf";
+        String outFilePath = outputPackage + "table_renderer_output_6.pdf";
+
+        List<TextBlock> textBlocks = TextGenerator.createVariedTextBlocks();
+        TextBlock variedTxtBlock = TextGenerator.createVariedTextBlock();
+
+        TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        List<TableCell> allCells = tableComponent.getAllCells();
+        allCells.get(0).setText(textBlocks.get(0));
+        allCells.get(4).setText(textBlocks.get(1));
+        allCells.get(8).setText(textBlocks.get(2));
+        allCells.get(9).setText(variedTxtBlock);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
                                         outFilePath,

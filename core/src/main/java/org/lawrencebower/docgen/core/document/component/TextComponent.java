@@ -1,22 +1,28 @@
 package org.lawrencebower.docgen.core.document.component;
 
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
+import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 
 public class TextComponent extends DocComponent {
 
-    private String value;
+    private TextBlock text;
+
+    public TextComponent(String name, TextBlock text) {
+        super(name);
+        this.text = text;
+    }
 
     public TextComponent(String name,
-                         String value) {
+                         String text) {
         super(name);
-        this.value = value;
+        this.text = new TextBlock(text);
     }
 
     public TextComponent(String name,
                          DocPosition position,
-                         String value) {
+                         String text) {
         super(name, position);
-        this.value = value;
+        this.text = new TextBlock(text);
     }
 
     public TextComponent(String name) {
@@ -32,12 +38,12 @@ public class TextComponent extends DocComponent {
         return DocComponentType.TEXT;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setText(String text) {
+        this.text = new TextBlock(text);
     }
 
-    public String getValue() {
-        return value;
+    public TextBlock getText() {
+        return text;
     }
 
 }

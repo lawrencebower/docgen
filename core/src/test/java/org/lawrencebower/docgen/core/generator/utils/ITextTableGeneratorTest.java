@@ -1,24 +1,25 @@
 package org.lawrencebower.docgen.core.generator.utils;
 
 import com.lowagie.text.pdf.PdfPTable;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
 import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static junit.framework.Assert.assertEquals;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:META-INF/core-test-context.xml"})
 public class ITextTableGeneratorTest {
 
+    @Autowired
     private ITextTableGenerator tableGenerator;
-
-    @Before
-    public void setup() {
-        this.tableGenerator = new ITextTableGenerator();
-    }
 
     @Test
     public void testMakeTable_standardComponent_returnsValidRowCount() {

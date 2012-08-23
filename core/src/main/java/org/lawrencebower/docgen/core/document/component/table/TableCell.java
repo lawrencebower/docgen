@@ -1,27 +1,33 @@
 package org.lawrencebower.docgen.core.document.component.table;
 
 import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
+import org.lawrencebower.docgen.core.document.component.text.TextBlock;
+import org.lawrencebower.docgen.core.document.component.text.TextFragment;
 
 import java.awt.*;
 
 public class TableCell {
 
-    private String value;
+    private TextBlock text;
     DocAlignment verticalAlignment = DocAlignment.TOP;//default
     DocAlignment horizontalAlignment = DocAlignment.LEFT;//default
     private Color backgroundColor;
     private float padding = 3;//default
 
-    public TableCell(String value) {
-        this.value = value;
+    public TableCell(String text) {
+        this.text = new TextBlock(text);
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setText(String text) {
+        this.text = new TextBlock(text);
     }
 
-    public String getValue() {
-        return value;
+    public void setText(TextBlock text) {
+        this.text = text;
+    }
+
+    public TextBlock getText() {
+        return text;
     }
 
     public DocAlignment getVerticalAlignment() {
@@ -58,5 +64,14 @@ public class TableCell {
 
     public float getPadding() {
         return padding;
+    }
+
+    public String getTextString() {
+        StringBuilder builder = new StringBuilder();
+        for (TextFragment textFragment : text.getFragments()) {
+            builder.append(textFragment.getText());
+        }
+
+        return builder.toString();
     }
 }

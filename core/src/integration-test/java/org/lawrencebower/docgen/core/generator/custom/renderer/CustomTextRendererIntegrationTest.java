@@ -7,16 +7,16 @@ import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
+import org.lawrencebower.docgen.core.document.component.text.TextBlock;
+import org.lawrencebower.docgen.core.generator.utils.TextGenerator;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:META-INF/integration-test-config.xml"})
 public class CustomTextRendererIntegrationTest extends AbstractCustomRendererTest {
-
-    private String longText = "value sssssssss sss ssssssss ssssssss sssssssss ssssssssssss " +
-                              "ssssssss ssssssss ssssssss ssssssss sssss sss sssssss sssss ss " +
-                              "ssssssss ss sssssss ssssssss ssss ssssssss ssss sssssssss sssssssss";
 
     @Before
     public void setup() {
@@ -43,6 +43,7 @@ public class CustomTextRendererIntegrationTest extends AbstractCustomRendererTes
         String expectedOutputFilePath = inputPackage + "text_renderer_expected_output2.pdf";
         String outFilePath = outputPackage + "text_renderer_output2.pdf";
 
+        String longText = multiplyText("long text");
         DocComponent textComponent = new TextComponent("Name", longText);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
@@ -57,24 +58,28 @@ public class CustomTextRendererIntegrationTest extends AbstractCustomRendererTes
         String outFilePath = outputPackage + "text_renderer_output3.pdf";
 
         DocPosition justifiedPosition = new DocPosition(DocAlignment.JUSTIFIED);
+        String justifiedText = multiplyText("justified");
         DocComponent justifiedComponent = new TextComponent("Name",
                                                             justifiedPosition,
-                                                            longText);
+                                                            justifiedText);
 
         DocPosition leftPosition = new DocPosition(DocAlignment.LEFT);
+        String leftText = multiplyText("left");
         DocComponent leftComponent = new TextComponent("Name",
                                                        leftPosition,
-                                                       longText);
+                                                       leftText);
 
         DocPosition rightPosition = new DocPosition(DocAlignment.RIGHT);
+        String rightText = multiplyText("right");
         DocComponent rightComponent = new TextComponent("Name",
                                                         rightPosition,
-                                                        longText);
+                                                        rightText);
 
         DocPosition centerPosition = new DocPosition(DocAlignment.CENTER);
+        String centerText = multiplyText("center");
         DocComponent centerComponent = new TextComponent("Name",
                                                          centerPosition,
-                                                         longText);
+                                                         centerText);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
                                         outFilePath,
@@ -82,5 +87,59 @@ public class CustomTextRendererIntegrationTest extends AbstractCustomRendererTes
                                         centerComponent,
                                         leftComponent,
                                         rightComponent);
+    }
+
+    @Test
+    public void testRenderComponent_variedFonts_rendersSuccessfully() {
+
+        String expectedOutputFilePath = inputPackage + "text_renderer_expected_output4.pdf";
+        String outFilePath = outputPackage + "text_renderer_output4.pdf";
+
+        List<TextBlock> textBlocks = TextGenerator.createVariedTextBlocks();
+
+        DocComponent plainComponent = new TextComponent("Plain", textBlocks.get(0));
+
+        DocComponent boldComponent = new TextComponent("bold", textBlocks.get(1));
+
+        DocComponent boldItalicComponent = new TextComponent("bold italic", textBlocks.get(2));
+
+        DocComponent underlineComponent = new TextComponent("underline", textBlocks.get(3));
+
+        createPDFAndCompareWithExpected(expectedOutputFilePath,
+                                        outFilePath,
+                                        plainComponent,
+                                        boldComponent,
+                                        boldItalicComponent,
+                                        underlineComponent);
+    }
+
+    @Test
+    public void testRenderComponent_variedFontsInOneBlock_rendersSuccessfully() {
+
+        String expectedOutputFilePath = inputPackage + "text_renderer_expected_output5.pdf";
+        String outFilePath = outputPackage + "text_renderer_output5.pdf";
+
+        List<TextBlock> textBlocks = TextGenerator.createVariedTextBlocks();
+
+        TextBlock variedTextBlock = TextGenerator.createVariedTextBlock();
+
+        DocComponent textComponent = new TextComponent("multi text", variedTextBlock);
+
+        createPDFAndCompareWithExpected(expectedOutputFilePath,
+                                        outFilePath,
+                                        textComponent);
+    }
+
+    private String multiplyText(String text) {
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = 0; i < 100; i++) {
+            builder.append(text);
+            builder.append(" ");
+        }
+
+        builder.append("\n\n");
+
+        return builder.toString();
     }
 }
