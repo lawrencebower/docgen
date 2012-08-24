@@ -21,8 +21,6 @@ public interface PDFGenUtils {
 
     Font getBaseFont();
 
-    float getLeading();
-
     PdfReader getPDFReaderAndUnlockForSourcePDF(String sourcePDF);
 
     PdfStamper getPDFStamper(PdfReader pdfReader, OutputStream pdfOutStream);

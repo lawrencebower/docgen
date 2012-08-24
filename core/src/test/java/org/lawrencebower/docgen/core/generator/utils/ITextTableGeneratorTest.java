@@ -3,6 +3,8 @@ package org.lawrencebower.docgen.core.generator.utils;
 import com.lowagie.text.pdf.PdfPTable;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
+import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
@@ -77,6 +79,9 @@ public class ITextTableGeneratorTest {
             fillTableRow(tableRow, colNumber);
             tableComponent.addRow(tableRow);
         }
+
+        tableComponent.setRenderBorder(true);
+        tableComponent.setPosition(new DocPosition(DocAlignment.CENTER));
 
         return tableComponent;
     }

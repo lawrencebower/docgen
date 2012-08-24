@@ -6,9 +6,9 @@ public class FontInfo {
     private String font;
     private FontStyle style;
 
-    private static final int DEFAULT_FONT_SIZE = 10;
-    private static final String DEFAULT_FONT = "Helvetica";
-    private static final FontStyle DEFAULT_FONT_STYLE = FontStyle.PLAIN;
+    public static final int DEFAULT_FONT_SIZE = 10;
+    public static final String DEFAULT_FONT = "Helvetica";
+    public static final FontStyle DEFAULT_FONT_STYLE = FontStyle.PLAIN;
 
     public FontInfo(String font,
                     int fontSize,
@@ -37,4 +37,15 @@ public class FontInfo {
         return style;
     }
 
+    public static FontInfo DEFAULT_BOLD() {
+        return new FontInfo(DEFAULT_FONT,
+                            DEFAULT_FONT_SIZE,
+                            FontStyle.BOLD);
+    }
+
+    public static FontInfo DEFAULT() {
+        return new FontInfo(DEFAULT_FONT,
+                            DEFAULT_FONT_SIZE,
+                            FontStyle.PLAIN);
+    }
 }

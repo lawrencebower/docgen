@@ -18,6 +18,10 @@ public class TableCell {
         this.text = new TextBlock(text);
     }
 
+    public TableCell(TextBlock text) {
+        this.text = text;
+    }
+
     public void setText(String text) {
         this.text = new TextBlock(text);
     }

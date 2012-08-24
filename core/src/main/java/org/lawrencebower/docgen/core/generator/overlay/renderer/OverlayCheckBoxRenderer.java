@@ -6,6 +6,7 @@ import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
+import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererInfo;
@@ -42,12 +43,22 @@ public class OverlayCheckBoxRenderer extends AbstractOverlayTextRenderer
                          DocCoordinates boxCoordinates) {
 
         String boxText = getTextFromSelected(isSelected);
-        TextBlock textBlock = new TextBlock(boxText);
+
+        FontInfo fontInfo = new FontInfo(FontInfo.DEFAULT_FONT,
+                                         10,
+                                         FontInfo.DEFAULT_FONT_STYLE);
+
+        TextBlock textBlock = new TextBlock(boxText, fontInfo);
 
         ColumnText column = createColumn(canvas,
                                          boxAlignment,
                                          boxCoordinates,
                                          textBlock);
+
+        /**
+         * for checkbox - the leading is overridden to be the font size
+         */
+        column.setLeading(fontInfo.getFontSize());
 
         drawColumn(column);
     }

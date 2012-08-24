@@ -32,13 +32,15 @@ public abstract class AbstractOverlayTextRenderer {
 
         ColumnText column = new ColumnText(canvas);
 
+        float leading = phrase.getLeading();
+
         column.setSimpleColumn(
                 phrase,
                 x1,
                 y1,
                 x2,
                 y2,
-                pdfUtils.getLeading(),
+                leading,
                 boxAlignment);
 
         return column;

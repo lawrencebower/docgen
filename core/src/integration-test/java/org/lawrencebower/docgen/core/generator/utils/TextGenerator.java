@@ -34,4 +34,17 @@ public class TextGenerator {
 
         return singleBlock;
     }
+
+    public static String multiplyText(String text) {
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = 0; i < 100; i++) {
+            builder.append(text);
+            builder.append(" ");
+        }
+
+        builder.append("\n\n");
+
+        return builder.toString();
+    }
 }

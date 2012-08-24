@@ -2,6 +2,7 @@ package org.lawrencebower.docgen.core.generator.utils;
 
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Phrase;
+import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
@@ -27,7 +28,15 @@ public class ITextTableGenerator {
 
         mapCells(tableComponent);
 
+        mapTableAlignment(tableComponent);
+
         return iTextTable;
+    }
+
+    private void mapTableAlignment(TableComponent tableComponent) {
+        DocAlignment alignment = tableComponent.getPosition().getAlignment();
+        int iTextAlignment = DocAlignment.mapToITextAlignment(alignment);
+        iTextTable.setHorizontalAlignment(iTextAlignment);
     }
 
     private void makeTable(TableComponent tableComponent) {
@@ -69,7 +78,23 @@ public class ITextTableGenerator {
 
             setCellPadding(tableCell, iTextCell);
 
+            setCellBorder(tableComponent.isRenderBorder(),
+                          iTextCell);
+
             iTextTable.addCell(iTextCell);
+        }
+    }
+
+    private void setCellBorder(boolean renderBorder,
+                               PdfPCell iTextCell) {
+
+        if (renderBorder) {
+            iTextCell.setBorder(Rectangle.LEFT +
+                                Rectangle.RIGHT +
+                                Rectangle.TOP +
+                                Rectangle.BOTTOM);
+        } else {
+            iTextCell.setBorder(0);
         }
     }
 

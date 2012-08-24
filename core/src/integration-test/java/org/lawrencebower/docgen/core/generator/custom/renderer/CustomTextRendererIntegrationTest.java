@@ -43,7 +43,7 @@ public class CustomTextRendererIntegrationTest extends AbstractCustomRendererTes
         String expectedOutputFilePath = inputPackage + "text_renderer_expected_output2.pdf";
         String outFilePath = outputPackage + "text_renderer_output2.pdf";
 
-        String longText = multiplyText("long text");
+        String longText = TextGenerator.multiplyText("long text");
         DocComponent textComponent = new TextComponent("Name", longText);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
@@ -58,25 +58,25 @@ public class CustomTextRendererIntegrationTest extends AbstractCustomRendererTes
         String outFilePath = outputPackage + "text_renderer_output3.pdf";
 
         DocPosition justifiedPosition = new DocPosition(DocAlignment.JUSTIFIED);
-        String justifiedText = multiplyText("justified");
+        String justifiedText = TextGenerator.multiplyText("justified");
         DocComponent justifiedComponent = new TextComponent("Name",
                                                             justifiedPosition,
                                                             justifiedText);
 
         DocPosition leftPosition = new DocPosition(DocAlignment.LEFT);
-        String leftText = multiplyText("left");
+        String leftText = TextGenerator.multiplyText("left");
         DocComponent leftComponent = new TextComponent("Name",
                                                        leftPosition,
                                                        leftText);
 
         DocPosition rightPosition = new DocPosition(DocAlignment.RIGHT);
-        String rightText = multiplyText("right");
+        String rightText = TextGenerator.multiplyText("right");
         DocComponent rightComponent = new TextComponent("Name",
                                                         rightPosition,
                                                         rightText);
 
         DocPosition centerPosition = new DocPosition(DocAlignment.CENTER);
-        String centerText = multiplyText("center");
+        String centerText = TextGenerator.multiplyText("center");
         DocComponent centerComponent = new TextComponent("Name",
                                                          centerPosition,
                                                          centerText);
@@ -130,16 +130,4 @@ public class CustomTextRendererIntegrationTest extends AbstractCustomRendererTes
                                         textComponent);
     }
 
-    private String multiplyText(String text) {
-        StringBuilder builder = new StringBuilder();
-
-        for (int i = 0; i < 100; i++) {
-            builder.append(text);
-            builder.append(" ");
-        }
-
-        builder.append("\n\n");
-
-        return builder.toString();
-    }
 }

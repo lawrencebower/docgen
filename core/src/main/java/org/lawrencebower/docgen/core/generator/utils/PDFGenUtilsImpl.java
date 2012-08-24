@@ -60,11 +60,6 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
     }
 
     @Override
-    public float getLeading() {
-        return DEFAULT_LEADING;
-    }
-
-    @Override
     public PdfReader getPDFReaderAndUnlockForSourcePDF(String sourcePDF) {
         try {
             PdfReader pdfReader = new PdfReader(sourcePDF);
