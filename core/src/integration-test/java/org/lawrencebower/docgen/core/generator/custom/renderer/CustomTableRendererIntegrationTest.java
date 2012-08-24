@@ -153,4 +153,19 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
 
     }
 
+    @Test
+    public void testRenderComponent_noBorder_createsValidFile() {
+
+        String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_7.pdf";
+        String outFilePath = outputPackage + "table_renderer_output_7.pdf";
+
+        TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        tableComponent.setRenderBorder(false);
+
+        createPDFAndCompareWithExpected(expectedOutputFilePath,
+                                        outFilePath,
+                                        tableComponent);
+
+    }
+
 }
