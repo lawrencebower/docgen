@@ -21,7 +21,7 @@ public class OverlayComponentRendererTest {
     }
 
     private DocComponent getUnknownComponent() {
-        return new DocComponent("made up component") {
+        return new DocComponent() {
             @Override
             public DocComponentType getComponentType() {
                 return null;

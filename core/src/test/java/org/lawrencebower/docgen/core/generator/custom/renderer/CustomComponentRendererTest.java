@@ -36,7 +36,7 @@ public class CustomComponentRendererTest {
 
         CustomComponentRenderer renderer = new CustomComponentRenderer();
 
-        DocComponent checkboxComponent = new CheckBoxComponent("name");
+        DocComponent checkboxComponent = new CheckBoxComponent();
 
         CustomComponentRendererInfo rendererInfo = new CustomComponentRendererInfo(new ByteArrayOutputStream());
 
@@ -50,7 +50,7 @@ public class CustomComponentRendererTest {
     }
 
     private DocComponent getUnknownComponent() {
-        return new DocComponent("made up component") {
+        return new DocComponent() {
             @Override
             public DocComponentType getComponentType() {
                 return null;

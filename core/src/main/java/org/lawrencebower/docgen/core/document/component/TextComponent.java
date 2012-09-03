@@ -8,30 +8,22 @@ public class TextComponent extends DocComponent {
 
     private TextBlock text;
 
-    public TextComponent(String name, TextBlock text) {
-        super(name);
+    public TextComponent(TextBlock text) {
         this.text = text;
     }
 
-    public TextComponent(String name,
-                         String text) {
-        super(name);
+    public TextComponent(String text) {
         this.text = new TextBlock(text);
     }
 
-    public TextComponent(String name,
-                         DocPosition position,
+    public TextComponent(DocPosition position,
                          String text) {
-        super(name, position);
+        super(position);
         this.text = new TextBlock(text);
     }
 
-    public TextComponent(String name) {
-        super(name);
-    }
-
-    public TextComponent(String name, DocPosition position) {
-        super(name, position);
+    public TextComponent(DocPosition position) {
+        super(position);
     }
 
     @Override

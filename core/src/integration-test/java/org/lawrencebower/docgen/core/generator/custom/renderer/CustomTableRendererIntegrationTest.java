@@ -143,10 +143,10 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
 
         TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
         List<TableCell> allCells = tableComponent.getAllCells();
-        allCells.get(0).setComponent(new TextComponent("", textBlocks.get(0)));
-        allCells.get(4).setComponent(new TextComponent("", textBlocks.get(1)));
-        allCells.get(8).setComponent(new TextComponent("", textBlocks.get(2)));
-        allCells.get(9).setComponent(new TextComponent("", variedTxtBlock));
+        allCells.get(0).setComponent(new TextComponent(textBlocks.get(0)));
+        allCells.get(4).setComponent(new TextComponent(textBlocks.get(1)));
+        allCells.get(8).setComponent(new TextComponent(textBlocks.get(2)));
+        allCells.get(9).setComponent(new TextComponent(variedTxtBlock));
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
                                         outFilePath,

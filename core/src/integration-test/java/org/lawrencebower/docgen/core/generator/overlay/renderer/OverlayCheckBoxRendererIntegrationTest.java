@@ -31,17 +31,17 @@ public class OverlayCheckBoxRendererIntegrationTest extends AbstractOverlayRende
 
         DocCoordinates leftCoordinates = new DocCoordinates(10, 545, width, height);
         DocPosition leftPosition = new DocPosition(DocAlignment.LEFT, leftCoordinates);
-        CheckBoxComponent leftTextComponent = new CheckBoxComponent("Name", true, leftPosition);
+        CheckBoxComponent leftTextComponent = new CheckBoxComponent(true, leftPosition);
         leftTextComponent.setRenderBorder(true);
 
         DocCoordinates rightCoordinates = new DocCoordinates(150, 445, width, height);
         DocPosition rightPosition = new DocPosition(DocAlignment.RIGHT, rightCoordinates);
-        CheckBoxComponent rightTextComponent = new CheckBoxComponent("Name", true, rightPosition);
+        CheckBoxComponent rightTextComponent = new CheckBoxComponent(true, rightPosition);
         rightTextComponent.setRenderBorder(true);
 
         DocCoordinates centerCoordinates = new DocCoordinates(300, 345, width, height);
         DocPosition centerPosition = new DocPosition(DocAlignment.CENTER, centerCoordinates);
-        CheckBoxComponent centerTextComponent = new CheckBoxComponent("Name", true, centerPosition);
+        CheckBoxComponent centerTextComponent = new CheckBoxComponent(true, centerPosition);
         centerTextComponent.setRenderBorder(true);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,

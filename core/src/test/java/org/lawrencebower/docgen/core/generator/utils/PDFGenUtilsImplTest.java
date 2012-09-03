@@ -106,7 +106,7 @@ public class PDFGenUtilsImplTest {
     public void testCheckCoordinates_validCoordinates_noError() {
 
         DocPosition position = new DocPosition(DocAlignment.LEFT, new DocCoordinates(1, 1, 1, 1));
-        DocComponent component = new TextComponent("name", position, "value");
+        DocComponent component = new TextComponent(position, "value");
         pdfGenUtils.checkCoordinates(Arrays.asList(component));
     }
 
@@ -114,7 +114,7 @@ public class PDFGenUtilsImplTest {
     public void testCheckCoordinates_nullPosition_throwsError() {
 
         try {
-            DocComponent component = new TextComponent("name", null, "value");
+            DocComponent component = new TextComponent(null, "value");
             pdfGenUtils.checkCoordinates(Arrays.asList(component));
         } catch (DocGenException e) {
             String message = e.getMessage();
@@ -129,7 +129,7 @@ public class PDFGenUtilsImplTest {
 
         try {
             DocPosition position = new DocPosition(DocAlignment.LEFT, null);
-            DocComponent component = new TextComponent("name", position, "value");
+            DocComponent component = new TextComponent(position, "value");
             pdfGenUtils.checkCoordinates(Arrays.asList(component));
         } catch (DocGenException e) {
             String message = e.getMessage();

@@ -62,6 +62,6 @@ public class OverlayDocumentInfoIntegrationTest extends AbstractIntegrationTest 
         DocCoordinates coordinates = new DocCoordinates(100, 675, 180, 81);
         DocPosition position = new DocPosition(DocAlignment.LEFT, coordinates);
 
-        return new TextComponent("Address", position, "39 York Street");
+        return new TextComponent(position, "39 York Street");
     }
 }

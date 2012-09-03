@@ -57,6 +57,6 @@ public class CustomDocumentInfoIntegrationTest extends AbstractIntegrationTest {
 
         DocPosition position = new DocPosition(DocAlignment.LEFT);
 
-        return new TextComponent("Address", position, "39 York Street");
+        return new TextComponent(position, "39 York Street");
     }
 }

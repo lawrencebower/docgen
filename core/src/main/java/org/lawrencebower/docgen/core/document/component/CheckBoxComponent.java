@@ -6,25 +6,21 @@ public class CheckBoxComponent extends DocComponent {
 
     private boolean selected;
 
-    public CheckBoxComponent(String name,
-                             boolean selected) {
-        super(name);
+    public CheckBoxComponent(boolean selected) {
         this.selected = selected;
     }
 
-    public CheckBoxComponent(String name,
-                             boolean selected,
+    public CheckBoxComponent(boolean selected,
                              DocPosition position) {
-        super(name, position);
+        super(position);
         this.selected = selected;
     }
 
-    public CheckBoxComponent(String name) {
-        super(name);
+    public CheckBoxComponent() {
     }
 
-    public CheckBoxComponent(String name, DocPosition position) {
-        super(name, position);
+    public CheckBoxComponent(DocPosition position) {
+        super(position);
     }
 
     @Override

@@ -24,10 +24,10 @@ public class CustomNewLineRendererIntegrationTest extends AbstractCustomRenderer
         String expectedOutputFilePath = inputPackage + "newline_renderer_expected_output.pdf";
         String outFilePath = outputPackage + "newline_renderer_output.pdf";
 
-        DocComponent textComponent1 = new TextComponent("Name", "value");
+        DocComponent textComponent1 = new TextComponent("value");
         DocComponent newlineComponent = new NewLineComponent();
-        DocComponent textComponent2 = new TextComponent("Name2", "value2");
-        DocComponent textComponent3 = new TextComponent("Name3", "value3");
+        DocComponent textComponent2 = new TextComponent("value2");
+        DocComponent textComponent3 = new TextComponent("value3");
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
                                         outFilePath,

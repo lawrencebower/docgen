@@ -9,19 +9,20 @@ public abstract class DocComponent {
     private DocPosition position;
     protected boolean renderBorder;
 
-    protected DocComponent(String name) {
-        this.name = name;
+    protected DocComponent() {
         this.position = new DocPosition(DocAlignment.LEFT);
     }
 
-    protected DocComponent(String name,
-                           DocPosition position) {
-        this.name = name;
+    protected DocComponent(DocPosition position) {
         this.position = position;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setPosition(DocPosition position) {

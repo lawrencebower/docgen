@@ -35,17 +35,17 @@ public class OverlayTextRendererIntegrationTest extends AbstractOverlayRendererT
 
         DocCoordinates leftCoordinates = new DocCoordinates(10, 545, width, height);
         DocPosition leftPosition = new DocPosition(DocAlignment.LEFT, leftCoordinates);
-        TextComponent leftTextComponent = new TextComponent("Name", leftPosition, "left align");
+        TextComponent leftTextComponent = new TextComponent(leftPosition, "left align");
         leftTextComponent.setRenderBorder(true);
 
         DocCoordinates rightCoordinates = new DocCoordinates(150, 445, width, height);
         DocPosition rightPosition = new DocPosition(DocAlignment.RIGHT, rightCoordinates);
-        TextComponent rightTextComponent = new TextComponent("Name", rightPosition, "right align");
+        TextComponent rightTextComponent = new TextComponent(rightPosition, "right align");
         rightTextComponent.setRenderBorder(true);
 
         DocCoordinates centerCoordinates = new DocCoordinates(300, 345, width, height);
         DocPosition centerPosition = new DocPosition(DocAlignment.CENTER, centerCoordinates);
-        TextComponent centerTextComponent = new TextComponent("Name", centerPosition, "center align");
+        TextComponent centerTextComponent = new TextComponent(centerPosition, "center align");
         centerTextComponent.setRenderBorder(true);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
@@ -71,7 +71,7 @@ public class OverlayTextRendererIntegrationTest extends AbstractOverlayRendererT
         DocPosition leftPosition = new DocPosition(DocAlignment.LEFT, leftCoordinates);
         String longText = TextGenerator.multiplyText("text ");
         TextBlock textBlock = new TextBlock(longText, new FontInfo("Serif",20, FontStyle.BOLD_ITALIC));
-        TextComponent textComponent = new TextComponent("Name", textBlock);
+        TextComponent textComponent = new TextComponent(textBlock);
         textComponent.setPosition(leftPosition);
         textComponent.setRenderBorder(true);
 
@@ -95,7 +95,7 @@ public class OverlayTextRendererIntegrationTest extends AbstractOverlayRendererT
         DocCoordinates leftCoordinates = new DocCoordinates(10, 545, width, height);
         DocPosition leftPosition = new DocPosition(DocAlignment.LEFT, leftCoordinates);
         TextBlock variedTextBlock = TextGenerator.createVariedTextBlock();
-        TextComponent textComponent = new TextComponent("Name", variedTextBlock);
+        TextComponent textComponent = new TextComponent(variedTextBlock);
         textComponent.setPosition(leftPosition);
         textComponent.setRenderBorder(true);
 

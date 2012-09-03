@@ -29,7 +29,7 @@ public class CustomTextRendererIntegrationTest extends AbstractCustomRendererTes
         String expectedOutputFilePath = inputPackage + "text_renderer_expected_output.pdf";
         String outFilePath = outputPackage + "text_renderer_output.pdf";
 
-        DocComponent textComponent = new TextComponent("Name", "value");
+        DocComponent textComponent = new TextComponent("value");
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
                                         outFilePath,
@@ -44,7 +44,7 @@ public class CustomTextRendererIntegrationTest extends AbstractCustomRendererTes
         String outFilePath = outputPackage + "text_renderer_output2.pdf";
 
         String longText = TextGenerator.multiplyText("long text");
-        DocComponent textComponent = new TextComponent("Name", longText);
+        DocComponent textComponent = new TextComponent(longText);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
                                         outFilePath,
@@ -59,26 +59,22 @@ public class CustomTextRendererIntegrationTest extends AbstractCustomRendererTes
 
         DocPosition justifiedPosition = new DocPosition(DocAlignment.JUSTIFIED);
         String justifiedText = TextGenerator.multiplyText("justified");
-        DocComponent justifiedComponent = new TextComponent("Name",
-                                                            justifiedPosition,
+        DocComponent justifiedComponent = new TextComponent(justifiedPosition,
                                                             justifiedText);
 
         DocPosition leftPosition = new DocPosition(DocAlignment.LEFT);
         String leftText = TextGenerator.multiplyText("left");
-        DocComponent leftComponent = new TextComponent("Name",
-                                                       leftPosition,
+        DocComponent leftComponent = new TextComponent(leftPosition,
                                                        leftText);
 
         DocPosition rightPosition = new DocPosition(DocAlignment.RIGHT);
         String rightText = TextGenerator.multiplyText("right");
-        DocComponent rightComponent = new TextComponent("Name",
-                                                        rightPosition,
+        DocComponent rightComponent = new TextComponent(rightPosition,
                                                         rightText);
 
         DocPosition centerPosition = new DocPosition(DocAlignment.CENTER);
         String centerText = TextGenerator.multiplyText("center");
-        DocComponent centerComponent = new TextComponent("Name",
-                                                         centerPosition,
+        DocComponent centerComponent = new TextComponent(centerPosition,
                                                          centerText);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
@@ -97,13 +93,13 @@ public class CustomTextRendererIntegrationTest extends AbstractCustomRendererTes
 
         List<TextBlock> textBlocks = TextGenerator.createVariedTextBlocks();
 
-        DocComponent plainComponent = new TextComponent("Plain", textBlocks.get(0));
+        DocComponent plainComponent = new TextComponent(textBlocks.get(0));
 
-        DocComponent boldComponent = new TextComponent("bold", textBlocks.get(1));
+        DocComponent boldComponent = new TextComponent(textBlocks.get(1));
 
-        DocComponent boldItalicComponent = new TextComponent("bold italic", textBlocks.get(2));
+        DocComponent boldItalicComponent = new TextComponent(textBlocks.get(2));
 
-        DocComponent underlineComponent = new TextComponent("underline", textBlocks.get(3));
+        DocComponent underlineComponent = new TextComponent(textBlocks.get(3));
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
                                         outFilePath,
@@ -119,11 +115,9 @@ public class CustomTextRendererIntegrationTest extends AbstractCustomRendererTes
         String expectedOutputFilePath = inputPackage + "text_renderer_expected_output5.pdf";
         String outFilePath = outputPackage + "text_renderer_output5.pdf";
 
-        List<TextBlock> textBlocks = TextGenerator.createVariedTextBlocks();
-
         TextBlock variedTextBlock = TextGenerator.createVariedTextBlock();
 
-        DocComponent textComponent = new TextComponent("multi text", variedTextBlock);
+        DocComponent textComponent = new TextComponent(variedTextBlock);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
                                         outFilePath,

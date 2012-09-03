@@ -5,7 +5,8 @@ public class NewLineComponent extends DocComponent {
     public static final String NEWLINE_NAME = "newline";
 
     public NewLineComponent() {
-        super(NEWLINE_NAME);
+        super();
+        setName(NEWLINE_NAME);
     }
 
     @Override

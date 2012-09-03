@@ -15,11 +15,12 @@ public class TableComponent extends DocComponent {
     private float widthPercentage;
 
     public TableComponent(String name) {
-        super(name);
+        setName(name);
     }
 
     public TableComponent(String name, DocPosition position) {
-        super(name, position);
+        super(position);
+        setName(name);
     }
 
     public int getColumnCount() {
