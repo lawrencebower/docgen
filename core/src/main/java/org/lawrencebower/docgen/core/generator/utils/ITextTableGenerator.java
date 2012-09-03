@@ -1,7 +1,7 @@
 package org.lawrencebower.docgen.core.generator.utils;
 
 import com.lowagie.text.DocumentException;
-import com.lowagie.text.Phrase;
+import com.lowagie.text.Element;
 import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
@@ -9,12 +9,16 @@ import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.core.generator.custom.renderer.CustomComponentRenderer;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ITextTableGenerator {
 
     @Autowired
     private PDFGenUtils pdfUtils;
+
+    @Autowired
+    private CustomComponentRenderer componentRenderer;
 
     private PdfPTable iTextTable;
 
@@ -69,8 +73,11 @@ public class ITextTableGenerator {
     private void mapCells(TableComponent tableComponent) {
         for (TableCell tableCell : tableComponent.getAllCells()) {
 
-            Phrase phrase = getPhraseFromCell(tableCell);
-            PdfPCell iTextCell = new PdfPCell(phrase);
+            PdfPCell iTextCell = new PdfPCell();
+
+            Element element = processCell(tableCell);
+
+            iTextCell.addElement(element);
 
             mapCellAlignment(tableCell, iTextCell);
 
@@ -112,10 +119,10 @@ public class ITextTableGenerator {
 
         mapVerticalALignment(tableCell, iTextCell);
 
-        mapHorizontalALignment(tableCell, iTextCell);
+        mapHorizontalAlignment(tableCell, iTextCell);
     }
 
-    private void mapHorizontalALignment(TableCell tableCell, PdfPCell iTextCell) {
+    private void mapHorizontalAlignment(TableCell tableCell, PdfPCell iTextCell) {
 
         DocAlignment horizontalAlignment = tableCell.getHorizontalAlignment();
         int iTextHorizontalAlignment = DocAlignment.mapToITextAlignment(horizontalAlignment);
@@ -129,7 +136,7 @@ public class ITextTableGenerator {
         iTextCell.setVerticalAlignment(iTextVerticalAlignment);
     }
 
-    private Phrase getPhraseFromCell(TableCell tableCell) {
-        return pdfUtils.mapTextBlock(tableCell.getText());
+    private Element processCell(TableCell tableCell) {
+        return componentRenderer.createComponent(tableCell.getComponent());
     }
 }

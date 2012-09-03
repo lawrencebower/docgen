@@ -1,6 +1,7 @@
 package org.lawrencebower.docgen.core.document.component.table;
 
 import org.junit.Test;
+import org.lawrencebower.docgen.core.document.component.TextComponent;
 
 import java.util.List;
 
@@ -58,7 +59,8 @@ public class TableComponentTest {
         TableComponent component = makeTableComponentWith6Cells();
 
         List<TableCell> allCells = component.getAllCells();
-        assertEquals("name5", allCells.get(4).getTextString());
+        TextComponent cellComponent = (TextComponent) allCells.get(4).getComponent();
+        assertEquals("name5", cellComponent.getTextString());
     }
 
     @Test
@@ -80,7 +82,8 @@ public class TableComponentTest {
 
         TableHeaderRow headerRow = component.getHeaderRow();
         List<TableCell> headerCells = headerRow.getCells();
-        assertEquals("cell3", headerCells.get(2).getTextString());
+        TextComponent cellComponent = (TextComponent) headerCells.get(2).getComponent();
+        assertEquals("cell3", cellComponent.getTextString());
     }
 
     private TableComponent makeTableComponentWith6Cells() {

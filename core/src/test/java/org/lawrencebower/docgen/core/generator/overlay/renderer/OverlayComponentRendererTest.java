@@ -17,7 +17,7 @@ public class OverlayComponentRendererTest {
 
         OverlayComponentRendererInfo rendererInfo = new OverlayComponentRendererInfo(null);
 
-        renderer.renderComponent(unknownComponent, rendererInfo);
+        renderer.createAndRenderComponent(unknownComponent, rendererInfo);
     }
 
     private DocComponent getUnknownComponent() {

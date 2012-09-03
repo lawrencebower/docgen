@@ -27,8 +27,6 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
     @Autowired
     private ITextTableGenerator iTextTableGenerator;
 
-    private static final float DEFAULT_LEADING = 9;
-
     public static final int DEFAULT_FONT_SIZE = 10;
     public static final int DEFAULT_FONT_STYLE = Font.BOLD;
     public static final int DEFAULT_FONT = Font.HELVETICA;

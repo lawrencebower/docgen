@@ -15,7 +15,7 @@ public class OverlayCheckBoxRenderer extends AbstractOverlayTextRenderer
         implements DocComponentRenderer<CheckBoxComponent, OverlayComponentRendererInfo> {
 
     @Override
-    public void renderComponent(CheckBoxComponent component, OverlayComponentRendererInfo rendererInfo) {
+    public void createAndRenderComponent(CheckBoxComponent component, OverlayComponentRendererInfo rendererInfo) {
         this.docComponent = component;
         drawTextBox(rendererInfo.getCanvas());
     }

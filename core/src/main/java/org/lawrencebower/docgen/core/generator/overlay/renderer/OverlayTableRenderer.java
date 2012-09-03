@@ -21,7 +21,7 @@ public class OverlayTableRenderer implements DocComponentRenderer<TableComponent
     private TableComponent tableComponent;
 
     @Override
-    public void renderComponent(TableComponent component, OverlayComponentRendererInfo rendererInfo) {
+    public void createAndRenderComponent(TableComponent component, OverlayComponentRendererInfo rendererInfo) {
         this.tableComponent = component;
         drawTextBox(rendererInfo.getCanvas());
     }

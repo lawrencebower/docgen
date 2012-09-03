@@ -1,37 +1,42 @@
 package org.lawrencebower.docgen.core.document.component.table;
 
+import org.lawrencebower.docgen.core.document.component.DocComponent;
+import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
-import org.lawrencebower.docgen.core.document.component.text.TextFragment;
 
 import java.awt.*;
 
 public class TableCell {
 
-    private TextBlock text;
-    DocAlignment verticalAlignment = DocAlignment.TOP;//default
-    DocAlignment horizontalAlignment = DocAlignment.LEFT;//default
+    private DocComponent component;
+
+    private DocAlignment verticalAlignment = DocAlignment.TOP;//default
+    private DocAlignment horizontalAlignment = DocAlignment.LEFT;//default
+
     private Color backgroundColor;
     private float padding = 3;//default
 
-    public TableCell(String text) {
-        this.text = new TextBlock(text);
+    public TableCell(DocComponent component) {
+        this.component = component;
     }
 
-    public TableCell(TextBlock text) {
-        this.text = text;
+    public TableCell(String text) {
+        TextBlock textBlock = new TextBlock(text);
+        this.component = new TextComponent("", textBlock);
+    }
+
+    public void setComponent(DocComponent component) {
+        this.component = component;
+    }
+
+    public DocComponent getComponent() {
+        return component;
     }
 
     public void setText(String text) {
-        this.text = new TextBlock(text);
-    }
-
-    public void setText(TextBlock text) {
-        this.text = text;
-    }
-
-    public TextBlock getText() {
-        return text;
+        TextBlock textBlock = new TextBlock(text);
+        this.component = new TextComponent("", textBlock);
     }
 
     public DocAlignment getVerticalAlignment() {
@@ -70,12 +75,4 @@ public class TableCell {
         return padding;
     }
 
-    public String getTextString() {
-        StringBuilder builder = new StringBuilder();
-        for (TextFragment textFragment : text.getFragments()) {
-            builder.append(textFragment.getText());
-        }
-
-        return builder.toString();
-    }
 }

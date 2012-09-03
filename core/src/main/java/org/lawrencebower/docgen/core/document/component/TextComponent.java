@@ -2,6 +2,7 @@ package org.lawrencebower.docgen.core.document.component;
 
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
+import org.lawrencebower.docgen.core.document.component.text.TextFragment;
 
 public class TextComponent extends DocComponent {
 
@@ -44,6 +45,15 @@ public class TextComponent extends DocComponent {
 
     public TextBlock getText() {
         return text;
+    }
+
+    public String getTextString() {
+        StringBuilder builder = new StringBuilder();
+        for (TextFragment textFragment : text.getFragments()) {
+            builder.append(textFragment.getText());
+        }
+
+        return builder.toString();
     }
 
 }

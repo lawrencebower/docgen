@@ -58,7 +58,7 @@ public class CustomPDFGenerator extends AbstractPDFGenerator<CustomDocumentInfo>
     }
 
     private void renderComponent(DocComponent component, CustomComponentRendererInfo rendererInfo) {
-        componentRenderer.renderComponent(component, rendererInfo);
+        componentRenderer.createAndRenderComponent(component, rendererInfo);
     }
 
 }

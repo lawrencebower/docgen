@@ -23,7 +23,7 @@ public class CustomComponentRendererTest {
         CustomComponentRendererInfo rendererInfo = new CustomComponentRendererInfo(new ByteArrayOutputStream());
 
         try {
-            renderer.renderComponent(unknownComponent, rendererInfo);
+            renderer.createAndRenderComponent(unknownComponent, rendererInfo);
         } catch (DocGenException e) {
             return;
         }
@@ -41,7 +41,7 @@ public class CustomComponentRendererTest {
         CustomComponentRendererInfo rendererInfo = new CustomComponentRendererInfo(new ByteArrayOutputStream());
 
         try {
-            renderer.renderComponent(checkboxComponent, rendererInfo);
+            renderer.createAndRenderComponent(checkboxComponent, rendererInfo);
         } catch (UnsupportedOperationException e) {
             return;
         }

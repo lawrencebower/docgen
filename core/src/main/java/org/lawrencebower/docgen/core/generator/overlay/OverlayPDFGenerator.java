@@ -74,7 +74,7 @@ public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocumentInf
     private void renderComponent(DocComponent component,
                                  OverlayComponentRendererInfo rendererInfo) {
 
-        componentRenderer.renderComponent(component, rendererInfo);
+        componentRenderer.createAndRenderComponent(component, rendererInfo);
     }
 
 }

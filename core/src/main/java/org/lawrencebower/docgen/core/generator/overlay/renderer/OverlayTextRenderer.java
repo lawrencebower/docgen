@@ -15,7 +15,7 @@ public class OverlayTextRenderer extends AbstractOverlayTextRenderer
 
 
     @Override
-    public void renderComponent(TextComponent component, OverlayComponentRendererInfo rendererInfo) {
+    public void createAndRenderComponent(TextComponent component, OverlayComponentRendererInfo rendererInfo) {
         this.docComponent = component;
         drawTextBox(rendererInfo.getCanvas());
     }

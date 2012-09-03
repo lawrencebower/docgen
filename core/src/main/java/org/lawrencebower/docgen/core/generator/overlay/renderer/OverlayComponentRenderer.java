@@ -20,14 +20,14 @@ public class OverlayComponentRenderer implements DocComponentRenderer<DocCompone
     private OverlayCheckBoxRenderer checkBoxRenderer;
 
     @Override
-    public void renderComponent(DocComponent component, OverlayComponentRendererInfo rendererInfo) {
+    public void createAndRenderComponent(DocComponent component, OverlayComponentRendererInfo rendererInfo) {
 
         if (component instanceof TextComponent) {
-            textRenderer.renderComponent((TextComponent) component, rendererInfo);
+            textRenderer.createAndRenderComponent((TextComponent) component, rendererInfo);
         }else if (component instanceof TableComponent) {
-            tableRenderer.renderComponent((TableComponent) component, rendererInfo);
+            tableRenderer.createAndRenderComponent((TableComponent) component, rendererInfo);
         }else if (component instanceof CheckBoxComponent) {
-            checkBoxRenderer.renderComponent((CheckBoxComponent) component, rendererInfo);
+            checkBoxRenderer.createAndRenderComponent((CheckBoxComponent) component, rendererInfo);
         }else if (component instanceof NewLineComponent) {
             throw new UnsupportedOperationException("NewLine not supported by Overlay renderer");
         } else {
