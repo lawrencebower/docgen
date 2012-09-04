@@ -13,7 +13,8 @@ import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererI
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class OverlayTableRenderer implements DocComponentRenderer<TableComponent, OverlayComponentRendererInfo> {
+public class OverlayTableRenderer
+        implements DocComponentRenderer<TableComponent, OverlayComponentRendererInfo, PdfPTable> {
 
     @Autowired
     private PDFGenUtils pdfUtils;
@@ -23,12 +24,16 @@ public class OverlayTableRenderer implements DocComponentRenderer<TableComponent
     @Override
     public void createAndRenderComponent(TableComponent component, OverlayComponentRendererInfo rendererInfo) {
         this.tableComponent = component;
-        drawTable(rendererInfo.getCanvas());
+        PdfPTable iTextTable = createComponent(tableComponent);
+        drawTable(rendererInfo.getCanvas(), iTextTable);
     }
 
-    private void drawTable(PdfContentByte canvas) {
+    @Override
+    public PdfPTable createComponent(TableComponent component) {
+        return pdfUtils.generateTable(tableComponent);
+    }
 
-        PdfPTable table = pdfUtils.generateTable(tableComponent);
+    private void drawTable(PdfContentByte canvas, PdfPTable iTextTable) {
 
         DocPosition position = tableComponent.getPosition();
 
@@ -36,9 +41,11 @@ public class OverlayTableRenderer implements DocComponentRenderer<TableComponent
 
         renderBorderIfSet(canvas, boxCoordinates);
 
-        drawTable(canvas,
-                  table,
-                  boxCoordinates);
+        ColumnText column = createColumn(canvas,
+                                         iTextTable,
+                                         boxCoordinates);
+
+        drawColumn(column);
     }
 
     private void renderBorderIfSet(PdfContentByte canvas,
@@ -53,9 +60,9 @@ public class OverlayTableRenderer implements DocComponentRenderer<TableComponent
         pdfUtils.drawRectangle(canvas, boxCoordinates);
     }
 
-    private void drawTable(PdfContentByte canvas,
-                           PdfPTable table,
-                           DocCoordinates boxCoordinates) {
+    private ColumnText createColumn(PdfContentByte canvas,
+                                    PdfPTable table,
+                                    DocCoordinates boxCoordinates) {
 
         int x1 = boxCoordinates.getX();
         int y1 = boxCoordinates.getY();
@@ -66,10 +73,10 @@ public class OverlayTableRenderer implements DocComponentRenderer<TableComponent
 
         table.setWidthPercentage(100);
 
-        column.setSimpleColumn(x1,y1,x2,y2);
+        column.setSimpleColumn(x1, y1, x2, y2);
         column.addElement(table);
 
-        drawColumn(column);
+        return column;
     }
 
     private void drawColumn(ColumnText column) {

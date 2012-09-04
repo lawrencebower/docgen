@@ -11,7 +11,8 @@ import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInf
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class CustomTextRenderer implements CustomDocComponentRenderer<TextComponent, CustomComponentRendererInfo> {
+public class CustomTextRenderer
+        implements CustomDocComponentRenderer<TextComponent, CustomComponentRendererInfo, Paragraph> {
 
     @Autowired
     private PDFGenUtils pdfUtils;
@@ -23,7 +24,7 @@ public class CustomTextRenderer implements CustomDocComponentRenderer<TextCompon
     }
 
     @Override
-    public Element createComponent(TextComponent component) {
+    public Paragraph createComponent(TextComponent component) {
 
         TextBlock textBlock = component.getText();
 
@@ -33,6 +34,7 @@ public class CustomTextRenderer implements CustomDocComponentRenderer<TextCompon
         Phrase phrase = pdfUtils.mapTextBlock(textBlock);
         Paragraph paragraph = new Paragraph(phrase);
         paragraph.setAlignment(boxAlignment);
+
         return paragraph;
     }
 

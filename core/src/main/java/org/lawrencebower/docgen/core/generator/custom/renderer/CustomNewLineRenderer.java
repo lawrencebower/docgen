@@ -5,7 +5,8 @@ import com.lowagie.text.Paragraph;
 import org.lawrencebower.docgen.core.document.component.NewLineComponent;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
 
-public class CustomNewLineRenderer implements CustomDocComponentRenderer<NewLineComponent, CustomComponentRendererInfo> {
+public class CustomNewLineRenderer
+        implements CustomDocComponentRenderer<NewLineComponent, CustomComponentRendererInfo, Paragraph> {
 
     @Override
     public void createAndRenderComponent(NewLineComponent component, CustomComponentRendererInfo rendererInfo) {
@@ -14,7 +15,7 @@ public class CustomNewLineRenderer implements CustomDocComponentRenderer<NewLine
     }
 
     @Override
-    public Element createComponent(NewLineComponent component) {
+    public Paragraph createComponent(NewLineComponent component) {
         return new Paragraph("\n");
     }
 

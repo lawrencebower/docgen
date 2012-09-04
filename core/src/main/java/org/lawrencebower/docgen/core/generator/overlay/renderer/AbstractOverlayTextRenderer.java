@@ -6,7 +6,6 @@ import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfContentByte;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
-import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +20,12 @@ public abstract class AbstractOverlayTextRenderer {
     protected ColumnText createColumn(PdfContentByte canvas,
                                       int boxAlignment,
                                       DocCoordinates boxCoordinates,
-                                      TextBlock textBlock) {
+                                      Phrase phrase) {
 
         int x1 = boxCoordinates.getX();
         int y1 = boxCoordinates.getY();
         int x2 = boxCoordinates.getXPlusWidth();
         int y2 = boxCoordinates.getYPlusHeight();
-
-        Phrase phrase = pdfUtils.mapTextBlock(textBlock);
 
         ColumnText column = new ColumnText(canvas);
 

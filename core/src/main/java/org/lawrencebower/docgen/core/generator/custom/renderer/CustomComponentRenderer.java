@@ -8,9 +8,11 @@ import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
+import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class CustomComponentRenderer implements CustomDocComponentRenderer<DocComponent, CustomComponentRendererInfo> {
+public class CustomComponentRenderer
+        implements DocComponentRenderer<DocComponent, CustomComponentRendererInfo, Element> {
 
     @Autowired
     private CustomTextRenderer textRenderer;
@@ -24,11 +26,11 @@ public class CustomComponentRenderer implements CustomDocComponentRenderer<DocCo
 
         if (component instanceof TextComponent) {
             textRenderer.createAndRenderComponent((TextComponent) component, rendererInfo);
-        }else if (component instanceof TableComponent) {
+        } else if (component instanceof TableComponent) {
             tableRenderer.createAndRenderComponent((TableComponent) component, rendererInfo);
-        }else if (component instanceof NewLineComponent) {
+        } else if (component instanceof NewLineComponent) {
             newLineRenderer.createAndRenderComponent((NewLineComponent) component, rendererInfo);
-        }else if (component instanceof CheckBoxComponent) {
+        } else if (component instanceof CheckBoxComponent) {
             throw new UnsupportedOperationException("Check box not supported by Custom renderer");
         } else {
             throw new DocGenException("Doc component not recognized " + component.getClass());
@@ -42,11 +44,11 @@ public class CustomComponentRenderer implements CustomDocComponentRenderer<DocCo
 
         if (component instanceof TextComponent) {
             element = textRenderer.createComponent((TextComponent) component);
-        }else if (component instanceof TableComponent) {
+        } else if (component instanceof TableComponent) {
             element = tableRenderer.createComponent((TableComponent) component);
-        }else if (component instanceof NewLineComponent) {
+        } else if (component instanceof NewLineComponent) {
             element = newLineRenderer.createComponent((NewLineComponent) component);
-        }else if (component instanceof CheckBoxComponent) {
+        } else if (component instanceof CheckBoxComponent) {
             throw new UnsupportedOperationException("Check box not supported by Custom renderer");
         } else {
             throw new DocGenException("Doc component not recognized " + component.getClass());

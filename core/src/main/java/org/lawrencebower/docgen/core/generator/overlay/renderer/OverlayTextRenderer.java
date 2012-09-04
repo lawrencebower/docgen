@@ -1,5 +1,6 @@
 package org.lawrencebower.docgen.core.generator.overlay.renderer;
 
+import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfContentByte;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
@@ -11,18 +12,23 @@ import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererInfo;
 
 public class OverlayTextRenderer extends AbstractOverlayTextRenderer
-        implements DocComponentRenderer<TextComponent, OverlayComponentRendererInfo> {
+        implements DocComponentRenderer<TextComponent, OverlayComponentRendererInfo, Phrase> {
 
 
     @Override
     public void createAndRenderComponent(TextComponent component, OverlayComponentRendererInfo rendererInfo) {
         this.docComponent = component;
-        drawTextBox(rendererInfo.getCanvas());
+        Phrase phrase = createComponent(component);
+        drawTextBox(rendererInfo.getCanvas(), phrase);
     }
 
-    private void drawTextBox(PdfContentByte canvas) {
+    @Override
+    public Phrase createComponent(TextComponent component) {
+        TextBlock textBlock = ((TextComponent) docComponent).getText();
+        return pdfUtils.mapTextBlock(textBlock);
+    }
 
-        TextBlock boxText = ((TextComponent)docComponent).getText();
+    private void drawTextBox(PdfContentByte canvas, Phrase phrase) {
 
         DocPosition position = docComponent.getPosition();
         int boxAlignment = DocAlignment.mapToITextAlignment(position.getAlignment());
@@ -31,22 +37,22 @@ public class OverlayTextRenderer extends AbstractOverlayTextRenderer
 
         renderBorderIfSet(canvas, boxCoordinates);
 
-        drawBox(canvas,
-                boxText,
-                boxAlignment,
-                boxCoordinates);
-    }
-
-    private void drawBox(PdfContentByte canvas,
-                         TextBlock boxText,
-                         int boxAlignment,
-                         DocCoordinates boxCoordinates) {
-
         ColumnText column = createColumn(canvas,
+                                         phrase,
                                          boxAlignment,
-                                         boxCoordinates,
-                                         boxText);
+                                         boxCoordinates);
 
         drawColumn(column);
+    }
+
+    private ColumnText createColumn(PdfContentByte canvas,
+                                    Phrase phrase,
+                                    int boxAlignment,
+                                    DocCoordinates boxCoordinates) {
+
+        return createColumn(canvas,
+                            boxAlignment,
+                            boxCoordinates,
+                            phrase);
     }
 }

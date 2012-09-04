@@ -1,5 +1,6 @@
 package org.lawrencebower.docgen.core.generator.overlay.renderer;
 
+import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfContentByte;
 import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
@@ -11,18 +12,36 @@ import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererInfo;
 
-public class OverlayCheckBoxRenderer extends AbstractOverlayTextRenderer
-        implements DocComponentRenderer<CheckBoxComponent, OverlayComponentRendererInfo> {
+public class OverlayCheckBoxRenderer
+        extends AbstractOverlayTextRenderer
+        implements DocComponentRenderer<CheckBoxComponent, OverlayComponentRendererInfo, Phrase> {
+
+    private int FONT_SIZE = 10;//todo maybe work out font size based on box area
 
     @Override
     public void createAndRenderComponent(CheckBoxComponent component, OverlayComponentRendererInfo rendererInfo) {
         this.docComponent = component;
-        drawCheckBox(rendererInfo.getCanvas());
+        Phrase phrase = createComponent(component);
+        drawCheckBox(rendererInfo.getCanvas(), phrase);
     }
 
-    private void drawCheckBox(PdfContentByte canvas) {
+    @Override
+    public Phrase createComponent(CheckBoxComponent component) {
 
-        boolean isSelected = ((CheckBoxComponent) docComponent).getSelected();
+        boolean selected = component.getSelected();
+
+        String selectedText = getTextFromSelected(selected);
+
+        FontInfo fontInfo = new FontInfo(FontInfo.DEFAULT_FONT,
+                                         FONT_SIZE,
+                                         FontInfo.DEFAULT_FONT_STYLE);
+
+        TextBlock textBlock = new TextBlock(selectedText, fontInfo);
+
+        return pdfUtils.mapTextBlock(textBlock);
+    }
+
+    private void drawCheckBox(PdfContentByte canvas, Phrase phrase) {
 
         DocPosition position = docComponent.getPosition();
         int boxAlignment = DocAlignment.mapToITextAlignment(position.getAlignment());
@@ -32,33 +51,25 @@ public class OverlayCheckBoxRenderer extends AbstractOverlayTextRenderer
         renderBorderIfSet(canvas, boxCoordinates);
 
         drawBox(canvas,
-                isSelected,
+                phrase,
                 boxAlignment,
                 boxCoordinates);
     }
 
     private void drawBox(PdfContentByte canvas,
-                         boolean isSelected,
+                         Phrase phrase,
                          int boxAlignment,
                          DocCoordinates boxCoordinates) {
-
-        String boxText = getTextFromSelected(isSelected);
-
-        FontInfo fontInfo = new FontInfo(FontInfo.DEFAULT_FONT,
-                                         10,
-                                         FontInfo.DEFAULT_FONT_STYLE);
-
-        TextBlock textBlock = new TextBlock(boxText, fontInfo);
 
         ColumnText column = createColumn(canvas,
                                          boxAlignment,
                                          boxCoordinates,
-                                         textBlock);
+                                         phrase);
 
         /**
          * for checkbox - the leading is overridden to be the font size
          */
-        column.setLeading(fontInfo.getFontSize());
+        column.setLeading(FONT_SIZE);
 
         drawColumn(column);
     }

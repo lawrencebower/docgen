@@ -1,12 +1,14 @@
 package org.lawrencebower.docgen.core.generator.custom.renderer;
 
 import com.lowagie.text.Element;
+import com.lowagie.text.pdf.PdfPTable;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class CustomTableRenderer implements CustomDocComponentRenderer<TableComponent, CustomComponentRendererInfo> {
+public class CustomTableRenderer
+        implements CustomDocComponentRenderer<TableComponent, CustomComponentRendererInfo, PdfPTable> {
 
     @Autowired
     private PDFGenUtils pdfUtils;
@@ -18,7 +20,7 @@ public class CustomTableRenderer implements CustomDocComponentRenderer<TableComp
     }
 
     @Override
-    public Element createComponent(TableComponent component) {
+    public PdfPTable createComponent(TableComponent component) {
         return pdfUtils.generateTable(component);
     }
 
