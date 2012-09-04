@@ -23,10 +23,10 @@ public class OverlayTableRenderer implements DocComponentRenderer<TableComponent
     @Override
     public void createAndRenderComponent(TableComponent component, OverlayComponentRendererInfo rendererInfo) {
         this.tableComponent = component;
-        drawTextBox(rendererInfo.getCanvas());
+        drawTable(rendererInfo.getCanvas());
     }
 
-    private void drawTextBox(PdfContentByte canvas) {
+    private void drawTable(PdfContentByte canvas) {
 
         PdfPTable table = pdfUtils.generateTable(tableComponent);
 

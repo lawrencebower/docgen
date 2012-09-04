@@ -17,10 +17,10 @@ public class OverlayCheckBoxRenderer extends AbstractOverlayTextRenderer
     @Override
     public void createAndRenderComponent(CheckBoxComponent component, OverlayComponentRendererInfo rendererInfo) {
         this.docComponent = component;
-        drawTextBox(rendererInfo.getCanvas());
+        drawCheckBox(rendererInfo.getCanvas());
     }
 
-    private void drawTextBox(PdfContentByte canvas) {
+    private void drawCheckBox(PdfContentByte canvas) {
 
         boolean isSelected = ((CheckBoxComponent) docComponent).getSelected();
 
