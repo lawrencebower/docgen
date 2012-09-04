@@ -20,35 +20,33 @@ public class ITextTableGenerator {
     @Autowired
     private CustomComponentRenderer componentRenderer;
 
-    private PdfPTable iTextTable;
-
     public PdfPTable generateTable(TableComponent tableComponent) {
 
-        makeTable(tableComponent);
+        PdfPTable iTextTable = makeTable(tableComponent);
 
-        setTableWidth(tableComponent);
+        setTableWidth(tableComponent, iTextTable);
 
-        setColumnWidths(tableComponent);
+        setColumnWidths(tableComponent, iTextTable);
 
-        mapCells(tableComponent);
+        mapCells(tableComponent, iTextTable);
 
-        mapTableAlignment(tableComponent);
+        mapTableAlignment(tableComponent, iTextTable);
 
         return iTextTable;
     }
 
-    private void mapTableAlignment(TableComponent tableComponent) {
+    private void mapTableAlignment(TableComponent tableComponent, PdfPTable iTextTable) {
         DocAlignment alignment = tableComponent.getPosition().getAlignment();
         int iTextAlignment = DocAlignment.mapToITextAlignment(alignment);
         iTextTable.setHorizontalAlignment(iTextAlignment);
     }
 
-    private void makeTable(TableComponent tableComponent) {
+    private PdfPTable makeTable(TableComponent tableComponent) {
         int columnCount = tableComponent.getColumnCount();
-        iTextTable = new PdfPTable(columnCount);
+        return new PdfPTable(columnCount);
     }
 
-    private void setColumnWidths(TableComponent tableComponent) {
+    private void setColumnWidths(TableComponent tableComponent, PdfPTable iTextTable) {
 
         int[] relativeWidths = tableComponent.getColumnWidths();
 
@@ -63,14 +61,15 @@ public class ITextTableGenerator {
         }
     }
 
-    private void setTableWidth(TableComponent tableComponent) {
+    private void setTableWidth(TableComponent tableComponent, PdfPTable iTextTable) {
         float widthPercentage = tableComponent.getWithPercentage();
         if (widthPercentage != 0) {
             iTextTable.setWidthPercentage(widthPercentage);
         }
     }
 
-    private void mapCells(TableComponent tableComponent) {
+    private void mapCells(TableComponent tableComponent, PdfPTable iTextTable) {
+
         for (TableCell tableCell : tableComponent.getAllCells()) {
 
             PdfPCell iTextCell = new PdfPCell();

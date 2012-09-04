@@ -59,10 +59,10 @@ public class CustomComponentRendererInfo implements DocComponentRendererInfo {
         }
     }
 
-    public void addToDocument(Element paragraph) {
+    public void addToDocument(Element element) {
         try {
             checkAndOpenDocument();
-            document.add(paragraph);
+            document.add(element);
             documentDataWritten = true;
         } catch (DocumentException e) {
             throw new DocGenException(e);

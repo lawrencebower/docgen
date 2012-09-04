@@ -14,7 +14,7 @@ import static org.junit.Assert.fail;
 public class CustomComponentRendererTest {
 
     @Test
-    public void testRenderComponent_passUnknownComponent_throwsError() throws Exception {
+    public void testCreateAndRenderComponent_passUnknownComponent_throwsError() throws Exception {
 
         CustomComponentRenderer renderer = new CustomComponentRenderer();
 
@@ -32,7 +32,7 @@ public class CustomComponentRendererTest {
     }
 
     @Test
-    public void testRenderComponent_passCheckboxComponent_throwsError() throws Exception {
+    public void testCreateAndRenderComponent_passCheckboxComponent_throwsError() throws Exception {
 
         CustomComponentRenderer renderer = new CustomComponentRenderer();
 
@@ -42,6 +42,38 @@ public class CustomComponentRendererTest {
 
         try {
             renderer.createAndRenderComponent(checkboxComponent, rendererInfo);
+        } catch (UnsupportedOperationException e) {
+            return;
+        }
+
+        fail();//should not get here
+    }
+
+    @Test
+    public void testCreateComponent_passUnknownComponent_throwsError() throws Exception {
+
+        CustomComponentRenderer renderer = new CustomComponentRenderer();
+
+        DocComponent unknownComponent = getUnknownComponent();
+
+        try {
+            renderer.createComponent(unknownComponent);
+        } catch (DocGenException e) {
+            return;
+        }
+
+        fail();//should not get here
+    }
+
+    @Test
+    public void testCreateComponent_passCheckboxComponent_throwsError() throws Exception {
+
+        CustomComponentRenderer renderer = new CustomComponentRenderer();
+
+        DocComponent checkboxComponent = new CheckBoxComponent();
+
+        try {
+            renderer.createComponent(checkboxComponent);
         } catch (UnsupportedOperationException e) {
             return;
         }

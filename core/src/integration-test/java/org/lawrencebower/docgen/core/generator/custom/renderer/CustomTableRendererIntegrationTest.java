@@ -169,4 +169,31 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
 
     }
 
+    @Test
+    public void testRenderComponent_mixedCellContent_createsValidFile() {
+
+        String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_8.pdf";
+        String outFilePath = outputPackage + "table_renderer_output_8.pdf";
+
+        TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        tableComponent.setName("main table");
+
+        List<TableCell> allCells = tableComponent.getAllCells();
+
+        TableComponent nestedTableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        nestedTableComponent.setName("nested table");
+        nestedTableComponent.setWidthPercentage(100);
+        TableCell tableCell = allCells.get(3);
+        tableCell.setPadding(0);
+        tableCell.setComponent(nestedTableComponent);
+
+        TextComponent nestedTextComponent = new TextComponent("This is a text component");
+        allCells.get(4).setComponent(nestedTextComponent);
+
+        createPDFAndCompareWithExpected(expectedOutputFilePath,
+                                        outFilePath,
+                                        tableComponent);
+
+    }
+
 }
