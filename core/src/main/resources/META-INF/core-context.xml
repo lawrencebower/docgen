@@ -21,11 +21,17 @@
     <beans:bean id="checkBoxRenderer"
                 class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayCheckBoxRenderer"/>
 
+    <beans:bean id="imageRenderer"
+                class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayImageRenderer"/>
+
     <beans:bean id="customTableRenderer"
                 class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomTableRenderer"/>
 
     <beans:bean id="newLineRenderer"
                 class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomNewLineRenderer"/>
+
+    <beans:bean id="customImageRenderer"
+                class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomImageRenderer"/>
 
     <beans:bean id="customComponentRenderer" class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomComponentRenderer"/>
     <beans:bean id="overlayComponentRenderer" class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayComponentRenderer"/>

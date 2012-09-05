@@ -11,7 +11,7 @@ import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererInfo;
 
-public class OverlayTextRenderer extends AbstractOverlayTextRenderer
+public class OverlayTextRenderer extends AbstractOverlayRenderer
         implements DocComponentRenderer<TextComponent, OverlayComponentRendererInfo, Phrase> {
 
 
@@ -50,9 +50,9 @@ public class OverlayTextRenderer extends AbstractOverlayTextRenderer
                                     int boxAlignment,
                                     DocCoordinates boxCoordinates) {
 
-        return createColumn(canvas,
-                            boxAlignment,
-                            boxCoordinates,
-                            phrase);
+        return createTextColumn(canvas,
+                                boxAlignment,
+                                boxCoordinates,
+                                phrase);
     }
 }

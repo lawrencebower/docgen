@@ -13,7 +13,7 @@ import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererInfo;
 
 public class OverlayCheckBoxRenderer
-        extends AbstractOverlayTextRenderer
+        extends AbstractOverlayRenderer
         implements DocComponentRenderer<CheckBoxComponent, OverlayComponentRendererInfo, Phrase> {
 
     private int FONT_SIZE = 10;//todo maybe work out font size based on box area
@@ -61,10 +61,10 @@ public class OverlayCheckBoxRenderer
                          int boxAlignment,
                          DocCoordinates boxCoordinates) {
 
-        ColumnText column = createColumn(canvas,
-                                         boxAlignment,
-                                         boxCoordinates,
-                                         phrase);
+        ColumnText column = createTextColumn(canvas,
+                                             boxAlignment,
+                                             boxCoordinates,
+                                             phrase);
 
         /**
          * for checkbox - the leading is overridden to be the font size

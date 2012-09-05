@@ -1,10 +1,7 @@
 package org.lawrencebower.docgen.core.generator.overlay.renderer;
 
 import com.lowagie.text.Element;
-import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
-import org.lawrencebower.docgen.core.document.component.DocComponent;
-import org.lawrencebower.docgen.core.document.component.NewLineComponent;
-import org.lawrencebower.docgen.core.document.component.TextComponent;
+import org.lawrencebower.docgen.core.document.component.*;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
@@ -21,6 +18,8 @@ public class OverlayComponentRenderer
     private OverlayTableRenderer tableRenderer;
     @Autowired
     private OverlayCheckBoxRenderer checkBoxRenderer;
+    @Autowired
+    private OverlayImageRenderer imageRenderer;
 
     @Override
     public void createAndRenderComponent(DocComponent component, OverlayComponentRendererInfo rendererInfo) {
@@ -31,6 +30,8 @@ public class OverlayComponentRenderer
             tableRenderer.createAndRenderComponent((TableComponent) component, rendererInfo);
         }else if (component instanceof CheckBoxComponent) {
             checkBoxRenderer.createAndRenderComponent((CheckBoxComponent) component, rendererInfo);
+        }else if (component instanceof ImageComponent) {
+            imageRenderer.createAndRenderComponent((ImageComponent) component, rendererInfo);
         }else if (component instanceof NewLineComponent) {
             throw new UnsupportedOperationException("NewLine not supported by Overlay renderer");
         } else {

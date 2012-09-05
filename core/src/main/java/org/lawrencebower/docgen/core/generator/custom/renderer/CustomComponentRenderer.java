@@ -1,10 +1,7 @@
 package org.lawrencebower.docgen.core.generator.custom.renderer;
 
 import com.lowagie.text.Element;
-import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
-import org.lawrencebower.docgen.core.document.component.DocComponent;
-import org.lawrencebower.docgen.core.document.component.NewLineComponent;
-import org.lawrencebower.docgen.core.document.component.TextComponent;
+import org.lawrencebower.docgen.core.document.component.*;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
@@ -20,6 +17,8 @@ public class CustomComponentRenderer
     private CustomTableRenderer tableRenderer;
     @Autowired
     private CustomNewLineRenderer newLineRenderer;
+    @Autowired
+    private CustomImageRenderer imageRenderer;
 
     @Override
     public void createAndRenderComponent(DocComponent component, CustomComponentRendererInfo rendererInfo) {
@@ -30,6 +29,8 @@ public class CustomComponentRenderer
             tableRenderer.createAndRenderComponent((TableComponent) component, rendererInfo);
         } else if (component instanceof NewLineComponent) {
             newLineRenderer.createAndRenderComponent((NewLineComponent) component, rendererInfo);
+        } else if (component instanceof ImageComponent) {
+            imageRenderer.createAndRenderComponent((ImageComponent) component, rendererInfo);
         } else if (component instanceof CheckBoxComponent) {
             throw new UnsupportedOperationException("Check box not supported by Custom renderer");
         } else {
@@ -48,6 +49,8 @@ public class CustomComponentRenderer
             element = tableRenderer.createComponent((TableComponent) component);
         } else if (component instanceof NewLineComponent) {
             element = newLineRenderer.createComponent((NewLineComponent) component);
+        } else if (component instanceof ImageComponent) {
+            element = imageRenderer.createComponent((ImageComponent) component);
         } else if (component instanceof CheckBoxComponent) {
             throw new UnsupportedOperationException("Check box not supported by Custom renderer");
         } else {
