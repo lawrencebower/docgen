@@ -18,6 +18,8 @@ public class TableCell {
 
     private Color backgroundColor;
     private float padding = 3;//default
+    private int rowSpan = 1;//default
+    private int colSpan = 1;//default
 
     public TableCell(DocComponent component) {
         this.component = component;
@@ -67,6 +69,22 @@ public class TableCell {
 
     public float getPadding() {
         return padding;
+    }
+
+    public void setRowSpan(int rowSpan) {
+        this.rowSpan = rowSpan;
+    }
+
+    public int getRowSpan() {
+        return rowSpan;
+    }
+
+    public void setColSpan(int colSpan) {
+        this.colSpan = colSpan;
+    }
+
+    public int getColSpan() {
+        return colSpan;
     }
 
 }

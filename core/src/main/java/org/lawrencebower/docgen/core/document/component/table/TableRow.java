@@ -7,8 +7,16 @@ public class TableRow {
 
     private List<TableCell> cells = new ArrayList<>();
 
+    /**
+     * the column count needs to take into account the col span of cells
+     */
     public int getColumnCount(){
-        return cells.size();
+        int colCount = 0;
+        for (TableCell cell : cells) {
+            colCount += cell.getColSpan();
+        }
+
+        return colCount;
     }
 
     public void addCell(TableCell cell) {

@@ -81,6 +81,8 @@ public class ITextTableGenerator {
 
             mapCellAlignment(tableCell, iTextCell);
 
+            mapCellSpans(tableCell, iTextCell);
+
             setCellColor(tableCell, iTextCell);
 
             setCellPadding(tableCell, iTextCell);
@@ -90,6 +92,11 @@ public class ITextTableGenerator {
 
             iTextTable.addCell(iTextCell);
         }
+    }
+
+    private void mapCellSpans(TableCell tableCell, PdfPCell iTextCell) {
+        iTextCell.setRowspan(tableCell.getRowSpan());
+        iTextCell.setColspan(tableCell.getColSpan());
     }
 
     private void setCellBorder(boolean renderBorder,
