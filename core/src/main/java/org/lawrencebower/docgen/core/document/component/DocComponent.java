@@ -1,7 +1,7 @@
 package org.lawrencebower.docgen.core.document.component;
 
-import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
+import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 
 public abstract class DocComponent {
 
@@ -10,7 +10,7 @@ public abstract class DocComponent {
     protected boolean renderBorder;
 
     protected DocComponent() {
-        this.position = new DocPosition(DocAlignment.LEFT);
+        this.position = new DocPosition(HorizontalAlignment.LEFT);
     }
 
     protected DocComponent(DocPosition position) {

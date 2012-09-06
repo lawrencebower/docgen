@@ -4,8 +4,8 @@ import com.lowagie.text.Element;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
-import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
+import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtils;
@@ -29,7 +29,7 @@ public class CustomTextRenderer
         TextBlock textBlock = component.getText();
 
         DocPosition position = component.getPosition();
-        int boxAlignment = DocAlignment.mapToITextAlignment(position.getAlignment());
+        int boxAlignment = HorizontalAlignment.mapToITextAlignment(position.getHorizontalAlignment());
 
         Phrase phrase = pdfUtils.mapTextBlock(textBlock);
         Paragraph paragraph = new Paragraph(phrase);

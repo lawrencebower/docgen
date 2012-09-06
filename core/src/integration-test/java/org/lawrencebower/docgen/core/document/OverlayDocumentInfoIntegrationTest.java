@@ -6,9 +6,9 @@ import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.AbstractIntegrationTest;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
-import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
+import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -60,7 +60,7 @@ public class OverlayDocumentInfoIntegrationTest extends AbstractIntegrationTest 
     private DocComponent generateSimpleTextComponent() {
 
         DocCoordinates coordinates = new DocCoordinates(100, 675, 180, 81);
-        DocPosition position = new DocPosition(DocAlignment.LEFT, coordinates);
+        DocPosition position = new DocPosition(HorizontalAlignment.LEFT, coordinates);
 
         return new TextComponent(position, "39 York Street");
     }

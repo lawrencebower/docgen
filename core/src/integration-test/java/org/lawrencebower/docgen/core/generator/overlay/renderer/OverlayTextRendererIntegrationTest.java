@@ -4,9 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
-import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
+import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.document.component.text.FontStyle;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
@@ -34,17 +34,17 @@ public class OverlayTextRendererIntegrationTest extends AbstractOverlayRendererT
         int height = 200;
 
         DocCoordinates leftCoordinates = new DocCoordinates(10, 545, width, height);
-        DocPosition leftPosition = new DocPosition(DocAlignment.LEFT, leftCoordinates);
+        DocPosition leftPosition = new DocPosition(HorizontalAlignment.LEFT, leftCoordinates);
         TextComponent leftTextComponent = new TextComponent(leftPosition, "left align");
         leftTextComponent.setRenderBorder(true);
 
         DocCoordinates rightCoordinates = new DocCoordinates(150, 445, width, height);
-        DocPosition rightPosition = new DocPosition(DocAlignment.RIGHT, rightCoordinates);
+        DocPosition rightPosition = new DocPosition(HorizontalAlignment.RIGHT, rightCoordinates);
         TextComponent rightTextComponent = new TextComponent(rightPosition, "right align");
         rightTextComponent.setRenderBorder(true);
 
         DocCoordinates centerCoordinates = new DocCoordinates(300, 345, width, height);
-        DocPosition centerPosition = new DocPosition(DocAlignment.CENTER, centerCoordinates);
+        DocPosition centerPosition = new DocPosition(HorizontalAlignment.CENTER, centerCoordinates);
         TextComponent centerTextComponent = new TextComponent(centerPosition, "center align");
         centerTextComponent.setRenderBorder(true);
 
@@ -68,7 +68,7 @@ public class OverlayTextRendererIntegrationTest extends AbstractOverlayRendererT
         int height = 200;
 
         DocCoordinates leftCoordinates = new DocCoordinates(10, 545, width, height);
-        DocPosition leftPosition = new DocPosition(DocAlignment.LEFT, leftCoordinates);
+        DocPosition leftPosition = new DocPosition(HorizontalAlignment.LEFT, leftCoordinates);
         String longText = TextGenerator.multiplyText("text ");
         TextBlock textBlock = new TextBlock(longText, new FontInfo("Serif",20, FontStyle.BOLD_ITALIC));
         TextComponent textComponent = new TextComponent(textBlock);
@@ -93,7 +93,7 @@ public class OverlayTextRendererIntegrationTest extends AbstractOverlayRendererT
         int height = 200;
 
         DocCoordinates leftCoordinates = new DocCoordinates(10, 545, width, height);
-        DocPosition leftPosition = new DocPosition(DocAlignment.LEFT, leftCoordinates);
+        DocPosition leftPosition = new DocPosition(HorizontalAlignment.LEFT, leftCoordinates);
         TextBlock variedTextBlock = TextGenerator.createVariedTextBlock();
         TextComponent textComponent = new TextComponent(variedTextBlock);
         textComponent.setPosition(leftPosition);

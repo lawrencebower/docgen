@@ -2,7 +2,7 @@ package org.lawrencebower.docgen.core.document.component.table;
 
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
-import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
+import org.lawrencebower.docgen.core.document.component.position.VerticalAlignment;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 
 import java.awt.*;
@@ -11,8 +11,10 @@ public class TableCell {
 
     private DocComponent component;
 
-    private DocAlignment verticalAlignment = DocAlignment.TOP;//default
-    private DocAlignment horizontalAlignment = DocAlignment.LEFT;//default
+    /**
+     * horizontal alignment is sourced from the inner DocComponent
+     */
+    private VerticalAlignment verticalAlignment = VerticalAlignment.TOP;//default
 
     private Color backgroundColor;
     private float padding = 3;//default
@@ -39,20 +41,12 @@ public class TableCell {
         this.component = new TextComponent(textBlock);
     }
 
-    public DocAlignment getVerticalAlignment() {
+    public VerticalAlignment getVerticalAlignment() {
         return verticalAlignment;
     }
 
-    public void setVerticalAlignment(DocAlignment verticalAlignment) {
+    public void setVerticalAlignment(VerticalAlignment verticalAlignment) {
         this.verticalAlignment = verticalAlignment;
-    }
-
-    public DocAlignment getHorizontalAlignment() {
-        return horizontalAlignment;
-    }
-
-    public void setHorizontalAlignment(DocAlignment horizontalAlignment) {
-        this.horizontalAlignment = horizontalAlignment;
     }
 
     public void setBackgroundColor(Color backgroundColor) {

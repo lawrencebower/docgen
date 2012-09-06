@@ -1,8 +1,8 @@
 package org.lawrencebower.docgen.core.document.component;
 
 import org.junit.Test;
-import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
+import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -19,8 +19,8 @@ public class DocComponentTest {
         };
 
         DocPosition defaultPosition = genericDocComponent.getPosition();
-        DocAlignment defaultAlignment = defaultPosition.getAlignment();
+        HorizontalAlignment defaultAlignment = defaultPosition.getHorizontalAlignment();
 
-        assertEquals(DocAlignment.LEFT, defaultAlignment);
+        assertEquals(HorizontalAlignment.LEFT, defaultAlignment);
     }
 }

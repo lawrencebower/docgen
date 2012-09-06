@@ -5,7 +5,8 @@ import com.lowagie.text.Element;
 import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
-import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
+import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
+import org.lawrencebower.docgen.core.document.component.position.VerticalAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
@@ -36,8 +37,8 @@ public class ITextTableGenerator {
     }
 
     private void mapTableAlignment(TableComponent tableComponent, PdfPTable iTextTable) {
-        DocAlignment alignment = tableComponent.getPosition().getAlignment();
-        int iTextAlignment = DocAlignment.mapToITextAlignment(alignment);
+        HorizontalAlignment alignment = tableComponent.getPosition().getHorizontalAlignment();
+        int iTextAlignment = HorizontalAlignment.mapToITextAlignment(alignment);
         iTextTable.setHorizontalAlignment(iTextAlignment);
     }
 
@@ -116,22 +117,18 @@ public class ITextTableGenerator {
 
     private void mapCellAlignment(TableCell tableCell, PdfPCell iTextCell) {
 
-        mapVerticalALignment(tableCell, iTextCell);
+        /**
+         * horizontal alignment ignored by table cells when adding content with
+         * addElement() - uses the horizontal alignment of the nested component
+         */
+        mapVerticalAlignment(tableCell, iTextCell);
 
-        mapHorizontalAlignment(tableCell, iTextCell);
     }
 
-    private void mapHorizontalAlignment(TableCell tableCell, PdfPCell iTextCell) {
+    private void mapVerticalAlignment(TableCell tableCell, PdfPCell iTextCell) {
 
-        DocAlignment horizontalAlignment = tableCell.getHorizontalAlignment();
-        int iTextHorizontalAlignment = DocAlignment.mapToITextAlignment(horizontalAlignment);
-        iTextCell.setHorizontalAlignment(iTextHorizontalAlignment);
-    }
-
-    private void mapVerticalALignment(TableCell tableCell, PdfPCell iTextCell) {
-
-        DocAlignment verticalAlignment = tableCell.getVerticalAlignment();
-        int iTextVerticalAlignment = DocAlignment.mapToITextAlignment(verticalAlignment);
+        VerticalAlignment verticalAlignment = tableCell.getVerticalAlignment();
+        int iTextVerticalAlignment = VerticalAlignment.mapToITextAlignment(verticalAlignment);
         iTextCell.setVerticalAlignment(iTextVerticalAlignment);
     }
 

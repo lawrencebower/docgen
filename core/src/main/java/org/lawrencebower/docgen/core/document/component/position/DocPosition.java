@@ -1,26 +1,31 @@
 package org.lawrencebower.docgen.core.document.component.position;
 
 public class DocPosition {
-    private DocAlignment alignment;
+
+    private HorizontalAlignment horizontalAlignment = HorizontalAlignment.LEFT;//default
+
     private DocCoordinates coordinates;
 
-    public DocPosition(DocAlignment alignment,
+    public DocPosition(HorizontalAlignment horizontalAlignment,
                        DocCoordinates coordinates) {
-        this.alignment = alignment;
+        this.horizontalAlignment = horizontalAlignment;
         this.coordinates = coordinates;
     }
 
     public DocPosition(DocCoordinates coordinates) {
         this.coordinates = coordinates;
-        this.alignment = DocAlignment.LEFT;//default
     }
 
-    public DocPosition(DocAlignment alignment) {
-        this.alignment = alignment;
+    public DocPosition(HorizontalAlignment horizontalAlignment) {
+        this.horizontalAlignment = horizontalAlignment;
     }
 
-    public DocAlignment getAlignment() {
-        return alignment;
+    public void setHorizontalAlignment(HorizontalAlignment horizontalAlignment) {
+        this.horizontalAlignment = horizontalAlignment;
+    }
+
+    public HorizontalAlignment getHorizontalAlignment() {
+        return horizontalAlignment;
     }
 
     public DocCoordinates getCoordinates() {

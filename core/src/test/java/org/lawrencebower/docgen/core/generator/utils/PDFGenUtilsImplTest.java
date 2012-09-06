@@ -3,9 +3,9 @@ package org.lawrencebower.docgen.core.generator.utils;
 import org.lawrencebower.docgen.core.document.OverlayDocumentInfo;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
-import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
+import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.type.DocType;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 
@@ -105,7 +105,7 @@ public class PDFGenUtilsImplTest {
     @org.junit.Test
     public void testCheckCoordinates_validCoordinates_noError() {
 
-        DocPosition position = new DocPosition(DocAlignment.LEFT, new DocCoordinates(1, 1, 1, 1));
+        DocPosition position = new DocPosition(HorizontalAlignment.LEFT, new DocCoordinates(1, 1, 1, 1));
         DocComponent component = new TextComponent(position, "value");
         pdfGenUtils.checkCoordinates(Arrays.asList(component));
     }
@@ -128,7 +128,7 @@ public class PDFGenUtilsImplTest {
     public void testCheckCoordinates_nullCoordinate_throwsError() {
 
         try {
-            DocPosition position = new DocPosition(DocAlignment.LEFT, null);
+            DocPosition position = new DocPosition(HorizontalAlignment.LEFT, null);
             DocComponent component = new TextComponent(position, "value");
             pdfGenUtils.checkCoordinates(Arrays.asList(component));
         } catch (DocGenException e) {

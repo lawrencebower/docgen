@@ -4,9 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
-import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
+import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -30,17 +30,17 @@ public class OverlayCheckBoxRendererIntegrationTest extends AbstractOverlayRende
         int height = 10;
 
         DocCoordinates leftCoordinates = new DocCoordinates(10, 545, width, height);
-        DocPosition leftPosition = new DocPosition(DocAlignment.LEFT, leftCoordinates);
+        DocPosition leftPosition = new DocPosition(HorizontalAlignment.LEFT, leftCoordinates);
         CheckBoxComponent leftTextComponent = new CheckBoxComponent(true, leftPosition);
         leftTextComponent.setRenderBorder(true);
 
         DocCoordinates rightCoordinates = new DocCoordinates(150, 445, width, height);
-        DocPosition rightPosition = new DocPosition(DocAlignment.RIGHT, rightCoordinates);
+        DocPosition rightPosition = new DocPosition(HorizontalAlignment.RIGHT, rightCoordinates);
         CheckBoxComponent rightTextComponent = new CheckBoxComponent(true, rightPosition);
         rightTextComponent.setRenderBorder(true);
 
         DocCoordinates centerCoordinates = new DocCoordinates(300, 345, width, height);
-        DocPosition centerPosition = new DocPosition(DocAlignment.CENTER, centerCoordinates);
+        DocPosition centerPosition = new DocPosition(HorizontalAlignment.CENTER, centerCoordinates);
         CheckBoxComponent centerTextComponent = new CheckBoxComponent(true, centerPosition);
         centerTextComponent.setRenderBorder(true);
 

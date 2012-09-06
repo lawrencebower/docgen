@@ -5,7 +5,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.NewLineComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
-import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
+import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
+import org.lawrencebower.docgen.core.document.component.position.VerticalAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
@@ -41,7 +42,7 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
     }
 
     @Test
-    public void testRenderComponent_alignedCells_createsValidFile() {
+    public void testRenderComponent_alignedCellContents_createsValidFile() {
 
         String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_2.pdf";
         String outFilePath = outputPackage + "table_renderer_output_2.pdf";
@@ -51,24 +52,24 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
 
         allCells.get(0).setText("\n\n\n\n");//make the cell deep
 
-        allCells.get(1).setVerticalAlignment(DocAlignment.TOP);
-        allCells.get(2).setVerticalAlignment(DocAlignment.MIDDLE);
-        allCells.get(3).setVerticalAlignment(DocAlignment.BOTTOM);
+        allCells.get(1).setVerticalAlignment(VerticalAlignment.TOP);
+        allCells.get(2).setVerticalAlignment(VerticalAlignment.MIDDLE);
+        allCells.get(3).setVerticalAlignment(VerticalAlignment.BOTTOM);
 
         allCells.get(4).setText("\n\n\n\n");//make the cell deep
 
-        allCells.get(5).setHorizontalAlignment(DocAlignment.LEFT);
-        allCells.get(6).setHorizontalAlignment(DocAlignment.CENTER);
-        allCells.get(7).setHorizontalAlignment(DocAlignment.RIGHT);
+        allCells.get(5).getComponent().getPosition().setHorizontalAlignment(HorizontalAlignment.LEFT);
+        allCells.get(6).getComponent().getPosition().setHorizontalAlignment(HorizontalAlignment.CENTER);
+        allCells.get(7).getComponent().getPosition().setHorizontalAlignment(HorizontalAlignment.RIGHT);
 
         allCells.get(8).setText("\n\n\n\n");//make the cell deep
 
-        allCells.get(9).setHorizontalAlignment(DocAlignment.LEFT);
-        allCells.get(9).setVerticalAlignment(DocAlignment.BOTTOM);
-        allCells.get(10).setHorizontalAlignment(DocAlignment.CENTER);
-        allCells.get(10).setVerticalAlignment(DocAlignment.MIDDLE);
-        allCells.get(11).setHorizontalAlignment(DocAlignment.RIGHT);
-        allCells.get(11).setVerticalAlignment(DocAlignment.TOP);
+        allCells.get(9).getComponent().getPosition().setHorizontalAlignment(HorizontalAlignment.LEFT);
+        allCells.get(9).setVerticalAlignment(VerticalAlignment.BOTTOM);
+        allCells.get(10).getComponent().getPosition().setHorizontalAlignment(HorizontalAlignment.CENTER);
+        allCells.get(10).setVerticalAlignment(VerticalAlignment.MIDDLE);
+        allCells.get(11).getComponent().getPosition().setHorizontalAlignment(HorizontalAlignment.RIGHT);
+        allCells.get(11).setVerticalAlignment(VerticalAlignment.TOP);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
                                         outFilePath,

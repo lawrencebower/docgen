@@ -5,8 +5,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
-import org.lawrencebower.docgen.core.document.component.position.DocAlignment;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
+import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.utils.TextGenerator;
 import org.springframework.test.context.ContextConfiguration;
@@ -57,22 +57,22 @@ public class CustomTextRendererIntegrationTest extends AbstractCustomRendererTes
         String expectedOutputFilePath = inputPackage + "text_renderer_expected_output3.pdf";
         String outFilePath = outputPackage + "text_renderer_output3.pdf";
 
-        DocPosition justifiedPosition = new DocPosition(DocAlignment.JUSTIFIED);
+        DocPosition justifiedPosition = new DocPosition(HorizontalAlignment.JUSTIFIED);
         String justifiedText = TextGenerator.multiplyText("justified");
         DocComponent justifiedComponent = new TextComponent(justifiedPosition,
                                                             justifiedText);
 
-        DocPosition leftPosition = new DocPosition(DocAlignment.LEFT);
+        DocPosition leftPosition = new DocPosition(HorizontalAlignment.LEFT);
         String leftText = TextGenerator.multiplyText("left");
         DocComponent leftComponent = new TextComponent(leftPosition,
                                                        leftText);
 
-        DocPosition rightPosition = new DocPosition(DocAlignment.RIGHT);
+        DocPosition rightPosition = new DocPosition(HorizontalAlignment.RIGHT);
         String rightText = TextGenerator.multiplyText("right");
         DocComponent rightComponent = new TextComponent(rightPosition,
                                                         rightText);
 
-        DocPosition centerPosition = new DocPosition(DocAlignment.CENTER);
+        DocPosition centerPosition = new DocPosition(HorizontalAlignment.CENTER);
         String centerText = TextGenerator.multiplyText("center");
         DocComponent centerComponent = new TextComponent(centerPosition,
                                                          centerText);
