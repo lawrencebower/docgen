@@ -1,7 +1,7 @@
 package org.lawrencebower.docgen.core.document.component.table;
 
 import org.lawrencebower.docgen.core.document.component.DocComponent;
-import org.lawrencebower.docgen.core.document.component.TextComponent;
+import org.lawrencebower.docgen.core.document.component.TableTextComponent;
 import org.lawrencebower.docgen.core.document.component.position.VerticalAlignment;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 
@@ -27,7 +27,7 @@ public class TableCell {
 
     public TableCell(String text) {
         TextBlock textBlock = new TextBlock(text);
-        this.component = new TextComponent(textBlock);
+        this.component = new TableTextComponent(textBlock);
     }
 
     public void setComponent(DocComponent component) {
@@ -40,7 +40,7 @@ public class TableCell {
 
     public void setText(String text) {
         TextBlock textBlock = new TextBlock(text);
-        this.component = new TextComponent(textBlock);
+        this.component = new TableTextComponent(textBlock);
     }
 
     public VerticalAlignment getVerticalAlignment() {

@@ -2,9 +2,13 @@ package org.lawrencebower.docgen.core.generator.utils;
 
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;
+import com.lowagie.text.Phrase;
 import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
+import org.lawrencebower.docgen.core.document.component.DocComponent;
+import org.lawrencebower.docgen.core.document.component.DocComponentType;
+import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.component.position.VerticalAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
@@ -73,11 +77,7 @@ public class ITextTableGenerator {
 
         for (TableCell tableCell : tableComponent.getAllCells()) {
 
-            PdfPCell iTextCell = new PdfPCell();
-
-            Element element = processCell(tableCell);
-
-            iTextCell.addElement(element);
+            PdfPCell iTextCell = processCell(tableCell);
 
             mapCellAlignment(tableCell, iTextCell);
 
@@ -87,8 +87,7 @@ public class ITextTableGenerator {
 
             setCellPadding(tableCell, iTextCell);
 
-            setCellBorder(tableComponent.isRenderBorder(),
-                          iTextCell);
+            setCellBorder(tableComponent.isRenderBorder(), iTextCell);
 
             iTextTable.addCell(iTextCell);
         }
@@ -124,12 +123,9 @@ public class ITextTableGenerator {
 
     private void mapCellAlignment(TableCell tableCell, PdfPCell iTextCell) {
 
-        /**
-         * horizontal alignment ignored by table cells when adding content with
-         * addElement() - uses the horizontal alignment of the nested component
-         */
         mapVerticalAlignment(tableCell, iTextCell);
 
+        mapHorizontalAlignment(tableCell, iTextCell);
     }
 
     private void mapVerticalAlignment(TableCell tableCell, PdfPCell iTextCell) {
@@ -139,7 +135,40 @@ public class ITextTableGenerator {
         iTextCell.setVerticalAlignment(iTextVerticalAlignment);
     }
 
-    private Element processCell(TableCell tableCell) {
-        return componentRenderer.createComponent(tableCell.getComponent());
+    /**
+     * sets the alignment on the ITextTable cell. The horizontal alignment will be ignored for all nested table
+     * components except TableTextComponent. Components other than TableTextComponent should have their
+     * HorizontalAlignment set.
+     */
+    private void mapHorizontalAlignment(TableCell tableCell, PdfPCell iTextCell) {
+
+        DocComponent component = tableCell.getComponent();
+        DocPosition componentPosition = component.getPosition();
+        HorizontalAlignment horizontalAlignment = componentPosition.getHorizontalAlignment();
+
+        int iTextHorizontalAlignment = HorizontalAlignment.mapToITextAlignment(horizontalAlignment);
+        iTextCell.setHorizontalAlignment(iTextHorizontalAlignment);
+    }
+
+    /**
+     * For TableText to be dealt with, the constructor arg needs to be used, otherwise all other element types
+     * use the addElement() method
+     */
+    private PdfPCell processCell(TableCell tableCell) {
+
+        DocComponent component = tableCell.getComponent();
+
+        Element iTextElement = componentRenderer.createComponent(component);
+
+        PdfPCell iTextCell;
+
+        if(component.getComponentType() == DocComponentType.TABLE_TEXT){
+            iTextCell = new PdfPCell((Phrase) iTextElement);
+        }else{
+            iTextCell = new PdfPCell();
+            iTextCell.addElement(iTextElement);
+        }
+
+        return iTextCell;
     }
 }

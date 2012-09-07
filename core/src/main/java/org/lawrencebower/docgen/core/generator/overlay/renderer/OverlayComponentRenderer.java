@@ -24,15 +24,17 @@ public class OverlayComponentRenderer
     @Override
     public void createAndRenderComponent(DocComponent component, OverlayComponentRendererInfo rendererInfo) {
 
-        if (component instanceof TextComponent) {
+        if (component.getComponentType() == DocComponentType.TEXT) {
             textRenderer.createAndRenderComponent((TextComponent) component, rendererInfo);
-        }else if (component instanceof TableComponent) {
+        }else if (component.getComponentType() == DocComponentType.TABLE) {
             tableRenderer.createAndRenderComponent((TableComponent) component, rendererInfo);
-        }else if (component instanceof CheckBoxComponent) {
+        }else if (component.getComponentType() == DocComponentType.CHECKBOX) {
             checkBoxRenderer.createAndRenderComponent((CheckBoxComponent) component, rendererInfo);
-        }else if (component instanceof ImageComponent) {
+        }else if (component.getComponentType() == DocComponentType.IMAGE) {
             imageRenderer.createAndRenderComponent((ImageComponent) component, rendererInfo);
-        }else if (component instanceof NewLineComponent) {
+        }else if (component.getComponentType() == DocComponentType.TABLE_TEXT) {
+            throw new UnsupportedOperationException("TableText not supported by Overlay renderer");
+        }else if (component.getComponentType() == DocComponentType.NEWLINE) {
             throw new UnsupportedOperationException("NewLine not supported by Overlay renderer");
         } else {
             throw new DocGenException("Doc component not recognized " + component.getClass());

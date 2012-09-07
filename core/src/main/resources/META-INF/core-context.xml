@@ -33,6 +33,9 @@
     <beans:bean id="customImageRenderer"
                 class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomImageRenderer"/>
 
+    <beans:bean id="customTableTestRenderer"
+                class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomTableTextRenderer"/>
+
     <beans:bean id="customComponentRenderer" class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomComponentRenderer"/>
     <beans:bean id="overlayComponentRenderer" class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayComponentRenderer"/>
 

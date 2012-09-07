@@ -19,19 +19,23 @@ public class CustomComponentRenderer
     private CustomNewLineRenderer newLineRenderer;
     @Autowired
     private CustomImageRenderer imageRenderer;
+    @Autowired
+    private CustomTableTextRenderer tableTextRenderer;
 
     @Override
     public void createAndRenderComponent(DocComponent component, CustomComponentRendererInfo rendererInfo) {
 
-        if (component instanceof TextComponent) {
+        if (component.getComponentType() == DocComponentType.TEXT) {
             textRenderer.createAndRenderComponent((TextComponent) component, rendererInfo);
-        } else if (component instanceof TableComponent) {
+        } else if (component.getComponentType() == DocComponentType.TABLE) {
             tableRenderer.createAndRenderComponent((TableComponent) component, rendererInfo);
-        } else if (component instanceof NewLineComponent) {
+        } else if (component.getComponentType() == DocComponentType.NEWLINE) {
             newLineRenderer.createAndRenderComponent((NewLineComponent) component, rendererInfo);
-        } else if (component instanceof ImageComponent) {
+        } else if (component.getComponentType() == DocComponentType.IMAGE) {
             imageRenderer.createAndRenderComponent((ImageComponent) component, rendererInfo);
-        } else if (component instanceof CheckBoxComponent) {
+        } else if (component.getComponentType() == DocComponentType.TABLE_TEXT) {
+            tableTextRenderer.createAndRenderComponent((TableTextComponent) component, rendererInfo);
+        } else if (component.getComponentType() == DocComponentType.CHECKBOX) {
             throw new UnsupportedOperationException("Check box not supported by Custom renderer");
         } else {
             throw new DocGenException("Doc component not recognized " + component.getClass());
@@ -43,15 +47,17 @@ public class CustomComponentRenderer
 
         Element element;
 
-        if (component instanceof TextComponent) {
+        if (component.getComponentType() == DocComponentType.TEXT) {
             element = textRenderer.createComponent((TextComponent) component);
-        } else if (component instanceof TableComponent) {
+        } else if (component.getComponentType() == DocComponentType.TABLE) {
             element = tableRenderer.createComponent((TableComponent) component);
-        } else if (component instanceof NewLineComponent) {
+        } else if (component.getComponentType() == DocComponentType.NEWLINE) {
             element = newLineRenderer.createComponent((NewLineComponent) component);
-        } else if (component instanceof ImageComponent) {
+        } else if (component.getComponentType() == DocComponentType.IMAGE) {
             element = imageRenderer.createComponent((ImageComponent) component);
-        } else if (component instanceof CheckBoxComponent) {
+        } else if (component.getComponentType() == DocComponentType.TABLE_TEXT) {
+            element = tableTextRenderer.createComponent((TextComponent) component);
+        } else if (component.getComponentType() == DocComponentType.CHECKBOX) {
             throw new UnsupportedOperationException("Check box not supported by Custom renderer");
         } else {
             throw new DocGenException("Doc component not recognized " + component.getClass());

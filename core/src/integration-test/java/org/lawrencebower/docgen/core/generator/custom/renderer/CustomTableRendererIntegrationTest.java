@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.NewLineComponent;
+import org.lawrencebower.docgen.core.document.component.TableTextComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.component.position.VerticalAlignment;
@@ -144,10 +145,10 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
 
         TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
         List<TableCell> allCells = tableComponent.getAllCells();
-        allCells.get(0).setComponent(new TextComponent(textBlocks.get(0)));
-        allCells.get(4).setComponent(new TextComponent(textBlocks.get(1)));
-        allCells.get(8).setComponent(new TextComponent(textBlocks.get(2)));
-        allCells.get(9).setComponent(new TextComponent(variedTxtBlock));
+        allCells.get(0).setComponent(new TableTextComponent(textBlocks.get(0)));
+        allCells.get(4).setComponent(new TableTextComponent(textBlocks.get(1)));
+        allCells.get(8).setComponent(new TableTextComponent(textBlocks.get(2)));
+        allCells.get(9).setComponent(new TableTextComponent(variedTxtBlock));
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
                                         outFilePath,
@@ -188,7 +189,7 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         tableCell.setPadding(0);
         tableCell.setComponent(nestedTableComponent);
 
-        TextComponent nestedTextComponent = new TextComponent("This is a text component");
+        TextComponent nestedTextComponent = new TextComponent("This is a TextComponent, not a TableTextComponent");
         allCells.get(4).setComponent(nestedTextComponent);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
