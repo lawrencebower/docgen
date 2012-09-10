@@ -42,7 +42,7 @@ public class TableComponentTest {
     public void testGetAllCells_noRows_returnsEmpty() throws Exception {
         TableComponent component = new TableComponent("name");
 
-        assertEquals(0, component.getAllCells().size());
+        assertEquals(0, component.getAllRenderableCells().size());
     }
 
     @Test
@@ -50,7 +50,7 @@ public class TableComponentTest {
 
         TableComponent component = makeTableComponentWith6Cells();
 
-        assertEquals(6, component.getAllCells().size());
+        assertEquals(6, component.getAllRenderableCells().size());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class TableComponentTest {
 
         TableComponent component = makeTableComponentWith6Cells();
 
-        List<TableCell> allCells = component.getAllCells();
+        List<TableCell> allCells = component.getAllRenderableCells();
         TextComponent cellComponent = (TextComponent) allCells.get(4).getComponent();
         assertEquals("name5", cellComponent.getTextString());
     }

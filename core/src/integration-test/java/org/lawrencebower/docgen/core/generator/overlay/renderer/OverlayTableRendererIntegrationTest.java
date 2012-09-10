@@ -77,7 +77,7 @@ public class OverlayTableRendererIntegrationTest extends AbstractOverlayRenderer
 
         tableComponent.setName("main table");
 
-        List<TableCell> allCells = tableComponent.getAllCells();
+        List<TableCell> allCells = tableComponent.getAllRenderableCells();
 
         TableComponent nestedTableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
         nestedTableComponent.setName("nested table");

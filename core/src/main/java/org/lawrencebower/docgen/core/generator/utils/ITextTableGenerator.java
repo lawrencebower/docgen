@@ -75,7 +75,7 @@ public class ITextTableGenerator {
 
     private void mapCells(TableComponent tableComponent, PdfPTable iTextTable) {
 
-        for (TableCell tableCell : tableComponent.getAllCells()) {
+        for (TableCell tableCell : tableComponent.getAllRenderableCells()) {
 
             PdfPCell iTextCell = processCell(tableCell);
 
@@ -85,7 +85,7 @@ public class ITextTableGenerator {
 
             setCellColor(tableCell, iTextCell);
 
-            setCellPadding(tableCell, iTextCell);
+            setCellPadding(tableComponent, tableCell, iTextCell);
 
             setCellBorder(tableComponent.isRenderBorder(), iTextCell);
 
@@ -111,8 +111,20 @@ public class ITextTableGenerator {
         }
     }
 
-    private void setCellPadding(TableCell tableCell, PdfPCell iTextCell) {
-        iTextCell.setPadding(tableCell.getPadding());
+    private void setCellPadding(TableComponent tableComponent,
+                                TableCell tableCell,
+                                PdfPCell iTextCell) {
+
+        float padding = tableComponent.getTablePadding();
+
+        /**
+         * cell padding over rides table padding
+         */
+        if(tableCell.getPadding() != 0){
+            padding = tableCell.getPadding();
+        }
+
+        iTextCell.setPadding(padding);
     }
 
     private void setCellColor(TableCell tableCell, PdfPCell iTextCell) {

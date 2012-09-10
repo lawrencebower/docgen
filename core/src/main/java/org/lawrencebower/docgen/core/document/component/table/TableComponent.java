@@ -13,6 +13,7 @@ public class TableComponent extends DocComponent {
     private TableHeaderRow headerRow = new TableHeaderRow();
     private List<TableRow> rows = new ArrayList<>();
     private float widthPercentage;
+    private int tablePadding = 3;//default
 
     public TableComponent(String name) {
         setName(name);
@@ -44,10 +45,12 @@ public class TableComponent extends DocComponent {
         this.rows.add(row);
     }
 
-    public List<TableCell> getAllCells() {
+    public List<TableCell> getAllRenderableCells() {
         List<TableCell> allCells = new ArrayList<>();
 
-        allCells.addAll(headerRow.getCells());
+        if (headerRow.isRenderHeader()) {
+            allCells.addAll(headerRow.getCells());
+        }
 
         for (TableRow row : rows) {
             allCells.addAll(row.getCells());
@@ -71,5 +74,16 @@ public class TableComponent extends DocComponent {
 
     public int[] getColumnWidths() {
         return headerRow.getColumnWidths();
+    }
+
+    /**
+     * will be over ridden by padding set on any given cell
+     */
+    public void setTablePadding(int tablePadding) {
+        this.tablePadding = tablePadding;
+    }
+
+    public int getTablePadding() {
+        return tablePadding;
     }
 }

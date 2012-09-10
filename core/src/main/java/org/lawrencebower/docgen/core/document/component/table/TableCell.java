@@ -17,9 +17,12 @@ public class TableCell {
     private VerticalAlignment verticalAlignment = VerticalAlignment.TOP;//default
 
     private Color backgroundColor;
-    private float padding = 3;//default
+    private float padding;//not set by default - tableCellPadding is used
     private int rowSpan = 1;//default
     private int colSpan = 1;//default
+
+    public TableCell() {
+    }
 
     public TableCell(DocComponent component) {
         this.component = component;

@@ -9,7 +9,16 @@ import java.util.List;
 
 public class TableHeaderRow extends TableRow {
 
+    private boolean renderHeader = true;
     private List<Integer> columnWidths = new ArrayList<>();
+
+    public boolean isRenderHeader() {
+        return renderHeader;
+    }
+
+    public void setRenderHeader(boolean renderHeader) {
+        this.renderHeader = renderHeader;
+    }
 
     @Override
     public void addCell(TableCell cell) {

@@ -49,7 +49,7 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         String outFilePath = outputPackage + "table_renderer_output_2.pdf";
 
         TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(4, 2);
-        List<TableCell> allCells = tableComponent.getAllCells();
+        List<TableCell> allCells = tableComponent.getAllRenderableCells();
 
         allCells.get(0).setText("\n\n\n\n");//make the cell deep
 
@@ -105,7 +105,7 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         String outFilePath = outputPackage + "table_renderer_output_4.pdf";
 
         TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
-        List<TableCell> allCells = tableComponent.getAllCells();
+        List<TableCell> allCells = tableComponent.getAllRenderableCells();
         allCells.get(0).setBackgroundColor(Color.cyan);
         allCells.get(2).setBackgroundColor(Color.pink);
         allCells.get(4).setBackgroundColor(Color.gray);
@@ -123,7 +123,7 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         String outFilePath = outputPackage + "table_renderer_output_5.pdf";
 
         TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
-        List<TableCell> allCells = tableComponent.getAllCells();
+        List<TableCell> allCells = tableComponent.getAllRenderableCells();
         allCells.get(0).setPadding(0);
         allCells.get(4).setPadding(20);
         allCells.get(8).setPadding(50);
@@ -144,7 +144,7 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         TextBlock variedTxtBlock = TextGenerator.createVariedTextBlock();
 
         TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
-        List<TableCell> allCells = tableComponent.getAllCells();
+        List<TableCell> allCells = tableComponent.getAllRenderableCells();
         allCells.get(0).setComponent(new TableTextComponent(textBlocks.get(0)));
         allCells.get(4).setComponent(new TableTextComponent(textBlocks.get(1)));
         allCells.get(8).setComponent(new TableTextComponent(textBlocks.get(2)));
@@ -180,7 +180,7 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
         tableComponent.setName("main table");
 
-        List<TableCell> allCells = tableComponent.getAllCells();
+        List<TableCell> allCells = tableComponent.getAllRenderableCells();
 
         TableComponent nestedTableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
         nestedTableComponent.setName("nested table");
