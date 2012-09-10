@@ -21,6 +21,8 @@ public class CustomComponentRenderer
     private CustomImageRenderer imageRenderer;
     @Autowired
     private CustomTableTextRenderer tableTextRenderer;
+    @Autowired
+    private CustomLineRenderer lineRenderer;
 
     @Override
     public void createAndRenderComponent(DocComponent component, CustomComponentRendererInfo rendererInfo) {
@@ -35,6 +37,8 @@ public class CustomComponentRenderer
             imageRenderer.createAndRenderComponent((ImageComponent) component, rendererInfo);
         } else if (component.getComponentType() == DocComponentType.TABLE_TEXT) {
             tableTextRenderer.createAndRenderComponent((TableTextComponent) component, rendererInfo);
+        } else if (component.getComponentType() == DocComponentType.LINE) {
+            lineRenderer.createAndRenderComponent((LineComponent) component, rendererInfo);
         } else if (component.getComponentType() == DocComponentType.CHECKBOX) {
             throw new UnsupportedOperationException("Check box not supported by Custom renderer");
         } else {
@@ -57,6 +61,8 @@ public class CustomComponentRenderer
             element = imageRenderer.createComponent((ImageComponent) component);
         } else if (component.getComponentType() == DocComponentType.TABLE_TEXT) {
             element = tableTextRenderer.createComponent((TextComponent) component);
+        } else if (component.getComponentType() == DocComponentType.LINE) {
+            element = lineRenderer.createComponent((LineComponent) component);
         } else if (component.getComponentType() == DocComponentType.CHECKBOX) {
             throw new UnsupportedOperationException("Check box not supported by Custom renderer");
         } else {

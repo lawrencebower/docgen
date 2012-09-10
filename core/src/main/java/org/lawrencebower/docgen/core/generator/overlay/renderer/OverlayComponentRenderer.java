@@ -36,6 +36,8 @@ public class OverlayComponentRenderer
             throw new UnsupportedOperationException("TableText not supported by Overlay renderer");
         }else if (component.getComponentType() == DocComponentType.NEWLINE) {
             throw new UnsupportedOperationException("NewLine not supported by Overlay renderer");
+        }else if (component.getComponentType() == DocComponentType.LINE) {
+            throw new UnsupportedOperationException("Line not supported by Overlay renderer");
         } else {
             throw new DocGenException("Doc component not recognized " + component.getClass());
         }

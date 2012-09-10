@@ -6,5 +6,6 @@ public enum DocComponentType {
     CHECKBOX,
     NEWLINE,
     IMAGE,
+    LINE,
     TABLE
 }
