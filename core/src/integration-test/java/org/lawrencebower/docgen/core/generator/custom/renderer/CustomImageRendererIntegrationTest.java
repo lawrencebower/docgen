@@ -18,11 +18,12 @@ import static org.junit.Assert.fail;
 @ContextConfiguration(locations = {"classpath:META-INF/integration-test-config.xml"})
 public class CustomImageRendererIntegrationTest extends AbstractCustomRendererTest {
 
-    private String imageFileLocation = "L:\\pictures\\random\\bod.bmp";
+    private String imageFileLocation;
 
     @Before
     public void setup() {
         super.prepareDirs();
+        imageFileLocation = inputPackage + "bod.bmp";
     }
 
     @Test

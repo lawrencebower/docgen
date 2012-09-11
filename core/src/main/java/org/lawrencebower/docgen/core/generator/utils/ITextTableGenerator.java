@@ -120,7 +120,7 @@ public class ITextTableGenerator {
         /**
          * cell padding over rides table padding
          */
-        if(tableCell.getPadding() != 0){
+        if(tableCell.getPadding() != -1){
             padding = tableCell.getPadding();
         }
 
