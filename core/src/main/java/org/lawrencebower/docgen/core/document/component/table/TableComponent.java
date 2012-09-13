@@ -46,7 +46,6 @@ public class TableComponent extends DocComponent {
     }
 
     public List<TableCell> getAllRenderableCells() {
-        //todo test
         List<TableCell> allCells = new ArrayList<>();
 
         if (headerRow.isRenderHeader()) {

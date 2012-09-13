@@ -10,6 +10,7 @@ import org.lawrencebower.docgen.core.document.component.position.HorizontalAlign
 import org.lawrencebower.docgen.core.document.component.position.VerticalAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
+import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.utils.ITextTableGeneratorTest;
 import org.lawrencebower.docgen.core.generator.utils.TextGenerator;
@@ -85,7 +86,11 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         String outFilePath = outputPackage + "table_renderer_output_3.pdf";
 
         TableComponent tableComponent1 = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
-        tableComponent1.getHeaderRow().setColumnWidths(20, 20, 60);
+        TableHeaderRow headerRow = tableComponent1.getHeaderRow();
+        headerRow.getCells().clear();
+        headerRow.addCell(new TableCell("col0"), 20);
+        headerRow.addCell(new TableCell("col1"), 20);
+        headerRow.addCell(new TableCell("col2"), 60);
 
         TableComponent tableComponent2 = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
         tableComponent2.getHeaderRow().setColumnWidths(60, 10, 30);
@@ -195,6 +200,49 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         createPDFAndCompareWithExpected(expectedOutputFilePath,
                                         outFilePath,
                                         tableComponent);
+
+    }
+
+    @Test
+    public void testRenderComponent_mixedTableAndCellPadding_createsValidFile() {
+
+        String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_9.pdf";
+        String outFilePath = outputPackage + "table_renderer_output_9.pdf";
+
+        TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        tableComponent.setName("main table");
+        tableComponent.setTablePadding(5);
+
+        List<TableCell> allCells = tableComponent.getAllRenderableCells();
+
+        allCells.get(3).setPadding(0);
+
+        allCells.get(7).setPadding(10);
+
+        createPDFAndCompareWithExpected(expectedOutputFilePath,
+                                        outFilePath,
+                                        tableComponent);
+
+    }
+
+    @Test
+    public void testRenderComponent_renderHeaderFalse_createsValidFile() {
+
+        String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_10.pdf";
+        String outFilePath = outputPackage + "table_renderer_output_10.pdf";
+
+        TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        tableComponent.setName("main table");
+        tableComponent.getHeaderRow().setRenderHeader(false);
+
+        TableComponent tableComponent2 = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        tableComponent2.setName("main table 2");
+        tableComponent2.getHeaderRow().setRenderHeader(true);
+
+        createPDFAndCompareWithExpected(expectedOutputFilePath,
+                                        outFilePath,
+                                        tableComponent,
+                                        tableComponent2);
 
     }
 

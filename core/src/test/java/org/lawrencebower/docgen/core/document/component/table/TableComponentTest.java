@@ -50,7 +50,7 @@ public class TableComponentTest {
 
         TableComponent component = makeTableComponentWith6Cells();
 
-        assertEquals(6, component.getAllRenderableCells().size());
+        assertEquals(9, component.getAllRenderableCells().size());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class TableComponentTest {
         TableComponent component = makeTableComponentWith6Cells();
 
         List<TableCell> allCells = component.getAllRenderableCells();
-        TextComponent cellComponent = (TextComponent) allCells.get(4).getComponent();
+        TextComponent cellComponent = (TextComponent) allCells.get(7).getComponent();
         assertEquals("name5", cellComponent.getTextString());
     }
 
@@ -86,6 +86,24 @@ public class TableComponentTest {
         assertEquals("cell3", cellComponent.getTextString());
     }
 
+    @Test
+    public void testGetAllRenderableCells_renderHeaderFalse_correctCellsReturned() throws Exception {
+
+        TableComponent component = makeTableComponentWith6Cells();
+        component.getHeaderRow().setRenderHeader(false);
+
+        assertEquals(6, component.getAllRenderableCells().size());
+    }
+
+    @Test
+    public void testGetAllRenderableCells_renderHeaderTrue_correctCellsReturned() throws Exception {
+
+        TableComponent component = makeTableComponentWith6Cells();
+        component.getHeaderRow().setRenderHeader(true);
+
+        assertEquals(9, component.getAllRenderableCells().size());
+    }
+
     private TableComponent makeTableComponentWith6Cells() {
         TableComponent component = new TableComponent("name");
 
@@ -93,6 +111,8 @@ public class TableComponentTest {
         headerRow.addCell(new TableCell("Col1"));
         headerRow.addCell(new TableCell("Col2"));
         headerRow.addCell(new TableCell("Col3"));
+
+        component.setHeaderRow(headerRow);
 
         TableRow row = new TableRow();
         row.addCell(new TableCell("name1"));
@@ -105,6 +125,7 @@ public class TableComponentTest {
         row2.addCell(new TableCell("name5"));
         row2.addCell(new TableCell("name6"));
         component.addRow(row2);
+
         return component;
     }
 }
