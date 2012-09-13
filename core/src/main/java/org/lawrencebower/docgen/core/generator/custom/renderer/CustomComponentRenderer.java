@@ -11,18 +11,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class CustomComponentRenderer
         implements DocComponentRenderer<DocComponent, CustomComponentRendererInfo, Element> {
 
-    @Autowired
     private CustomTextRenderer textRenderer;
-    @Autowired
     private CustomTableRenderer tableRenderer;
-    @Autowired
     private CustomNewLineRenderer newLineRenderer;
-    @Autowired
     private CustomImageRenderer imageRenderer;
-    @Autowired
     private CustomTableTextRenderer tableTextRenderer;
-    @Autowired
     private CustomLineRenderer lineRenderer;
+
+    @Autowired
+    public void setTextRenderer(CustomTextRenderer textRenderer) {
+        this.textRenderer = textRenderer;
+    }
+
+    @Autowired
+    public void setTableRenderer(CustomTableRenderer tableRenderer) {
+        this.tableRenderer = tableRenderer;
+    }
+
+    @Autowired
+    public void setNewLineRenderer(CustomNewLineRenderer newLineRenderer) {
+        this.newLineRenderer = newLineRenderer;
+    }
+
+    @Autowired
+    public void setImageRenderer(CustomImageRenderer imageRenderer) {
+        this.imageRenderer = imageRenderer;
+    }
+
+    @Autowired
+    public void setTableTextRenderer(CustomTableTextRenderer tableTextRenderer) {
+        this.tableTextRenderer = tableTextRenderer;
+    }
+
+    @Autowired
+    public void setLineRenderer(CustomLineRenderer lineRenderer) {
+        this.lineRenderer = lineRenderer;
+    }
 
     @Override
     public void createAndRenderComponent(DocComponent component, CustomComponentRendererInfo rendererInfo) {

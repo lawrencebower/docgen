@@ -1,12 +1,12 @@
 package org.lawrencebower.docgen.core.generator.custom.renderer;
 
-import com.lowagie.text.Element;
 import com.lowagie.text.Phrase;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class CustomTableTextRenderer
         implements CustomDocComponentRenderer<TextComponent, CustomComponentRendererInfo, Phrase> {
@@ -14,10 +14,13 @@ public class CustomTableTextRenderer
     @Autowired
     private PDFGenUtils pdfUtils;
 
+    /**
+     * not implemented for TableText - this component will never render its self, only be added to a parent
+     * table, which deals with the rendering
+     */
     @Override
     public void createAndRenderComponent(TextComponent component, CustomComponentRendererInfo rendererInfo) {
-        Element element = createComponent(component);
-        renderComponent(rendererInfo, element);
+        throw new NotImplementedException();
     }
 
     @Override
@@ -28,8 +31,4 @@ public class CustomTableTextRenderer
         return pdfUtils.mapTextBlock(textBlock);
     }
 
-    private void renderComponent(CustomComponentRendererInfo renderInfo,
-                                 Element element){
-        renderInfo.addToDocument(element);
-    }
 }

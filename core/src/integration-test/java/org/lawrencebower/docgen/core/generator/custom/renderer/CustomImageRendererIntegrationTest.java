@@ -33,7 +33,8 @@ public class CustomImageRendererIntegrationTest extends AbstractCustomRendererTe
         String outFilePath = outputPackage + "image_renderer_output.pdf";
 
         DocPosition leftPosition = new DocPosition(HorizontalAlignment.LEFT);
-        DocComponent leftImageComponent = new ImageComponent(leftPosition, imageFileLocation);
+        DocComponent leftImageComponent = new ImageComponent(imageFileLocation);
+        leftImageComponent.setPosition(leftPosition);
 
         DocPosition centerPosition = new DocPosition(HorizontalAlignment.CENTER);
         DocComponent centerImageComponent = new ImageComponent(centerPosition, imageFileLocation);

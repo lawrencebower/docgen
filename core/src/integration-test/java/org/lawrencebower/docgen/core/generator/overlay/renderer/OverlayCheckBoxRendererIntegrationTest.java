@@ -31,25 +31,27 @@ public class OverlayCheckBoxRendererIntegrationTest extends AbstractOverlayRende
 
         DocCoordinates leftCoordinates = new DocCoordinates(10, 545, width, height);
         DocPosition leftPosition = new DocPosition(HorizontalAlignment.LEFT, leftCoordinates);
-        CheckBoxComponent leftTextComponent = new CheckBoxComponent(true, leftPosition);
-        leftTextComponent.setRenderBorder(true);
+        CheckBoxComponent leftCheckBox = new CheckBoxComponent(true, leftPosition);
+        leftCheckBox.setRenderBorder(true);
 
         DocCoordinates rightCoordinates = new DocCoordinates(150, 445, width, height);
         DocPosition rightPosition = new DocPosition(HorizontalAlignment.RIGHT, rightCoordinates);
-        CheckBoxComponent rightTextComponent = new CheckBoxComponent(true, rightPosition);
-        rightTextComponent.setRenderBorder(true);
+        CheckBoxComponent rightCheckBox = new CheckBoxComponent(rightPosition);
+        rightCheckBox.setSelected(true);
+        rightCheckBox.setRenderBorder(true);
 
         DocCoordinates centerCoordinates = new DocCoordinates(300, 345, width, height);
         DocPosition centerPosition = new DocPosition(HorizontalAlignment.CENTER, centerCoordinates);
-        CheckBoxComponent centerTextComponent = new CheckBoxComponent(true, centerPosition);
-        centerTextComponent.setRenderBorder(true);
+        CheckBoxComponent centerCheckBox = new CheckBoxComponent(true);
+        centerCheckBox.setPosition(centerPosition);
+        centerCheckBox.setRenderBorder(true);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
                                         outFilePath,
                                         inputFilePath,
-                                        leftTextComponent,
-                                        rightTextComponent,
-                                        centerTextComponent);
+                                        leftCheckBox,
+                                        rightCheckBox,
+                                        centerCheckBox);
 
     }
 }

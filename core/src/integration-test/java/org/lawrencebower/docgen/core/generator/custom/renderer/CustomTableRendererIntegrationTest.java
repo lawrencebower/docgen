@@ -6,11 +6,13 @@ import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.NewLineComponent;
 import org.lawrencebower.docgen.core.document.component.TableTextComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
+import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.component.position.VerticalAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
+import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.utils.ITextTableGeneratorTest;
 import org.lawrencebower.docgen.core.generator.utils.TextGenerator;
@@ -60,9 +62,17 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
 
         allCells.get(4).setText("\n\n\n\n");//make the cell deep
 
-        allCells.get(5).getComponent().getPosition().setHorizontalAlignment(HorizontalAlignment.LEFT);
-        allCells.get(6).getComponent().getPosition().setHorizontalAlignment(HorizontalAlignment.CENTER);
-        allCells.get(7).getComponent().getPosition().setHorizontalAlignment(HorizontalAlignment.RIGHT);
+        TableTextComponent leftAlignedComponent = new TableTextComponent("1");
+        leftAlignedComponent.setPosition(new DocPosition(HorizontalAlignment.LEFT));
+        allCells.get(5).setComponent(leftAlignedComponent);
+
+        TableTextComponent centerAlignedComponent = new TableTextComponent(new DocPosition(HorizontalAlignment.CENTER));
+        centerAlignedComponent.setText("2");
+        allCells.get(6).setComponent(centerAlignedComponent);
+
+        TableTextComponent rightAlignedComponent = new TableTextComponent(new DocPosition(HorizontalAlignment.RIGHT),
+                                                                          "3");
+        allCells.get(7).setComponent(rightAlignedComponent);
 
         allCells.get(8).setText("\n\n\n\n");//make the cell deep
 
@@ -243,6 +253,54 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
                                         outFilePath,
                                         tableComponent,
                                         tableComponent2);
+
+    }
+
+    @Test
+    public void testRenderComponent_colAndRowSpan_createsValidFile() {
+
+        String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_11.pdf";
+        String outFilePath = outputPackage + "table_renderer_output_11.pdf";
+
+        TableComponent tableComponent = new TableComponent("table");
+        tableComponent.setRenderBorder(true);
+
+        tableComponent.setHeaderRow(new TableCell("col1"),
+                                    new TableCell("col2"),
+                                    new TableCell("col3"));
+
+
+        TableRow row1 = new TableRow();
+
+        row1.addCell(new TableCell("cel1"));
+        TableCell cell2 = new TableCell("colspan 2");
+        cell2.setColSpan(2);
+
+        row1.addCell(cell2);
+        tableComponent.addRow(row1);
+
+        TableRow row2 = new TableRow();
+
+        TableCell cell3 = new TableCell("rowspan 2");
+        cell3.setRowSpan(2);
+
+        row2.addCell(cell3);
+        row2.addCell(new TableCell("cell 4"));
+        row2.addCell(new TableCell("cell 5"));
+        tableComponent.addRow(row2);
+
+        TableRow row3 = new TableRow();
+        row3.addCell(new TableCell("cell6"));
+        row3.addCell(new TableCell("cell7"));
+        row3.addCell(new TableCell("cell8"));
+
+        tableComponent.addRow(row3);
+
+        tableComponent.setName("main table");
+
+        createPDFAndCompareWithExpected(expectedOutputFilePath,
+                                        outFilePath,
+                                        tableComponent);
 
     }
 
