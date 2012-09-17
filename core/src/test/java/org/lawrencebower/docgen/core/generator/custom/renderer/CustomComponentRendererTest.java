@@ -1,5 +1,6 @@
 package org.lawrencebower.docgen.core.generator.custom.renderer;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.*;
@@ -7,7 +8,9 @@ import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -19,9 +22,8 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:META-INF/core-test-context.xml"})
-public class CustomComponentRendererTest {
+public class CustomComponentRendererTest implements ApplicationContextAware {
 
-    @Autowired
     private CustomComponentRenderer renderer;
 
     private CustomTextRenderer mockTextRenderer = Mockito.mock(CustomTextRenderer.class);
@@ -30,6 +32,12 @@ public class CustomComponentRendererTest {
     private CustomImageRenderer mockImageRenderer = Mockito.mock(CustomImageRenderer.class);
     private CustomTableTextRenderer mockTableTextRenderer = Mockito.mock(CustomTableTextRenderer.class);
     private CustomLineRenderer mockLineRenderer = Mockito.mock(CustomLineRenderer.class);
+    private ApplicationContext applicationContext;
+
+    @Before
+    public void setup(){
+        renderer = (CustomComponentRenderer) applicationContext.getBean("customComponentRenderer");
+    }
 
     public void setMockRenderers() {
         renderer.setImageRenderer(mockImageRenderer);
@@ -176,6 +184,66 @@ public class CustomComponentRendererTest {
         fail();//should not get here
     }
 
+    @Test
+    public void testCreateComponent_passTextComponent_correctRendererCalled() throws Exception {
+
+        TextComponent component = new TextComponent("text");
+
+        createComponentWithMocks(component);
+
+        verify(mockTextRenderer).createComponent(component);
+    }
+
+    @Test
+    public void testCreateComponent_passTableComponent_correctRendererCalled() throws Exception {
+
+        TableComponent component = new TableComponent("name");
+
+        createComponentWithMocks(component);
+
+        verify(mockTableRenderer).createComponent(component);
+    }
+
+    @Test
+    public void testCreateComponent_passNewLineComponent_correctRendererCalled() throws Exception {
+
+        NewLineComponent component = new NewLineComponent();
+
+        createComponentWithMocks(component);
+
+        verify(mockNewLineRenderer).createComponent(component);
+    }
+
+    @Test
+    public void testCreateComponent_passImageComponent_correctRendererCalled() throws Exception {
+
+        ImageComponent component = new ImageComponent("made up location");
+
+        createComponentWithMocks(component);
+
+        verify(mockImageRenderer).createComponent(component);
+    }
+
+    @Test
+    public void testCreateComponent_passTableTextComponent_correctRendererCalled() throws Exception {
+
+        TableTextComponent component = new TableTextComponent("table");
+
+        createComponentWithMocks(component);
+
+        verify(mockTableTextRenderer).createComponent(component);
+    }
+
+    @Test
+    public void testCreateComponent_passLineComponent_correctRendererCalled() throws Exception {
+
+        LineComponent component = new LineComponent(100);
+
+        createComponentWithMocks(component);
+
+        verify(mockLineRenderer).createComponent(component);
+    }
+
     private DocComponent getUnknownComponent() {
         return new DocComponent() {
             @Override
@@ -196,4 +264,16 @@ public class CustomComponentRendererTest {
         return rendererInfo;
     }
 
+    private void createComponentWithMocks(DocComponent component) {
+
+        setMockRenderers();
+
+        renderer.createComponent(component);
+
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
 }
