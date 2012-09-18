@@ -26,12 +26,6 @@ public class CustomComponentRendererTest implements ApplicationContextAware {
 
     private CustomComponentRenderer renderer;
 
-    private CustomTextRenderer mockTextRenderer = Mockito.mock(CustomTextRenderer.class);
-    private CustomTableRenderer mockTableRenderer = Mockito.mock(CustomTableRenderer.class);
-    private CustomNewLineRenderer mockNewLineRenderer = Mockito.mock(CustomNewLineRenderer.class);
-    private CustomImageRenderer mockImageRenderer = Mockito.mock(CustomImageRenderer.class);
-    private CustomTableTextRenderer mockTableTextRenderer = Mockito.mock(CustomTableTextRenderer.class);
-    private CustomLineRenderer mockLineRenderer = Mockito.mock(CustomLineRenderer.class);
     private ApplicationContext applicationContext;
 
     @Before
