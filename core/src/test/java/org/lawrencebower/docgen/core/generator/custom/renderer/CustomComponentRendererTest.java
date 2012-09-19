@@ -3,14 +3,13 @@ package org.lawrencebower.docgen.core.generator.custom.renderer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lawrencebower.docgen.core.document.component.*;
-import org.lawrencebower.docgen.core.document.component.table.TableComponent;
+import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
+import org.lawrencebower.docgen.core.document.component.DocComponent;
+import org.lawrencebower.docgen.core.document.component.DocComponentType;
+import org.lawrencebower.docgen.core.document.component.TableTextComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
-import org.mockito.Mockito;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -18,19 +17,16 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.io.ByteArrayOutputStream;
 
 import static org.junit.Assert.fail;
-import static org.mockito.Mockito.verify;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/core-test-context.xml"})
-public class CustomComponentRendererTest implements ApplicationContextAware {
+@ContextConfiguration(locations = {"classpath:META-INF/core-test-context.xml"} )
+public class CustomComponentRendererTest {
 
+    @Autowired
     private CustomComponentRenderer renderer;
-
-    private ApplicationContext applicationContext;
 
     @Before
     public void setup(){
-        renderer = (CustomComponentRenderer) applicationContext.getBean("customComponentRenderer");
     }
 
     @Test
@@ -51,6 +47,8 @@ public class CustomComponentRendererTest implements ApplicationContextAware {
 
     @Test
     public void testCreateAndRenderComponent_passTableTextComponent_throwsError() throws Exception {
+
+        System.out.println("CustomComponentRendererTest.testCreateAndRenderComponent_passTableTextComponent_throwsError");
 
         TableTextComponent tableText = new TableTextComponent("text");
 
@@ -118,8 +116,4 @@ public class CustomComponentRendererTest implements ApplicationContextAware {
         };
     }
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
-    }
 }

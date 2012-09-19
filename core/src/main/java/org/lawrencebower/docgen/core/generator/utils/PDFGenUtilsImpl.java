@@ -33,6 +33,7 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
 
     @Override
     public void checkRequiredValuesPresent(DocumentInfo docInfo) {
+        System.out.println("PDFGenUtilsImpl.checkRequiredValuesPresent");
         if (docInfo.getDocType() == null) {
             throw new DocGenException("DocInfo DocType must not be null");
         }

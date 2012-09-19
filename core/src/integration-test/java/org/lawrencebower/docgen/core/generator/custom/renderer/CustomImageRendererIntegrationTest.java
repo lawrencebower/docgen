@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -89,7 +90,7 @@ public class CustomImageRendererIntegrationTest extends AbstractCustomRendererTe
                                             outFilePath,
                                             imageComponent);
         } catch (DocGenException e) {
-            assertEquals("java.io.FileNotFoundException: C:\\GitHub\\docgen\\core\\i dont exist (The system cannot find the file specified)", e.getMessage());
+            assertTrue(e.getMessage().contains("i dont exist (The system cannot find the file specified)"));
             return;
         }
 

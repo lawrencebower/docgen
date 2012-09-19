@@ -2,27 +2,16 @@ package org.lawrencebower.docgen.core.generator.custom.renderer;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.*;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
-import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
 import org.mockito.Mockito;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.ByteArrayOutputStream;
 
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.verify;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/core-test-context.xml"})
-public class CustomComponentRendererMockTest implements ApplicationContextAware {
+public class CustomComponentRendererMockTest {
 
     private CustomComponentRenderer renderer;
 
@@ -32,11 +21,10 @@ public class CustomComponentRendererMockTest implements ApplicationContextAware 
     private CustomImageRenderer mockImageRenderer = Mockito.mock(CustomImageRenderer.class);
     private CustomTableTextRenderer mockTableTextRenderer = Mockito.mock(CustomTableTextRenderer.class);
     private CustomLineRenderer mockLineRenderer = Mockito.mock(CustomLineRenderer.class);
-    private ApplicationContext applicationContext;
 
     @Before
     public void setup(){
-        renderer = (CustomComponentRenderer) applicationContext.getBean("customComponentRenderer");
+        renderer = new CustomComponentRenderer();
         renderer.setImageRenderer(mockImageRenderer);
         renderer.setLineRenderer(mockLineRenderer);
         renderer.setNewLineRenderer(mockNewLineRenderer);
@@ -189,8 +177,4 @@ public class CustomComponentRendererMockTest implements ApplicationContextAware 
 
     }
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
-    }
 }
