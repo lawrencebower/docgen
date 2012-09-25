@@ -2,8 +2,8 @@ subprojects {
     apply plugin: 'java'
 }
 
-project(':core'){
+project(':web'){
 dependencies {
-compile project(':web')
+compile project(':core')
 }
 }
