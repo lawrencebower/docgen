@@ -13,7 +13,17 @@
 
     <definition name="home" extends=".mainTemplate">
         <put-attribute name="title" value="Home" type="string" />
-        <put-attribute name="body" value="/WEB-INF/jsp/home.jsp" />
+        <put-attribute name="body" value="/WEB-INF/jsp/customers.jsp" />
+    </definition>
+
+    <definition name="documents" extends=".mainTemplate">
+        <put-attribute name="title" value="Home" type="string" />
+        <put-attribute name="body" value="/WEB-INF/jsp/documents.jsp" />
+    </definition>
+
+    <definition name="products" extends=".mainTemplate">
+        <put-attribute name="title" value="Home" type="string" />
+        <put-attribute name="body" value="/WEB-INF/jsp/products.jsp" />
     </definition>
 
 </tiles-definitions>

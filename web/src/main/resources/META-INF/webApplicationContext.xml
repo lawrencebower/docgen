@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+    <bean name="sessionData"
+          class="org.lawrencebower.docgen.web.model.SessionData"
+          scope="session"/>
+
+    <bean name="thing" class="java.lang.String" scope="session"/>
+
+</beans>

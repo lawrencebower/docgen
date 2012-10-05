@@ -9,7 +9,7 @@
     <div id="headerTitle"><tiles:insertAttribute name="header"/></div>
 </div>
 <div id="content" align="center">
-    <td><tiles:insertAttribute name="body"/>
+    <tiles:insertAttribute name="body"/>
 </div>
 </body>
 </html>

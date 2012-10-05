@@ -12,6 +12,14 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath:META-INF/webApplicationContext.xml
+            classpath:META-INF/web_logic-context.xml
+        </param-value>
+    </context-param>
+
     <listener>
         <listener-class>
             org.springframework.web.context.ContextLoaderListener
