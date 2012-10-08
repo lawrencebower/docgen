@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_logic.business.xml_mapper;
+package org.lawrencebower.docgen.web_logic.business.model_factory;
 
 import org.lawrencebower.docgen.web_logic.view.customer.CustomerView;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;

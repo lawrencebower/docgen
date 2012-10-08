@@ -21,8 +21,14 @@ hello I am the home page
     </ol>
     <ol>
         <c:forEach var="selectedProduct" items="${sessionData.selectedProducts}">
-
             <c:out value="${selectedProduct.id}"/>
         </c:forEach>
     </ol>
+
+    <s:url var="data_entry_url" value="/dataEntry/prepareFields"/>
+
+    <a href="${data_entry_url}">
+        <c:out value="Enter data"/>
+    </a>
+
 </div>

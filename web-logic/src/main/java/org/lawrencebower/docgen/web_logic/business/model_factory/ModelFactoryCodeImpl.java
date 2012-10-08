@@ -1,9 +1,9 @@
-package org.lawrencebower.docgen.web_logic.business.xml_mapper;
+package org.lawrencebower.docgen.web_logic.business.model_factory;
 
 import org.lawrencebower.docgen.core.document.DocumentInfo;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.model.customer.Customer;
-import org.lawrencebower.docgen.web_logic.model.mapping.CustomerProduct_Document_Mappings;
+import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
 import org.lawrencebower.docgen.web_logic.model.product.Product;
 import org.lawrencebower.docgen.web_logic.view.customer.CustomerView;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
@@ -22,14 +22,14 @@ public class ModelFactoryCodeImpl implements ModelFactory {
     private CommercialInvoice commercialInvoice;
     @Autowired
     private DeliveryNote deliveryNote;
+    @Autowired
+    private CustomerProduct_Document_Mappings customerProductDocMappings;
 
     private LinkedHashMap<String, CustomerView> customers = new LinkedHashMap<>();
 
     private LinkedHashMap<String, ProductView> products = new LinkedHashMap<>();
 
     private LinkedHashMap<String, DocumentInfoView> documents = new LinkedHashMap<>();
-
-    private CustomerProduct_Document_Mappings customerProductDocMappings = new CustomerProduct_Document_Mappings();
 
     private CustomerView customer1;
     private CustomerView customer2;

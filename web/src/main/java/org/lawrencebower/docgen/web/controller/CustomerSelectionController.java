@@ -2,9 +2,8 @@ package org.lawrencebower.docgen.web.controller;
 
 import org.apache.log4j.Logger;
 import org.lawrencebower.docgen.web.model.SessionData;
-import org.lawrencebower.docgen.web_logic.business.xml_mapper.ModelFactory;
+import org.lawrencebower.docgen.web_logic.business.controler_business.CustomerSelectionCB;
 import org.lawrencebower.docgen.web_logic.view.customer.CustomerView;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -24,7 +23,7 @@ public class CustomerSelectionController {
     static Logger logger = Logger.getLogger(CustomerSelectionController.class);
 
     @Autowired
-    private ModelFactory xmlModelMapper;
+    private CustomerSelectionCB business;
     @Autowired
     private SessionData sessionData;
 
@@ -34,7 +33,7 @@ public class CustomerSelectionController {
     @RequestMapping({"/", "/home"})
     public String showHomePage(Model model) {
 
-        List<CustomerView> customers = xmlModelMapper.getCustomers();
+        List<CustomerView> customers = business.getCustomers();
 
         model.addAttribute("customers", customers);
 
@@ -47,10 +46,10 @@ public class CustomerSelectionController {
 
         logger.error("customerName = [" + customerName + "]");
 
-        CustomerView selectedCustomer = xmlModelMapper.getCustomer(customerName);
+        CustomerView selectedCustomer = business.getCustomer(customerName);
         sessionData.setSelectedCustomer(selectedCustomer);
 
-        List<ProductView> products = xmlModelMapper.getProducts();
+        List<ProductView> products = business.getProducts();
 
         model.addAttribute("products", products);
 

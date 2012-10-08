@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_logic.model.mapping;
+package org.lawrencebower.docgen.web_logic.business.mapping;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;

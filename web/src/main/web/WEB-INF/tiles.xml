@@ -26,4 +26,9 @@
         <put-attribute name="body" value="/WEB-INF/jsp/products.jsp" />
     </definition>
 
+    <definition name="dataEntry" extends=".mainTemplate">
+        <put-attribute name="title" value="Home" type="string" />
+        <put-attribute name="body" value="/WEB-INF/jsp/dataEntry.jsp" />
+    </definition>
+
 </tiles-definitions>

@@ -17,5 +17,6 @@ project(':web-logic') {
 project(':web') {
     dependencies {
         compile project(':web-logic')
+        compile project(':core')
     }
 }
