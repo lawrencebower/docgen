@@ -22,6 +22,9 @@
                 class="org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactoryCodeImpl"
                 init-method="init"/>
 
+    <beans:bean name="modelToViewMapper"
+                class="org.lawrencebower.docgen.web_logic.business.mapping.ModelToViewMapper"/>
+
     <beans:bean name="customerProductMappings"
                 class="org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings"/>
 

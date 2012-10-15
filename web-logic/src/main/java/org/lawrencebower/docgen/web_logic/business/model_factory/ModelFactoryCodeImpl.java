@@ -2,12 +2,12 @@ package org.lawrencebower.docgen.web_logic.business.model_factory;
 
 import org.lawrencebower.docgen.core.document.DocumentInfo;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.web_logic.model.customer.Customer;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
-import org.lawrencebower.docgen.web_logic.model.product.Product;
-import org.lawrencebower.docgen.web_logic.view.customer.CustomerView;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
-import org.lawrencebower.docgen.web_logic.view.product.ProductView;
+import org.lawrencebower.docgen.web_model.view.customer.Customer;
+import org.lawrencebower.docgen.web_model.view.customer.CustomerView;
+import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_model.view.product.Product;
+import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import usecase.CommercialInvoice;
 import usecase.DeliveryNote;
@@ -47,13 +47,9 @@ public class ModelFactoryCodeImpl implements ModelFactory {
 
     private void initDocuments() {
 
-        DocumentInfo commercialInvoiceDocInfo = commercialInvoice.getDocInfo();
+        commercialInvoiceView = commercialInvoice.getDocInfoView();
 
-        commercialInvoiceView = new DocumentInfoView(commercialInvoiceDocInfo);
-
-        DocumentInfo deliveryNoteDocInfo = deliveryNote.getDocInfo();
-
-        deliveryNoteView = new DocumentInfoView(deliveryNoteDocInfo);
+        deliveryNoteView = deliveryNote.getDocInfo();
 
         documents.put(commercialInvoiceView.getName(), commercialInvoiceView);
         documents.put(deliveryNoteView.getName(), deliveryNoteView);
@@ -85,28 +81,28 @@ public class ModelFactoryCodeImpl implements ModelFactory {
         //Customer 1
         customerProductDocMappings.addDocument(customer1.getCustomer(),
                                                product1.getproduct(),
-                                               commercialInvoiceView.getDocument());
+                                               commercialInvoiceView);
 
         customerProductDocMappings.addDocument(customer1.getCustomer(),
                                                product2.getproduct(),
-                                               commercialInvoiceView.getDocument());
+                                               commercialInvoiceView);
 
         customerProductDocMappings.addDocument(customer1.getCustomer(),
                                                product2.getproduct(),
-                                               deliveryNoteView.getDocument());
+                                               deliveryNoteView);
 
         //Customer 2
         customerProductDocMappings.addDocument(customer2.getCustomer(),
                                                product1.getproduct(),
-                                               commercialInvoiceView.getDocument());
+                                               commercialInvoiceView);
 
         customerProductDocMappings.addDocument(customer2.getCustomer(),
                                                product2.getproduct(),
-                                               commercialInvoiceView.getDocument());
+                                               commercialInvoiceView);
 
         customerProductDocMappings.addDocument(customer2.getCustomer(),
                                                product2.getproduct(),
-                                               deliveryNoteView.getDocument());
+                                               deliveryNoteView);
 
     }
 

@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_logic.model.customer;
+package org.lawrencebower.docgen.web_model.view.customer;
 
 public class Customer {
     private String name;

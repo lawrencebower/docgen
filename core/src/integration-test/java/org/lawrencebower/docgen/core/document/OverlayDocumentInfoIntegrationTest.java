@@ -10,6 +10,7 @@ import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
+import org.lawrencebower.docgen.core.generator.overlay.OverlayPDFGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -24,7 +25,7 @@ import static org.junit.Assert.assertTrue;
 public class OverlayDocumentInfoIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired
-    OverlayDocumentInfo overlayDocumentInfo;
+    OverlayPDFGenerator pdfGenerator;
 
     @Before
     public void setup(){
@@ -37,6 +38,8 @@ public class OverlayDocumentInfoIntegrationTest extends AbstractIntegrationTest 
         String inputFilePath = inputPackage + "overlay_input.pdf";
         String expectedOutputFilePath = inputPackage + "overlay_expected_output.pdf";
         String outFilePath = outputPackage + "overlay_output.pdf";
+
+        OverlayDocumentInfo overlayDocumentInfo = new OverlayDocumentInfo(pdfGenerator);
 
         overlayDocumentInfo.setName("test name");
 

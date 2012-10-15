@@ -3,8 +3,9 @@ package org.lawrencebower.docgen.web_logic.business.mapping;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.lawrencebower.docgen.core.document.DocumentInfo;
-import org.lawrencebower.docgen.web_logic.model.customer.Customer;
-import org.lawrencebower.docgen.web_logic.model.product.Product;
+import org.lawrencebower.docgen.web_model.view.customer.Customer;
+import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_model.view.product.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,18 +14,18 @@ import java.util.Map;
 
 public class CustomerProduct_Document_Mappings {
 
-    private Map<CustomerProductPair, List<DocumentInfo>> mappings = new HashMap<>();
+    private Map<CustomerProductPair, List<DocumentInfoView>> mappings = new HashMap<>();
 
     public void addDocument(Customer customer,
                             Product product,
-                            DocumentInfo document) {
+                            DocumentInfoView document) {
 
         CustomerProductPair pair = makeCustomerProductPair(customer, product);
 
         if (mappings.containsKey(pair)) {
             mappings.get(pair).add(document);
         }else{
-            ArrayList<DocumentInfo> list = new ArrayList<>();
+            ArrayList<DocumentInfoView> list = new ArrayList<>();
             list.add(document);
             mappings.put(pair, list);
         }
@@ -34,7 +35,7 @@ public class CustomerProduct_Document_Mappings {
         return new CustomerProductPair(customer.getName(), product.getProductId());
     }
 
-    public List<DocumentInfo> getDocInfosForCustomerAndProduct(Customer customer, Product product){
+    public List<DocumentInfoView> getDocInfosForCustomerAndProduct(Customer customer, Product product){
 
         CustomerProductPair customerProductPair = makeCustomerProductPair(customer, product);
         if(mappings.containsKey(customerProductPair)){

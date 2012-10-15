@@ -1,6 +1,4 @@
-package org.lawrencebower.docgen.web_logic.view.customer;
-
-import org.lawrencebower.docgen.web_logic.model.customer.Customer;
+package org.lawrencebower.docgen.web_model.view.customer;
 
 public class CustomerView {
 

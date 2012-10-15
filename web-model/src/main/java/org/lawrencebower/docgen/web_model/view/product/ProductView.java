@@ -1,6 +1,4 @@
-package org.lawrencebower.docgen.web_logic.view.product;
-
-import org.lawrencebower.docgen.web_logic.model.product.Product;
+package org.lawrencebower.docgen.web_model.view.product;
 
 public class ProductView {
 

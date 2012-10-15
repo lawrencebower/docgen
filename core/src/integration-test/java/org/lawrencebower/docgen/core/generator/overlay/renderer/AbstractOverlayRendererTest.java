@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 public abstract class AbstractOverlayRendererTest extends AbstractIntegrationTest {
 
     @Autowired
-    private OverlayDocumentInfo docInfo;
+    private OverlayPDFGenerator pdfGenerator;
 
     @Autowired
     private OverlayPDFGenerator overlayGenerator;
@@ -24,6 +24,8 @@ public abstract class AbstractOverlayRendererTest extends AbstractIntegrationTes
                                                    String outFilePath,
                                                    String sourcePDF,
                                                    DocComponent... components) {
+
+        OverlayDocumentInfo docInfo = new OverlayDocumentInfo(pdfGenerator);
 
         docInfo.setSourcePDF(sourcePDF);
         docInfo.setComponents(Arrays.asList(components));

@@ -54,10 +54,6 @@
                 class="org.lawrencebower.docgen.core.generator.overlay.OverlayPDFGenerator"
                 parent="pdfGeneratorAbstract"/>
 
-    <beans:bean id="overlayDocInfo" scope="prototype" class="org.lawrencebower.docgen.core.document.OverlayDocumentInfo"/>
-    <beans:bean id="customDocInfo" scope="prototype"
-                class="org.lawrencebower.docgen.core.document.CustomDocumentInfo"/>
-
     <context:component-scan base-package="org.lawrencebower.docgen.core"/>
 
 </beans:beans>

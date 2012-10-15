@@ -1,10 +1,9 @@
 package org.lawrencebower.docgen.web.controller;
 
 import org.apache.log4j.Logger;
-import org.lawrencebower.docgen.core.document.DocumentInfo;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.DataEntryCB;
-import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
+import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -12,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @Scope("session")
@@ -32,8 +30,17 @@ public class DataEntryController {
     @RequestMapping({"/prepareFields"})
     public String prepareFields(Model model) {
 
-        Set<DocumentInfo> documentInfos = business.prepareFieldsForViewing(sessionData.getSelectedCustomer(),
-                                                                           sessionData.getSelectedProducts());
+        List<DocumentInfoView> documentInfos =
+                business.getDocumentsForViewing(sessionData.getSelectedCustomer(),
+                                                sessionData.getSelectedProducts());
+
+        sessionData.setDocuments(documentInfos);
+
+        return "dataEntry";
+    }
+
+    @RequestMapping({"/submitFields"})
+    public String submitFields(SessionData sessionDataParam) {
 
         return "dataEntry";
     }

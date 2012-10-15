@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class OverlayDocumentInfo extends AbstractDocumentInfo {
 
-    @Autowired
     private OverlayPDFGenerator pdfGenerator;
     private String sourcePDF;
 
-    public OverlayDocumentInfo() {
+    public OverlayDocumentInfo(OverlayPDFGenerator pdfGenerator) {
+        this.pdfGenerator = pdfGenerator;
     }
 
     public void setSourcePDF(String sourcePDF) {

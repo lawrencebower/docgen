@@ -12,22 +12,23 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertTrue;
 
-public abstract class AbstractCustomRendererTest extends AbstractIntegrationTest{
-
-    @Autowired
-    private CustomDocumentInfo docInfo;
+public abstract class AbstractCustomRendererTest extends AbstractIntegrationTest {
 
     @Autowired
     private CustomPDFGenerator customGenerator;
+
+    protected AbstractCustomRendererTest() {
+    }
 
     protected void createPDFAndCompareWithExpected(String expectedOutputFilePath,
                                                    String outFilePath,
                                                    DocComponent... components) {
 
+        CustomDocumentInfo docInfo = new CustomDocumentInfo(customGenerator);
         docInfo.setComponents(Arrays.asList(components));
         docInfo.setName("Doc name");
 
-        PDFDocument pdfDocument = customGenerator.generatePDF(docInfo);
+        PDFDocument pdfDocument = docInfo.generatePDF();
 
         File outputFile = createOutputFilePathAndWriteFile(outFilePath, pdfDocument);
 

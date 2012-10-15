@@ -8,6 +8,7 @@ import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
+import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -23,11 +24,14 @@ import static org.junit.Assert.assertTrue;
 public class CustomDocumentInfoIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired
+    private CustomPDFGenerator pdfGenerator;
+
     CustomDocumentInfo customDocumentInfo;
 
     @Before
     public void setup(){
         super.prepareDirs();
+        customDocumentInfo = new CustomDocumentInfo(pdfGenerator);
     }
 
     @Test

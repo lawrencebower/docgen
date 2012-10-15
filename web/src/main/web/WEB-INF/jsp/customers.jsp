@@ -2,7 +2,7 @@
 
 hello I am the home page
 
-<jsp:useBean id="customers" scope="request" type="java.util.List<org.lawrencebower.docgen.web_logic.view.customer.CustomerView>"/>
+<jsp:useBean id="customers" scope="request" type="java.util.List<org.lawrencebower.docgen.web_model.view.customer.CustomerView>"/>
 
 <div>
     <ol>

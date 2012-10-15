@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class CustomDocumentInfo extends AbstractDocumentInfo {
 
-    @Autowired
     private CustomPDFGenerator pdfGenerator;
 
-    public CustomDocumentInfo() {
+    public CustomDocumentInfo(CustomPDFGenerator pdfGenerator) {
+        this.pdfGenerator = pdfGenerator;
     }
 
     @Override
