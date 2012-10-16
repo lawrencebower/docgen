@@ -51,7 +51,7 @@ public class DocComponentView {
         return value;
     }
 
-    public boolean isIsTextComponent() {
+    public boolean isTextComponent() {
         return docComponent.getComponentType() == DocComponentType.TEXT;
     }
 }

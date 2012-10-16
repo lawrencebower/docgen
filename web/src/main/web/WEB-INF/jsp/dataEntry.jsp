@@ -4,6 +4,7 @@
 hello I am the fields
 
 <jsp:useBean id="sessionData" scope="session" type="org.lawrencebower.docgen.web.model.SessionData"/>
+<c:set var="fieldSeperator" value="~" scope="application"/>
 
 <div>
     <ol>
@@ -23,10 +24,10 @@ hello I am the fields
                                items="${document.editableFields}"
                                varStatus="fieldIndex">
 
-                        <c:if test="${field.isTextComponent}">
+                        <c:if test="${field.textComponent}">
                             <label>
                                 <c:out value="${field.name}"/>
-                                <input name="${document.name}~${field.name}"
+                                <input name="${document.name}${fieldSeperator}${field.name}"
                                        value="${field.value}"/>
                             </label>
                             <br/>

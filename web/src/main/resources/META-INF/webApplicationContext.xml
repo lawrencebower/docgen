@@ -9,6 +9,4 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
           class="org.lawrencebower.docgen.web.model.SessionData"
           scope="session"/>
 
-    <bean name="thing" class="java.lang.String" scope="session"/>
-
 </beans>
