@@ -9,8 +9,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @Scope("session")
@@ -27,7 +30,7 @@ public class DataEntryController {
     public DataEntryController() {
     }
 
-    @RequestMapping({"/prepareFields"})
+    @RequestMapping(method = RequestMethod.GET)
     public String prepareFields(Model model) {
 
         List<DocumentInfoView> documentInfos =
@@ -39,8 +42,18 @@ public class DataEntryController {
         return "dataEntry";
     }
 
-    @RequestMapping({"/submitFields"})
-    public String submitFields(SessionData sessionDataParam) {
+    @RequestMapping(value = "/setFields", method = RequestMethod.POST)
+    public String submitFields(WebRequest webRequest) {
+
+        Map<String, String[]> parameterMap = webRequest.getParameterMap();
+
+        for (String key : parameterMap.keySet()) {
+            System.out.println("key = " + key);
+            String[] values = parameterMap.get(key);
+            for (String value : values) {
+                System.out.println("value = " + value);
+            }
+        }
 
         return "dataEntry";
     }

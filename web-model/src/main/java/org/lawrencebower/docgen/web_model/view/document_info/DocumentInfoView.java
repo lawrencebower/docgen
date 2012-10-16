@@ -10,7 +10,7 @@ import java.util.List;
 public class DocumentInfoView {
 
     private DocumentInfo documentInfo;
-    private List<DocComponentView> docComponents;
+    private List<DocComponentView> docComponentViews;
 
     private boolean isDirty = false;
     private boolean isComplete = false;
@@ -20,7 +20,7 @@ public class DocumentInfoView {
             throw new DocGenException("DocumentInfo parameter is null");
         }
 
-        docComponents = new ArrayList<>();
+        docComponentViews = new ArrayList<>();
 
         this.documentInfo = documentInfo;
     }
@@ -37,11 +37,11 @@ public class DocumentInfoView {
         return documentInfo.getName();
     }
 
-    public DocumentInfo getDocument() {
+    public DocumentInfo createDocumentInfo() {
 
         List<DocComponent> components = new ArrayList<>();
 
-        for (DocComponentView docComponentView : docComponents) {
+        for (DocComponentView docComponentView : docComponentViews) {
             components.add(docComponentView.getDocComponent());
         }
 
@@ -51,16 +51,25 @@ public class DocumentInfoView {
     }
 
     public List<DocComponentView> getEditableFields() {
-        return docComponents;
+
+        List<DocComponentView> editableViews = new ArrayList<>();
+
+        for (DocComponentView docComponentView : docComponentViews) {
+            if(docComponentView.isEditable()){
+                editableViews.add(docComponentView);
+            }
+        }
+
+        return editableViews;
     }
 
-    public void addComponent(DocComponent component, boolean editable) {
+    public void addComponentView(DocComponent component, boolean editable) {
         DocComponentView componentView = new DocComponentView(component);
         componentView.setEditable(editable);
-        docComponents.add(componentView);
+        docComponentViews.add(componentView);
     }
 
-    public List<DocComponentView> getComponents() {
-        return docComponents;
+    public List<DocComponentView> getComponentViews() {
+        return docComponentViews;
     }
 }

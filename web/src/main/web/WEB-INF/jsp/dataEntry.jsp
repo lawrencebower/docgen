@@ -7,23 +7,34 @@ hello I am the fields
 
 <div>
     <ol>
-        <sf:form method="POST"
-                 modelAttribute="sessionData"
-                 commandName="dataEntry"
-                 action="submitFields">
 
-            <c:forEach var="document" items="${sessionData.documents}">
+        <form method="post"
+              action="/docgen/dataEntry/setFields">
 
-                <br/><c:out value="${document.name}"/><br/><br/>
+            <fieldset>
 
-                <c:forEach var="field" items="${document.editableFields}">
-                    <c:if test="${field.editable and field.isTextComponent}">
-                        <c:out value="${field.name}"/><br/>
-                        <sf:input path="${field.value}"/>
-                    </c:if>
+                <c:forEach var="document"
+                           items="${sessionData.documents}"
+                           varStatus="docIndex">
+
+                    <br/><c:out value="${document.name}"/><br/><br/>
+
+                    <c:forEach var="field"
+                               items="${document.editableFields}"
+                               varStatus="fieldIndex">
+
+                        <c:if test="${field.isTextComponent}">
+                            <label>
+                                <c:out value="${field.name}"/>
+                                <input name="${document.name}~${field.name}"
+                                       value="${field.value}"/>
+                            </label>
+                            <br/>
+                        </c:if>
+                    </c:forEach>
                 </c:forEach>
-            </c:forEach>
-            <input name="commit" type="submit"/>
-        </sf:form>
+                <input name="commit" type="submit"/>
+            </fieldset>
+        </form>
     </ol>
 </div>

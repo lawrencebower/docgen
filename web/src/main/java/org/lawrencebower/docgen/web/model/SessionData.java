@@ -15,6 +15,17 @@ public class SessionData {
 
     private List<DocumentInfoView> documents = new ArrayList<>();
 
+    private String thing;
+
+    public String getThing() {
+        return thing;
+    }
+
+    public void setThing(String thing) {
+        System.out.println("SessionData.setThing " + hashCode());
+        this.thing = thing;
+    }
+
     public void setSelectedCustomer(CustomerView selectedCustomer) {
         this.selectedCustomer = selectedCustomer;
     }
