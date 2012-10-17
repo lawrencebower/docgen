@@ -24,9 +24,8 @@ public abstract class AbstractCustomRendererTest extends AbstractIntegrationTest
                                                    String outFilePath,
                                                    DocComponent... components) {
 
-        CustomDocumentInfo docInfo = new CustomDocumentInfo(customGenerator);
+        CustomDocumentInfo docInfo = new CustomDocumentInfo("Doc name", customGenerator);
         docInfo.setComponents(Arrays.asList(components));
-        docInfo.setName("Doc name");
 
         PDFDocument pdfDocument = docInfo.generatePDF();
 

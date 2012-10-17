@@ -1,7 +1,15 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="/WEB-INF/jsp/include.jsp" %>
 
-hello I am the fields
+
+<script type="text/javascript">
+    function setBlankTarget() {
+        document.form.target = "_blank";
+    }
+    function setSelfTarget() {
+        document.form.target = "_self";
+    }
+</script>
 
 <jsp:useBean id="sessionData" scope="session" type="org.lawrencebower.docgen.web.model.SessionData"/>
 <c:set var="fieldSeperator" value="~" scope="application"/>
@@ -10,6 +18,7 @@ hello I am the fields
     <ol>
 
         <form method="post"
+              name="form"
               action="/docgen/dataEntry/setFields">
 
             <fieldset>
@@ -34,7 +43,8 @@ hello I am the fields
                         </c:if>
                     </c:forEach>
                 </c:forEach>
-                <input name="commit" type="submit"/>
+                <input name="full" type="submit" value="full" onmousedown="setBlankTarget()"/>
+                <input name="partial" type="submit" value="partial" onmousedown="setSelfTarget()"/>
             </fieldset>
         </form>
     </ol>

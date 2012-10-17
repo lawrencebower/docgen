@@ -39,9 +39,7 @@ public class OverlayDocumentInfoIntegrationTest extends AbstractIntegrationTest 
         String expectedOutputFilePath = inputPackage + "overlay_expected_output.pdf";
         String outFilePath = outputPackage + "overlay_output.pdf";
 
-        OverlayDocumentInfo overlayDocumentInfo = new OverlayDocumentInfo(pdfGenerator);
-
-        overlayDocumentInfo.setName("test name");
+        OverlayDocumentInfo overlayDocumentInfo = new OverlayDocumentInfo("test name", pdfGenerator);
 
         overlayDocumentInfo.setSourcePDF(inputFilePath);
 

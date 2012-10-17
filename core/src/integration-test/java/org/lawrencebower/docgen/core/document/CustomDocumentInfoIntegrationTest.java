@@ -31,7 +31,7 @@ public class CustomDocumentInfoIntegrationTest extends AbstractIntegrationTest {
     @Before
     public void setup(){
         super.prepareDirs();
-        customDocumentInfo = new CustomDocumentInfo(pdfGenerator);
+        customDocumentInfo = new CustomDocumentInfo("test name", pdfGenerator);
     }
 
     @Test
@@ -39,8 +39,6 @@ public class CustomDocumentInfoIntegrationTest extends AbstractIntegrationTest {
 
         String outFilePath = outputPackage + "custom_output.pdf";
         String expectedOutFilePath = inputPackage + "custom_expected_output.pdf";
-
-        customDocumentInfo.setName("test name");
 
         DocComponent textComponent = generateSimpleTextComponent();
 

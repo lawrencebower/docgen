@@ -25,11 +25,10 @@ public abstract class AbstractOverlayRendererTest extends AbstractIntegrationTes
                                                    String sourcePDF,
                                                    DocComponent... components) {
 
-        OverlayDocumentInfo docInfo = new OverlayDocumentInfo(pdfGenerator);
+        OverlayDocumentInfo docInfo = new OverlayDocumentInfo("Doc name", pdfGenerator);
 
         docInfo.setSourcePDF(sourcePDF);
         docInfo.setComponents(Arrays.asList(components));
-        docInfo.setName("Doc name");
 
         PDFDocument pdfDocument = overlayGenerator.generatePDF(docInfo);
 

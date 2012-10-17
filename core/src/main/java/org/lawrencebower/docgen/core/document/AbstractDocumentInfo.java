@@ -9,9 +9,6 @@ public abstract class AbstractDocumentInfo implements DocumentInfo {
     protected String name;
     private List<DocComponent> components;
 
-    protected AbstractDocumentInfo() {
-    }
-
     @Override
     public void setName(String name) {
         this.name = name;

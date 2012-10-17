@@ -25,7 +25,7 @@ hello I am the home page
         </c:forEach>
     </ol>
 
-    <s:url var="data_entry_url" value="/dataEntry"/>
+    <s:url var="data_entry_url" value="/dataEntry/prepareFields"/>
 
     <a href="${data_entry_url}">
         <c:out value="Enter data"/>

@@ -1,5 +1,6 @@
 package org.lawrencebower.docgen.web.model;
 
+import org.lawrencebower.docgen.core.generator.model.PDFDocument;
 import org.lawrencebower.docgen.web_model.view.customer.CustomerView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
@@ -15,16 +16,7 @@ public class SessionData {
 
     private List<DocumentInfoView> documents = new ArrayList<>();
 
-    private String thing;
-
-    public String getThing() {
-        return thing;
-    }
-
-    public void setThing(String thing) {
-        System.out.println("SessionData.setThing " + hashCode());
-        this.thing = thing;
-    }
+    private List<PDFDocument> generatedDocuments;
 
     public void setSelectedCustomer(CustomerView selectedCustomer) {
         this.selectedCustomer = selectedCustomer;
@@ -48,5 +40,13 @@ public class SessionData {
 
     public void addSelectedProduct(ProductView selectedProduct) {
        selectedProducts.add(selectedProduct);
+    }
+
+    public void setGeneratedDocuments(List<PDFDocument> generatedDocuments) {
+        this.generatedDocuments = generatedDocuments;
+    }
+
+    public List<PDFDocument> getPDFDocuments() {
+        return generatedDocuments;
     }
 }
