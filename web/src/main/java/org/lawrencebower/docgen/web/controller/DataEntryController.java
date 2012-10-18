@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 
+import java.io.File;
 import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
@@ -69,9 +70,11 @@ public class DataEntryController {
 
         sessionData.setGeneratedDocuments(pdFs);
 
-        business.writePDFsToFile(sessionData.getPDFDocuments());
+        List<File> allPdfFiles = business.writePDFsToFiles(sessionData.getPDFDocuments());
 
-        business.writePDFsToStream(outStream, sessionData.getPDFDocuments());
+        File concatenatedFile = business.makeConcatenatedFile(allPdfFiles);
+
+        business.writePDFsToStream(outStream, concatenatedFile);
 
         return null;
     }

@@ -10,5 +10,5 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @Ignore
 public class CustomComponentRendererInfoIntegrationTest {
 
-
+ //todo delete this?
 }

@@ -1,7 +1,9 @@
 package org.lawrencebower.docgen.core.generator.utils;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.lawrencebower.docgen.core.AbstractIntegrationTest;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,7 +18,7 @@ import static org.junit.Assert.assertFalse;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:META-INF/integration-test-config.xml"})
-public class DocGenFileUtilsIntegrationTest {
+public class DocGenFileUtilsIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired
     DocGenFileUtils fileUtils;
@@ -24,9 +26,12 @@ public class DocGenFileUtilsIntegrationTest {
     @Autowired
     ChecksumUtils checksumUtils;
 
-    @Autowired
-    @Qualifier("fileUtilsExampleFile")
-    String exampleFileString;
+    String exampleFileString = "example_file.pdf";
+
+    @Before
+    public void setup(){
+        super.prepareDirs();
+    }
 
     @Test
     public void testDeleteFileIfAlreadyExists_fileExists_fileDeleted() throws Exception {
@@ -52,7 +57,7 @@ public class DocGenFileUtilsIntegrationTest {
     }
 
     private File createExampleFileAndCheckExists() throws IOException {
-        File exampleFile = new File(exampleFileString);
+        File exampleFile = new File(outputPackage + exampleFileString);
         exampleFile.createNewFile();
         if(!exampleFile.exists()){
             throw new DocGenException("Problem making example file");

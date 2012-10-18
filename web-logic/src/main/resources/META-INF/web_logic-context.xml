@@ -9,6 +9,10 @@
 
     <import resource="usecase-context.xml"/>
 
+    <bean name="pdfOutputRoot" class="java.lang.String">
+        <constructor-arg value="C:\code\output\"/>
+    </bean>
+
     <bean name="customerSelectionCB"
           class="org.lawrencebower.docgen.web_logic.business.controler_business.CustomerSelectionCB"/>
 

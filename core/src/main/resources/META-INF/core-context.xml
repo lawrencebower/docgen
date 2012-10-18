@@ -1,59 +1,60 @@
-<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xmlns:context="http://www.springframework.org/schema/context"
              xsi:schemaLocation="
              http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd
              http://www.springframework.org/schema/context classpath:/org/springframework/context/config/spring-context-3.1.xsd">
 
-    <beans:bean id="fileUtils" class="org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils"/>
-    <beans:bean id="iTextTableGenerator" class="org.lawrencebower.docgen.core.generator.utils.ITextTableGenerator"/>
-    <beans:bean id="pdfGenUtils" class="org.lawrencebower.docgen.core.generator.utils.PDFGenUtilsImpl"/>
+    <bean id="fileUtils" class="org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils"/>
+    <bean id="iTextTableGenerator" class="org.lawrencebower.docgen.core.generator.utils.ITextTableGenerator"/>
+    <bean id="pdfGenUtils" class="org.lawrencebower.docgen.core.generator.utils.PDFGenUtilsImpl"/>
+    <bean id="pdfConcatenator" class="org.lawrencebower.docgen.core.generator.utils.PDFConcatenator"/>
 
-    <beans:bean id="overlayTextRenderer"
+    <bean id="overlayTextRenderer"
                 class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayTextRenderer"/>
 
-    <beans:bean id="customTextRenderer"
+    <bean id="customTextRenderer"
                 class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomTextRenderer"/>
 
-    <beans:bean id="overlayTableRenderer"
+    <bean id="overlayTableRenderer"
                 class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayTableRenderer"/>
 
-    <beans:bean id="checkBoxRenderer"
+    <bean id="checkBoxRenderer"
                 class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayCheckBoxRenderer"/>
 
-    <beans:bean id="imageRenderer"
+    <bean id="imageRenderer"
                 class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayImageRenderer"/>
 
-    <beans:bean id="customTableRenderer"
+    <bean id="customTableRenderer"
                 class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomTableRenderer"/>
 
-    <beans:bean id="newLineRenderer"
+    <bean id="newLineRenderer"
                 class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomNewLineRenderer"/>
 
-    <beans:bean id="customImageRenderer"
+    <bean id="customImageRenderer"
                 class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomImageRenderer"/>
 
-    <beans:bean id="customTableTextRenderer"
+    <bean id="customTableTextRenderer"
                 class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomTableTextRenderer"/>
 
-    <beans:bean id="customLineRenderer"
+    <bean id="customLineRenderer"
                 class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomLineRenderer"/>
 
-    <beans:bean id="customComponentRenderer" class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomComponentRenderer"/>
-    <beans:bean id="overlayComponentRenderer" class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayComponentRenderer"/>
+    <bean id="customComponentRenderer" class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomComponentRenderer"/>
+    <bean id="overlayComponentRenderer" class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayComponentRenderer"/>
 
-    <beans:bean id="pdfGeneratorAbstract"
+    <bean id="pdfGeneratorAbstract"
                 class="org.lawrencebower.docgen.core.generator.model.AbstractPDFGenerator"
                 abstract="true"/>
 
-    <beans:bean id="pdfGeneratorCustom"
+    <bean id="pdfGeneratorCustom"
                 class="org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator"
                 parent="pdfGeneratorAbstract"/>
 
-    <beans:bean id="pdfGeneratorOverlay"
+    <bean id="pdfGeneratorOverlay"
                 class="org.lawrencebower.docgen.core.generator.overlay.OverlayPDFGenerator"
                 parent="pdfGeneratorAbstract"/>
 
     <context:component-scan base-package="org.lawrencebower.docgen.core"/>
 
-</beans:beans>
+</beans>

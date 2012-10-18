@@ -1,24 +1,33 @@
 package org.lawrencebower.docgen.web_logic.business.controler_business;
 
+import org.apache.commons.io.IOUtils;
 import org.lawrencebower.docgen.core.document.DocumentInfo;
+import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
+import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
 import org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper;
+import org.lawrencebower.docgen.web_model.ViewConstants;
 import org.lawrencebower.docgen.web_model.view.customer.Customer;
 import org.lawrencebower.docgen.web_model.view.customer.CustomerView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_model.view.product.Product;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
-import java.io.File;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.*;
 
 public class DataEntryCB {
 
     @Autowired
     FieldMapper fieldMapper;
+    @Autowired
+    PDFConcatenator pdfConcatenator;
+    @Autowired
+    @Qualifier("pdfOutputRoot")
+    String fileRoot;
 
     @Autowired
     private CustomerProduct_Document_Mappings mappings;
@@ -73,18 +82,38 @@ public class DataEntryCB {
         return results;
     }
 
-    public void writePDFsToStream(OutputStream outStream, List<PDFDocument> pdfDocument) {
-        //todo this should be passed a concatenated one
-        pdfDocument.get(0).writeToStream(outStream);
+    public void writePDFsToStream(OutputStream outStream, File file) {
+        try {
+            FileInputStream inStream = new FileInputStream(file);
+            byte[] bytes = IOUtils.toByteArray(inStream);
+            outStream.write(bytes);
+        } catch (IOException e) {
+            throw new DocGenException(e);
+        }
     }
 
-    public void writePDFsToFile(List<PDFDocument> pdfDocuments) {
+    public List<File> writePDFsToFiles(List<PDFDocument> pdfDocuments) {
+
+        List<File> allFiles = new ArrayList<>();
+
         for (PDFDocument pdfDocument : pdfDocuments) {
             String docName = pdfDocument.getName();
-            String fileName = "C:\\code\\output\\" + docName + ".pdf";
+            String fileName = fileRoot + docName + ".pdf";
             File file = new File(fileName);
 
             pdfDocument.writeToFile(file);
+
+            allFiles.add(file);
         }
+
+        return allFiles;
+    }
+
+    public File makeConcatenatedFile(List<File> allFiles) {
+        String pathName = fileRoot + ViewConstants.CONCATENATED_FILE_NAME;
+        File concatenatedFile = new File(pathName);
+        pdfConcatenator.concatenatePDFs(allFiles, concatenatedFile);
+
+        return concatenatedFile;
     }
 }

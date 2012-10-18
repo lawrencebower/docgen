@@ -9,12 +9,4 @@
         <beans:constructor-arg value="C:\code\output\"/>
     </beans:bean>
 
-    <beans:bean name="customPDFTestExample" class="java.lang.String">
-        <beans:constructor-arg value="#{testInputRoot}\custom_example.pdf"/>
-    </beans:bean>
-
-    <beans:bean name="fileUtilsExampleFile" class="java.lang.String">
-        <beans:constructor-arg value="#{testInputRoot}\example_file.pdf"/>
-    </beans:bean>
-
 </beans:beans>
