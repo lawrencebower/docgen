@@ -39,17 +39,10 @@ public class DocumentInfoView {
 
     public DocumentInfo createDocumentInfo() {
 
-        List<DocComponent> components = new ArrayList<>();
-
-        for (DocComponentView docComponentView : docComponentViews) {
-            components.add(docComponentView.getDocComponent());
-        }
-
-        documentInfo.setComponents(components);
-
         return documentInfo;
     }
 
+/*
     public List<DocComponentView> getEditableFields() {
 
         List<DocComponentView> editableViews = new ArrayList<>();
@@ -62,10 +55,14 @@ public class DocumentInfoView {
 
         return editableViews;
     }
+*/
 
-    public void addComponentView(DocComponent component, boolean editable) {
-        DocComponentView componentView = new DocComponentView(component);
-        componentView.setEditable(editable);
+    public void addComponentView(DocComponent component, DocComponentView.ComponentViewType viewType) {
+        DocComponentView componentView = new DocComponentView(component, viewType);
+        docComponentViews.add(componentView);
+    }
+
+    public void addComponentView(DocComponentView componentView) {
         docComponentViews.add(componentView);
     }
 

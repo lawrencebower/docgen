@@ -1,6 +1,7 @@
 package org.lawrencebower.docgen.core.document;
 
 import org.lawrencebower.docgen.core.document.component.DocComponent;
+import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.type.DocType;
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
 
@@ -18,4 +19,6 @@ public interface DocumentInfo {
     PDFDocument generatePDF();
 
     void setName(String name);
+
+    void addComponent(DocComponent component);
 }

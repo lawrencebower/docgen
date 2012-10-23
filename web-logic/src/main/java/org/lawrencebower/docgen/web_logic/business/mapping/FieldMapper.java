@@ -58,8 +58,10 @@ public class FieldMapper {
     }
 
     private void setComponentValue(DocComponentView component, String value) {
-        if (component.isTextComponent()) {
+        if (component.isTextComponent() || component.isTextAreaComponent()) {
             ((TextComponent) component.getDocComponent()).setText(value);
+        }else{
+            throw new DocGenException("Can not set the value for component of type " + component.getClass());
         }
     }
 

@@ -87,28 +87,4 @@ public class TableComponent extends DocComponent {
         return tablePadding;
     }
 
-    /**
-     * drills down through all LayoutTables until the base DocComponents are found - returns
-     * as a list.
-     */
-    private List<DocComponent> getNestedComponents(){
-        return getNestedComponents(this);
-    }
-
-    private List<DocComponent> getNestedComponents(DocComponent component) {
-
-        List<DocComponent> results = new ArrayList<>();
-
-        if (component.getComponentType() != DocComponentType.LAYOUT_TABLE) {
-            results.add(component);
-            return results;
-        } else {
-            TableComponent layoutTable = (TableComponent) component;
-            for (TableCell tableCell : layoutTable.getAllRenderableCells()) {
-                DocComponent docComponent = tableCell.getComponent();
-                results.addAll(getNestedComponents(docComponent));
-            }
-        }
-        return results;
-    }
 }

@@ -14,38 +14,43 @@
 <jsp:useBean id="sessionData" scope="session" type="org.lawrencebower.docgen.web.model.SessionData"/>
 <c:set var="fieldSeperator" value="~" scope="application"/>
 
-<div>
-    <ol>
+<form method="post"
+      name="form"
+      action="/docgen/dataEntry/setFields">
 
-        <form method="post"
-              name="form"
-              action="/docgen/dataEntry/setFields">
+    <c:forEach var="document"
+               items="${sessionData.documents}"
+               varStatus="docIndex">
 
-            <fieldset>
+        <br/><c:out value="${document.name}"/><br/><br/>
 
-                <c:forEach var="document"
-                           items="${sessionData.documents}"
-                           varStatus="docIndex">
-
-                    <br/><c:out value="${document.name}"/><br/><br/>
-
-                    <c:forEach var="field"
-                               items="${document.editableFields}"
-                               varStatus="fieldIndex">
-
+        <table>
+            <c:forEach var="field"
+                       items="${document.componentViews}"
+                       varStatus="fieldIndex">
+                <tr>
+                    <td>
+                        <label for="${field.name}">
+                            <c:out value="${field.name}"/>
+                        </label>
+                    </td>
+                    <td>
                         <c:if test="${field.textComponent}">
-                            <label>
-                                <c:out value="${field.name}"/>
-                                <input name="${document.name}${fieldSeperator}${field.name}"
-                                       value="${field.value}"/>
-                            </label>
-                            <br/>
+                            <input name="${document.name}${fieldSeperator}${field.name}"
+                                   value="${field.value}"
+                                   id="${field.name}"/>
                         </c:if>
-                    </c:forEach>
-                </c:forEach>
-                <input name="full" type="submit" value="full" onmousedown="setBlankTarget()"/>
-                <input name="partial" type="submit" value="partial" onmousedown="setSelfTarget()"/>
-            </fieldset>
-        </form>
-    </ol>
-</div>
+                        <c:if test="${field.textAreaComponent}">
+                            <textarea cols="50"
+                                      rows="8"
+                                      name="${document.name}${fieldSeperator}${field.name}"
+                                      id="${field.name}"><c:out value="${field.value}"/></textarea>
+                        </c:if>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+    </c:forEach>
+    <input name="full" type="submit" value="full" onmousedown="setBlankTarget()"/>
+    <input name="partial" type="submit" value="partial" onmousedown="setSelfTarget()"/>
+</form>

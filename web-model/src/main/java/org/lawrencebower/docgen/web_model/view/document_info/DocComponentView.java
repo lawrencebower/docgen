@@ -1,29 +1,38 @@
 package org.lawrencebower.docgen.web_model.view.document_info;
 
 import org.lawrencebower.docgen.core.document.component.DocComponent;
-import org.lawrencebower.docgen.core.document.component.DocComponentType;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 
 public class DocComponentView {
 
-    private boolean editable;
-    private DocComponent docComponent;
+    public enum ComponentViewType {
+        TEXT,
+        TEXT_AREA,
+        CHECK_BOX,
+        CV
+    }
 
-    public DocComponentView(DocComponent docComponent) {
+//    private boolean editable;
+    private DocComponent docComponent;
+    private ComponentViewType componentViewType;
+
+    public DocComponentView(DocComponent docComponent, ComponentViewType type) {
         if (docComponent == null) {
             throw new DocGenException("DocComponent is null");
         }
+
         this.docComponent = docComponent;
+        this.componentViewType = type;
     }
 
-    public boolean isEditable() {
-        return editable;
-    }
+//    public boolean isEditable() {
+//        return editable;
+//    }
 
-    public void setEditable(boolean editable) {
-        this.editable = editable;
-    }
+//    public void setEditable(boolean editable) {
+//        this.editable = editable;
+//    }
 
     public DocComponent getDocComponent() {
         return docComponent;
@@ -52,6 +61,10 @@ public class DocComponentView {
     }
 
     public boolean isTextComponent() {
-        return docComponent.getComponentType() == DocComponentType.TEXT;
+        return componentViewType == ComponentViewType.TEXT;
+    }
+
+    public boolean isTextAreaComponent() {
+        return componentViewType == ComponentViewType.TEXT_AREA;
     }
 }
