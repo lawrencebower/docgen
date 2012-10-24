@@ -54,15 +54,7 @@ public class FieldMapper {
 
         String value = getFieldValue(key, parameterMap.get(key));
 
-        setComponentValue(component, value);
-    }
-
-    private void setComponentValue(DocComponentView component, String value) {
-        if (component.isTextComponent() || component.isTextAreaComponent()) {
-            ((TextComponent) component.getDocComponent()).setText(value);
-        }else{
-            throw new DocGenException("Can not set the value for component of type " + component.getClass());
-        }
+        component.setComponentValue(value);
     }
 
     private String getFieldValue(String key, String[] strings) {

@@ -5,6 +5,7 @@ import org.lawrencebower.docgen.core.document.DocumentInfo;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
 import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
+import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedFieldMapper;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
 import org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper;
 import org.lawrencebower.docgen.web_model.ViewConstants;
@@ -25,6 +26,9 @@ public class DataEntryCB {
     FieldMapper fieldMapper;
     @Autowired
     PDFConcatenator pdfConcatenator;
+    @Autowired
+    AutoMappedFieldMapper reservedFieldMapper;
+
     @Autowired
     @Qualifier("pdfOutputRoot")
     String fileRoot;
@@ -115,5 +119,10 @@ public class DataEntryCB {
         pdfConcatenator.concatenatePDFs(allFiles, concatenatedFile);
 
         return concatenatedFile;
+    }
+
+    public void mapAutoMapCustomerFields(List<DocumentInfoView> documentInfos,
+                                         CustomerView selectedCustomer) {
+        reservedFieldMapper.mapCustomerFields(documentInfos, selectedCustomer);
     }
 }

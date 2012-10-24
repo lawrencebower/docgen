@@ -42,14 +42,17 @@ public class DataEntryController {
 
         sessionData.setDocuments(documentInfos);
 
+        business.mapAutoMapCustomerFields(documentInfos,
+                                          sessionData.getSelectedCustomer());
+
         return "dataEntry";
     }
 
-    @RequestMapping(value = "/addTableRow", method = RequestMethod.GET)
-    public String addTableRow() {
-        System.out.println("DataEntryController.addTableRow");
-        return "dataEntry";
-    }
+//    @RequestMapping(value = "/addTableRow", method = RequestMethod.GET)
+//    public String addTableRow() {
+//        System.out.println("DataEntryController.addTableRow");
+//        return "dataEntry";
+//    }
 
     @RequestMapping(value = "/setFields", method = RequestMethod.POST)
     public String submitFields(WebRequest webRequest,
@@ -62,9 +65,9 @@ public class DataEntryController {
         business.mapFieldValuesToComponents(parameterMap,
                                             sessionData.getDocuments());
 
-        if (parameterMap.containsKey("partial")) {
-            return "redirect:/dataEntry/addTableRow";
-        }
+//        if (parameterMap.containsKey("partial")) {
+//            return "redirect:/dataEntry/addTableRow";
+//        }
 
         List<PDFDocument> pdFs = business.createPDFs(sessionData.getDocuments());
 

@@ -67,10 +67,16 @@ public class ModelFactoryCodeImpl implements ModelFactory {
     private void initCustomers() {
 
         customer1 = new CustomerView(new Customer("Customer 1",
-                                                  "Just round the corner"));
+                                                  "David Davidson",
+                                                  "Just round the corner",
+                                                  "198293893839",
+                                                  "UK"));
 
         customer2 = new CustomerView(new Customer("Customer 2",
-                                                  "miles away"));
+                                                  "Billy Bob Bobson",
+                                                  "miles away",
+                                                  "38783478347",
+                                                  "CHINA"));
 
         customers.put(customer1.getCustomerName(), customer1);
         customers.put(customer2.getCustomerName(), customer2);
