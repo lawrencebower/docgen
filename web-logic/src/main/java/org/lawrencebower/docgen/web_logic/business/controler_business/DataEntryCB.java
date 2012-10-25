@@ -10,9 +10,9 @@ import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Docum
 import org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper;
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
+import org.lawrencebower.docgen.web_model.view.business.ContactView;
 import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
-import org.lawrencebower.docgen.web_model.view.business.Business;
-import org.lawrencebower.docgen.web_model.view.business.BusinessView;
+import org.lawrencebower.docgen.web_model.view.business.Contact;
 import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_model.view.product.Product;
@@ -43,7 +43,7 @@ public class DataEntryCB {
     @Autowired
     private CustomerProduct_Document_Mappings mappings;
 
-    public List<DocumentInfoView> getDocumentsForViewing(BusinessView selectedBusiness,
+    public List<DocumentInfoView> getDocumentsForViewing(ContactView selectedBusiness,
                                                          List<ProductView> selectedProducts) {
 
         ArrayList<DocumentInfoView> relevantDocuments =
@@ -52,10 +52,10 @@ public class DataEntryCB {
         return relevantDocuments;
     }
 
-    private ArrayList<DocumentInfoView> getRelevantDocuments(BusinessView selectedBusiness,
+    private ArrayList<DocumentInfoView> getRelevantDocuments(ContactView selectedBusiness,
                                                              List<ProductView> selectedProducts) {
 
-        Business business = selectedBusiness.getbusiness();
+        Contact business = selectedBusiness.getContact();
         Set<DocumentInfoView> docInfos = new HashSet<>();
 
         for (ProductView selectedProduct : selectedProducts) {
@@ -123,7 +123,7 @@ public class DataEntryCB {
     }
 
     public void mapAutoMapFields(List<DocumentInfoView> documentInfos,
-                                 BusinessView selectedCustomer) {
+                                 ContactView selectedCustomer) {
 
         reservedFieldMapper.mapFields(documentInfos,
                                       selectedCustomer,

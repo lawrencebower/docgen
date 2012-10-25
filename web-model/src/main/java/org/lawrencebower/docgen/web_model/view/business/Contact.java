@@ -1,6 +1,6 @@
 package org.lawrencebower.docgen.web_model.view.business;
 
-public class Business {
+public class Contact {
 
     private String name;
     private String contactName;
@@ -10,11 +10,11 @@ public class Business {
     private String taxId;
     private String email;
 
-    public Business(String name,
-                    String contactName,
-                    String address,
-                    String phone,
-                    String country) {
+    public Contact(String name,
+                   String contactName,
+                   String address,
+                   String phone,
+                   String country) {
         this(name,
              contactName,
              address,
@@ -24,13 +24,13 @@ public class Business {
              null);
     }
 
-    public Business(String name,
-                    String contactName,
-                    String address,
-                    String phone,
-                    String country,
-                    String taxId,
-                    String email) {
+    public Contact(String name,
+                   String contactName,
+                   String address,
+                   String phone,
+                   String country,
+                   String taxId,
+                   String email) {
 
         this.name = name;
         this.contactName = contactName;

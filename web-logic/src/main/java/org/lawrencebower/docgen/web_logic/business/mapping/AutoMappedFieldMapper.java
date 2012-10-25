@@ -1,9 +1,9 @@
 package org.lawrencebower.docgen.web_logic.business.mapping;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.web_model.view.business.Contact;
+import org.lawrencebower.docgen.web_model.view.business.ContactView;
 import org.lawrencebower.docgen.web_model.view.constants.AutoMappedField;
-import org.lawrencebower.docgen.web_model.view.business.Business;
-import org.lawrencebower.docgen.web_model.view.business.BusinessView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 
@@ -11,12 +11,12 @@ import java.util.List;
 
 public class AutoMappedFieldMapper {
 
-    private BusinessView customerView;
-    private BusinessView vendorView;
+    private ContactView customerView;
+    private ContactView vendorView;
 
     public void mapFields(List<DocumentInfoView> documentInfoViews,
-                          BusinessView selectedCustomer,
-                          BusinessView vendor) {
+                          ContactView selectedCustomer,
+                          ContactView vendor) {
 
         this.customerView = selectedCustomer;
         this.vendorView = vendor;
@@ -44,8 +44,8 @@ public class AutoMappedFieldMapper {
 
     private void mapFieldValue(DocComponentView docComponentView, AutoMappedField field) {
 
-        Business customer = customerView.getbusiness();
-        Business vendor = vendorView.getbusiness();
+        Contact customer = customerView.getContact();
+        Contact vendor = vendorView.getContact();
 
         if (field == AutoMappedField.CUSTOMER_ADDRESS) {
             setComponentText(docComponentView, customer.getAddress());

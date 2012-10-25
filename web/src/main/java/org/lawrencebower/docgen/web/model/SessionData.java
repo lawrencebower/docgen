@@ -1,7 +1,7 @@
 package org.lawrencebower.docgen.web.model;
 
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
-import org.lawrencebower.docgen.web_model.view.business.BusinessView;
+import org.lawrencebower.docgen.web_model.view.business.ContactView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class SessionData {
 
-    private BusinessView selectedCustomer;
+    private ContactView selectedCustomer;
 
     private List<ProductView> selectedProducts = new ArrayList<>();
 
@@ -20,7 +20,7 @@ public class SessionData {
 
     private boolean showAutoMappedFields = false;
 
-    public void setSelectedCustomer(BusinessView selectedCustomer) {
+    public void setSelectedCustomer(ContactView selectedCustomer) {
         this.selectedCustomer = selectedCustomer;
     }
 
@@ -28,7 +28,7 @@ public class SessionData {
         this.documents = documents;
     }
 
-    public BusinessView getSelectedCustomer() {
+    public ContactView getSelectedCustomer() {
         return selectedCustomer;
     }
 

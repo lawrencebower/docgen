@@ -2,7 +2,7 @@ package org.lawrencebower.docgen.web_logic.business.mapping;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.lawrencebower.docgen.web_model.view.business.Business;
+import org.lawrencebower.docgen.web_model.view.business.Contact;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_model.view.product.Product;
 
@@ -15,7 +15,7 @@ public class CustomerProduct_Document_Mappings {
 
     private Map<CustomerProductPair, List<DocumentInfoView>> mappings = new HashMap<>();
 
-    public void addDocument(Business business,
+    public void addDocument(Contact business,
                             Product product,
                             DocumentInfoView document) {
 
@@ -30,11 +30,11 @@ public class CustomerProduct_Document_Mappings {
         }
     }
 
-    private CustomerProductPair makeCustomerProductPair(Business business, Product product) {
+    private CustomerProductPair makeCustomerProductPair(Contact business, Product product) {
         return new CustomerProductPair(business.getName(), product.getProductId());
     }
 
-    public List<DocumentInfoView> getDocInfosForCustomerAndProduct(Business business, Product product){
+    public List<DocumentInfoView> getDocInfosForCustomerAndProduct(Contact business, Product product){
 
         CustomerProductPair customerProductPair = makeCustomerProductPair(business, product);
         if(mappings.containsKey(customerProductPair)){

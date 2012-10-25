@@ -2,8 +2,8 @@ package org.lawrencebower.docgen.web_logic.business.model_factory;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
-import org.lawrencebower.docgen.web_model.view.business.Business;
-import org.lawrencebower.docgen.web_model.view.business.BusinessView;
+import org.lawrencebower.docgen.web_model.view.business.Contact;
+import org.lawrencebower.docgen.web_model.view.business.ContactView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_model.view.product.Product;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
@@ -24,15 +24,15 @@ public class ModelFactoryCodeImpl implements ModelFactory {
     @Autowired
     private CustomerProduct_Document_Mappings customerProductDocMappings;
 
-    private LinkedHashMap<String, BusinessView> customers = new LinkedHashMap<>();
+    private LinkedHashMap<String, ContactView> customers = new LinkedHashMap<>();
 
     private LinkedHashMap<String, ProductView> products = new LinkedHashMap<>();
 
     private LinkedHashMap<String, DocumentInfoView> documents = new LinkedHashMap<>();
 
-    private BusinessView vendor;
-    private BusinessView business1;
-    private BusinessView business2;
+    private ContactView vendor;
+    private ContactView business1;
+    private ContactView business2;
     private ProductView product1;
     private ProductView product2;
     private DocumentInfoView commercialInvoiceView;
@@ -47,7 +47,7 @@ public class ModelFactoryCodeImpl implements ModelFactory {
     }
 
     private void initVendor() {
-        vendor = new BusinessView(new Business("Billy Bob's Widgets",
+        vendor = new ContactView(new Contact("Billy Bob's Widgets",
                                                "Billy Bob",
                                                "36 Billy Bob Street\nColchester\nEssex",
                                                "534546454",
@@ -77,54 +77,54 @@ public class ModelFactoryCodeImpl implements ModelFactory {
 
     private void initCustomers() {
 
-        business1 = new BusinessView(new Business("Business 1",
+        business1 = new ContactView(new Contact("Contact 1",
                                                   "David Davidson",
                                                   "Just round the corner",
                                                   "198293893839",
                                                   "UK"));
 
-        business2 = new BusinessView(new Business("Business 2",
+        business2 = new ContactView(new Contact("Contact 2",
                                                   "Billy Bob Bobson",
                                                   "miles away",
                                                   "38783478347",
                                                   "CHINA"));
 
-        customers.put(business1.getCustomerName(), business1);
-        customers.put(business2.getCustomerName(), business2);
+        customers.put(business1.getContactName(), business1);
+        customers.put(business2.getContactName(), business2);
     }
 
     private void initCustomerProductDocumentMappings() {
 
-        //Business 1
-        customerProductDocMappings.addDocument(business1.getbusiness(),
+        //Contact 1
+        customerProductDocMappings.addDocument(business1.getContact(),
                                                product1.getproduct(),
                                                commercialInvoiceView);
 
-        customerProductDocMappings.addDocument(business1.getbusiness(),
+        customerProductDocMappings.addDocument(business1.getContact(),
                                                product2.getproduct(),
                                                commercialInvoiceView);
 
-        customerProductDocMappings.addDocument(business1.getbusiness(),
+        customerProductDocMappings.addDocument(business1.getContact(),
                                                product2.getproduct(),
                                                deliveryNoteView);
 
-        //Business 2
-        customerProductDocMappings.addDocument(business2.getbusiness(),
+        //Contact 2
+        customerProductDocMappings.addDocument(business2.getContact(),
                                                product1.getproduct(),
                                                commercialInvoiceView);
 
-        customerProductDocMappings.addDocument(business2.getbusiness(),
+        customerProductDocMappings.addDocument(business2.getContact(),
                                                product2.getproduct(),
                                                commercialInvoiceView);
 
-        customerProductDocMappings.addDocument(business2.getbusiness(),
+        customerProductDocMappings.addDocument(business2.getContact(),
                                                product2.getproduct(),
                                                deliveryNoteView);
 
     }
 
     @Override
-    public List<BusinessView> getCustomers() {
+    public List<ContactView> getCustomers() {
         return new ArrayList<>(customers.values());
     }
 
@@ -137,9 +137,9 @@ public class ModelFactoryCodeImpl implements ModelFactory {
         return new ArrayList<>(documents.values());
     }
 
-    public BusinessView getCustomer(String customerName) {
+    public ContactView getCustomer(String customerName) {
         if (!customers.containsKey(customerName)) {
-            throw new DocGenException(String.format("Business %s not found?!", customerName));
+            throw new DocGenException(String.format("Contact %s not found?!", customerName));
         }
         return customers.get(customerName);
     }
@@ -153,7 +153,7 @@ public class ModelFactoryCodeImpl implements ModelFactory {
     }
 
     @Override
-    public BusinessView getVendor() {
+    public ContactView getVendor() {
         return vendor;
     }
 }
