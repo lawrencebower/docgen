@@ -3,7 +3,7 @@ package org.lawrencebower.docgen.web.controller;
 import org.apache.log4j.Logger;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.CustomerSelectionCB;
-import org.lawrencebower.docgen.web_model.view.customer.CustomerView;
+import org.lawrencebower.docgen.web_model.view.customer.BusinessView;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -33,9 +33,9 @@ public class CustomerSelectionController {
     @RequestMapping({"/", "/home"})
     public String showHomePage(Model model) {
 
-        List<CustomerView> customers = business.getCustomers();
+        List<BusinessView> businesses = business.getCustomers();
 
-        model.addAttribute("customers", customers);
+        model.addAttribute("businesses", businesses);
 
         return "home";
     }
@@ -46,8 +46,8 @@ public class CustomerSelectionController {
 
         logger.error("customerName = [" + customerName + "]");
 
-        CustomerView selectedCustomer = business.getCustomer(customerName);
-        sessionData.setSelectedCustomer(selectedCustomer);
+        BusinessView selectedBusiness = business.getCustomer(customerName);
+        sessionData.setSelectedBusiness(selectedBusiness);
 
         List<ProductView> products = business.getProducts();
 

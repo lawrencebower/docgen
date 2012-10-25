@@ -2,8 +2,8 @@
 
 hello I am the home page
 
-<jsp:useBean id="customers" scope="request"
-             type="java.util.List<org.lawrencebower.docgen.web_model.view.customer.CustomerView>"/>
+<jsp:useBean id="businesses" scope="request"
+             type="java.util.List<org.lawrencebower.docgen.web_model.view.business.CustomerView>"/>
 
 <div>
     <ol>

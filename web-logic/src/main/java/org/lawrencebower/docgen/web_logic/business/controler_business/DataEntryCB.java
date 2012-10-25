@@ -10,8 +10,8 @@ import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Docum
 import org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
-import org.lawrencebower.docgen.web_model.view.customer.Customer;
-import org.lawrencebower.docgen.web_model.view.customer.CustomerView;
+import org.lawrencebower.docgen.web_model.view.customer.Business;
+import org.lawrencebower.docgen.web_model.view.customer.BusinessView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_model.view.product.Product;
@@ -40,24 +40,24 @@ public class DataEntryCB {
     @Autowired
     private CustomerProduct_Document_Mappings mappings;
 
-    public List<DocumentInfoView> getDocumentsForViewing(CustomerView selectedCustomer,
+    public List<DocumentInfoView> getDocumentsForViewing(BusinessView selectedBusiness,
                                                          List<ProductView> selectedProducts) {
 
         ArrayList<DocumentInfoView> relevantDocuments =
-                getRelevantDocuments(selectedCustomer, selectedProducts);
+                getRelevantDocuments(selectedBusiness, selectedProducts);
 
         return relevantDocuments;
     }
 
-    private ArrayList<DocumentInfoView> getRelevantDocuments(CustomerView selectedCustomer,
+    private ArrayList<DocumentInfoView> getRelevantDocuments(BusinessView selectedBusiness,
                                                              List<ProductView> selectedProducts) {
 
-        Customer customer = selectedCustomer.getCustomer();
+        Business business = selectedBusiness.getBusiness();
         Set<DocumentInfoView> docInfos = new HashSet<>();
 
         for (ProductView selectedProduct : selectedProducts) {
             Product product = selectedProduct.getproduct();
-            List<DocumentInfoView> docInfo = mappings.getDocInfosForCustomerAndProduct(customer, product);
+            List<DocumentInfoView> docInfo = mappings.getDocInfosForCustomerAndProduct(business, product);
             docInfos.addAll(docInfo);
         }
 
@@ -120,9 +120,9 @@ public class DataEntryCB {
     }
 
     public void mapAutoMapCustomerFields(List<DocumentInfoView> documentInfos,
-                                         CustomerView selectedCustomer) {
+                                         BusinessView selectedBusiness) {
 
-        reservedFieldMapper.mapCustomerFields(documentInfos, selectedCustomer);
+        reservedFieldMapper.mapCustomerFields(documentInfos, selectedBusiness);
     }
 
     public List<DocComponentView> getComponentsForViewing(List<DocumentInfoView> documents,

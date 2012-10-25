@@ -1,6 +1,6 @@
 package org.lawrencebower.docgen.web_logic.business.model_factory;
 
-import org.lawrencebower.docgen.web_model.view.customer.CustomerView;
+import org.lawrencebower.docgen.web_model.view.customer.BusinessView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 
@@ -10,7 +10,7 @@ import java.util.List;
 public class ModelFactoryFileImpl implements ModelFactory {
 
     @Override
-    public List<CustomerView> getCustomers() {
+    public List<BusinessView> getCustomers() {
         return new ArrayList<>();
     }
 
@@ -25,7 +25,7 @@ public class ModelFactoryFileImpl implements ModelFactory {
     }
 
     @Override
-    public CustomerView getCustomer(String customerName) {
+    public BusinessView getCustomer(String customerName) {
         return null;
     }
 

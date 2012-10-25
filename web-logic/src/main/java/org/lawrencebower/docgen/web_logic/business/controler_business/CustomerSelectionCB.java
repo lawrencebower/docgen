@@ -1,7 +1,7 @@
 package org.lawrencebower.docgen.web_logic.business.controler_business;
 
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
-import org.lawrencebower.docgen.web_model.view.customer.CustomerView;
+import org.lawrencebower.docgen.web_model.view.customer.BusinessView;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,11 +12,11 @@ public class CustomerSelectionCB {
     @Autowired
     private ModelFactory modelFactory;
 
-    public List<CustomerView> getCustomers() {
+    public List<BusinessView> getCustomers() {
         return modelFactory.getCustomers();
     }
 
-    public CustomerView getCustomer(String customerName) {
+    public BusinessView getCustomer(String customerName) {
         return modelFactory.getCustomer(customerName);
     }
 

@@ -1,6 +1,6 @@
 package org.lawrencebower.docgen.web_model.view.customer;
 
-public class Customer {
+public class Business {
 
     private String name;
     private String contactName;
@@ -8,7 +8,7 @@ public class Customer {
     private String country;
     private String address;
 
-    public Customer(String name,
+    public Business(String name,
                     String contactName,
                     String address,
                     String phone,

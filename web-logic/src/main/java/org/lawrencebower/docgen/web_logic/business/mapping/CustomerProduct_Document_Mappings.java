@@ -2,8 +2,7 @@ package org.lawrencebower.docgen.web_logic.business.mapping;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.lawrencebower.docgen.core.document.DocumentInfo;
-import org.lawrencebower.docgen.web_model.view.customer.Customer;
+import org.lawrencebower.docgen.web_model.view.customer.Business;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_model.view.product.Product;
 
@@ -16,11 +15,11 @@ public class CustomerProduct_Document_Mappings {
 
     private Map<CustomerProductPair, List<DocumentInfoView>> mappings = new HashMap<>();
 
-    public void addDocument(Customer customer,
+    public void addDocument(Business business,
                             Product product,
                             DocumentInfoView document) {
 
-        CustomerProductPair pair = makeCustomerProductPair(customer, product);
+        CustomerProductPair pair = makeCustomerProductPair(business, product);
 
         if (mappings.containsKey(pair)) {
             mappings.get(pair).add(document);
@@ -31,13 +30,13 @@ public class CustomerProduct_Document_Mappings {
         }
     }
 
-    private CustomerProductPair makeCustomerProductPair(Customer customer, Product product) {
-        return new CustomerProductPair(customer.getName(), product.getProductId());
+    private CustomerProductPair makeCustomerProductPair(Business business, Product product) {
+        return new CustomerProductPair(business.getName(), product.getProductId());
     }
 
-    public List<DocumentInfoView> getDocInfosForCustomerAndProduct(Customer customer, Product product){
+    public List<DocumentInfoView> getDocInfosForCustomerAndProduct(Business business, Product product){
 
-        CustomerProductPair customerProductPair = makeCustomerProductPair(customer, product);
+        CustomerProductPair customerProductPair = makeCustomerProductPair(business, product);
         if(mappings.containsKey(customerProductPair)){
             return mappings.get(customerProductPair);
         }

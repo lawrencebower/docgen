@@ -1,10 +1,9 @@
 package org.lawrencebower.docgen.web_logic.business.model_factory;
 
-import org.lawrencebower.docgen.core.document.DocumentInfo;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
-import org.lawrencebower.docgen.web_model.view.customer.Customer;
-import org.lawrencebower.docgen.web_model.view.customer.CustomerView;
+import org.lawrencebower.docgen.web_model.view.customer.Business;
+import org.lawrencebower.docgen.web_model.view.customer.BusinessView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_model.view.product.Product;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
@@ -25,14 +24,14 @@ public class ModelFactoryCodeImpl implements ModelFactory {
     @Autowired
     private CustomerProduct_Document_Mappings customerProductDocMappings;
 
-    private LinkedHashMap<String, CustomerView> customers = new LinkedHashMap<>();
+    private LinkedHashMap<String, BusinessView> customers = new LinkedHashMap<>();
 
     private LinkedHashMap<String, ProductView> products = new LinkedHashMap<>();
 
     private LinkedHashMap<String, DocumentInfoView> documents = new LinkedHashMap<>();
 
-    private CustomerView customer1;
-    private CustomerView customer2;
+    private BusinessView business1;
+    private BusinessView business2;
     private ProductView product1;
     private ProductView product2;
     private DocumentInfoView commercialInvoiceView;
@@ -66,54 +65,54 @@ public class ModelFactoryCodeImpl implements ModelFactory {
 
     private void initCustomers() {
 
-        customer1 = new CustomerView(new Customer("Customer 1",
+        business1 = new BusinessView(new Business("Business 1",
                                                   "David Davidson",
                                                   "Just round the corner",
                                                   "198293893839",
                                                   "UK"));
 
-        customer2 = new CustomerView(new Customer("Customer 2",
+        business2 = new BusinessView(new Business("Business 2",
                                                   "Billy Bob Bobson",
                                                   "miles away",
                                                   "38783478347",
                                                   "CHINA"));
 
-        customers.put(customer1.getCustomerName(), customer1);
-        customers.put(customer2.getCustomerName(), customer2);
+        customers.put(business1.getCustomerName(), business1);
+        customers.put(business2.getCustomerName(), business2);
     }
 
     private void initCustomerProductDocumentMappings() {
 
-        //Customer 1
-        customerProductDocMappings.addDocument(customer1.getCustomer(),
+        //Business 1
+        customerProductDocMappings.addDocument(business1.getBusiness(),
                                                product1.getproduct(),
                                                commercialInvoiceView);
 
-        customerProductDocMappings.addDocument(customer1.getCustomer(),
+        customerProductDocMappings.addDocument(business1.getBusiness(),
                                                product2.getproduct(),
                                                commercialInvoiceView);
 
-        customerProductDocMappings.addDocument(customer1.getCustomer(),
+        customerProductDocMappings.addDocument(business1.getBusiness(),
                                                product2.getproduct(),
                                                deliveryNoteView);
 
-        //Customer 2
-        customerProductDocMappings.addDocument(customer2.getCustomer(),
+        //Business 2
+        customerProductDocMappings.addDocument(business2.getBusiness(),
                                                product1.getproduct(),
                                                commercialInvoiceView);
 
-        customerProductDocMappings.addDocument(customer2.getCustomer(),
+        customerProductDocMappings.addDocument(business2.getBusiness(),
                                                product2.getproduct(),
                                                commercialInvoiceView);
 
-        customerProductDocMappings.addDocument(customer2.getCustomer(),
+        customerProductDocMappings.addDocument(business2.getBusiness(),
                                                product2.getproduct(),
                                                deliveryNoteView);
 
     }
 
     @Override
-    public List<CustomerView> getCustomers() {
+    public List<BusinessView> getCustomers() {
         return new ArrayList<>(customers.values());
     }
 
@@ -126,9 +125,9 @@ public class ModelFactoryCodeImpl implements ModelFactory {
         return new ArrayList<>(documents.values());
     }
 
-    public CustomerView getCustomer(String customerName) {
+    public BusinessView getCustomer(String customerName) {
         if (!customers.containsKey(customerName)) {
-            throw new DocGenException(String.format("Customer %s not found?!", customerName));
+            throw new DocGenException(String.format("Business %s not found?!", customerName));
         }
         return customers.get(customerName);
     }
