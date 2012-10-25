@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.DataEntryCB;
+import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -15,6 +16,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.io.File;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +36,7 @@ public class DataEntryController {
     }
 
     @RequestMapping(value = "/prepareFields", method = RequestMethod.GET)
-    public String prepareFields(Model model) {
+    public String prepareFields() {
 
         List<DocumentInfoView> documentInfos =
                 business.getDocumentsForViewing(sessionData.getSelectedCustomer(),
@@ -48,11 +50,13 @@ public class DataEntryController {
         return "dataEntry";
     }
 
-//    @RequestMapping(value = "/addTableRow", method = RequestMethod.GET)
-//    public String addTableRow() {
-//        System.out.println("DataEntryController.addTableRow");
-//        return "dataEntry";
-//    }
+    @RequestMapping(value = "/toggleAutomapped")
+    public String toggleShowAutomappedFields(){
+        boolean currentValue = sessionData.isShowAutoMappedFields();
+        sessionData.setShowAutoMappedFields(!currentValue);
+
+        return "dataEntry";
+    }
 
     @RequestMapping(value = "/setFields", method = RequestMethod.POST)
     public String submitFields(WebRequest webRequest,
@@ -64,10 +68,6 @@ public class DataEntryController {
 
         business.mapFieldValuesToComponents(parameterMap,
                                             sessionData.getDocuments());
-
-//        if (parameterMap.containsKey("partial")) {
-//            return "redirect:/dataEntry/addTableRow";
-//        }
 
         List<PDFDocument> pdFs = business.createPDFs(sessionData.getDocuments());
 
@@ -90,6 +90,12 @@ public class DataEntryController {
                 System.out.println("value = " + value);
             }
         }
+    }
+
+    public List<DocComponentView> getDocComponentViews(){
+
+        return business.getComponentsForViewing(sessionData.getDocuments(),
+                                                sessionData.isShowAutoMappedFields());
     }
 
 }

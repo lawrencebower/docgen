@@ -55,4 +55,19 @@ public class DocumentInfoView {
     public List<DocComponentView> getComponentViews() {
         return docComponentViews;
     }
+
+    public List<DocComponentView> getComponentsWithName(String componentName) {
+
+        List<DocComponentView> results = new ArrayList<>();
+
+        for (DocComponentView componentView : getComponentViews()) {
+            String name = componentView.getName();
+            if (name != null && name.equals(componentName)) {
+                results.add(componentView);
+            }
+        }
+
+        return results;
+    }
+
 }

@@ -18,6 +18,8 @@ public class SessionData {
 
     private List<PDFDocument> generatedDocuments;
 
+    private boolean showAutoMappedFields = false;
+
     public void setSelectedCustomer(CustomerView selectedCustomer) {
         this.selectedCustomer = selectedCustomer;
     }
@@ -48,5 +50,13 @@ public class SessionData {
 
     public List<PDFDocument> getPDFDocuments() {
         return generatedDocuments;
+    }
+
+    public boolean isShowAutoMappedFields() {
+        return showAutoMappedFields;
+    }
+
+    public void setShowAutoMappedFields(boolean showAutoMappedFields) {
+        this.showAutoMappedFields = showAutoMappedFields;
     }
 }

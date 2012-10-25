@@ -5,12 +5,15 @@ import org.lawrencebower.docgen.core.document.DocumentInfo;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
 import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
+import org.lawrencebower.docgen.core.generator.utils.PDFGenUtils;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedFieldMapper;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
 import org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper;
+import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_model.ViewConstants;
 import org.lawrencebower.docgen.web_model.view.customer.Customer;
 import org.lawrencebower.docgen.web_model.view.customer.CustomerView;
+import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_model.view.product.Product;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
@@ -28,6 +31,8 @@ public class DataEntryCB {
     PDFConcatenator pdfConcatenator;
     @Autowired
     AutoMappedFieldMapper reservedFieldMapper;
+    @Autowired
+    ViewUtils viewUtils;
 
     @Autowired
     @Qualifier("pdfOutputRoot")
@@ -42,13 +47,7 @@ public class DataEntryCB {
         ArrayList<DocumentInfoView> relevantDocuments =
                 getRelevantDocuments(selectedCustomer, selectedProducts);
 
-        filterDuplicatedFields(relevantDocuments);
-
         return relevantDocuments;
-    }
-
-    private void filterDuplicatedFields(List<DocumentInfoView> documents) {
-        //todo add filterer
     }
 
     private ArrayList<DocumentInfoView> getRelevantDocuments(CustomerView selectedCustomer,
@@ -123,6 +122,49 @@ public class DataEntryCB {
 
     public void mapAutoMapCustomerFields(List<DocumentInfoView> documentInfos,
                                          CustomerView selectedCustomer) {
+
         reservedFieldMapper.mapCustomerFields(documentInfos, selectedCustomer);
     }
+
+    public List<DocComponentView> getComponentsForViewing(List<DocumentInfoView> documents,
+                                                          boolean showAutoMappedFields) {
+
+        List<DocComponentView> results = filterAutomapped(documents, showAutoMappedFields);
+
+        results = filterDuplicatedFields(results);
+
+        return results;
+    }
+
+    private List<DocComponentView> filterAutomapped(List<DocumentInfoView> documents,
+                                                    boolean showAutoMappedFields) {
+
+        List<DocComponentView> results = new ArrayList<>();
+
+        List<DocComponentView> componentViews = viewUtils.getAllComponentViewsFromDocs(documents);
+
+        for (DocComponentView docComponentView : componentViews) {
+            if (isComponentViewable(showAutoMappedFields, docComponentView)) {
+                results.add(docComponentView);
+            }
+        }
+        return results;
+    }
+
+    private boolean isComponentViewable(boolean showAutoMappedFields, DocComponentView docComponentView) {
+
+        boolean componentViewable = true;
+
+        if (showAutoMappedFields == false && docComponentView.isAutoMappedField()) {
+            componentViewable = false;
+        }
+
+        return componentViewable;
+    }
+
+    private ArrayList<DocComponentView> filterDuplicatedFields(List<DocComponentView> documents) {
+        //todo add filterer
+        return new ArrayList<>(documents);
+    }
+
 }

@@ -12,45 +12,46 @@
 </script>
 
 <jsp:useBean id="sessionData" scope="session" type="org.lawrencebower.docgen.web.model.SessionData"/>
+<jsp:useBean id="dataEntryController" scope="session"
+             type="org.lawrencebower.docgen.web.controller.DataEntryController"/>
 <c:set var="fieldSeperator" value="~" scope="application"/>
+
+<s:url var="toggleAutomapped" value="/dataEntry/toggleAutomapped"/>
+
+<a href="${toggleAutomapped}">
+    show/hide automapped
+</a>
 
 <form method="post"
       name="form"
       action="/docgen/dataEntry/setFields">
 
-    <c:forEach var="document"
-               items="${sessionData.documents}"
-               varStatus="docIndex">
-
-        <br/><c:out value="${document.name}"/><br/><br/>
-
-        <table>
-            <c:forEach var="field"
-                       items="${document.componentViews}"
-                       varStatus="fieldIndex">
-                <tr>
-                    <td>
-                        <label for="${field.name}">
-                            <c:out value="${field.name}"/>
-                        </label>
-                    </td>
-                    <td>
-                        <c:if test="${field.textComponent}">
-                            <input name="${document.name}${fieldSeperator}${field.name}"
-                                   value="${field.value}"
-                                   id="${field.name}"/>
-                        </c:if>
-                        <c:if test="${field.textAreaComponent}">
-                            <textarea cols="50"
-                                      rows="8"
-                                      name="${document.name}${fieldSeperator}${field.name}"
-                                      id="${field.name}"><c:out value="${field.value}"/></textarea>
-                        </c:if>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-    </c:forEach>
+    <table>
+        <c:forEach var="field"
+                   items="${dataEntryController.docComponentViews}"
+                   varStatus="fieldIndex">
+            <tr>
+                <td>
+                    <label for="${field.name}">
+                        <c:out value="${field.name}"/>
+                    </label>
+                </td>
+                <td>
+                    <c:if test="${field.textComponent}">
+                        <input name="${field.name}"
+                               value="${field.value}"
+                               id="${field.name}"/>
+                    </c:if>
+                    <c:if test="${field.textAreaComponent}">
+                        <textarea cols="30"
+                                  rows="8"
+                                  name="${field.name}"
+                                  id="${field.name}"><c:out value="${field.value}"/></textarea>
+                    </c:if>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
     <input name="full" type="submit" value="full" onmousedown="setBlankTarget()"/>
     <input name="partial" type="submit" value="partial" onmousedown="setSelfTarget()"/>
 </form>

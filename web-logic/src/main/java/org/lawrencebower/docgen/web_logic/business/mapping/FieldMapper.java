@@ -1,15 +1,11 @@
 package org.lawrencebower.docgen.web_logic.business.mapping;
 
 import org.apache.commons.lang.StringUtils;
-import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static org.lawrencebower.docgen.web_model.ViewConstants.DOCUMENT_FIELD_SEPARATOR;
 
@@ -41,20 +37,23 @@ public class FieldMapper {
 
     private void extractAndSetValues(Map<String, String[]> parameterMap,
                                      List<DocumentInfoView> documents,
-                                     String key) {
+                                     String componentName) {
 
-        DocumentComponentPair documentAndComponentName = extractDocumentAndComponentName(key);
+//        DocumentComponentPair documentAndComponentName = extractDocumentAndComponentName(componentName);
 
-        String documentName = documentAndComponentName.getDocumentName();
-        String componentName = documentAndComponentName.getFieldName();
+//        String documentName = documentAndComponentName.getDocumentName();
+//        String componentName = componentName;
 
-        DocumentInfoView document = getDocument(documentName, documents);
+//        DocumentInfoView documents = getDocument(documentName, documents);
 
-        DocComponentView component = getComponent(componentName, document);
+        List<DocComponentView> components = getComponentsWithName(componentName, documents);
 
-        String value = getFieldValue(key, parameterMap.get(key));
+        String value = getFieldValue(componentName, parameterMap.get(componentName));
 
-        component.setComponentValue(value);
+        for (DocComponentView component : components) {
+            component.setComponentValue(value);
+        }
+
     }
 
     private String getFieldValue(String key, String[] strings) {
@@ -70,18 +69,20 @@ public class FieldMapper {
         return strings[0];
     }
 
-    private DocComponentView getComponent(String componentName, DocumentInfoView document) {
+    private List<DocComponentView> getComponentsWithName(String componentName,
+                                                         List<DocumentInfoView> documents) {
 
-        for (DocComponentView componentView : document.getComponentViews()) {
-            String name = componentView.getName();
-            if (name != null && name.equals(componentName)) {
-                return componentView;
-            }
+        List<DocComponentView> results = new ArrayList<>();
+
+        for (DocumentInfoView document : documents) {
+            List<DocComponentView> matchingComponents = document.getComponentsWithName(componentName);
+            results.addAll(matchingComponents);
         }
 
-        throw new DocGenException("DocComponent not found " + componentName);
+        return results;
     }
 
+/*
     private DocumentInfoView getDocument(String documentName, List<DocumentInfoView> documents) {
 
         for (DocumentInfoView document : documents) {
@@ -111,12 +112,13 @@ public class FieldMapper {
 
         return new DocumentComponentPair(strings[0], strings[1]);
     }
+*/
 
     public boolean isExcludedToken(String token) {
         return EXCLUDED_TOKENS.contains(token);
     }
 
-    class DocumentComponentPair {
+/*    class DocumentComponentPair {
 
         private String documentName;
         private String fieldName;
@@ -142,5 +144,5 @@ public class FieldMapper {
         public String getFieldName() {
             return fieldName;
         }
-    }
+    }*/
 }
