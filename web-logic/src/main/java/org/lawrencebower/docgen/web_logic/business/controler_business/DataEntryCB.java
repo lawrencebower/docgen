@@ -162,9 +162,19 @@ public class DataEntryCB {
         return componentViewable;
     }
 
+    /**
+     * Adds the DocComponentViews to a Set and returns a unique list in the order they were added.
+     * There will be one DocComponent with each unique component name in the set. The Set evaluates
+     * the equality of the DocComponentViews based on the DocComponentView names.
+     */
     private ArrayList<DocComponentView> filterDuplicatedFields(List<DocComponentView> documents) {
-        //todo add filterer
-        return new ArrayList<>(documents);
+
+        LinkedHashSet<DocComponentView> filteredViews = new LinkedHashSet<>();
+        for (DocComponentView document : documents) {
+            filteredViews.add(document);
+        }
+
+        return new ArrayList<>(filteredViews);
     }
 
 }
