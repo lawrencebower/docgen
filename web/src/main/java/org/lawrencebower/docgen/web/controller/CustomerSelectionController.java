@@ -47,7 +47,7 @@ public class CustomerSelectionController {
         logger.error("customerName = [" + customerName + "]");
 
         BusinessView selectedBusiness = business.getCustomer(customerName);
-        sessionData.setSelectedBusiness(selectedBusiness);
+        sessionData.setSelectedCustomer(selectedBusiness);
 
         List<ProductView> products = business.getProducts();
 

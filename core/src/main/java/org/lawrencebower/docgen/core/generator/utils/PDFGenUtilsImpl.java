@@ -136,6 +136,11 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
         Phrase iTextPhrase = new Phrase();
 
         for (TextFragment textFragment : textBlock.getFragments()) {
+
+            if(textFragment.getText() == null){
+                continue;
+            }
+
             Font iTextFont = mapFont(textFragment.getFontInfo());
             Chunk iTextChunk = new Chunk(textFragment.getText(), iTextFont);
             iTextPhrase.add(iTextChunk);

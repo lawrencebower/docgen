@@ -16,6 +16,7 @@ public class TableComponent extends DocComponent {
     private int tablePadding = 3;//default
 
     public TableComponent(String name) {
+        super();
         setName(name);
     }
 

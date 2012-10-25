@@ -30,6 +30,7 @@ public class ModelFactoryCodeImpl implements ModelFactory {
 
     private LinkedHashMap<String, DocumentInfoView> documents = new LinkedHashMap<>();
 
+    private BusinessView vendor;
     private BusinessView business1;
     private BusinessView business2;
     private ProductView product1;
@@ -38,10 +39,21 @@ public class ModelFactoryCodeImpl implements ModelFactory {
     private DocumentInfoView deliveryNoteView;
 
     public void init() {
+        initVendor();
         initCustomers();
         initProducts();
         initDocuments();
         initCustomerProductDocumentMappings();
+    }
+
+    private void initVendor() {
+        vendor = new BusinessView(new Business("Billy Bob's Widgets",
+                                               "Billy Bob",
+                                               "36 Billy Bob Street\nColchester\nEssex",
+                                               "534546454",
+                                               "UK",
+                                               "tax id",
+                                               "sales@ziath.com"));
     }
 
     private void initDocuments() {
@@ -84,28 +96,28 @@ public class ModelFactoryCodeImpl implements ModelFactory {
     private void initCustomerProductDocumentMappings() {
 
         //Business 1
-        customerProductDocMappings.addDocument(business1.getCustomer(),
+        customerProductDocMappings.addDocument(business1.getbusiness(),
                                                product1.getproduct(),
                                                commercialInvoiceView);
 
-        customerProductDocMappings.addDocument(business1.getCustomer(),
+        customerProductDocMappings.addDocument(business1.getbusiness(),
                                                product2.getproduct(),
                                                commercialInvoiceView);
 
-        customerProductDocMappings.addDocument(business1.getCustomer(),
+        customerProductDocMappings.addDocument(business1.getbusiness(),
                                                product2.getproduct(),
                                                deliveryNoteView);
 
         //Business 2
-        customerProductDocMappings.addDocument(business2.getCustomer(),
+        customerProductDocMappings.addDocument(business2.getbusiness(),
                                                product1.getproduct(),
                                                commercialInvoiceView);
 
-        customerProductDocMappings.addDocument(business2.getCustomer(),
+        customerProductDocMappings.addDocument(business2.getbusiness(),
                                                product2.getproduct(),
                                                commercialInvoiceView);
 
-        customerProductDocMappings.addDocument(business2.getCustomer(),
+        customerProductDocMappings.addDocument(business2.getbusiness(),
                                                product2.getproduct(),
                                                deliveryNoteView);
 
@@ -138,5 +150,10 @@ public class ModelFactoryCodeImpl implements ModelFactory {
             throw new DocGenException(String.format("product %s not found?!", productId));
         }
         return products.get(productId);
+    }
+
+    @Override
+    public BusinessView getVendor() {
+        return vendor;
     }
 }

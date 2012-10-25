@@ -8,6 +8,7 @@ import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedFieldMapper;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
 import org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper;
+import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_model.view.business.Business;
@@ -32,6 +33,8 @@ public class DataEntryCB {
     AutoMappedFieldMapper reservedFieldMapper;
     @Autowired
     ViewUtils viewUtils;
+    @Autowired
+    ModelFactory modelFactory;
 
     @Autowired
     @Qualifier("pdfOutputRoot")
@@ -52,7 +55,7 @@ public class DataEntryCB {
     private ArrayList<DocumentInfoView> getRelevantDocuments(BusinessView selectedBusiness,
                                                              List<ProductView> selectedProducts) {
 
-        Business business = selectedBusiness.getCustomer();
+        Business business = selectedBusiness.getbusiness();
         Set<DocumentInfoView> docInfos = new HashSet<>();
 
         for (ProductView selectedProduct : selectedProducts) {
@@ -119,10 +122,12 @@ public class DataEntryCB {
         return concatenatedFile;
     }
 
-    public void mapAutoMapCustomerFields(List<DocumentInfoView> documentInfos,
-                                         BusinessView selectedBusiness) {
+    public void mapAutoMapFields(List<DocumentInfoView> documentInfos,
+                                 BusinessView selectedCustomer) {
 
-        reservedFieldMapper.mapCustomerFields(documentInfos, selectedBusiness);
+        reservedFieldMapper.mapFields(documentInfos,
+                                      selectedCustomer,
+                                      modelFactory.getVendor());
     }
 
     public List<DocComponentView> getComponentsForViewing(List<DocumentInfoView> documents,

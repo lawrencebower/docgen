@@ -33,4 +33,9 @@ public class ModelFactoryFileImpl implements ModelFactory {
     public ProductView getProduct(String productId) {
         return null;
     }
+
+    @Override
+    public BusinessView getVendor() {
+        return null;
+    }
 }

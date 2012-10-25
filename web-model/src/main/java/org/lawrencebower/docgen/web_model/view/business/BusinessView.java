@@ -2,21 +2,21 @@ package org.lawrencebower.docgen.web_model.view.business;
 
 public class BusinessView {
 
-    private Business customer;
+    private Business business;
 
     public BusinessView(Business business) {
-        this.customer = business;
+        this.business = business;
     }
 
     public String getCustomerName(){
-        return customer.getName();
+        return business.getName();
     }
 
     public String getCustomerAddress(){
-        return customer.getAddress();
+        return business.getAddress();
     }
 
-    public Business getCustomer() {
-        return customer;
+    public Business getbusiness() {
+        return business;
     }
 }

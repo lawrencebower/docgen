@@ -17,4 +17,6 @@ public interface ModelFactory {
     BusinessView getCustomer(String customerName);
 
     ProductView getProduct(String productId);
+
+    BusinessView getVendor();
 }

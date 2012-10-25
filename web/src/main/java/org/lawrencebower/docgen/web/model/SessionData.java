@@ -10,7 +10,7 @@ import java.util.List;
 
 public class SessionData {
 
-    private BusinessView selectedBusiness;
+    private BusinessView selectedCustomer;
 
     private List<ProductView> selectedProducts = new ArrayList<>();
 
@@ -20,16 +20,16 @@ public class SessionData {
 
     private boolean showAutoMappedFields = false;
 
-    public void setSelectedBusiness(BusinessView selectedBusiness) {
-        this.selectedBusiness = selectedBusiness;
+    public void setSelectedCustomer(BusinessView selectedCustomer) {
+        this.selectedCustomer = selectedCustomer;
     }
 
     public void setDocuments(List<DocumentInfoView> documents) {
         this.documents = documents;
     }
 
-    public BusinessView getSelectedBusiness() {
-        return selectedBusiness;
+    public BusinessView getSelectedCustomer() {
+        return selectedCustomer;
     }
 
     public List<ProductView> getSelectedProducts() {

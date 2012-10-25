@@ -37,13 +37,13 @@ public class DataEntryController {
     public String prepareFields() {
 
         List<DocumentInfoView> documentInfos =
-                business.getDocumentsForViewing(sessionData.getSelectedBusiness(),
+                business.getDocumentsForViewing(sessionData.getSelectedCustomer(),
                                                 sessionData.getSelectedProducts());
 
         sessionData.setDocuments(documentInfos);
 
-        business.mapAutoMapCustomerFields(documentInfos,
-                                          sessionData.getSelectedBusiness());
+        business.mapAutoMapFields(documentInfos,
+                                  sessionData.getSelectedCustomer());
 
         return "dataEntry";
     }

@@ -7,18 +7,38 @@ public class Business {
     private String phone;
     private String country;
     private String address;
+    private String taxId;
+    private String email;
 
     public Business(String name,
                     String contactName,
                     String address,
                     String phone,
                     String country) {
+        this(name,
+             contactName,
+             address,
+             phone,
+             country,
+             null,
+             null);
+    }
+
+    public Business(String name,
+                    String contactName,
+                    String address,
+                    String phone,
+                    String country,
+                    String taxId,
+                    String email) {
 
         this.name = name;
         this.contactName = contactName;
         this.address = address;
         this.phone = phone;
         this.country = country;
+        this.taxId = taxId;
+        this.email = email;
     }
 
     public String getName() {
@@ -41,23 +61,11 @@ public class Business {
         return contactName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getTaxId() {
+        return taxId;
     }
 
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    public String getEmail() {
+        return email;
     }
 }
