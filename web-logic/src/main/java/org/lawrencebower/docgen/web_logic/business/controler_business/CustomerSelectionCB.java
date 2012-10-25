@@ -20,6 +20,10 @@ public class CustomerSelectionCB {
         return modelFactory.getCustomer(customerName);
     }
 
+    public ContactView getBusinessByCustomerName(String customerName) {
+        return modelFactory.getBusinessByCustomerName(customerName);
+    }
+
     public List<ProductView> getProducts() {
         return modelFactory.getProducts();
     }

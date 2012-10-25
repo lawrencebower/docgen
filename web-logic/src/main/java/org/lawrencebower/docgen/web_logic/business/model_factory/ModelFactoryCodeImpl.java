@@ -26,6 +26,8 @@ public class ModelFactoryCodeImpl implements ModelFactory {
 
     private LinkedHashMap<String, ContactView> customers = new LinkedHashMap<>();
 
+    private LinkedHashMap<String, ContactView> businesses = new LinkedHashMap<>();
+
     private LinkedHashMap<String, ProductView> products = new LinkedHashMap<>();
 
     private LinkedHashMap<String, DocumentInfoView> documents = new LinkedHashMap<>();
@@ -91,6 +93,8 @@ public class ModelFactoryCodeImpl implements ModelFactory {
 
         customers.put(business1.getContactName(), business1);
         customers.put(business2.getContactName(), business2);
+        businesses.put(business1.getContactName(), business2);
+        businesses.put(business2.getContactName(), business1);
     }
 
     private void initCustomerProductDocumentMappings() {
@@ -129,6 +133,11 @@ public class ModelFactoryCodeImpl implements ModelFactory {
     }
 
     @Override
+    public ArrayList<ContactView> getBusinesses() {
+        return new ArrayList<>(businesses.values());
+    }
+
+    @Override
     public List<ProductView> getProducts() {
         return new ArrayList<>(products.values());
     }
@@ -142,6 +151,14 @@ public class ModelFactoryCodeImpl implements ModelFactory {
             throw new DocGenException(String.format("Contact %s not found?!", customerName));
         }
         return customers.get(customerName);
+    }
+
+    @Override
+    public ContactView getBusinessByCustomerName(String customerName) {
+        if (!businesses.containsKey(customerName)) {
+            throw new DocGenException(String.format("Business %s not found?!", customerName));
+        }
+        return businesses.get(customerName);
     }
 
     @Override

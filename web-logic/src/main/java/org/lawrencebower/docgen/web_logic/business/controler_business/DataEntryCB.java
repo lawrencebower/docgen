@@ -123,11 +123,20 @@ public class DataEntryCB {
     }
 
     public void mapAutoMapFields(List<DocumentInfoView> documentInfos,
-                                 ContactView selectedCustomer) {
+                                 ContactView selectedCustomer,
+                                 ContactView selectedBusiness) {
+
+        Contact customerContact = selectedCustomer.getContact();
+
+        ContactView vendor = modelFactory.getVendor();
+        Contact vendorContact = vendor.getContact();
+
+        Contact businessContact = selectedBusiness.getContact();
 
         reservedFieldMapper.mapFields(documentInfos,
-                                      selectedCustomer,
-                                      modelFactory.getVendor());
+                                      customerContact,
+                                      vendorContact,
+                                      businessContact);
     }
 
     public List<DocComponentView> getComponentsForViewing(List<DocumentInfoView> documents,

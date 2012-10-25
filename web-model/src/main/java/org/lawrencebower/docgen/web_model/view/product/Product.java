@@ -1,6 +1,7 @@
 package org.lawrencebower.docgen.web_model.view.product;
 
 public class Product {
+
     private String productId;
     private String productName;
 

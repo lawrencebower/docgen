@@ -38,4 +38,14 @@ public class ModelFactoryFileImpl implements ModelFactory {
     public ContactView getVendor() {
         return null;
     }
+
+    @Override
+    public ContactView getBusinessByCustomerName(String customerName) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<ContactView> getBusinesses() {
+        return null;
+    }
 }

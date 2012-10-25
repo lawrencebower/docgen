@@ -1,8 +1,6 @@
 package org.lawrencebower.docgen.web_logic.business.mapping;
 
-import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_model.view.business.Contact;
-import org.lawrencebower.docgen.web_model.view.business.ContactView;
 import org.lawrencebower.docgen.web_model.view.constants.AutoMappedField;
 import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
@@ -11,15 +9,18 @@ import java.util.List;
 
 public class AutoMappedFieldMapper {
 
-    private ContactView customerView;
-    private ContactView vendorView;
+    private Contact customer;
+    private Contact vendor;
+    private Contact business;
 
     public void mapFields(List<DocumentInfoView> documentInfoViews,
-                          ContactView selectedCustomer,
-                          ContactView vendor) {
+                          Contact selectedCustomer,
+                          Contact vendor,
+                          Contact business) {
 
-        this.customerView = selectedCustomer;
-        this.vendorView = vendor;
+        this.customer = selectedCustomer;
+        this.vendor = vendor;
+        this.business = business;
 
         for (DocumentInfoView documentInfoView : documentInfoViews) {
             checkAndMapDocument(documentInfoView);
@@ -44,20 +45,17 @@ public class AutoMappedFieldMapper {
 
     private void mapFieldValue(DocComponentView docComponentView, AutoMappedField field) {
 
-        Contact customer = customerView.getContact();
-        Contact vendor = vendorView.getContact();
+        mapCustomerFields(docComponentView, field);
 
-        if (field == AutoMappedField.CUSTOMER_ADDRESS) {
-            setComponentText(docComponentView, customer.getAddress());
-        } else if (field == AutoMappedField.CUSTOMER_CONTACT_NAME) {
-            setComponentText(docComponentView, customer.getContactName());
-        } else if (field == AutoMappedField.CUSTOMER_COUNTRY) {
-            setComponentText(docComponentView, customer.getCountry());
-        } else if (field == AutoMappedField.CUSTOMER_NAME) {
-            setComponentText(docComponentView, customer.getName());
-        } else if (field == AutoMappedField.CUSTOMER_PHONE) {
-            setComponentText(docComponentView, customer.getPhone());
-        }else if (field == AutoMappedField.VENDOR_ADDRESS) {
+        mapBusinessFields(docComponentView, field);
+
+        mapVendorFields(docComponentView, field);
+    }
+
+    private void mapVendorFields(DocComponentView docComponentView,
+                                 AutoMappedField field) {
+
+        if (field == AutoMappedField.VENDOR_ADDRESS) {
             setComponentText(docComponentView, vendor.getAddress());
         } else if (field == AutoMappedField.VENDOR_CONTACT_NAME) {
             setComponentText(docComponentView, vendor.getContactName());
@@ -71,8 +69,38 @@ public class AutoMappedFieldMapper {
             setComponentText(docComponentView, vendor.getEmail());
         } else if (field == AutoMappedField.VENDOR_TAX_ID) {
             setComponentText(docComponentView, vendor.getTaxId());
-        }else{
-            throw new DocGenException("AutoMappedField not recognized - " + field);
+        }
+    }
+
+    private void mapBusinessFields(DocComponentView docComponentView,
+                                   AutoMappedField field) {
+
+        if (field == AutoMappedField.BUSINESS_ADDRESS) {
+            setComponentText(docComponentView, business.getAddress());
+        } else if (field == AutoMappedField.BUSINESS_CONTACT_NAME) {
+            setComponentText(docComponentView, business.getContactName());
+        } else if (field == AutoMappedField.BUSINESS_COUNTRY) {
+            setComponentText(docComponentView, business.getCountry());
+        } else if (field == AutoMappedField.BUSINESS_NAME) {
+            setComponentText(docComponentView, business.getName());
+        } else if (field == AutoMappedField.BUSINESS_PHONE) {
+            setComponentText(docComponentView, business.getPhone());
+        }
+    }
+
+    private void mapCustomerFields(DocComponentView docComponentView,
+                                   AutoMappedField field) {
+
+        if (field == AutoMappedField.CUSTOMER_ADDRESS) {
+            setComponentText(docComponentView, customer.getAddress());
+        } else if (field == AutoMappedField.CUSTOMER_CONTACT_NAME) {
+            setComponentText(docComponentView, customer.getContactName());
+        } else if (field == AutoMappedField.CUSTOMER_COUNTRY) {
+            setComponentText(docComponentView, customer.getCountry());
+        } else if (field == AutoMappedField.CUSTOMER_NAME) {
+            setComponentText(docComponentView, customer.getName());
+        } else if (field == AutoMappedField.CUSTOMER_PHONE) {
+            setComponentText(docComponentView, customer.getPhone());
         }
     }
 

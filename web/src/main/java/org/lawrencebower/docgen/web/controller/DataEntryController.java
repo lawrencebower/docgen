@@ -43,7 +43,8 @@ public class DataEntryController {
         sessionData.setDocuments(documentInfos);
 
         business.mapAutoMapFields(documentInfos,
-                                  sessionData.getSelectedCustomer());
+                                  sessionData.getSelectedCustomer(),
+                                  sessionData.getSelectedBusiness());
 
         return "dataEntry";
     }

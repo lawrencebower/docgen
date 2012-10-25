@@ -12,6 +12,8 @@ public class SessionData {
 
     private ContactView selectedCustomer;
 
+    private ContactView selectedBusiness;
+
     private List<ProductView> selectedProducts = new ArrayList<>();
 
     private List<DocumentInfoView> documents = new ArrayList<>();
@@ -24,12 +26,20 @@ public class SessionData {
         this.selectedCustomer = selectedCustomer;
     }
 
-    public void setDocuments(List<DocumentInfoView> documents) {
-        this.documents = documents;
-    }
-
     public ContactView getSelectedCustomer() {
         return selectedCustomer;
+    }
+
+    public ContactView getSelectedBusiness() {
+        return selectedBusiness;
+    }
+
+    public void setSelectedBusiness(ContactView selectedBusiness) {
+        this.selectedBusiness = selectedBusiness;
+    }
+
+    public void setDocuments(List<DocumentInfoView> documents) {
+        this.documents = documents;
     }
 
     public List<ProductView> getSelectedProducts() {

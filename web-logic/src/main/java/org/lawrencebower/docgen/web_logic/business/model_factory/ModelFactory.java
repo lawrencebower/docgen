@@ -4,6 +4,7 @@ import org.lawrencebower.docgen.web_model.view.business.ContactView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ModelFactory {
@@ -19,4 +20,8 @@ public interface ModelFactory {
     ProductView getProduct(String productId);
 
     ContactView getVendor();
+
+    ContactView getBusinessByCustomerName(String customerName);
+
+    ArrayList<ContactView> getBusinesses();
 }
