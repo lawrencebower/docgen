@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_model.view.customer;
+package org.lawrencebower.docgen.web_model.view.business;
 
 public class Business {
 

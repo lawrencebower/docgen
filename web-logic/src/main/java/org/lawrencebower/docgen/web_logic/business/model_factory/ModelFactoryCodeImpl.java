@@ -2,8 +2,8 @@ package org.lawrencebower.docgen.web_logic.business.model_factory;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
-import org.lawrencebower.docgen.web_model.view.customer.Business;
-import org.lawrencebower.docgen.web_model.view.customer.BusinessView;
+import org.lawrencebower.docgen.web_model.view.business.Business;
+import org.lawrencebower.docgen.web_model.view.business.BusinessView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_model.view.product.Product;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
@@ -84,28 +84,28 @@ public class ModelFactoryCodeImpl implements ModelFactory {
     private void initCustomerProductDocumentMappings() {
 
         //Business 1
-        customerProductDocMappings.addDocument(business1.getBusiness(),
+        customerProductDocMappings.addDocument(business1.getCustomer(),
                                                product1.getproduct(),
                                                commercialInvoiceView);
 
-        customerProductDocMappings.addDocument(business1.getBusiness(),
+        customerProductDocMappings.addDocument(business1.getCustomer(),
                                                product2.getproduct(),
                                                commercialInvoiceView);
 
-        customerProductDocMappings.addDocument(business1.getBusiness(),
+        customerProductDocMappings.addDocument(business1.getCustomer(),
                                                product2.getproduct(),
                                                deliveryNoteView);
 
         //Business 2
-        customerProductDocMappings.addDocument(business2.getBusiness(),
+        customerProductDocMappings.addDocument(business2.getCustomer(),
                                                product1.getproduct(),
                                                commercialInvoiceView);
 
-        customerProductDocMappings.addDocument(business2.getBusiness(),
+        customerProductDocMappings.addDocument(business2.getCustomer(),
                                                product2.getproduct(),
                                                commercialInvoiceView);
 
-        customerProductDocMappings.addDocument(business2.getBusiness(),
+        customerProductDocMappings.addDocument(business2.getCustomer(),
                                                product2.getproduct(),
                                                deliveryNoteView);
 

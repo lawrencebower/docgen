@@ -1,8 +1,8 @@
 package org.lawrencebower.docgen.web_logic.business.mapping;
 
 import org.lawrencebower.docgen.web_model.view.constants.AutoMappedField;
-import org.lawrencebower.docgen.web_model.view.customer.Business;
-import org.lawrencebower.docgen.web_model.view.customer.BusinessView;
+import org.lawrencebower.docgen.web_model.view.business.Business;
+import org.lawrencebower.docgen.web_model.view.business.BusinessView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 
@@ -39,7 +39,7 @@ public class AutoMappedFieldMapper {
 
     private void mapFieldValue(DocComponentView docComponentView, AutoMappedField field) {
 
-        Business business = businessView.getBusiness();
+        Business business = businessView.getCustomer();
 
         if (field == AutoMappedField.CUSTOMER_ADDRESS) {
             setComponentText(docComponentView, business.getAddress());

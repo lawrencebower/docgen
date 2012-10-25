@@ -10,8 +10,8 @@ import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Docum
 import org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
-import org.lawrencebower.docgen.web_model.view.customer.Business;
-import org.lawrencebower.docgen.web_model.view.customer.BusinessView;
+import org.lawrencebower.docgen.web_model.view.business.Business;
+import org.lawrencebower.docgen.web_model.view.business.BusinessView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_model.view.product.Product;
@@ -52,7 +52,7 @@ public class DataEntryCB {
     private ArrayList<DocumentInfoView> getRelevantDocuments(BusinessView selectedBusiness,
                                                              List<ProductView> selectedProducts) {
 
-        Business business = selectedBusiness.getBusiness();
+        Business business = selectedBusiness.getCustomer();
         Set<DocumentInfoView> docInfos = new HashSet<>();
 
         for (ProductView selectedProduct : selectedProducts) {
