@@ -1,13 +1,10 @@
 package org.lawrencebower.docgen.web_logic.business.mapping;
 
-import org.apache.commons.lang.StringUtils;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 
 import java.util.*;
-
-import static org.lawrencebower.docgen.web_model.ViewConstants.DOCUMENT_FIELD_SEPARATOR;
 
 public class FieldMapper {
 

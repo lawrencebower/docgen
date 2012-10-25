@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_model;
+package org.lawrencebower.docgen.web_model.view.constants;
 
 public class ViewConstants {
 
