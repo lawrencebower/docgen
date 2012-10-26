@@ -63,8 +63,6 @@ public class DataEntryController {
 
         Map<String, String[]> parameterMap = webRequest.getParameterMap();
 
-        writeParameterVals(parameterMap);
-
         business.mapFieldValuesToComponents(parameterMap,
                                             sessionData.getDocuments());
 

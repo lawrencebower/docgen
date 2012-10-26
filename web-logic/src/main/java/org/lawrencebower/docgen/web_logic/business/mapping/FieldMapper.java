@@ -36,13 +36,6 @@ public class FieldMapper {
                                      List<DocumentInfoView> documents,
                                      String componentName) {
 
-//        DocumentComponentPair documentAndComponentName = extractDocumentAndComponentName(componentName);
-
-//        String documentName = documentAndComponentName.getDocumentName();
-//        String componentName = componentName;
-
-//        DocumentInfoView documents = getDocument(documentName, documents);
-
         List<DocComponentView> components = getComponentsWithName(componentName, documents);
 
         String value = getFieldValue(componentName, parameterMap.get(componentName));
@@ -79,67 +72,7 @@ public class FieldMapper {
         return results;
     }
 
-/*
-    private DocumentInfoView getDocument(String documentName, List<DocumentInfoView> documents) {
-
-        for (DocumentInfoView document : documents) {
-            if (document.getName() != null && document.getName().equals(documentName)) {
-                return document;
-            }
-        }
-
-        throw new DocGenException("Document not found - " + documentName);
-    }
-
-    private DocumentComponentPair extractDocumentAndComponentName(String fieldName) {
-
-        if (!fieldName.contains(DOCUMENT_FIELD_SEPARATOR)) {
-            throw new DocGenException("Field name does not contain separator? " + fieldName);
-        }
-
-        String[] strings = StringUtils.split(fieldName, DOCUMENT_FIELD_SEPARATOR);
-
-        if (strings.length != 2) {
-            String message = String.format("Unexpected number of tokens (%s) when parsing field name, %s",
-                                           strings.length,
-                                           fieldName);
-
-            throw new DocGenException(message);
-        }
-
-        return new DocumentComponentPair(strings[0], strings[1]);
-    }
-*/
-
     public boolean isExcludedToken(String token) {
         return EXCLUDED_TOKENS.contains(token);
     }
-
-/*    class DocumentComponentPair {
-
-        private String documentName;
-        private String fieldName;
-
-        DocumentComponentPair(String documentName, String fieldName) {
-
-            if (StringUtils.isWhitespace(documentName)) {
-                throw new DocGenException("documentName is null " + documentName);
-            }
-
-            if (StringUtils.isWhitespace(fieldName)) {
-                throw new DocGenException("fieldName is null " + documentName);
-            }
-
-            this.documentName = documentName;
-            this.fieldName = fieldName;
-        }
-
-        public String getDocumentName() {
-            return documentName;
-        }
-
-        public String getFieldName() {
-            return fieldName;
-        }
-    }*/
 }
