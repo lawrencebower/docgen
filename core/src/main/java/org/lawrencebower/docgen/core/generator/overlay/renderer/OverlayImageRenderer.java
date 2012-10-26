@@ -24,7 +24,7 @@ public class OverlayImageRenderer extends AbstractOverlayRenderer
     public void createAndRenderComponent(ImageComponent component, OverlayComponentRendererInfo rendererInfo) {
         this.docComponent = component;
         Image image = createComponent(component);
-        drawTable(rendererInfo.getCanvas(), image);
+        renderComponent(rendererInfo.getCanvas(), image);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class OverlayImageRenderer extends AbstractOverlayRenderer
         }
     }
 
-    private void drawTable(PdfContentByte canvas, Image image) {
+    private void renderComponent(PdfContentByte canvas, Image image) {
 
         DocCoordinates boxCoordinates = docComponent.getCoordinates();
 

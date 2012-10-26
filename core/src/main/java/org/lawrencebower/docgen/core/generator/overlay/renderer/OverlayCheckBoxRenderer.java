@@ -21,7 +21,7 @@ public class OverlayCheckBoxRenderer
     public void createAndRenderComponent(CheckBoxComponent component, OverlayComponentRendererInfo rendererInfo) {
         this.docComponent = component;
         Phrase phrase = createComponent(component);
-        drawCheckBox(rendererInfo.getCanvas(), phrase);
+        renderComponent(rendererInfo.getCanvas(), phrase);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class OverlayCheckBoxRenderer
         return pdfUtils.mapTextBlock(textBlock);
     }
 
-    private void drawCheckBox(PdfContentByte canvas, Phrase phrase) {
+    private void renderComponent(PdfContentByte canvas, Phrase phrase) {
 
         HorizontalAlignment alignment = docComponent.getAlignment();
         int boxAlignment = HorizontalAlignment.mapToITextAlignment(alignment);

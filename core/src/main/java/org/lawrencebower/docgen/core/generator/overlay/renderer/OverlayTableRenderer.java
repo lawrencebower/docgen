@@ -20,7 +20,7 @@ public class OverlayTableRenderer extends AbstractOverlayRenderer
     public void createAndRenderComponent(TableComponent component, OverlayComponentRendererInfo rendererInfo) {
         this.docComponent = component;
         PdfPTable iTextTable = createComponent(component);
-        drawTable(rendererInfo.getCanvas(), iTextTable);
+        renderComponent(rendererInfo.getCanvas(), iTextTable);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class OverlayTableRenderer extends AbstractOverlayRenderer
         return pdfUtils.generateTable(component);
     }
 
-    private void drawTable(PdfContentByte canvas, PdfPTable iTextTable) {
+    private void renderComponent(PdfContentByte canvas, PdfPTable iTextTable) {
 
         DocCoordinates boxCoordinates = docComponent.getCoordinates();
 

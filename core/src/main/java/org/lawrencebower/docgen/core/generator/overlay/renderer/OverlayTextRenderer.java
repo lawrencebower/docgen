@@ -18,7 +18,7 @@ public class OverlayTextRenderer extends AbstractOverlayRenderer
     public void createAndRenderComponent(TextComponent component, OverlayComponentRendererInfo rendererInfo) {
         this.docComponent = component;
         Phrase phrase = createComponent(component);
-        drawTextBox(rendererInfo.getCanvas(), phrase);
+        renderComponent(rendererInfo.getCanvas(), phrase);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class OverlayTextRenderer extends AbstractOverlayRenderer
         return pdfUtils.mapTextBlock(textBlock);
     }
 
-    private void drawTextBox(PdfContentByte canvas, Phrase phrase) {
+    private void renderComponent(PdfContentByte canvas, Phrase phrase) {
 
         HorizontalAlignment alignment = docComponent.getAlignment();
         int boxAlignment = HorizontalAlignment.mapToITextAlignment(alignment);
