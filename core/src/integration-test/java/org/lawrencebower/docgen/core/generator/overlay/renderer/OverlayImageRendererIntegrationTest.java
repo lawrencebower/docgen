@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.ImageComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -31,18 +30,15 @@ public class OverlayImageRendererIntegrationTest extends AbstractOverlayRenderer
         int height = 200;
 
         DocCoordinates leftCoordinates = new DocCoordinates(10, 545, width, height);
-        DocPosition leftPosition = new DocPosition(leftCoordinates);
-        ImageComponent imageComponent1 = getImageComponent(leftPosition);
+        ImageComponent imageComponent1 = getImageComponent(leftCoordinates);
         imageComponent1.setRenderBorder(true);
 
         DocCoordinates rightCoordinates = new DocCoordinates(150, 445, width + 50, height);
-        DocPosition rightPosition = new DocPosition(rightCoordinates);
-        ImageComponent imageComponent2 = getImageComponent(rightPosition);
+        ImageComponent imageComponent2 = getImageComponent(rightCoordinates);
         imageComponent2.setRenderBorder(true);
 
         DocCoordinates centerCoordinates = new DocCoordinates(350, 345, width, height + 50);
-        DocPosition centerPosition = new DocPosition(centerCoordinates);
-        ImageComponent imageComponent3 = getImageComponent(centerPosition);
+        ImageComponent imageComponent3 = getImageComponent(centerCoordinates);
         imageComponent3.setRenderBorder(true);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
@@ -54,7 +50,9 @@ public class OverlayImageRendererIntegrationTest extends AbstractOverlayRenderer
 
     }
 
-    private ImageComponent getImageComponent(DocPosition position) {
-        return new ImageComponent(position, imageFileLocation);
+    private ImageComponent getImageComponent(DocCoordinates coordinates) {
+        ImageComponent imageComponent = new ImageComponent(imageFileLocation);
+        imageComponent.setCoordinates(coordinates);
+        return imageComponent;
     }
 }

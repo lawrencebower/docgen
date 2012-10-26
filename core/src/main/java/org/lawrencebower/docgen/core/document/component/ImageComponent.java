@@ -1,6 +1,6 @@
 package org.lawrencebower.docgen.core.document.component;
 
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
+import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 
 public class ImageComponent extends DocComponent {
 
@@ -13,8 +13,8 @@ public class ImageComponent extends DocComponent {
         this.imageFileLocation = imageFileLocation;
     }
 
-    public ImageComponent(DocPosition position, String imageFileLocation) {
-        super(position);
+    public ImageComponent(HorizontalAlignment alignment, String imageFileLocation) {
+        super(alignment);
         this.imageFileLocation = imageFileLocation;
     }
 

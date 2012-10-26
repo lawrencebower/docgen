@@ -2,7 +2,6 @@ package org.lawrencebower.docgen.core.generator.model;
 
 import org.lawrencebower.docgen.core.document.DocumentInfo;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtils;
-import org.lawrencebower.docgen.core.generator.utils.PDFGenUtilsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.ByteArrayOutputStream;

@@ -8,7 +8,6 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.DocComponentType;
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.component.position.VerticalAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
@@ -41,7 +40,7 @@ public class ITextTableGenerator {
     }
 
     private void mapTableAlignment(TableComponent tableComponent, PdfPTable iTextTable) {
-        HorizontalAlignment alignment = tableComponent.getPosition().getHorizontalAlignment();
+        HorizontalAlignment alignment = tableComponent.getAlignment();
         int iTextAlignment = HorizontalAlignment.mapToITextAlignment(alignment);
         iTextTable.setHorizontalAlignment(iTextAlignment);
     }
@@ -155,8 +154,7 @@ public class ITextTableGenerator {
     private void mapHorizontalAlignment(TableCell tableCell, PdfPCell iTextCell) {
 
         DocComponent component = tableCell.getComponent();
-        DocPosition componentPosition = component.getPosition();
-        HorizontalAlignment horizontalAlignment = componentPosition.getHorizontalAlignment();
+        HorizontalAlignment horizontalAlignment = component.getAlignment();
 
         int iTextHorizontalAlignment = HorizontalAlignment.mapToITextAlignment(horizontalAlignment);
         iTextCell.setHorizontalAlignment(iTextHorizontalAlignment);

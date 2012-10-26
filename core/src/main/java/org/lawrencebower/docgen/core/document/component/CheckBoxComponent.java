@@ -1,6 +1,6 @@
 package org.lawrencebower.docgen.core.document.component;
 
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
+import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 
 public class CheckBoxComponent extends DocComponent {
 
@@ -11,16 +11,16 @@ public class CheckBoxComponent extends DocComponent {
     }
 
     public CheckBoxComponent(boolean selected,
-                             DocPosition position) {
-        super(position);
+                             HorizontalAlignment alignment) {
+        super(alignment);
         this.selected = selected;
     }
 
     public CheckBoxComponent() {
     }
 
-    public CheckBoxComponent(DocPosition position) {
-        super(position);
+    public CheckBoxComponent(HorizontalAlignment alignment) {
+        super(alignment);
     }
 
     @Override

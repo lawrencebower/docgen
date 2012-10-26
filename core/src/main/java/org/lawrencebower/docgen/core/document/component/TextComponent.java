@@ -1,6 +1,6 @@
 package org.lawrencebower.docgen.core.document.component;
 
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
+import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.document.component.text.TextFragment;
 
@@ -16,14 +16,14 @@ public class TextComponent extends DocComponent {
         this.text = new TextBlock(text);
     }
 
-    public TextComponent(DocPosition position,
+    public TextComponent(HorizontalAlignment alignment,
                          String text) {
-        super(position);
+        super(alignment);
         this.text = new TextBlock(text);
     }
 
-    public TextComponent(DocPosition position) {
-        super(position);
+    public TextComponent(HorizontalAlignment alignment) {
+        super(alignment);
     }
 
     @Override

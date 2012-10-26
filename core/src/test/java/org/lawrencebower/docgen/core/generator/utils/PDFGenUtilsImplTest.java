@@ -4,7 +4,6 @@ import org.lawrencebower.docgen.core.document.OverlayDocumentInfo;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.type.DocType;
 import org.lawrencebower.docgen.core.exception.DocGenException;
@@ -105,31 +104,16 @@ public class PDFGenUtilsImplTest {
     @org.junit.Test
     public void testCheckCoordinates_validCoordinates_noError() {
 
-        DocPosition position = new DocPosition(HorizontalAlignment.LEFT, new DocCoordinates(1, 1, 1, 1));
-        DocComponent component = new TextComponent(position, "value");
+        DocComponent component = new TextComponent(HorizontalAlignment.LEFT, "value");
+        component.setCoordinates(new DocCoordinates(1, 1, 1, 1));
         pdfGenUtils.checkCoordinates(Arrays.asList(component));
-    }
-
-    @org.junit.Test
-    public void testCheckCoordinates_nullPosition_throwsError() {
-
-        try {
-            DocComponent component = new TextComponent(null, "value");
-            pdfGenUtils.checkCoordinates(Arrays.asList(component));
-        } catch (DocGenException e) {
-            String message = e.getMessage();
-            assertTrue(message.startsWith("Position is null"));
-            return;
-        }
-        fail();//should not get here
     }
 
     @org.junit.Test
     public void testCheckCoordinates_nullCoordinate_throwsError() {
 
         try {
-            DocPosition position = new DocPosition(HorizontalAlignment.LEFT, null);
-            DocComponent component = new TextComponent(position, "value");
+            DocComponent component = new TextComponent(HorizontalAlignment.LEFT, "value");
             pdfGenUtils.checkCoordinates(Arrays.asList(component));
         } catch (DocGenException e) {
             String message = e.getMessage();

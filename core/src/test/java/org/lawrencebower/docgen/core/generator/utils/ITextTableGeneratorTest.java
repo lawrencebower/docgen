@@ -3,7 +3,6 @@ package org.lawrencebower.docgen.core.generator.utils;
 import com.lowagie.text.pdf.PdfPTable;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
@@ -81,7 +80,7 @@ public class ITextTableGeneratorTest {
         }
 
         tableComponent.setRenderBorder(true);
-        tableComponent.setPosition(new DocPosition(HorizontalAlignment.CENTER));
+        tableComponent.setAlignment(HorizontalAlignment.CENTER);
 
         return tableComponent;
     }

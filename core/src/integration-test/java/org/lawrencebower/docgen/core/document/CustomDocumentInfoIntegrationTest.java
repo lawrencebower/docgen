@@ -6,7 +6,6 @@ import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.AbstractIntegrationTest;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
@@ -57,8 +56,6 @@ public class CustomDocumentInfoIntegrationTest extends AbstractIntegrationTest {
 
     private DocComponent generateSimpleTextComponent() {
 
-        DocPosition position = new DocPosition(HorizontalAlignment.LEFT);
-
-        return new TextComponent(position, "39 York Street");
+        return new TextComponent(HorizontalAlignment.LEFT, "39 York Street");
     }
 }

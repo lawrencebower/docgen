@@ -1,6 +1,6 @@
 package org.lawrencebower.docgen.core.document.component;
 
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
+import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 
 public class LineComponent extends DocComponent {
 
@@ -11,8 +11,9 @@ public class LineComponent extends DocComponent {
         this.widthPercentage = widthPercentage;
     }
 
-    public LineComponent(DocPosition position, int widthPercentage) {
-        super(position);
+    public LineComponent(HorizontalAlignment alignment,
+                         int widthPercentage) {
+        super(alignment);
         this.widthPercentage = widthPercentage;
     }
 

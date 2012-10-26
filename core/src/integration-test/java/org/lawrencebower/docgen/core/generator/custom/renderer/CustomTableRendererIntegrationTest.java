@@ -6,7 +6,6 @@ import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.NewLineComponent;
 import org.lawrencebower.docgen.core.document.component.TableTextComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.component.position.VerticalAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
@@ -63,24 +62,24 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         allCells.get(4).setText("\n\n\n\n");//make the cell deep
 
         TableTextComponent leftAlignedComponent = new TableTextComponent("1");
-        leftAlignedComponent.setPosition(new DocPosition(HorizontalAlignment.LEFT));
+        leftAlignedComponent.setAlignment(HorizontalAlignment.LEFT);
         allCells.get(5).setComponent(leftAlignedComponent);
 
-        TableTextComponent centerAlignedComponent = new TableTextComponent(new DocPosition(HorizontalAlignment.CENTER));
+        TableTextComponent centerAlignedComponent = new TableTextComponent(HorizontalAlignment.CENTER);
         centerAlignedComponent.setText("2");
         allCells.get(6).setComponent(centerAlignedComponent);
 
-        TableTextComponent rightAlignedComponent = new TableTextComponent(new DocPosition(HorizontalAlignment.RIGHT),
+        TableTextComponent rightAlignedComponent = new TableTextComponent(HorizontalAlignment.RIGHT,
                                                                           "3");
         allCells.get(7).setComponent(rightAlignedComponent);
 
         allCells.get(8).setText("\n\n\n\n");//make the cell deep
 
-        allCells.get(9).getComponent().getPosition().setHorizontalAlignment(HorizontalAlignment.LEFT);
+        allCells.get(9).getComponent().setAlignment(HorizontalAlignment.LEFT);
         allCells.get(9).setVerticalAlignment(VerticalAlignment.BOTTOM);
-        allCells.get(10).getComponent().getPosition().setHorizontalAlignment(HorizontalAlignment.CENTER);
+        allCells.get(10).getComponent().setAlignment(HorizontalAlignment.CENTER);
         allCells.get(10).setVerticalAlignment(VerticalAlignment.MIDDLE);
-        allCells.get(11).getComponent().getPosition().setHorizontalAlignment(HorizontalAlignment.RIGHT);
+        allCells.get(11).getComponent().setAlignment(HorizontalAlignment.RIGHT);
         allCells.get(11).setVerticalAlignment(VerticalAlignment.TOP);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,

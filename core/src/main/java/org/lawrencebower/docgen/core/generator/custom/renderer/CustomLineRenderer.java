@@ -3,7 +3,6 @@ package org.lawrencebower.docgen.core.generator.custom.renderer;
 import com.lowagie.text.Element;
 import com.lowagie.text.pdf.draw.LineSeparator;
 import org.lawrencebower.docgen.core.document.component.LineComponent;
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
 
@@ -19,8 +18,8 @@ public class CustomLineRenderer
     @Override
     public LineSeparator createComponent(LineComponent component) {
 
-        DocPosition position = component.getPosition();
-        int boxAlignment = HorizontalAlignment.mapToITextAlignment(position.getHorizontalAlignment());
+        HorizontalAlignment alignment = component.getAlignment();
+        int boxAlignment = HorizontalAlignment.mapToITextAlignment(alignment);
 
         return new LineSeparator(1,
                                  component.getWidthPercentage(),

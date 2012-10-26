@@ -5,13 +5,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.ImageComponent;
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -33,15 +31,12 @@ public class CustomImageRendererIntegrationTest extends AbstractCustomRendererTe
         String expectedOutputFilePath = inputPackage + "image_renderer_expected_output.pdf";
         String outFilePath = outputPackage + "image_renderer_output.pdf";
 
-        DocPosition leftPosition = new DocPosition(HorizontalAlignment.LEFT);
         DocComponent leftImageComponent = new ImageComponent(imageFileLocation);
-        leftImageComponent.setPosition(leftPosition);
+        leftImageComponent.setAlignment(HorizontalAlignment.LEFT);
 
-        DocPosition centerPosition = new DocPosition(HorizontalAlignment.CENTER);
-        DocComponent centerImageComponent = new ImageComponent(centerPosition, imageFileLocation);
+        DocComponent centerImageComponent = new ImageComponent(HorizontalAlignment.CENTER, imageFileLocation);
 
-        DocPosition rightPosition = new DocPosition(HorizontalAlignment.RIGHT);
-        DocComponent rightImageComponent = new ImageComponent(rightPosition, imageFileLocation);
+        DocComponent rightImageComponent = new ImageComponent(HorizontalAlignment.RIGHT, imageFileLocation);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
                                         outFilePath,
@@ -56,16 +51,13 @@ public class CustomImageRendererIntegrationTest extends AbstractCustomRendererTe
         String expectedOutputFilePath = inputPackage + "image_renderer_expected_output2.pdf";
         String outFilePath = outputPackage + "image_renderer_output2.pdf";
 
-        DocPosition leftPosition = new DocPosition(HorizontalAlignment.LEFT);
-        ImageComponent leftImageComponent = new ImageComponent(leftPosition, imageFileLocation);
+        ImageComponent leftImageComponent = new ImageComponent(HorizontalAlignment.LEFT, imageFileLocation);
         leftImageComponent.setSize(10,10);
 
-        DocPosition centerPosition = new DocPosition(HorizontalAlignment.CENTER);
-        ImageComponent centerImageComponent = new ImageComponent(centerPosition, imageFileLocation);
+        ImageComponent centerImageComponent = new ImageComponent(HorizontalAlignment.CENTER, imageFileLocation);
         centerImageComponent.setSize(50,75);
 
-        DocPosition rightPosition = new DocPosition(HorizontalAlignment.RIGHT);
-        ImageComponent rightImageComponent = new ImageComponent(rightPosition, imageFileLocation);
+        ImageComponent rightImageComponent = new ImageComponent(HorizontalAlignment.RIGHT, imageFileLocation);
         rightImageComponent.setSize(100,50);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
@@ -81,8 +73,7 @@ public class CustomImageRendererIntegrationTest extends AbstractCustomRendererTe
         String expectedOutputFilePath = inputPackage + "image_renderer_expected_output2.pdf";
         String outFilePath = outputPackage + "image_renderer_output2.pdf";
 
-        DocPosition leftPosition = new DocPosition(HorizontalAlignment.LEFT);
-        ImageComponent imageComponent = new ImageComponent(leftPosition, "i dont exist");
+        ImageComponent imageComponent = new ImageComponent(HorizontalAlignment.LEFT, "i dont exist");
         imageComponent.setSize(10, 10);
 
         try {

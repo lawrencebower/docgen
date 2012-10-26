@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.generator.utils.ITextTableGeneratorTest;
@@ -34,18 +33,15 @@ public class OverlayTableRendererIntegrationTest extends AbstractOverlayRenderer
         int height = 200;
 
         DocCoordinates leftCoordinates = new DocCoordinates(10, 545, width, height);
-        DocPosition leftPosition = new DocPosition(leftCoordinates);
-        TableComponent tableComponent1 = getTableComponent(leftPosition);
+        TableComponent tableComponent1 = getTableComponent(leftCoordinates);
         tableComponent1.setRenderBorder(true);
 
         DocCoordinates rightCoordinates = new DocCoordinates(150, 445, width, height);
-        DocPosition rightPosition = new DocPosition(rightCoordinates);
-        TableComponent tableComponent2 = getTableComponent(rightPosition);
+        TableComponent tableComponent2 = getTableComponent(rightCoordinates);
         tableComponent2.setRenderBorder(true);
 
         DocCoordinates centerCoordinates = new DocCoordinates(300, 345, width, height);
-        DocPosition centerPosition = new DocPosition(centerCoordinates);
-        TableComponent tableComponent3 = getTableComponent(centerPosition);
+        TableComponent tableComponent3 = getTableComponent(centerCoordinates);
         tableComponent3.setRenderBorder(true);
         tableComponent3.setWidthPercentage(50);
 
@@ -69,9 +65,8 @@ public class OverlayTableRendererIntegrationTest extends AbstractOverlayRenderer
         int height = 200;
 
         DocCoordinates tableCoordinates = new DocCoordinates(100, 345, width, height);
-        DocPosition tablePosition = new DocPosition(tableCoordinates);
 
-        TableComponent tableComponent = getTableComponent(tablePosition);
+        TableComponent tableComponent = getTableComponent(tableCoordinates);
 
         tableComponent.setRenderBorder(true);
 
@@ -96,9 +91,9 @@ public class OverlayTableRendererIntegrationTest extends AbstractOverlayRenderer
 
     }
 
-    public TableComponent getTableComponent(DocPosition position) {
+    public TableComponent getTableComponent(DocCoordinates coordinates) {
         TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
-        tableComponent.setPosition(position);
+        tableComponent.setCoordinates(coordinates);
         return tableComponent;
     }
 

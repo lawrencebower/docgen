@@ -4,7 +4,6 @@ import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfPTable;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererInfo;
@@ -31,9 +30,7 @@ public class OverlayTableRenderer extends AbstractOverlayRenderer
 
     private void drawTable(PdfContentByte canvas, PdfPTable iTextTable) {
 
-        DocPosition position = docComponent.getPosition();
-
-        DocCoordinates boxCoordinates = position.getCoordinates();
+        DocCoordinates boxCoordinates = docComponent.getCoordinates();
 
         renderBorderIfSet(canvas, boxCoordinates);
 

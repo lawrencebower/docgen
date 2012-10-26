@@ -1,20 +1,28 @@
 package org.lawrencebower.docgen.core.document.component;
 
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
+import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 
 public abstract class DocComponent {
 
     private String name;
-    private DocPosition position;
+    private HorizontalAlignment alignment;
+    private DocCoordinates coordinates;
     protected boolean renderBorder;
 
     protected DocComponent() {
-        this.position = new DocPosition(HorizontalAlignment.LEFT);
+        this.alignment = HorizontalAlignment.LEFT;
     }
 
-    protected DocComponent(DocPosition position) {
-        this.position = position;
+    protected DocComponent(HorizontalAlignment alignment,
+                           DocCoordinates coordinates) {
+
+        this.alignment = alignment;
+        this.coordinates = coordinates;
+    }
+
+    protected DocComponent(HorizontalAlignment alignment) {
+        this.alignment = alignment;
     }
 
     public String getName() {
@@ -25,12 +33,20 @@ public abstract class DocComponent {
         this.name = name;
     }
 
-    public void setPosition(DocPosition position) {
-        this.position = position;
+    public HorizontalAlignment getAlignment() {
+        return alignment;
     }
 
-    public DocPosition getPosition() {
-        return position;
+    public void setAlignment(HorizontalAlignment alignment) {
+        this.alignment = alignment;
+    }
+
+    public DocCoordinates getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(DocCoordinates coordinates) {
+        this.coordinates = coordinates;
     }
 
     public abstract DocComponentType getComponentType();

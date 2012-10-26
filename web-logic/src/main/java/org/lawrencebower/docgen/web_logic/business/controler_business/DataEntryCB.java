@@ -10,9 +10,9 @@ import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Docum
 import org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper;
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
+import org.lawrencebower.docgen.web_model.view.business.Contact;
 import org.lawrencebower.docgen.web_model.view.business.ContactView;
 import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
-import org.lawrencebower.docgen.web_model.view.business.Contact;
 import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_model.view.product.Product;
@@ -20,7 +20,10 @@ import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.*;
 
 public class DataEntryCB {

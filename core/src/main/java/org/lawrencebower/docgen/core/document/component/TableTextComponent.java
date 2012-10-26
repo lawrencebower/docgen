@@ -1,6 +1,6 @@
 package org.lawrencebower.docgen.core.document.component;
 
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
+import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 
 public class TableTextComponent extends TextComponent {
@@ -12,12 +12,12 @@ public class TableTextComponent extends TextComponent {
         super(text);
     }
 
-    public TableTextComponent(DocPosition position, String text) {
-        super(position, text);
+    public TableTextComponent(HorizontalAlignment alignment, String text) {
+        super(alignment, text);
     }
 
-    public TableTextComponent(DocPosition position) {
-        super(position);
+    public TableTextComponent(HorizontalAlignment alignment) {
+        super(alignment);
     }
 
     @Override

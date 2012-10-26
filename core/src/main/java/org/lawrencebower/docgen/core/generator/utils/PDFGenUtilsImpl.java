@@ -8,7 +8,7 @@ import com.lowagie.text.pdf.*;
 import org.lawrencebower.docgen.core.document.DocumentInfo;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
+import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.document.component.text.FontStyle;
@@ -104,12 +104,7 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
     @Override
     public void checkCoordinates(List<DocComponent> components) {
         for (DocComponent component : components) {
-            DocPosition position = component.getPosition();
-            if (position == null) {
-                throw new DocGenException("Position is null for component " + component.getName());
-            }
-
-            DocCoordinates coordinates = position.getCoordinates();
+            DocCoordinates coordinates = component.getCoordinates();
             if (coordinates == null) {
                 throw new DocGenException("Coordinates are null for component " + component.getName());
             }

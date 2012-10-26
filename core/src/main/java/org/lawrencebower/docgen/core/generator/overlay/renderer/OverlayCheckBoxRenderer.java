@@ -5,7 +5,6 @@ import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfContentByte;
 import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
@@ -43,10 +42,10 @@ public class OverlayCheckBoxRenderer
 
     private void drawCheckBox(PdfContentByte canvas, Phrase phrase) {
 
-        DocPosition position = docComponent.getPosition();
-        int boxAlignment = HorizontalAlignment.mapToITextAlignment(position.getHorizontalAlignment());
+        HorizontalAlignment alignment = docComponent.getAlignment();
+        int boxAlignment = HorizontalAlignment.mapToITextAlignment(alignment);
 
-        DocCoordinates boxCoordinates = position.getCoordinates();
+        DocCoordinates boxCoordinates = docComponent.getCoordinates();
 
         renderBorderIfSet(canvas, boxCoordinates);
 

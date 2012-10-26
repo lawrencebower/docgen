@@ -2,7 +2,7 @@ package org.lawrencebower.docgen.core.document.component.table;
 
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.DocComponentType;
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
+import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,8 +20,8 @@ public class TableComponent extends DocComponent {
         setName(name);
     }
 
-    public TableComponent(String name, DocPosition position) {
-        super(position);
+    public TableComponent(String name, HorizontalAlignment alignment) {
+        super(alignment);
         setName(name);
     }
 

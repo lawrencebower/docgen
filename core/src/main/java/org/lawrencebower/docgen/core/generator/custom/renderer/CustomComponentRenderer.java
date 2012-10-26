@@ -8,8 +8,7 @@ import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInf
 import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class CustomComponentRenderer
-        implements DocComponentRenderer<DocComponent, CustomComponentRendererInfo, Element> {
+public class CustomComponentRenderer {
 
     private CustomTextRenderer textRenderer;
     private CustomTableRenderer tableRenderer;
@@ -48,8 +47,9 @@ public class CustomComponentRenderer
         this.lineRenderer = lineRenderer;
     }
 
-    @Override
     public void createAndRenderComponent(DocComponent component, CustomComponentRendererInfo rendererInfo) {
+
+        //todo move this to the DocComponent creation logic
 
         if (component.getComponentType() == DocComponentType.TEXT) {
             textRenderer.createAndRenderComponent((TextComponent) component, rendererInfo);
@@ -70,7 +70,6 @@ public class CustomComponentRenderer
         }
     }
 
-    @Override
     public Element createComponent(DocComponent component) {
 
         Element element;

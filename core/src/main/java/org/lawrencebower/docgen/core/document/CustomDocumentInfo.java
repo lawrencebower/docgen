@@ -5,7 +5,6 @@ import org.lawrencebower.docgen.core.document.type.DocType;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class CustomDocumentInfo extends AbstractDocumentInfo {
 

@@ -7,7 +7,6 @@ import org.lawrencebower.docgen.core.AbstractIntegrationTest;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayPDFGenerator;
@@ -61,8 +60,10 @@ public class OverlayDocumentInfoIntegrationTest extends AbstractIntegrationTest 
     private DocComponent generateSimpleTextComponent() {
 
         DocCoordinates coordinates = new DocCoordinates(100, 675, 180, 81);
-        DocPosition position = new DocPosition(HorizontalAlignment.LEFT, coordinates);
 
-        return new TextComponent(position, "39 York Street");
+        TextComponent textComponent = new TextComponent(HorizontalAlignment.LEFT, "39 York Street");
+        textComponent.setCoordinates(coordinates);
+
+        return textComponent;
     }
 }

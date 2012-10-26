@@ -9,8 +9,7 @@ import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererI
 import org.springframework.beans.factory.annotation.Autowired;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class OverlayComponentRenderer
-        implements DocComponentRenderer<DocComponent, OverlayComponentRendererInfo, Element> {
+public class OverlayComponentRenderer {
 
     @Autowired
     private OverlayTextRenderer textRenderer;
@@ -21,8 +20,9 @@ public class OverlayComponentRenderer
     @Autowired
     private OverlayImageRenderer imageRenderer;
 
-    @Override
     public void createAndRenderComponent(DocComponent component, OverlayComponentRendererInfo rendererInfo) {
+
+        //todo move this to the DocComponent creation logic
 
         if (component.getComponentType() == DocComponentType.TEXT) {
             textRenderer.createAndRenderComponent((TextComponent) component, rendererInfo);
@@ -43,8 +43,4 @@ public class OverlayComponentRenderer
         }
     }
 
-    @Override
-    public Element createComponent(DocComponent component) {
-        throw new NotImplementedException();
-    }
 }

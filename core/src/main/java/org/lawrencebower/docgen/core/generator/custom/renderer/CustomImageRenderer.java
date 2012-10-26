@@ -4,7 +4,6 @@ import com.lowagie.text.BadElementException;
 import com.lowagie.text.Element;
 import com.lowagie.text.Image;
 import org.lawrencebower.docgen.core.document.component.ImageComponent;
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
@@ -27,8 +26,8 @@ public class CustomImageRenderer
             String imageFileLocation = component.getImageFileLocation();
             Image iTextImage = Image.getInstance(imageFileLocation);
 
-            DocPosition position = component.getPosition();
-            int boxAlignment = HorizontalAlignment.mapToITextAlignment(position.getHorizontalAlignment());
+            HorizontalAlignment alignment = component.getAlignment();
+            int boxAlignment = HorizontalAlignment.mapToITextAlignment(alignment);
 
             iTextImage.setAlignment(boxAlignment);
 

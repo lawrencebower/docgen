@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
-import org.lawrencebower.docgen.core.document.component.position.DocPosition;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -29,21 +28,21 @@ public class OverlayCheckBoxRendererIntegrationTest extends AbstractOverlayRende
         int width = 10;
         int height = 10;
 
+        CheckBoxComponent leftCheckBox = new CheckBoxComponent(true, HorizontalAlignment.LEFT);
         DocCoordinates leftCoordinates = new DocCoordinates(10, 545, width, height);
-        DocPosition leftPosition = new DocPosition(HorizontalAlignment.LEFT, leftCoordinates);
-        CheckBoxComponent leftCheckBox = new CheckBoxComponent(true, leftPosition);
+        leftCheckBox.setCoordinates(leftCoordinates);
         leftCheckBox.setRenderBorder(true);
 
+        CheckBoxComponent rightCheckBox = new CheckBoxComponent(HorizontalAlignment.RIGHT);
         DocCoordinates rightCoordinates = new DocCoordinates(150, 445, width, height);
-        DocPosition rightPosition = new DocPosition(HorizontalAlignment.RIGHT, rightCoordinates);
-        CheckBoxComponent rightCheckBox = new CheckBoxComponent(rightPosition);
+        rightCheckBox.setCoordinates(rightCoordinates);
         rightCheckBox.setSelected(true);
         rightCheckBox.setRenderBorder(true);
 
-        DocCoordinates centerCoordinates = new DocCoordinates(300, 345, width, height);
-        DocPosition centerPosition = new DocPosition(HorizontalAlignment.CENTER, centerCoordinates);
         CheckBoxComponent centerCheckBox = new CheckBoxComponent(true);
-        centerCheckBox.setPosition(centerPosition);
+        centerCheckBox.setAlignment(HorizontalAlignment.CENTER);
+        DocCoordinates centerCoordinates = new DocCoordinates(300, 345, width, height);
+        centerCheckBox.setCoordinates(centerCoordinates);
         centerCheckBox.setRenderBorder(true);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
