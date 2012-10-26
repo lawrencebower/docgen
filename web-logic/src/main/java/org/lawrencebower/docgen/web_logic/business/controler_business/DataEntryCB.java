@@ -29,8 +29,6 @@ import java.util.*;
 public class DataEntryCB {
 
     @Autowired
-    FieldMapper fieldMapper;
-    @Autowired
     PDFConcatenator pdfConcatenator;
     @Autowired
     AutoMappedFieldMapper reservedFieldMapper;
@@ -44,26 +42,28 @@ public class DataEntryCB {
     String fileRoot;
 
     @Autowired
-    private CustomerProduct_Document_Mappings mappings;
+    private CustomerProduct_Document_Mappings customerProductMappings;
+    @Autowired
+    FieldMapper fieldMapper;
 
-    public List<DocumentInfoView> getDocumentsForViewing(ContactView selectedBusiness,
+    public List<DocumentInfoView> getDocumentsForViewing(ContactView selectedCustomer,
                                                          List<ProductView> selectedProducts) {
 
         ArrayList<DocumentInfoView> relevantDocuments =
-                getRelevantDocuments(selectedBusiness, selectedProducts);
+                getRelevantDocuments(selectedCustomer, selectedProducts);
 
         return relevantDocuments;
     }
 
-    private ArrayList<DocumentInfoView> getRelevantDocuments(ContactView selectedBusiness,
+    private ArrayList<DocumentInfoView> getRelevantDocuments(ContactView selectedCustomer,
                                                              List<ProductView> selectedProducts) {
 
-        Contact business = selectedBusiness.getContact();
+        Contact customer = selectedCustomer.getContact();
         Set<DocumentInfoView> docInfos = new HashSet<>();
 
         for (ProductView selectedProduct : selectedProducts) {
             Product product = selectedProduct.getproduct();
-            List<DocumentInfoView> docInfo = mappings.getDocInfosForCustomerAndProduct(business, product);
+            List<DocumentInfoView> docInfo = customerProductMappings.getDocInfosForCustomerAndProduct(customer, product);
             docInfos.addAll(docInfo);
         }
 
