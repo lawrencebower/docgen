@@ -13,7 +13,7 @@ import org.lawrencebower.docgen.core.document.component.position.VerticalAlignme
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.core.generator.custom.renderer.CustomComponentRenderer;
+import org.lawrencebower.docgen.core.generator.custom.CustomComponentRenderer;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ITextTableGenerator {

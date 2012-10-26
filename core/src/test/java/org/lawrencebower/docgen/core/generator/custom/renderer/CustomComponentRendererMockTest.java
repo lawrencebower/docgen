@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.lawrencebower.docgen.core.document.component.*;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
+import org.lawrencebower.docgen.core.generator.custom.CustomComponentRenderer;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
 import org.mockito.Mockito;
 

@@ -2,7 +2,6 @@ package org.lawrencebower.docgen.core.generator.custom;
 
 import org.lawrencebower.docgen.core.document.CustomDocumentInfo;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
-import org.lawrencebower.docgen.core.generator.custom.renderer.CustomComponentRenderer;
 import org.lawrencebower.docgen.core.generator.model.AbstractPDFGenerator;
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
 import org.springframework.beans.factory.annotation.Autowired;

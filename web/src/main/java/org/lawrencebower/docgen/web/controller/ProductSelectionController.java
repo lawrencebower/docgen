@@ -29,29 +29,26 @@ public class ProductSelectionController {
     public ProductSelectionController() {
     }
 
-    @RequestMapping({"/selectProduct"})
-    public String showHomePage(Model model) {
-
-        List<ProductView> products = business.getProducts();
-
-        model.addAttribute("products", products);
-
-        return "products";
-    }
-
     @RequestMapping(value = "/productId/{productId}", method = RequestMethod.GET)
     public String selectProduct(@PathVariable String productId,
                                 Model model) {
 
         logger.error("productId = [" + productId + "]");
 
-        ProductView selectedProduct = business.getProduct(productId);
-        sessionData.addSelectedProduct(selectedProduct);
+        addSelectedProductToSession(productId);
 
-        List<ProductView> products = business.getProducts();
-
-        model.addAttribute("products", products);
+        putAllProductsOnPageModel(model);
 
         return "products";
+    }
+
+    private void putAllProductsOnPageModel(Model model) {
+        List<ProductView> products = business.getProducts();
+        model.addAttribute("products", products);
+    }
+
+    private void addSelectedProductToSession(String productId) {
+        ProductView selectedProduct = business.getProduct(productId);
+        sessionData.addSelectedProduct(selectedProduct);
     }
 }

@@ -1,7 +1,7 @@
 package org.lawrencebower.docgen.web.model;
 
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
-import org.lawrencebower.docgen.web_model.view.business.ContactView;
+import org.lawrencebower.docgen.web_model.view.contact.ContactView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 

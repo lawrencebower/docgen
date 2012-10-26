@@ -1,10 +1,11 @@
-package org.lawrencebower.docgen.core.generator.custom.renderer;
+package org.lawrencebower.docgen.core.generator.custom;
 
 import com.lowagie.text.Element;
 import org.lawrencebower.docgen.core.document.component.*;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
+import org.lawrencebower.docgen.core.generator.custom.renderer.*;
 import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 import org.springframework.beans.factory.annotation.Autowired;
 

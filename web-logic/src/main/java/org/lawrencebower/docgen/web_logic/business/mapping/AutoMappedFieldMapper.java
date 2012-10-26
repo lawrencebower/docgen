@@ -1,6 +1,6 @@
 package org.lawrencebower.docgen.web_logic.business.mapping;
 
-import org.lawrencebower.docgen.web_model.view.business.Contact;
+import org.lawrencebower.docgen.web_model.view.contact.Contact;
 import org.lawrencebower.docgen.web_model.view.constants.AutoMappedField;
 import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;

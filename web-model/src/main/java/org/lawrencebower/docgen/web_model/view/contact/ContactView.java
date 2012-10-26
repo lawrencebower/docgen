@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_model.view.business;
+package org.lawrencebower.docgen.web_model.view.contact;
 
 public class ContactView {
 

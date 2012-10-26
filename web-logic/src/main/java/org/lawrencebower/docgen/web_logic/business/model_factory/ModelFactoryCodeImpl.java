@@ -2,8 +2,8 @@ package org.lawrencebower.docgen.web_logic.business.model_factory;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
-import org.lawrencebower.docgen.web_model.view.business.Contact;
-import org.lawrencebower.docgen.web_model.view.business.ContactView;
+import org.lawrencebower.docgen.web_model.view.contact.Contact;
+import org.lawrencebower.docgen.web_model.view.contact.ContactView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_model.view.product.Product;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
