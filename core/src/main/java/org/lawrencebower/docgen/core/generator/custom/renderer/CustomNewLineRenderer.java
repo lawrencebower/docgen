@@ -4,9 +4,10 @@ import com.lowagie.text.Element;
 import com.lowagie.text.Paragraph;
 import org.lawrencebower.docgen.core.document.component.NewLineComponent;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
+import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 
 public class CustomNewLineRenderer
-        implements CustomDocComponentRenderer<NewLineComponent, CustomComponentRendererInfo, Paragraph> {
+        implements DocComponentRenderer<NewLineComponent, CustomComponentRendererInfo, Paragraph> {
 
     @Override
     public void createAndRenderComponent(NewLineComponent component, CustomComponentRendererInfo rendererInfo) {

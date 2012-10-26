@@ -4,11 +4,12 @@ import com.lowagie.text.Element;
 import com.lowagie.text.pdf.PdfPTable;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
+import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class CustomTableRenderer
-        implements CustomDocComponentRenderer<TableComponent, CustomComponentRendererInfo, PdfPTable> {
+        implements DocComponentRenderer<TableComponent, CustomComponentRendererInfo, PdfPTable> {
 
     @Autowired
     private PDFGenUtils pdfUtils;

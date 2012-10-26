@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.core.generator.overlay.renderer;
+package org.lawrencebower.docgen.core.generator.overlay;
 
 import com.lowagie.text.Element;
 import org.lawrencebower.docgen.core.document.component.*;
@@ -6,6 +6,10 @@ import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererInfo;
+import org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayCheckBoxRenderer;
+import org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayImageRenderer;
+import org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayTableRenderer;
+import org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayTextRenderer;
 import org.springframework.beans.factory.annotation.Autowired;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 

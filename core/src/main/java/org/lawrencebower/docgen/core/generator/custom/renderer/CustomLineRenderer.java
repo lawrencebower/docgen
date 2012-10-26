@@ -5,9 +5,10 @@ import com.lowagie.text.pdf.draw.LineSeparator;
 import org.lawrencebower.docgen.core.document.component.LineComponent;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
+import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 
 public class CustomLineRenderer
-        implements CustomDocComponentRenderer<LineComponent, CustomComponentRendererInfo, LineSeparator> {
+        implements DocComponentRenderer<LineComponent, CustomComponentRendererInfo, LineSeparator> {
 
     @Override
     public void createAndRenderComponent(LineComponent component, CustomComponentRendererInfo rendererInfo) {

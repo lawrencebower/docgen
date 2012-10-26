@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.DocComponentType;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRenderer;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererInfo;
 
 public class OverlayComponentRendererTest {

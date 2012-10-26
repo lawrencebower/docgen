@@ -7,11 +7,12 @@ import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
+import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class CustomTextRenderer
-        implements CustomDocComponentRenderer<TextComponent, CustomComponentRendererInfo, Paragraph> {
+        implements DocComponentRenderer<TextComponent, CustomComponentRendererInfo, Paragraph> {
 
     @Autowired
     private PDFGenUtils pdfUtils;

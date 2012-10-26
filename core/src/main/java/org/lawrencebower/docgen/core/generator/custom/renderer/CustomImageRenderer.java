@@ -7,11 +7,12 @@ import org.lawrencebower.docgen.core.document.component.ImageComponent;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
+import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 
 import java.io.IOException;
 
 public class CustomImageRenderer
-        implements CustomDocComponentRenderer<ImageComponent, CustomComponentRendererInfo, Image> {
+        implements DocComponentRenderer<ImageComponent, CustomComponentRendererInfo, Image> {
 
     @Override
     public void createAndRenderComponent(ImageComponent component, CustomComponentRendererInfo rendererInfo) {

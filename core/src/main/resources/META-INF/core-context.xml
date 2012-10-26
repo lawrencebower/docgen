@@ -41,7 +41,7 @@
                 class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomLineRenderer"/>
 
     <bean id="customComponentRenderer" class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomComponentRenderer"/>
-    <bean id="overlayComponentRenderer" class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayComponentRenderer"/>
+    <bean id="overlayComponentRenderer" class="org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRenderer"/>
 
     <bean id="pdfGeneratorAbstract"
                 class="org.lawrencebower.docgen.core.generator.model.AbstractPDFGenerator"

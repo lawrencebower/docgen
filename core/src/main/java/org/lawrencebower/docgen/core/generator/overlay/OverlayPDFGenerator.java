@@ -6,7 +6,6 @@ import org.lawrencebower.docgen.core.document.OverlayDocumentInfo;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.generator.model.AbstractPDFGenerator;
 import org.lawrencebower.docgen.core.generator.model.PDFDocument;
-import org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayComponentRenderer;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

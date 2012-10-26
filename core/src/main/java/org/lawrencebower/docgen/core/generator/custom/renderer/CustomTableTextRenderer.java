@@ -4,12 +4,13 @@ import com.lowagie.text.Phrase;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
+import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class CustomTableTextRenderer
-        implements CustomDocComponentRenderer<TextComponent, CustomComponentRendererInfo, Phrase> {
+        implements DocComponentRenderer<TextComponent, CustomComponentRendererInfo, Phrase> {
 
     @Autowired
     private PDFGenUtils pdfUtils;

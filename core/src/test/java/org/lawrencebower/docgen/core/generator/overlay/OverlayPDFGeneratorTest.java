@@ -7,7 +7,6 @@ import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.OverlayDocumentInfo;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
-import org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayComponentRenderer;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtilsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
