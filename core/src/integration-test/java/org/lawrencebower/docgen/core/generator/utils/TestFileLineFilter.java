@@ -10,10 +10,16 @@ public class TestFileLineFilter {
 
     private static List<String> EXCLUDED_TOKENS;
 
+    private static List<String> EXCLUDE_NEXT_LINE_TOKENS;
+
     static {
         EXCLUDED_TOKENS = Arrays.asList("<</Producer",
                                         "<</Root");
+
+        EXCLUDE_NEXT_LINE_TOKENS = Arrays.asList("startxref");
     }
+
+    private boolean excludeNextLine = false;
 
     public byte[] filterFileLines(File inFile) {
 
@@ -48,13 +54,39 @@ public class TestFileLineFilter {
     private boolean isLineIncluded(String currentLine) {
 
         String trimmedLine = currentLine.trim();
+        boolean lineIsIncluded = true;
 
-        for (String token : EXCLUDED_TOKENS) {
-            if (trimmedLine.contains(token)) {
-                return false;
-            }
+        boolean lineContainsExcludedToken = lineContainsExcludedToken(trimmedLine);
+
+        if (excludeNextLine) {
+            excludeNextLine = false;//reset
+            lineIsIncluded = false;
+        } else if (lineContainsExcludedToken) {
+            lineIsIncluded = false;
         }
 
-        return true;
+        setExcludeNextLineToken(trimmedLine);
+
+        return lineIsIncluded;
+    }
+
+    private void setExcludeNextLineToken(String trimmedLine) {
+
+        excludeNextLine = false;
+
+        for (String token : EXCLUDE_NEXT_LINE_TOKENS) {
+            if (trimmedLine.contains(token)) {
+                excludeNextLine = true;
+            }
+        }
+    }
+
+    private boolean lineContainsExcludedToken(String trimmedLine) {
+        for (String token : EXCLUDED_TOKENS) {
+            if (trimmedLine.contains(token)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
