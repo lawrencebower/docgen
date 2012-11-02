@@ -1,12 +1,13 @@
-package org.lawrencebower.docgen.core.document;
+package org.lawrencebower.docgen.core.generator.overlay;
 
 import org.apache.commons.lang.StringUtils;
+import org.lawrencebower.docgen.core.document.AbstractDocumentInfo;
 import org.lawrencebower.docgen.core.document.type.DocType;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.core.generator.model.PDFDocument;
-import org.lawrencebower.docgen.core.generator.overlay.OverlayPDFGenerator;
+import org.lawrencebower.docgen.core.document.PDFDocument;
+import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
 
-public class OverlayDocumentInfo extends AbstractDocumentInfo {
+public class OverlayDocumentInfo extends AbstractDocumentInfo<OverlayComponent> {
 
     private OverlayPDFGenerator pdfGenerator;
     private String sourcePDF;

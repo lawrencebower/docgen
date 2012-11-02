@@ -8,47 +8,40 @@ import org.lawrencebower.docgen.core.document.component.position.HorizontalAlign
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
 import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
+import org.lawrencebower.docgen.core.generator.model.itext_component.ITextImageComponent;
+import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererInfo;
 
 import java.io.IOException;
 
 public class CustomImageRenderer
-        implements DocComponentRenderer<ImageComponent, CustomComponentRendererInfo, Image> {
+        implements DocComponentRenderer<ITextImageComponent, CustomComponentRendererInfo> {
 
     @Override
-    public void createAndRenderComponent(ImageComponent component, CustomComponentRendererInfo rendererInfo) {
-        Element element = createComponent(component);
-        renderComponent(rendererInfo, element);
+    public void createAndRenderComponent(ITextImageComponent component, CustomComponentRendererInfo rendererInfo) {
+        Image iTextImage = component.createITextComponent();
+        processImage(component, iTextImage);
+        renderComponent(rendererInfo, iTextImage);
     }
 
-    @Override
-    public Image createComponent(ImageComponent component) {
+    private void processImage(ITextImageComponent component, Image iTextImage) {
 
-        try {
-            String imageFileLocation = component.getImageFileLocation();
-            Image iTextImage = Image.getInstance(imageFileLocation);
+        HorizontalAlignment alignment = component.getAlignment();
+        int boxAlignment = HorizontalAlignment.mapToITextAlignment(alignment);
 
-            HorizontalAlignment alignment = component.getAlignment();
-            int boxAlignment = HorizontalAlignment.mapToITextAlignment(alignment);
+        iTextImage.setAlignment(boxAlignment);
 
-            iTextImage.setAlignment(boxAlignment);
-
-            scaleImage(component, iTextImage);
-
-            return iTextImage;
-        } catch (BadElementException | IOException e) {
-            throw new DocGenException(e);
-        }
-    }
-
-    private void scaleImage(ImageComponent component, Image iTextImage) {
-        if(component.hasSize()){
-            iTextImage.scalePercent(component.getWidth(), component.getHeight());
-        }
+        scaleImage(component, iTextImage);
     }
 
     private void renderComponent(CustomComponentRendererInfo renderInfo,
                                  Element element) {
         renderInfo.addToDocument(element);
+    }
+
+    private void scaleImage(ITextImageComponent component, Image iTextImage) {
+        if (component.hasSize()) {
+            iTextImage.scalePercent(component.getWidth(), component.getHeight());
+        }
     }
 
 }

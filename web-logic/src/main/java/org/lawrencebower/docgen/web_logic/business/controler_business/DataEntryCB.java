@@ -3,7 +3,7 @@ package org.lawrencebower.docgen.web_logic.business.controler_business;
 import org.apache.commons.io.IOUtils;
 import org.lawrencebower.docgen.core.document.DocumentInfo;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.core.generator.model.PDFDocument;
+import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedFieldMapper;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;

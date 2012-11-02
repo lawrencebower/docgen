@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.core.generator.model;
+package org.lawrencebower.docgen.core.document;
 
 import java.io.File;
 import java.io.OutputStream;

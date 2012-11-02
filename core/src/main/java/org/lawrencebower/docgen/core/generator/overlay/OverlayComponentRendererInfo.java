@@ -2,7 +2,7 @@ package org.lawrencebower.docgen.core.generator.overlay;
 
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfStamper;
-import org.lawrencebower.docgen.core.generator.model.DocComponentRendererInfo;
+import org.lawrencebower.docgen.core.document.DocComponentRendererInfo;
 
 public class OverlayComponentRendererInfo implements DocComponentRendererInfo {
 

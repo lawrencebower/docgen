@@ -8,38 +8,34 @@ import org.lawrencebower.docgen.core.document.component.position.HorizontalAlign
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
 import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
+import org.lawrencebower.docgen.core.generator.model.itext_component.ITextTextComponent;
+import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererInfo;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class CustomTextRenderer
-        implements DocComponentRenderer<TextComponent, CustomComponentRendererInfo, Paragraph> {
-
-    @Autowired
-    private PDFGenUtils pdfUtils;
+        implements DocComponentRenderer<ITextTextComponent, CustomComponentRendererInfo> {
 
     @Override
-    public void createAndRenderComponent(TextComponent component, CustomComponentRendererInfo rendererInfo) {
-        Element element = createComponent(component);
-        renderComponent(rendererInfo, element);
+    public void createAndRenderComponent(ITextTextComponent component, CustomComponentRendererInfo rendererInfo) {
+        Paragraph paragraph = processPhrase(component);
+        renderComponent(rendererInfo, paragraph);
     }
 
-    @Override
-    public Paragraph createComponent(TextComponent component) {
+    private Paragraph processPhrase(ITextTextComponent component) {
+        Phrase iTextPhrase = component.createITextComponent();
 
-        TextBlock textBlock = component.getText();
+        Paragraph paragraph = new Paragraph(iTextPhrase);
 
         HorizontalAlignment alignment = component.getAlignment();
         int boxAlignment = HorizontalAlignment.mapToITextAlignment(alignment);
-
-        Phrase phrase = pdfUtils.mapTextBlock(textBlock);
-        Paragraph paragraph = new Paragraph(phrase);
         paragraph.setAlignment(boxAlignment);
 
         return paragraph;
     }
 
     private void renderComponent(CustomComponentRendererInfo renderInfo,
-                                 Element element){
+                                 Element element) {
         renderInfo.addToDocument(element);
     }
 

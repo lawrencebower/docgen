@@ -1,5 +1,6 @@
 package org.lawrencebower.docgen.core.generator.model;
 
+import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 
 import java.io.File;

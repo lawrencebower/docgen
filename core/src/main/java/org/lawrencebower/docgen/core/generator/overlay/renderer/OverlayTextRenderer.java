@@ -3,28 +3,20 @@ package org.lawrencebower.docgen.core.generator.overlay.renderer;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfContentByte;
-import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
-import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
+import org.lawrencebower.docgen.core.generator.model.itext_component.ITextTextComponent;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererInfo;
 
 public class OverlayTextRenderer extends AbstractOverlayRenderer
-        implements DocComponentRenderer<TextComponent, OverlayComponentRendererInfo, Phrase> {
+        implements DocComponentRenderer<ITextTextComponent, OverlayComponentRendererInfo> {
 
 
     @Override
-    public void createAndRenderComponent(TextComponent component, OverlayComponentRendererInfo rendererInfo) {
+    public void createAndRenderComponent(ITextTextComponent component, OverlayComponentRendererInfo rendererInfo) {
         this.docComponent = component;
-        Phrase phrase = createComponent(component);
-        renderComponent(rendererInfo.getCanvas(), phrase);
-    }
-
-    @Override
-    public Phrase createComponent(TextComponent component) {
-        TextBlock textBlock = ((TextComponent) docComponent).getText();
-        return pdfUtils.mapTextBlock(textBlock);
+        renderComponent(rendererInfo.getCanvas(), component.createITextComponent());
     }
 
     private void renderComponent(PdfContentByte canvas, Phrase phrase) {

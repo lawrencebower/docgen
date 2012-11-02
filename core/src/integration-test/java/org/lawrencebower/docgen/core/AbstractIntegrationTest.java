@@ -1,6 +1,6 @@
 package org.lawrencebower.docgen.core;
 
-import org.lawrencebower.docgen.core.generator.model.PDFDocument;
+import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.generator.utils.ChecksumUtils;
 import org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;

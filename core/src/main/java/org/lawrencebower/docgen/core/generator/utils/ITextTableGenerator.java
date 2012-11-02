@@ -13,7 +13,8 @@ import org.lawrencebower.docgen.core.document.component.position.VerticalAlignme
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.core.generator.custom.CustomComponentRenderer;
+import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponent;
+import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponentFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ITextTableGenerator {
@@ -22,7 +23,7 @@ public class ITextTableGenerator {
     private PDFGenUtils pdfUtils;
 
     @Autowired
-    private CustomComponentRenderer componentRenderer;
+    private ITextComponentFactory componentFactory;
 
     public PdfPTable generateTable(TableComponent tableComponent) {
 
@@ -168,7 +169,9 @@ public class ITextTableGenerator {
 
         DocComponent component = tableCell.getComponent();
 
-        Element iTextElement = componentRenderer.createComponent(component);
+        ITextComponent iTextComponent = componentFactory.createComponent(component);
+
+        Element iTextElement = iTextComponent.createITextComponent();
 
         PdfPCell iTextCell;
 

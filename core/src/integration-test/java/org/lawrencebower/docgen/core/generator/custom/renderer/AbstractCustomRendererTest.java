@@ -1,14 +1,17 @@
 package org.lawrencebower.docgen.core.generator.custom.renderer;
 
 import org.lawrencebower.docgen.core.AbstractIntegrationTest;
-import org.lawrencebower.docgen.core.document.CustomDocumentInfo;
-import org.lawrencebower.docgen.core.document.component.DocComponent;
+import org.lawrencebower.docgen.core.generator.custom.CustomDocumentInfo;
+import org.lawrencebower.docgen.core.document.component.*;
 import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
-import org.lawrencebower.docgen.core.generator.model.PDFDocument;
+import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
+import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
+import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
@@ -16,6 +19,8 @@ public abstract class AbstractCustomRendererTest extends AbstractIntegrationTest
 
     @Autowired
     private CustomPDFGenerator customGenerator;
+    @Autowired
+    private CustomComponentFactory componentFactory;
 
     protected AbstractCustomRendererTest() {
     }
@@ -25,7 +30,10 @@ public abstract class AbstractCustomRendererTest extends AbstractIntegrationTest
                                                    DocComponent... components) {
 
         CustomDocumentInfo docInfo = new CustomDocumentInfo("Doc name", customGenerator);
-        docInfo.setComponents(Arrays.asList(components));
+
+        List<CustomComponent> overlayComponents = convertComponents(components);
+
+        docInfo.setComponents(overlayComponents);
 
         PDFDocument pdfDocument = docInfo.generatePDF();
 
@@ -36,5 +44,16 @@ public abstract class AbstractCustomRendererTest extends AbstractIntegrationTest
         boolean fileSameAsExpected = checksumUtils.filteredFileChecksumsAreSame(expectedFile, outputFile);
 
         assertTrue(fileSameAsExpected);
+    }
+
+    private List<CustomComponent> convertComponents(DocComponent[] components) {
+
+        List<CustomComponent> results = new ArrayList<>();
+
+        for (DocComponent component : components) {
+            results.add(componentFactory.createCustomComponent(component));
+        }
+
+        return results;
     }
 }

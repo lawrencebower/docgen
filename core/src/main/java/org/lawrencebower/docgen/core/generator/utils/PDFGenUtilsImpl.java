@@ -6,15 +6,15 @@ import com.lowagie.text.Font;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.*;
 import org.lawrencebower.docgen.core.document.DocumentInfo;
-import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
-import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.document.component.text.FontStyle;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.document.component.text.TextFragment;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponent;
+import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
@@ -102,12 +102,17 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
     }
 
     @Override
-    public void checkCoordinates(List<DocComponent> components) {
-        for (DocComponent component : components) {
-            DocCoordinates coordinates = component.getCoordinates();
-            if (coordinates == null) {
-                throw new DocGenException("Coordinates are null for component " + component.getName());
-            }
+    public void checkCoordinatesPresent(List<ITextComponent> components) {
+        for (ITextComponent component : components) {
+            checkCoordinatesPresent(component);
+        }
+    }
+
+    @Override
+    public void checkCoordinatesPresent(ITextComponent component) {
+        DocCoordinates coordinates = component.getCoordinates();
+        if (coordinates == null) {
+            throw new DocGenException("Coordinates are null for component " + component.getName());
         }
     }
 

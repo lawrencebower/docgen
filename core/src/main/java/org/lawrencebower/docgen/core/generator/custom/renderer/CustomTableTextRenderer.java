@@ -1,16 +1,21 @@
 package org.lawrencebower.docgen.core.generator.custom.renderer;
 
+import com.lowagie.text.Element;
 import com.lowagie.text.Phrase;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
 import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
+import org.lawrencebower.docgen.core.generator.model.itext_component.ITextTableComponent;
+import org.lawrencebower.docgen.core.generator.model.itext_component.ITextTableTextComponent;
+import org.lawrencebower.docgen.core.generator.model.itext_component.ITextTextComponent;
+import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererInfo;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class CustomTableTextRenderer
-        implements DocComponentRenderer<TextComponent, CustomComponentRendererInfo, Phrase> {
+        implements DocComponentRenderer<ITextTableTextComponent, CustomComponentRendererInfo> {
 
     @Autowired
     private PDFGenUtils pdfUtils;
@@ -20,16 +25,8 @@ public class CustomTableTextRenderer
      * table, which deals with the rendering
      */
     @Override
-    public void createAndRenderComponent(TextComponent component, CustomComponentRendererInfo rendererInfo) {
+    public void createAndRenderComponent(ITextTableTextComponent component, CustomComponentRendererInfo rendererInfo) {
         throw new NotImplementedException();
-    }
-
-    @Override
-    public Phrase createComponent(TextComponent component) {
-
-        TextBlock textBlock = component.getText();
-
-        return pdfUtils.mapTextBlock(textBlock);
     }
 
 }

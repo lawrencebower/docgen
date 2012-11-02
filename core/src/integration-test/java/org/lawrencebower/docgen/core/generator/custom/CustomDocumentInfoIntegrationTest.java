@@ -1,14 +1,15 @@
-package org.lawrencebower.docgen.core.document;
+package org.lawrencebower.docgen.core.generator.custom;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.AbstractIntegrationTest;
-import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
-import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
-import org.lawrencebower.docgen.core.generator.model.PDFDocument;
+import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
+import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
+import org.lawrencebower.docgen.core.generator.custom.component.CustomTextComponent;
+import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -24,11 +25,13 @@ public class CustomDocumentInfoIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired
     private CustomPDFGenerator pdfGenerator;
+    @Autowired
+    private CustomComponentFactory componentFactory;
 
     CustomDocumentInfo customDocumentInfo;
 
     @Before
-    public void setup(){
+    public void setup() {
         super.prepareDirs();
         customDocumentInfo = new CustomDocumentInfo("test name", pdfGenerator);
     }
@@ -39,7 +42,7 @@ public class CustomDocumentInfoIntegrationTest extends AbstractIntegrationTest {
         String outFilePath = outputPackage + "custom_output.pdf";
         String expectedOutFilePath = inputPackage + "custom_expected_output.pdf";
 
-        DocComponent textComponent = generateSimpleTextComponent();
+        CustomComponent textComponent = generateSimpleTextComponent();
 
         customDocumentInfo.setComponents(Arrays.asList(textComponent));
 
@@ -54,8 +57,10 @@ public class CustomDocumentInfoIntegrationTest extends AbstractIntegrationTest {
         assertTrue(fileSameAsExpected);
     }
 
-    private DocComponent generateSimpleTextComponent() {
+    private CustomTextComponent generateSimpleTextComponent() {
 
-        return new TextComponent(HorizontalAlignment.LEFT, "39 York Street");
+        TextComponent textComponent = new TextComponent(HorizontalAlignment.LEFT, "39 York Street");
+
+        return componentFactory.createCustomText(textComponent);
     }
 }

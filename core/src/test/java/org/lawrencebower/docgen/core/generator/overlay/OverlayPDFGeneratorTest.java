@@ -4,9 +4,8 @@ import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lawrencebower.docgen.core.document.OverlayDocumentInfo;
-import org.lawrencebower.docgen.core.document.component.DocComponent;
-import org.lawrencebower.docgen.core.document.component.TextComponent;
+import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
+import org.lawrencebower.docgen.core.generator.overlay.component.OverlayTextComponent;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtilsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -34,8 +33,6 @@ public class OverlayPDFGeneratorTest {
 
         pdfGenerator.setPdfGenUtils(mockUtils);
 
-        stubComponentRenderer();
-
         OverlayDocumentInfo documentInfo = stubDocInfo();
 
         pdfGenerator.generatePDF(documentInfo);
@@ -58,17 +55,12 @@ public class OverlayPDFGeneratorTest {
         return mockPDFUtils;
     }
 
-    private void stubComponentRenderer() {
-        OverlayComponentRenderer componentRenderer = mock(OverlayComponentRenderer.class);
-        pdfGenerator.setComponentRenderer(componentRenderer);
-    }
-
     public OverlayDocumentInfo stubDocInfo() {
 
         OverlayDocumentInfo docInfo = mock(OverlayDocumentInfo.class);
 
         when(docInfo.getDocType()).thenReturn(null);
-        List<DocComponent> textComponents = (Arrays.asList((DocComponent) mock(TextComponent.class)));
+        List<OverlayComponent> textComponents = (Arrays.asList((OverlayComponent) mock(OverlayTextComponent.class)));
         when(docInfo.getComponents()).thenReturn(textComponents);
         when(docInfo.getName()).thenReturn("name");
 

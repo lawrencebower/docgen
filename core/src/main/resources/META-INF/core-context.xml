@@ -1,7 +1,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns:context="http://www.springframework.org/schema/context"
-             xsi:schemaLocation="
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
              http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd
              http://www.springframework.org/schema/context classpath:/org/springframework/context/config/spring-context-3.1.xsd">
 
@@ -10,50 +10,153 @@
     <bean id="pdfGenUtils" class="org.lawrencebower.docgen.core.generator.utils.PDFGenUtilsImpl"/>
     <bean id="pdfConcatenator" class="org.lawrencebower.docgen.core.generator.utils.PDFConcatenator"/>
 
+    <!--ITEXT COMPONENTS-->
+
+    <bean id="iTextComponentFactory"
+          class="org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponentFactory">
+        <lookup-method name="getCheckBoxComponent" bean="iTextCheckBoxComponent"/>
+        <lookup-method name="getImageComponent" bean="iTextImageComponent"/>
+        <lookup-method name="getLineComponent" bean="iTextLineComponent"/>
+        <lookup-method name="getNewLineComponent" bean="iTextNewLineComponent"/>
+        <lookup-method name="getTableComponent" bean="iTextTableComponent"/>
+        <lookup-method name="getTableTextComponent" bean="iTextTableTextComponent"/>
+        <lookup-method name="getTextComponent" bean="iTextTextComponent"/>
+    </bean>
+
+    <bean id="iTextCheckBoxComponent"
+          class="org.lawrencebower.docgen.core.generator.model.itext_component.ITextCheckBoxComponent"
+          scope="prototype"/>
+
+    <bean id="iTextImageComponent"
+          class="org.lawrencebower.docgen.core.generator.model.itext_component.ITextImageComponent"
+          scope="prototype"/>
+
+    <bean id="iTextLineComponent"
+          class="org.lawrencebower.docgen.core.generator.model.itext_component.ITextLineComponent"
+          scope="prototype"/>
+
+    <bean id="iTextNewLineComponent"
+          class="org.lawrencebower.docgen.core.generator.model.itext_component.ITextNewLineComponent"
+          scope="prototype"/>
+
+    <bean id="iTextTableComponent"
+          class="org.lawrencebower.docgen.core.generator.model.itext_component.ITextTableComponent"
+          scope="prototype"/>
+
+    <bean id="iTextTableTextComponent"
+          class="org.lawrencebower.docgen.core.generator.model.itext_component.ITextTableTextComponent"
+          scope="prototype"/>
+
+    <bean id="iTextTextComponent"
+          class="org.lawrencebower.docgen.core.generator.model.itext_component.ITextTextComponent"
+          scope="prototype"/>
+
+    <!--RENDERERS-->
+
     <bean id="overlayTextRenderer"
-                class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayTextRenderer"/>
+          class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayTextRenderer"/>
 
     <bean id="customTextRenderer"
-                class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomTextRenderer"/>
+          class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomTextRenderer"/>
 
     <bean id="overlayTableRenderer"
-                class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayTableRenderer"/>
+          class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayTableRenderer"/>
 
     <bean id="checkBoxRenderer"
-                class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayCheckBoxRenderer"/>
+          class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayCheckBoxRenderer"/>
 
     <bean id="imageRenderer"
-                class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayImageRenderer"/>
+          class="org.lawrencebower.docgen.core.generator.overlay.renderer.OverlayImageRenderer"/>
 
     <bean id="customTableRenderer"
-                class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomTableRenderer"/>
+          class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomTableRenderer"/>
 
     <bean id="newLineRenderer"
-                class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomNewLineRenderer"/>
+          class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomNewLineRenderer"/>
 
     <bean id="customImageRenderer"
-                class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomImageRenderer"/>
+          class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomImageRenderer"/>
 
     <bean id="customTableTextRenderer"
-                class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomTableTextRenderer"/>
+          class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomTableTextRenderer"/>
 
     <bean id="customLineRenderer"
-                class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomLineRenderer"/>
+          class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomLineRenderer"/>
 
-    <bean id="customComponentRenderer" class="org.lawrencebower.docgen.core.generator.custom.CustomComponentRenderer"/>
-    <bean id="overlayComponentRenderer" class="org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRenderer"/>
+    <!--OVERLAY COMPONENTS-->
+
+    <bean id="overlayComponentFactory"
+          class="org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponentFactory">
+        <lookup-method name="getCheckBoxComponent" bean="overlayCheckBoxComponent"/>
+        <lookup-method name="getImageComponent" bean="overlayImageComponent"/>
+        <lookup-method name="getTableComponent" bean="overlayTableComponent"/>
+        <lookup-method name="getTextComponent" bean="overlayTextComponent"/>
+    </bean>
+
+    <bean id="overlayCheckBoxComponent"
+          class="org.lawrencebower.docgen.core.generator.overlay.component.OverlayCheckBoxComponent"
+          scope="prototype"/>
+
+    <bean id="overlayImageComponent"
+          class="org.lawrencebower.docgen.core.generator.overlay.component.OverlayImageComponent"
+          scope="prototype"/>
+
+    <bean id="overlayTableComponent"
+          class="org.lawrencebower.docgen.core.generator.overlay.component.OverlayTableComponent"
+          scope="prototype"/>
+
+    <bean id="overlayTextComponent"
+          class="org.lawrencebower.docgen.core.generator.overlay.component.OverlayTextComponent"
+          scope="prototype"/>
+
+    <!--CUSTOM COMPONENTS-->
+
+    <bean id="customComponentFactory"
+          class="org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory">
+        <lookup-method name="getImageComponent" bean="customImageComponent"/>
+        <lookup-method name="getTableComponent" bean="customTableComponent"/>
+        <lookup-method name="getTextComponent" bean="customTextComponent"/>
+        <lookup-method name="getLineComponent" bean="customLineComponent"/>
+        <lookup-method name="getNewLineComponent" bean="customNewLineComponent"/>
+    </bean>
+
+    <bean id="customImageComponent"
+          class="org.lawrencebower.docgen.core.generator.custom.component.CustomImageComponent"
+          scope="prototype"/>
+
+    <bean id="customTextComponent"
+          class="org.lawrencebower.docgen.core.generator.custom.component.CustomTextComponent"
+          scope="prototype"/>
+
+    <bean id="customTableComponent"
+          class="org.lawrencebower.docgen.core.generator.custom.component.CustomTableComponent"
+          scope="prototype"/>
+
+    <bean id="customTableTextComponent"
+          class="org.lawrencebower.docgen.core.generator.custom.component.CustomTableTextComponent"
+          scope="prototype"/>
+
+    <bean id="customLineComponent"
+          class="org.lawrencebower.docgen.core.generator.custom.component.CustomLineComponent"
+          scope="prototype"/>
+
+    <bean id="customNewLineComponent"
+          class="org.lawrencebower.docgen.core.generator.custom.component.CustomNewLineComponent"
+          scope="prototype"/>
+
+    <!--GENERATORS-->
 
     <bean id="pdfGeneratorAbstract"
-                class="org.lawrencebower.docgen.core.generator.model.AbstractPDFGenerator"
-                abstract="true"/>
+          class="org.lawrencebower.docgen.core.generator.model.AbstractPDFGenerator"
+          abstract="true"/>
 
     <bean id="pdfGeneratorCustom"
-                class="org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator"
-                parent="pdfGeneratorAbstract"/>
+          class="org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator"
+          parent="pdfGeneratorAbstract"/>
 
     <bean id="pdfGeneratorOverlay"
-                class="org.lawrencebower.docgen.core.generator.overlay.OverlayPDFGenerator"
-                parent="pdfGeneratorAbstract"/>
+          class="org.lawrencebower.docgen.core.generator.overlay.OverlayPDFGenerator"
+          parent="pdfGeneratorAbstract"/>
 
     <context:component-scan base-package="org.lawrencebower.docgen.core"/>
 

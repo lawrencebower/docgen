@@ -1,21 +1,12 @@
 package org.lawrencebower.docgen.core.generator.custom;
 
-import org.lawrencebower.docgen.core.document.CustomDocumentInfo;
-import org.lawrencebower.docgen.core.document.component.DocComponent;
+import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 import org.lawrencebower.docgen.core.generator.model.AbstractPDFGenerator;
-import org.lawrencebower.docgen.core.generator.model.PDFDocument;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.lawrencebower.docgen.core.document.PDFDocument;
 
 public class CustomPDFGenerator extends AbstractPDFGenerator<CustomDocumentInfo> {
 
     private CustomDocumentInfo docInfo;
-
-    private CustomComponentRenderer componentRenderer;
-
-    @Autowired
-    public void setComponentRenderer(CustomComponentRenderer componentRenderer) {
-        this.componentRenderer = componentRenderer;
-    }
 
     @Override
     public PDFDocument generatePDF(CustomDocumentInfo docInfo) {
@@ -46,7 +37,7 @@ public class CustomPDFGenerator extends AbstractPDFGenerator<CustomDocumentInfo>
 
     private void renderComponents(CustomComponentRendererInfo rendererInfo) {
 
-        for (DocComponent docComponent : docInfo.getComponents()) {
+        for (CustomComponent docComponent : docInfo.getComponents()) {
             renderComponent(docComponent, rendererInfo);
         }
     }
@@ -56,8 +47,9 @@ public class CustomPDFGenerator extends AbstractPDFGenerator<CustomDocumentInfo>
         pdfGenUtils.checkRequiredValuesPresent(docInfo);
     }
 
-    private void renderComponent(DocComponent component, CustomComponentRendererInfo rendererInfo) {
-        componentRenderer.createAndRenderComponent(component, rendererInfo);
+    private void renderComponent(CustomComponent component,
+                                 CustomComponentRendererInfo rendererInfo) {
+        component.createAndRenderComponent(rendererInfo);
     }
 
 }

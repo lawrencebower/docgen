@@ -6,27 +6,15 @@ import org.lawrencebower.docgen.core.document.component.LineComponent;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
 import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
+import org.lawrencebower.docgen.core.generator.model.itext_component.ITextLineComponent;
+import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererInfo;
 
 public class CustomLineRenderer
-        implements DocComponentRenderer<LineComponent, CustomComponentRendererInfo, LineSeparator> {
+        implements DocComponentRenderer<ITextLineComponent, CustomComponentRendererInfo> {
 
     @Override
-    public void createAndRenderComponent(LineComponent component, CustomComponentRendererInfo rendererInfo) {
-        Element element = createComponent(component);
-        renderComponent(rendererInfo, element);
-    }
-
-    @Override
-    public LineSeparator createComponent(LineComponent component) {
-
-        HorizontalAlignment alignment = component.getAlignment();
-        int boxAlignment = HorizontalAlignment.mapToITextAlignment(alignment);
-
-        return new LineSeparator(1,
-                                 component.getWidthPercentage(),
-                                 null,
-                                 boxAlignment,
-                                 0);
+    public void createAndRenderComponent(ITextLineComponent component, CustomComponentRendererInfo rendererInfo) {
+        renderComponent(rendererInfo, component.createITextComponent());
     }
 
     private void renderComponent(CustomComponentRendererInfo renderInfo,

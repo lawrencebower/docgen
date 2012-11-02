@@ -2,9 +2,8 @@ package org.lawrencebower.docgen.core.generator.custom;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lawrencebower.docgen.core.document.CustomDocumentInfo;
-import org.lawrencebower.docgen.core.document.component.DocComponent;
-import org.lawrencebower.docgen.core.document.component.TextComponent;
+import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
+import org.lawrencebower.docgen.core.generator.custom.component.CustomTextComponent;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtilsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -29,7 +28,7 @@ public class CustomPDFGeneratorTest {
 
         pdfGenerator.setPdfGenUtils(mockUtils);
 
-        stubComponentRenderer();
+//        stubComponentRenderer();
 
         CustomDocumentInfo documentInfo = stubDocInfo();
 
@@ -39,17 +38,17 @@ public class CustomPDFGeneratorTest {
 
     }
 
-    private void stubComponentRenderer() {
-        CustomComponentRenderer componentRenderer = mock(CustomComponentRenderer.class);
-        pdfGenerator.setComponentRenderer(componentRenderer);
-    }
+//    private void stubComponentRenderer() {
+//        CustomComponentRenderer componentRenderer = mock(CustomComponentRenderer.class);
+//        pdfGenerator.setComponentRenderer(componentRenderer);
+//    }
 
     public CustomDocumentInfo stubDocInfo() {
 
         CustomDocumentInfo docInfo = mock(CustomDocumentInfo.class);
 
         when(docInfo.getDocType()).thenReturn(null);
-        List<DocComponent> textComponents = (Arrays.asList((DocComponent)mock(TextComponent.class)));
+        List<CustomComponent> textComponents = (Arrays.asList((CustomComponent)mock(CustomTextComponent.class)));
         when(docInfo.getComponents()).thenReturn(textComponents);
         when(docInfo.getName()).thenReturn("name");
 

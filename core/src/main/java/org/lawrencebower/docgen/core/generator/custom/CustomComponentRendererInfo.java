@@ -6,7 +6,7 @@ import com.lowagie.text.Element;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.pdf.PdfWriter;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.core.generator.model.DocComponentRendererInfo;
+import org.lawrencebower.docgen.core.document.DocComponentRendererInfo;
 
 import java.io.OutputStream;
 

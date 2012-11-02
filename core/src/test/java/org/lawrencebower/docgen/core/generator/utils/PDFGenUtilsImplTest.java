@@ -1,12 +1,20 @@
 package org.lawrencebower.docgen.core.generator.utils;
 
-import org.lawrencebower.docgen.core.document.OverlayDocumentInfo;
-import org.lawrencebower.docgen.core.document.component.DocComponent;
+import org.junit.runner.RunWith;
+import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponent;
+import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponentFactory;
+import org.lawrencebower.docgen.core.generator.model.itext_component.ITextTextComponent;
+import org.lawrencebower.docgen.core.generator.overlay.OverlayDocumentInfo;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.type.DocType;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
+import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponentFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +25,12 @@ import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:META-INF/core-test-context.xml"})
 public class PDFGenUtilsImplTest {
+
+    @Autowired
+    private ITextComponentFactory componentFactory;
 
     private PDFGenUtilsImpl pdfGenUtils;
     private OverlayDocumentInfo docInfo;
@@ -33,7 +46,7 @@ public class PDFGenUtilsImplTest {
 
 
         when(docInfo.getDocType()).thenReturn(null);
-        List<DocComponent> textComponents = Arrays.asList(mock(DocComponent.class));
+        List<OverlayComponent> textComponents = Arrays.asList(mock(OverlayComponent.class));
         when(docInfo.getComponents()).thenReturn(textComponents);
         when(docInfo.getName()).thenReturn("name");
 
@@ -52,7 +65,7 @@ public class PDFGenUtilsImplTest {
         OverlayDocumentInfo testDoc = mock(OverlayDocumentInfo.class);
 
         when(testDoc.getDocType()).thenReturn(DocType.OVERLAY);
-        when(testDoc.getComponents()).thenReturn(new ArrayList<DocComponent>());
+        when(testDoc.getComponents()).thenReturn(new ArrayList<OverlayComponent>());
         when(testDoc.getName()).thenReturn("name");
 
         try {
@@ -88,7 +101,7 @@ public class PDFGenUtilsImplTest {
         OverlayDocumentInfo testDoc = mock(OverlayDocumentInfo.class);
 
         when(testDoc.getDocType()).thenReturn(DocType.OVERLAY);
-        List<DocComponent> textComponents = Arrays.asList(mock(DocComponent.class));
+        List<OverlayComponent> textComponents = Arrays.asList(mock(OverlayComponent.class));
         when(testDoc.getComponents()).thenReturn(textComponents);
         when(testDoc.getName()).thenReturn(null);
 
@@ -104,17 +117,19 @@ public class PDFGenUtilsImplTest {
     @org.junit.Test
     public void testCheckCoordinates_validCoordinates_noError() {
 
-        DocComponent component = new TextComponent(HorizontalAlignment.LEFT, "value");
+        TextComponent component = new TextComponent(HorizontalAlignment.LEFT, "value");
         component.setCoordinates(new DocCoordinates(1, 1, 1, 1));
-        pdfGenUtils.checkCoordinates(Arrays.asList(component));
+        ITextComponent overlayText = componentFactory.createTextComponent(component);
+        pdfGenUtils.checkCoordinatesPresent(Arrays.asList(overlayText));
     }
 
     @org.junit.Test
     public void testCheckCoordinates_nullCoordinate_throwsError() {
 
         try {
-            DocComponent component = new TextComponent(HorizontalAlignment.LEFT, "value");
-            pdfGenUtils.checkCoordinates(Arrays.asList(component));
+            TextComponent component = new TextComponent(HorizontalAlignment.LEFT, "value");
+            ITextComponent overlayText = componentFactory.createTextComponent(component);
+            pdfGenUtils.checkCoordinatesPresent(Arrays.asList(overlayText));
         } catch (DocGenException e) {
             String message = e.getMessage();
             assertTrue(message.startsWith("Coordinates are null"));

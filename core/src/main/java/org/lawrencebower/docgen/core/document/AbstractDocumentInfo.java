@@ -1,14 +1,12 @@
 package org.lawrencebower.docgen.core.document;
 
-import org.lawrencebower.docgen.core.document.component.DocComponent;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractDocumentInfo implements DocumentInfo {
+public abstract class AbstractDocumentInfo<T extends RenderableComponent> implements DocumentInfo<T> {
 
     protected String name;
-    private List<DocComponent> components = new ArrayList<>();
+    private List<T> components = new ArrayList<>();
 
     @Override
     public void setName(String name) {
@@ -21,17 +19,17 @@ public abstract class AbstractDocumentInfo implements DocumentInfo {
     }
 
     @Override
-    public void addComponent(DocComponent component) {
+    public void addComponent(T component) {
         this.components.add(component);
     }
 
     @Override
-    public void setComponents(List<DocComponent> components) {
+    public void setComponents(List<T> components) {
         this.components = components;
     }
 
     @Override
-    public List<DocComponent> getComponents() {
+    public List<T> getComponents() {
         return components;
     }
 

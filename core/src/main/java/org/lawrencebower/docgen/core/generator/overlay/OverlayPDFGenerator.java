@@ -2,24 +2,15 @@ package org.lawrencebower.docgen.core.generator.overlay;
 
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
-import org.lawrencebower.docgen.core.document.OverlayDocumentInfo;
-import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.generator.model.AbstractPDFGenerator;
-import org.lawrencebower.docgen.core.generator.model.PDFDocument;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.lawrencebower.docgen.core.document.PDFDocument;
+import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
 
 import java.util.List;
 
 public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocumentInfo> {
 
     private OverlayDocumentInfo docInfo;
-
-    private OverlayComponentRenderer componentRenderer;
-
-    @Autowired
-    public void setComponentRenderer(OverlayComponentRenderer componentRenderer) {
-        this.componentRenderer = componentRenderer;
-    }
 
     @Override
     public PDFDocument generatePDF(OverlayDocumentInfo docInfo) {
@@ -49,9 +40,9 @@ public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocumentInf
 
         OverlayComponentRendererInfo rendererInfo = new OverlayComponentRendererInfo(pdfStamper);
 
-        List<? extends DocComponent> components = docInfo.getComponents();
+        List<OverlayComponent> components = docInfo.getComponents();
 
-        for (DocComponent component : components) {
+        for (OverlayComponent component : components) {
             renderComponent(component, rendererInfo);
         }
     }
@@ -67,13 +58,12 @@ public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocumentInf
     @Override
     protected void checkRequiredValuesPresent() {
         pdfGenUtils.checkRequiredValuesPresent(docInfo);
-        pdfGenUtils.checkCoordinates(docInfo.getComponents());
     }
 
-    private void renderComponent(DocComponent component,
+    private void renderComponent(OverlayComponent component,
                                  OverlayComponentRendererInfo rendererInfo) {
 
-        componentRenderer.createAndRenderComponent(component, rendererInfo);
+        component.createAndRenderComponent(rendererInfo);
     }
 
 }

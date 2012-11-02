@@ -1,17 +1,16 @@
 package org.lawrencebower.docgen.core.document;
 
-import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.type.DocType;
-import org.lawrencebower.docgen.core.generator.model.PDFDocument;
 
 import java.util.List;
 
-public interface DocumentInfo {
+public interface DocumentInfo<T extends RenderableComponent> {
+
     String getName();
 
-    void setComponents(List<DocComponent> components);
+    void setComponents(List<T> components);
 
-    List<DocComponent> getComponents();
+    List<T> getComponents();
 
     DocType getDocType();
 
@@ -19,5 +18,5 @@ public interface DocumentInfo {
 
     void setName(String name);
 
-    void addComponent(DocComponent component);
+    void addComponent(T component);
 }

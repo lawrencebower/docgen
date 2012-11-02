@@ -1,15 +1,16 @@
-package org.lawrencebower.docgen.core.document;
+package org.lawrencebower.docgen.core.generator.overlay;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.AbstractIntegrationTest;
-import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
-import org.lawrencebower.docgen.core.generator.model.PDFDocument;
-import org.lawrencebower.docgen.core.generator.overlay.OverlayPDFGenerator;
+import org.lawrencebower.docgen.core.document.PDFDocument;
+import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
+import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponentFactory;
+import org.lawrencebower.docgen.core.generator.overlay.component.OverlayTextComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -24,7 +25,9 @@ import static org.junit.Assert.assertTrue;
 public class OverlayDocumentInfoIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired
-    OverlayPDFGenerator pdfGenerator;
+    private OverlayPDFGenerator pdfGenerator;
+    @Autowired
+    private OverlayComponentFactory componentFactory;
 
     @Before
     public void setup(){
@@ -42,7 +45,7 @@ public class OverlayDocumentInfoIntegrationTest extends AbstractIntegrationTest 
 
         overlayDocumentInfo.setSourcePDF(inputFilePath);
 
-        DocComponent textComponent = generateSimpleTextComponent();
+        OverlayComponent textComponent = generateSimpleTextComponent();
 
         overlayDocumentInfo.setComponents(Arrays.asList(textComponent));
 
@@ -57,13 +60,13 @@ public class OverlayDocumentInfoIntegrationTest extends AbstractIntegrationTest 
         assertTrue(fileSameAsExpected);
     }
 
-    private DocComponent generateSimpleTextComponent() {
+    private OverlayTextComponent generateSimpleTextComponent() {
 
         DocCoordinates coordinates = new DocCoordinates(100, 675, 180, 81);
 
         TextComponent textComponent = new TextComponent(HorizontalAlignment.LEFT, "39 York Street");
         textComponent.setCoordinates(coordinates);
 
-        return textComponent;
+        return componentFactory.createOverlayText(textComponent);
     }
 }

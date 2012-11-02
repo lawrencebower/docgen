@@ -8,6 +8,7 @@ import com.lowagie.text.pdf.PdfContentByte;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponent;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,7 +17,7 @@ public abstract class AbstractOverlayRenderer {
     @Autowired
     protected PDFGenUtils pdfUtils;
 
-    protected DocComponent docComponent;
+    protected ITextComponent docComponent;
 
     protected ColumnText createTextColumn(PdfContentByte canvas,
                                           int boxAlignment,
