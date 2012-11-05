@@ -10,6 +10,10 @@ public class CustomImageComponent extends CustomComponent<ITextImageComponent> {
     @Autowired
     private CustomImageRenderer renderer;
 
+    private CustomImageComponent() {
+        //enforce spring creation
+    }
+
     public void setComponent(ITextImageComponent component) {
         this.component = component;
     }

@@ -10,6 +10,10 @@ public class OverlayTableComponent extends OverlayComponent<ITextTableComponent>
     @Autowired
     private OverlayTableRenderer renderer;
 
+    private OverlayTableComponent() {
+        //enforce spring creation
+    }
+
     public void setComponent(ITextTableComponent component) {
         this.component = component;
         checkDocCoordinatesSet();

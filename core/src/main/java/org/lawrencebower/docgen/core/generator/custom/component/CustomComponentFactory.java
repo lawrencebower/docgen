@@ -4,10 +4,6 @@ import org.lawrencebower.docgen.core.document.component.*;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.itext_component.*;
-import org.lawrencebower.docgen.core.generator.overlay.component.OverlayCheckBoxComponent;
-import org.lawrencebower.docgen.core.generator.overlay.component.OverlayImageComponent;
-import org.lawrencebower.docgen.core.generator.overlay.component.OverlayTableComponent;
-import org.lawrencebower.docgen.core.generator.overlay.component.OverlayTextComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class CustomComponentFactory {
@@ -16,18 +12,27 @@ public abstract class CustomComponentFactory {
     private ITextComponentFactory iTextFactory;
 
     public abstract CustomImageComponent getImageComponent();
+
     public abstract CustomTableComponent getTableComponent();
+
     public abstract CustomTextComponent getTextComponent();
+
     public abstract CustomLineComponent getLineComponent();
+
     public abstract CustomNewLineComponent getNewLineComponent();
 
-    public CustomComponent createCustomComponent(DocComponent component){
-        switch (component.getComponentType()){
-            case TEXT: return createCustomText((TextComponent) component);
-            case TABLE: return createCustomTable((TableComponent) component);
-            case IMAGE: return createCustomImage((ImageComponent) component);
-            case LINE: return createCustomLine((LineComponent) component);
-            case NEWLINE: return createCustomNewLine((NewLineComponent) component);
+    public CustomComponent createCustomComponent(DocComponent component) {
+        switch (component.getComponentType()) {
+            case TEXT:
+                return createCustomText((TextComponent) component);
+            case TABLE:
+                return createCustomTable((TableComponent) component);
+            case IMAGE:
+                return createCustomImage((ImageComponent) component);
+            case LINE:
+                return createCustomLine((LineComponent) component);
+            case NEWLINE:
+                return createCustomNewLine((NewLineComponent) component);
         }
         throw new DocGenException("DocComponent not mapped to CustomComponent? " + component.getClass());
     }
@@ -76,7 +81,7 @@ public abstract class CustomComponentFactory {
         return overlayComponent;
     }
 
-    public CustomLineComponent createCustomLine(LineComponent component){
+    public CustomLineComponent createCustomLine(LineComponent component) {
 
         ITextLineComponent iTextComponent = iTextFactory.getLineComponent();
         iTextComponent.setComponent(component);

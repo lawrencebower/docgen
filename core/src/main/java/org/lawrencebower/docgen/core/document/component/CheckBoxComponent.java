@@ -16,9 +16,6 @@ public class CheckBoxComponent extends DocComponent {
         this.selected = selected;
     }
 
-    public CheckBoxComponent() {
-    }
-
     public CheckBoxComponent(HorizontalAlignment alignment) {
         super(alignment);
     }

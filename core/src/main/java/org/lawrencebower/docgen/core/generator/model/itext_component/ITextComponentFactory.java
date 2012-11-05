@@ -5,6 +5,7 @@ import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 
 public abstract class ITextComponentFactory {
+
     public abstract ITextCheckBoxComponent getCheckBoxComponent();
 
     public abstract ITextImageComponent getImageComponent();

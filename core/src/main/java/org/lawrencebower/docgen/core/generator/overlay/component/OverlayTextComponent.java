@@ -10,6 +10,10 @@ public class OverlayTextComponent extends OverlayComponent<ITextTextComponent> {
     @Autowired
     private OverlayTextRenderer renderer;
 
+    private OverlayTextComponent() {
+        //enforce spring creation
+    }
+
     public void setComponent(ITextTextComponent component) {
         this.component = component;
         checkDocCoordinatesSet();

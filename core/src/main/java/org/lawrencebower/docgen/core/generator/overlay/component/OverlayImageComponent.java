@@ -10,6 +10,10 @@ public class OverlayImageComponent extends OverlayComponent<ITextImageComponent>
     @Autowired
     private OverlayImageRenderer renderer;
 
+    private OverlayImageComponent() {
+        //enforce spring creation
+    }
+
     public void setComponent(ITextImageComponent component) {
         this.component = component;
         checkDocCoordinatesSet();

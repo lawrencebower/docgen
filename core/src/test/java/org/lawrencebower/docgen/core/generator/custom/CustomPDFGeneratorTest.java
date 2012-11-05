@@ -28,8 +28,6 @@ public class CustomPDFGeneratorTest {
 
         pdfGenerator.setPdfGenUtils(mockUtils);
 
-//        stubComponentRenderer();
-
         CustomDocumentInfo documentInfo = stubDocInfo();
 
         pdfGenerator.generatePDF(documentInfo);
@@ -37,11 +35,6 @@ public class CustomPDFGeneratorTest {
         verify(mockUtils).checkRequiredValuesPresent(documentInfo);
 
     }
-
-//    private void stubComponentRenderer() {
-//        CustomComponentRenderer componentRenderer = mock(CustomComponentRenderer.class);
-//        pdfGenerator.setComponentRenderer(componentRenderer);
-//    }
 
     public CustomDocumentInfo stubDocInfo() {
 

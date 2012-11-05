@@ -10,6 +10,9 @@ public class OverlayCheckBoxComponent extends OverlayComponent<ITextCheckBoxComp
     @Autowired
     private OverlayCheckBoxRenderer renderer;
 
+    private OverlayCheckBoxComponent() {//enforce spring creation
+    }
+
     public void setComponent(ITextCheckBoxComponent component) {
         this.component = component;
         checkDocCoordinatesSet();

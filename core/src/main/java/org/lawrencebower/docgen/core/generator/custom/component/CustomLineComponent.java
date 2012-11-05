@@ -12,6 +12,10 @@ public class CustomLineComponent extends CustomComponent<ITextLineComponent> {
     @Autowired
     private CustomLineRenderer renderer;
 
+    private CustomLineComponent() {
+        //enforce spring creation
+    }
+
     public void setComponent(ITextLineComponent component) {
         this.component = component;
     }

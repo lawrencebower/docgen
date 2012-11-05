@@ -24,10 +24,7 @@ import static org.junit.Assert.assertTrue;
 public abstract class AbstractOverlayRendererTest extends AbstractIntegrationTest {
 
     @Autowired
-    private OverlayPDFGenerator pdfGenerator;
-    @Autowired
     private OverlayComponentFactory componentFactory;
-
     @Autowired
     private OverlayPDFGenerator overlayGenerator;
 
@@ -36,7 +33,7 @@ public abstract class AbstractOverlayRendererTest extends AbstractIntegrationTes
                                                    String sourcePDF,
                                                    DocComponent... components) {
 
-        OverlayDocumentInfo docInfo = new OverlayDocumentInfo("Doc name", pdfGenerator);
+        OverlayDocumentInfo docInfo = new OverlayDocumentInfo("Doc name", overlayGenerator);
 
         docInfo.setSourcePDF(sourcePDF);
 
@@ -67,28 +64,6 @@ public abstract class AbstractOverlayRendererTest extends AbstractIntegrationTes
     }
 
     protected OverlayComponent createOverlayComponent(DocComponent component){
-         switch (component.getComponentType()){
-             case TEXT: return createOverlayText((TextComponent) component);
-             case TABLE: return createOverlayTable((TableComponent) component);
-             case IMAGE: return createOverlayImage((ImageComponent) component);
-             case CHECKBOX: return createOverlayCheckBox((CheckBoxComponent) component);
-         }
-        throw new DocGenException("DocComponent not mapped to OverlayComponent? " + component.getClass());
-    }
-
-    private OverlayComponent createOverlayCheckBox(CheckBoxComponent component) {
-        return componentFactory.createOverlayCheckBox(component);
-    }
-
-    private OverlayComponent createOverlayImage(ImageComponent component) {
-        return componentFactory.createOverlayImage(component);
-    }
-
-    private OverlayComponent createOverlayTable(TableComponent component) {
-        return componentFactory.createOverlayTable(component);
-    }
-
-    private OverlayTextComponent createOverlayText(TextComponent component) {
-        return componentFactory.createOverlayText(component);
+        return componentFactory.createOverlayComponent(component);
     }
 }

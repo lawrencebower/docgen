@@ -10,6 +10,10 @@ public class CustomTextComponent extends CustomComponent<ITextTextComponent> {
     @Autowired
     private CustomTextRenderer renderer;
 
+    private CustomTextComponent() {
+        //enforce spring creation
+    }
+
     public void setComponent(ITextTextComponent component) {
         this.component = component;
     }

@@ -1,6 +1,5 @@
 package org.lawrencebower.docgen.core.generator.overlay.component;
 
-import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.generator.model.AbstractRenderableComponent;
 import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponent;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererInfo;
@@ -13,12 +12,12 @@ public abstract class OverlayComponent<T2 extends ITextComponent>
     @Autowired
     PDFGenUtils pdfUtils;
 
+    public void setPdfUtils(PDFGenUtils pdfUtils) {
+        this.pdfUtils = pdfUtils;
+    }
+
     @Override
     public abstract void createAndRenderComponent(OverlayComponentRendererInfo rendererInfo);
-
-    public DocCoordinates getCoordinates(){
-        return this.component.getCoordinates();
-    }
 
     protected void checkDocCoordinatesSet() {
         pdfUtils.checkCoordinatesPresent(component);

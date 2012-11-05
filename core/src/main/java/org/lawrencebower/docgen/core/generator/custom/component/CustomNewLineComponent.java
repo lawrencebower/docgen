@@ -10,6 +10,10 @@ public class CustomNewLineComponent extends CustomComponent<ITextNewLineComponen
     @Autowired
     private CustomNewLineRenderer renderer;
 
+    private CustomNewLineComponent() {
+        //enforce spring creation
+    }
+
     public void setComponent(ITextNewLineComponent component) {
         this.component = component;
     }

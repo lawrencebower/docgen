@@ -1,21 +1,40 @@
 package org.lawrencebower.docgen.core.generator.overlay.component;
 
 import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
+import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.ImageComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
+import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.itext_component.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class OverlayComponentFactory {
 
     @Autowired
-    ITextComponentFactory iTextFactory;
+    private ITextComponentFactory iTextFactory;
 
     public abstract OverlayCheckBoxComponent getCheckBoxComponent();
+
     public abstract OverlayImageComponent getImageComponent();
+
     public abstract OverlayTableComponent getTableComponent();
+
     public abstract OverlayTextComponent getTextComponent();
+
+    public OverlayComponent createOverlayComponent(DocComponent component) {
+        switch (component.getComponentType()) {
+            case TEXT:
+                return createOverlayText((TextComponent) component);
+            case TABLE:
+                return createOverlayTable((TableComponent) component);
+            case IMAGE:
+                return createOverlayImage((ImageComponent) component);
+            case CHECKBOX:
+                return createOverlayCheckBox((CheckBoxComponent) component);
+        }
+        throw new DocGenException("DocComponent not mapped to OverlayComponent? " + component.getClass());
+    }
 
     public OverlayCheckBoxComponent createOverlayCheckBox(CheckBoxComponent component) {
 
@@ -60,4 +79,5 @@ public abstract class OverlayComponentFactory {
 
         return overlayComponent;
     }
+
 }

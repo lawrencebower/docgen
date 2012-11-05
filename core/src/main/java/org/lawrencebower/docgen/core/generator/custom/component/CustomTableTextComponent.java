@@ -11,6 +11,9 @@ public class CustomTableTextComponent extends CustomComponent<ITextTableTextComp
     @Autowired
     private CustomTableTextRenderer renderer;
 
+    private CustomTableTextComponent() {
+        //enforce spring creation
+    }
 
     public void setComponent(ITextTableTextComponent component) {
         this.component = component;
