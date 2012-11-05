@@ -12,8 +12,8 @@ public abstract class AbstractRenderableComponent
 
     public abstract void setComponent(T2 component);
 
-    @Override
-    public String getName() {
-        return component.getName();
-    }
+//    @Override
+//    public String getName() {
+//        return component.getName();
+//    }
 }

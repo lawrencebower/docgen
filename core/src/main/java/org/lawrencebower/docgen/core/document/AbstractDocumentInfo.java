@@ -1,5 +1,9 @@
 package org.lawrencebower.docgen.core.document;
 
+import org.apache.commons.lang.StringUtils;
+import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +12,12 @@ public abstract class AbstractDocumentInfo<T extends RenderableComponent> implem
     protected String name;
     private List<T> components = new ArrayList<>();
 
-    @Override
-    public void setName(String name) {
+    public AbstractDocumentInfo(String name) {
+
+        if(StringUtils.isWhitespace(name)){
+            throw new DocGenException("Name is not set");
+        }
+
         this.name = name;
     }
 

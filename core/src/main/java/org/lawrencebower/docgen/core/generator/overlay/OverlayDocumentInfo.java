@@ -15,12 +15,8 @@ public class OverlayDocumentInfo extends AbstractDocumentInfo<OverlayComponent> 
     public OverlayDocumentInfo(String name,
                                OverlayPDFGenerator pdfGenerator) {
 
-        if(StringUtils.isWhitespace(name)){
-            throw new DocGenException("Name is not set");
-        }
-
+        super(name);
         this.pdfGenerator = pdfGenerator;
-        this.name = name;
     }
 
     public void setSourcePDF(String sourcePDF) {

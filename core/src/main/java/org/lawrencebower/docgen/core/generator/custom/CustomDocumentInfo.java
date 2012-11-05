@@ -1,11 +1,9 @@
 package org.lawrencebower.docgen.core.generator.custom;
 
-import org.apache.commons.lang.StringUtils;
 import org.lawrencebower.docgen.core.document.AbstractDocumentInfo;
-import org.lawrencebower.docgen.core.document.type.DocType;
-import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 import org.lawrencebower.docgen.core.document.PDFDocument;
+import org.lawrencebower.docgen.core.document.type.DocType;
+import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 
 public class CustomDocumentInfo extends AbstractDocumentInfo<CustomComponent> {
 
@@ -13,13 +11,8 @@ public class CustomDocumentInfo extends AbstractDocumentInfo<CustomComponent> {
 
     public CustomDocumentInfo(String name,
                               CustomPDFGenerator pdfGenerator) {
-
-        if(StringUtils.isWhitespace(name)){
-            throw new DocGenException("Name is not set");
-        }
-
+        super(name);
         this.pdfGenerator = pdfGenerator;
-        this.name = name;
     }
 
     @Override

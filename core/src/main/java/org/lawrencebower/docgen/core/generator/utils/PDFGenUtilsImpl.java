@@ -47,8 +47,8 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
         }
     }
 
-    @Override
-    public Font getBaseFont() {
+//    @Override
+/*    public Font getBaseFont() {
         try {
             BaseFont baseFont = BaseFont.createFont();
             Font font = new Font(baseFont, DEFAULT_FONT_SIZE);
@@ -56,7 +56,7 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
         } catch (DocumentException | IOException e) {
             throw new DocGenException(e);
         }
-    }
+    }*/
 
     @Override
     public PdfReader getPDFReaderAndUnlockForSourcePDF(String sourcePDF) {

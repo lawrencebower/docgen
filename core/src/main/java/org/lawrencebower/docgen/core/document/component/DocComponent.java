@@ -14,13 +14,6 @@ public abstract class DocComponent {
         this.alignment = HorizontalAlignment.LEFT;
     }
 
-    protected DocComponent(HorizontalAlignment alignment,
-                           DocCoordinates coordinates) {
-
-        this.alignment = alignment;
-        this.coordinates = coordinates;
-    }
-
     protected DocComponent(HorizontalAlignment alignment) {
         this.alignment = alignment;
     }

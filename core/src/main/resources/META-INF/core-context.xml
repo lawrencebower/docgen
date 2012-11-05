@@ -77,9 +77,6 @@
     <bean id="customImageRenderer"
           class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomImageRenderer"/>
 
-    <bean id="customTableTextRenderer"
-          class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomTableTextRenderer"/>
-
     <bean id="customLineRenderer"
           class="org.lawrencebower.docgen.core.generator.custom.renderer.CustomLineRenderer"/>
 
@@ -130,10 +127,6 @@
 
     <bean id="customTableComponent"
           class="org.lawrencebower.docgen.core.generator.custom.component.CustomTableComponent"
-          scope="prototype"/>
-
-    <bean id="customTableTextComponent"
-          class="org.lawrencebower.docgen.core.generator.custom.component.CustomTableTextComponent"
           scope="prototype"/>
 
     <bean id="customLineComponent"

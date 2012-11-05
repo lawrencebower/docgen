@@ -21,7 +21,7 @@ public interface PDFGenUtils {
 
     void checkRequiredValuesPresent(DocumentInfo docInfo);
 
-    Font getBaseFont();
+//    Font getBaseFont();
 
     PdfReader getPDFReaderAndUnlockForSourcePDF(String sourcePDF);
 
