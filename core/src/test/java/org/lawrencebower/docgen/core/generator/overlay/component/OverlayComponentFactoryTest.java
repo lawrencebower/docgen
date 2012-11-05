@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,12 +25,12 @@ public class OverlayComponentFactoryTest {
     PDFGenUtils mockUtils;
 
     @Before
-    public void setup(){
+    public void setup() {
         mockUtils = mock(PDFGenUtils.class);
     }
 
     @Test
-    public void testCreateOverlayComponent_unKnownType_throwsError(){
+    public void testCreateOverlayComponent_unKnownType_throwsError() {
         try {
             DocComponent unknownComponent = new TableTextComponent("I am unsupported");
             factory.createOverlayComponent(unknownComponent);
@@ -39,15 +40,15 @@ public class OverlayComponentFactoryTest {
     }
 
     @Test
-    public void testCreateOverlayComponent_textComponent_correctComponentReturned(){
+    public void testCreateOverlayComponent_textComponent_correctComponentReturned() {
         DocComponent textComponent = new TextComponent("Text");
-        textComponent.setCoordinates(new DocCoordinates(1,2,3,4));
+        textComponent.setCoordinates(new DocCoordinates(1, 2, 3, 4));
         OverlayComponent overlayText = factory.createOverlayComponent(textComponent);
         assertTrue(overlayText instanceof OverlayTextComponent);
     }
 
     @Test
-    public void testCreateOverlayComponent_tableComponent_correctComponentReturned(){
+    public void testCreateOverlayComponent_tableComponent_correctComponentReturned() {
         DocComponent tableComponent = new TableComponent("Table");
         tableComponent.setCoordinates(new DocCoordinates(1, 2, 3, 4));
         OverlayComponent overlayText = factory.createOverlayComponent(tableComponent);
@@ -55,7 +56,7 @@ public class OverlayComponentFactoryTest {
     }
 
     @Test
-    public void testCreateOverlayComponent_imageComponent_correctComponentReturned(){
+    public void testCreateOverlayComponent_imageComponent_correctComponentReturned() {
         DocComponent imageComponent = new ImageComponent("Image");
         imageComponent.setCoordinates(new DocCoordinates(1, 2, 3, 4));
         OverlayComponent overlayText = factory.createOverlayComponent(imageComponent);
@@ -63,11 +64,45 @@ public class OverlayComponentFactoryTest {
     }
 
     @Test
-    public void testCreateOverlayComponent_checkboxComponent_correctComponentReturned(){
+    public void testCreateOverlayComponent_checkboxComponent_correctComponentReturned() {
         DocComponent checkBoxComponent = new CheckBoxComponent(true);
         checkBoxComponent.setCoordinates(new DocCoordinates(1, 2, 3, 4));
         OverlayComponent overlayText = factory.createOverlayComponent(checkBoxComponent);
         assertTrue(overlayText instanceof OverlayCheckBoxComponent);
     }
 
+    @Test
+    public void testCreateOverlayText_noCoordinates_errorThrown() {
+        DocComponent component = new TextComponent("Text");
+        testThrowsErrorIfCoordinatesNotSet(component);
+    }
+
+    @Test
+    public void testCreateOverlayTable_noCoordinates_errorThrown() {
+        DocComponent component = new TableComponent("Table");
+        testThrowsErrorIfCoordinatesNotSet(component);
+    }
+
+    @Test
+    public void testCreateOverlayImage_noCoordinates_errorThrown() {
+        DocComponent component = new ImageComponent("Image");
+        testThrowsErrorIfCoordinatesNotSet(component);
+    }
+
+    @Test
+    public void testCreateOverlayCheckbox_noCoordinates_errorThrown() {
+        DocComponent component = new CheckBoxComponent(true);
+        testThrowsErrorIfCoordinatesNotSet(component);
+    }
+
+    private void testThrowsErrorIfCoordinatesNotSet(DocComponent component) {
+        try {
+            factory.createOverlayComponent(component);
+        } catch (DocGenException e) {
+            String message = e.getMessage();
+            assertTrue(message.contains("Coordinates are null for component"));
+            return;
+        }
+        fail();//should not get here
+    }
 }
