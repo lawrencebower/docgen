@@ -101,28 +101,28 @@ public class ModelFactoryCodeImpl implements ModelFactory {
 
         //Contact 1
         customerProductDocMappings.addDocument(business1.getContact(),
-                                               product1.getproduct(),
+                                               product1.getProduct(),
                                                commercialInvoiceView);
 
         customerProductDocMappings.addDocument(business1.getContact(),
-                                               product2.getproduct(),
+                                               product2.getProduct(),
                                                commercialInvoiceView);
 
         customerProductDocMappings.addDocument(business1.getContact(),
-                                               product2.getproduct(),
+                                               product2.getProduct(),
                                                deliveryNoteView);
 
         //Contact 2
         customerProductDocMappings.addDocument(business2.getContact(),
-                                               product1.getproduct(),
+                                               product1.getProduct(),
                                                commercialInvoiceView);
 
         customerProductDocMappings.addDocument(business2.getContact(),
-                                               product2.getproduct(),
+                                               product2.getProduct(),
                                                commercialInvoiceView);
 
         customerProductDocMappings.addDocument(business2.getContact(),
-                                               product2.getproduct(),
+                                               product2.getProduct(),
                                                deliveryNoteView);
 
     }

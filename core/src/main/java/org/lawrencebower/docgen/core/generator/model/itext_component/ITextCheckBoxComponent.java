@@ -17,7 +17,7 @@ public class ITextCheckBoxComponent extends AbstractITextComponent<Phrase, Check
     @Override
     public Phrase createITextComponent() {
 
-        boolean selected = component.getSelected();
+        boolean selected = component.isSelected();
 
         String selectedText = getTextFromSelected(selected);
 

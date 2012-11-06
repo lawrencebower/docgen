@@ -62,7 +62,7 @@ public class DataEntryCB {
         Set<DocumentInfoView> docInfos = new HashSet<>();
 
         for (ProductView selectedProduct : selectedProducts) {
-            Product product = selectedProduct.getproduct();
+            Product product = selectedProduct.getProduct();
             List<DocumentInfoView> docInfo = customerProductMappings.getDocInfosForCustomerAndProduct(customer, product);
             docInfos.addAll(docInfo);
         }

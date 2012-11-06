@@ -16,7 +16,5 @@ public interface DocumentInfo<T extends RenderableComponent> {
 
     PDFDocument generatePDF();
 
-    void setName(String name);
-
     void addComponent(T component);
 }

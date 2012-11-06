@@ -12,7 +12,7 @@ public class ProductView {
         return product.getProductId();
     }
 
-    public Product getproduct() {
+    public Product getProduct() {
         return product;
     }
 }

@@ -105,7 +105,7 @@ public class AutoMappedFieldMapper {
     }
 
     private void setComponentText(DocComponentView docComponent, String text) {
-        docComponent.setComponentValue(text);
+        docComponent.setComponentFromParamString(text);
     }
 
 }

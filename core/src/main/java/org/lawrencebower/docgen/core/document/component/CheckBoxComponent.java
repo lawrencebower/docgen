@@ -29,7 +29,7 @@ public class CheckBoxComponent extends DocComponent {
         this.selected = selected;
     }
 
-    public boolean getSelected() {
+    public boolean isSelected() {
         return selected;
     }
 

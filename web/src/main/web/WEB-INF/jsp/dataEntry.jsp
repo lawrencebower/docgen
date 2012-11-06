@@ -37,16 +37,16 @@
                     </label>
                 </td>
                 <td>
-                    <c:if test="${field.textComponent}">
+                    <c:if test="${field.text }">
                         <input name="${field.name}"
-                               value="${field.value}"
+                               value="${field.componentValue}"
                                id="${field.name}"/>
                     </c:if>
-                    <c:if test="${field.textAreaComponent}">
+                    <c:if test="${field.textArea}">
                         <textarea cols="30"
                                   rows="8"
                                   name="${field.name}"
-                                  id="${field.name}"><c:out value="${field.value}"/></textarea>
+                                  id="${field.name}"><c:out value="${field.componentValue}"/></textarea>
                     </c:if>
                 </td>
             </tr>

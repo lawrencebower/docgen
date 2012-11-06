@@ -7,26 +7,27 @@ import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_model.view.constants.AutoMappedField;
 
-public class DocComponentView {
+public abstract class DocComponentView<T extends DocComponent> {
 
     public enum ComponentViewType {
         TEXT,
         TEXT_AREA,
         CHECK_BOX,
+        TABLE,
         CV
     }
 
-    private DocComponent docComponent;
-    private ComponentViewType componentViewType;
+    protected T docComponent;
+    protected ComponentViewType componentViewType;
     private AutoMappedField autoMappedField;
 
-    public DocComponentView(DocComponent docComponent, ComponentViewType type) {
+    public DocComponentView(T docComponent) {
+
         if (docComponent == null) {
             throw new DocGenException("DocComponent is null");
         }
 
         this.docComponent = docComponent;
-        this.componentViewType = type;
     }
 
     public DocComponent getDocComponent() {
@@ -44,31 +45,12 @@ public class DocComponentView {
         return name;
     }
 
-    public String getValue() {
+    public abstract String getComponentValue();
 
-        String value = "not set";
+    public abstract void setComponentFromParamString(String value);
 
-        if (isTextComponent() || isTextAreaComponent()) {
-            return ((TextComponent) docComponent).getTextString();
-        }
-
-        return value;
-    }
-
-    public boolean isTextComponent() {
-        return componentViewType == ComponentViewType.TEXT;
-    }
-
-    public boolean isTextAreaComponent() {
-        return componentViewType == ComponentViewType.TEXT_AREA;
-    }
-
-    public void setComponentValue(String value) {
-        if (isTextComponent() || isTextAreaComponent()) {
-            ((TextComponent) getDocComponent()).setText(value);
-        }else{
-            throw new DocGenException("Can not set the value for component of type " + docComponent.getClass());
-        }
+    public ComponentViewType getComponentViewType(){
+        return componentViewType;
     }
 
     public boolean isAutoMappedField(){
@@ -81,6 +63,14 @@ public class DocComponentView {
 
     public AutoMappedField getAutoMappedField() {
         return autoMappedField;
+    }
+
+    public boolean isText(){
+        return componentViewType == ComponentViewType.TEXT;
+    }
+
+    public boolean isTextArea(){
+        return componentViewType == ComponentViewType.TEXT_AREA;
     }
 
     @Override

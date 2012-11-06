@@ -41,7 +41,7 @@ public class FieldMapper {
         String value = getFieldValue(componentName, parameterMap.get(componentName));
 
         for (DocComponentView component : components) {
-            component.setComponentValue(value);
+            component.setComponentFromParamString(value);
         }
 
     }
