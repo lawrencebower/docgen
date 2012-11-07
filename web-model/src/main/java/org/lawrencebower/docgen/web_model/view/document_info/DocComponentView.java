@@ -3,11 +3,13 @@ package org.lawrencebower.docgen.web_model.view.document_info;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
-import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_model.view.constants.AutoMappedField;
 
 public abstract class DocComponentView<T extends DocComponent> {
+
+    protected static final String NULL_COMPONENT_MESSAGE = "DocComponent is null";
+    protected static final String NOT_SET_MESSAGE = "not set";
 
     public enum ComponentViewType {
         TEXT,
@@ -24,7 +26,7 @@ public abstract class DocComponentView<T extends DocComponent> {
     public DocComponentView(T docComponent) {
 
         if (docComponent == null) {
-            throw new DocGenException("DocComponent is null");
+            throw new DocGenException(NULL_COMPONENT_MESSAGE);
         }
 
         this.docComponent = docComponent;
@@ -36,7 +38,7 @@ public abstract class DocComponentView<T extends DocComponent> {
 
     public String getName() {
 
-        String name = "not set";
+        String name = NOT_SET_MESSAGE;
 
         if(docComponent.getName() != null){
             name = docComponent.getName();

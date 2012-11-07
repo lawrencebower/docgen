@@ -1,7 +1,5 @@
 package org.lawrencebower.docgen.web_model.view.constants;
 
-import org.lawrencebower.docgen.core.exception.DocGenException;
-
 public enum AutoMappedField {
 
     BUSINESS_NAME("BUSINESS_NAME"),
@@ -34,6 +32,7 @@ public enum AutoMappedField {
         return name;
     }
 
+/*
     public static boolean containsName(String name) {
 
         for (AutoMappedField autoMappedField : AutoMappedField.values()) {
@@ -53,4 +52,5 @@ public enum AutoMappedField {
         }
         throw new DocGenException("enum AutoMappedField not found with name " + name);
     }
+*/
 }

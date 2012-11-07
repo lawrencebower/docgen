@@ -13,6 +13,8 @@ public class ITextCheckBoxComponent extends AbstractITextComponent<Phrase, Check
     private PDFGenUtils pdfUtils;
 
     private int FONT_SIZE = 10;//todo maybe work out font size based on box area
+    private static final String SELECTED_STRING = "X";
+    private static final String UNSELECTED_STRING = "";
 
     @Override
     public Phrase createITextComponent() {
@@ -32,9 +34,9 @@ public class ITextCheckBoxComponent extends AbstractITextComponent<Phrase, Check
 
     private String getTextFromSelected(boolean selected) {
         if(selected){
-            return "X";
+            return SELECTED_STRING;
         }
-        return "";
+        return UNSELECTED_STRING;
     }
 
 }
