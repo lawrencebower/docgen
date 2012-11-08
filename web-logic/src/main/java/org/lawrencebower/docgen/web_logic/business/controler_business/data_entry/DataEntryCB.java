@@ -1,18 +1,17 @@
-package org.lawrencebower.docgen.web_logic.business.controler_business;
+package org.lawrencebower.docgen.web_logic.business.controler_business.data_entry;
 
 import org.apache.commons.io.IOUtils;
-import org.lawrencebower.docgen.core.document.DocumentInfo;
-import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.document.PDFDocument;
+import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedFieldMapper;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
 import org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper;
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
+import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_model.view.contact.Contact;
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
-import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_model.view.product.Product;
@@ -36,30 +35,31 @@ public class DataEntryCB {
     ViewUtils viewUtils;
     @Autowired
     ModelFactory modelFactory;
+    @Autowired
+    private CustomerProduct_Document_Mappings customerProductMappings;
+    @Autowired
+    FieldMapper fieldMapper;
+    @Autowired
+    private ViewableComponentFilter viewableComponentFilter;
 
     @Autowired
     @Qualifier("pdfOutputRoot")
     String fileRoot;
 
-    @Autowired
-    private CustomerProduct_Document_Mappings customerProductMappings;
-    @Autowired
-    FieldMapper fieldMapper;
-
     public List<DocumentInfoView> getDocumentsForViewing(ContactView selectedCustomer,
                                                          List<ProductView> selectedProducts) {
 
-        ArrayList<DocumentInfoView> relevantDocuments =
-                getRelevantDocuments(selectedCustomer, selectedProducts);
+        viewUtils.checkCustomerSet(selectedCustomer);
+        viewUtils.checkProductsSet(selectedProducts);
 
-        return relevantDocuments;
+        return getRelevantDocuments(selectedCustomer, selectedProducts);
     }
 
     private ArrayList<DocumentInfoView> getRelevantDocuments(ContactView selectedCustomer,
                                                              List<ProductView> selectedProducts) {
 
         Contact customer = selectedCustomer.getContact();
-        Set<DocumentInfoView> docInfos = new HashSet<>();
+        Set<DocumentInfoView> docInfos = new LinkedHashSet<>();//preserve order - for tests
 
         for (ProductView selectedProduct : selectedProducts) {
             Product product = selectedProduct.getProduct();
@@ -81,8 +81,7 @@ public class DataEntryCB {
         List<PDFDocument> results = new ArrayList<>();
 
         for (DocumentInfoView document : documents) {
-            DocumentInfo documentInfo = document.createDocumentInfo();
-            PDFDocument pdfDocument = documentInfo.generatePDF();
+            PDFDocument pdfDocument = document.generatePDF();
             pdfDocument.setName(document.getName());
             results.add(pdfDocument);
         }
@@ -129,12 +128,16 @@ public class DataEntryCB {
                                  ContactView selectedCustomer,
                                  ContactView selectedBusiness) {
 
+        viewUtils.checkCustomerSet(selectedCustomer);
+        viewUtils.checkBusinessSet(selectedBusiness);
+        viewUtils.checkDocumentsSet(documentInfos);
+
         Contact customerContact = selectedCustomer.getContact();
+
+        Contact businessContact = selectedBusiness.getContact();
 
         ContactView vendor = modelFactory.getVendor();
         Contact vendorContact = vendor.getContact();
-
-        Contact businessContact = selectedBusiness.getContact();
 
         reservedFieldMapper.mapFields(documentInfos,
                                       customerContact,
@@ -142,55 +145,26 @@ public class DataEntryCB {
                                       businessContact);
     }
 
+//    SETTERS FOR UNIT TESTS
+
+    protected void setPdfConcatenator(PDFConcatenator pdfConcatenator) {
+        this.pdfConcatenator = pdfConcatenator;
+    }
+
+    protected void setCustomerProductMappings(CustomerProduct_Document_Mappings customerProductMappings) {
+        this.customerProductMappings = customerProductMappings;
+    }
+
     public List<DocComponentView> getComponentsForViewing(List<DocumentInfoView> documents,
                                                           boolean showAutoMappedFields) {
+        List<DocComponentView> results;
 
-        List<DocComponentView> results = filterAutomapped(documents, showAutoMappedFields);
-
-        results = filterDuplicatedFields(results);
+        if (showAutoMappedFields) {
+            results = viewableComponentFilter.getComponents(documents);
+        } else {
+            results = viewableComponentFilter.getNonAutoMappedComponents(documents);
+        }
 
         return results;
     }
-
-    private List<DocComponentView> filterAutomapped(List<DocumentInfoView> documents,
-                                                    boolean showAutoMappedFields) {
-
-        List<DocComponentView> results = new ArrayList<>();
-
-        List<DocComponentView> componentViews = viewUtils.getAllComponentViewsFromDocs(documents);
-
-        for (DocComponentView docComponentView : componentViews) {
-            if (isComponentViewable(showAutoMappedFields, docComponentView)) {
-                results.add(docComponentView);
-            }
-        }
-        return results;
-    }
-
-    private boolean isComponentViewable(boolean showAutoMappedFields, DocComponentView docComponentView) {
-
-        boolean componentViewable = true;
-
-        if (showAutoMappedFields == false && docComponentView.isAutoMappedField()) {
-            componentViewable = false;
-        }
-
-        return componentViewable;
-    }
-
-    /**
-     * Adds the DocComponentViews to a Set and returns a unique list in the order they were added.
-     * There will be one DocComponent with each unique component name in the set. The Set evaluates
-     * the equality of the DocComponentViews based on the DocComponentView names.
-     */
-    private ArrayList<DocComponentView> filterDuplicatedFields(List<DocComponentView> documents) {
-
-        LinkedHashSet<DocComponentView> filteredViews = new LinkedHashSet<>();
-        for (DocComponentView document : documents) {
-            filteredViews.add(document);
-        }
-
-        return new ArrayList<>(filteredViews);
-    }
-
 }

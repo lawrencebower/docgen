@@ -14,13 +14,16 @@
     </bean>
 
     <bean name="customerSelectionCB"
-          class="org.lawrencebower.docgen.web_logic.business.controler_business.CustomerSelectionCB"/>
+          class="org.lawrencebower.docgen.web_logic.business.controler_business.customer_selection.CustomerSelectionCB"/>
 
     <bean name="productSelectionCB"
-          class="org.lawrencebower.docgen.web_logic.business.controler_business.ProductSelectionCB"/>
+          class="org.lawrencebower.docgen.web_logic.business.controler_business.product_selection.ProductSelectionCB"/>
 
     <bean name="dataEntryCB"
-          class="org.lawrencebower.docgen.web_logic.business.controler_business.DataEntryCB"/>
+          class="org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB"/>
+
+    <bean name="viewableComponentFilter"
+          class="org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.ViewableComponentFilter"/>
 
     <bean name="xmlModelMapper"
           class="org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactoryCodeImpl"

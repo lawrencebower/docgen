@@ -1,23 +1,61 @@
 package org.lawrencebower.docgen.web_logic.business.utils;
 
+import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.web_model.view.contact.ContactView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_model.view.product.ProductView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ViewUtils {
 
+    public static final String NO_CUSTOMER_SELECTED = "No customer selected?!";
+    public static final String NO_PRODUCTS_SELECTED = "No products selected?!";
+    public static final String NO_BUSINESS_SELECTED = "No business selected?!";
+    public static final String NO_DOCUMENTS_SELECTED = "No documents selected?!";
+
     public List<DocComponentView> getAllComponentViewsFromDocs(List<DocumentInfoView> documents) {
 
         List<DocComponentView> results = new ArrayList<>();
 
         for (DocumentInfoView documentInfoView : documents) {
-            for (DocComponentView docComponentView : documentInfoView.getComponentViews()) {
-                results.add(docComponentView);
-            }
+            results.addAll(getComponentViewsFromDoc(documentInfoView));
         }
 
         return results;
+    }
+
+    private List<DocComponentView> getComponentViewsFromDoc(DocumentInfoView documentInfoView) {
+        List<DocComponentView> results = new ArrayList<>();
+        for (DocComponentView docComponentView : documentInfoView.getComponentViews()) {
+            results.add(docComponentView);
+        }
+        return results;
+    }
+
+    public void checkBusinessSet(ContactView selectedBusiness) {
+        if (selectedBusiness == null) {
+            throw new DocGenException(NO_BUSINESS_SELECTED);
+        }
+    }
+
+    public void checkProductsSet(List<ProductView> selectedProducts) {
+        if (selectedProducts == null || selectedProducts.isEmpty()) {
+            throw new DocGenException(NO_PRODUCTS_SELECTED);
+        }
+    }
+
+    public void checkDocumentsSet(List<DocumentInfoView> selectedDocuments) {
+        if (selectedDocuments == null || selectedDocuments.isEmpty()) {
+            throw new DocGenException(NO_DOCUMENTS_SELECTED);
+        }
+    }
+
+    public void checkCustomerSet(ContactView selectedCustomer) {
+        if (selectedCustomer == null) {
+            throw new DocGenException(NO_CUSTOMER_SELECTED);
+        }
     }
 }

@@ -1,6 +1,7 @@
 package org.lawrencebower.docgen.web_model.view.document_info;
 
 import org.lawrencebower.docgen.core.document.DocumentInfo;
+import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
@@ -29,8 +30,7 @@ public class DocumentInfoView {
         return documentInfo.getName();
     }
 
-    public DocumentInfo createDocumentInfo() {
-
+    public DocumentInfo getDocumentInfo() {
         return documentInfo;
     }
 
@@ -56,4 +56,8 @@ public class DocumentInfoView {
         return results;
     }
 
+    public PDFDocument generatePDF() {
+        PDFDocument pdfDocument = documentInfo.generatePDF();
+        return pdfDocument;
+    }
 }
