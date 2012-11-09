@@ -13,23 +13,17 @@ public class AutoMappedFieldMapper {
     private Contact vendor;
     private Contact business;
 
-    public void mapFields(List<DocumentInfoView> documentInfoViews,
-                          Contact selectedCustomer,
+    public void mapFields(List<DocComponentView> components,
+                          Contact customer,
                           Contact vendor,
                           Contact business) {
 
-        this.customer = selectedCustomer;
+        this.customer = customer;
         this.vendor = vendor;
         this.business = business;
 
-        for (DocumentInfoView documentInfoView : documentInfoViews) {
-            checkAndMapDocument(documentInfoView);
-        }
-    }
-
-    private void checkAndMapDocument(DocumentInfoView documentInfoView) {
-        for (DocComponentView docComponentView : documentInfoView.getComponentViews()) {
-            checkAndMapComponent(docComponentView);
+        for (DocComponentView component : components) {
+            checkAndMapComponent(component);
         }
     }
 

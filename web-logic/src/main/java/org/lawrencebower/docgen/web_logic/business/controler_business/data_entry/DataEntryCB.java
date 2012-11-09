@@ -140,7 +140,9 @@ public class DataEntryCB {
         ContactView vendor = modelFactory.getVendor();
         Contact vendorContact = vendor.getContact();
 
-        reservedFieldMapper.mapFields(documentInfos,
+        List<DocComponentView> components = viewUtils.getAllComponentViewsFromDocs(documentInfos);
+
+        reservedFieldMapper.mapFields(components,
                                       customerContact,
                                       vendorContact,
                                       businessContact);

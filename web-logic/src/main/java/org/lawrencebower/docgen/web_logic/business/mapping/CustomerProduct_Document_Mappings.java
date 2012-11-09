@@ -6,14 +6,14 @@ import org.lawrencebower.docgen.web_model.view.contact.Contact;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_model.view.product.Product;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CustomerProduct_Document_Mappings {
 
-    private Map<CustomerProductPair, List<DocumentInfoView>> mappings = new HashMap<>();
+    /**
+     * using linked map as its helpful to preserve the order for tests
+     */
+    protected Map<CustomerProductPair, List<DocumentInfoView>> mappings = new LinkedHashMap<>();
 
     public void addDocument(Contact business,
                             Product product,

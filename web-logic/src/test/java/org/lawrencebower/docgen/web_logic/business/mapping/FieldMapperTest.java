@@ -24,7 +24,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/web-logic-test-context.xml"})
+@ContextConfiguration(locations = "classpath:META-INF/web-logic-test-context.xml")
 public class FieldMapperTest {
 
     @Autowired
@@ -37,6 +37,7 @@ public class FieldMapperTest {
     private final String fieldName1 = "fieldName1";
     private final String fieldName2 = "fieldName2";
     private final String fieldName3 = "fieldName3";
+
     private final String value1 = "value1";
     private final String value2 = "value2";
     private final String value3 = "value3";
