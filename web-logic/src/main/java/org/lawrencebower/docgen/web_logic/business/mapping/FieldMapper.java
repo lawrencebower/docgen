@@ -38,7 +38,8 @@ public class FieldMapper {
 
         List<DocComponentView> components = getComponentsWithName(componentName, documents);
 
-        String value = getFieldValue(componentName, parameterMap.get(componentName));
+        String[] componentValue = parameterMap.get(componentName);
+        String value = getFieldValue(componentName, componentValue);
 
         for (DocComponentView component : components) {
             component.setComponentFromParamString(value);

@@ -82,7 +82,8 @@ public class DataEntryCB {
 
         for (DocumentInfoView document : documents) {
             PDFDocument pdfDocument = document.generatePDF();
-            pdfDocument.setName(document.getName());
+            String documentName = document.getName();
+            pdfDocument.setName(documentName);
             results.add(pdfDocument);
         }
 

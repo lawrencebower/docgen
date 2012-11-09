@@ -36,12 +36,15 @@ public class CustomerProduct_Document_Mappings {
 
     public List<DocumentInfoView> getDocInfosForCustomerAndProduct(Contact business, Product product){
 
+        List<DocumentInfoView> results = new ArrayList<>();
+
         CustomerProductPair customerProductPair = makeCustomerProductPair(business, product);
         if(mappings.containsKey(customerProductPair)){
-            return mappings.get(customerProductPair);
+            List<DocumentInfoView> docInfos = mappings.get(customerProductPair);
+            results.addAll(docInfos);
         }
 
-        return new ArrayList<>();
+        return results;
     }
 
     class CustomerProductPair {
