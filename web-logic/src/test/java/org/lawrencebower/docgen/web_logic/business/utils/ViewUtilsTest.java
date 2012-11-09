@@ -16,7 +16,7 @@ import java.util.List;
 import static junit.framework.TestCase.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/web_logic-test-context.xml"})
+@ContextConfiguration(locations = {"classpath:META-INF/web-logic-test-context.xml"})
 public class ViewUtilsTest {
 
     @Autowired

@@ -49,11 +49,13 @@ public class FieldMapper {
     private String getFieldValue(String key, String[] strings) {
 
         if (strings.length == 0) {
-            throw new DocGenException("No values bound to field - " + key);
+            String message = String.format("No values bound to field '%s'", key);
+            throw new DocGenException(message);
         }
 
         if (strings.length > 1) {
-            throw new DocGenException("more than 1 value bound to field - " + key);
+            String message = String.format("more than 1 value bound to field '%s'", key);
+            throw new DocGenException(message);
         }
 
         return strings[0];

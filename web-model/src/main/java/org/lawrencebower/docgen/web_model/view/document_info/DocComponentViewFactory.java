@@ -7,7 +7,6 @@ import org.lawrencebower.docgen.web_model.view.document_info.component.CheckBoxC
 import org.lawrencebower.docgen.web_model.view.document_info.component.TextAreaComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.component.TextComponentView;
 
-//todo make this a spring factory
 public class DocComponentViewFactory {
 
     public TextComponentView createTextComponentView(TextComponent textComponent) {

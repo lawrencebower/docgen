@@ -9,7 +9,9 @@
 
     <import resource="usecase-context.xml"/>
 
-    <import resource="web_logic-context.xml"/>
+    <import resource="web-logic-context.xml"/>
+
+    <import resource="web-model-context.xml"/>
 
     <context:component-scan base-package="org.lawrencebower.docgen.web_logic"/>
 

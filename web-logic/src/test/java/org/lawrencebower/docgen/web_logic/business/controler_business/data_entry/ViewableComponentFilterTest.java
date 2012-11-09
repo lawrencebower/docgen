@@ -3,12 +3,10 @@ package org.lawrencebower.docgen.web_logic.business.controler_business.data_entr
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_model.view.constants.AutoMappedField;
 import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
-import org.lawrencebower.docgen.web_model.view.document_info.component.TextAreaComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.component.TextComponentView;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -26,7 +24,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/web_logic-test-context.xml"})
+@ContextConfiguration(locations = {"classpath:META-INF/web-logic-test-context.xml"})
 public class ViewableComponentFilterTest {
 
     @Mock

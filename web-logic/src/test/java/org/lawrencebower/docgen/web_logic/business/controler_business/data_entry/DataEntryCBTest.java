@@ -5,7 +5,6 @@ import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
-import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
@@ -38,7 +37,7 @@ import static org.mockito.Mockito.when;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/web_logic-test-context.xml"})
+@ContextConfiguration(locations = {"classpath:META-INF/web-logic-test-context.xml"})
 public class DataEntryCBTest {
 
     @Autowired
