@@ -22,16 +22,13 @@ public class CustomerProduct_Document_Mappings {
         CustomerProductPair pair = makeCustomerProductPair(business, product);
 
         if (mappings.containsKey(pair)) {
-            mappings.get(pair).add(document);
+            List<DocumentInfoView> documentInfoViews = mappings.get(pair);
+            documentInfoViews.add(document);
         }else{
             ArrayList<DocumentInfoView> list = new ArrayList<>();
             list.add(document);
             mappings.put(pair, list);
         }
-    }
-
-    private CustomerProductPair makeCustomerProductPair(Contact business, Product product) {
-        return new CustomerProductPair(business.getName(), product.getProductId());
     }
 
     public List<DocumentInfoView> getDocInfosForCustomerAndProduct(Contact business, Product product){
@@ -47,6 +44,12 @@ public class CustomerProduct_Document_Mappings {
         return results;
     }
 
+    private CustomerProductPair makeCustomerProductPair(Contact business, Product product) {
+        String name = business.getName();
+        String productId = product.getProductId();
+        return new CustomerProductPair(name, productId);
+    }
+
     class CustomerProductPair {
 
         private String customerName;
@@ -60,6 +63,7 @@ public class CustomerProduct_Document_Mappings {
         @Override
         public boolean equals(Object obj) {
 
+            boolean isEqual = false;
             if (obj instanceof CustomerProductPair) {
                 CustomerProductPair compareTo = (CustomerProductPair) obj;
 
@@ -68,10 +72,10 @@ public class CustomerProduct_Document_Mappings {
                 builder.append(this.customerName, compareTo.customerName);
                 builder.append(this.productId, compareTo.productId);
 
-                return builder.isEquals();
+                isEqual = builder.isEquals();
             }
 
-            return false;
+            return isEqual;
         }
 
         @Override
