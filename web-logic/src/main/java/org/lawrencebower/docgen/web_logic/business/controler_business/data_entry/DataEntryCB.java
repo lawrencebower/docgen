@@ -148,16 +148,6 @@ public class DataEntryCB {
                                       businessContact);
     }
 
-//    SETTERS FOR UNIT TESTS
-
-    protected void setPdfConcatenator(PDFConcatenator pdfConcatenator) {
-        this.pdfConcatenator = pdfConcatenator;
-    }
-
-    protected void setCustomerProductMappings(CustomerProduct_Document_Mappings customerProductMappings) {
-        this.customerProductMappings = customerProductMappings;
-    }
-
     public List<DocComponentView> getComponentsForViewing(List<DocumentInfoView> documents,
                                                           boolean showAutoMappedFields) {
         List<DocComponentView> results;
@@ -169,5 +159,15 @@ public class DataEntryCB {
         }
 
         return results;
+    }
+
+//    SETTERS FOR UNIT TESTS
+
+    protected void setPdfConcatenator(PDFConcatenator pdfConcatenator) {
+        this.pdfConcatenator = pdfConcatenator;
+    }
+
+    protected void setCustomerProductMappings(CustomerProduct_Document_Mappings customerProductMappings) {
+        this.customerProductMappings = customerProductMappings;
     }
 }

@@ -43,6 +43,8 @@ public class AutoMappedFieldMapperTest {
     public static final String VENDOR_PHONE_STRING = "vendorphone";
     public static final String VENDOR_COUNTRY_STRING = "vendorcountry";
     public static final String VENDOR_ADDRESS_STRING = "vendoraddress";
+    public static final String VENDOR_EMAIL_STRING = "vendoremail";
+    public static final String VENDOR_TAXID_STRING = "vendortaxid";
 
     public static final String CUSTOMER_NAME_STRING = "customername";
     public static final String CUSTOMER_CONTACT_NAME_STRING = "customercontact";
@@ -78,6 +80,8 @@ public class AutoMappedFieldMapperTest {
         when(vendor.getPhone()).thenReturn(VENDOR_PHONE_STRING);
         when(vendor.getCountry()).thenReturn(VENDOR_COUNTRY_STRING);
         when(vendor.getAddress()).thenReturn(VENDOR_ADDRESS_STRING);
+        when(vendor.getEmail()).thenReturn(VENDOR_EMAIL_STRING);
+        when(vendor.getTaxId()).thenReturn(VENDOR_TAXID_STRING);
     }
 
     //GENERAL TESTS//
@@ -195,6 +199,159 @@ public class AutoMappedFieldMapperTest {
 
 
     //VENDOR TESTS//
+
+    @Test
+    public void testMapFields_vendorCountry_correctFieldMapped() {
+
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_COUNTRY);
+
+        verify(component, atLeastOnce()).isAutoMappedField();
+        verify(component, times(1)).setComponentFromParamString(VENDOR_COUNTRY_STRING);
+        verify(vendor, times(1)).getCountry();
+        verifyNoMoreInteractions(business);
+        verifyNoMoreInteractions(customer);
+    }
+
+    @Test
+    public void testMapFields_vendorName_correctFieldMapped() {
+
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_NAME);
+
+        verify(component, atLeastOnce()).isAutoMappedField();
+        verify(component, times(1)).setComponentFromParamString(VENDOR_NAME_STRING);
+        verify(vendor, times(1)).getName();
+        verifyNoMoreInteractions(business);
+        verifyNoMoreInteractions(customer);
+    }
+
+    @Test
+    public void testMapFields_vendorAddress_correctFieldMapped() {
+
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_ADDRESS);
+
+        verify(component, atLeastOnce()).isAutoMappedField();
+        verify(component, times(1)).setComponentFromParamString(VENDOR_ADDRESS_STRING);
+        verify(vendor, times(1)).getAddress();
+        verifyNoMoreInteractions(business);
+        verifyNoMoreInteractions(customer);
+    }
+
+    @Test
+    public void testMapFields_vendorContactName_correctFieldMapped() {
+
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_CONTACT_NAME);
+
+        verify(component, atLeastOnce()).isAutoMappedField();
+        verify(component, times(1)).setComponentFromParamString(VENDOR_CONTACT_NAME_STRING);
+        verify(vendor, times(1)).getContactName();
+        verifyNoMoreInteractions(business);
+        verifyNoMoreInteractions(customer);
+    }
+
+    @Test
+    public void testMapFields_vendorPhone_correctFieldMapped() {
+
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_PHONE);
+
+        verify(component, atLeastOnce()).isAutoMappedField();
+        verify(component, times(1)).setComponentFromParamString(VENDOR_PHONE_STRING);
+        verify(vendor, times(1)).getPhone();
+        verifyNoMoreInteractions(business);
+        verifyNoMoreInteractions(customer);
+    }
+
+    @Test
+    public void testMapFields_vendorEmail_correctFieldMapped() {
+
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_EMAIL);
+
+        verify(component, atLeastOnce()).isAutoMappedField();
+        verify(component, times(1)).setComponentFromParamString(VENDOR_EMAIL_STRING);
+        verify(vendor, times(1)).getEmail();
+        verifyNoMoreInteractions(business);
+        verifyNoMoreInteractions(customer);
+    }
+
+    @Test
+    public void testMapFields_vendorTaxId_correctFieldMapped() {
+
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_TAX_ID);
+
+        verify(component, atLeastOnce()).isAutoMappedField();
+        verify(component, times(1)).setComponentFromParamString(VENDOR_TAXID_STRING);
+        verify(vendor, times(1)).getTaxId();
+        verifyNoMoreInteractions(business);
+        verifyNoMoreInteractions(customer);
+    }
+
+    //CUSTOMER TESTS//
+
+    @Test
+    public void testMapFields_customerName_correctFieldMapped() {
+
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.CUSTOMER_NAME);
+
+        verify(component, atLeastOnce()).isAutoMappedField();
+        verify(component, times(1)).setComponentFromParamString(CUSTOMER_NAME_STRING);
+
+        verify(customer, times(1)).getName();
+        verifyNoMoreInteractions(vendor);
+        verifyNoMoreInteractions(business);
+    }
+
+    @Test
+    public void testMapFields_customerAddress_correctFieldMapped() {
+
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.CUSTOMER_ADDRESS);
+
+        verify(component, atLeastOnce()).isAutoMappedField();
+        verify(component, times(1)).setComponentFromParamString(CUSTOMER_ADDRESS_STRING);
+
+        verify(customer, times(1)).getAddress();
+        verifyNoMoreInteractions(vendor);
+        verifyNoMoreInteractions(business);
+    }
+
+    @Test
+    public void testMapFields_customerContactName_correctFieldMapped() {
+
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.CUSTOMER_CONTACT_NAME);
+
+        verify(component, atLeastOnce()).isAutoMappedField();
+        verify(component, times(1)).setComponentFromParamString(CUSTOMER_CONTACT_NAME_STRING);
+
+        verify(customer, times(1)).getContactName();
+        verifyNoMoreInteractions(vendor);
+        verifyNoMoreInteractions(business);
+    }
+
+    @Test
+    public void testMapFields_customerCountry_correctFieldMapped() {
+
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.CUSTOMER_COUNTRY);
+
+        verify(component, atLeastOnce()).isAutoMappedField();
+        verify(component, times(1)).setComponentFromParamString(CUSTOMER_COUNTRY_STRING);
+
+        verify(customer, times(1)).getCountry();
+        verifyNoMoreInteractions(vendor);
+        verifyNoMoreInteractions(business);
+    }
+
+    @Test
+    public void testMapFields_customerPhone_correctFieldMapped() {
+
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.CUSTOMER_PHONE);
+
+        verify(component, atLeastOnce()).isAutoMappedField();
+        verify(component, times(1)).setComponentFromParamString(CUSTOMER_PHONE_STRING);
+
+        verify(customer, times(1)).getPhone();
+        verifyNoMoreInteractions(vendor);
+        verifyNoMoreInteractions(business);
+    }
+
+    //////////////////////////////////
 
     private DocComponentView makeComponentsAndMap(AutoMappedField field) {
 
