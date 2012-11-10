@@ -21,12 +21,17 @@ public class ProductSelectionController {
 
     static Logger logger = Logger.getLogger(ProductSelectionController.class);
 
-    @Autowired
     private ProductSelectionCB business;
-    @Autowired
     private SessionData sessionData;
 
-    public ProductSelectionController() {
+    @Autowired
+    public void setBusiness(ProductSelectionCB business) {
+        this.business = business;
+    }
+
+    @Autowired
+    public void setSessionData(SessionData sessionData) {
+        this.sessionData = sessionData;
     }
 
     @RequestMapping(value = "/productId/{productId}", method = RequestMethod.GET)
@@ -35,7 +40,7 @@ public class ProductSelectionController {
 
         logger.error("productId = [" + productId + "]");
 
-        addSelectedProductToSession(productId);
+        getProductAndAddToSession(productId);
 
         putAllProductsOnPageModel(model);
 
@@ -47,7 +52,7 @@ public class ProductSelectionController {
         model.addAttribute("products", products);
     }
 
-    private void addSelectedProductToSession(String productId) {
+    private void getProductAndAddToSession(String productId) {
         ProductView selectedProduct = business.getProduct(productId);
         sessionData.addSelectedProduct(selectedProduct);
     }

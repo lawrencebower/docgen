@@ -50,12 +50,12 @@ public class ModelFactoryCodeImpl implements ModelFactory {
 
     private void initVendor() {
         vendor = new ContactView(new Contact("Billy Bob's Widgets",
-                                               "Billy Bob",
-                                               "36 Billy Bob Street\nColchester\nEssex",
-                                               "534546454",
-                                               "UK",
-                                               "tax id",
-                                               "sales@ziath.com"));
+                                             "Billy Bob",
+                                             "36 Billy Bob Street\nColchester\nEssex",
+                                             "534546454",
+                                             "UK",
+                                             "tax id",
+                                             "sales@ziath.com"));
     }
 
     private void initDocuments() {
@@ -80,16 +80,16 @@ public class ModelFactoryCodeImpl implements ModelFactory {
     private void initCustomers() {
 
         business1 = new ContactView(new Contact("Contact 1",
-                                                  "David Davidson",
-                                                  "Just round the corner",
-                                                  "198293893839",
-                                                  "UK"));
+                                                "David Davidson",
+                                                "Just round the corner",
+                                                "198293893839",
+                                                "UK"));
 
         business2 = new ContactView(new Contact("Contact 2",
-                                                  "Billy Bob Bobson",
-                                                  "miles away",
-                                                  "38783478347",
-                                                  "CHINA"));
+                                                "Billy Bob Bobson",
+                                                "miles away",
+                                                "38783478347",
+                                                "CHINA"));
 
         customers.put(business1.getContactName(), business1);
         customers.put(business2.getContactName(), business2);
@@ -164,7 +164,7 @@ public class ModelFactoryCodeImpl implements ModelFactory {
     @Override
     public ProductView getProduct(String productId) {
         if (!products.containsKey(productId)) {
-            throw new DocGenException(String.format("product %s not found?!", productId));
+            throw new DocGenException(String.format("product '%s' not found?!", productId));
         }
         return products.get(productId);
     }

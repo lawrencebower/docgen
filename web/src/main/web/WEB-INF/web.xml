@@ -15,7 +15,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath:META-INF/webApplicationContext.xml
+            classpath:META-INF/web-application-context.xml
             classpath:META-INF/web-logic-context.xml
         </param-value>
     </context-param>
