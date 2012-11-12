@@ -64,7 +64,7 @@ public class ModelFactoryCodeImpl implements ModelFactory {
                                              "534546454",
                                              "UK",
                                              "tax id",
-                                             "sales@ziath.com"));
+                                             "sales@acme.com"));
     }
 
     private void initDocuments() {

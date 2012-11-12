@@ -17,7 +17,7 @@ public abstract class AbstractIntegrationTest {
     protected ChecksumUtils checksumUtils;
 
     @Autowired
-    @Qualifier("testInputRoot")
+    @Qualifier("coreTestInputRoot")
     String testInputRoot;
 
     @Autowired

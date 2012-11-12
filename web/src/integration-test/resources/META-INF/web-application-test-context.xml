@@ -16,6 +16,11 @@
 
     <import resource="web-application-test-params.xml"/>
 
+    <bean id="testFileUtils" class="org.lawrencebower.docgen.core.generator.utils.ChecksumUtils"/>
+    <bean id="testFileLineFilter" class="org.lawrencebower.docgen.core.generator.utils.TestFileLineFilter"/>
+
+    <import resource="integration-test-params.xml"/>
+
     <context:component-scan base-package="org.lawrencebower.docgen"/>
 
 </beans>

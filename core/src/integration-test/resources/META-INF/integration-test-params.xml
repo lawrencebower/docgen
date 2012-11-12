@@ -2,7 +2,7 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd">
 
-    <beans:bean name="testInputRoot" class="java.lang.String">
+    <beans:bean name="coreTestInputRoot" class="java.lang.String">
         <beans:constructor-arg value="C:\GitHub\docgen\core\src\integration-test\resources\"/>
     </beans:bean>
     <beans:bean name="testOutputRoot" class="java.lang.String">
