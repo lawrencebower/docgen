@@ -6,6 +6,16 @@
        http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd
        http://www.springframework.org/schema/context classpath:/org/springframework/context/config/spring-context-3.1.xsd">
 
-    <import resource="web-logic-context.xml"/>
+    <import resource="core-beans.xml"/>
+
+    <import resource="usecase-beans.xml"/>
+
+    <import resource="web-logic-beans.xml"/>
+
+    <import resource="web-model-beans.xml"/>
+
+    <import resource="web-application-test-params.xml"/>
+
+    <context:component-scan base-package="org.lawrencebower.docgen"/>
 
 </beans>

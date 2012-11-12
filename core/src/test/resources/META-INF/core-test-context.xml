@@ -6,7 +6,7 @@
              http://www.springframework.org/schema/context classpath:/org/springframework/context/config/spring-context-3.1.xsd">
 
 
-    <beans:import resource="core-context.xml"/>
+    <beans:import resource="core-beans.xml"/>
 
     <context:component-scan base-package="org.lawrencebower.docgen.core"/>
 

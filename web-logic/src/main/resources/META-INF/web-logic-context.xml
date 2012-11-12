@@ -5,42 +5,14 @@
              http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd
              http://www.springframework.org/schema/context classpath:/org/springframework/context/config/spring-context-3.1.xsd">
 
-    <import resource="core-context.xml"/>
+    <import resource="core-beans.xml"/>
 
-    <import resource="usecase-context.xml"/>
+    <import resource="usecase-beans.xml"/>
 
-    <bean name="pdfOutputRoot" class="java.lang.String">
-        <constructor-arg value="C:\code\output\"/>
-    </bean>
+    <import resource="web-logic-beans.xml"/>
 
-    <bean name="customerSelectionCB"
-          class="org.lawrencebower.docgen.web_logic.business.controler_business.customer_selection.CustomerSelectionCB"/>
+    <import resource="web-logic-params.xml"/>
 
-    <bean name="productSelectionCB"
-          class="org.lawrencebower.docgen.web_logic.business.controler_business.product_selection.ProductSelectionCB"/>
-
-    <bean name="dataEntryCB"
-          class="org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB"/>
-
-    <bean name="viewableComponentFilter"
-          class="org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.ViewableComponentFilter"/>
-
-    <bean name="xmlModelMapper"
-          class="org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactoryCodeImpl"
-          init-method="init"/>
-
-    <bean name="customerProductMappings"
-          class="org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings"/>
-
-    <bean name="fieldMapper"
-          class="org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper"/>
-
-    <bean name="reservedFieldMapper"
-          class="org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedFieldMapper"/>
-
-    <bean name="viewUtils"
-          class="org.lawrencebower.docgen.web_logic.business.utils.ViewUtils"/>
-
-    <context:component-scan base-package="org.lawrencebower.docgen.web_logic"/>
+    <context:component-scan base-package="org.lawrencebower.docgen"/>
 
 </beans>

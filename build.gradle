@@ -22,6 +22,6 @@ project(':web-logic') {
 
 project(':web') {
     dependencies {
-        compile project(':web-logic'), project(':core'), project(':web-model')
+        compile project(':web-logic'), project(':core'), project(':use_cases'), project(':web-model')
     }
 }

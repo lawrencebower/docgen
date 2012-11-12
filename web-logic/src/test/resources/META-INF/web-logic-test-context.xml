@@ -5,11 +5,13 @@
              http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd
              http://www.springframework.org/schema/context classpath:/org/springframework/context/config/spring-context-3.1.xsd">
 
-    <import resource="core-context.xml"/>
+    <import resource="core-beans.xml"/>
 
-    <import resource="usecase-context.xml"/>
+    <import resource="usecase-beans.xml"/>
 
-    <import resource="web-logic-context.xml"/>
+    <import resource="web-logic-beans.xml"/>
+
+    <import resource="web-logic-params.xml"/>
 
     <import resource="web-model-context.xml"/>
 
