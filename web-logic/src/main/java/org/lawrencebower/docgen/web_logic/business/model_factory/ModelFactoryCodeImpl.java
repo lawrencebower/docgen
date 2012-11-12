@@ -42,6 +42,12 @@ public class ModelFactoryCodeImpl implements ModelFactory {
 
     public static final String CUSTOMER_ID_1 = "Contact 1";
     public static final String CUSTOMER_ID_2 = "Contact 2";
+    public static final String PRODUCT_ID_1 = "id1";
+    public static final String PRODUCT_ID_2 = "id2";
+    public static final String DOC_1_NAME = CommercialInvoice.INVOICE_NAME;
+    public static final String DOC_2_NAME = DeliveryNote.DELIVERY_NOTE_NAME;
+    public static final String AUTO_MAPPED_EXAMPLE_FIELD = "soldToName:";
+    public static final String EXAMPLE_FIELD = "Date:";
 
     public void init() {
         initVendor();
@@ -73,8 +79,8 @@ public class ModelFactoryCodeImpl implements ModelFactory {
 
     private void initProducts() {
 
-        product1 = new ProductView(new Product("id1", "name 1"));
-        product2 = new ProductView(new Product("id2", "name 2"));
+        product1 = new ProductView(new Product(PRODUCT_ID_1, "name 1"));
+        product2 = new ProductView(new Product(PRODUCT_ID_2, "name 2"));
 
         products.put(product1.getId(), product1);
         products.put(product2.getId(), product2);

@@ -48,8 +48,7 @@ public class DataEntryController {
         ContactView selectedBusiness = sessionData.getSelectedBusiness();
 
         List<DocumentInfoView> documentInfos =
-                business.getDocumentsForViewing(selectedCustomer,
-                                                selectedProducts);
+                business.getDocumentsForViewing(selectedCustomer, selectedProducts);
 
         sessionData.setDocuments(documentInfos);
 
