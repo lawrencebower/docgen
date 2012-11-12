@@ -22,12 +22,17 @@ public class CustomerSelectionController {
 
     static Logger logger = Logger.getLogger(CustomerSelectionController.class);
 
-    @Autowired
     private CustomerSelectionCB business;
-    @Autowired
     private SessionData sessionData;
 
-    public CustomerSelectionController() {
+    @Autowired
+    public void setBusiness(CustomerSelectionCB business) {
+        this.business = business;
+    }
+
+    @Autowired
+    public void setSessionData(SessionData sessionData) {
+        this.sessionData = sessionData;
     }
 
     @RequestMapping({"/", "/home"})

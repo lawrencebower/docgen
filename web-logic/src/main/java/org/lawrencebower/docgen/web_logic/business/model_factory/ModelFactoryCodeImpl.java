@@ -33,12 +33,15 @@ public class ModelFactoryCodeImpl implements ModelFactory {
     private LinkedHashMap<String, DocumentInfoView> documents = new LinkedHashMap<>();
 
     private ContactView vendor;
-    private ContactView business1;
-    private ContactView business2;
+    private ContactView customer1;
+    private ContactView customer2;
     private ProductView product1;
     private ProductView product2;
     private DocumentInfoView commercialInvoiceView;
     private DocumentInfoView deliveryNoteView;
+
+    public static final String CUSTOMER_ID_1 = "Contact 1";
+    public static final String CUSTOMER_ID_2 = "Contact 2";
 
     public void init() {
         initVendor();
@@ -79,49 +82,50 @@ public class ModelFactoryCodeImpl implements ModelFactory {
 
     private void initCustomers() {
 
-        business1 = new ContactView(new Contact("Contact 1",
+        customer1 = new ContactView(new Contact(CUSTOMER_ID_1,
                                                 "David Davidson",
                                                 "Just round the corner",
                                                 "198293893839",
                                                 "UK"));
 
-        business2 = new ContactView(new Contact("Contact 2",
+        customer2 = new ContactView(new Contact(CUSTOMER_ID_2,
                                                 "Billy Bob Bobson",
                                                 "miles away",
                                                 "38783478347",
                                                 "CHINA"));
 
-        customers.put(business1.getContactName(), business1);
-        customers.put(business2.getContactName(), business2);
-        businesses.put(business1.getContactName(), business2);
-        businesses.put(business2.getContactName(), business1);
+        customers.put(customer1.getName(), customer1);
+        customers.put(customer2.getName(), customer2);
+
+        businesses.put(customer1.getName(), customer2);
+        businesses.put(customer2.getName(), customer1);
     }
 
     private void initCustomerProductDocumentMappings() {
 
         //Contact 1
-        customerProductDocMappings.addDocument(business1.getContact(),
+        customerProductDocMappings.addDocument(customer1.getContact(),
                                                product1.getProduct(),
                                                commercialInvoiceView);
 
-        customerProductDocMappings.addDocument(business1.getContact(),
+        customerProductDocMappings.addDocument(customer1.getContact(),
                                                product2.getProduct(),
                                                commercialInvoiceView);
 
-        customerProductDocMappings.addDocument(business1.getContact(),
+        customerProductDocMappings.addDocument(customer1.getContact(),
                                                product2.getProduct(),
                                                deliveryNoteView);
 
         //Contact 2
-        customerProductDocMappings.addDocument(business2.getContact(),
+        customerProductDocMappings.addDocument(customer2.getContact(),
                                                product1.getProduct(),
                                                commercialInvoiceView);
 
-        customerProductDocMappings.addDocument(business2.getContact(),
+        customerProductDocMappings.addDocument(customer2.getContact(),
                                                product2.getProduct(),
                                                commercialInvoiceView);
 
-        customerProductDocMappings.addDocument(business2.getContact(),
+        customerProductDocMappings.addDocument(customer2.getContact(),
                                                product2.getProduct(),
                                                deliveryNoteView);
 

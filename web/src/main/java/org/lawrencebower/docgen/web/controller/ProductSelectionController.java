@@ -25,12 +25,12 @@ public class ProductSelectionController {
     private SessionData sessionData;
 
     @Autowired
-    public void setBusiness(ProductSelectionCB business) {
+    protected void setBusiness(ProductSelectionCB business) {
         this.business = business;
     }
 
     @Autowired
-    public void setSessionData(SessionData sessionData) {
+    protected void setSessionData(SessionData sessionData) {
         this.sessionData = sessionData;
     }
 

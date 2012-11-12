@@ -10,13 +10,13 @@ hello I am the home page
         <c:forEach var="product" items="${customers}">
 
             <s:url var="customer_url" value="/customerSelect/customerName/{customerName}">
-                <s:param name="customerName" value="${product.contactName}"/>
+                <s:param name="customerName" value="${product.name}"/>
             </s:url>
 
             <a href="${customer_url}">
-                <c:out value="${product.contactName}"/>
+                <c:out value="${product.name}"/>
             </a>
-            &nbsp;<c:out value="${product.contactAddress}"/><br/>
+            &nbsp;<c:out value="${product.address}"/><br/>
         </c:forEach>
     </ol>
 </div>

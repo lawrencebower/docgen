@@ -8,11 +8,11 @@ public class ContactView {
         this.contact = contact;
     }
 
-    public String getContactName(){
+    public String getName(){
         return contact.getName();
     }
 
-    public String getContactAddress(){
+    public String getAddress(){
         return contact.getAddress();
     }
 
