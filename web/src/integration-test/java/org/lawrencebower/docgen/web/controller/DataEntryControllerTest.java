@@ -71,7 +71,7 @@ public class DataEntryControllerTest {
     }
 
     /**
-     * sets the directory where the expected output file templates are written
+     * sets the directory where the expected file templates are written
      */
     private void setupInputPath() {
         String packageName = getClass().getPackage().getName();
@@ -187,7 +187,7 @@ public class DataEntryControllerTest {
     }
 
     private void checkConcatenatedFiles() {
-        File expectedConcatenatedFile = new File(testInputPath +  "EXPECTED_CONCATENATED_FILE.pdf");
+        File expectedConcatenatedFile = new File(testInputPath + "EXPECTED_CONCATENATED_FILE.pdf");
         File createdConcatenatedFile = new File(testOutputRoot + ViewConstants.CONCATENATED_FILE_NAME);
         checkFilesAreSame(expectedConcatenatedFile, createdConcatenatedFile);
     }
@@ -199,7 +199,7 @@ public class DataEntryControllerTest {
     }
 
     private void checkDoc2() {
-        File expectedConcatenatedFile = new File(testInputPath +  "EXPECTED_DOC2.pdf");
+        File expectedConcatenatedFile = new File(testInputPath + "EXPECTED_DOC2.pdf");
         File createdConcatenatedFile = new File(testOutputRoot + ModelFactoryCodeImpl.DOC_2_NAME + ".pdf");
         checkFilesAreSame(expectedConcatenatedFile, createdConcatenatedFile);
     }
@@ -219,7 +219,18 @@ public class DataEntryControllerTest {
     }
 
     @Test
-    public void testGetDocComponentViews() throws Exception {
+    public void testGetDocComponentViews_showAutoMappedOn_allComponentsReturned() throws Exception {
+        controller.prepareFields();
+        sessionData.setShowAutoMappedFields(true);
+        List<DocComponentView> docComponentViews = controller.getDocComponentViews();
+        assertEquals(23, docComponentViews.size());//all the components
+    }
 
+    @Test
+    public void testGetDocComponentViews_showAutoMappedOff_nonMappedComponentsReturned() throws Exception {
+        controller.prepareFields();
+        sessionData.setShowAutoMappedFields(false);
+        List<DocComponentView> docComponentViews = controller.getDocComponentViews();
+        assertEquals(4, docComponentViews.size());//all the components
     }
 }

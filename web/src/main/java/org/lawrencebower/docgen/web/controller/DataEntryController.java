@@ -92,6 +92,7 @@ public class DataEntryController {
         return null;
     }
 
+/*
     private void writeParameterVals(Map<String, String[]> parameterMap) {
         for (String key : parameterMap.keySet()) {
             System.out.println("key = " + key);
@@ -101,6 +102,7 @@ public class DataEntryController {
             }
         }
     }
+*/
 
     public List<DocComponentView> getDocComponentViews(){
 
