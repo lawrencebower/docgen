@@ -16,12 +16,12 @@ project(':use_cases') {
 
 project(':web-logic') {
     dependencies {
-        compile project(':core'), project(':use_cases'), project(':web-model')
+        compile project(':core'), project(':web-model'), project(':use_cases')
     }
 }
 
 project(':web') {
     dependencies {
-        compile project(':web-logic'), project(':core'), project(':use_cases'), project(':web-model')
+        compile project(':core'), project(':web-model'), project(':use_cases'), project(':web-logic')
     }
 }

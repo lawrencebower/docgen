@@ -5,6 +5,9 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_model.view.constants.AutoMappedField;
+import org.lawrencebower.docgen.web_model.view.product.ProductView;
+
+import java.util.List;
 
 public abstract class DocComponentView<T extends DocComponent> {
 
@@ -51,6 +54,10 @@ public abstract class DocComponentView<T extends DocComponent> {
 
     public abstract void setComponentFromParamString(String value);
 
+    public abstract boolean allowsProductInjection();
+
+    public abstract void injectProducts(List<ProductView> products);
+
     public ComponentViewType getComponentViewType(){
         return componentViewType;
     }
@@ -73,6 +80,10 @@ public abstract class DocComponentView<T extends DocComponent> {
 
     public boolean isTextArea(){
         return componentViewType == ComponentViewType.TEXT_AREA;
+    }
+
+    public boolean isTableArea(){
+        return componentViewType == ComponentViewType.TABLE;
     }
 
     @Override

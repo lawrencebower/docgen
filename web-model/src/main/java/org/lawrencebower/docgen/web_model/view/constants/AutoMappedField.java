@@ -36,7 +36,7 @@ public enum AutoMappedField {
     public static boolean containsName(String name) {
 
         for (AutoMappedField autoMappedField : AutoMappedField.values()) {
-            if (autoMappedField.getName().equals(name)) {
+            if (autoMappedField.getProductName().equals(name)) {
                 return true;
             }
         }
@@ -46,7 +46,7 @@ public enum AutoMappedField {
 
     public static AutoMappedField getByFieldName(String name) {
         for (AutoMappedField autoMappedField : AutoMappedField.values()) {
-            if (autoMappedField.getName().equals(name)) {
+            if (autoMappedField.getProductName().equals(name)) {
                 return autoMappedField;
             }
         }

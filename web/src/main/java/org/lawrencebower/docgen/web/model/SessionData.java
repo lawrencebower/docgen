@@ -3,6 +3,7 @@ package org.lawrencebower.docgen.web.model;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_model.view.product.ProductSelection;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class SessionData {
 
     private ContactView selectedBusiness;
 
-    private List<ProductView> selectedProducts = new ArrayList<>();
+    private ProductSelection selectedProducts = new ProductSelection();
 
     private List<DocumentInfoView> documents = new ArrayList<>();
 
@@ -43,7 +44,7 @@ public class SessionData {
     }
 
     public List<ProductView> getSelectedProducts() {
-        return selectedProducts;
+        return selectedProducts.getProducts();
     }
 
     public List<DocumentInfoView> getDocuments() {
@@ -51,14 +52,14 @@ public class SessionData {
     }
 
     public void addSelectedProduct(ProductView selectedProduct) {
-       selectedProducts.add(selectedProduct);
+       selectedProducts.addProduct(selectedProduct);
     }
 
-    public void setGeneratedDocuments(List<PDFDocument> generatedDocuments) {
+    public void setGeneratedPDFs(List<PDFDocument> generatedDocuments) {
         this.generatedDocuments = generatedDocuments;
     }
 
-    public List<PDFDocument> getPDFDocuments() {
+    public List<PDFDocument> getGeneratedPDFs() {
         return generatedDocuments;
     }
 

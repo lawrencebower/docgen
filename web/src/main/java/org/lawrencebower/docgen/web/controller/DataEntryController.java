@@ -43,24 +43,46 @@ public class DataEntryController {
     @RequestMapping(value = "/prepareFields", method = RequestMethod.GET)
     public String prepareFields() {
 
-        ContactView selectedCustomer = sessionData.getSelectedCustomer();
-        List<ProductView> selectedProducts = sessionData.getSelectedProducts();
-        ContactView selectedBusiness = sessionData.getSelectedBusiness();
+        setRelevantDocuments();
 
-        List<DocumentInfoView> documentInfos =
-                business.getDocumentsForViewing(selectedCustomer, selectedProducts);
+        mapAutoMappedFields();
 
-        sessionData.setDocuments(documentInfos);
-
-        business.mapAutoMapFields(documentInfos,
-                                  selectedCustomer,
-                                  selectedBusiness);
+        injectProductFields();
 
         return "dataEntry";
     }
 
+    private void setRelevantDocuments() {
+
+        ContactView selectedCustomer = sessionData.getSelectedCustomer();
+        List<ProductView> selectedProducts = sessionData.getSelectedProducts();
+
+        List<DocumentInfoView> documentsForViewing =
+                business.getDocumentsForViewing(selectedCustomer, selectedProducts);
+
+        sessionData.setDocuments(documentsForViewing);
+    }
+
+    private void mapAutoMappedFields() {
+
+        ContactView selectedBusiness = sessionData.getSelectedBusiness();
+        ContactView selectedCustomer = sessionData.getSelectedCustomer();
+        List<DocumentInfoView> documents = sessionData.getDocuments();
+
+        business.mapAutoMapFields(documents,
+                                  selectedCustomer,
+                                  selectedBusiness);
+    }
+
+    private void injectProductFields() {
+        List<DocumentInfoView> documents = sessionData.getDocuments();
+        List<ProductView> selectedProducts = sessionData.getSelectedProducts();
+
+        business.injectProductFields(documents, selectedProducts);
+    }
+
     @RequestMapping("/toggleAutomapped")
-    public String toggleShowAutomappedFields(){
+    public String toggleShowAutomappedFields() {
         boolean currentValue = sessionData.isShowAutoMappedFields();
         sessionData.setShowAutoMappedFields(!currentValue);
 
@@ -71,25 +93,37 @@ public class DataEntryController {
     public String submitFields(WebRequest webRequest,
                                OutputStream outStream) {
 
+        mapFieldValuesToComponents(webRequest);
+
+        List<File> allPdfFiles = generatePDFsAndWriteToFiles();
+
+        concatenatePDFsAndWriteToResponse(outStream, allPdfFiles);
+
+        return null;
+    }
+
+    private void concatenatePDFsAndWriteToResponse(OutputStream outStream, List<File> allPdfFiles) {
+        File concatenatedFile = business.makeConcatenatedFile(allPdfFiles);
+        business.writePDFsToStream(outStream, concatenatedFile);
+    }
+
+    private List<File> generatePDFsAndWriteToFiles() {
+
+        List<DocumentInfoView> relevantDocs = sessionData.getDocuments();
+
+        List<PDFDocument> generatedPDFs = business.createPDFs(relevantDocs);
+
+        sessionData.setGeneratedPDFs(generatedPDFs);
+
+        return business.writePDFsToFiles(generatedPDFs);
+    }
+
+    private void mapFieldValuesToComponents(WebRequest webRequest) {
         Map<String, String[]> parameterMap = webRequest.getParameterMap();
 
         List<DocumentInfoView> relevantDocs = sessionData.getDocuments();
 
         business.mapFieldValuesToComponents(parameterMap, relevantDocs);
-
-        List<PDFDocument> pdFs = business.createPDFs(relevantDocs);
-
-        sessionData.setGeneratedDocuments(pdFs);
-
-        List<PDFDocument> generatedPDFs = sessionData.getPDFDocuments();
-
-        List<File> allPdfFiles = business.writePDFsToFiles(generatedPDFs);
-
-        File concatenatedFile = business.makeConcatenatedFile(allPdfFiles);
-
-        business.writePDFsToStream(outStream, concatenatedFile);
-
-        return null;
     }
 
 /*
@@ -104,7 +138,7 @@ public class DataEntryController {
     }
 */
 
-    public List<DocComponentView> getDocComponentViews(){
+    public List<DocComponentView> getDocComponentViews() {
 
         List<DocumentInfoView> relevantDocs = sessionData.getDocuments();
 

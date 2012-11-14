@@ -27,6 +27,9 @@
     <bean name="fieldMapper"
           class="org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper"/>
 
+    <bean name="productInjector"
+          class="org.lawrencebower.docgen.web_logic.business.product_injection.ProductInjector"/>
+
     <bean name="reservedFieldMapper"
           class="org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedFieldMapper"/>
 

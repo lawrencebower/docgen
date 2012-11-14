@@ -9,7 +9,6 @@ public class TextAreaComponentView extends TextComponentView {
 
     public TextAreaComponentView(TextComponent docComponent) {
         super(docComponent);
-        this.componentViewType = ComponentViewType.TEXT_AREA;
+        componentViewType = ComponentViewType.TEXT_AREA;
     }
-
 }

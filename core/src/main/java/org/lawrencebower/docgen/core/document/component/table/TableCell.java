@@ -30,7 +30,7 @@ public class TableCell {
 
     public TableCell(String text) {
         TextBlock textBlock = new TextBlock(text);
-        this.component = new TableTextComponent(textBlock);
+        component = new TableTextComponent(textBlock);
     }
 
     public void setComponent(DocComponent component) {
@@ -43,7 +43,11 @@ public class TableCell {
 
     public void setText(String text) {
         TextBlock textBlock = new TextBlock(text);
-        this.component = new TableTextComponent(textBlock);
+        component = new TableTextComponent(textBlock);
+    }
+
+    public String getName() {
+        return component.getName();
     }
 
     public VerticalAlignment getVerticalAlignment() {

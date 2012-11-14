@@ -2,8 +2,8 @@ package org.lawrencebower.docgen.web_model.view.product;
 
 public class Product {
 
-    private String productId;
-    private String productName;
+    private final String productId;
+    private final String productName;
 
     public Product(String productId, String productName) {
         this.productId = productId;

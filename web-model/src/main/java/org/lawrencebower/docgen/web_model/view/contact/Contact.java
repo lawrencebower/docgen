@@ -2,13 +2,13 @@ package org.lawrencebower.docgen.web_model.view.contact;
 
 public class Contact {
 
-    private String name;
-    private String contactName;
-    private String phone;
-    private String country;
-    private String address;
-    private String taxId;
-    private String email;
+    private final String name;
+    private final String contactName;
+    private final String phone;
+    private final String country;
+    private final String address;
+    private final String taxId;
+    private final String email;
 
     public Contact(String name,
                    String contactName,

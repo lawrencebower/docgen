@@ -7,6 +7,7 @@ import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedFieldMapper;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
 import org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper;
+import org.lawrencebower.docgen.web_logic.business.product_injection.ProductInjector;
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
@@ -41,6 +42,8 @@ public class DataEntryCB {
     FieldMapper fieldMapper;
     @Autowired
     private ViewableComponentFilter viewableComponentFilter;
+    @Autowired
+    ProductInjector productInjector;
 
     @Autowired
     @Qualifier("pdfOutputRoot")
@@ -161,6 +164,15 @@ public class DataEntryCB {
         return results;
     }
 
+    public void injectProductFields(List<DocumentInfoView> documents,
+                                    List<ProductView> selectedProducts) {
+
+        for (DocumentInfoView documentView : documents) {
+            List<DocComponentView> componentViews = documentView.getComponentViews();
+            productInjector.injectProductFields(componentViews, selectedProducts);
+        }
+    }
+
 //    SETTERS FOR UNIT TESTS
 
     protected void setPdfConcatenator(PDFConcatenator pdfConcatenator) {
@@ -170,4 +182,5 @@ public class DataEntryCB {
     protected void setCustomerProductMappings(CustomerProduct_Document_Mappings customerProductMappings) {
         this.customerProductMappings = customerProductMappings;
     }
+
 }

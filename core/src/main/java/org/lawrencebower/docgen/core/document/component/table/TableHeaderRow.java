@@ -42,7 +42,8 @@ public class TableHeaderRow extends TableRow {
 
         if(widths.length != columnCount){
             String message = "Specified number of column widths '%s' does not match the number of columns - '%s'";
-            throw new DocGenException(String.format(message, widths.length, columnCount));
+            String formattedMessage = String.format(message, widths.length, columnCount);
+            throw new DocGenException(formattedMessage);
         }
 
         columnWidths = new ArrayList<>(Arrays.asList(widths));

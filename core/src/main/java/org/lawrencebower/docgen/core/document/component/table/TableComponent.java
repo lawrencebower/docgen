@@ -16,7 +16,6 @@ public class TableComponent extends DocComponent {
     private int tablePadding = 3;//default
 
     public TableComponent(String name) {
-        super();
         setName(name);
     }
 
@@ -30,12 +29,12 @@ public class TableComponent extends DocComponent {
     }
 
     public void setHeaderRow(TableHeaderRow row) {
-        this.headerRow = row;
+        headerRow = row;
     }
 
     public void setHeaderRow(TableCell... cells) {
-        this.headerRow = new TableHeaderRow();
-        this.headerRow.setCells(Arrays.asList(cells));
+        headerRow = new TableHeaderRow();
+        headerRow.setCells(Arrays.asList(cells));
     }
 
     public TableHeaderRow getHeaderRow() {
@@ -43,7 +42,11 @@ public class TableComponent extends DocComponent {
     }
 
     public void addRow(TableRow row) {
-        this.rows.add(row);
+        rows.add(row);
+    }
+
+    public void clearRows() {
+        rows.clear();
     }
 
     public List<TableCell> getAllRenderableCells() {
