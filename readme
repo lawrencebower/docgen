@@ -1,0 +1,11 @@
+This project is in development and will not (yet) build from checkout
+
+Docgen is a framework for creating sales invoices and filling in customs forms when shipping products.
+
+Specification of PDF documents is performed using XML. PDFs can be created from scratch (custom) or existing
+ PDF files can be written upon (overlay) when filling in customs forms.
+
+A web application allows users to specify customers and the products being dispatched, and edit specified
+fields, which are used when generating the pdf documents.
+
+Generated PDFs are written to disk and opened on a new browser tab for review and printing.
