@@ -1,6 +1,7 @@
 package org.lawrencebower.docgen.web_logic.business.controler_business.product_selection;
 
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
+import org.lawrencebower.docgen.web_model.view.product.Product;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,7 +16,7 @@ public class ProductSelectionCB {
         return modelFactory.getProducts();
     }
 
-    public ProductView getProduct(String productId) {
+    public Product getProduct(String productId) {
         return modelFactory.getProduct(productId);
     }
 }

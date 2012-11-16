@@ -105,8 +105,8 @@ public class AutoMappedFieldMapperTest {
 
         verify(businessNameComponent, atLeastOnce()).isAutoMappedField();
         verify(nonAutomappedComponent, atLeastOnce()).isAutoMappedField();
-        verify(businessNameComponent, times(1)).setComponentFromParamString(BUSINESS_NAME_STRING);
-        verify(nonAutomappedComponent, never()).setComponentFromParamString(anyString());
+        verify(businessNameComponent, times(1)).setComponentValue(BUSINESS_NAME_STRING);
+        verify(nonAutomappedComponent, never()).setComponentValue(anyString());
     }
 
     @Test
@@ -127,8 +127,8 @@ public class AutoMappedFieldMapperTest {
 
         verify(businessNameComponent, atLeastOnce()).isAutoMappedField();
         verify(nonAutomappedComponent, atLeastOnce()).isAutoMappedField();
-        verify(businessNameComponent, never()).setComponentFromParamString(anyString());
-        verify(nonAutomappedComponent, never()).setComponentFromParamString(anyString());
+        verify(businessNameComponent, never()).setComponentValue(anyString());
+        verify(nonAutomappedComponent, never()).setComponentValue(anyString());
     }
 
     //BUSINESS TESTS//
@@ -139,7 +139,7 @@ public class AutoMappedFieldMapperTest {
         DocComponentView component = makeComponentsAndMap(AutoMappedField.BUSINESS_NAME);
 
         verify(component, atLeastOnce()).isAutoMappedField();
-        verify(component, times(1)).setComponentFromParamString(BUSINESS_NAME_STRING);
+        verify(component, times(1)).setComponentValue(BUSINESS_NAME_STRING);
 
         verify(business, times(1)).getName();
         verifyNoMoreInteractions(vendor);
@@ -152,7 +152,7 @@ public class AutoMappedFieldMapperTest {
         DocComponentView component = makeComponentsAndMap(AutoMappedField.BUSINESS_ADDRESS);
 
         verify(component, atLeastOnce()).isAutoMappedField();
-        verify(component, times(1)).setComponentFromParamString(BUSINESS_ADDRESS_STRING);
+        verify(component, times(1)).setComponentValue(BUSINESS_ADDRESS_STRING);
 
         verify(business, times(1)).getAddress();
         verifyNoMoreInteractions(vendor);
@@ -165,7 +165,7 @@ public class AutoMappedFieldMapperTest {
         DocComponentView component = makeComponentsAndMap(AutoMappedField.BUSINESS_CONTACT_NAME);
 
         verify(component, atLeastOnce()).isAutoMappedField();
-        verify(component, times(1)).setComponentFromParamString(BUSINESS_CONTACT_NAME_STRING);
+        verify(component, times(1)).setComponentValue(BUSINESS_CONTACT_NAME_STRING);
 
         verify(business, times(1)).getContactName();
         verifyNoMoreInteractions(vendor);
@@ -178,7 +178,7 @@ public class AutoMappedFieldMapperTest {
         DocComponentView component = makeComponentsAndMap(AutoMappedField.BUSINESS_PHONE);
 
         verify(component, atLeastOnce()).isAutoMappedField();
-        verify(component, times(1)).setComponentFromParamString(BUSINESS_PHONE_STRING);
+        verify(component, times(1)).setComponentValue(BUSINESS_PHONE_STRING);
 
         verify(business, times(1)).getPhone();
         verifyNoMoreInteractions(vendor);
@@ -191,7 +191,7 @@ public class AutoMappedFieldMapperTest {
         DocComponentView component = makeComponentsAndMap(AutoMappedField.BUSINESS_COUNTRY);
 
         verify(component, atLeastOnce()).isAutoMappedField();
-        verify(component, times(1)).setComponentFromParamString(BUSINESS_COUNTRY_STRING);
+        verify(component, times(1)).setComponentValue(BUSINESS_COUNTRY_STRING);
         verify(business, times(1)).getCountry();
         verifyNoMoreInteractions(vendor);
         verifyNoMoreInteractions(customer);
@@ -206,7 +206,7 @@ public class AutoMappedFieldMapperTest {
         DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_COUNTRY);
 
         verify(component, atLeastOnce()).isAutoMappedField();
-        verify(component, times(1)).setComponentFromParamString(VENDOR_COUNTRY_STRING);
+        verify(component, times(1)).setComponentValue(VENDOR_COUNTRY_STRING);
         verify(vendor, times(1)).getCountry();
         verifyNoMoreInteractions(business);
         verifyNoMoreInteractions(customer);
@@ -218,7 +218,7 @@ public class AutoMappedFieldMapperTest {
         DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_NAME);
 
         verify(component, atLeastOnce()).isAutoMappedField();
-        verify(component, times(1)).setComponentFromParamString(VENDOR_NAME_STRING);
+        verify(component, times(1)).setComponentValue(VENDOR_NAME_STRING);
         verify(vendor, times(1)).getName();
         verifyNoMoreInteractions(business);
         verifyNoMoreInteractions(customer);
@@ -230,7 +230,7 @@ public class AutoMappedFieldMapperTest {
         DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_ADDRESS);
 
         verify(component, atLeastOnce()).isAutoMappedField();
-        verify(component, times(1)).setComponentFromParamString(VENDOR_ADDRESS_STRING);
+        verify(component, times(1)).setComponentValue(VENDOR_ADDRESS_STRING);
         verify(vendor, times(1)).getAddress();
         verifyNoMoreInteractions(business);
         verifyNoMoreInteractions(customer);
@@ -242,7 +242,7 @@ public class AutoMappedFieldMapperTest {
         DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_CONTACT_NAME);
 
         verify(component, atLeastOnce()).isAutoMappedField();
-        verify(component, times(1)).setComponentFromParamString(VENDOR_CONTACT_NAME_STRING);
+        verify(component, times(1)).setComponentValue(VENDOR_CONTACT_NAME_STRING);
         verify(vendor, times(1)).getContactName();
         verifyNoMoreInteractions(business);
         verifyNoMoreInteractions(customer);
@@ -254,7 +254,7 @@ public class AutoMappedFieldMapperTest {
         DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_PHONE);
 
         verify(component, atLeastOnce()).isAutoMappedField();
-        verify(component, times(1)).setComponentFromParamString(VENDOR_PHONE_STRING);
+        verify(component, times(1)).setComponentValue(VENDOR_PHONE_STRING);
         verify(vendor, times(1)).getPhone();
         verifyNoMoreInteractions(business);
         verifyNoMoreInteractions(customer);
@@ -266,7 +266,7 @@ public class AutoMappedFieldMapperTest {
         DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_EMAIL);
 
         verify(component, atLeastOnce()).isAutoMappedField();
-        verify(component, times(1)).setComponentFromParamString(VENDOR_EMAIL_STRING);
+        verify(component, times(1)).setComponentValue(VENDOR_EMAIL_STRING);
         verify(vendor, times(1)).getEmail();
         verifyNoMoreInteractions(business);
         verifyNoMoreInteractions(customer);
@@ -278,7 +278,7 @@ public class AutoMappedFieldMapperTest {
         DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_TAX_ID);
 
         verify(component, atLeastOnce()).isAutoMappedField();
-        verify(component, times(1)).setComponentFromParamString(VENDOR_TAXID_STRING);
+        verify(component, times(1)).setComponentValue(VENDOR_TAXID_STRING);
         verify(vendor, times(1)).getTaxId();
         verifyNoMoreInteractions(business);
         verifyNoMoreInteractions(customer);
@@ -292,7 +292,7 @@ public class AutoMappedFieldMapperTest {
         DocComponentView component = makeComponentsAndMap(AutoMappedField.CUSTOMER_NAME);
 
         verify(component, atLeastOnce()).isAutoMappedField();
-        verify(component, times(1)).setComponentFromParamString(CUSTOMER_NAME_STRING);
+        verify(component, times(1)).setComponentValue(CUSTOMER_NAME_STRING);
 
         verify(customer, times(1)).getName();
         verifyNoMoreInteractions(vendor);
@@ -305,7 +305,7 @@ public class AutoMappedFieldMapperTest {
         DocComponentView component = makeComponentsAndMap(AutoMappedField.CUSTOMER_ADDRESS);
 
         verify(component, atLeastOnce()).isAutoMappedField();
-        verify(component, times(1)).setComponentFromParamString(CUSTOMER_ADDRESS_STRING);
+        verify(component, times(1)).setComponentValue(CUSTOMER_ADDRESS_STRING);
 
         verify(customer, times(1)).getAddress();
         verifyNoMoreInteractions(vendor);
@@ -318,7 +318,7 @@ public class AutoMappedFieldMapperTest {
         DocComponentView component = makeComponentsAndMap(AutoMappedField.CUSTOMER_CONTACT_NAME);
 
         verify(component, atLeastOnce()).isAutoMappedField();
-        verify(component, times(1)).setComponentFromParamString(CUSTOMER_CONTACT_NAME_STRING);
+        verify(component, times(1)).setComponentValue(CUSTOMER_CONTACT_NAME_STRING);
 
         verify(customer, times(1)).getContactName();
         verifyNoMoreInteractions(vendor);
@@ -331,7 +331,7 @@ public class AutoMappedFieldMapperTest {
         DocComponentView component = makeComponentsAndMap(AutoMappedField.CUSTOMER_COUNTRY);
 
         verify(component, atLeastOnce()).isAutoMappedField();
-        verify(component, times(1)).setComponentFromParamString(CUSTOMER_COUNTRY_STRING);
+        verify(component, times(1)).setComponentValue(CUSTOMER_COUNTRY_STRING);
 
         verify(customer, times(1)).getCountry();
         verifyNoMoreInteractions(vendor);
@@ -344,7 +344,7 @@ public class AutoMappedFieldMapperTest {
         DocComponentView component = makeComponentsAndMap(AutoMappedField.CUSTOMER_PHONE);
 
         verify(component, atLeastOnce()).isAutoMappedField();
-        verify(component, times(1)).setComponentFromParamString(CUSTOMER_PHONE_STRING);
+        verify(component, times(1)).setComponentValue(CUSTOMER_PHONE_STRING);
 
         verify(customer, times(1)).getPhone();
         verifyNoMoreInteractions(vendor);

@@ -42,7 +42,7 @@ public class DocumentInfoView {
         return docComponentViews;
     }
 
-    public List<DocComponentView> getComponentsWithName(String componentName) {
+    public List<DocComponentView> getComponentViewsWithName(String componentName) {
 
         List<DocComponentView> results = new ArrayList<>();
 

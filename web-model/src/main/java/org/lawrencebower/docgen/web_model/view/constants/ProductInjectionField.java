@@ -5,7 +5,10 @@ import org.lawrencebower.docgen.web_model.view.product.ProductView;
 
 public enum ProductInjectionField {
 
-    PRODUCT_NAME("PRODUCT_INJECT_NAME");
+    PRODUCT_NAME("PRODUCT_INJECT_NAME"),
+    PRODUCT_VALUE("PRODUCT_INJECT_VALUE"),
+    PRODUCT_ORIGIN("PRODUCT_INJECT_ORIGIN"),
+    PRODUCT_QUANTITY("PRODUCT_INJECT_QUANTITY");
 
     private String name;
 
@@ -46,7 +49,16 @@ public enum ProductInjectionField {
         switch (productField) {
             case PRODUCT_NAME:
                 value = product.getProductName();
-
+                break;
+            case PRODUCT_ORIGIN:
+                value = product.getProductCountryOfOrigin();
+                break;
+            case PRODUCT_VALUE:
+                value = product.getProductValue();
+                break;
+            case PRODUCT_QUANTITY:
+                value = product.getQuantityString();
+                break;
         }
 
         return value;

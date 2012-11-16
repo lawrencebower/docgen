@@ -5,11 +5,6 @@
              http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd
              http://www.springframework.org/schema/context classpath:/org/springframework/context/config/spring-context-3.1.xsd">
 
-    <bean id="fileUtils" class="org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils"/>
-    <bean id="iTextTableGenerator" class="org.lawrencebower.docgen.core.generator.utils.ITextTableGenerator"/>
-    <bean id="pdfGenUtils" class="org.lawrencebower.docgen.core.generator.utils.PDFGenUtilsImpl"/>
-    <bean id="pdfConcatenator" class="org.lawrencebower.docgen.core.generator.utils.PDFConcatenator"/>
-
     <import resource="core-beans.xml"/>
 
     <context:component-scan base-package="org.lawrencebower.docgen.core"/>

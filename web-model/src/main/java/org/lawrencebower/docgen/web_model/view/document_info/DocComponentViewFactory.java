@@ -1,33 +1,59 @@
 package org.lawrencebower.docgen.web_model.view.document_info;
 
-import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
-import org.lawrencebower.docgen.core.document.component.TableTextComponent;
-import org.lawrencebower.docgen.core.document.component.TextComponent;
+import org.lawrencebower.docgen.core.document.component.*;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
+import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 import org.lawrencebower.docgen.web_model.view.document_info.component.CheckBoxComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.component.TableComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.component.TextAreaComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.component.TextComponentView;
 
-public class DocComponentViewFactory {
+public abstract class DocComponentViewFactory {
 
-    public TableComponentView createTextComponentView(TableComponent tableComponent) {
-        return new TableComponentView(tableComponent);
+    public TableComponentView createTableComponentView(TableComponent tableComponent) {
+        TableComponentView view = getTableComponentView();
+        view.setComponent(tableComponent);
+        return view;
     }
 
     public TextComponentView createTextComponentView(TextComponent textComponent) {
-        return new TextComponentView(textComponent);
-    }
-
-    public TextComponentView createTextComponentView(TableTextComponent textComponent) {
-        return new TextComponentView(textComponent);
+        TextComponentView view = getTextComponentView();
+        view.setComponent(textComponent);
+        return view;
     }
 
     public TextAreaComponentView createTextAreaComponentView(TableTextComponent textComponent) {
-        return new TextAreaComponentView(textComponent);
+        TextAreaComponentView view = getTextAreaComponentView();
+        view.setComponent(textComponent);
+        return view;
     }
 
     public CheckBoxComponentView createCheckBoxComponentView(CheckBoxComponent checkBoxComponent) {
-        return new CheckBoxComponentView(checkBoxComponent);
+        CheckBoxComponentView view = getCheckBoxComponentView();
+        view.setComponent(checkBoxComponent);
+        return view;
+    }
+
+    protected abstract CheckBoxComponentView getCheckBoxComponentView();
+
+    protected abstract TableComponentView getTableComponentView();
+
+    protected abstract TextAreaComponentView getTextAreaComponentView();
+
+    protected abstract TextComponentView getTextComponentView();
+
+    public DocComponentView createComponentView(DocComponent component) {
+        switch (component.getComponentType()) {
+            case TEXT:
+                return createTextComponentView((TextComponent) component);
+            case TABLE_TEXT:
+                return createTextComponentView((TableTextComponent) component);
+            case TABLE:
+                return createTableComponentView((TableComponent) component);
+            case CHECKBOX:
+                return createCheckBoxComponentView((CheckBoxComponent) component);
+        }
+        throw new DocGenException("DocComponent not mapped to ComponentView? " + component.getClass());
     }
 }

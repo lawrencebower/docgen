@@ -2,6 +2,7 @@ package org.lawrencebower.docgen.web_logic.business.model_factory;
 
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_model.view.product.Product;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public interface ModelFactory {
 
     ContactView getCustomer(String customerName);
 
-    ProductView getProduct(String productId);
+    Product getProduct(String productId);
 
     ContactView getVendor();
 

@@ -9,19 +9,36 @@ import java.util.List;
 
 public class TextComponentView extends DocComponentView<TextComponent> {
 
-    public TextComponentView(TextComponent docComponent) {
-        super(docComponent);
+    protected TextComponentView() {//force spring creation
         componentViewType = ComponentViewType.TEXT;
     }
 
     @Override
-    public String getComponentValue() {
-        return docComponent.getTextString();
+    public void setComponent(TextComponent docComponent) {
+        super.setComponent(docComponent);
     }
 
     @Override
-    public void setComponentFromParamString(String value) {
-       docComponent.setText(value);//no processing needed
+    public void setComponentValue(Boolean value) {
+        String booleanString = value.toString();
+        docComponent.setText(booleanString);
+    }
+
+    @Override
+    public void setComponentValue(String value) {
+        docComponent.setText(value);
+    }
+
+    @Override
+    public void checkAndSetValueFromParamString(String componentName, String value) {
+        String thisComponentName = getName();
+        if (componentName.equals(thisComponentName)) {
+            docComponent.setText(value);
+        }
+    }
+
+    public String getComponentText(){
+        return docComponent.getTextString();
     }
 
     @Override

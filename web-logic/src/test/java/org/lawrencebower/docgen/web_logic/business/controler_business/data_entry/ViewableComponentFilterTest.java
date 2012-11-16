@@ -7,6 +7,7 @@ import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_model.view.constants.AutoMappedField;
 import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
+import org.lawrencebower.docgen.web_model.view.document_info.DocComponentViewFactory;
 import org.lawrencebower.docgen.web_model.view.document_info.component.TextComponentView;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -24,11 +25,13 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/web-logic-test-context.xml"})
+@ContextConfiguration(locations = "classpath:META-INF/web-logic-test-context.xml")
 public class ViewableComponentFilterTest {
 
     @Mock
     ViewUtils viewUtils;
+    @Autowired
+    DocComponentViewFactory viewFactory;
 
     @Before
     public void setup() {
@@ -95,6 +98,6 @@ public class ViewableComponentFilterTest {
     private DocComponentView makeDocComponent(String name) {
         TextComponent component1 = new TextComponent(name);
         component1.setName(name);
-        return new TextComponentView(component1);
+        return viewFactory.createTextComponentView(component1);
     }
 }

@@ -28,7 +28,7 @@ public class DocumentInfoViewTest {
     @Test
     public void testGetComponentsWithName_namedComponents_returnsCorrectNumberOfComponents() {
         mockNamedComponents();
-        List<DocComponentView> returnedComponent = docInfoView.getComponentsWithName("name2");
+        List<DocComponentView> returnedComponent = docInfoView.getComponentViewsWithName("name2");
         assertEquals(1, returnedComponent.size());
     }
 
@@ -36,7 +36,7 @@ public class DocumentInfoViewTest {
     public void testGetComponentsWithName_2namedComponents_returnsCorrectNumberOfComponents() {
         mockNamedComponents();
         docInfoView.addComponentView(mockComponentView("name2"));//add another one
-        List<DocComponentView> returnedComponent = docInfoView.getComponentsWithName("name2");
+        List<DocComponentView> returnedComponent = docInfoView.getComponentViewsWithName("name2");
         assertEquals(2, returnedComponent.size());
     }
 
@@ -44,20 +44,20 @@ public class DocumentInfoViewTest {
     public void testGetComponentsWithName_nullNamedComponents_returnsCorrectNumberOfComponents() {
         mockNamedComponents();
         docInfoView.addComponentView(mockComponentView(null));//make return null
-        List<DocComponentView> returnedComponent = docInfoView.getComponentsWithName("name2");
+        List<DocComponentView> returnedComponent = docInfoView.getComponentViewsWithName("name2");
         assertEquals(1, returnedComponent.size());
     }
 
     @Test
     public void testGetComponentsWithName_noNamedComponents_returnsCorrectNumberOfComponents() {
-        List<DocComponentView> returnedComponent = docInfoView.getComponentsWithName("name2");
+        List<DocComponentView> returnedComponent = docInfoView.getComponentViewsWithName("name2");
         assertEquals(0, returnedComponent.size());
     }
 
     @Test
     public void testGetComponentsWithName_namedComponents_returnsCorrectComponent() {
         mockNamedComponents();
-        List<DocComponentView> returnedComponent = docInfoView.getComponentsWithName("name2");
+        List<DocComponentView> returnedComponent = docInfoView.getComponentViewsWithName("name2");
         assertEquals("name2", returnedComponent.get(0).getName());
     }
 

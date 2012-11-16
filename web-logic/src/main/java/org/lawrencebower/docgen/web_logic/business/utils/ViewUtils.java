@@ -4,6 +4,7 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_model.view.document_info.component.TextComponentView;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 
 import java.util.ArrayList;
@@ -21,17 +22,10 @@ public class ViewUtils {
         List<DocComponentView> results = new ArrayList<>();
 
         for (DocumentInfoView documentInfoView : documents) {
-            results.addAll(getComponentViewsFromDoc(documentInfoView));
+            List<DocComponentView> docComponentViews = documentInfoView.getComponentViews();
+            results.addAll(docComponentViews);
         }
 
-        return results;
-    }
-
-    private List<DocComponentView> getComponentViewsFromDoc(DocumentInfoView documentInfoView) {
-        List<DocComponentView> results = new ArrayList<>();
-        for (DocComponentView docComponentView : documentInfoView.getComponentViews()) {
-            results.add(docComponentView);
-        }
         return results;
     }
 

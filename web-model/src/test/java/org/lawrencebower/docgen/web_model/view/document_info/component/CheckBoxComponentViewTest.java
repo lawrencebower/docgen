@@ -13,7 +13,8 @@ public class CheckBoxComponentViewTest {
     public void testGetComponentValue_notSelected_returnsCorrectValue() throws Exception {
         CheckBoxComponent mockComponent = Mockito.mock(CheckBoxComponent.class);
         when(mockComponent.isSelected()).thenReturn(false);
-        CheckBoxComponentView componentView = new CheckBoxComponentView(mockComponent);
+        CheckBoxComponentView componentView = new CheckBoxComponentView();
+        componentView.setComponent(mockComponent);
         assertEquals(CheckBoxComponentView.UNSELECTED_TEXT, componentView.getComponentValue());
     }
 
@@ -21,7 +22,8 @@ public class CheckBoxComponentViewTest {
     public void testGetComponentValue_selected_returnsCorrectValue() throws Exception {
         CheckBoxComponent mockComponent = Mockito.mock(CheckBoxComponent.class);
         when(mockComponent.isSelected()).thenReturn(true);
-        CheckBoxComponentView componentView = new CheckBoxComponentView(mockComponent);
+        CheckBoxComponentView componentView = new CheckBoxComponentView();
+        componentView.setComponent(mockComponent);
         assertEquals(CheckBoxComponentView.SELECTED_TEXT, componentView.getComponentValue());
     }
 

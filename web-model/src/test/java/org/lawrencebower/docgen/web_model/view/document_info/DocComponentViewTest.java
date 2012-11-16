@@ -2,24 +2,32 @@ package org.lawrencebower.docgen.web_model.view.document_info;
 
 import junit.framework.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_model.view.document_info.component.TextComponentView;
 import org.mockito.Mockito;
-
-import javax.swing.text.ComponentView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static org.mockito.Mockito.when;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:META-INF/web-model-context.xml")
 public class DocComponentViewTest {
+
+    @Autowired
+    DocComponentViewFactory viewFactory;
 
     @Test
     public void testDocComponentView_noComponent_throwsError() {
         try {
-            new TextComponentView(null);
+            TextComponentView view = viewFactory.getTextComponentView();
+            view.setComponent(null);
         } catch (DocGenException e) {
             String message = e.getMessage();
             assertEquals(DocComponentView.NULL_COMPONENT_MESSAGE, message);
@@ -30,7 +38,7 @@ public class DocComponentViewTest {
     public void testGetName_componentHasNoName_returnsDefault() {
         TextComponent mockComponent = Mockito.mock(TextComponent.class);
         when(mockComponent.getName()).thenReturn(null);
-        TextComponentView componentView = new TextComponentView(mockComponent);
+        TextComponentView componentView = viewFactory.createTextComponentView(mockComponent);
         String returnedName = componentView.getName();
         Assert.assertEquals(DocComponentView.NOT_SET_MESSAGE, returnedName);
     }
@@ -42,7 +50,7 @@ public class DocComponentViewTest {
 
         TextComponent mockComponent = Mockito.mock(TextComponent.class);
         when(mockComponent.getName()).thenReturn(name);
-        TextComponentView componentView = new TextComponentView(mockComponent);
+        TextComponentView componentView = viewFactory.createTextComponentView(mockComponent);
         String returnedName = componentView.getName();
 
         Assert.assertEquals(name, returnedName);
@@ -87,6 +95,6 @@ public class DocComponentViewTest {
     private DocComponentView makeComponentWithName(String name) {
         TextComponent mockComponent = Mockito.mock(TextComponent.class);
         when(mockComponent.getName()).thenReturn(name);
-        return new TextComponentView(mockComponent);
+        return viewFactory.createTextComponentView(mockComponent);
     }
 }

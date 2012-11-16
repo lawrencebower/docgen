@@ -3,6 +3,7 @@ package org.lawrencebower.docgen.web.model;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_model.view.product.Product;
 import org.lawrencebower.docgen.web_model.view.product.ProductSelection;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 
@@ -51,8 +52,8 @@ public class SessionData {
         return documents;
     }
 
-    public void addSelectedProduct(ProductView selectedProduct) {
-       selectedProducts.addProduct(selectedProduct);
+    public void addSelectedProduct(Product selectedProduct) {
+        selectedProducts.addProduct(selectedProduct);
     }
 
     public void setGeneratedPDFs(List<PDFDocument> generatedDocuments) {

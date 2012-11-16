@@ -13,6 +13,8 @@ import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_model.view.document_info.component.TextComponentView;
+import org.lawrencebower.docgen.web_model.view.product.Product;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -87,8 +89,8 @@ public class DataEntryControllerTest {
     }
 
     private void setProductsOnSession() {
-        ProductView product1 = modelFactory.getProduct(ModelFactoryCodeImpl.PRODUCT_ID_1);
-        ProductView product2 = modelFactory.getProduct(ModelFactoryCodeImpl.PRODUCT_ID_2);
+        Product product1 = modelFactory.getProduct(ModelFactoryCodeImpl.PRODUCT_ID_1);
+        Product product2 = modelFactory.getProduct(ModelFactoryCodeImpl.PRODUCT_ID_2);
         sessionData.addSelectedProduct(product1);
         sessionData.addSelectedProduct(product2);
     }
@@ -125,15 +127,16 @@ public class DataEntryControllerTest {
         DocumentInfoView doc1 = documents.get(0);
         assertEquals(ModelFactoryCodeImpl.DOC_1_NAME, doc1.getName());
 
-        List<DocComponentView> components = doc1.getComponentsWithName(ModelFactoryCodeImpl.AUTO_MAPPED_EXAMPLE_FIELD);
+        List<DocComponentView> components = doc1.getComponentViewsWithName(ModelFactoryCodeImpl.AUTO_MAPPED_EXAMPLE_FIELD);
         assertEquals("auto mapped field not found",
                      1,
                      components.size());
 
         ContactView selectedBusiness = modelFactory.getBusinessByCustomerName(ModelFactoryCodeImpl.CUSTOMER_ID_1);
+        TextComponentView docComponentView = (TextComponentView) components.get(0);
         assertEquals("auto mapped field value not correctly mapped",
                      selectedBusiness.getName(),
-                     components.get(0).getComponentValue());
+                     docComponentView.getComponentText());
     }
 
     @Test

@@ -20,9 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ITextTableGenerator {
 
     @Autowired
-    private PDFGenUtils pdfUtils;
-
-    @Autowired
     private ITextComponentFactory componentFactory;
 
     public PdfPTable generateTable(TableComponent tableComponent) {

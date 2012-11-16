@@ -1,7 +1,5 @@
 <%@ include file="/WEB-INF/jsp/include.jsp" %>
 
-hello I am the home page
-
 <jsp:useBean id="products" scope="request"
              type="java.util.List<org.lawrencebower.docgen.web_model.view.product.ProductView>"/>
 <jsp:useBean id="sessionData" scope="session" type="org.lawrencebower.docgen.web.model.SessionData"/>
@@ -20,9 +18,18 @@ hello I am the home page
         </c:forEach>
     </ol>
     <ol>
-        <c:forEach var="selectedProduct" items="${sessionData.selectedProducts}">
-            <c:out value="${selectedProduct.id}"/>
-        </c:forEach>
+        <table>
+            <c:forEach var="selectedProduct" items="${sessionData.selectedProducts}">
+                <tr>
+                    <td>
+                        <c:out value="${selectedProduct.id}"/>
+                    </td>
+                    <td>
+                        <c:out value="${selectedProduct.quantity}"/>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
     </ol>
 
     <s:url var="data_entry_url" value="/dataEntry/prepareFields"/>

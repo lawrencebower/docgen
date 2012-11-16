@@ -28,15 +28,15 @@ public class ModelFactoryCodeImpl implements ModelFactory {
 
     private LinkedHashMap<String, ContactView> businesses = new LinkedHashMap<>();
 
-    private LinkedHashMap<String, ProductView> products = new LinkedHashMap<>();
+    private LinkedHashMap<String, Product> products = new LinkedHashMap<>();
 
     private LinkedHashMap<String, DocumentInfoView> documents = new LinkedHashMap<>();
 
     private ContactView vendor;
     private ContactView customer1;
     private ContactView customer2;
-    private ProductView product1;
-    private ProductView product2;
+    private Product product1;
+    private Product product2;
     private DocumentInfoView commercialInvoiceView;
     private DocumentInfoView deliveryNoteView;
 
@@ -79,11 +79,12 @@ public class ModelFactoryCodeImpl implements ModelFactory {
 
     private void initProducts() {
 
-        product1 = new ProductView(new Product(PRODUCT_ID_1, "name 1"));
-        product2 = new ProductView(new Product(PRODUCT_ID_2, "name 2"));
+        product1 = new Product(PRODUCT_ID_1, "name 1", "100", "UK");
+        product2 = new Product(PRODUCT_ID_2, "name 2", "200", "UK");
 
-        products.put(product1.getId(), product1);
-        products.put(product2.getId(), product2);
+        products.put(product1.getProductId(), product1);
+        products.put(product2.getProductId(), product2);
+
     }
 
     private void initCustomers() {
@@ -111,28 +112,28 @@ public class ModelFactoryCodeImpl implements ModelFactory {
 
         //Contact 1
         customerProductDocMappings.addDocument(customer1.getContact(),
-                                               product1.getProduct(),
+                                               product1,
                                                commercialInvoiceView);
 
         customerProductDocMappings.addDocument(customer1.getContact(),
-                                               product2.getProduct(),
+                                               product2,
                                                commercialInvoiceView);
 
         customerProductDocMappings.addDocument(customer1.getContact(),
-                                               product2.getProduct(),
+                                               product2,
                                                deliveryNoteView);
 
         //Contact 2
         customerProductDocMappings.addDocument(customer2.getContact(),
-                                               product1.getProduct(),
+                                               product1,
                                                commercialInvoiceView);
 
         customerProductDocMappings.addDocument(customer2.getContact(),
-                                               product2.getProduct(),
+                                               product2,
                                                commercialInvoiceView);
 
         customerProductDocMappings.addDocument(customer2.getContact(),
-                                               product2.getProduct(),
+                                               product2,
                                                deliveryNoteView);
 
     }
@@ -149,7 +150,13 @@ public class ModelFactoryCodeImpl implements ModelFactory {
 
     @Override
     public List<ProductView> getProducts() {
-        return new ArrayList<>(products.values());
+
+        List<ProductView> results = new ArrayList<>();
+        for (Product product : products.values()) {
+            results.add(new ProductView(product));
+        }
+
+        return results;
     }
 
     public List<DocumentInfoView> getDocuments() {
@@ -172,7 +179,7 @@ public class ModelFactoryCodeImpl implements ModelFactory {
     }
 
     @Override
-    public ProductView getProduct(String productId) {
+    public Product getProduct(String productId) {
         if (!products.containsKey(productId)) {
             throw new DocGenException(String.format("product '%s' not found?!", productId));
         }

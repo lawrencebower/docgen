@@ -3,6 +3,7 @@ package org.lawrencebower.docgen.core.document.component.table;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.DocComponentType;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
+import org.lawrencebower.docgen.core.exception.DocGenException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,6 +44,10 @@ public class TableComponent extends DocComponent {
 
     public void addRow(TableRow row) {
         rows.add(row);
+    }
+
+    public List<TableRow> getRows() {
+        return rows;
     }
 
     public void clearRows() {
@@ -89,6 +94,19 @@ public class TableComponent extends DocComponent {
 
     public int getTablePadding() {
         return tablePadding;
+    }
+
+    public TableRow getRow(int rowNum) {
+
+        if(rows.size() <=  rowNum){
+            String messageTemplate = "Cant retrieve row number '%s' from table '%s' - only has %s rows";
+            String componentName = getName();
+            int actualRowNum = rows.size();
+            String message = String.format(messageTemplate, rowNum, componentName, actualRowNum);
+            throw new DocGenException(message);
+        }
+
+        return rows.get(rowNum);
     }
 
 }

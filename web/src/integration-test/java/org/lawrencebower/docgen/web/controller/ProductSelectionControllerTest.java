@@ -72,10 +72,10 @@ public class ProductSelectionControllerTest {
 
         List<ProductView> products = sessionData.getSelectedProducts();
 
-        assertTrue(products.size() == 3);
+        assertTrue(products.size() == 2);
         assertTrue(products.get(0).getId().equals("id1"));
         assertTrue(products.get(1).getId().equals("id2"));
-        assertTrue(products.get(2).getId().equals("id2"));
+        assertTrue(products.get(1).getQuantity() == 2);
     }
 
     @Test

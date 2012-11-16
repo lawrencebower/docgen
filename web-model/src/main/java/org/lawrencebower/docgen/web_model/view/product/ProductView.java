@@ -7,7 +7,7 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 public class ProductView {
 
     private Product product;
-    private int quantity = 0;
+    private int quantity = 1;
 
     public ProductView(Product product) {
         this.product = product;
@@ -25,6 +25,14 @@ public class ProductView {
         return product.getProductName();
     }
 
+    public String getProductValue(){
+        return product.getValue();
+    }
+
+    public String getProductCountryOfOrigin(){
+        return product.getCountryOfOrigin();
+    }
+
     public void incrementQuantity(){
         quantity++;
     }
@@ -39,6 +47,14 @@ public class ProductView {
         }
 
         quantity--;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public String getQuantityString() {
+        return Integer.toString(quantity);
     }
 
     @Override

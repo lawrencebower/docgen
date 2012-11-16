@@ -5,6 +5,28 @@
              http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd
              http://www.springframework.org/schema/context classpath:/org/springframework/context/config/spring-context-3.1.xsd">
 
-    <bean name="componentViewFactory" class="org.lawrencebower.docgen.web_model.view.document_info.DocComponentViewFactory"/>
+    <bean name="componentViewFactory"
+          class="org.lawrencebower.docgen.web_model.view.document_info.DocComponentViewFactory">
+        <lookup-method name="getCheckBoxComponentView" bean="checkBoxComponentView"/>
+        <lookup-method name="getTableComponentView" bean="tableComponentView"/>
+        <lookup-method name="getTextAreaComponentView" bean="textAreaComponentView"/>
+        <lookup-method name="getTextComponentView" bean="textComponentView"/>
+    </bean>
+
+
+    <bean name="checkBoxComponentView"
+          class="org.lawrencebower.docgen.web_model.view.document_info.component.CheckBoxComponentView"
+          scope="prototype"/>
+    <bean name="tableComponentView"
+          class="org.lawrencebower.docgen.web_model.view.document_info.component.TableComponentView"
+          scope="prototype"/>
+    <bean name="textAreaComponentView"
+          class="org.lawrencebower.docgen.web_model.view.document_info.component.TextAreaComponentView"
+          scope="prototype"/>
+    <bean name="textComponentView"
+          class="org.lawrencebower.docgen.web_model.view.document_info.component.TextComponentView"
+          scope="prototype"/>
+
+    <bean name="tableComponentValueSetter" class="org.lawrencebower.docgen.web_model.business.table_component.TableComponentValueSetter"/>
 
 </beans>

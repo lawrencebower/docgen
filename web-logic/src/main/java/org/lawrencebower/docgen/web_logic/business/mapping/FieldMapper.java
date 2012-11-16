@@ -1,12 +1,17 @@
 package org.lawrencebower.docgen.web_logic.business.mapping;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
 public class FieldMapper {
+
+    @Autowired
+    ViewUtils viewUtils;
 
     private static Set<String> EXCLUDED_TOKENS;
 
@@ -36,43 +41,30 @@ public class FieldMapper {
                                      List<DocumentInfoView> documents,
                                      String componentName) {
 
-        List<DocComponentView> components = getComponentsWithName(componentName, documents);
+        List<DocComponentView> allViewComponents = viewUtils.getAllComponentViewsFromDocs(documents);
 
-        String[] componentValue = parameterMap.get(componentName);
-        String value = getFieldValue(componentName, componentValue);
+        String componentValue = getComponentValue(componentName, parameterMap);
 
-        for (DocComponentView component : components) {
-            component.setComponentFromParamString(value);
+        for (DocComponentView component : allViewComponents) {
+            component.checkAndSetValueFromParamString(componentName, componentValue);
         }
-
     }
 
-    private String getFieldValue(String key, String[] strings) {
+    private String getComponentValue(String key, Map<String, String[]> parameterMap) {
 
-        if (strings.length == 0) {
+        String[] componentValues = parameterMap.get(key);
+
+        if (componentValues.length == 0) {
             String message = String.format("No values bound to field '%s'", key);
             throw new DocGenException(message);
         }
 
-        if (strings.length > 1) {
+        if (componentValues.length > 1) {
             String message = String.format("more than 1 value bound to field '%s'", key);
             throw new DocGenException(message);
         }
 
-        return strings[0];
-    }
-
-    private List<DocComponentView> getComponentsWithName(String componentName,
-                                                         List<DocumentInfoView> documents) {
-
-        List<DocComponentView> results = new ArrayList<>();
-
-        for (DocumentInfoView document : documents) {
-            List<DocComponentView> matchingComponents = document.getComponentsWithName(componentName);
-            results.addAll(matchingComponents);
-        }
-
-        return results;
+        return componentValues[0];
     }
 
     public boolean isExcludedToken(String token) {

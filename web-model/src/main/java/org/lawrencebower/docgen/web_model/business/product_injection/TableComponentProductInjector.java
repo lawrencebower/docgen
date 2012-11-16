@@ -11,13 +11,13 @@ import java.util.List;
 
 public class TableComponentProductInjector implements ProductInjection<TableComponent>{
 
-    public void injectProducts(TableComponent docComponent, List<ProductView> products) {
+    public void injectProducts(TableComponent tableComponent, List<ProductView> products) {
 
-        clearExistingProducts(docComponent);
+        clearExistingProducts(tableComponent);
 
         for (ProductView product : products) {
-            TableRow row = getProductRow(docComponent, product);
-            docComponent.addRow(row);
+            TableRow row = getProductRow(tableComponent, product);
+            tableComponent.addRow(row);
         }
     }
 

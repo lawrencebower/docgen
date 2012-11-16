@@ -39,14 +39,18 @@
                 <td>
                     <c:if test="${field.text }">
                         <input name="${field.name}"
-                               value="${field.componentValue}"
+                               value="${field.componentText}"
                                id="${field.name}"/>
                     </c:if>
                     <c:if test="${field.textArea}">
                         <textarea cols="30"
                                   rows="8"
                                   name="${field.name}"
-                                  id="${field.name}"><c:out value="${field.componentValue}"/></textarea>
+                                  id="${field.name}"><c:out value="${field.componentText}"/></textarea>
+                    </c:if>
+                    <c:if test="${field.table}">
+                        <c:set var="table" value="${field}" scope="request"/>
+                        <jsp:include page="table.jsp"/>
                     </c:if>
                 </td>
             </tr>

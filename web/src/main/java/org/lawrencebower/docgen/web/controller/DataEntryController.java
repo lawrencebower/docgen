@@ -119,14 +119,16 @@ public class DataEntryController {
     }
 
     private void mapFieldValuesToComponents(WebRequest webRequest) {
+
         Map<String, String[]> parameterMap = webRequest.getParameterMap();
+
+        writeParameterVals(parameterMap);
 
         List<DocumentInfoView> relevantDocs = sessionData.getDocuments();
 
         business.mapFieldValuesToComponents(parameterMap, relevantDocs);
     }
 
-/*
     private void writeParameterVals(Map<String, String[]> parameterMap) {
         for (String key : parameterMap.keySet()) {
             System.out.println("key = " + key);
@@ -136,7 +138,6 @@ public class DataEntryController {
             }
         }
     }
-*/
 
     public List<DocComponentView> getDocComponentViews() {
 

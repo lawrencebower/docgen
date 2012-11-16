@@ -26,8 +26,7 @@ public abstract class DocComponentView<T extends DocComponent> {
     protected ComponentViewType componentViewType;
     private AutoMappedField autoMappedField;
 
-    public DocComponentView(T docComponent) {
-
+    public void setComponent(T docComponent){
         if (docComponent == null) {
             throw new DocGenException(NULL_COMPONENT_MESSAGE);
         }
@@ -50,9 +49,11 @@ public abstract class DocComponentView<T extends DocComponent> {
         return name;
     }
 
-    public abstract String getComponentValue();
+    public abstract void setComponentValue(Boolean value);
 
-    public abstract void setComponentFromParamString(String value);
+    public abstract void setComponentValue(String value);
+
+    public abstract void checkAndSetValueFromParamString(String componentName, String value);
 
     public abstract boolean allowsProductInjection();
 
@@ -82,7 +83,7 @@ public abstract class DocComponentView<T extends DocComponent> {
         return componentViewType == ComponentViewType.TEXT_AREA;
     }
 
-    public boolean isTableArea(){
+    public boolean isTable(){
         return componentViewType == ComponentViewType.TABLE;
     }
 
