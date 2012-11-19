@@ -1,16 +1,16 @@
 package org.lawrencebower.docgen.web_logic.business.model_factory;
 
-import org.lawrencebower.docgen.web_model.view.contact.ContactView;
-import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
-import org.lawrencebower.docgen.web_model.view.product.Product;
-import org.lawrencebower.docgen.web_model.view.product.ProductView;
+import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.product.Product;
+import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public interface ModelFactory {
 
-    public List<ContactView> getCustomers();
+    List<ContactView> getCustomers();
 
     List<DocumentInfoView> getDocuments();
 

@@ -1,18 +1,16 @@
 package org.lawrencebower.docgen.web_logic.business.mapping;
 
-import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lawrencebower.docgen.web_model.view.contact.Contact;
-import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
-import org.lawrencebower.docgen.web_model.view.product.Product;
+import org.lawrencebower.docgen.web_logic.view.contact.Contact;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
-import java.util.Map;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;

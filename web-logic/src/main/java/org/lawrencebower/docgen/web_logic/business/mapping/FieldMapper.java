@@ -2,8 +2,8 @@ package org.lawrencebower.docgen.web_logic.business.mapping;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
-import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
-import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;

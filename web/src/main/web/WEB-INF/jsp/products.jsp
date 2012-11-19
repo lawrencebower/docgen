@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/jsp/include.jsp" %>
 
 <jsp:useBean id="products" scope="request"
-             type="java.util.List<org.lawrencebower.docgen.web_model.view.product.ProductView>"/>
+             type="java.util.List<org.lawrencebower.docgen.web_logic.view.product.ProductView>"/>
 <jsp:useBean id="sessionData" scope="session" type="org.lawrencebower.docgen.web.model.SessionData"/>
 
 <div>

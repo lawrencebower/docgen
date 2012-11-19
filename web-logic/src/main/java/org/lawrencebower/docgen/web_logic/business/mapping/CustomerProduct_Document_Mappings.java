@@ -2,9 +2,9 @@ package org.lawrencebower.docgen.web_logic.business.mapping;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.lawrencebower.docgen.web_model.view.contact.Contact;
-import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
-import org.lawrencebower.docgen.web_model.view.product.Product;
+import org.lawrencebower.docgen.web_logic.view.contact.Contact;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.product.Product;
 
 import java.util.*;
 

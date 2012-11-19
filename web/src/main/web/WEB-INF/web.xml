@@ -15,8 +15,11 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
+            classpath:META-INF/core-beans.xml
+            classpath:META-INF/web-logic-params.xml
+            classpath:META-INF/web-logic-beans.xml
+            classpath:META-INF/usecase-beans.xml
             classpath:META-INF/web-beans.xml
-            classpath:META-INF/web-logic-context.xml
         </param-value>
     </context-param>
 

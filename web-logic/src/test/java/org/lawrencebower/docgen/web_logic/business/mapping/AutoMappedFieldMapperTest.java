@@ -3,13 +3,12 @@ package org.lawrencebower.docgen.web_logic.business.mapping;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lawrencebower.docgen.web_model.view.constants.AutoMappedField;
-import org.lawrencebower.docgen.web_model.view.contact.Contact;
-import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.constants.AutoMappedField;
+import org.lawrencebower.docgen.web_logic.view.contact.Contact;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocComponentView;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.event.GenericApplicationListenerAdapter;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 

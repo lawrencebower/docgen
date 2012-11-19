@@ -9,13 +9,13 @@ import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Docum
 import org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper;
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
-import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
-import org.lawrencebower.docgen.web_model.view.contact.Contact;
-import org.lawrencebower.docgen.web_model.view.contact.ContactView;
-import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
-import org.lawrencebower.docgen.web_model.view.document_info.DocumentInfoView;
-import org.lawrencebower.docgen.web_model.view.product.Product;
-import org.lawrencebower.docgen.web_model.view.product.ProductView;
+import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
+import org.lawrencebower.docgen.web_logic.view.contact.Contact;
+import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.product.Product;
+import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 

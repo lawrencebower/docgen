@@ -12,17 +12,6 @@
 
     <!--ITEXT COMPONENTS-->
 
-    <bean id="iTextComponentFactory"
-          class="org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponentFactory">
-        <lookup-method name="getCheckBoxComponent" bean="iTextCheckBoxComponent"/>
-        <lookup-method name="getImageComponent" bean="iTextImageComponent"/>
-        <lookup-method name="getLineComponent" bean="iTextLineComponent"/>
-        <lookup-method name="getNewLineComponent" bean="iTextNewLineComponent"/>
-        <lookup-method name="getTableComponent" bean="iTextTableComponent"/>
-        <lookup-method name="getTableTextComponent" bean="iTextTableTextComponent"/>
-        <lookup-method name="getTextComponent" bean="iTextTextComponent"/>
-    </bean>
-
     <bean id="iTextCheckBoxComponent"
           class="org.lawrencebower.docgen.core.generator.model.itext_component.ITextCheckBoxComponent"
           scope="prototype"/>
@@ -50,6 +39,17 @@
     <bean id="iTextTextComponent"
           class="org.lawrencebower.docgen.core.generator.model.itext_component.ITextTextComponent"
           scope="prototype"/>
+
+    <bean id="iTextComponentFactory"
+          class="org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponentFactory">
+        <lookup-method name="getCheckBoxComponent" bean="iTextCheckBoxComponent"/>
+        <lookup-method name="getImageComponent" bean="iTextImageComponent"/>
+        <lookup-method name="getLineComponent" bean="iTextLineComponent"/>
+        <lookup-method name="getNewLineComponent" bean="iTextNewLineComponent"/>
+        <lookup-method name="getTableComponent" bean="iTextTableComponent"/>
+        <lookup-method name="getTableTextComponent" bean="iTextTableTextComponent"/>
+        <lookup-method name="getTextComponent" bean="iTextTextComponent"/>
+    </bean>
 
     <!--RENDERERS-->
 

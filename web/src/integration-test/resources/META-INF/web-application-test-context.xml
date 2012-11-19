@@ -12,8 +12,6 @@
 
     <import resource="web-logic-beans.xml"/>
 
-    <import resource="web-model-beans.xml"/>
-
     <import resource="web-application-test-params.xml"/>
 
     <bean id="testFileUtils" class="org.lawrencebower.docgen.core.generator.utils.ChecksumUtils"/>
