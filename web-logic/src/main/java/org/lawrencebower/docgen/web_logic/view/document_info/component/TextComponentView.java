@@ -2,7 +2,6 @@ package org.lawrencebower.docgen.web_logic.view.document_info.component;
 
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 
 import java.util.List;

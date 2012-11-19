@@ -3,7 +3,6 @@ package org.lawrencebower.docgen.web_logic.view.document_info.component;
 import org.junit.Before;
 import org.junit.Test;
 import org.lawrencebower.docgen.core.document.DocumentInfo;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.mockito.Mockito;
 

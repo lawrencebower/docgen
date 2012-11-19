@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_logic.view.document_info;
+package org.lawrencebower.docgen.web_logic.view.document_info.component;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;

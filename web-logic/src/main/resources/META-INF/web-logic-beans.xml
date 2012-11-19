@@ -27,7 +27,7 @@
           class="org.lawrencebower.docgen.web_logic.business.utils.ViewUtils"/>
 
     <bean name="componentViewFactory"
-          class="org.lawrencebower.docgen.web_logic.view.document_info.DocComponentViewFactory">
+          class="org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentViewFactory">
         <lookup-method name="getCheckBoxComponentView" bean="checkBoxComponentView"/>
         <lookup-method name="getTableComponentView" bean="tableComponentView"/>
         <lookup-method name="getTextAreaComponentView" bean="textAreaComponentView"/>

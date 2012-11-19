@@ -2,7 +2,6 @@ package org.lawrencebower.docgen.web_logic.view.document_info.component;
 
 import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 

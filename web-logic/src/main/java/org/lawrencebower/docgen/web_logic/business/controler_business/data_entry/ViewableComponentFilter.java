@@ -1,7 +1,7 @@
 package org.lawrencebower.docgen.web_logic.business.controler_business.data_entry;
 
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.springframework.beans.factory.annotation.Autowired;
 

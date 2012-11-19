@@ -9,8 +9,6 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.TableComponentCalculation;
 import org.lawrencebower.docgen.web_logic.business.product_injection.TableComponentProductInjector;
 import org.lawrencebower.docgen.web_logic.business.table_component.TableComponentValueSetter;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocComponentViewFactory;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 

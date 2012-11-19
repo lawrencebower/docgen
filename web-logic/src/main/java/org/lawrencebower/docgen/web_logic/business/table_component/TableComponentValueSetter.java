@@ -2,7 +2,7 @@ package org.lawrencebower.docgen.web_logic.business.table_component;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.TableComponentView;
 
 public class TableComponentValueSetter {

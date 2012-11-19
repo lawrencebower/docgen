@@ -3,6 +3,7 @@ package org.lawrencebower.docgen.web_logic.view.document_info;
 import org.lawrencebower.docgen.core.document.DocumentInfo;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 
 import java.util.ArrayList;
 import java.util.List;
