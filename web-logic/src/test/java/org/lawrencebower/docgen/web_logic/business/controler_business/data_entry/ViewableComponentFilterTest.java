@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
-import org.lawrencebower.docgen.web_logic.view.constants.AutoMappedField;
+import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedField;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocComponentViewFactory;
 import org.mockito.Mock;

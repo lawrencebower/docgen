@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_logic.view.constants;
+package org.lawrencebower.docgen.web_logic.business.mapping;
 
 public enum AutoMappedField {
 

@@ -4,7 +4,6 @@ import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
 import org.lawrencebower.docgen.core.document.component.table.TableRow;
-import org.lawrencebower.docgen.web_logic.view.constants.ProductInjectionField;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 
 import java.util.List;

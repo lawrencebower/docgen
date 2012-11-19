@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_logic.view.constants;
+package org.lawrencebower.docgen.web_logic.business.product_injection;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
