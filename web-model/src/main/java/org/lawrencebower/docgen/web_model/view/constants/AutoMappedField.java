@@ -24,7 +24,7 @@ public enum AutoMappedField {
 
     private String name;
 
-    private AutoMappedField(String name) {
+    AutoMappedField(String name) {
         this.name = name;
     }
 

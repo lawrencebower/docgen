@@ -1,6 +1,8 @@
 package org.lawrencebower.docgen.web_model.view.document_info.component;
 
 import org.lawrencebower.docgen.core.document.component.TextComponent;
+import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.web_model.business.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -8,6 +10,8 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.List;
 
 public class TextComponentView extends DocComponentView<TextComponent> {
+
+    private ComponentCalculation componentCalculation;
 
     protected TextComponentView() {//force spring creation
         componentViewType = ComponentViewType.TEXT;
@@ -37,19 +41,28 @@ public class TextComponentView extends DocComponentView<TextComponent> {
         }
     }
 
-    public String getComponentText(){
+    public String getComponentText() {
         return docComponent.getTextString();
     }
 
     @Override
-    public boolean allowsProductInjection() {
-        return false;
+    public void injectProducts(List<ProductView> products) {
+        //not implemented - just exit quietly
+    }
+
+    public boolean hasComponentCalculations() {
+        return componentCalculation != null;
     }
 
     @Override
-    public void injectProducts(List<ProductView> products) {
-        throw new NotImplementedException();
+    public void calculateValue(List<DocComponentView> allComponents) {
+        if (hasComponentCalculations()) {
+            componentCalculator.calculateComponentValue(this, allComponents);
+        }
     }
 
+    public void setComponentCalculation(ComponentCalculation componentCalculation) {
+        this.componentCalculation = componentCalculation;
+    }
 
 }

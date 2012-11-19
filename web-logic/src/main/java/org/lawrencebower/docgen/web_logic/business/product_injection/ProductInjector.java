@@ -10,17 +10,5 @@ public class ProductInjector {
     public void injectProductFields(List<DocComponentView> components,
                                     List<ProductView> products) {
 
-        for (DocComponentView component : components) {
-            injectProductIfSupported(component, products);
-        }
-
-    }
-
-    private void injectProductIfSupported(DocComponentView component,
-                                          List<ProductView> products) {
-
-        if(component.allowsProductInjection()){
-            component.injectProducts(products);
-        }
     }
 }

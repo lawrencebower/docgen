@@ -4,9 +4,13 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.web_model.business.component_calculation.ComponentCalculation;
+import org.lawrencebower.docgen.web_model.business.component_calculation.ComponentCalculator;
 import org.lawrencebower.docgen.web_model.view.constants.AutoMappedField;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class DocComponentView<T extends DocComponent> {
@@ -21,6 +25,9 @@ public abstract class DocComponentView<T extends DocComponent> {
         TABLE,
         CV
     }
+
+    @Autowired
+    protected ComponentCalculator componentCalculator;
 
     protected T docComponent;
     protected ComponentViewType componentViewType;
@@ -55,13 +62,7 @@ public abstract class DocComponentView<T extends DocComponent> {
 
     public abstract void checkAndSetValueFromParamString(String componentName, String value);
 
-    public abstract boolean allowsProductInjection();
-
     public abstract void injectProducts(List<ProductView> products);
-
-    public ComponentViewType getComponentViewType(){
-        return componentViewType;
-    }
 
     public boolean isAutoMappedField(){
         return autoMappedField != null;
@@ -74,6 +75,8 @@ public abstract class DocComponentView<T extends DocComponent> {
     public AutoMappedField getAutoMappedField() {
         return autoMappedField;
     }
+
+    public abstract void calculateValue(List<DocComponentView> allComponents);
 
     public boolean isText(){
         return componentViewType == ComponentViewType.TEXT;

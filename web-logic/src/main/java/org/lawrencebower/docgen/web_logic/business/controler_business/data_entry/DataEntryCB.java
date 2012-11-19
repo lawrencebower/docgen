@@ -7,7 +7,6 @@ import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedFieldMapper;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
 import org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper;
-import org.lawrencebower.docgen.web_logic.business.product_injection.ProductInjector;
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
@@ -42,8 +41,6 @@ public class DataEntryCB {
     FieldMapper fieldMapper;
     @Autowired
     private ViewableComponentFilter viewableComponentFilter;
-    @Autowired
-    ProductInjector productInjector;
 
     @Autowired
     @Qualifier("pdfOutputRoot")
@@ -166,11 +163,18 @@ public class DataEntryCB {
 
     public void injectProductFields(List<DocumentInfoView> documents,
                                     List<ProductView> selectedProducts) {
-
-        for (DocumentInfoView documentView : documents) {
-            List<DocComponentView> componentViews = documentView.getComponentViews();
-            productInjector.injectProductFields(componentViews, selectedProducts);
+        List<DocComponentView> componentViews = viewUtils.getAllComponentViewsFromDocs(documents);
+        for (DocComponentView componentView : componentViews) {
+            componentView.injectProducts(selectedProducts);
         }
+    }
+
+    public void processCalculatedFields(List<DocumentInfoView> documents) {
+        List<DocComponentView> componentViews = viewUtils.getAllComponentViewsFromDocs(documents);
+        for (DocComponentView componentView : componentViews) {
+            componentView.calculateValue(componentViews);
+        }
+
     }
 
 //    SETTERS FOR UNIT TESTS

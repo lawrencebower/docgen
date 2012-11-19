@@ -29,4 +29,7 @@
 
     <bean name="tableComponentValueSetter" class="org.lawrencebower.docgen.web_model.business.table_component.TableComponentValueSetter"/>
 
+    <bean name="componentCalculator"
+          class="org.lawrencebower.docgen.web_model.business.component_calculation.ComponentCalculator"/>
+
 </beans>

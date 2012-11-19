@@ -7,6 +7,7 @@ import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
 import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.web_model.business.component_calculation.TableComponentCalculation;
 import org.lawrencebower.docgen.web_model.business.product_injection.TableComponentProductInjector;
 import org.lawrencebower.docgen.web_model.business.table_component.TableComponentValueSetter;
 import org.lawrencebower.docgen.web_model.view.document_info.DocComponentView;
@@ -14,15 +15,17 @@ import org.lawrencebower.docgen.web_model.view.document_info.DocComponentViewFac
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class TableComponentView<T extends DocComponent>
-        extends DocComponentView<TableComponent> {
+public class TableComponentView extends DocComponentView<TableComponent> {
 
     @Autowired
     DocComponentViewFactory viewFactory;
     @Autowired
     TableComponentValueSetter tableValueSetter;
+
+    private List<TableComponentCalculation> componentCalculations = new ArrayList<>();
 
     private TableComponentView() {//force spring creation
         componentViewType = ComponentViewType.TABLE;
@@ -52,13 +55,9 @@ public class TableComponentView<T extends DocComponent>
         return docComponent.getRows();
     }
 
-    public List<TableCell> getHeaderCells(){
+    public List<TableCell> getHeaderCells() {
         TableHeaderRow headerRow = docComponent.getHeaderRow();
         return headerRow.getCells();
-    }
-
-    public boolean allowsProductInjection() {
-        return true;
     }
 
     public void injectProducts(List<ProductView> products) {
@@ -72,4 +71,20 @@ public class TableComponentView<T extends DocComponent>
         DocComponent component = cell.getComponent();
         return viewFactory.createComponentView(component);
     }
+
+    @Override
+    public void calculateValue(List<DocComponentView> allComponents) {
+        if (hasComponentCalculations()) {
+            componentCalculator.calculateComponents(this, allComponents);
+        }
+    }
+
+    public void addComponentCalculation(TableComponentCalculation calculation) {
+        componentCalculations.add(calculation);
+    }
+
+    private boolean hasComponentCalculations() {
+        return !componentCalculations.isEmpty();
+    }
+
 }

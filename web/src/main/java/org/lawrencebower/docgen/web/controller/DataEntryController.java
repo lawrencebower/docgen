@@ -49,6 +49,8 @@ public class DataEntryController {
 
         injectProductFields();
 
+        processCalculatedFields();
+
         return "dataEntry";
     }
 
@@ -79,6 +81,11 @@ public class DataEntryController {
         List<ProductView> selectedProducts = sessionData.getSelectedProducts();
 
         business.injectProductFields(documents, selectedProducts);
+    }
+
+    private void processCalculatedFields() {
+        List<DocumentInfoView> documents = sessionData.getDocuments();
+        business.processCalculatedFields(documents);
     }
 
     @RequestMapping("/toggleAutomapped")

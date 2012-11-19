@@ -9,7 +9,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 
-public class CheckBoxComponentView<T extends DocComponent> extends DocComponentView<CheckBoxComponent> {
+public class CheckBoxComponentView extends DocComponentView<CheckBoxComponent> {
 
     protected static final String SELECTED_TEXT = "X";
     protected static final String UNSELECTED_TEXT = "";
@@ -33,7 +33,7 @@ public class CheckBoxComponentView<T extends DocComponent> extends DocComponentV
             docComponent.setSelected(true);
         } else if (value.equals(falseString)) {
             docComponent.setSelected(false);
-        }else{
+        } else {
             String messageTemplate = "Can not map String '%s' to checkbox selection";
             String message = String.format(messageTemplate, value);
             throw new DocGenException(message);
@@ -58,13 +58,13 @@ public class CheckBoxComponentView<T extends DocComponent> extends DocComponentV
     }
 
     @Override
-    public boolean allowsProductInjection() {
-        return false;
+    public void injectProducts(List<ProductView> products) {
+        //not implemented - just exit quietly
     }
 
     @Override
-    public void injectProducts(List<ProductView> products) {
-        throw new NotImplementedException();
+    public void calculateValue(List<DocComponentView> allComponents) {
+        throw new DocGenException("CheckBox does not support calculated values");
     }
 
 }
