@@ -30,7 +30,7 @@ public class DataEntryCB {
     @Autowired
     PDFConcatenator pdfConcatenator;
     @Autowired
-    AutoMappedFieldMapper reservedFieldMapper;
+    AutoMappedFieldMapper automappedFieldMapper;
     @Autowired
     ViewUtils viewUtils;
     @Autowired
@@ -142,7 +142,7 @@ public class DataEntryCB {
 
         List<DocComponentView> components = viewUtils.getAllComponentViewsFromDocs(documentInfos);
 
-        reservedFieldMapper.mapFields(components,
+        automappedFieldMapper.mapFields(components,
                                       customerContact,
                                       vendorContact,
                                       businessContact);
