@@ -96,10 +96,10 @@ public class AutoMappedComponentMapperTest {
 
         List<DocComponentView> components = Arrays.asList(businessNameComponent, nonAutomappedComponent);
 
-        mapper.mapFields(components,
-                         customer,
-                         vendor,
-                         business);
+        mapper.mapComponents(components,
+                             customer,
+                             vendor,
+                             business);
 
         verify(businessNameComponent, atLeastOnce()).getAutoMappedComponent();
         verify(nonAutomappedComponent, atLeastOnce()).getAutoMappedComponent();
@@ -118,10 +118,10 @@ public class AutoMappedComponentMapperTest {
 
         List<DocComponentView> components = Arrays.asList(businessNameComponent, nonAutomappedComponent);
 
-        mapper.mapFields(components,
-                         customer,
-                         vendor,
-                         business);
+        mapper.mapComponents(components,
+                             customer,
+                             vendor,
+                             business);
 
         verify(businessNameComponent, atLeastOnce()).getAutoMappedComponent();
         verify(nonAutomappedComponent, atLeastOnce()).getAutoMappedComponent();
@@ -360,10 +360,10 @@ public class AutoMappedComponentMapperTest {
 
         List<DocComponentView> components = Arrays.asList(component);
 
-        mapper.mapFields(components,
-                         customer,
-                         vendor,
-                         business);
+        mapper.mapComponents(components,
+                             customer,
+                             vendor,
+                             business);
 
         return component;
     }

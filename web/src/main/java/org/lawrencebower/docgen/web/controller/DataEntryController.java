@@ -71,9 +71,9 @@ public class DataEntryController {
         ContactView selectedCustomer = sessionData.getSelectedCustomer();
         List<DocumentInfoView> documents = sessionData.getDocuments();
 
-        business.mapAutoMapFields(documents,
-                                  selectedCustomer,
-                                  selectedBusiness);
+        business.mapAutoMapComponents(documents,
+                                      selectedCustomer,
+                                      selectedBusiness);
     }
 
     private void injectProductFields() {

@@ -125,9 +125,9 @@ public class DataEntryCB {
         return concatenatedFile;
     }
 
-    public void mapAutoMapFields(List<DocumentInfoView> documentInfos,
-                                 ContactView selectedCustomer,
-                                 ContactView selectedBusiness) {
+    public void mapAutoMapComponents(List<DocumentInfoView> documentInfos,
+                                     ContactView selectedCustomer,
+                                     ContactView selectedBusiness) {
 
         viewUtils.checkCustomerSet(selectedCustomer);
         viewUtils.checkBusinessSet(selectedBusiness);
@@ -142,10 +142,10 @@ public class DataEntryCB {
 
         List<DocComponentView> components = viewUtils.getAllComponentViewsFromDocs(documentInfos);
 
-        automappedComponentMapper.mapFields(components,
-                                        customerContact,
-                                        vendorContact,
-                                        businessContact);
+        automappedComponentMapper.mapComponents(components,
+                                                customerContact,
+                                                vendorContact,
+                                                businessContact);
     }
 
     public List<DocComponentView> getComponentsForViewing(List<DocumentInfoView> documents,

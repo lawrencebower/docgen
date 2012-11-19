@@ -11,10 +11,10 @@ public class AutoMappedComponentMapper {
     private Contact vendor;
     private Contact business;
 
-    public void mapFields(List<DocComponentView> components,
-                          Contact customer,
-                          Contact vendor,
-                          Contact business) {
+    public void mapComponents(List<DocComponentView> components,
+                              Contact customer,
+                              Contact vendor,
+                              Contact business) {
 
         this.customer = customer;
         this.vendor = vendor;
@@ -31,11 +31,11 @@ public class AutoMappedComponentMapper {
 
         if (componentIsAutoMapped) {
             AutoMappedComponent autoMappedComponent = docComponentView.getAutoMappedField();
-            mapFieldValue(docComponentView, autoMappedComponent);
+            mapComponentValue(docComponentView, autoMappedComponent);
         }
     }
 
-    private void mapFieldValue(DocComponentView docComponentView, AutoMappedComponent component) {
+    private void mapComponentValue(DocComponentView docComponentView, AutoMappedComponent component) {
 
         mapCustomerFields(docComponentView, component);
 
