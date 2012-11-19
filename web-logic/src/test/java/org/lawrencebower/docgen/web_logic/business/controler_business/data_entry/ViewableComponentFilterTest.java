@@ -60,7 +60,7 @@ public class ViewableComponentFilterTest {
     @Test
     public void testGetComponents_validParams_automappedFieldsPresent() throws Exception {
         List<DocComponentView> allComponents = getAllComponents();
-        assertTrue(allComponents.get(1).getAutoMappedComponent());
+        assertTrue(allComponents.get(1).isAutoMappedComponent());
     }
 
     private List<DocComponentView> getAllComponents() {

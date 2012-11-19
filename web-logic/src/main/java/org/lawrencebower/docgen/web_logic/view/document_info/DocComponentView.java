@@ -6,6 +6,7 @@ import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculator;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
+import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponentInfo;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -62,7 +63,7 @@ public abstract class DocComponentView<T extends DocComponent> {
 
     public abstract void injectProducts(List<ProductView> products);
 
-    public boolean getAutoMappedComponent(){
+    public boolean isAutoMappedComponent(){
         return autoMappedComponent != null;
     }
 
@@ -70,8 +71,13 @@ public abstract class DocComponentView<T extends DocComponent> {
         this.autoMappedComponent = autoMappedComponent;
     }
 
-    public AutoMappedComponent getAutoMappedField() {
-        return autoMappedComponent;
+    public void mapComponentValue(AutoMappedComponentInfo mappingInfo) {
+        if(isAutoMappedComponent()){
+            AutoMappedComponent.mapComponent(this,
+                                             autoMappedComponent,
+                                             mappingInfo);
+
+        }
     }
 
     public abstract void calculateValue(List<DocComponentView> allComponents);

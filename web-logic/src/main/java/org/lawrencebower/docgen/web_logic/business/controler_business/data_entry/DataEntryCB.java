@@ -4,7 +4,7 @@ import org.apache.commons.io.IOUtils;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
-import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponentMapper;
+import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponentInfo;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
 import org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper;
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
@@ -29,8 +29,6 @@ public class DataEntryCB {
 
     @Autowired
     PDFConcatenator pdfConcatenator;
-    @Autowired
-    AutoMappedComponentMapper automappedComponentMapper;
     @Autowired
     ViewUtils viewUtils;
     @Autowired
@@ -135,17 +133,20 @@ public class DataEntryCB {
 
         Contact customerContact = selectedCustomer.getContact();
 
-        Contact businessContact = selectedBusiness.getContact();
-
         ContactView vendor = modelFactory.getVendor();
         Contact vendorContact = vendor.getContact();
 
+        Contact businessContact = selectedBusiness.getContact();
+
+        AutoMappedComponentInfo mappingInfo = new AutoMappedComponentInfo(customerContact,
+                                                                          vendorContact,
+                                                                          businessContact);
+
         List<DocComponentView> components = viewUtils.getAllComponentViewsFromDocs(documentInfos);
 
-        automappedComponentMapper.mapComponents(components,
-                                                customerContact,
-                                                vendorContact,
-                                                businessContact);
+        for (DocComponentView component : components) {
+            component.mapComponentValue(mappingInfo);
+        }
     }
 
     public List<DocComponentView> getComponentsForViewing(List<DocumentInfoView> documents,

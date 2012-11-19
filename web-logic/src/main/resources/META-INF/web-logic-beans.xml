@@ -23,9 +23,6 @@
     <bean name="fieldMapper"
           class="org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper"/>
 
-    <bean name="reservedFieldMapper"
-          class="org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponentMapper"/>
-
     <bean name="viewUtils"
           class="org.lawrencebower.docgen.web_logic.business.utils.ViewUtils"/>
 
