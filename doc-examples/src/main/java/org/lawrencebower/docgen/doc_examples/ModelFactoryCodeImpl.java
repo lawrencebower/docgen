@@ -1,4 +1,4 @@
-package usecase;
+package org.lawrencebower.docgen.doc_examples;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
@@ -9,8 +9,6 @@ import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
-import usecase.CommercialInvoice;
-import usecase.DeliveryNote;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

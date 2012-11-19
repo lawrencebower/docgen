@@ -8,7 +8,7 @@ import org.lawrencebower.docgen.core.generator.utils.ChecksumUtils;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB;
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
-import usecase.ModelFactoryCodeImpl;
+import org.lawrencebower.docgen.doc_examples.ModelFactoryCodeImpl;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocComponentView;

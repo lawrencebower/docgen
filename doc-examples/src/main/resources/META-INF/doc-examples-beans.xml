@@ -1,0 +1,21 @@
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xsi:schemaLocation="
+             http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd
+             http://www.springframework.org/schema/context classpath:/org/springframework/context/config/spring-context-3.1.xsd">
+
+    <beans:bean id="fda2887" class="org.lawrencebower.docgen.doc_examples.FDA_2887" init-method="prepareComponents"/>
+    <beans:bean id="deliveryNote" class="org.lawrencebower.docgen.doc_examples.DeliveryNote" init-method="prepareComponents"/>
+    <beans:bean id="commercialInvoice" class="org.lawrencebower.docgen.doc_examples.CommercialInvoice" init-method="prepareComponents"/>
+
+    <beans:bean id="customComponentConverter" class="org.lawrencebower.docgen.doc_examples.CustomComponentConverter"/>
+    <beans:bean id="overlayComponentConverter" class="org.lawrencebower.docgen.doc_examples.OverlayComponentConverter"/>
+
+    <beans:bean name="modelFactory"
+          class="org.lawrencebower.docgen.doc_examples.ModelFactoryCodeImpl"
+          init-method="init"/>
+
+    <context:component-scan base-package="usecase"/>
+
+</beans:beans>

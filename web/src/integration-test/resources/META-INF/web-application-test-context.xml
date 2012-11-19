@@ -8,7 +8,7 @@
 
     <import resource="core-beans.xml"/>
 
-    <import resource="usecase-beans.xml"/>
+    <import resource="doc-examples-beans.xml"/>
 
     <import resource="web-logic-beans.xml"/>
 
