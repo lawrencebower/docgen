@@ -1,6 +1,6 @@
 package org.lawrencebower.docgen.web_logic.business.mapping;
 
-public enum AutoMappedField {
+public enum AutoMappedComponent {
 
     BUSINESS_NAME("BUSINESS_NAME"),
     BUSINESS_CONTACT_NAME("BUSINESS_CONTACT_NAME"),
@@ -24,7 +24,7 @@ public enum AutoMappedField {
 
     private String name;
 
-    AutoMappedField(String name) {
+    AutoMappedComponent(String name) {
         this.name = name;
     }
 

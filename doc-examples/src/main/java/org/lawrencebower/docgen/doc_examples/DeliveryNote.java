@@ -15,7 +15,7 @@ import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
-import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedField;
+import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
 import org.lawrencebower.docgen.web_logic.business.product_injection.ProductInjectionField;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocComponentViewFactory;
@@ -101,19 +101,19 @@ public class DeliveryNote {
         addressComponent.setName("vendorAddress");
         convertAndAddComponent(addressComponent);
         addTextComponentView(addressComponent,
-                             AutoMappedField.VENDOR_ADDRESS);
+                             AutoMappedComponent.VENDOR_ADDRESS);
 
         TextComponent phoneComponent = new TextComponent("Phone +44 (0) 1223 655577");
         phoneComponent.setName("vendorPhone");
         convertAndAddComponent(phoneComponent);
         addTextComponentView(phoneComponent,
-                             AutoMappedField.VENDOR_PHONE);
+                             AutoMappedComponent.VENDOR_PHONE);
 
         TextComponent emailComponent = new TextComponent("sales@acme.com");
         emailComponent.setName("vendorEmail");
         convertAndAddComponent(emailComponent);
         addTextComponentView(emailComponent,
-                             AutoMappedField.VENDOR_EMAIL);
+                             AutoMappedComponent.VENDOR_EMAIL);
 
         addNewLine();
 
@@ -241,7 +241,7 @@ public class DeliveryNote {
         TableCell addressCell = new TableCell(addressComponent);
 
         addTextAreaComponent(addressComponent,
-                             AutoMappedField.CUSTOMER_ADDRESS);
+                             AutoMappedComponent.CUSTOMER_ADDRESS);
 
         headerRow.addCell(addressCell, 9);
 
@@ -338,23 +338,23 @@ public class DeliveryNote {
         docInfoView.addComponentView(componentView);
     }
 
-    private void addTextComponentView(TableTextComponent textComponent, AutoMappedField autoMappedField) {
+    private void addTextComponentView(TableTextComponent textComponent, AutoMappedComponent autoMappedComponent) {
         TextComponentView componentView = componentViewFactory.createTextComponentView(textComponent);
-        componentView.setAutoMappedField(autoMappedField);
+        componentView.setAutoMappedComponent(autoMappedComponent);
         docInfoView.addComponentView(componentView);
     }
 
     private void addTextAreaComponent(TableTextComponent textComponent,
-                                      AutoMappedField autoMappedField) {
+                                      AutoMappedComponent autoMappedComponent) {
         DocComponentView componentView = componentViewFactory.createTextAreaComponentView(textComponent);
-        componentView.setAutoMappedField(autoMappedField);
+        componentView.setAutoMappedComponent(autoMappedComponent);
         docInfoView.addComponentView(componentView);
     }
 
     private void addTextComponentView(TextComponent textComponent,
-                                      AutoMappedField autoMappedField) {
+                                      AutoMappedComponent autoMappedComponent) {
         DocComponentView componentView = componentViewFactory.createTextComponentView(textComponent);
-        componentView.setAutoMappedField(autoMappedField);
+        componentView.setAutoMappedComponent(autoMappedComponent);
         docInfoView.addComponentView(componentView);
     }
 }

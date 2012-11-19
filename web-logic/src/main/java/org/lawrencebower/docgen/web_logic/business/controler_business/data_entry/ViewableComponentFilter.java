@@ -43,7 +43,7 @@ public class ViewableComponentFilter {
         List<DocComponentView> results = new ArrayList<>();
 
         for (DocComponentView docComponentView : componentViews) {
-            if (docComponentView.isAutoMappedField()) {
+            if (docComponentView.getAutoMappedComponent()) {
                 continue;//skip to the next one
             }
             results.add(docComponentView);

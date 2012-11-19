@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
-import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedField;
+import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocComponentViewFactory;
 import org.mockito.Mock;
@@ -60,7 +60,7 @@ public class ViewableComponentFilterTest {
     @Test
     public void testGetComponents_validParams_automappedFieldsPresent() throws Exception {
         List<DocComponentView> allComponents = getAllComponents();
-        assertTrue(allComponents.get(1).isAutoMappedField());
+        assertTrue(allComponents.get(1).getAutoMappedComponent());
     }
 
     private List<DocComponentView> getAllComponents() {
@@ -87,7 +87,7 @@ public class ViewableComponentFilterTest {
     public List<DocComponentView> getDocComponents() {
         DocComponentView view1 = makeDocComponent("comp1");
         DocComponentView view2 = makeDocComponent("comp2");
-        view2.setAutoMappedField(AutoMappedField.CUSTOMER_NAME);
+        view2.setAutoMappedComponent(AutoMappedComponent.CUSTOMER_NAME);
         DocComponentView view3 = makeDocComponent("comp3");
         DocComponentView view4 = makeDocComponent("comp1");//duplicate - should be filtered
 
