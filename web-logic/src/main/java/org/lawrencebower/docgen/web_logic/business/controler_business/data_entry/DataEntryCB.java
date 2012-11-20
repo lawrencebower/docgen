@@ -173,7 +173,9 @@ public class DataEntryCB {
 
     public void injectProductFields(List<DocumentInfoView> documents,
                                     List<ProductView> selectedProducts) {
+
         List<DocComponentView> componentViews = viewUtils.getAllComponentViewsFromDocs(documents);
+
         for (DocComponentView componentView : componentViews) {
             componentView.injectProducts(selectedProducts);
         }

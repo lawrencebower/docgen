@@ -5,8 +5,8 @@ import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -109,11 +109,6 @@ public class DataEntryController {
         return null;
     }
 
-    private void concatenatePDFsAndWriteToResponse(OutputStream outStream, List<File> allPdfFiles) {
-        File concatenatedFile = business.makeConcatenatedFile(allPdfFiles);
-        business.writePDFsToStream(outStream, concatenatedFile);
-    }
-
     private List<File> generatePDFsAndWriteToFiles() {
 
         List<DocumentInfoView> relevantDocs = sessionData.getDocuments();
@@ -125,17 +120,23 @@ public class DataEntryController {
         return business.writePDFsToFiles(generatedPDFs);
     }
 
+    private void concatenatePDFsAndWriteToResponse(OutputStream outStream, List<File> allPdfFiles) {
+        File concatenatedFile = business.makeConcatenatedFile(allPdfFiles);
+        business.writePDFsToStream(outStream, concatenatedFile);
+    }
+
     private void mapFieldValuesToComponents(WebRequest webRequest) {
 
         Map<String, String[]> parameterMap = webRequest.getParameterMap();
 
-        writeParameterVals(parameterMap);
+//        writeParameterVals(parameterMap);
 
         List<DocumentInfoView> relevantDocs = sessionData.getDocuments();
 
         business.mapFieldValuesToComponents(parameterMap, relevantDocs);
     }
 
+/*
     private void writeParameterVals(Map<String, String[]> parameterMap) {
         for (String key : parameterMap.keySet()) {
             System.out.println("key = " + key);
@@ -145,6 +146,7 @@ public class DataEntryController {
             }
         }
     }
+*/
 
     public List<DocComponentView> getDocComponentViews() {
 
