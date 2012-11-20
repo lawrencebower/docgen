@@ -12,8 +12,8 @@ import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_logic.view.contact.Contact;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,6 +127,21 @@ public class DataEntryCB {
                                      ContactView selectedCustomer,
                                      ContactView selectedBusiness) {
 
+        AutoMappedComponentInfo mappingInfo = createMappingInfo(documentInfos,
+                                                                selectedCustomer,
+                                                                selectedBusiness);
+
+        List<DocComponentView> components = viewUtils.getAllComponentViewsFromDocs(documentInfos);
+
+        for (DocComponentView component : components) {
+            component.mapComponentValue(mappingInfo);
+        }
+    }
+
+    private AutoMappedComponentInfo createMappingInfo(List<DocumentInfoView> documentInfos,
+                                                      ContactView selectedCustomer,
+                                                      ContactView selectedBusiness) {
+
         viewUtils.checkCustomerSet(selectedCustomer);
         viewUtils.checkBusinessSet(selectedBusiness);
         viewUtils.checkDocumentsSet(documentInfos);
@@ -138,15 +153,9 @@ public class DataEntryCB {
 
         Contact businessContact = selectedBusiness.getContact();
 
-        AutoMappedComponentInfo mappingInfo = new AutoMappedComponentInfo(customerContact,
-                                                                          vendorContact,
-                                                                          businessContact);
-
-        List<DocComponentView> components = viewUtils.getAllComponentViewsFromDocs(documentInfos);
-
-        for (DocComponentView component : components) {
-            component.mapComponentValue(mappingInfo);
-        }
+        return new AutoMappedComponentInfo(customerContact,
+                                           vendorContact,
+                                           businessContact);
     }
 
     public List<DocComponentView> getComponentsForViewing(List<DocumentInfoView> documents,
