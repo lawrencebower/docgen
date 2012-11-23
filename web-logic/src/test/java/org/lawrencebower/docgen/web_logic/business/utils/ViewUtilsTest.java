@@ -3,8 +3,9 @@ package org.lawrencebower.docgen.web_logic.business.utils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.DocumentInfo;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoViewFactory;
+import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -16,11 +17,13 @@ import java.util.List;
 import static junit.framework.TestCase.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/web-logic-test-context.xml"})
+@ContextConfiguration(locations = "classpath:META-INF/web-logic-test-context.xml")
 public class ViewUtilsTest {
 
     @Autowired
     ViewUtils viewUtils;
+    @Autowired
+    DocumentInfoViewFactory viewFactory;
 
     @Test
     public void testGetAllComponentViewsFromDocs_documentsSet_validReturnCount() throws Exception {
@@ -37,7 +40,7 @@ public class ViewUtilsTest {
 
         for (int i = 0; i < documentNumber; i++) {
             DocumentInfo mockInfo = Mockito.mock(DocumentInfo.class);
-            DocumentInfoView docView = new DocumentInfoView(mockInfo);
+            DocumentInfoView docView = viewFactory.createDocumentInfoView(mockInfo);
 
             addComponentsToView(componentNumber, docView);
 

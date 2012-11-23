@@ -7,9 +7,10 @@ import org.lawrencebower.docgen.core.document.DocumentInfo;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentViewFactory;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -32,6 +33,8 @@ public class FieldMapperTest {
     CustomComponentFactory customComponentFactory;
     @Autowired
     DocComponentViewFactory componentViewFactory;
+    @Autowired
+    DocumentInfoViewFactory docInfoViewFactory;
 
     private final String fieldName1 = "fieldName1";
     private final String fieldName2 = "fieldName2";
@@ -190,7 +193,8 @@ public class FieldMapperTest {
     }
 
     private DocumentInfoView makeDocInfoView() {
-        return new DocumentInfoView(mock(DocumentInfo.class));
+        DocumentInfo mockDocInfo = mock(DocumentInfo.class);
+        return docInfoViewFactory.createDocumentInfoView(mockDocInfo);
     }
 
     private Map<String, String[]> makeParameterMap() {

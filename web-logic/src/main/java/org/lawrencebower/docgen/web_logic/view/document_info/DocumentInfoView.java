@@ -12,14 +12,15 @@ import java.util.List;
 public class DocumentInfoView {
 
     private DocumentInfo documentInfo;
-    private List<DocComponentView> docComponentViews;
+    private List<DocComponentView> docComponentViews = new ArrayList<>();
 
-    public DocumentInfoView(DocumentInfo documentInfo) {
+    private DocumentInfoView() {//force spring instantiation
+    }
+
+    public void setDocumentInfo(DocumentInfo documentInfo) {
         if (documentInfo == null) {
             throw new DocGenException("DocumentInfo parameter is null");
         }
-
-        docComponentViews = new ArrayList<>();
 
         this.documentInfo = documentInfo;
     }

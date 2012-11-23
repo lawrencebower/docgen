@@ -1,15 +1,16 @@
 package org.lawrencebower.docgen.doc_examples;
 
-import org.lawrencebower.docgen.core.generator.overlay.OverlayDocumentInfo;
 import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
+import org.lawrencebower.docgen.core.generator.overlay.OverlayDocumentInfo;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayPDFGenerator;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoViewFactory;
+import org.lawrencebower.docgen.web_logic.view.document_info.component.CheckBoxComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentViewFactory;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.CheckBoxComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.TextComponentView;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,6 +20,8 @@ public class FDA_2887 {
     private OverlayPDFGenerator pdfGenerator;
     @Autowired
     private DocComponentViewFactory componentViewFactory;
+    @Autowired
+    DocumentInfoViewFactory docInfoViewFactory;
 
     private DocumentInfoView docInfoView;
 
@@ -30,7 +33,7 @@ public class FDA_2887 {
         OverlayDocumentInfo docInfo = new OverlayDocumentInfo("FDA-2887", pdfGenerator);
         docInfo.setSourcePDF("C:\\GitHub\\use_cases\\src\\main\\resources\\FDA-2877.pdf");
 
-        docInfoView = new DocumentInfoView(docInfo);
+        docInfoView = docInfoViewFactory.createDocumentInfoView(docInfo);
 
         addTextBox("port of entry",
                    new DocCoordinates(27, 658, 285, 18),

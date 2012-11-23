@@ -17,6 +17,7 @@ import org.lawrencebower.docgen.web_logic.business.component_calculation.table.T
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
 import org.lawrencebower.docgen.web_logic.business.product_injection.ProductInjectionField;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.TableComponentView;
@@ -33,6 +34,8 @@ public class CommercialInvoice {
     private CustomComponentFactory componentFactory;
     @Autowired
     private DocComponentViewFactory componentViewFactory;
+    @Autowired
+    DocumentInfoViewFactory docInfoViewFactory;
 
     private CustomDocumentInfo docInfo;
     private DocumentInfoView docInfoView;
@@ -45,7 +48,7 @@ public class CommercialInvoice {
 
         docInfo = new CustomDocumentInfo(INVOICE_NAME, pdfGenerator);
 
-        docInfoView = new DocumentInfoView(docInfo);
+        docInfoView = docInfoViewFactory.createDocumentInfoView(docInfo);
 
         TableComponent addressTable = makeInvoiceTable();
 

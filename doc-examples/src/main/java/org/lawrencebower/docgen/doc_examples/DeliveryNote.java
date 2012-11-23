@@ -18,6 +18,7 @@ import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentF
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
 import org.lawrencebower.docgen.web_logic.business.product_injection.ProductInjectionField;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.TableComponentView;
@@ -36,6 +37,8 @@ public class DeliveryNote {
     private CustomComponentFactory componentFactory;
     @Autowired
     private DocComponentViewFactory componentViewFactory;
+    @Autowired
+    DocumentInfoViewFactory docInfoViewFactory;
 
     private DocumentInfoView docInfoView;
     private CustomDocumentInfo docInfo;
@@ -46,7 +49,7 @@ public class DeliveryNote {
 
         docInfo = new CustomDocumentInfo(DELIVERY_NOTE_NAME, pdfGenerator);
 
-        docInfoView = new DocumentInfoView(docInfo);
+        docInfoView = docInfoViewFactory.createDocumentInfoView(docInfo);
 
         ImageComponent logo = new ImageComponent("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\logo.png");
         logo.setSize(70, 1);
