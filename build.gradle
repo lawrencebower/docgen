@@ -2,7 +2,7 @@ subprojects {
     apply plugin: 'java'
 }
 
-project(':use_cases') {
+project(':doc-examples') {
     dependencies {
         compile project(':core'), project(':web-logic')
     }
@@ -16,6 +16,6 @@ project(':web-logic') {
 
 project(':web') {
     dependencies {
-         compile project(':core'), project(':use_cases'), project(':web-logic')
+         compile project(':core'), project(':doc-examples'), project(':web-logic')
     }
 }
