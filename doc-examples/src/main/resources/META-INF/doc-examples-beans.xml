@@ -16,6 +16,6 @@
           class="org.lawrencebower.docgen.doc_examples.ModelFactoryCodeImpl"
           init-method="init"/>
 
-    <context:component-scan base-package="usecase"/>
+    <context:component-scan base-package="org.lawrencebower.docgen.doc_examples"/>
 
 </beans:beans>

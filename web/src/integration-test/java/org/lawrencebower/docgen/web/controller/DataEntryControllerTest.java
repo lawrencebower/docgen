@@ -107,13 +107,13 @@ public class DataEntryControllerTest {
     @Test
     public void testPrepareFields_validFields_correctDocumentNumberSet() throws Exception {
         controller.prepareFields();
-        assertEquals(2, sessionData.getDocuments().size());
+        assertEquals(2, sessionData.getDocumentsAsList().size());
     }
 
     @Test
     public void testPrepareFields_validFields_correctDocumentsSet() throws Exception {
         controller.prepareFields();
-        List<DocumentInfoView> documents = sessionData.getDocuments();
+        List<DocumentInfoView> documents = sessionData.getDocumentsAsList();
         assertEquals(ModelFactoryCodeImpl.DOC_1_NAME, documents.get(0).getName());
         assertEquals(ModelFactoryCodeImpl.DOC_2_NAME, documents.get(1).getName());
     }
@@ -122,7 +122,7 @@ public class DataEntryControllerTest {
     public void testPrepareFields_validFields_autoMappedFieldsMapped() throws Exception {
         controller.prepareFields();
 
-        List<DocumentInfoView> documents = sessionData.getDocuments();
+        List<DocumentInfoView> documents = sessionData.getDocumentsAsList();
         DocumentInfoView doc1 = documents.get(0);
         assertEquals(ModelFactoryCodeImpl.DOC_1_NAME, doc1.getName());
 

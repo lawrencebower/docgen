@@ -6,7 +6,6 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponentInfo;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
-import org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper;
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
@@ -37,10 +36,6 @@ public class DataEntryCB {
     ModelFactory modelFactory;
     @Autowired
     private CustomerProduct_Document_Mappings customerProductMappings;
-    @Autowired
-    FieldMapper fieldMapper;
-    @Autowired
-    private ViewableComponentFilter viewableComponentFilter;
     @Autowired
     private DocumentInfoSetFactory documentSetFactory;
 
@@ -77,23 +72,13 @@ public class DataEntryCB {
     }
 
     public void mapFieldValuesToComponents(Map<String, String[]> parameterMap,
-                                           List<DocumentInfoView> documents) {
+                                           DocumentInfoSet documentSet) {
 
-        fieldMapper.mapFieldValuesToComponents(parameterMap, documents);
+        documentSet.mapFieldValuesToComponents(parameterMap);
     }
 
-    public List<PDFDocument> createPDFs(List<DocumentInfoView> documents) {
-
-        List<PDFDocument> results = new ArrayList<>();
-
-        for (DocumentInfoView document : documents) {
-            PDFDocument pdfDocument = document.generatePDF();
-            String documentName = document.getName();
-            pdfDocument.setName(documentName);
-            results.add(pdfDocument);
-        }
-
-        return results;
+    public List<PDFDocument> createPDFs(DocumentInfoSet documentSet) {
+        return documentSet.createPDFs();
     }
 
     public void writePDFsToStream(OutputStream outStream, File file) {
@@ -131,28 +116,22 @@ public class DataEntryCB {
         return concatenatedFile;
     }
 
-    public void mapAutoMapComponents(List<DocumentInfoView> documentInfos,
+    public void mapAutoMapComponents(DocumentInfoSet documentSet,
                                      ContactView selectedCustomer,
                                      ContactView selectedBusiness) {
 
-        AutoMappedComponentInfo mappingInfo = createMappingInfo(documentInfos,
-                                                                selectedCustomer,
+        AutoMappedComponentInfo mappingInfo = createMappingInfo(selectedCustomer,
                                                                 selectedBusiness);
 
-        List<DocComponentView> components = viewUtils.getAllComponentViewsFromDocs(documentInfos);
+        documentSet.mapAutomappedComponents(mappingInfo);
 
-        for (DocComponentView component : components) {
-            component.mapComponentValue(mappingInfo);
-        }
     }
 
-    private AutoMappedComponentInfo createMappingInfo(List<DocumentInfoView> documentInfos,
-                                                      ContactView selectedCustomer,
+    private AutoMappedComponentInfo createMappingInfo(ContactView selectedCustomer,
                                                       ContactView selectedBusiness) {
 
         viewUtils.checkCustomerSet(selectedCustomer);
         viewUtils.checkBusinessSet(selectedBusiness);
-        viewUtils.checkDocumentsSet(documentInfos);
 
         Contact customerContact = selectedCustomer.getContact();
 
@@ -166,35 +145,21 @@ public class DataEntryCB {
                                            businessContact);
     }
 
-    public List<DocComponentView> getComponentsForViewing(List<DocumentInfoView> documents,
+    public List<DocComponentView> getComponentsForViewing(DocumentInfoSet documentSet,
                                                           boolean showAutoMappedFields) {
-        List<DocComponentView> results;
 
-        if (showAutoMappedFields) {
-            results = viewableComponentFilter.getComponents(documents);
-        } else {
-            results = viewableComponentFilter.getNonAutoMappedComponents(documents);
-        }
+        return documentSet.getComponentsForViewing(showAutoMappedFields);
 
-        return results;
     }
 
-    public void injectProductFields(List<DocumentInfoView> documents,
+    public void injectProductFields(DocumentInfoSet documentSet,
                                     List<ProductView> selectedProducts) {
 
-        List<DocComponentView> componentViews = viewUtils.getAllComponentViewsFromDocs(documents);
-
-        for (DocComponentView componentView : componentViews) {
-            componentView.injectProducts(selectedProducts);
-        }
+        documentSet.injectProductFields(selectedProducts);
     }
 
-    public void processCalculatedFields(List<DocumentInfoView> documents) {
-        List<DocComponentView> componentViews = viewUtils.getAllComponentViewsFromDocs(documents);
-        for (DocComponentView componentView : componentViews) {
-            componentView.calculateValueIfNeeded(documents);
-        }
-
+    public void processCalculatedFields(DocumentInfoSet documentSet) {
+        documentSet.processCalculatedFields();
     }
 
 //    SETTERS FOR UNIT TESTS

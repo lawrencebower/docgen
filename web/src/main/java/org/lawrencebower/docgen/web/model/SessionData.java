@@ -48,8 +48,12 @@ public class SessionData {
         return selectedProducts.getProducts();
     }
 
-    public List<DocumentInfoView> getDocuments() {
+    public List<DocumentInfoView> getDocumentsAsList() {
         return documents.getDocumentsAsList();
+    }
+
+    public DocumentInfoSet getDocuments() {
+        return documents;
     }
 
     public void addSelectedProduct(Product selectedProduct) {

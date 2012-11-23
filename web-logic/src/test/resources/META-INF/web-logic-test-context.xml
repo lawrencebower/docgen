@@ -12,7 +12,7 @@
     <import resource="web-logic-params.xml"/>
 
     <bean name="modelFactory"
-          class="org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactoryDummyImpl"/>
+          class="org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactoryTestImpl"/>
 
     <context:component-scan base-package="org.lawrencebower.docgen.web_logic"/>
 

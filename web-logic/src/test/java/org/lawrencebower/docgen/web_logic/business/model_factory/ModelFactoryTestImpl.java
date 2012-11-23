@@ -1,5 +1,6 @@
 package org.lawrencebower.docgen.web_logic.business.model_factory;
 
+import org.lawrencebower.docgen.web_logic.view.contact.Contact;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
@@ -8,7 +9,7 @@ import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModelFactoryDummyImpl implements ModelFactory {
+public class ModelFactoryTestImpl implements ModelFactory {
 
     @Override
     public List<ContactView> getCustomers() {
@@ -37,7 +38,15 @@ public class ModelFactoryDummyImpl implements ModelFactory {
 
     @Override
     public ContactView getVendor() {
-        return null;
+        ContactView vendor = new ContactView(new Contact("Billy Bob's Widgets",
+                                                         "Billy Bob",
+                                                         "36 Billy Bob Street\nColchester\nEssex",
+                                                         "534546454",
+                                                         "UK",
+                                                         "tax id",
+                                                         "sales@acme.com"));
+
+        return vendor;
     }
 
     @Override

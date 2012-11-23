@@ -1,9 +1,6 @@
 package org.lawrencebower.docgen.web_logic.business.controler_business.data_entry;
 
-import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -11,27 +8,16 @@ import java.util.List;
 
 public class ViewableComponentFilter {
 
-    ViewUtils viewUtils;
+    public List<DocComponentView> getComponents(List<DocComponentView> allComponents) {
 
-    @Autowired
-    public void setViewUtils(ViewUtils viewUtils) {
-        this.viewUtils = viewUtils;
-    }
-
-    public List<DocComponentView> getComponents(List<DocumentInfoView> documents) {
-
-        List<DocComponentView> results = viewUtils.getAllComponentViewsFromDocs(documents);
-
-        results = filterDuplicatedFields(results);
+        List<DocComponentView> results = filterDuplicatedFields(allComponents);
 
         return results;
     }
 
-    public List<DocComponentView> getNonAutoMappedComponents(List<DocumentInfoView> documents) {
+    public List<DocComponentView> getNonAutoMappedComponents(List<DocComponentView> allComponents) {
 
-        List<DocComponentView> componentViews = viewUtils.getAllComponentViewsFromDocs(documents);
-
-        List<DocComponentView> results = filterAutomapped(componentViews);
+        List<DocComponentView> results = filterAutomapped(allComponents);
 
         results = filterDuplicatedFields(results);
 

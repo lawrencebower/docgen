@@ -4,7 +4,7 @@
 
 <div>
     <ol>
-        <c:forEach var="document" items="${sessionData.documents}">
+        <c:forEach var="document" items="${sessionData.documentsAsList}">
             <s:url var="document_url" value="/documentSelect/document/{documentName}">
                 <s:param name="documentName" value="${document.name}"/>
             </s:url>

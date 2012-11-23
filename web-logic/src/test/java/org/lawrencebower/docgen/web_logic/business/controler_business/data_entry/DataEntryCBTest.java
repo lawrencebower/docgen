@@ -12,6 +12,7 @@ import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_logic.view.contact.Contact;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSetFactory;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
@@ -40,6 +41,8 @@ public class DataEntryCBTest {
 
     @Autowired
     DataEntryCB dataEntryBusiness;
+    @Autowired
+    DocumentInfoSetFactory documentInfoSetFactory;
 
     @Autowired
     @Qualifier("pdfOutputRoot")
@@ -129,7 +132,7 @@ public class DataEntryCBTest {
 
         DocumentInfoView docView1 = mockDocInfoView("doc1");
         DocumentInfoView docView2 = mockDocInfoView("doc2");
-        List<DocumentInfoView> documentInfoViews = Arrays.asList(docView1, docView2);
+        DocumentInfoSet documentSet = documentInfoSetFactory.createDocumentInfoSet(docView1, docView2);
 
         PDFDocument pdf1 = mock(PDFDocument.class);
         PDFDocument pdf2 = mock(PDFDocument.class);
@@ -140,7 +143,7 @@ public class DataEntryCBTest {
         when(docView1.generatePDF()).thenReturn(pdf1);
         when(docView2.generatePDF()).thenReturn(pdf2);
 
-        List<PDFDocument> results = dataEntryBusiness.createPDFs(documentInfoViews);
+        List<PDFDocument> results = dataEntryBusiness.createPDFs(documentSet);
 
         verify(pdf1).setName("doc1");
         verify(pdf2).setName("doc2");
@@ -182,22 +185,10 @@ public class DataEntryCBTest {
     }
 
     @Test
-    public void testMapAutoMapFields_nullDocs_errorThrown() throws Exception {
-        try {
-            dataEntryBusiness.mapAutoMapComponents(null,
-                                                   mock(ContactView.class),
-                                                   mock(ContactView.class));
-        } catch (DocGenException e) {
-            String message = e.getMessage();
-            assertEquals(ViewUtils.NO_DOCUMENTS_SELECTED, message);
-        }
-
-    }
-
-    @Test
     public void testMapAutoMapFields_emptyDocs_errorThrown() throws Exception {
         try {
-            dataEntryBusiness.mapAutoMapComponents(new ArrayList<DocumentInfoView>(),
+            DocumentInfoSet documentSet = documentInfoSetFactory.createDocumentInfoSet();
+            dataEntryBusiness.mapAutoMapComponents(documentSet,
                                                    mockCustomer,
                                                    mockBusiness);
         } catch (DocGenException e) {
@@ -210,7 +201,7 @@ public class DataEntryCBTest {
     @Test
     public void testMapAutoMapFields_nullCustomer_errorThrown() throws Exception {
         try {
-            dataEntryBusiness.mapAutoMapComponents(Arrays.asList(mock(DocumentInfoView.class)),
+            dataEntryBusiness.mapAutoMapComponents(mock(DocumentInfoSet.class),
                                                    null,
                                                    mockBusiness);
         } catch (DocGenException e) {
@@ -222,7 +213,7 @@ public class DataEntryCBTest {
     @Test
     public void testMapAutoMapFields_nullBusiness_errorThrown() throws Exception {
         try {
-            dataEntryBusiness.mapAutoMapComponents(Arrays.asList(mock(DocumentInfoView.class)),
+            dataEntryBusiness.mapAutoMapComponents(mock(DocumentInfoSet.class),
                                                    mockCustomer,
                                                    null);
         } catch (DocGenException e) {

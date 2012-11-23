@@ -4,11 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
-import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentViewFactory;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,25 +17,20 @@ import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:META-INF/web-logic-test-context.xml")
 public class ViewableComponentFilterTest {
 
-    @Mock
-    ViewUtils viewUtils;
     @Autowired
     DocComponentViewFactory viewFactory;
+
+    private List<DocComponentView> components;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        viewableComponentFilter.setViewUtils(viewUtils);
-        List<DocComponentView> components = getDocComponents();
-        when(viewUtils.getAllComponentViewsFromDocs(any(List.class))).thenReturn(components);
+        components = getDocComponents();
     }
 
     @Autowired
@@ -64,7 +57,7 @@ public class ViewableComponentFilterTest {
     }
 
     private List<DocComponentView> getAllComponents() {
-        return viewableComponentFilter.getComponents(mock(List.class));
+        return viewableComponentFilter.getComponents(components);
     }
 
     @Test
@@ -74,7 +67,7 @@ public class ViewableComponentFilterTest {
     }
 
     private List<DocComponentView> getNonAutomappedComponents() {
-        return viewableComponentFilter.getNonAutoMappedComponents(mock(List.class));
+        return viewableComponentFilter.getNonAutoMappedComponents(components);
     }
 
     @Test

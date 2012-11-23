@@ -7,6 +7,8 @@ import org.lawrencebower.docgen.core.document.DocumentInfo;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSetFactory;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
@@ -15,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +36,8 @@ public class FieldMapperTest {
     DocComponentViewFactory componentViewFactory;
     @Autowired
     DocumentInfoViewFactory docInfoViewFactory;
+    @Autowired
+    DocumentInfoSetFactory docInfoSetFactory;
 
     private final String fieldName1 = "fieldName1";
     private final String fieldName2 = "fieldName2";
@@ -69,10 +72,11 @@ public class FieldMapperTest {
         when(component4.getName()).thenReturn(fieldName1);
 
         //add mocks to Documents
-        List<DocumentInfoView> documentInfoViews = addMocksToDocuments();
+        DocumentInfoSet documentInfoSet = addMocksToDocuments();
+        List<DocComponentView> allComponents = documentInfoSet.getAllComponentViewsFromDocs();
 
         //run mapping
-        fieldMapper.mapFieldValuesToComponents(paramMap, documentInfoViews);
+        fieldMapper.mapFieldValuesToComponents(paramMap, allComponents);
 
         //verify
         verify(component1, times(1)).setText(value1);
@@ -104,10 +108,11 @@ public class FieldMapperTest {
         when(component4.getName()).thenReturn("some value not in the params");
 
         //add mocks to Documents
-        List<DocumentInfoView> documentInfoViews = addMocksToDocuments();
+        DocumentInfoSet documentInfoSet = addMocksToDocuments();
+        List<DocComponentView> allComponents = documentInfoSet.getAllComponentViewsFromDocs();
 
         //run mapping
-        fieldMapper.mapFieldValuesToComponents(paramMap, documentInfoViews);
+        fieldMapper.mapFieldValuesToComponents(paramMap, allComponents);
 
         //verify
         verify(component1, times(1)).setText(value1);
@@ -136,10 +141,11 @@ public class FieldMapperTest {
             when(component4.getName()).thenReturn(fieldName1);
 
             //add mocks to Documents
-            List<DocumentInfoView> documentInfoViews = addMocksToDocuments();
+            DocumentInfoSet documentInfoSet = addMocksToDocuments();
+            List<DocComponentView> allComponents = documentInfoSet.getAllComponentViewsFromDocs();
 
             //run mapping
-            fieldMapper.mapFieldValuesToComponents(paramMap, documentInfoViews);
+            fieldMapper.mapFieldValuesToComponents(paramMap, allComponents);
         } catch (DocGenException e) {
             String message = e.getMessage();
             assertEquals("No values bound to field 'token with no values'", message);
@@ -163,10 +169,11 @@ public class FieldMapperTest {
             when(component4.getName()).thenReturn(fieldName1);
 
             //add mocks to Documents
-            List<DocumentInfoView> documentInfoViews = addMocksToDocuments();
+            DocumentInfoSet documentInfoSet = addMocksToDocuments();
+            List<DocComponentView> allComponents = documentInfoSet.getAllComponentViewsFromDocs();
 
             //run mapping
-            fieldMapper.mapFieldValuesToComponents(paramMap, documentInfoViews);
+            fieldMapper.mapFieldValuesToComponents(paramMap, allComponents);
         } catch (DocGenException e) {
             String message = e.getMessage();
             assertEquals("more than 1 value bound to field 'token with no values'", message);
@@ -175,7 +182,7 @@ public class FieldMapperTest {
 
     //UTIL METHODS//
 
-    private List<DocumentInfoView> addMocksToDocuments() {
+    private DocumentInfoSet addMocksToDocuments() {
         DocumentInfoView documentInfoView1 = makeDocInfoView();
         addComponentViewToDoc(documentInfoView1, component1);
         addComponentViewToDoc(documentInfoView1, component2);
@@ -184,7 +191,7 @@ public class FieldMapperTest {
         addComponentViewToDoc(documentInfoView2, component3);
         addComponentViewToDoc(documentInfoView2, component4);
 
-        return Arrays.asList(documentInfoView1, documentInfoView2);
+        return docInfoSetFactory.createDocumentInfoSet(documentInfoView1, documentInfoView2);
     }
 
     private void addComponentViewToDoc(DocumentInfoView documentInfoView, TextComponent component) {
