@@ -2,12 +2,12 @@ package org.lawrencebower.docgen.web.model;
 
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.lawrencebower.docgen.web_logic.view.product.ProductSelection;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SessionData {
@@ -18,7 +18,7 @@ public class SessionData {
 
     private ProductSelection selectedProducts = new ProductSelection();
 
-    private List<DocumentInfoView> documents = new ArrayList<>();
+    private DocumentInfoSet documents;
 
     private List<PDFDocument> generatedDocuments;
 
@@ -40,7 +40,7 @@ public class SessionData {
         this.selectedBusiness = selectedBusiness;
     }
 
-    public void setDocuments(List<DocumentInfoView> documents) {
+    public void setDocuments(DocumentInfoSet documents) {
         this.documents = documents;
     }
 
@@ -49,7 +49,7 @@ public class SessionData {
     }
 
     public List<DocumentInfoView> getDocuments() {
-        return documents;
+        return documents.getDocumentsAsList();
     }
 
     public void addSelectedProduct(Product selectedProduct) {

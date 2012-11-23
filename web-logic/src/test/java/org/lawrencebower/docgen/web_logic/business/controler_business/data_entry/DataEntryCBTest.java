@@ -1,6 +1,7 @@
 package org.lawrencebower.docgen.web_logic.business.controler_business.data_entry;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
@@ -10,6 +11,7 @@ import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_logic.view.contact.Contact;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
@@ -21,8 +23,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import org.junit.Test;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,9 +31,7 @@ import java.util.List;
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -115,8 +113,10 @@ public class DataEntryCBTest {
 
         dataEntryBusiness.setCustomerProductMappings(mockMapper);
 
-        List<DocumentInfoView> forViewing =
+        DocumentInfoSet docSet =
                 dataEntryBusiness.getDocumentsForViewing(mockCustomer, products);
+
+        List<DocumentInfoView> forViewing = docSet.getDocumentsAsList();
 
         assertEquals(3, forViewing.size());
         assertEquals("doc1", forViewing.get(0).getName());

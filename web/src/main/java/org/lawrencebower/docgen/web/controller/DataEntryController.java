@@ -5,6 +5,7 @@ import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
@@ -59,7 +60,7 @@ public class DataEntryController {
         ContactView selectedCustomer = sessionData.getSelectedCustomer();
         List<ProductView> selectedProducts = sessionData.getSelectedProducts();
 
-        List<DocumentInfoView> documentsForViewing =
+        DocumentInfoSet documentsForViewing =
                 business.getDocumentsForViewing(selectedCustomer, selectedProducts);
 
         sessionData.setDocuments(documentsForViewing);

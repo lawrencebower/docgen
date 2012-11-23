@@ -1,8 +1,6 @@
 package org.lawrencebower.docgen.web_logic.view.document_info;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class DocumentInfoSet {
 
@@ -11,8 +9,8 @@ public class DocumentInfoSet {
     private DocumentInfoSet() {//force spring creation
     }
 
-    public void setDocuments(List<DocumentInfoView> documents) {
-        this.documents = documents;
+    public void setDocuments(Collection<DocumentInfoView> documents) {
+        this.documents = new ArrayList<>(documents);
     }
 
     public void setDocuments(DocumentInfoView... views) {
@@ -20,4 +18,7 @@ public class DocumentInfoSet {
         documents = new ArrayList<>(docList);
     }
 
+    public List<DocumentInfoView> getDocumentsAsList() {
+        return Collections.unmodifiableList(documents);
+    }
 }

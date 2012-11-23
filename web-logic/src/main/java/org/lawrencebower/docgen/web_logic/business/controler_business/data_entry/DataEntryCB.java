@@ -12,6 +12,8 @@ import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_logic.view.contact.Contact;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSetFactory;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
@@ -39,13 +41,15 @@ public class DataEntryCB {
     FieldMapper fieldMapper;
     @Autowired
     private ViewableComponentFilter viewableComponentFilter;
+    @Autowired
+    private DocumentInfoSetFactory documentSetFactory;
 
     @Autowired
     @Qualifier("pdfOutputRoot")
     String fileRoot;
 
-    public List<DocumentInfoView> getDocumentsForViewing(ContactView selectedCustomer,
-                                                         List<ProductView> selectedProducts) {
+    public DocumentInfoSet getDocumentsForViewing(ContactView selectedCustomer,
+                                                  List<ProductView> selectedProducts) {
 
         viewUtils.checkCustomerSet(selectedCustomer);
         viewUtils.checkProductsSet(selectedProducts);
@@ -53,11 +57,15 @@ public class DataEntryCB {
         return getRelevantDocuments(selectedCustomer, selectedProducts);
     }
 
-    private ArrayList<DocumentInfoView> getRelevantDocuments(ContactView selectedCustomer,
-                                                             List<ProductView> selectedProducts) {
+    private DocumentInfoSet getRelevantDocuments(ContactView selectedCustomer,
+                                                 List<ProductView> selectedProducts) {
 
         Contact customer = selectedCustomer.getContact();
-        Set<DocumentInfoView> docInfos = new LinkedHashSet<>();//preserve order - for tests
+        /**
+         * LinkedHashSet is used to ensure no duplicate Documents are included and the order
+         * of insertion is preserved (helpful in tests)
+         */
+        Set<DocumentInfoView> docInfos = new LinkedHashSet<>();
 
         for (ProductView selectedProduct : selectedProducts) {
             Product product = selectedProduct.getProduct();
@@ -65,7 +73,7 @@ public class DataEntryCB {
             docInfos.addAll(docInfo);
         }
 
-        return new ArrayList<>(docInfos);
+        return documentSetFactory.createDocumentInfoSet(docInfos);
     }
 
     public void mapFieldValuesToComponents(Map<String, String[]> parameterMap,
