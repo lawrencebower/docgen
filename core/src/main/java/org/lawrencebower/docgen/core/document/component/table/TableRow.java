@@ -44,4 +44,18 @@ public class TableRow {
 
         return cells.get(colNum);
     }
+
+    public boolean hasCellName(String cellName) {
+
+        boolean hasCell = false;
+
+        for (TableCell cell : cells) {
+            String name = cell.getName();
+            if(name.equals(cellName)){
+                hasCell = true;
+            }
+        }
+
+        return hasCell;
+    }
 }

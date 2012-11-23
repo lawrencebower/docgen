@@ -15,7 +15,7 @@ public class CheckBoxComponentViewTest {
         when(mockComponent.isSelected()).thenReturn(false);
         CheckBoxComponentView componentView = new CheckBoxComponentView();
         componentView.setComponent(mockComponent);
-        assertEquals(CheckBoxComponentView.UNSELECTED_TEXT, componentView.getComponentValue());
+        assertEquals(CheckBoxComponentView.UNSELECTED_TEXT, componentView.getStringValue());
     }
 
     @Test
@@ -24,7 +24,7 @@ public class CheckBoxComponentViewTest {
         when(mockComponent.isSelected()).thenReturn(true);
         CheckBoxComponentView componentView = new CheckBoxComponentView();
         componentView.setComponent(mockComponent);
-        assertEquals(CheckBoxComponentView.SELECTED_TEXT, componentView.getComponentValue());
+        assertEquals(CheckBoxComponentView.SELECTED_TEXT, componentView.getStringValue());
     }
 
 }

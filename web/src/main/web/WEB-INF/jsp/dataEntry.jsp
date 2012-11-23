@@ -39,14 +39,14 @@
                 <td>
                     <c:if test="${field.text }">
                         <input name="${field.name}"
-                               value="${field.componentText}"
+                               value="${field.stringValue}"
                                id="${field.name}"/>
                     </c:if>
                     <c:if test="${field.textArea}">
                         <textarea cols="30"
                                   rows="8"
                                   name="${field.name}"
-                                  id="${field.name}"><c:out value="${field.componentText}"/></textarea>
+                                  id="${field.name}"><c:out value="${field.stringValue}"/></textarea>
                     </c:if>
                     <c:if test="${field.table}">
                         <c:set var="table" value="${field}" scope="request"/>

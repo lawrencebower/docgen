@@ -1,6 +1,5 @@
 package org.lawrencebower.docgen.doc_examples;
 
-import org.lawrencebower.docgen.core.generator.custom.CustomDocumentInfo;
 import org.lawrencebower.docgen.core.document.component.*;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
@@ -12,14 +11,15 @@ import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.document.component.text.FontStyle;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
+import org.lawrencebower.docgen.core.generator.custom.CustomDocumentInfo;
 import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
 import org.lawrencebower.docgen.web_logic.business.product_injection.ProductInjectionField;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentViewFactory;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.TableComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.TextComponentView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class DeliveryNote {
 
         docInfoView = new DocumentInfoView(docInfo);
 
-        ImageComponent logo = new ImageComponent("C:\\GitHub\\docgen\\doc_examples\\src\\main\\resources\\logo.png");
+        ImageComponent logo = new ImageComponent("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\logo.png");
         logo.setSize(70, 1);
 
         TableComponent logoTable = new TableComponent("logo table");

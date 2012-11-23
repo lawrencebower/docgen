@@ -2,6 +2,7 @@ package org.lawrencebower.docgen.web_logic.view.document_info.component;
 
 import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -39,15 +40,30 @@ public class CheckBoxComponentView extends DocComponentView<CheckBoxComponent> {
     }
 
     @Override
+    public void setComponentValue(Float value) {
+        throw new DocGenException("Can not set a CheckBox value as Float");
+    }
+
+    @Override
     public void setComponent(CheckBoxComponent docComponent) {
         super.setComponent(docComponent);
     }
 
-    public String getComponentValue() {
+    public String getStringValue() {
         if (docComponent.isSelected()) {
             return SELECTED_TEXT;
         }
         return UNSELECTED_TEXT;
+    }
+
+    @Override
+    public Float getFloatValue() {
+        throw new DocGenException("Can not get a CheckBox value as Float");
+    }
+
+    @Override
+    public Boolean getBooleanValue() {
+        return docComponent.isSelected();
     }
 
     @Override
@@ -61,7 +77,12 @@ public class CheckBoxComponentView extends DocComponentView<CheckBoxComponent> {
     }
 
     @Override
-    public void calculateValue(List<DocComponentView> allComponents) {
+    public boolean hasCalculation() {
+        return false;//not supported
+    }
+
+    @Override
+    public void calculateValueIfNeeded(List<DocumentInfoView> allDocs) {
         throw new DocGenException("CheckBox does not support calculated values");
     }
 

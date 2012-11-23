@@ -1,9 +1,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="
-             http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd
-             http://www.springframework.org/schema/context classpath:/org/springframework/context/config/spring-context-3.1.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd
+              /org/springframework/context/config/spring-context-3.1.xsd">
 
     <bean name="customerSelectionCB"
           class="org.lawrencebower.docgen.web_logic.business.controler_business.customer_selection.CustomerSelectionCB"/>
@@ -49,7 +47,10 @@
 
     <bean name="tableComponentValueSetter" class="org.lawrencebower.docgen.web_logic.business.table_component.TableComponentValueSetter"/>
 
-    <bean name="componentCalculator"
-          class="org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculator"/>
+    <bean name="tableComponentCalculator"
+          class="org.lawrencebower.docgen.web_logic.business.component_calculation.table.BasicTableComponentCalculator"/>
+
+    <bean name="textComponentCalculator"
+          class="org.lawrencebower.docgen.web_logic.business.component_calculation.text.BasicTextComponentCalculator"/>
 
 </beans>

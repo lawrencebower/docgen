@@ -1,23 +1,13 @@
 package org.lawrencebower.docgen.web_logic.business.component_calculation;
 
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.TableComponentView;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.TextComponentView;
 
 import java.util.List;
 
-public class ComponentCalculator {
+public interface ComponentCalculator<T extends DocComponentView, T2 extends ComponentCalculation> {
 
-    private List<Float> getOperandValues(DocComponentView targetComponent,
-                                         List<DocComponentView> allComponents) {
-        return null;
-    }
-
-    public void calculateComponentValue(TextComponentView textComponentView,
-                                        List<DocComponentView> allComponents) {
-    }
-
-    public void calculateComponents(TableComponentView tableComponentView,
-                                    List<DocComponentView> allComponents) {
-    }
+    void runCalculation(T componentView,
+                        T2 calculation,
+                        List<DocumentInfoView> allDocs);
 }

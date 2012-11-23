@@ -1,6 +1,5 @@
 package org.lawrencebower.docgen.doc_examples;
 
-import org.lawrencebower.docgen.core.generator.custom.CustomDocumentInfo;
 import org.lawrencebower.docgen.core.document.component.*;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
@@ -8,14 +7,20 @@ import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
 import org.lawrencebower.docgen.core.document.component.table.TableRow;
+import org.lawrencebower.docgen.core.generator.custom.CustomDocumentInfo;
 import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
-import org.lawrencebower.docgen.core.generator.custom.component.*;
+import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
+import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
+import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
+import org.lawrencebower.docgen.web_logic.business.component_calculation.Operator;
+import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculation;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
 import org.lawrencebower.docgen.web_logic.business.product_injection.ProductInjectionField;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentViewFactory;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.TableComponentView;
+import org.lawrencebower.docgen.web_logic.view.document_info.component.TextComponentView;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
@@ -33,6 +38,8 @@ public class CommercialInvoice {
     private DocumentInfoView docInfoView;
 
     public static final String INVOICE_NAME = "invoice";
+    public static final String TOTAL_VALUE_NAME = "totalValue";
+
 
     public void prepareComponents() {
 
@@ -254,6 +261,13 @@ public class CommercialInvoice {
         docInfoView.addComponentView(componentView);
     }
 
+    private void addTextComponentView(TableTextComponent textComponent,
+                                      ComponentCalculation calculation) {
+        TextComponentView componentView = componentViewFactory.createTextComponentView(textComponent);
+        componentView.setComponentCalculation(calculation);
+        docInfoView.addComponentView(componentView);
+    }
+
     private void addTextComponent(TableTextComponent textComponent, AutoMappedComponent autoMappedComponent) {
         DocComponentView componentView = componentViewFactory.createTextComponentView(textComponent);
         componentView.setAutoMappedComponent(autoMappedComponent);
@@ -269,6 +283,13 @@ public class CommercialInvoice {
 
     private void addTableComponentView(TableComponent tableComponent) {
         TableComponentView componentView = componentViewFactory.createTableComponentView(tableComponent);
+        docInfoView.addComponentView(componentView);
+    }
+
+    private void addTableComponentView(TableComponent tableComponent,
+                                       TableComponentCalculation calculation) {
+        TableComponentView componentView = componentViewFactory.createTableComponentView(tableComponent);
+        componentView.addComponentCalculation(calculation);
         docInfoView.addComponentView(componentView);
     }
 
@@ -350,33 +371,46 @@ public class CommercialInvoice {
         TableHeaderRow headerRow = new TableHeaderRow();
 
         TextComponent quantityComponent = new TextComponent("Number of Units");
-        quantityComponent.setName(ProductInjectionField.PRODUCT_QUANTITY.getName());
+        String quantityName = ProductInjectionField.PRODUCT_QUANTITY.getName();
+        quantityComponent.setName(quantityName);
         TableCell quantityCell = new TableCell(quantityComponent);
         headerRow.addCell(quantityCell);
 
         TextComponent nameComponent = new TextComponent("Description");
-        nameComponent.setName(ProductInjectionField.PRODUCT_NAME.getName());
+        String productNameName = ProductInjectionField.PRODUCT_NAME.getName();
+        nameComponent.setName(productNameName);
         TableCell nameCell = new TableCell(nameComponent);
         headerRow.addCell(nameCell);
 
         TextComponent valueComponent = new TextComponent("Unit Value");
-        valueComponent.setName(ProductInjectionField.PRODUCT_VALUE.getName());
+        String productValueName = ProductInjectionField.PRODUCT_VALUE.getName();
+        valueComponent.setName(productValueName);
         TableCell valueCell = new TableCell(valueComponent);
         headerRow.addCell(valueCell);
 
         TextComponent originComponent = new TextComponent("Country of origin");
-        originComponent.setName(ProductInjectionField.PRODUCT_ORIGIN.getName());
+        String productOriginName = ProductInjectionField.PRODUCT_ORIGIN.getName();
+        originComponent.setName(productOriginName);
         TableCell originCell = new TableCell(originComponent);
         headerRow.addCell(originCell);
 
-        headerRow.addCell(new TableCell("Total Value"));
+        TextComponent totalValueComponent = new TextComponent("Total Value");
+        totalValueComponent.setName(TOTAL_VALUE_NAME);
+        TableCell totalCell = new TableCell(totalValueComponent);
+
+        headerRow.addCell(totalCell);
 
         productTable.setHeaderRow(headerRow);
 
         productTable.setWidthPercentage(100);
         productTable.setRenderBorder(true);
 
-        addTableComponentView(productTable);
+        TableComponentCalculation calculation = new TableComponentCalculation(Operator.MULTIPLY,
+                                                                              TOTAL_VALUE_NAME,
+                                                                              quantityName,
+                                                                              productValueName);
+        addTableComponentView(productTable, calculation);
+
         return productTable;
     }
 
@@ -446,17 +480,47 @@ public class CommercialInvoice {
         headerRow.addCell(cell);
         costTable.setHeaderRow(headerRow);
 
-        TableTextComponent textComponent = createTextComponent("Subtotal", "10");
-        costTable.addRow(createRowWithLabelAndValue("Subtotal", textComponent));
+        TableRow subTotalRow = new TableRow();
+        subTotalRow.addCell(new TableCell("Subtotal"));
+        String subTotalName = "subTotal";
+        TableTextComponent subTotalComponent = createTextComponent(subTotalName, "");
+        TableCell subTotalCell = new TableCell(subTotalComponent);
+        subTotalRow.addCell(subTotalCell);
+        costTable.addRow(subTotalRow);
 
-        textComponent = createTextComponent("Freight", "12");
-        costTable.addRow(createRowWithLabelAndValue("Freight", textComponent));
+        ComponentCalculation subtotalCalc = new ComponentCalculation(Operator.PLUS,
+                                                                     TOTAL_VALUE_NAME);
+        addTextComponentView(subTotalComponent, subtotalCalc);
 
-        textComponent = createTextComponent("Total", "22");
-        costTable.addRow(createRowWithLabelAndValue("Total", textComponent));
+        TableRow freightTotalRow = new TableRow();
+        freightTotalRow.addCell(new TableCell("Freight"));
+        String freightName = "freight";
+        TableTextComponent freightComponent = createTextComponent(freightName, "0");
+        TableCell freightCell = new TableCell(freightComponent);
+        freightTotalRow.addCell(freightCell);
+        costTable.addRow(freightTotalRow);
 
-        textComponent = createTextComponent("Currency Code", "GBP");
-        costTable.addRow(createRowWithLabelAndValue("Currency Code", textComponent));
+        TableRow totalRow = new TableRow();
+        totalRow.addCell(new TableCell("Total"));
+        String totalName = "total";
+        TableTextComponent totalComponent = createTextComponent(totalName, "");
+        TableCell totalCell = new TableCell(totalComponent);
+        totalRow.addCell(totalCell);
+        costTable.addRow(totalRow);
+
+        ComponentCalculation totalCalc = new ComponentCalculation(Operator.PLUS,
+                                                                  TOTAL_VALUE_NAME);
+        addTextComponentView(totalComponent, totalCalc);
+
+        TableRow currencyRow = new TableRow();
+        currencyRow.addCell(new TableCell("Currency Code"));
+        String currencyName = "currency";
+        TableTextComponent currencyComponent = createTextComponent(currencyName, "");
+        TableCell currencyCell = new TableCell(currencyComponent);
+        currencyRow.addCell(currencyCell);
+        costTable.addRow(currencyRow);
+
+        addTextComponentView(currencyComponent);
 
         return costTable;
     }

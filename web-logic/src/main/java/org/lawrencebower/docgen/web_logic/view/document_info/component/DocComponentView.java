@@ -4,11 +4,10 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculator;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponentInfo;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -24,9 +23,6 @@ public abstract class DocComponentView<T extends DocComponent> {
         TABLE,
         CV
     }
-
-    @Autowired
-    protected ComponentCalculator componentCalculator;
 
     protected T docComponent;
     protected ComponentViewType componentViewType;
@@ -59,6 +55,14 @@ public abstract class DocComponentView<T extends DocComponent> {
 
     public abstract void setComponentValue(String value);
 
+    public abstract void setComponentValue(Float value);
+
+    public abstract String getStringValue();
+
+    public abstract Float getFloatValue();
+
+    public abstract Boolean getBooleanValue();
+
     public abstract void checkAndSetValueFromParamString(String componentName, String value);
 
     public abstract void injectProducts(List<ProductView> products);
@@ -80,7 +84,9 @@ public abstract class DocComponentView<T extends DocComponent> {
         }
     }
 
-    public abstract void calculateValue(List<DocComponentView> allComponents);
+    public abstract boolean hasCalculation();
+
+    public abstract void calculateValueIfNeeded(List<DocumentInfoView> allDocs);
 
     public boolean isText(){
         return componentViewType == ComponentViewType.TEXT;

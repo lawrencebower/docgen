@@ -6,9 +6,11 @@ import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
 import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.web_logic.business.component_calculation.TableComponentCalculation;
+import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculation;
+import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculator;
 import org.lawrencebower.docgen.web_logic.business.product_injection.TableComponentProductInjector;
 import org.lawrencebower.docgen.web_logic.business.table_component.TableComponentValueSetter;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,6 +23,8 @@ public class TableComponentView extends DocComponentView<TableComponent> {
     DocComponentViewFactory viewFactory;
     @Autowired
     TableComponentValueSetter tableValueSetter;
+    @Autowired
+    protected TableComponentCalculator componentCalculator;
 
     private List<TableComponentCalculation> componentCalculations = new ArrayList<>();
 
@@ -44,8 +48,45 @@ public class TableComponentView extends DocComponentView<TableComponent> {
     }
 
     @Override
+    public void setComponentValue(Float value) {
+        throw new DocGenException("Table component does not accept Float values as value setter");
+    }
+
+    @Override
+    public String getStringValue() {
+        throw new DocGenException("Table component does not support getting value as a string");
+    }
+
+    @Override
+    public Float getFloatValue() {
+        throw new DocGenException("Table component does not support getting value as a boolean");
+    }
+
+    @Override
+    public Boolean getBooleanValue() {
+        throw new DocGenException("Table component does not support getting value as a boolean");
+    }
+
+    @Override
     public void checkAndSetValueFromParamString(String paramString, String value) {
         tableValueSetter.setCellValueIfMatch(paramString, value, this);
+    }
+
+    public int getColumnIndex(String colName) {
+
+        int colIndex = -1;
+
+        List<TableCell> headerCells = getHeaderCells();
+
+        for (int i = 0; i < headerCells.size(); i++) {
+            TableCell headerCell = headerCells.get(i);
+            String name = headerCell.getName();
+            if (colName.equals(name)) {
+                colIndex = i;
+            }
+        }
+
+        return colIndex;
     }
 
     public List<TableRow> getTableRows() {
@@ -70,9 +111,24 @@ public class TableComponentView extends DocComponentView<TableComponent> {
     }
 
     @Override
-    public void calculateValue(List<DocComponentView> allComponents) {
-        if (hasComponentCalculations()) {
-            componentCalculator.calculateComponents(this, allComponents);
+    public boolean hasCalculation() {
+        return !componentCalculations.isEmpty();
+    }
+
+    @Override
+    public void calculateValueIfNeeded(List<DocumentInfoView> allDocs) {
+        if (hasCalculation()) {
+            for (TableComponentCalculation calculation : componentCalculations) {
+                runCalculationIfNeeded(allDocs, calculation);
+            }
+        }
+    }
+
+    private void runCalculationIfNeeded(List<DocumentInfoView> allDocs, TableComponentCalculation calculation) {
+        if (calculation.isNotRun()) {
+            componentCalculator.runCalculation(this,
+                                               calculation,
+                                               allDocs);
         }
     }
 
@@ -80,8 +136,38 @@ public class TableComponentView extends DocComponentView<TableComponent> {
         componentCalculations.add(calculation);
     }
 
-    private boolean hasComponentCalculations() {
-        return !componentCalculations.isEmpty();
+    public boolean hasColumnName(String columnName) {
+        TableHeaderRow headerRow = docComponent.getHeaderRow();
+        return headerRow.hasCellName(columnName);
     }
 
+    public List<Float> getColumnValuesAsFloats(String columnName) {
+
+        List<Float> results = new ArrayList<>();
+
+        int columnIndex = getColumnIndex(columnName);
+
+        List<DocComponentView> columnComponents = getComponentViewsByColumn(columnIndex);
+
+        for (DocComponentView columnComponent : columnComponents) {
+            Float value = columnComponent.getFloatValue();
+            results.add(value);
+        }
+
+        return results;
+    }
+
+    private List<DocComponentView> getComponentViewsByColumn(int columnIndex) {
+
+        List<DocComponentView> results = new ArrayList<>();
+
+        List<TableRow> rows = getTableRows();
+
+        for (int rowIndex = 0; rowIndex < rows.size(); rowIndex++) {
+            DocComponentView view = getCellComponentView(rowIndex, columnIndex);
+            results.add(view);
+        }
+
+        return results;
+    }
 }

@@ -4,6 +4,7 @@ import org.lawrencebower.docgen.core.document.component.position.HorizontalAlign
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 
 public class TableTextComponent extends TextComponent {
+
     public TableTextComponent(TextBlock text) {
         super(text);
     }

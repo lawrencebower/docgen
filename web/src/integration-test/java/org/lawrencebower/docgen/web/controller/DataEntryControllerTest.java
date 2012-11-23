@@ -5,14 +5,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.generator.utils.ChecksumUtils;
+import org.lawrencebower.docgen.doc_examples.ModelFactoryCodeImpl;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB;
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
-import org.lawrencebower.docgen.doc_examples.ModelFactoryCodeImpl;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.TextComponentView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,7 +135,7 @@ public class DataEntryControllerTest {
         TextComponentView docComponentView = (TextComponentView) components.get(0);
         assertEquals("auto mapped field value not correctly mapped",
                      selectedBusiness.getName(),
-                     docComponentView.getComponentText());
+                     docComponentView.getStringValue());
     }
 
     @Test

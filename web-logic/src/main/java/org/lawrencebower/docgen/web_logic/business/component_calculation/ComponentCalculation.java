@@ -5,8 +5,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class ComponentCalculation {
+
     private Operator operator;
     private List<String> fields;
+    private boolean isRun;
 
     public ComponentCalculation(Operator operator, List<String> fields) {
         this.operator = operator;
@@ -24,5 +26,13 @@ public class ComponentCalculation {
 
     public List<String> getOperands() {
         return fields;
+    }
+
+    public boolean isNotRun() {
+        return !isRun;
+    }
+
+    public boolean isRun() {
+        return isRun;
     }
 }

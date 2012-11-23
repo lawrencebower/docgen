@@ -184,7 +184,7 @@ public class DataEntryCB {
     public void processCalculatedFields(List<DocumentInfoView> documents) {
         List<DocComponentView> componentViews = viewUtils.getAllComponentViewsFromDocs(documents);
         for (DocComponentView componentView : componentViews) {
-            componentView.calculateValue(componentViews);
+            componentView.calculateValueIfNeeded(documents);
         }
 
     }
