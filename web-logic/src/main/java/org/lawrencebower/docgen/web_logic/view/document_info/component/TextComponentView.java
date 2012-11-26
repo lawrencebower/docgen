@@ -3,18 +3,14 @@ package org.lawrencebower.docgen.web_logic.view.document_info.component;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
-import org.lawrencebower.docgen.web_logic.business.component_calculation.text.TextComponentCalculator;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class TextComponentView extends DocComponentView<TextComponent> {
 
     private ComponentCalculation componentCalculation;
-    @Autowired
-    private TextComponentCalculator componentCalculator;
 
     protected TextComponentView() {//force spring creation
         componentViewType = ComponentViewType.TEXT;
@@ -89,12 +85,36 @@ public class TextComponentView extends DocComponentView<TextComponent> {
     }
 
     @Override
-    public void calculateValueIfNeeded(List<DocumentInfoView> allDocs) {
+    public void calculateValueIfNeeded(DocumentInfoSet documentSet) {
         if(hasCalculation() && componentCalculation.isNotRun()){
-           componentCalculator.runCalculation(this,
-                                              componentCalculation,
-                                              allDocs);
+            componentCalculation.clearResult();
+            documentSet.runCalculation(componentCalculation);
+            Float result = componentCalculation.getResult();
+            setComponentValue(result);
         }
+    }
+
+    @Override
+    public boolean runCalculationIfMatch(String operand,
+                                         ComponentCalculation calculation,
+                                         DocumentInfoSet documentSet) {
+
+        boolean operandMatched = false;
+
+        if(operandMatched(operand)){
+
+            calculateValueIfNeeded(documentSet);//calculate this component if necessary
+
+            Float operandValue = getFloatValue();
+            calculation.runOnOperand(operandValue);
+        }
+
+        return operandMatched;
+    }
+
+    private boolean operandMatched(String operand) {
+        String componentName = getName();
+        return componentName.equals(operand);
     }
 
     public void setComponentCalculation(ComponentCalculation componentCalculation) {

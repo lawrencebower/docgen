@@ -7,7 +7,6 @@ import org.lawrencebower.docgen.web_logic.view.document_info.component.DocCompon
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ViewUtils {
@@ -51,40 +50,5 @@ public class ViewUtils {
         if (selectedCustomer == null) {
             throw new DocGenException(NO_CUSTOMER_SELECTED);
         }
-    }
-
-    /**
-     * returns DocumentComponentView with name matching the provided value. Only the first componentView
-     * that matches is returned
-     */
-    public List<Float> getOperandValuesByName(String operandName,
-                                              List<DocumentInfoView> allDocs) {
-
-        for (DocumentInfoView docView : allDocs) {
-            if (docView.hasComponentViewWithName(operandName)) {
-                DocComponentView componentView = docView.getComponentViewWithName(operandName);
-                Float value = componentView.getFloatValue();
-                return Arrays.asList(value);
-            }else if(docView.hasTableWithColumnName(operandName)){
-                return docView.getTableColumnValuesAsFloats(operandName);
-            }
-        }
-
-        String message = String.format("Could not find DocComponent with name '%s'", operandName);
-        throw new DocGenException(message);
-    }
-
-    public List<DocComponentView> getAllDocComponentViewsWithName(String componentName,
-                                                                  List<DocumentInfoView> allDocs) {
-        List<DocComponentView> results = new ArrayList<>();
-
-        for (DocumentInfoView docView : allDocs) {
-            if (docView.hasComponentViewWithName(componentName)) {
-                DocComponentView componentView = docView.getComponentViewWithName(componentName);
-                results.add(componentView);
-            }
-        }
-
-        return results;
     }
 }

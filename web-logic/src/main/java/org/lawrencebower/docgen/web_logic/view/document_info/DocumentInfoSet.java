@@ -1,6 +1,7 @@
 package org.lawrencebower.docgen.web_logic.view.document_info;
 
 import org.lawrencebower.docgen.core.document.PDFDocument;
+import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.ViewableComponentFilter;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponentInfo;
 import org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper;
@@ -85,16 +86,6 @@ public class DocumentInfoSet {
         }
     }
 
-    public void processCalculatedFields() {
-
-        List<DocComponentView> componentViews = getAllComponentViewsFromDocs();
-
-        for (DocComponentView componentView : componentViews) {
-            componentView.calculateValueIfNeeded(documents);
-        }
-
-    }
-
     public List<DocComponentView> getComponentsForViewing(boolean showAutoMappedFields) {
 
         List<DocComponentView> results;
@@ -109,4 +100,19 @@ public class DocumentInfoSet {
 
         return results;
     }
+
+    public void processCalculatedFields() {
+
+        List<DocComponentView> componentViews = getAllComponentViewsFromDocs();
+
+        for (DocComponentView componentView : componentViews) {
+            componentView.calculateValueIfNeeded(this);
+        }
+
+    }
+
+    public void runCalculation(ComponentCalculation calculation) {
+        calculation.runOnOperands(this);
+    }
+
 }

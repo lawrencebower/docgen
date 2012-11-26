@@ -1,5 +1,8 @@
 package org.lawrencebower.docgen.web_logic.business.component_calculation;
 
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet;
+import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -8,7 +11,10 @@ public class ComponentCalculation {
 
     private Operator operator;
     private List<String> fields;
+    private Float result;
     private boolean isRun;
+
+    public static final float NO_RESULT = Float.MAX_VALUE;
 
     public ComponentCalculation(Operator operator, List<String> fields) {
         this.operator = operator;
@@ -35,4 +41,52 @@ public class ComponentCalculation {
     public boolean isRun() {
         return isRun;
     }
+
+    public void clearResult() {
+        result = NO_RESULT;
+    }
+
+    public void runOnOperand(Float operandValue) {
+        /**
+         * If this is the first term in the calculation, set the operand as the result
+         */
+        if(result == NO_RESULT){
+            result = operandValue;
+        }else{
+            result = Operator.applyOperation(operator, result, operandValue);
+        }
+    }
+
+    public Float getResult() {
+        return result;
+    }
+
+    public void runOnOperands(DocumentInfoSet documentSet) {
+
+        List<DocComponentView> componentViews = documentSet.getAllComponentViewsFromDocs();
+
+        List<String> operands = getOperands();
+        for (String operand : operands) {
+            runCalculationOnOperand(operand,
+                                    componentViews,
+                                    documentSet);
+        }
+
+        isRun = true;
+    }
+
+    private void runCalculationOnOperand(String operand,
+                                         List<DocComponentView> componentViews,
+                                         DocumentInfoSet documentSet) {
+
+        for (DocComponentView componentView : componentViews) {
+            boolean run = componentView.runCalculationIfMatch(operand,
+                                                              this,
+                                                              documentSet);
+            if(run){
+                break;//only run the calculation on the first component to match
+            }
+        }
+    }
+
 }

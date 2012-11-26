@@ -6,11 +6,12 @@ import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
 import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculation;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculator;
 import org.lawrencebower.docgen.web_logic.business.product_injection.TableComponentProductInjector;
 import org.lawrencebower.docgen.web_logic.business.table_component.TableComponentValueSetter;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -116,20 +117,44 @@ public class TableComponentView extends DocComponentView<TableComponent> {
     }
 
     @Override
-    public void calculateValueIfNeeded(List<DocumentInfoView> allDocs) {
+    public void calculateValueIfNeeded(DocumentInfoSet documentSet) {
         if (hasCalculation()) {
-            for (TableComponentCalculation calculation : componentCalculations) {
-                runCalculationIfNeeded(allDocs, calculation);
-            }
+            componentCalculator.runCalculations(this,
+                                                componentCalculations,
+                                                documentSet);
         }
     }
 
-    private void runCalculationIfNeeded(List<DocumentInfoView> allDocs, TableComponentCalculation calculation) {
-        if (calculation.isNotRun()) {
-            componentCalculator.runCalculation(this,
-                                               calculation,
-                                               allDocs);
+
+    @Override
+    public boolean runCalculationIfMatch(String operand,
+                                         ComponentCalculation calculation,
+                                         DocumentInfoSet documentSet) {
+        boolean operandMatched = false;
+
+        if (operandMatched(operand)) {
+
+            calculateValueIfNeeded(documentSet);//calculate this component if necessary
+
+            List<Float> operandValues = getColumnValuesAsFloats(operand);
+
+            for (Float operandValue : operandValues) {
+                calculation.runOnOperand(operandValue);
+            }
         }
+
+        return operandMatched;
+    }
+
+    private boolean operandMatched(String operand) {
+
+        boolean matched = false;
+
+        if (hasColumnName(operand)) {
+            matched = true;
+        }
+
+        return matched;
     }
 
     public void addComponentCalculation(TableComponentCalculation calculation) {

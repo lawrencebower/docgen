@@ -2,25 +2,42 @@ package org.lawrencebower.docgen.web_logic.business.component_calculation.table;
 
 import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.web_logic.business.component_calculation.AbstractCalculator;
-import org.lawrencebower.docgen.web_logic.business.component_calculation.Operator;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document_info.component.TableComponentView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BasicTableComponentCalculator extends AbstractCalculator implements TableComponentCalculator {
+public class BasicTableComponentCalculator implements TableComponentCalculator {
+
+    private TableComponentView tableComponentView;
+    private List<TableComponentCalculation> calculations;
 
     @Override
-    public void runCalculation(TableComponentView tableComponentView,
-                               TableComponentCalculation calculation,
-                               List<DocumentInfoView> allDocs) {
-        /**
-         * allDocs are not used in BasicCalculator - more advanced implementation could
-         * allow results to be calculated from outside the target table
-         */
+    public void runCalculations(TableComponentView tableComponentView,
+                                List<TableComponentCalculation> calculations,
+                                DocumentInfoSet documentSet) {
+
+        this.tableComponentView = tableComponentView;
+        this.calculations = calculations;
+
+        for (TableComponentCalculation calculation : calculations) {
+            runCalculationIfNeeded(documentSet, calculation);
+        }
+
+    }
+
+    private void runCalculationIfNeeded(DocumentInfoSet documentSet,
+                                        TableComponentCalculation calculation) {
+        if (calculation.isNotRun()) {
+            calculation.clearResult();
+            runCalculation(calculation, documentSet);
+        }
+    }
+
+    private void runCalculation(TableComponentCalculation calculation,
+                                DocumentInfoSet documentSet) {
 
         String resultCol = calculation.getTargetColumn();
         int resultColIndex = getColumnIndex(resultCol, tableComponentView);
@@ -28,26 +45,64 @@ public class BasicTableComponentCalculator extends AbstractCalculator implements
         List<String> operands = calculation.getOperands();
         List<Integer> operandColIndices = getOperandIndicies(operands, tableComponentView);
 
-        runCalculationOnOperandsIfNeeded(operands, allDocs);
+        runCalculationOnOperandsIfNeeded(operands, documentSet);
 
         List<TableRow> tableRows = tableComponentView.getTableRows();
 
-        Operator operator = calculation.getOperator();
-
         for (int rowIndex = 0; rowIndex < tableRows.size(); rowIndex++) {
-            calculateRow(rowIndex,
-                         operandColIndices,
-                         resultColIndex,
-                         operator,
-                         tableComponentView);
+
+            runCalculationOnRow(rowIndex,
+                                operandColIndices,
+                                calculation);
+
+            Float calculationResult = calculation.getResult();
+            DocComponentView resultComponent = tableComponentView.getCellComponentView(rowIndex, resultColIndex);
+            resultComponent.setComponentValue(calculationResult);
+
         }
     }
 
-    private void calculateRow(int rowIndex,
-                              List<Integer> operandColIndices,
-                              int resultColIndex,
-                              Operator operator,
-                              TableComponentView tableComponentView) {
+    private void runCalculationOnOperandsIfNeeded(List<String> operands,
+                                                  DocumentInfoSet documentSet) {
+        for (String operand : operands) {
+            if (operandMatchesCalculation(operand)) {
+                TableComponentCalculation calculation = getCalculationMatchingOperand(operand);
+                runCalculationIfNeeded(documentSet, calculation);
+            }
+        }
+
+    }
+
+    private boolean operandMatchesCalculation(String operand) {
+
+        boolean operandMatched = false;
+
+        for (TableComponentCalculation calculation : calculations) {
+            String targetColumn = calculation.getTargetColumn();
+            if (operand.equals(targetColumn)) {
+                operandMatched = true;
+            }
+        }
+
+        return operandMatched;
+    }
+
+    private TableComponentCalculation getCalculationMatchingOperand(String operand) {
+
+        for (TableComponentCalculation calculation : calculations) {
+            String targetColumn = calculation.getTargetColumn();
+            if (operand.equals(targetColumn)) {
+                return calculation;
+            }
+        }
+
+        String message = String.format("No calculation found matching targetColumn '%s'", operand);
+        throw new DocGenException(message);
+    }
+
+    private void runCalculationOnRow(int rowIndex,
+                                     List<Integer> operandColIndices,
+                                     TableComponentCalculation calculation) {
 
         List<Float> operandValues = new ArrayList<>();
 
@@ -57,10 +112,8 @@ public class BasicTableComponentCalculator extends AbstractCalculator implements
             operandValues.add(value);
         }
 
-        Float calculationResult = runCalculation(operandValues, operator);
+        runCalculation(operandValues, calculation);
 
-        DocComponentView resultComponent = tableComponentView.getCellComponentView(rowIndex, resultColIndex);
-        resultComponent.setComponentValue(calculationResult);
     }
 
     private List<Integer> getOperandIndicies(List<String> operands,
@@ -88,5 +141,22 @@ public class BasicTableComponentCalculator extends AbstractCalculator implements
         }
 
         return columnIndex;
+    }
+
+    private void runCalculation(List<Float> operandValues, TableComponentCalculation calculation) {
+
+        checkOperandSize(operandValues);
+        calculation.clearResult();
+
+        for (Float operandValue : operandValues) {
+            calculation.runOnOperand(operandValue);
+        }
+
+    }
+
+    private void checkOperandSize(List<Float> operandValues) {
+        if ((operandValues == null) || operandValues.isEmpty()) {
+            throw new DocGenException("List of operands is empty!?");
+        }
     }
 }
