@@ -5,8 +5,8 @@ import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
+import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -59,7 +59,7 @@ public class DataEntryController {
         ContactView selectedCustomer = sessionData.getSelectedCustomer();
         List<ProductView> selectedProducts = sessionData.getSelectedProducts();
 
-        DocumentInfoSet documentsForViewing =
+        DocumentSet documentsForViewing =
                 business.getDocumentsForViewing(selectedCustomer, selectedProducts);
 
         sessionData.setDocuments(documentsForViewing);
@@ -69,7 +69,7 @@ public class DataEntryController {
 
         ContactView selectedBusiness = sessionData.getSelectedBusiness();
         ContactView selectedCustomer = sessionData.getSelectedCustomer();
-        DocumentInfoSet documentSet = sessionData.getDocuments();
+        DocumentSet documentSet = sessionData.getDocuments();
 
         business.mapAutoMapComponents(documentSet,
                                       selectedCustomer,
@@ -78,14 +78,14 @@ public class DataEntryController {
 
     private void injectProductFields() {
 
-        DocumentInfoSet documentSet = sessionData.getDocuments();
+        DocumentSet documentSet = sessionData.getDocuments();
         List<ProductView> selectedProducts = sessionData.getSelectedProducts();
 
         business.injectProductFields(documentSet, selectedProducts);
     }
 
     private void processCalculatedFields() {
-        DocumentInfoSet documentSet = sessionData.getDocuments();
+        DocumentSet documentSet = sessionData.getDocuments();
         business.processCalculatedFields(documentSet);
     }
 
@@ -112,7 +112,7 @@ public class DataEntryController {
 
     private List<File> generatePDFsAndWriteToFiles() {
 
-        DocumentInfoSet relevantDocs = sessionData.getDocuments();
+        DocumentSet relevantDocs = sessionData.getDocuments();
 
         List<PDFDocument> generatedPDFs = business.createPDFs(relevantDocs);
 
@@ -132,7 +132,7 @@ public class DataEntryController {
 
 //        writeParameterVals(parameterMap);
 
-        DocumentInfoSet relevantDocs = sessionData.getDocuments();
+        DocumentSet relevantDocs = sessionData.getDocuments();
 
         business.mapFieldValuesToComponents(parameterMap, relevantDocs);
     }
@@ -151,7 +151,7 @@ public class DataEntryController {
 
     public List<DocComponentView> getDocComponentViews() {
 
-        DocumentInfoSet documentSet = sessionData.getDocuments();
+        DocumentSet documentSet = sessionData.getDocuments();
 
         boolean showAutoMappedFields = sessionData.isShowAutoMappedFields();
 

@@ -1,12 +1,12 @@
 package org.lawrencebower.docgen.core.generator.custom.renderer;
 
 import org.lawrencebower.docgen.core.AbstractIntegrationTest;
-import org.lawrencebower.docgen.core.generator.custom.CustomDocumentInfo;
-import org.lawrencebower.docgen.core.document.component.*;
+import org.lawrencebower.docgen.core.document.PDFDocument;
+import org.lawrencebower.docgen.core.document.component.DocComponent;
+import org.lawrencebower.docgen.core.generator.custom.CustomDocument;
 import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
-import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
@@ -29,13 +29,13 @@ public abstract class AbstractCustomRendererTest extends AbstractIntegrationTest
                                                    String outFilePath,
                                                    DocComponent... components) {
 
-        CustomDocumentInfo docInfo = new CustomDocumentInfo("Doc name", customGenerator);
+        CustomDocument document = new CustomDocument("Doc name", customGenerator);
 
         List<CustomComponent> overlayComponents = convertComponents(components);
 
-        docInfo.setComponents(overlayComponents);
+        document.setComponents(overlayComponents);
 
-        PDFDocument pdfDocument = docInfo.generatePDF();
+        PDFDocument pdfDocument = document.generatePDF();
 
         File outputFile = createOutputFilePathAndWriteFile(outFilePath, pdfDocument);
 

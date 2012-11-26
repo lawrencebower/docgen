@@ -1,10 +1,10 @@
-package org.lawrencebower.docgen.web_logic.view.document_info.component;
+package org.lawrencebower.docgen.web_logic.view.document.component;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lawrencebower.docgen.core.document.DocumentInfo;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.core.document.Document;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -20,59 +20,59 @@ import static org.mockito.Mockito.when;
 public class DocumentInfoViewTest {
 
     @Autowired
-    private DocumentInfoView docInfoView;
+    private DocumentView documentView;
 
     @Before
     public void setUp(){
-        DocumentInfo mockDocInfo = mockDocInfoWithComponents();
-        docInfoView .setDocumentInfo(mockDocInfo);
+        Document mockDoc = mockDocumentsWithComponents();
+        documentView.setDocument(mockDoc);
     }
 
     @Test
     public void testGetComponentsWithName_noComponents_returnsNull() {
-        docInfoView.addComponentView(mockComponentView("name1"));
+        documentView.addComponentView(mockComponentView("name1"));
     }
 
     @Test
     public void testGetComponentsWithName_namedComponents_returnsCorrectNumberOfComponents() {
         mockNamedComponents();
-        List<DocComponentView> returnedComponent = docInfoView.getComponentViewsWithName("name2");
+        List<DocComponentView> returnedComponent = documentView.getComponentViewsWithName("name2");
         assertEquals(1, returnedComponent.size());
     }
 
     @Test
     public void testGetComponentsWithName_2namedComponents_returnsCorrectNumberOfComponents() {
         mockNamedComponents();
-        docInfoView.addComponentView(mockComponentView("name2"));//add another one
-        List<DocComponentView> returnedComponent = docInfoView.getComponentViewsWithName("name2");
+        documentView.addComponentView(mockComponentView("name2"));//add another one
+        List<DocComponentView> returnedComponent = documentView.getComponentViewsWithName("name2");
         assertEquals(2, returnedComponent.size());
     }
 
     @Test
     public void testGetComponentsWithName_nullNamedComponents_returnsCorrectNumberOfComponents() {
         mockNamedComponents();
-        docInfoView.addComponentView(mockComponentView(null));//make return null
-        List<DocComponentView> returnedComponent = docInfoView.getComponentViewsWithName("name2");
+        documentView.addComponentView(mockComponentView(null));//make return null
+        List<DocComponentView> returnedComponent = documentView.getComponentViewsWithName("name2");
         assertEquals(1, returnedComponent.size());
     }
 
     @Test
     public void testGetComponentsWithName_noNamedComponents_returnsCorrectNumberOfComponents() {
-        List<DocComponentView> returnedComponent = docInfoView.getComponentViewsWithName("name2");
+        List<DocComponentView> returnedComponent = documentView.getComponentViewsWithName("name2");
         assertEquals(0, returnedComponent.size());
     }
 
     @Test
     public void testGetComponentsWithName_namedComponents_returnsCorrectComponent() {
         mockNamedComponents();
-        List<DocComponentView> returnedComponent = docInfoView.getComponentViewsWithName("name2");
+        List<DocComponentView> returnedComponent = documentView.getComponentViewsWithName("name2");
         assertEquals("name2", returnedComponent.get(0).getName());
     }
 
     private void mockNamedComponents() {
-        docInfoView.addComponentView(mockComponentView("name1"));
-        docInfoView.addComponentView(mockComponentView("name2"));
-        docInfoView.addComponentView(mockComponentView("name3"));
+        documentView.addComponentView(mockComponentView("name1"));
+        documentView.addComponentView(mockComponentView("name2"));
+        documentView.addComponentView(mockComponentView("name3"));
     }
 
     private DocComponentView mockComponentView(String name) {
@@ -81,7 +81,7 @@ public class DocumentInfoViewTest {
         return mock;
     }
 
-    private DocumentInfo mockDocInfoWithComponents() {
-        return Mockito.mock(DocumentInfo.class);
+    private Document mockDocumentsWithComponents() {
+        return Mockito.mock(Document.class);
     }
 }

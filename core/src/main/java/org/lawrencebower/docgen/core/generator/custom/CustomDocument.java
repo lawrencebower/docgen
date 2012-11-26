@@ -1,16 +1,16 @@
 package org.lawrencebower.docgen.core.generator.custom;
 
-import org.lawrencebower.docgen.core.document.AbstractDocumentInfo;
+import org.lawrencebower.docgen.core.document.AbstractDocument;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.document.type.DocType;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 
-public class CustomDocumentInfo extends AbstractDocumentInfo<CustomComponent> {
+public class CustomDocument extends AbstractDocument<CustomComponent> {
 
     private CustomPDFGenerator pdfGenerator;
 
-    public CustomDocumentInfo(String name,
-                              CustomPDFGenerator pdfGenerator) {
+    public CustomDocument(String name,
+                          CustomPDFGenerator pdfGenerator) {
         super(name);
         this.pdfGenerator = pdfGenerator;
     }

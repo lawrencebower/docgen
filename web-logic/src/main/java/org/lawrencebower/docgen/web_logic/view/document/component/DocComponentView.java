@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_logic.view.document_info.component;
+package org.lawrencebower.docgen.web_logic.view.document.component;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -7,7 +7,7 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponentInfo;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 
 import java.util.List;
@@ -87,11 +87,11 @@ public abstract class DocComponentView<T extends DocComponent> {
 
     public abstract boolean hasCalculation();
 
-    public abstract void calculateValueIfNeeded(DocumentInfoSet documentSet);
+    public abstract void calculateValueIfNeeded(DocumentSet documentSet);
 
     public abstract boolean runCalculationIfMatch(String operand,
                                                   ComponentCalculation calculation,
-                                                  DocumentInfoSet documentSet);
+                                                  DocumentSet documentSet);
 
     public boolean isText(){
         return componentViewType == ComponentViewType.TEXT;

@@ -1,17 +1,17 @@
 package org.lawrencebower.docgen.core.generator.custom;
 
+import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 import org.lawrencebower.docgen.core.generator.model.AbstractPDFGenerator;
-import org.lawrencebower.docgen.core.document.PDFDocument;
 
-public class CustomPDFGenerator extends AbstractPDFGenerator<CustomDocumentInfo> {
+public class CustomPDFGenerator extends AbstractPDFGenerator<CustomDocument> {
 
-    private CustomDocumentInfo docInfo;
+    private CustomDocument document;
 
     @Override
-    public PDFDocument generatePDF(CustomDocumentInfo docInfo) {
+    public PDFDocument generatePDF(CustomDocument document) {
 
-        this.docInfo = docInfo;
+        this.document = document;
 
         checkRequiredValuesPresent();
 
@@ -37,14 +37,14 @@ public class CustomPDFGenerator extends AbstractPDFGenerator<CustomDocumentInfo>
 
     private void renderComponents(CustomComponentRendererInfo rendererInfo) {
 
-        for (CustomComponent docComponent : docInfo.getComponents()) {
+        for (CustomComponent docComponent : document.getComponents()) {
             renderComponent(docComponent, rendererInfo);
         }
     }
 
     @Override
     protected void checkRequiredValuesPresent() {
-        pdfGenUtils.checkRequiredValuesPresent(docInfo);
+        pdfGenUtils.checkRequiredValuesPresent(document);
     }
 
     private void renderComponent(CustomComponent component,

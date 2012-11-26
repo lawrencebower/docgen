@@ -3,7 +3,7 @@ package org.lawrencebower.docgen.web_logic.business.mapping;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;

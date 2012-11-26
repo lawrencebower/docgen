@@ -1,9 +1,9 @@
-package org.lawrencebower.docgen.web_logic.view.document_info.component;
+package org.lawrencebower.docgen.web_logic.view.document.component;
 
 import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -83,14 +83,14 @@ public class CheckBoxComponentView extends DocComponentView<CheckBoxComponent> {
     }
 
     @Override
-    public void calculateValueIfNeeded(DocumentInfoSet documentSet) {
+    public void calculateValueIfNeeded(DocumentSet documentSet) {
         throw new DocGenException("CheckBox does not support calculated values");
     }
 
     @Override
     public boolean runCalculationIfMatch(String operand,
                                          ComponentCalculation calculation,
-                                         DocumentInfoSet documentSet) {
+                                         DocumentSet documentSet) {
         return false;//not supported
     }
 

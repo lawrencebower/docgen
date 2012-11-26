@@ -2,8 +2,8 @@ package org.lawrencebower.docgen.web.model;
 
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.lawrencebower.docgen.web_logic.view.product.ProductSelection;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
@@ -18,7 +18,7 @@ public class SessionData {
 
     private ProductSelection selectedProducts = new ProductSelection();
 
-    private DocumentInfoSet documents;
+    private DocumentSet documents;
 
     private List<PDFDocument> generatedDocuments;
 
@@ -40,7 +40,7 @@ public class SessionData {
         this.selectedBusiness = selectedBusiness;
     }
 
-    public void setDocuments(DocumentInfoSet documents) {
+    public void setDocuments(DocumentSet documents) {
         this.documents = documents;
     }
 
@@ -48,11 +48,11 @@ public class SessionData {
         return selectedProducts.getProducts();
     }
 
-    public List<DocumentInfoView> getDocumentsAsList() {
+    public List<DocumentView> getDocumentsAsList() {
         return documents.getDocumentsAsList();
     }
 
-    public DocumentInfoSet getDocuments() {
+    public DocumentSet getDocuments() {
         return documents;
     }
 

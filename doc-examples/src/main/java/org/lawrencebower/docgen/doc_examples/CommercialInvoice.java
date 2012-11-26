@@ -7,7 +7,7 @@ import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
 import org.lawrencebower.docgen.core.document.component.table.TableRow;
-import org.lawrencebower.docgen.core.generator.custom.CustomDocumentInfo;
+import org.lawrencebower.docgen.core.generator.custom.CustomDocument;
 import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
@@ -16,12 +16,12 @@ import org.lawrencebower.docgen.web_logic.business.component_calculation.Operato
 import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculation;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
 import org.lawrencebower.docgen.web_logic.business.product_injection.ProductInjectionField;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoViewFactory;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentViewFactory;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.TableComponentView;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.TextComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
+import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentViewFactory;
+import org.lawrencebower.docgen.web_logic.view.document.component.TableComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.component.TextComponentView;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
@@ -35,10 +35,10 @@ public class CommercialInvoice {
     @Autowired
     private DocComponentViewFactory componentViewFactory;
     @Autowired
-    DocumentInfoViewFactory docInfoViewFactory;
+    DocumentViewFactory documentViewFactory;
 
-    private CustomDocumentInfo docInfo;
-    private DocumentInfoView docInfoView;
+    private CustomDocument document;
+    private DocumentView documentView;
 
     public static final String INVOICE_NAME = "invoice";
     public static final String TOTAL_VALUE_NAME = "totalValue";
@@ -46,44 +46,44 @@ public class CommercialInvoice {
 
     public void prepareComponents() {
 
-        docInfo = new CustomDocumentInfo(INVOICE_NAME, pdfGenerator);
+        document = new CustomDocument(INVOICE_NAME, pdfGenerator);
 
-        docInfoView = docInfoViewFactory.createDocumentInfoView(docInfo);
+        documentView = documentViewFactory.createDocumentInfoView(document);
 
         TableComponent addressTable = makeInvoiceTable();
 
         TableComponent packageInformationTable = makePackageInformationTable();
 
-        docInfo.addComponent(convertComponent(addressTable));
+        document.addComponent(convertComponent(addressTable));
 
-        docInfo.addComponent(convertComponent(new NewLineComponent()));
+        document.addComponent(convertComponent(new NewLineComponent()));
 
-        docInfo.addComponent(convertComponent(packageInformationTable));
+        document.addComponent(convertComponent(packageInformationTable));
 
         TableComponent totalsTable = makeTotalsTable();
 
-        docInfo.addComponent(convertComponent(totalsTable));
+        document.addComponent(convertComponent(totalsTable));
 
-        docInfo.addComponent(convertComponent(new NewLineComponent()));
+        document.addComponent(convertComponent(new NewLineComponent()));
 
         TextComponent signature = new TextComponent("David Davidson");
         signature.setName("signature");
 
-        docInfo.addComponent(convertComponent(signature));
+        document.addComponent(convertComponent(signature));
 
-        docInfo.addComponent(convertComponent(new LineComponent(70)));
-        docInfo.addComponent(convertComponent(new TextComponent("Signature of exporter (print and sign)\n" +
+        document.addComponent(convertComponent(new LineComponent(70)));
+        document.addComponent(convertComponent(new TextComponent("Signature of exporter (print and sign)\n" +
                                                                 "I declare all the information to be accurate and correct")));
 
-        docInfo.addComponent(convertComponent(new NewLineComponent()));
+        document.addComponent(convertComponent(new NewLineComponent()));
 
         TextComponent date = new TextComponent("29th May 2012");
         date.setName("Date:");
-        docInfo.addComponent(convertComponent(date));
+        document.addComponent(convertComponent(date));
         addTextComponentView(date);
 
-        docInfo.addComponent(convertComponent(new LineComponent(30)));
-        docInfo.addComponent(convertComponent(new TextComponent("Date")));
+        document.addComponent(convertComponent(new LineComponent(30)));
+        document.addComponent(convertComponent(new TextComponent("Date")));
 
     }
 
@@ -256,44 +256,44 @@ public class CommercialInvoice {
 
     private void addTextComponentView(TextComponent textComponent) {
         DocComponentView componentView = componentViewFactory.createTextComponentView(textComponent);
-        docInfoView.addComponentView(componentView);
+        documentView.addComponentView(componentView);
     }
 
     private void addTextComponentView(TableTextComponent textComponent) {
         DocComponentView componentView = componentViewFactory.createTextComponentView(textComponent);
-        docInfoView.addComponentView(componentView);
+        documentView.addComponentView(componentView);
     }
 
     private void addTextComponentView(TableTextComponent textComponent,
                                       ComponentCalculation calculation) {
         TextComponentView componentView = componentViewFactory.createTextComponentView(textComponent);
         componentView.setComponentCalculation(calculation);
-        docInfoView.addComponentView(componentView);
+        documentView.addComponentView(componentView);
     }
 
     private void addTextComponent(TableTextComponent textComponent, AutoMappedComponent autoMappedComponent) {
         DocComponentView componentView = componentViewFactory.createTextComponentView(textComponent);
         componentView.setAutoMappedComponent(autoMappedComponent);
-        docInfoView.addComponentView(componentView);
+        documentView.addComponentView(componentView);
     }
 
     private void addTextAreaComponent(TableTextComponent textComponent,
                                       AutoMappedComponent autoMappedComponent) {
         DocComponentView componentView = componentViewFactory.createTextAreaComponentView(textComponent);
         componentView.setAutoMappedComponent(autoMappedComponent);
-        docInfoView.addComponentView(componentView);
+        documentView.addComponentView(componentView);
     }
 
     private void addTableComponentView(TableComponent tableComponent) {
         TableComponentView componentView = componentViewFactory.createTableComponentView(tableComponent);
-        docInfoView.addComponentView(componentView);
+        documentView.addComponentView(componentView);
     }
 
     private void addTableComponentView(TableComponent tableComponent,
                                        TableComponentCalculation calculation) {
         TableComponentView componentView = componentViewFactory.createTableComponentView(tableComponent);
         componentView.addComponentCalculation(calculation);
-        docInfoView.addComponentView(componentView);
+        documentView.addComponentView(componentView);
     }
 
     private TableComponent makeShippedFrom1Table() {
@@ -556,7 +556,7 @@ public class CommercialInvoice {
         return textComponent;
     }
 
-    public DocumentInfoView getDocInfoView() {
-        return docInfoView;
+    public DocumentView getDocumentView() {
+        return documentView;
     }
 }

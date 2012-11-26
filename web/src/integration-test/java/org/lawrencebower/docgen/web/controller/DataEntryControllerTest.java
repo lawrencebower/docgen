@@ -11,9 +11,9 @@ import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.TextComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
+import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.component.TextComponentView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -113,7 +113,7 @@ public class DataEntryControllerTest {
     @Test
     public void testPrepareFields_validFields_correctDocumentsSet() throws Exception {
         controller.prepareFields();
-        List<DocumentInfoView> documents = sessionData.getDocumentsAsList();
+        List<DocumentView> documents = sessionData.getDocumentsAsList();
         assertEquals(ModelFactoryCodeImpl.DOC_1_NAME, documents.get(0).getName());
         assertEquals(ModelFactoryCodeImpl.DOC_2_NAME, documents.get(1).getName());
     }
@@ -122,8 +122,8 @@ public class DataEntryControllerTest {
     public void testPrepareFields_validFields_autoMappedFieldsMapped() throws Exception {
         controller.prepareFields();
 
-        List<DocumentInfoView> documents = sessionData.getDocumentsAsList();
-        DocumentInfoView doc1 = documents.get(0);
+        List<DocumentView> documents = sessionData.getDocumentsAsList();
+        DocumentView doc1 = documents.get(0);
         assertEquals(ModelFactoryCodeImpl.DOC_1_NAME, doc1.getName());
 
         List<DocComponentView> components = doc1.getComponentViewsWithName(ModelFactoryCodeImpl.AUTO_MAPPED_EXAMPLE_FIELD);

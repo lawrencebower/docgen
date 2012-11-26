@@ -33,11 +33,11 @@ public class OverlayPDFGeneratorTest {
 
         pdfGenerator.setPdfGenUtils(mockUtils);
 
-        OverlayDocumentInfo documentInfo = stubDocInfo();
+        OverlayDocument document = stubDocument();
 
-        pdfGenerator.generatePDF(documentInfo);
+        pdfGenerator.generatePDF(document);
 
-        verify(mockUtils).checkRequiredValuesPresent(documentInfo);
+        verify(mockUtils).checkRequiredValuesPresent(document);
 
     }
 
@@ -55,16 +55,16 @@ public class OverlayPDFGeneratorTest {
         return mockPDFUtils;
     }
 
-    public OverlayDocumentInfo stubDocInfo() {
+    public OverlayDocument stubDocument() {
 
-        OverlayDocumentInfo docInfo = mock(OverlayDocumentInfo.class);
+        OverlayDocument document = mock(OverlayDocument.class);
 
-        when(docInfo.getDocType()).thenReturn(null);
+        when(document.getDocType()).thenReturn(null);
         List<OverlayComponent> textComponents = (Arrays.asList((OverlayComponent) mock(OverlayTextComponent.class)));
-        when(docInfo.getComponents()).thenReturn(textComponents);
-        when(docInfo.getName()).thenReturn("name");
+        when(document.getComponents()).thenReturn(textComponents);
+        when(document.getName()).thenReturn("name");
 
-        return docInfo;
+        return document;
     }
 
 }

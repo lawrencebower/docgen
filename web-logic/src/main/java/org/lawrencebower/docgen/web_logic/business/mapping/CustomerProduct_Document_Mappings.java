@@ -3,42 +3,45 @@ package org.lawrencebower.docgen.web_logic.business.mapping;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.lawrencebower.docgen.web_logic.view.contact.Contact;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CustomerProduct_Document_Mappings {
 
     /**
      * using linked map as its helpful to preserve the order for tests
      */
-    protected Map<CustomerProductPair, List<DocumentInfoView>> mappings = new LinkedHashMap<>();
+    protected Map<CustomerProductPair, List<DocumentView>> mappings = new LinkedHashMap<>();
 
     public void addDocument(Contact business,
                             Product product,
-                            DocumentInfoView document) {
+                            DocumentView document) {
 
         CustomerProductPair pair = makeCustomerProductPair(business, product);
 
         if (mappings.containsKey(pair)) {
-            List<DocumentInfoView> documentInfoViews = mappings.get(pair);
-            documentInfoViews.add(document);
+            List<DocumentView> documentViews = mappings.get(pair);
+            documentViews.add(document);
         }else{
-            ArrayList<DocumentInfoView> list = new ArrayList<>();
+            ArrayList<DocumentView> list = new ArrayList<>();
             list.add(document);
             mappings.put(pair, list);
         }
     }
 
-    public List<DocumentInfoView> getDocInfosForCustomerAndProduct(Contact business, Product product){
+    public List<DocumentView> getDocumentsForCustomerAndProduct(Contact business, Product product){
 
-        List<DocumentInfoView> results = new ArrayList<>();
+        List<DocumentView> results = new ArrayList<>();
 
         CustomerProductPair customerProductPair = makeCustomerProductPair(business, product);
         if(mappings.containsKey(customerProductPair)){
-            List<DocumentInfoView> docInfos = mappings.get(customerProductPair);
-            results.addAll(docInfos);
+            List<DocumentView> documentViews = mappings.get(customerProductPair);
+            results.addAll(documentViews);
         }
 
         return results;

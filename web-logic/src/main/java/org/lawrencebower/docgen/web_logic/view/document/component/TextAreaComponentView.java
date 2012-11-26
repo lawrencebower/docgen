@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_logic.view.document_info.component;
+package org.lawrencebower.docgen.web_logic.view.document.component;
 
 /**
  * Same as TextComponentView, but is represented as a text area

@@ -1,9 +1,11 @@
-package org.lawrencebower.docgen.web_logic.view.document_info.component;
+package org.lawrencebower.docgen.web_logic.view.document.component;
 
-import org.lawrencebower.docgen.core.document.component.*;
+import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
+import org.lawrencebower.docgen.core.document.component.DocComponent;
+import org.lawrencebower.docgen.core.document.component.TableTextComponent;
+import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.*;
 
 public abstract class DocComponentViewFactory {
 

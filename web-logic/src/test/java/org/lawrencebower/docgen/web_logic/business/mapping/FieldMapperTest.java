@@ -3,16 +3,16 @@ package org.lawrencebower.docgen.web_logic.business.mapping;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lawrencebower.docgen.core.document.DocumentInfo;
+import org.lawrencebower.docgen.core.document.Document;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSetFactory;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoViewFactory;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentViewFactory;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentSetFactory;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
+import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -35,9 +35,9 @@ public class FieldMapperTest {
     @Autowired
     DocComponentViewFactory componentViewFactory;
     @Autowired
-    DocumentInfoViewFactory docInfoViewFactory;
+    DocumentViewFactory documentViewFactory;
     @Autowired
-    DocumentInfoSetFactory docInfoSetFactory;
+    DocumentSetFactory documentSetFactory;
 
     private final String fieldName1 = "fieldName1";
     private final String fieldName2 = "fieldName2";
@@ -72,8 +72,8 @@ public class FieldMapperTest {
         when(component4.getName()).thenReturn(fieldName1);
 
         //add mocks to Documents
-        DocumentInfoSet documentInfoSet = addMocksToDocuments();
-        List<DocComponentView> allComponents = documentInfoSet.getAllComponentViewsFromDocs();
+        DocumentSet documentSet = addMocksToDocuments();
+        List<DocComponentView> allComponents = documentSet.getAllComponentViewsFromDocs();
 
         //run mapping
         fieldMapper.mapFieldValuesToComponents(paramMap, allComponents);
@@ -108,8 +108,8 @@ public class FieldMapperTest {
         when(component4.getName()).thenReturn("some value not in the params");
 
         //add mocks to Documents
-        DocumentInfoSet documentInfoSet = addMocksToDocuments();
-        List<DocComponentView> allComponents = documentInfoSet.getAllComponentViewsFromDocs();
+        DocumentSet documentSet = addMocksToDocuments();
+        List<DocComponentView> allComponents = documentSet.getAllComponentViewsFromDocs();
 
         //run mapping
         fieldMapper.mapFieldValuesToComponents(paramMap, allComponents);
@@ -141,8 +141,8 @@ public class FieldMapperTest {
             when(component4.getName()).thenReturn(fieldName1);
 
             //add mocks to Documents
-            DocumentInfoSet documentInfoSet = addMocksToDocuments();
-            List<DocComponentView> allComponents = documentInfoSet.getAllComponentViewsFromDocs();
+            DocumentSet documentSet = addMocksToDocuments();
+            List<DocComponentView> allComponents = documentSet.getAllComponentViewsFromDocs();
 
             //run mapping
             fieldMapper.mapFieldValuesToComponents(paramMap, allComponents);
@@ -169,8 +169,8 @@ public class FieldMapperTest {
             when(component4.getName()).thenReturn(fieldName1);
 
             //add mocks to Documents
-            DocumentInfoSet documentInfoSet = addMocksToDocuments();
-            List<DocComponentView> allComponents = documentInfoSet.getAllComponentViewsFromDocs();
+            DocumentSet documentSet = addMocksToDocuments();
+            List<DocComponentView> allComponents = documentSet.getAllComponentViewsFromDocs();
 
             //run mapping
             fieldMapper.mapFieldValuesToComponents(paramMap, allComponents);
@@ -182,26 +182,26 @@ public class FieldMapperTest {
 
     //UTIL METHODS//
 
-    private DocumentInfoSet addMocksToDocuments() {
-        DocumentInfoView documentInfoView1 = makeDocInfoView();
-        addComponentViewToDoc(documentInfoView1, component1);
-        addComponentViewToDoc(documentInfoView1, component2);
+    private DocumentSet addMocksToDocuments() {
+        DocumentView documentView1 = makeDocumentView();
+        addComponentViewToDoc(documentView1, component1);
+        addComponentViewToDoc(documentView1, component2);
 
-        DocumentInfoView documentInfoView2 = makeDocInfoView();
-        addComponentViewToDoc(documentInfoView2, component3);
-        addComponentViewToDoc(documentInfoView2, component4);
+        DocumentView documentView2 = makeDocumentView();
+        addComponentViewToDoc(documentView2, component3);
+        addComponentViewToDoc(documentView2, component4);
 
-        return docInfoSetFactory.createDocumentInfoSet(documentInfoView1, documentInfoView2);
+        return documentSetFactory.createDocumentInfoSet(documentView1, documentView2);
     }
 
-    private void addComponentViewToDoc(DocumentInfoView documentInfoView, TextComponent component) {
+    private void addComponentViewToDoc(DocumentView documentView, TextComponent component) {
         DocComponentView componentView = componentViewFactory.createTextComponentView(component);
-        documentInfoView.addComponentView(componentView);
+        documentView.addComponentView(componentView);
     }
 
-    private DocumentInfoView makeDocInfoView() {
-        DocumentInfo mockDocInfo = mock(DocumentInfo.class);
-        return docInfoViewFactory.createDocumentInfoView(mockDocInfo);
+    private DocumentView makeDocumentView() {
+        Document mockDoc = mock(Document.class);
+        return documentViewFactory.createDocumentInfoView(mockDoc);
     }
 
     private Map<String, String[]> makeParameterMap() {

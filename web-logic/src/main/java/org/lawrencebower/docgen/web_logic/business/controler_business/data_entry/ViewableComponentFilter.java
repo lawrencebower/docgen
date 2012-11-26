@@ -1,6 +1,6 @@
 package org.lawrencebower.docgen.web_logic.business.controler_business.data_entry;
 
-import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;

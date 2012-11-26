@@ -15,7 +15,7 @@ import java.util.List;
 import static org.mockito.Mockito.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/core-test-context.xml"})
+@ContextConfiguration(locations = "classpath:META-INF/core-test-context.xml")
 public class CustomPDFGeneratorTest {
 
     @Autowired
@@ -28,24 +28,24 @@ public class CustomPDFGeneratorTest {
 
         pdfGenerator.setPdfGenUtils(mockUtils);
 
-        CustomDocumentInfo documentInfo = stubDocInfo();
+        CustomDocument document = stubDocument();
 
-        pdfGenerator.generatePDF(documentInfo);
+        pdfGenerator.generatePDF(document);
 
-        verify(mockUtils).checkRequiredValuesPresent(documentInfo);
+        verify(mockUtils).checkRequiredValuesPresent(document);
 
     }
 
-    public CustomDocumentInfo stubDocInfo() {
+    public CustomDocument stubDocument() {
 
-        CustomDocumentInfo docInfo = mock(CustomDocumentInfo.class);
+        CustomDocument document = mock(CustomDocument.class);
 
-        when(docInfo.getDocType()).thenReturn(null);
+        when(document.getDocType()).thenReturn(null);
         List<CustomComponent> textComponents = (Arrays.asList((CustomComponent)mock(CustomTextComponent.class)));
-        when(docInfo.getComponents()).thenReturn(textComponents);
-        when(docInfo.getName()).thenReturn("name");
+        when(document.getComponents()).thenReturn(textComponents);
+        when(document.getName()).thenReturn("name");
 
-        return docInfo;
+        return document;
     }
 
 }

@@ -2,7 +2,7 @@ package org.lawrencebower.docgen.web_logic.business.model_factory;
 
 import org.lawrencebower.docgen.web_logic.view.contact.Contact;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 
@@ -17,7 +17,7 @@ public class ModelFactoryTestImpl implements ModelFactory {
     }
 
     @Override
-    public List<DocumentInfoView> getDocuments() {
+    public List<DocumentView> getDocuments() {
         return null;
     }
 

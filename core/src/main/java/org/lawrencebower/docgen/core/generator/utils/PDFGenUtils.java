@@ -5,7 +5,7 @@ import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
-import org.lawrencebower.docgen.core.document.DocumentInfo;
+import org.lawrencebower.docgen.core.document.Document;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public interface PDFGenUtils {
 
-    void checkRequiredValuesPresent(DocumentInfo docInfo);
+    void checkRequiredValuesPresent(Document doc);
 
 //    Font getBaseFont();
 

@@ -1,6 +1,6 @@
 package org.lawrencebower.docgen.web_logic.business.mapping;
 
-import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 
 public enum AutoMappedComponent {
 

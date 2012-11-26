@@ -30,31 +30,28 @@
     <bean name="tableComponentCalculator"
           class="org.lawrencebower.docgen.web_logic.business.component_calculation.table.BasicTableComponentCalculator"/>
 
-    <bean name="textComponentCalculator"
-          class="org.lawrencebower.docgen.web_logic.business.component_calculation.text.BasicTextComponentCalculator"/>
-
     <!--VIEW BEANS-->
 
     <bean name="documentInfoSet"
-          class="org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet"
+          class="org.lawrencebower.docgen.web_logic.view.document.DocumentSet"
           scope="prototype"/>
 
     <bean name="documentInfoSetFactory"
-          class="org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSetFactory">
+          class="org.lawrencebower.docgen.web_logic.view.document.DocumentSetFactory">
         <lookup-method name="createDocumentInfoSet" bean="documentInfoSet"/>
     </bean>
 
     <bean name="documentInfoView"
-          class="org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView"
+          class="org.lawrencebower.docgen.web_logic.view.document.DocumentView"
           scope="prototype"/>
 
     <bean name="documentInfoViewFactory"
-          class="org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoViewFactory">
+          class="org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory">
         <lookup-method name="createDocumentInfoView" bean="documentInfoView"/>
     </bean>
 
     <bean name="componentViewFactory"
-          class="org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentViewFactory">
+          class="org.lawrencebower.docgen.web_logic.view.document.component.DocComponentViewFactory">
         <lookup-method name="getCheckBoxComponentView" bean="checkBoxComponentView"/>
         <lookup-method name="getTableComponentView" bean="tableComponentView"/>
         <lookup-method name="getTextAreaComponentView" bean="textAreaComponentView"/>
@@ -62,16 +59,16 @@
     </bean>
 
     <bean name="checkBoxComponentView"
-          class="org.lawrencebower.docgen.web_logic.view.document_info.component.CheckBoxComponentView"
+          class="org.lawrencebower.docgen.web_logic.view.document.component.CheckBoxComponentView"
           scope="prototype"/>
     <bean name="tableComponentView"
-          class="org.lawrencebower.docgen.web_logic.view.document_info.component.TableComponentView"
+          class="org.lawrencebower.docgen.web_logic.view.document.component.TableComponentView"
           scope="prototype"/>
     <bean name="textAreaComponentView"
-          class="org.lawrencebower.docgen.web_logic.view.document_info.component.TextAreaComponentView"
+          class="org.lawrencebower.docgen.web_logic.view.document.component.TextAreaComponentView"
           scope="prototype"/>
     <bean name="textComponentView"
-          class="org.lawrencebower.docgen.web_logic.view.document_info.component.TextComponentView"
+          class="org.lawrencebower.docgen.web_logic.view.document.component.TextComponentView"
           scope="prototype"/>
 
 </beans>

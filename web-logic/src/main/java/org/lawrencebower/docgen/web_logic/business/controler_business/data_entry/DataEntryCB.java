@@ -11,10 +11,10 @@ import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_logic.view.contact.Contact;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSetFactory;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentSetFactory;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
+import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +37,13 @@ public class DataEntryCB {
     @Autowired
     private CustomerProduct_Document_Mappings customerProductMappings;
     @Autowired
-    private DocumentInfoSetFactory documentSetFactory;
+    private DocumentSetFactory documentSetFactory;
 
     @Autowired
     @Qualifier("pdfOutputRoot")
     String fileRoot;
 
-    public DocumentInfoSet getDocumentsForViewing(ContactView selectedCustomer,
+    public DocumentSet getDocumentsForViewing(ContactView selectedCustomer,
                                                   List<ProductView> selectedProducts) {
 
         viewUtils.checkCustomerSet(selectedCustomer);
@@ -52,7 +52,7 @@ public class DataEntryCB {
         return getRelevantDocuments(selectedCustomer, selectedProducts);
     }
 
-    private DocumentInfoSet getRelevantDocuments(ContactView selectedCustomer,
+    private DocumentSet getRelevantDocuments(ContactView selectedCustomer,
                                                  List<ProductView> selectedProducts) {
 
         Contact customer = selectedCustomer.getContact();
@@ -60,24 +60,24 @@ public class DataEntryCB {
          * LinkedHashSet is used to ensure no duplicate Documents are included and the order
          * of insertion is preserved (helpful in tests)
          */
-        Set<DocumentInfoView> docInfos = new LinkedHashSet<>();
+        Set<DocumentView> documents = new LinkedHashSet<>();
 
         for (ProductView selectedProduct : selectedProducts) {
             Product product = selectedProduct.getProduct();
-            List<DocumentInfoView> docInfo = customerProductMappings.getDocInfosForCustomerAndProduct(customer, product);
-            docInfos.addAll(docInfo);
+            List<DocumentView> documentViews = customerProductMappings.getDocumentsForCustomerAndProduct(customer, product);
+            documents.addAll(documentViews);
         }
 
-        return documentSetFactory.createDocumentInfoSet(docInfos);
+        return documentSetFactory.createDocumentInfoSet(documents);
     }
 
     public void mapFieldValuesToComponents(Map<String, String[]> parameterMap,
-                                           DocumentInfoSet documentSet) {
+                                           DocumentSet documentSet) {
 
         documentSet.mapFieldValuesToComponents(parameterMap);
     }
 
-    public List<PDFDocument> createPDFs(DocumentInfoSet documentSet) {
+    public List<PDFDocument> createPDFs(DocumentSet documentSet) {
         return documentSet.createPDFs();
     }
 
@@ -116,7 +116,7 @@ public class DataEntryCB {
         return concatenatedFile;
     }
 
-    public void mapAutoMapComponents(DocumentInfoSet documentSet,
+    public void mapAutoMapComponents(DocumentSet documentSet,
                                      ContactView selectedCustomer,
                                      ContactView selectedBusiness) {
 
@@ -145,20 +145,20 @@ public class DataEntryCB {
                                            businessContact);
     }
 
-    public List<DocComponentView> getComponentsForViewing(DocumentInfoSet documentSet,
+    public List<DocComponentView> getComponentsForViewing(DocumentSet documentSet,
                                                           boolean showAutoMappedFields) {
 
         return documentSet.getComponentsForViewing(showAutoMappedFields);
 
     }
 
-    public void injectProductFields(DocumentInfoSet documentSet,
+    public void injectProductFields(DocumentSet documentSet,
                                     List<ProductView> selectedProducts) {
 
         documentSet.injectProductFields(selectedProducts);
     }
 
-    public void processCalculatedFields(DocumentInfoSet documentSet) {
+    public void processCalculatedFields(DocumentSet documentSet) {
         documentSet.processCalculatedFields();
     }
 

@@ -1,18 +1,12 @@
 package org.lawrencebower.docgen.core.generator.overlay.renderer;
 
 import org.lawrencebower.docgen.core.AbstractIntegrationTest;
-import org.lawrencebower.docgen.core.generator.overlay.OverlayDocumentInfo;
-import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
-import org.lawrencebower.docgen.core.document.component.DocComponent;
-import org.lawrencebower.docgen.core.document.component.ImageComponent;
-import org.lawrencebower.docgen.core.document.component.TextComponent;
-import org.lawrencebower.docgen.core.document.component.table.TableComponent;
-import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.document.PDFDocument;
+import org.lawrencebower.docgen.core.document.component.DocComponent;
+import org.lawrencebower.docgen.core.generator.overlay.OverlayDocument;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayPDFGenerator;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponentFactory;
-import org.lawrencebower.docgen.core.generator.overlay.component.OverlayTextComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
@@ -33,15 +27,15 @@ public abstract class AbstractOverlayRendererTest extends AbstractIntegrationTes
                                                    String sourcePDF,
                                                    DocComponent... components) {
 
-        OverlayDocumentInfo docInfo = new OverlayDocumentInfo("Doc name", overlayGenerator);
+        OverlayDocument document = new OverlayDocument("Doc name", overlayGenerator);
 
-        docInfo.setSourcePDF(sourcePDF);
+        document.setSourcePDF(sourcePDF);
 
         List<OverlayComponent> overlayComponents = convertComponents(components);
 
-        docInfo.setComponents(overlayComponents);
+        document.setComponents(overlayComponents);
 
-        PDFDocument pdfDocument = overlayGenerator.generatePDF(docInfo);
+        PDFDocument pdfDocument = overlayGenerator.generatePDF(document);
 
         File outputFile = createOutputFilePathAndWriteFile(outFilePath, pdfDocument);
 

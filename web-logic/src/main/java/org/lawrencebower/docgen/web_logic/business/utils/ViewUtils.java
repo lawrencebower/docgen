@@ -2,8 +2,8 @@ package org.lawrencebower.docgen.web_logic.business.utils;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
+import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 
 import java.util.ArrayList;
@@ -16,12 +16,12 @@ public class ViewUtils {
     public static final String NO_BUSINESS_SELECTED = "No business selected?!";
     public static final String NO_DOCUMENTS_SELECTED = "No documents selected?!";
 
-    public List<DocComponentView> getAllComponentViewsFromDocs(List<DocumentInfoView> documents) {
+    public List<DocComponentView> getAllComponentViewsFromDocs(List<DocumentView> documents) {
 
         List<DocComponentView> results = new ArrayList<>();
 
-        for (DocumentInfoView documentInfoView : documents) {
-            List<DocComponentView> docComponentViews = documentInfoView.getComponentViews();
+        for (DocumentView documentView : documents) {
+            List<DocComponentView> docComponentViews = documentView.getComponentViews();
             results.addAll(docComponentViews);
         }
 
@@ -40,7 +40,7 @@ public class ViewUtils {
         }
     }
 
-    public void checkDocumentsSet(List<DocumentInfoView> selectedDocuments) {
+    public void checkDocumentsSet(List<DocumentView> selectedDocuments) {
         if ((selectedDocuments == null) || selectedDocuments.isEmpty()) {
             throw new DocGenException(NO_DOCUMENTS_SELECTED);
         }

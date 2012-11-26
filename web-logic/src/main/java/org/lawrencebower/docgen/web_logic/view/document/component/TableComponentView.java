@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_logic.view.document_info.component;
+package org.lawrencebower.docgen.web_logic.view.document.component;
 
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
@@ -11,7 +11,7 @@ import org.lawrencebower.docgen.web_logic.business.component_calculation.table.T
 import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculator;
 import org.lawrencebower.docgen.web_logic.business.product_injection.TableComponentProductInjector;
 import org.lawrencebower.docgen.web_logic.business.table_component.TableComponentValueSetter;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -117,7 +117,7 @@ public class TableComponentView extends DocComponentView<TableComponent> {
     }
 
     @Override
-    public void calculateValueIfNeeded(DocumentInfoSet documentSet) {
+    public void calculateValueIfNeeded(DocumentSet documentSet) {
         if (hasCalculation()) {
             componentCalculator.runCalculations(this,
                                                 componentCalculations,
@@ -129,7 +129,7 @@ public class TableComponentView extends DocComponentView<TableComponent> {
     @Override
     public boolean runCalculationIfMatch(String operand,
                                          ComponentCalculation calculation,
-                                         DocumentInfoSet documentSet) {
+                                         DocumentSet documentSet) {
         boolean operandMatched = false;
 
         if (operandMatched(operand)) {

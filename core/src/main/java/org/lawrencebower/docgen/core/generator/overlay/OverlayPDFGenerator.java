@@ -2,24 +2,26 @@ package org.lawrencebower.docgen.core.generator.overlay;
 
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
-import org.lawrencebower.docgen.core.generator.model.AbstractPDFGenerator;
 import org.lawrencebower.docgen.core.document.PDFDocument;
+import org.lawrencebower.docgen.core.generator.model.AbstractPDFGenerator;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
 
 import java.util.List;
 
-public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocumentInfo> {
+public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocument> {
 
-    private OverlayDocumentInfo docInfo;
+    private OverlayDocument document;
 
     @Override
-    public PDFDocument generatePDF(OverlayDocumentInfo docInfo) {
+    public PDFDocument generatePDF(OverlayDocument document) {
 
-        this.docInfo = docInfo;
+        this.document = document;
 
         checkRequiredValuesPresent();
 
-        PdfReader pdfReader = getPDFReaderForSourcePDF(docInfo.getSourcePDF());
+        String sourcePDF = document.getSourcePDF();
+
+        PdfReader pdfReader = getPDFReaderForSourcePDF(sourcePDF);
 
         resetPDFOutputStream();
 
@@ -40,7 +42,7 @@ public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocumentInf
 
         OverlayComponentRendererInfo rendererInfo = new OverlayComponentRendererInfo(pdfStamper);
 
-        List<OverlayComponent> components = docInfo.getComponents();
+        List<OverlayComponent> components = document.getComponents();
 
         for (OverlayComponent component : components) {
             renderComponent(component, rendererInfo);
@@ -57,7 +59,7 @@ public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocumentInf
 
     @Override
     protected void checkRequiredValuesPresent() {
-        pdfGenUtils.checkRequiredValuesPresent(docInfo);
+        pdfGenUtils.checkRequiredValuesPresent(document);
     }
 
     private void renderComponent(OverlayComponent component,

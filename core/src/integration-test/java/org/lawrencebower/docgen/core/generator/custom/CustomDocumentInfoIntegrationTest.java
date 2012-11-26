@@ -4,12 +4,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.AbstractIntegrationTest;
+import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomTextComponent;
-import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -28,12 +28,12 @@ public class CustomDocumentInfoIntegrationTest extends AbstractIntegrationTest {
     @Autowired
     private CustomComponentFactory componentFactory;
 
-    CustomDocumentInfo customDocumentInfo;
+    CustomDocument customDocumentInfo;
 
     @Before
     public void setup() {
         super.prepareDirs();
-        customDocumentInfo = new CustomDocumentInfo("test name", pdfGenerator);
+        customDocumentInfo = new CustomDocument("test name", pdfGenerator);
     }
 
     @Test

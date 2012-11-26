@@ -2,9 +2,9 @@ package org.lawrencebower.docgen.web_logic.business.component_calculation.table;
 
 import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.TableComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
+import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.component.TableComponentView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class BasicTableComponentCalculator implements TableComponentCalculator {
     @Override
     public void runCalculations(TableComponentView tableComponentView,
                                 List<TableComponentCalculation> calculations,
-                                DocumentInfoSet documentSet) {
+                                DocumentSet documentSet) {
 
         this.tableComponentView = tableComponentView;
         this.calculations = calculations;
@@ -28,7 +28,7 @@ public class BasicTableComponentCalculator implements TableComponentCalculator {
 
     }
 
-    private void runCalculationIfNeeded(DocumentInfoSet documentSet,
+    private void runCalculationIfNeeded(DocumentSet documentSet,
                                         TableComponentCalculation calculation) {
         if (calculation.isNotRun()) {
             calculation.clearResult();
@@ -37,7 +37,7 @@ public class BasicTableComponentCalculator implements TableComponentCalculator {
     }
 
     private void runCalculation(TableComponentCalculation calculation,
-                                DocumentInfoSet documentSet) {
+                                DocumentSet documentSet) {
 
         String resultCol = calculation.getTargetColumn();
         int resultColIndex = getColumnIndex(resultCol, tableComponentView);
@@ -63,7 +63,7 @@ public class BasicTableComponentCalculator implements TableComponentCalculator {
     }
 
     private void runCalculationOnOperandsIfNeeded(List<String> operands,
-                                                  DocumentInfoSet documentSet) {
+                                                  DocumentSet documentSet) {
         for (String operand : operands) {
             if (operandMatchesCalculation(operand)) {
                 TableComponentCalculation calculation = getCalculationMatchingOperand(operand);

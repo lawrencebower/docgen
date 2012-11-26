@@ -1,7 +1,8 @@
 package org.lawrencebower.docgen.doc_examples;
 
-import org.lawrencebower.docgen.core.document.DocumentInfo;
+import org.lawrencebower.docgen.core.document.Document;
 import org.lawrencebower.docgen.core.document.PDFDocument;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.File;
@@ -14,9 +15,11 @@ public class CommercialInvoiceRunner {
 
         CommercialInvoice doc = (CommercialInvoice) context.getBean("commercialInvoice");
 
-        DocumentInfo docInfo = doc.getDocInfoView().getDocumentInfo();
+        DocumentView documentView = doc.getDocumentView();
 
-        PDFDocument pdfDocument = docInfo.generatePDF();
+        Document document = documentView.getDocument();
+
+        PDFDocument pdfDocument = document.generatePDF();
 
         File outFile = new File("C:\\GitHub\\docgen\\use_cases\\src\\main\\resources\\CommercialInvoice_output.pdf");
 

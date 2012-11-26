@@ -1,7 +1,7 @@
 package org.lawrencebower.docgen.web_logic.business.component_calculation;
 
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
+import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -61,7 +61,7 @@ public class ComponentCalculation {
         return result;
     }
 
-    public void runOnOperands(DocumentInfoSet documentSet) {
+    public void runOnOperands(DocumentSet documentSet) {
 
         List<DocComponentView> componentViews = documentSet.getAllComponentViewsFromDocs();
 
@@ -77,7 +77,7 @@ public class ComponentCalculation {
 
     private void runCalculationOnOperand(String operand,
                                          List<DocComponentView> componentViews,
-                                         DocumentInfoSet documentSet) {
+                                         DocumentSet documentSet) {
 
         for (DocComponentView componentView : componentViews) {
             boolean run = componentView.runCalculationIfMatch(operand,

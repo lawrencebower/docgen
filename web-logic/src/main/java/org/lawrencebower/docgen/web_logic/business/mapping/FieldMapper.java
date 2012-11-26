@@ -2,7 +2,7 @@ package org.lawrencebower.docgen.web_logic.business.mapping;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;

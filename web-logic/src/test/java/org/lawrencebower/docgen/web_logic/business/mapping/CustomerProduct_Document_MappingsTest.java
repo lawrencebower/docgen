@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.web_logic.view.contact.Contact;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -28,8 +28,8 @@ public class CustomerProduct_Document_MappingsTest {
     private Contact customer2;
     private Product product1;
     private Product product2;
-    private DocumentInfoView doc1;
-    private DocumentInfoView doc2;
+    private DocumentView doc1;
+    private DocumentView doc2;
 
     @Before
     public void setup() {
@@ -38,30 +38,30 @@ public class CustomerProduct_Document_MappingsTest {
     }
 
     @Test
-    public void testGetDocInfosForCustomerAndProduct_validParams_correctDocsReturned_1() {
-        List<DocumentInfoView> docs = mappings.getDocInfosForCustomerAndProduct(customer1, product1);
+    public void testGetDocumentsForCustomerAndProduct_validParams_correctDocsReturned_1() {
+        List<DocumentView> docs = mappings.getDocumentsForCustomerAndProduct(customer1, product1);
         assertEquals(2, docs.size());
         assertTrue(docs.get(0).equals(doc1));
         assertTrue(docs.get(1).equals(doc2));
     }
 
     @Test
-    public void testGetDocInfosForCustomerAndProduct_validParams_correctDocsReturned_2() {
-        List<DocumentInfoView> docs = mappings.getDocInfosForCustomerAndProduct(customer1, product2);
+    public void testGetDocumentsForCustomerAndProduct_validParams_correctDocsReturned_2() {
+        List<DocumentView> docs = mappings.getDocumentsForCustomerAndProduct(customer1, product2);
         assertEquals(1, docs.size());
         assertTrue(docs.get(0).equals(doc2));
     }
 
     @Test
-    public void testGetDocInfosForCustomerAndProduct_validParams_correctDocsReturned_3() {
-        List<DocumentInfoView> docs = mappings.getDocInfosForCustomerAndProduct(customer2, product1);
+    public void testGetDocumentsForCustomerAndProduct_validParams_correctDocsReturned_3() {
+        List<DocumentView> docs = mappings.getDocumentsForCustomerAndProduct(customer2, product1);
         assertEquals(1, docs.size());
         assertTrue(docs.get(0).equals(doc1));
     }
 
     @Test
-    public void testGetDocInfosForCustomerAndProduct_unmappedProduct_returnsEmpty() {
-        List<DocumentInfoView> docs = mappings.getDocInfosForCustomerAndProduct(customer2, product2);
+    public void testGetDocumentsForCustomerAndProduct_unmappedProduct_returnsEmpty() {
+        List<DocumentView> docs = mappings.getDocumentsForCustomerAndProduct(customer2, product2);
         assertTrue(docs.isEmpty());
     }
 
@@ -73,8 +73,8 @@ public class CustomerProduct_Document_MappingsTest {
         product1 = mockProduct("product1");
         product2 = mockProduct("product2");
 
-        doc1 = mockDocInfo("doc1");
-        doc2 = mockDocInfo("doc2");
+        doc1 = mockDocument("doc1");
+        doc2 = mockDocument("doc2");
 
         //customer 1
         mappings.addDocument(customer1,
@@ -93,8 +93,8 @@ public class CustomerProduct_Document_MappingsTest {
                              doc1);
     }
 
-    private DocumentInfoView mockDocInfo(String docName) {
-        DocumentInfoView mock = mock(DocumentInfoView.class);
+    private DocumentView mockDocument(String docName) {
+        DocumentView mock = mock(DocumentView.class);
         when(mock.getName()).thenReturn(docName);
         return mock;
     }

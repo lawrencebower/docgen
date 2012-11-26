@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/jsp/include.jsp" %>
 
 <jsp:useBean id="table" scope="request"
-             type="org.lawrencebower.docgen.web_logic.view.document_info.component.TableComponentView"/>
+             type="org.lawrencebower.docgen.web_logic.view.document.component.TableComponentView"/>
 <c:set var="fieldSeperator" value="~" scope="application"/>
 
 <table cellpadding="0" border="1">

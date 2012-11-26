@@ -1,17 +1,15 @@
 package org.lawrencebower.docgen.core.generator.utils;
 
 import org.junit.runner.RunWith;
-import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponent;
-import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponentFactory;
-import org.lawrencebower.docgen.core.generator.model.itext_component.ITextTextComponent;
-import org.lawrencebower.docgen.core.generator.overlay.OverlayDocumentInfo;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.type.DocType;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponent;
+import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponentFactory;
+import org.lawrencebower.docgen.core.generator.overlay.OverlayDocument;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
-import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponentFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -33,27 +31,27 @@ public class PDFGenUtilsImplTest {
     private ITextComponentFactory componentFactory;
 
     private PDFGenUtilsImpl pdfGenUtils;
-    private OverlayDocumentInfo docInfo;
+    private OverlayDocument document;
 
     @org.junit.Before
     public void setUp() throws Exception {
         this.pdfGenUtils = new PDFGenUtilsImpl();
-        this.docInfo = mock(OverlayDocumentInfo.class);
+        this.document = mock(OverlayDocument.class);
     }
 
     @org.junit.Test
     public void testCheckRequiredValuesPresent_noDocType_throwsError() throws Exception {
 
 
-        when(docInfo.getDocType()).thenReturn(null);
+        when(document.getDocType()).thenReturn(null);
         List<OverlayComponent> textComponents = Arrays.asList(mock(OverlayComponent.class));
-        when(docInfo.getComponents()).thenReturn(textComponents);
-        when(docInfo.getName()).thenReturn("name");
+        when(document.getComponents()).thenReturn(textComponents);
+        when(document.getName()).thenReturn("name");
 
         try {
-            pdfGenUtils.checkRequiredValuesPresent(docInfo);
+            pdfGenUtils.checkRequiredValuesPresent(document);
         } catch (DocGenException e) {
-            assertTrue(e.getMessage().equals("DocInfo DocType must not be null"));
+            assertTrue(e.getMessage().equals("Document DocType must not be null"));
             return;
         }
         fail();//should not get here
@@ -62,7 +60,7 @@ public class PDFGenUtilsImplTest {
     @org.junit.Test
     public void testCheckRequiredValuesPresent_emptyDocComponents_throwsError() throws Exception {
 
-        OverlayDocumentInfo testDoc = mock(OverlayDocumentInfo.class);
+        OverlayDocument testDoc = mock(OverlayDocument.class);
 
         when(testDoc.getDocType()).thenReturn(DocType.OVERLAY);
         when(testDoc.getComponents()).thenReturn(new ArrayList<OverlayComponent>());
@@ -71,7 +69,7 @@ public class PDFGenUtilsImplTest {
         try {
             pdfGenUtils.checkRequiredValuesPresent(testDoc);
         } catch (DocGenException e) {
-            assertTrue(e.getMessage().equals("DocInfo Document components are null/empty"));
+            assertTrue(e.getMessage().equals("Document Document components are null/empty"));
             return;
         }
         fail();//should not get here
@@ -80,7 +78,7 @@ public class PDFGenUtilsImplTest {
     @org.junit.Test
     public void testCheckRequiredValuesPresent_nullDocComponents_throwsError() throws Exception {
 
-        OverlayDocumentInfo testDoc = mock(OverlayDocumentInfo.class);
+        OverlayDocument testDoc = mock(OverlayDocument.class);
 
         when(testDoc.getDocType()).thenReturn(DocType.OVERLAY);
         when(testDoc.getComponents()).thenReturn(null);
@@ -89,7 +87,7 @@ public class PDFGenUtilsImplTest {
         try {
             pdfGenUtils.checkRequiredValuesPresent(testDoc);
         } catch (DocGenException e) {
-            assertTrue(e.getMessage().equals("DocInfo Document components are null/empty"));
+            assertTrue(e.getMessage().equals("Document Document components are null/empty"));
             return;
         }
         fail();//should not get here
@@ -98,7 +96,7 @@ public class PDFGenUtilsImplTest {
     @org.junit.Test
     public void testCheckRequiredValuesPresent_nullName_throwsError() throws Exception {
 
-        OverlayDocumentInfo testDoc = mock(OverlayDocumentInfo.class);
+        OverlayDocument testDoc = mock(OverlayDocument.class);
 
         when(testDoc.getDocType()).thenReturn(DocType.OVERLAY);
         List<OverlayComponent> textComponents = Arrays.asList(mock(OverlayComponent.class));
@@ -108,7 +106,7 @@ public class PDFGenUtilsImplTest {
         try {
             pdfGenUtils.checkRequiredValuesPresent(testDoc);
         } catch (DocGenException e) {
-            assertTrue(e.getMessage().equals("DocInfo Name must not be null"));
+            assertTrue(e.getMessage().equals("Document Name must not be null"));
             return;
         }
         fail();//should not get here

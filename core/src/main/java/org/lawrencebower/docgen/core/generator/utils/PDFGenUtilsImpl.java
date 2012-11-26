@@ -4,8 +4,11 @@ import com.lowagie.text.Chunk;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
 import com.lowagie.text.Phrase;
-import com.lowagie.text.pdf.*;
-import org.lawrencebower.docgen.core.document.DocumentInfo;
+import com.lowagie.text.pdf.PdfContentByte;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfStamper;
+import org.lawrencebower.docgen.core.document.Document;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.text.FontInfo;
@@ -14,7 +17,6 @@ import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.document.component.text.TextFragment;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponent;
-import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
@@ -32,18 +34,18 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
     public static final int DEFAULT_FONT = Font.HELVETICA;
 
     @Override
-    public void checkRequiredValuesPresent(DocumentInfo docInfo) {
+    public void checkRequiredValuesPresent(Document doc) {
         System.out.println("PDFGenUtilsImpl.checkRequiredValuesPresent");
-        if (docInfo.getDocType() == null) {
-            throw new DocGenException("DocInfo DocType must not be null");
+        if (doc.getDocType() == null) {
+            throw new DocGenException("Document DocType must not be null");
         }
 
-        if (docInfo.getComponents() == null || docInfo.getComponents().isEmpty()) {
-            throw new DocGenException("DocInfo Document components are null/empty");
+        if (doc.getComponents() == null || doc.getComponents().isEmpty()) {
+            throw new DocGenException("Document Document components are null/empty");
         }
 
-        if (docInfo.getName() == null) {
-            throw new DocGenException("DocInfo Name must not be null");
+        if (doc.getName() == null) {
+            throw new DocGenException("Document Name must not be null");
         }
     }
 

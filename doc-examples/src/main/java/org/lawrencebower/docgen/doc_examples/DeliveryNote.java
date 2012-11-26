@@ -11,18 +11,18 @@ import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.document.component.text.FontStyle;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
-import org.lawrencebower.docgen.core.generator.custom.CustomDocumentInfo;
+import org.lawrencebower.docgen.core.generator.custom.CustomDocument;
 import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
 import org.lawrencebower.docgen.web_logic.business.product_injection.ProductInjectionField;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoViewFactory;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentView;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.DocComponentViewFactory;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.TableComponentView;
-import org.lawrencebower.docgen.web_logic.view.document_info.component.TextComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
+import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentViewFactory;
+import org.lawrencebower.docgen.web_logic.view.document.component.TableComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.component.TextComponentView;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
@@ -38,18 +38,18 @@ public class DeliveryNote {
     @Autowired
     private DocComponentViewFactory componentViewFactory;
     @Autowired
-    DocumentInfoViewFactory docInfoViewFactory;
+    DocumentViewFactory documentViewFactory;
 
-    private DocumentInfoView docInfoView;
-    private CustomDocumentInfo docInfo;
+    private DocumentView documentView;
+    private CustomDocument document;
 
     public static final String DELIVERY_NOTE_NAME = "Delivery note";
 
     public void prepareComponents() {
 
-        docInfo = new CustomDocumentInfo(DELIVERY_NOTE_NAME, pdfGenerator);
+        document = new CustomDocument(DELIVERY_NOTE_NAME, pdfGenerator);
 
-        docInfoView = docInfoViewFactory.createDocumentInfoView(docInfo);
+        documentView = documentViewFactory.createDocumentInfoView(document);
 
         ImageComponent logo = new ImageComponent("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\logo.png");
         logo.setSize(70, 1);
@@ -154,7 +154,7 @@ public class DeliveryNote {
 
     private void convertAndAddComponent(DocComponent component) {
         CustomComponent customComponent = convertComponent(component);
-        docInfo.addComponent(customComponent);
+        document.addComponent(customComponent);
     }
 
     private TableComponent makeMainOrderTable() {
@@ -323,8 +323,8 @@ public class DeliveryNote {
         }
     }
 
-    public DocumentInfoView getDocInfo() {
-        return docInfoView;
+    public DocumentView getDocument() {
+        return documentView;
     }
 
     private CustomComponent convertComponent(DocComponent component) {
@@ -333,31 +333,31 @@ public class DeliveryNote {
 
     private void addTextComponentView(TextComponent textComponent) {
         TextComponentView componentView = componentViewFactory.createTextComponentView(textComponent);
-        docInfoView.addComponentView(componentView);
+        documentView.addComponentView(componentView);
     }
 
     private void addProductTableComponentView(TableComponent tableComponent) {
         TableComponentView componentView = componentViewFactory.createTableComponentView(tableComponent);
-        docInfoView.addComponentView(componentView);
+        documentView.addComponentView(componentView);
     }
 
     private void addTextComponentView(TableTextComponent textComponent, AutoMappedComponent autoMappedComponent) {
         TextComponentView componentView = componentViewFactory.createTextComponentView(textComponent);
         componentView.setAutoMappedComponent(autoMappedComponent);
-        docInfoView.addComponentView(componentView);
+        documentView.addComponentView(componentView);
     }
 
     private void addTextAreaComponent(TableTextComponent textComponent,
                                       AutoMappedComponent autoMappedComponent) {
         DocComponentView componentView = componentViewFactory.createTextAreaComponentView(textComponent);
         componentView.setAutoMappedComponent(autoMappedComponent);
-        docInfoView.addComponentView(componentView);
+        documentView.addComponentView(componentView);
     }
 
     private void addTextComponentView(TextComponent textComponent,
                                       AutoMappedComponent autoMappedComponent) {
         DocComponentView componentView = componentViewFactory.createTextComponentView(textComponent);
         componentView.setAutoMappedComponent(autoMappedComponent);
-        docInfoView.addComponentView(componentView);
+        documentView.addComponentView(componentView);
     }
 }

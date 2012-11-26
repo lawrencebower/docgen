@@ -1,6 +1,6 @@
 package org.lawrencebower.docgen.doc_examples;
 
-import org.lawrencebower.docgen.core.document.DocumentInfo;
+import org.lawrencebower.docgen.core.document.Document;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -14,9 +14,9 @@ public class DeliveryNoteRunner {
 
         DeliveryNote doc = (DeliveryNote) context.getBean("deliveryNote");
 
-        DocumentInfo docInfo = doc.getDocInfo().getDocumentInfo();
+        Document document = doc.getDocument().getDocument();
 
-        PDFDocument pdfDocument = docInfo.generatePDF();
+        PDFDocument pdfDocument = document.generatePDF();
 
         File outFile = new File("C:\\GitHub\\docgen\\use_cases\\src\\main\\resources\\DeliveryNote_output.pdf");
 

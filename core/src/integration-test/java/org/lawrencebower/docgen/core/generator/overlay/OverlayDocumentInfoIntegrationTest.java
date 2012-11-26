@@ -4,10 +4,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.AbstractIntegrationTest;
+import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
-import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponentFactory;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayTextComponent;
@@ -41,7 +41,7 @@ public class OverlayDocumentInfoIntegrationTest extends AbstractIntegrationTest 
         String expectedOutputFilePath = inputPackage + "overlay_expected_output.pdf";
         String outFilePath = outputPackage + "overlay_output.pdf";
 
-        OverlayDocumentInfo overlayDocumentInfo = new OverlayDocumentInfo("test name", pdfGenerator);
+        OverlayDocument overlayDocumentInfo = new OverlayDocument("test name", pdfGenerator);
 
         overlayDocumentInfo.setSourcePDF(inputFilePath);
 

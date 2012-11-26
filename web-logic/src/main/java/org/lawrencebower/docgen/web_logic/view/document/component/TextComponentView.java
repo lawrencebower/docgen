@@ -1,9 +1,9 @@
-package org.lawrencebower.docgen.web_logic.view.document_info.component;
+package org.lawrencebower.docgen.web_logic.view.document.component;
 
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoSet;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 
 import java.util.List;
@@ -85,7 +85,7 @@ public class TextComponentView extends DocComponentView<TextComponent> {
     }
 
     @Override
-    public void calculateValueIfNeeded(DocumentInfoSet documentSet) {
+    public void calculateValueIfNeeded(DocumentSet documentSet) {
         if(hasCalculation() && componentCalculation.isNotRun()){
             componentCalculation.clearResult();
             documentSet.runCalculation(componentCalculation);
@@ -97,7 +97,7 @@ public class TextComponentView extends DocComponentView<TextComponent> {
     @Override
     public boolean runCalculationIfMatch(String operand,
                                          ComponentCalculation calculation,
-                                         DocumentInfoSet documentSet) {
+                                         DocumentSet documentSet) {
 
         boolean operandMatched = false;
 

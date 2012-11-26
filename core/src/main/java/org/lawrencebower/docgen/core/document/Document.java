@@ -4,7 +4,7 @@ import org.lawrencebower.docgen.core.document.type.DocType;
 
 import java.util.List;
 
-public interface DocumentInfo<T extends RenderableComponent> {
+public interface Document<T extends RenderableComponent> {
 
     String getName();
 

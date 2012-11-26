@@ -1,7 +1,7 @@
 package org.lawrencebower.docgen.web_logic.business.model_factory;
 
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 
@@ -12,7 +12,7 @@ public interface ModelFactory {
 
     List<ContactView> getCustomers();
 
-    List<DocumentInfoView> getDocuments();
+    List<DocumentView> getDocuments();
 
     List<ProductView> getProducts();
 

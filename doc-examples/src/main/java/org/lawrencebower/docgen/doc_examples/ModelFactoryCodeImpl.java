@@ -5,7 +5,7 @@ import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Docum
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.view.contact.Contact;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
-import org.lawrencebower.docgen.web_logic.view.document_info.DocumentInfoView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +29,15 @@ public class ModelFactoryCodeImpl implements ModelFactory {
 
     private LinkedHashMap<String, Product> products = new LinkedHashMap<>();
 
-    private LinkedHashMap<String, DocumentInfoView> documents = new LinkedHashMap<>();
+    private LinkedHashMap<String, DocumentView> documents = new LinkedHashMap<>();
 
     private ContactView vendor;
     private ContactView customer1;
     private ContactView customer2;
     private Product product1;
     private Product product2;
-    private DocumentInfoView commercialInvoiceView;
-    private DocumentInfoView deliveryNoteView;
+    private DocumentView commercialInvoiceView;
+    private DocumentView deliveryNoteView;
 
     public static final String CUSTOMER_ID_1 = "Contact 1";
     public static final String CUSTOMER_ID_2 = "Contact 2";
@@ -68,9 +68,9 @@ public class ModelFactoryCodeImpl implements ModelFactory {
 
     private void initDocuments() {
 
-        commercialInvoiceView = commercialInvoice.getDocInfoView();
+        commercialInvoiceView = commercialInvoice.getDocumentView();
 
-        deliveryNoteView = deliveryNote.getDocInfo();
+        deliveryNoteView = deliveryNote.getDocument();
 
         documents.put(commercialInvoiceView.getName(), commercialInvoiceView);
         documents.put(deliveryNoteView.getName(), deliveryNoteView);
@@ -158,7 +158,7 @@ public class ModelFactoryCodeImpl implements ModelFactory {
         return results;
     }
 
-    public List<DocumentInfoView> getDocuments() {
+    public List<DocumentView> getDocuments() {
         return new ArrayList<>(documents.values());
     }
 
