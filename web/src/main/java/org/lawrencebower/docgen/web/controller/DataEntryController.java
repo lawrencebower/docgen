@@ -103,14 +103,14 @@ public class DataEntryController {
 
         mapFieldValuesToComponents(webRequest);
 
-        List<File> allPdfFiles = generatePDFsAndWriteToFiles();
+        List<PDFDocument> allPdfFiles = generatePDFsAndWriteToFiles();
 
         concatenatePDFsAndWriteToResponse(outStream, allPdfFiles);
 
         return null;
     }
 
-    private List<File> generatePDFsAndWriteToFiles() {
+    private List<PDFDocument> generatePDFsAndWriteToFiles() {
 
         DocumentSet relevantDocs = sessionData.getDocuments();
 
@@ -118,10 +118,12 @@ public class DataEntryController {
 
         sessionData.setGeneratedPDFs(generatedPDFs);
 
-        return business.writePDFsToFiles(generatedPDFs);
+        business.writePDFsToFiles(generatedPDFs);
+
+        return generatedPDFs;
     }
 
-    private void concatenatePDFsAndWriteToResponse(OutputStream outStream, List<File> allPdfFiles) {
+    private void concatenatePDFsAndWriteToResponse(OutputStream outStream, List<PDFDocument> allPdfFiles) {
         File concatenatedFile = business.makeConcatenatedFile(allPdfFiles);
         business.writePDFsToStream(outStream, concatenatedFile);
     }

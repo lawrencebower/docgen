@@ -6,6 +6,7 @@ import com.lowagie.text.pdf.BadPdfFormatException;
 import com.lowagie.text.pdf.PdfCopy;
 import com.lowagie.text.pdf.PdfImportedPage;
 import com.lowagie.text.pdf.PdfReader;
+import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 
 import java.io.*;
@@ -13,37 +14,47 @@ import java.util.List;
 
 public class PDFConcatenator {
 
-    private Document document;
-
-    public void concatenatePDFs(List<File> pdfs, File output) {
+    public void concatenatePDFs(List<PDFDocument> pdfs, File output) {
 
         checkFiles(pdfs);
 
-        document = new Document();
+        Document document = new Document();
 
-        PdfCopy copy = makePDFCopy(output);
+        PdfCopy copy = makePDFCopy(output, document);
 
         document.open();
 
-        for (File pdf : pdfs) {
-
-            PdfReader reader = createReader(pdf);
-
-            addPagesInPDF(copy, reader);
-
-            freeReader(copy, reader);
+        for (PDFDocument pdf : pdfs) {
+            addDocumentToCopy(copy, pdf);
         }
 
         document.close();
 
     }
 
-    private PdfCopy makePDFCopy(File output) {
+    private void addDocumentToCopy(PdfCopy copy, PDFDocument pdf) {
+
+        File file = pdf.getFile();
+        int copyNumber = pdf.getCopyNumber();
+
+        int count = 0;
+
+        while (count < copyNumber) {
+            PdfReader reader = createReader(file);
+            addPagesInPDF(copy, reader);
+            freeReader(copy, reader);
+            count++;
+        }
+    }
+
+    private PdfCopy makePDFCopy(File output, Document document) {
 
         try {
+
             FileOutputStream outputStream = new FileOutputStream(output);
 
             return new PdfCopy(document, outputStream);
+
         } catch (FileNotFoundException | DocumentException e) {
             throw new DocGenException(e);
         }
@@ -87,19 +98,20 @@ public class PDFConcatenator {
         }
     }
 
-    private void checkFiles(List<File> pdfs) {
+    private void checkFiles(List<PDFDocument> pdfs) {
 
-        if(pdfs.isEmpty()){
+        if (pdfs.isEmpty()) {
             throw new DocGenException("No source files specified");
         }
 
-        for (File pdf : pdfs) {
-            checkFilExists(pdf);
+        for (PDFDocument pdf : pdfs) {
+            File file = pdf.getFile();
+            checkFilExists(file);
         }
     }
 
     private void checkFilExists(File file) {
-        if(!file.exists()){
+        if (!file.exists()) {
             String message = String.format("file does not exist '%s'", file.getPath());
             throw new DocGenException(message);
         }

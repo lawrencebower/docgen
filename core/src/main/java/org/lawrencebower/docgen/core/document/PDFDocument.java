@@ -12,4 +12,12 @@ public interface PDFDocument {
     void setName(String name);
 
     String getName();
+
+    int getCopyNumber();
+
+    void setCopyNumber(int copyNumber);
+
+    void setFile(File fileName);
+
+    File getFile();
 }

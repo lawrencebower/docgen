@@ -24,7 +24,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class DataEntryCB {
 
@@ -91,24 +94,20 @@ public class DataEntryCB {
         }
     }
 
-    public List<File> writePDFsToFiles(List<PDFDocument> pdfDocuments) {
-
-        List<File> allFiles = new ArrayList<>();
+    public void writePDFsToFiles(List<PDFDocument> pdfDocuments) {
 
         for (PDFDocument pdfDocument : pdfDocuments) {
+
             String docName = pdfDocument.getName();
             String fileName = fileRoot + docName + ".pdf";
             File file = new File(fileName);
 
+            pdfDocument.setFile(file);
             pdfDocument.writeToFile(file);
-
-            allFiles.add(file);
         }
-
-        return allFiles;
     }
 
-    public File makeConcatenatedFile(List<File> allFiles) {
+    public File makeConcatenatedFile(List<PDFDocument> allFiles) {
         String pathName = fileRoot + ViewConstants.CONCATENATED_FILE_NAME;
         File concatenatedFile = new File(pathName);
         pdfConcatenator.concatenatePDFs(allFiles, concatenatedFile);

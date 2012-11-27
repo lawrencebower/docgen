@@ -44,9 +44,15 @@ public class DocumentSet {
         List<PDFDocument> results = new ArrayList<>();
 
         for (DocumentView document : documents) {
+
             PDFDocument pdfDocument = document.generatePDF();
+
             String documentName = document.getName();
             pdfDocument.setName(documentName);
+
+            int copyNumber = document.getCopyNumber();
+            pdfDocument.setCopyNumber(copyNumber);
+
             results.add(pdfDocument);
         }
 

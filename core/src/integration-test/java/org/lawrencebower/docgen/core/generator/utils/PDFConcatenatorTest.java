@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.AbstractIntegrationTest;
+import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -16,9 +17,11 @@ import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/integration-test-config.xml"})
+@ContextConfiguration(locations = "classpath:META-INF/integration-test-config.xml")
 public class PDFConcatenatorTest extends AbstractIntegrationTest {
 
     @Autowired
@@ -36,6 +39,8 @@ public class PDFConcatenatorTest extends AbstractIntegrationTest {
     private static final String inputFile2Name = "concat_input_2.pdf";
     private static final String expectedOut_1_file_Name = "1_concatenated_file_expected_output.pdf";
     private static final String expectedOut_2_files_Name = "2_concatenated_files_expected_output.pdf";
+    private static final String expectedOut_3_files_Name = "1_concatenated_files_multiple_copies_expected_output.pdf";
+    private static final String expectedOut_4_files_Name = "2_concatenated_files_multiple_copies_expected_output.pdf";
 
     @Before
     public void setUp() {
@@ -48,17 +53,32 @@ public class PDFConcatenatorTest extends AbstractIntegrationTest {
     @Test
     public void testConcatenatePDFs_sourceFilesDontExist_throwsError() throws Exception {
         try {
-            List<File> sourceFiles = new ArrayList<>();
-            sourceFiles.add(new File("i dont exist"));
+            File file = new File("i dont exist");
+            List<PDFDocument> sourceFiles = mockPDFList(file);
             pdfConcatenator.concatenatePDFs(sourceFiles, outputFile);
         } catch (DocGenException e) {
             assertEquals("file does not exist 'i dont exist'", e.getMessage());
         }
     }
 
+    private List<PDFDocument> mockPDFList(File... files) {
+
+        List<PDFDocument> results = new ArrayList<>();
+
+        for (File file : files) {
+            PDFDocument pdf = mock(PDFDocument.class);
+            when(pdf.getFile()).thenReturn(file);
+            when(pdf.getCopyNumber()).thenReturn(1);
+            results.add(pdf);
+        }
+
+        return results;
+    }
+
     @Test
     public void testConcatenatePDFs_outputFileDoesntExist_makesFile() throws Exception {
-        List<File> sourceFiles = Arrays.asList(inputFile1, inputFile2);
+
+        List<PDFDocument> sourceFiles = mockPDFList(inputFile1, inputFile2);
 
         File nonExistantOutput = new File(outputPackage + "non_existant_output.pdf");
         fileUtils.deleteFileIfAlreadyExists(nonExistantOutput);
@@ -70,7 +90,8 @@ public class PDFConcatenatorTest extends AbstractIntegrationTest {
 
     @Test
     public void testConcatenatePDFs_outputFileExists_noError() throws Exception {
-        List<File> sourceFiles = Arrays.asList(inputFile1, inputFile2);
+
+        List<PDFDocument> sourceFiles = mockPDFList(inputFile1, inputFile2);
 
         File nonExistantOutput = new File(outputPackage + "non_existant_output.pdf");
         nonExistantOutput.createNewFile();
@@ -82,7 +103,8 @@ public class PDFConcatenatorTest extends AbstractIntegrationTest {
 
     @Test
     public void testConcatenatePDFs_twoSourceFiles_concatenatesOkay() throws Exception {
-        List<File> sourceFiles = Arrays.asList(inputFile1, inputFile2);
+
+        List<PDFDocument> sourceFiles = mockPDFList(inputFile1, inputFile2);
 
         pdfConcatenator.concatenatePDFs(sourceFiles, outputFile);
 
@@ -95,11 +117,52 @@ public class PDFConcatenatorTest extends AbstractIntegrationTest {
 
     @Test
     public void testConcatenatePDFs_oneSourceFile_concatenatesOkay() throws Exception {
-        List<File> sourceFiles = Arrays.asList(inputFile1);
+
+        List<PDFDocument> sourceFiles = mockPDFList(inputFile1);
 
         pdfConcatenator.concatenatePDFs(sourceFiles, outputFile);
 
         File expectedOutputFile = new File(inputPackage + expectedOut_1_file_Name);
+
+        boolean filesAreSame = checksumUtils.filteredFileChecksumsAreSame(expectedOutputFile, outputFile);
+
+        assertTrue(filesAreSame);
+    }
+
+    @Test
+    public void testConcatenatePDFs_multipleCopiesOfOneFile_concatenatesOkay() throws Exception {
+
+        PDFDocument pdf = mock(PDFDocument.class);
+        when(pdf.getFile()).thenReturn(inputFile1);
+        when(pdf.getCopyNumber()).thenReturn(3);
+
+        List<PDFDocument> sourceFiles = Arrays.asList(pdf);
+
+        pdfConcatenator.concatenatePDFs(sourceFiles, outputFile);
+
+        File expectedOutputFile = new File(inputPackage + expectedOut_3_files_Name);
+
+        boolean filesAreSame = checksumUtils.filteredFileChecksumsAreSame(expectedOutputFile, outputFile);
+
+        assertTrue(filesAreSame);
+    }
+
+    @Test
+    public void testConcatenatePDFs_multipleCopiesMixedFiles_concatenatesOkay() throws Exception {
+
+        PDFDocument pdf1 = mock(PDFDocument.class);
+        when(pdf1.getFile()).thenReturn(inputFile1);
+        when(pdf1.getCopyNumber()).thenReturn(2);
+
+        PDFDocument pdf2 = mock(PDFDocument.class);
+        when(pdf2.getFile()).thenReturn(inputFile2);
+        when(pdf2.getCopyNumber()).thenReturn(1);
+
+        List<PDFDocument> sourceFiles = Arrays.asList(pdf1, pdf2);
+
+        pdfConcatenator.concatenatePDFs(sourceFiles, outputFile);
+
+        File expectedOutputFile = new File(inputPackage + expectedOut_4_files_Name);
 
         boolean filesAreSame = checksumUtils.filteredFileChecksumsAreSame(expectedOutputFile, outputFile);
 

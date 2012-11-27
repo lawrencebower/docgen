@@ -1,10 +1,12 @@
 package org.lawrencebower.docgen.web_logic.business.controler_business.data_entry;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.core.generator.model.PDFDocumentImpl;
 import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
@@ -54,8 +56,6 @@ public class DataEntryCBTest {
     ContactView mockBusiness;
     @Mock
     ArgumentCaptor<ArrayList<ProductView>> mockProducts;
-    @Mock
-    ProductView mockProduct;
 
     @Before
     public void setup() {
@@ -152,35 +152,35 @@ public class DataEntryCBTest {
     }
 
     @Test
-    public void testWritePDFsToFiles_validData_correctFileNumberReturned() throws Exception {
-        List<File> results = writePDFToFiles();
-        assertEquals(2, results.size());
-    }
+    public void testWritePDFsToFiles_validData_correctFileNamesSet() throws Exception {
 
-    @Test
-    public void testWritePDFsToFiles_validData_correctFileNamesReturned() throws Exception {
-        List<File> results = writePDFToFiles();
-        assertEquals(fileRoot + "pdf1.pdf", results.get(0).getPath());
-    }
+        PDFDocument pdf1 = new PDFDocumentImpl(new byte[]{});
+        PDFDocument pdf2 = new PDFDocumentImpl(new byte[]{});
 
-    private List<File> writePDFToFiles() {
-        PDFDocument mockPDF1 = mock(PDFDocument.class);
-        PDFDocument mockPDF2 = mock(PDFDocument.class);
+        String pdf1Name = "pdf1";
+        String pdf2Name = "pdf2";
 
-        when(mockPDF1.getName()).thenReturn("pdf1");
-        when(mockPDF2.getName()).thenReturn("pdf2");
+        pdf1.setName(pdf1Name);
+        pdf2.setName(pdf2Name);
 
-        List<File> results = dataEntryBusiness.writePDFsToFiles(Arrays.asList(mockPDF1, mockPDF2));
+        List<PDFDocument> pdfDocuments = Arrays.asList(pdf1, pdf2);
 
-        verify(mockPDF1).writeToFile(any(File.class));
-        verify(mockPDF2).writeToFile(any(File.class));
-        return results;
+        dataEntryBusiness.writePDFsToFiles(pdfDocuments);
+
+        String file1 = pdfDocuments.get(0).getFile().getPath();
+        String file2 = pdfDocuments.get(1).getFile().getPath();
+
+        assertEquals(fileRoot + "pdf1.pdf", file1);
+        assertEquals(fileRoot + "pdf2.pdf", file2);
+
+        FileUtils.deleteQuietly(new File(file1));
+        FileUtils.deleteQuietly(new File(file2));
     }
 
     @Test
     public void testMakeConcatenatedFile_validParams_returnsCorrectFileName() throws Exception {
         dataEntryBusiness.setPdfConcatenator(mock(PDFConcatenator.class));
-        File file = dataEntryBusiness.makeConcatenatedFile(new ArrayList<File>());
+        File file = dataEntryBusiness.makeConcatenatedFile(new ArrayList<PDFDocument>());
         assertEquals(fileRoot + ViewConstants.CONCATENATED_FILE_NAME, file.getPath());
     }
 

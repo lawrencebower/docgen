@@ -12,6 +12,7 @@ public class DocumentView {
 
     private Document document;
     private List<DocComponentView> docComponentViews = new ArrayList<>();
+    private int copyNumber = 1;//default
 
     private DocumentView() {//force spring instantiation
     }
@@ -26,6 +27,14 @@ public class DocumentView {
 
     public String getName() {
         return document.getName();
+    }
+
+    public int getCopyNumber() {
+        return copyNumber;
+    }
+
+    public void setCopyNumber(int copyNumber) {
+        this.copyNumber = copyNumber;
     }
 
     public Document getDocument() {
