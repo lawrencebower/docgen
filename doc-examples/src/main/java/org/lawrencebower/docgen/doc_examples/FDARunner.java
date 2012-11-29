@@ -11,11 +11,11 @@ public class FDARunner {
 
     public static void main(String[] args) {
 
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("\\META-INF\\usecase-context.xml");
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("\\META-INF\\doc-examples-context.xml");
 
         FDA_2887 doc = (FDA_2887) context.getBean("fda2887");
 
-        doc.setComponentValuesAndRenderBorder();
+//        doc.setComponentValuesAndRenderBorder();
 
         DocumentView documentView = doc.getDocumentView();
 
@@ -23,7 +23,7 @@ public class FDARunner {
 
         PDFDocument pdfDocument = document.generatePDF();
 
-        File outFile = new File("C:\\GitHub\\use_cases\\src\\main\\resources\\FDA-2877_output.pdf");
+        File outFile = new File("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\FDA-2877_output.pdf");
 
         pdfDocument.writeToFile(outFile);
     }

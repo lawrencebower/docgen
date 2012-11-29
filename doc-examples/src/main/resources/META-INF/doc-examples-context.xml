@@ -9,8 +9,10 @@
 
     <beans:import resource="web-logic-beans.xml"/>
 
+    <beans:import resource="web-logic-params.xml"/>
+
     <beans:import resource="doc-examples-beans.xml"/>
 
-    <context:component-scan base-package="usecase"/>
+    <context:component-scan base-package="org.lawrencebower.docgen"/>
 
 </beans:beans>

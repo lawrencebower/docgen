@@ -5,7 +5,6 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 
@@ -51,10 +50,14 @@ public class CheckBoxComponentView extends DocComponentView<CheckBoxComponent> {
     }
 
     public String getStringValue() {
+
+        String returnValue = UNSELECTED_TEXT;
+
         if (docComponent.isSelected()) {
-            return SELECTED_TEXT;
+            returnValue = SELECTED_TEXT;
         }
-        return UNSELECTED_TEXT;
+
+        return returnValue;
     }
 
     @Override
@@ -69,7 +72,12 @@ public class CheckBoxComponentView extends DocComponentView<CheckBoxComponent> {
 
     @Override
     public void checkAndSetValueFromParamString(String componentName, String value) {
-        throw new NotImplementedException();//todo implement this
+
+        String thisComponentName = getName();
+
+        if (componentName.equals(thisComponentName)) {
+            setComponentValue(value);
+        }
     }
 
     @Override
@@ -84,7 +92,7 @@ public class CheckBoxComponentView extends DocComponentView<CheckBoxComponent> {
 
     @Override
     public void calculateValueIfNeeded(DocumentSet documentSet) {
-        throw new DocGenException("CheckBox does not support calculated values");
+        //not implemented - just exit quietly
     }
 
     @Override

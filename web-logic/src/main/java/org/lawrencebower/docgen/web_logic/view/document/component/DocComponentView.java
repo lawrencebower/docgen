@@ -105,6 +105,10 @@ public abstract class DocComponentView<T extends DocComponent> {
         return componentViewType == ComponentViewType.TABLE;
     }
 
+    public void setRenderBorder(boolean renderBorder) {
+        docComponent.setRenderBorder(renderBorder);
+    }
+
     @Override
     public boolean equals(Object obj) {
 

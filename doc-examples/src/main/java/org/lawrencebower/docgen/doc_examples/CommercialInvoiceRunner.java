@@ -11,7 +11,7 @@ public class CommercialInvoiceRunner {
 
     public static void main(String[] args) {
 
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("\\META-INF\\usecase-context.xml");
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("\\META-INF\\doc-examples-context.xml");
 
         CommercialInvoice doc = (CommercialInvoice) context.getBean("commercialInvoice");
 
@@ -21,7 +21,7 @@ public class CommercialInvoiceRunner {
 
         PDFDocument pdfDocument = document.generatePDF();
 
-        File outFile = new File("C:\\GitHub\\docgen\\use_cases\\src\\main\\resources\\CommercialInvoice_output.pdf");
+        File outFile = new File("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\CommercialInvoice_output.pdf");
 
         pdfDocument.writeToFile(outFile);
     }

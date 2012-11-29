@@ -21,6 +21,9 @@ public class ModelFactoryCodeImpl implements ModelFactory {
     @Autowired
     private DeliveryNote deliveryNote;
     @Autowired
+    private FDA_2887 fda_2887;
+
+    @Autowired
     private CustomerProduct_Document_Mappings customerProductDocMappings;
 
     private LinkedHashMap<String, ContactView> customers = new LinkedHashMap<>();
@@ -36,8 +39,10 @@ public class ModelFactoryCodeImpl implements ModelFactory {
     private ContactView customer2;
     private Product product1;
     private Product product2;
+
     private DocumentView commercialInvoiceView;
     private DocumentView deliveryNoteView;
+    private DocumentView fda2887View;
 
     public static final String CUSTOMER_ID_1 = "Contact 1";
     public static final String CUSTOMER_ID_2 = "Contact 2";
@@ -70,10 +75,13 @@ public class ModelFactoryCodeImpl implements ModelFactory {
 
         commercialInvoiceView = commercialInvoice.getDocumentView();
 
-        deliveryNoteView = deliveryNote.getDocument();
+        deliveryNoteView = deliveryNote.getDocumentView();
+
+        fda2887View = fda_2887.getDocumentView();
 
         documents.put(commercialInvoiceView.getName(), commercialInvoiceView);
         documents.put(deliveryNoteView.getName(), deliveryNoteView);
+        documents.put(fda2887View.getName(), fda2887View);
     }
 
     private void initProducts() {
@@ -98,7 +106,7 @@ public class ModelFactoryCodeImpl implements ModelFactory {
                                                 "Billy Bob Bobson",
                                                 "miles away",
                                                 "38783478347",
-                                                "CHINA"));
+                                                "USA"));
 
         customers.put(customer1.getName(), customer1);
         customers.put(customer2.getName(), customer2);
@@ -115,6 +123,10 @@ public class ModelFactoryCodeImpl implements ModelFactory {
                                                commercialInvoiceView);
 
         customerProductDocMappings.addDocument(customer1.getContact(),
+                                               product1,
+                                               deliveryNoteView);
+
+        customerProductDocMappings.addDocument(customer1.getContact(),
                                                product2,
                                                commercialInvoiceView);
 
@@ -128,12 +140,20 @@ public class ModelFactoryCodeImpl implements ModelFactory {
                                                commercialInvoiceView);
 
         customerProductDocMappings.addDocument(customer2.getContact(),
+                                               product1,
+                                               deliveryNoteView);
+
+        customerProductDocMappings.addDocument(customer2.getContact(),
                                                product2,
                                                commercialInvoiceView);
 
         customerProductDocMappings.addDocument(customer2.getContact(),
                                                product2,
                                                deliveryNoteView);
+
+        customerProductDocMappings.addDocument(customer2.getContact(),
+                                               product2,
+                                               fda2887View);
 
     }
 

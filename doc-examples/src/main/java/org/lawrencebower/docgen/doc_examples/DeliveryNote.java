@@ -323,7 +323,7 @@ public class DeliveryNote {
         }
     }
 
-    public DocumentView getDocument() {
+    public DocumentView getDocumentView() {
         return documentView;
     }
 

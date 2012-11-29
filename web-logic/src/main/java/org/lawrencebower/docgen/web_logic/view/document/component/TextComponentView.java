@@ -40,9 +40,11 @@ public class TextComponentView extends DocComponentView<TextComponent> {
 
     @Override
     public void checkAndSetValueFromParamString(String componentName, String value) {
+
         String thisComponentName = getName();
+
         if (componentName.equals(thisComponentName)) {
-            docComponent.setText(value);
+            setComponentValue(value);
         }
     }
 
