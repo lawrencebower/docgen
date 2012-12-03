@@ -5,9 +5,12 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
+import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionField;
+import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionInfo;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponentInfo;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 
 import java.util.List;
@@ -29,29 +32,6 @@ public abstract class DocComponentView<T extends DocComponent> {
     protected ComponentViewType componentViewType;
     private AutoMappedComponent autoMappedComponent;
 
-    public void setComponent(T docComponent){
-        if (docComponent == null) {
-            throw new DocGenException(NULL_COMPONENT_MESSAGE);
-        }
-
-        this.docComponent = docComponent;
-    }
-
-    public DocComponent getDocComponent() {
-        return docComponent;
-    }
-
-    public String getName() {
-
-        String name = NOT_SET_MESSAGE;
-
-        if(docComponent.getName() != null){
-            name = docComponent.getName();
-        }
-
-        return name;
-    }
-
     public abstract void setComponentValue(Boolean value);
 
     public abstract void setComponentValue(String value);
@@ -67,6 +47,42 @@ public abstract class DocComponentView<T extends DocComponent> {
     public abstract void checkAndSetValueFromParamString(String componentName, String value);
 
     public abstract void injectProducts(List<ProductView> products);
+
+    public abstract void setDocumentInjectionFields(DocumentInjectionInfo injectionInfo);
+
+    public abstract boolean hasCalculation();
+
+    public abstract void calculateValueIfNeeded(DocumentSet documentSet);
+
+    public abstract boolean runCalculationIfMatch(String operand,
+                                                  ComponentCalculation calculation,
+                                                  DocumentSet documentSet);
+
+    public abstract void copyFromDocument(DocumentView document);
+
+    public boolean isDocumentInjection() {
+        String componentName = getName();
+        return DocumentInjectionField.containsName(componentName);
+    }
+
+    public void setComponent(T docComponent){
+        if (docComponent == null) {
+            throw new DocGenException(NULL_COMPONENT_MESSAGE);
+        }
+
+        this.docComponent = docComponent;
+    }
+
+    public String getName() {
+
+        String name = NOT_SET_MESSAGE;
+
+        if(docComponent.getName() != null){
+            name = docComponent.getName();
+        }
+
+        return name;
+    }
 
     public boolean isAutoMappedComponent(){
         return autoMappedComponent != null;
@@ -84,14 +100,6 @@ public abstract class DocComponentView<T extends DocComponent> {
 
         }
     }
-
-    public abstract boolean hasCalculation();
-
-    public abstract void calculateValueIfNeeded(DocumentSet documentSet);
-
-    public abstract boolean runCalculationIfMatch(String operand,
-                                                  ComponentCalculation calculation,
-                                                  DocumentSet documentSet);
 
     public boolean isText(){
         return componentViewType == ComponentViewType.TEXT;

@@ -3,7 +3,9 @@ package org.lawrencebower.docgen.web_logic.view.document.component;
 import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
+import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionInfo;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 
 import java.util.List;
@@ -86,6 +88,11 @@ public class CheckBoxComponentView extends DocComponentView<CheckBoxComponent> {
     }
 
     @Override
+    public void setDocumentInjectionFields(DocumentInjectionInfo injectionInfo) {
+        //not implemented - just exit quietly
+    }
+
+    @Override
     public boolean hasCalculation() {
         return false;//not supported
     }
@@ -100,6 +107,16 @@ public class CheckBoxComponentView extends DocComponentView<CheckBoxComponent> {
                                          ComponentCalculation calculation,
                                          DocumentSet documentSet) {
         return false;//not supported
+    }
+
+    @Override
+    public void copyFromDocument(DocumentView document) {
+        String thisName = getName();
+        List<DocComponentView> matchingComponents = document.getComponentViewsWithName(thisName);
+        for (DocComponentView matchingComponent : matchingComponents) {
+            Boolean thisValue = getBooleanValue();
+            matchingComponent.setComponentValue(thisValue);
+        }
     }
 
 }

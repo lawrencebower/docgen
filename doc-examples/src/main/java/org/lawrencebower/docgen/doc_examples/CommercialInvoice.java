@@ -14,8 +14,8 @@ import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentF
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.Operator;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculation;
+import org.lawrencebower.docgen.web_logic.business.injection.product_injection.ProductInjectionField;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
-import org.lawrencebower.docgen.web_logic.business.product_injection.ProductInjectionField;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
@@ -44,7 +44,7 @@ public class CommercialInvoice {
     public static final String TOTAL_VALUE_NAME = "totalValue";
 
 
-    public void prepareComponents() {
+    private void prepareComponents() {
 
         document = new CustomDocument(INVOICE_NAME, pdfGenerator);
 

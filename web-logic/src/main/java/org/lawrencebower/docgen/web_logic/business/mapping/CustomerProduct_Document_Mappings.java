@@ -2,9 +2,11 @@ package org.lawrencebower.docgen.web_logic.business.mapping;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.view.contact.Contact;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -13,23 +15,26 @@ import java.util.Map;
 
 public class CustomerProduct_Document_Mappings {
 
+    @Autowired
+    ModelFactory modelFactory;
+
     /**
      * using linked map as its helpful to preserve the order for tests
      */
-    protected Map<CustomerProductPair, List<DocumentView>> mappings = new LinkedHashMap<>();
+    protected Map<CustomerProductPair, List<String>> mappings = new LinkedHashMap<>();
 
     public void addDocument(Contact business,
                             Product product,
-                            DocumentView document) {
+                            String documentName) {
 
         CustomerProductPair pair = makeCustomerProductPair(business, product);
 
         if (mappings.containsKey(pair)) {
-            List<DocumentView> documentViews = mappings.get(pair);
-            documentViews.add(document);
+            List<String> documentViews = mappings.get(pair);
+            documentViews.add(documentName);
         }else{
-            ArrayList<DocumentView> list = new ArrayList<>();
-            list.add(document);
+            ArrayList<String> list = new ArrayList<>();
+            list.add(documentName);
             mappings.put(pair, list);
         }
     }
@@ -40,8 +45,11 @@ public class CustomerProduct_Document_Mappings {
 
         CustomerProductPair customerProductPair = makeCustomerProductPair(business, product);
         if(mappings.containsKey(customerProductPair)){
-            List<DocumentView> documentViews = mappings.get(customerProductPair);
-            results.addAll(documentViews);
+            List<String> documentNames = mappings.get(customerProductPair);
+            for (String documentName : documentNames) {
+                DocumentView document = modelFactory.getDocument(documentName);
+                results.add(document);
+            }
         }
 
         return results;

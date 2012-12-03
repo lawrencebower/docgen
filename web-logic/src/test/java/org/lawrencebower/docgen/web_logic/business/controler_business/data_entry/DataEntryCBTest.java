@@ -178,6 +178,34 @@ public class DataEntryCBTest {
     }
 
     @Test
+    public void testWritePDFsToFiles_nameExtensionSet_correctFileNamesSet() throws Exception {
+
+        PDFDocument pdf1 = new PDFDocumentImpl(new byte[]{});
+        PDFDocument pdf2 = new PDFDocumentImpl(new byte[]{});
+
+        String pdf1Name = "pdf1";
+        String pdf2Name = "pdf2";
+        String pdf2Extension = "extension";
+
+        pdf1.setName(pdf1Name);
+        pdf2.setName(pdf2Name);
+        pdf2.setNameExtension(pdf2Extension);
+
+        List<PDFDocument> pdfDocuments = Arrays.asList(pdf1, pdf2);
+
+        dataEntryBusiness.writePDFsToFiles(pdfDocuments);
+
+        String file1 = pdfDocuments.get(0).getFile().getPath();
+        String file2 = pdfDocuments.get(1).getFile().getPath();
+
+        assertEquals(fileRoot + "pdf1.pdf", file1);
+        assertEquals(fileRoot + "pdf2_extension.pdf", file2);
+
+        FileUtils.deleteQuietly(new File(file1));
+        FileUtils.deleteQuietly(new File(file2));
+    }
+
+    @Test
     public void testMakeConcatenatedFile_validParams_returnsCorrectFileName() throws Exception {
         dataEntryBusiness.setPdfConcatenator(mock(PDFConcatenator.class));
         File file = dataEntryBusiness.makeConcatenatedFile(new ArrayList<PDFDocument>());

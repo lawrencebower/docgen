@@ -4,6 +4,7 @@ import org.apache.commons.io.IOUtils;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
+import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionInfo;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponentInfo;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
@@ -24,10 +25,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class DataEntryCB {
 
@@ -47,7 +45,7 @@ public class DataEntryCB {
     String fileRoot;
 
     public DocumentSet getDocumentsForViewing(ContactView selectedCustomer,
-                                                  List<ProductView> selectedProducts) {
+                                              List<ProductView> selectedProducts) {
 
         viewUtils.checkCustomerSet(selectedCustomer);
         viewUtils.checkProductsSet(selectedProducts);
@@ -56,7 +54,7 @@ public class DataEntryCB {
     }
 
     private DocumentSet getRelevantDocuments(ContactView selectedCustomer,
-                                                 List<ProductView> selectedProducts) {
+                                             List<ProductView> selectedProducts) {
 
         Contact customer = selectedCustomer.getContact();
         /**
@@ -99,7 +97,8 @@ public class DataEntryCB {
         for (PDFDocument pdfDocument : pdfDocuments) {
 
             String docName = pdfDocument.getName();
-            String fileName = fileRoot + docName + ".pdf";
+            String nameExtension = pdfDocument.getNameExtension();
+            String fileName = fileRoot + docName + nameExtension + ".pdf";
             File file = new File(fileName);
 
             pdfDocument.setFile(file);
@@ -159,6 +158,26 @@ public class DataEntryCB {
 
     public void processCalculatedFields(DocumentSet documentSet) {
         documentSet.processCalculatedFields();
+    }
+
+    public DocumentSet injectDocuments(DocumentSet documents,
+                                       List<ProductView> products) {
+
+        List<DocumentInjectionInfo> injectionInfos = makeDocumentInjectionInfo(products);
+
+        return documents.injectDocuments(injectionInfos);
+    }
+
+    private List<DocumentInjectionInfo> makeDocumentInjectionInfo(List<ProductView> products) {
+
+        List<DocumentInjectionInfo> injectionInfos = new ArrayList<>();
+
+        for (ProductView product : products) {
+            DocumentInjectionInfo info = new DocumentInjectionInfo(product);
+            injectionInfos.add(info);
+        }
+
+        return injectionInfos;
     }
 
 //    SETTERS FOR UNIT TESTS

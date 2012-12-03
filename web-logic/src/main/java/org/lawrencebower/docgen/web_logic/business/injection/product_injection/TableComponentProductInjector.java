@@ -1,10 +1,9 @@
-package org.lawrencebower.docgen.web_logic.business.product_injection.component;
+package org.lawrencebower.docgen.web_logic.business.injection.product_injection;
 
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
 import org.lawrencebower.docgen.core.document.component.table.TableRow;
-import org.lawrencebower.docgen.web_logic.business.product_injection.ProductInjectionField;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 
 import java.util.List;

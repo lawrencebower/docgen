@@ -5,13 +5,17 @@ import java.io.OutputStream;
 
 public interface PDFDocument {
 
-    public void writeToFile(File file);
+    void writeToFile(File file);
 
-    public void writeToStream(OutputStream stream);
+    void writeToStream(OutputStream stream);
 
     void setName(String name);
 
     String getName();
+
+    void setNameExtension(String nameExtension);
+
+    String getNameExtension();
 
     int getCopyNumber();
 

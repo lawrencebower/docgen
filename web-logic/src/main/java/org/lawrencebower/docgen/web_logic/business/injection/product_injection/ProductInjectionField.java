@@ -1,7 +1,10 @@
-package org.lawrencebower.docgen.web_logic.business.product_injection;
+package org.lawrencebower.docgen.web_logic.business.injection.product_injection;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public enum ProductInjectionField {
 
@@ -25,7 +28,10 @@ public enum ProductInjectionField {
         boolean containsName = false;
 
         for (ProductInjectionField productField : ProductInjectionField.values()) {
-            if (productField.getName().equals(name)) {
+
+            String productName = productField.getName();
+
+            if (productName.equals(name)) {
                 containsName = true;
             }
         }
@@ -33,12 +39,27 @@ public enum ProductInjectionField {
         return containsName;
     }
 
-    public static ProductInjectionField getByFieldName(String name) {
+    public static List<String> getNames() {
+
+        List<String> names = new ArrayList<>();
+
         for (ProductInjectionField productField : ProductInjectionField.values()) {
-            if (productField.getName().equals(name)) {
+            String productName = productField.getName();
+            names.add(productName);
+        }
+
+        return names;
+    }
+
+    public static ProductInjectionField getByFieldName(String name) {
+
+        for (ProductInjectionField productField : ProductInjectionField.values()) {
+            String productName = productField.getName();
+            if (productName.equals(name)) {
                 return productField;
             }
         }
+
         throw new DocGenException("enum productInjectionField not found with name " + name);
     }
 

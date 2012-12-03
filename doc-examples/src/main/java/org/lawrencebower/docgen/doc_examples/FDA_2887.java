@@ -8,6 +8,7 @@ import org.lawrencebower.docgen.core.generator.overlay.OverlayDocument;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayPDFGenerator;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponentFactory;
+import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionField;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
@@ -32,12 +33,14 @@ public class FDA_2887 {
     private DocumentView documentView;
     private OverlayDocument document;
 
+    public static final String FDA_2887_NAME = "FDA_2887";
+
     public FDA_2887() {
     }
 
-    public void prepareComponents() {
+    private void prepareComponents() {
 
-        document = new OverlayDocument("FDA-2887", pdfGenerator);
+        document = new OverlayDocument(FDA_2887_NAME, pdfGenerator);
         document.setSourcePDF("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\FDA-2877.pdf");
 
         documentView = documentViewFactory.createDocumentInfoView(document);
@@ -50,13 +53,13 @@ public class FDA_2887 {
                    new DocCoordinates(27, 592, 285, 57),
                    false);
 
-        addTextBox("product description",
+        addTextBox(DocumentInjectionField.PRODUCT_NAME.getName(),
                    new DocCoordinates(27, 545, 170, 40),
-                   false);
+                   true);
 
-        addTextBox("quantity",
+        addTextBox(DocumentInjectionField.PRODUCT_QUANTITY.getName(),
                    new DocCoordinates(198, 545, 114, 40),
-                   false);
+                   true);
 
         addTextBox("entry number",
                    new DocCoordinates(312, 658, 156, 18),
@@ -71,9 +74,9 @@ public class FDA_2887 {
                    true,
                    AutoMappedComponent.CUSTOMER_ADDRESS);
 
-        addTextBox("model numbers",
+        addTextBox(DocumentInjectionField.PRODUCT_MODEL.getName(),
                    new DocCoordinates(312, 545, 285, 40),
-                   false);
+                   true);
 
         addCheckBox("are not subject radiation",
                     new DocCoordinates(33, 519, 10, 10),

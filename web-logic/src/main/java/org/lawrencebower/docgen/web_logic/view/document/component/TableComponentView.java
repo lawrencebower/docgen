@@ -9,9 +9,11 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculation;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculator;
-import org.lawrencebower.docgen.web_logic.business.product_injection.component.TableComponentProductInjector;
+import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionInfo;
+import org.lawrencebower.docgen.web_logic.business.injection.product_injection.TableComponentProductInjector;
 import org.lawrencebower.docgen.web_logic.business.table_component.TableComponentValueSetter;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -104,6 +106,11 @@ public class TableComponentView extends DocComponentView<TableComponent> {
         productInjector.injectProducts(docComponent, products);
     }
 
+    @Override
+    public void setDocumentInjectionFields(DocumentInjectionInfo injectionInfo) {
+        //not implemented - just exit quietly
+    }
+
     public DocComponentView getCellComponentView(int rowNum, int colNum) {
         TableRow row = docComponent.getRow(rowNum);
         TableCell cell = row.getCell(colNum);
@@ -144,6 +151,11 @@ public class TableComponentView extends DocComponentView<TableComponent> {
         }
 
         return operandMatched;
+    }
+
+    @Override
+    public void copyFromDocument(DocumentView document) {
+        //todo
     }
 
     private boolean operandMatched(String operand) {

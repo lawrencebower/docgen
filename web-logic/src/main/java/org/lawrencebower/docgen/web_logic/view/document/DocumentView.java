@@ -1,18 +1,27 @@
 package org.lawrencebower.docgen.web_logic.view.document;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.lawrencebower.docgen.core.document.Document;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionInfo;
+import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DocumentView {
 
+    @Autowired
+    ModelFactory modelFactory;
+
     private Document document;
     private List<DocComponentView> docComponentViews = new ArrayList<>();
     private int copyNumber = 1;//default
+    private String nameExtension;
 
     private DocumentView() {//force spring instantiation
     }
@@ -27,6 +36,14 @@ public class DocumentView {
 
     public String getName() {
         return document.getName();
+    }
+
+    public void setNameExtension(String nameExtension) {
+        this.nameExtension = nameExtension;
+    }
+
+    public String getNameExtension() {
+        return nameExtension;
     }
 
     public int getCopyNumber() {
@@ -69,4 +86,61 @@ public class DocumentView {
     public PDFDocument generatePDF() {
         return document.generatePDF();
     }
- }
+
+    public void setDocumentInjectionFields(DocumentInjectionInfo injectionInfo) {
+
+        for (DocComponentView docComponentView : getComponentViews()) {
+            docComponentView.setDocumentInjectionFields(injectionInfo);
+        }
+
+    }
+
+    public boolean hasDocumentInjectionFields() {
+
+        boolean hasDocumentInjectionField = false;
+
+        for (DocComponentView docComponentView : getComponentViews()) {
+            if (docComponentView.isDocumentInjection()) {
+                hasDocumentInjectionField = true;
+            }
+        }
+
+        return hasDocumentInjectionField;
+    }
+
+    public void copyFromDocument(DocumentView document) {
+        for (DocComponentView docComponentView : getComponentViews()) {
+            docComponentView.copyFromDocument(document);
+        }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (!(obj instanceof DocumentView)) {
+            return false;
+        }
+
+        DocumentView compareTo = (DocumentView) obj;
+        EqualsBuilder builder = new EqualsBuilder();
+        builder.append(getName(), compareTo.getName());
+
+        return builder.isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        HashCodeBuilder builder = new HashCodeBuilder();
+        String name = getName();
+        builder.append(name);
+        return builder.toHashCode();
+    }
+
+    public DocumentView copy() {
+        String docName = document.getName();
+        DocumentView newDocument = modelFactory.getDocument(docName);
+        newDocument.copyFromDocument(this);
+        return newDocument;
+    }
+
+}

@@ -12,7 +12,9 @@ public interface ModelFactory {
 
     List<ContactView> getCustomers();
 
-    List<DocumentView> getDocuments();
+    List<DocumentView> getAllDocuments();
+
+    DocumentView getDocument(String documentName);
 
     List<ProductView> getProducts();
 

@@ -15,8 +15,8 @@ import org.lawrencebower.docgen.core.generator.custom.CustomDocument;
 import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
+import org.lawrencebower.docgen.web_logic.business.injection.product_injection.ProductInjectionField;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
-import org.lawrencebower.docgen.web_logic.business.product_injection.ProductInjectionField;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
@@ -45,7 +45,7 @@ public class DeliveryNote {
 
     public static final String DELIVERY_NOTE_NAME = "Delivery note";
 
-    public void prepareComponents() {
+    private void prepareComponents() {
 
         document = new CustomDocument(DELIVERY_NOTE_NAME, pdfGenerator);
 

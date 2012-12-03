@@ -3,7 +3,9 @@ package org.lawrencebower.docgen.web_logic.view.document.component;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
+import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionInfo;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 
 import java.util.List;
@@ -82,13 +84,25 @@ public class TextComponentView extends DocComponentView<TextComponent> {
         //not implemented - just exit quietly
     }
 
+    @Override
+    public void setDocumentInjectionFields(DocumentInjectionInfo injectionInfo) {
+
+        String componentName = getName();
+
+        if (isDocumentInjection()) {
+            String value = injectionInfo.getFieldValueByName(componentName);
+            setComponentValue(value);
+        }
+
+    }
+
     public boolean hasCalculation() {
         return componentCalculation != null;
     }
 
     @Override
     public void calculateValueIfNeeded(DocumentSet documentSet) {
-        if(hasCalculation() && componentCalculation.isNotRun()){
+        if (hasCalculation() && componentCalculation.isNotRun()) {
             componentCalculation.clearResult();
             documentSet.runCalculation(componentCalculation);
             Float result = componentCalculation.getResult();
@@ -103,7 +117,7 @@ public class TextComponentView extends DocComponentView<TextComponent> {
 
         boolean operandMatched = false;
 
-        if(operandMatched(operand)){
+        if (operandMatched(operand)) {
 
             calculateValueIfNeeded(documentSet);//calculate this component if necessary
 
@@ -112,6 +126,16 @@ public class TextComponentView extends DocComponentView<TextComponent> {
         }
 
         return operandMatched;
+    }
+
+    @Override
+    public void copyFromDocument(DocumentView document) {
+        String thisName = getName();
+        List<DocComponentView> matchingComponents = document.getComponentViewsWithName(thisName);
+        for (DocComponentView matchingComponent : matchingComponents) {
+            String thisValue = getStringValue();
+            matchingComponent.setComponentValue(thisValue);
+        }
     }
 
     private boolean operandMatched(String operand) {

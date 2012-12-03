@@ -11,17 +11,11 @@ import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class ModelFactoryCodeImpl implements ModelFactory {
-
-    @Autowired
-    private CommercialInvoice commercialInvoice;
-    @Autowired
-    private DeliveryNote deliveryNote;
-    @Autowired
-    private FDA_2887 fda_2887;
+public abstract class ModelFactoryCodeImpl implements ModelFactory {
 
     @Autowired
     private CustomerProduct_Document_Mappings customerProductDocMappings;
@@ -32,17 +26,11 @@ public class ModelFactoryCodeImpl implements ModelFactory {
 
     private LinkedHashMap<String, Product> products = new LinkedHashMap<>();
 
-    private LinkedHashMap<String, DocumentView> documents = new LinkedHashMap<>();
-
     private ContactView vendor;
     private ContactView customer1;
     private ContactView customer2;
     private Product product1;
     private Product product2;
-
-    private DocumentView commercialInvoiceView;
-    private DocumentView deliveryNoteView;
-    private DocumentView fda2887View;
 
     public static final String CUSTOMER_ID_1 = "Contact 1";
     public static final String CUSTOMER_ID_2 = "Contact 2";
@@ -57,7 +45,6 @@ public class ModelFactoryCodeImpl implements ModelFactory {
         initVendor();
         initCustomers();
         initProducts();
-        initDocuments();
         initCustomerProductDocumentMappings();
     }
 
@@ -69,19 +56,6 @@ public class ModelFactoryCodeImpl implements ModelFactory {
                                              "UK",
                                              "tax id",
                                              "sales@acme.com"));
-    }
-
-    private void initDocuments() {
-
-        commercialInvoiceView = commercialInvoice.getDocumentView();
-
-        deliveryNoteView = deliveryNote.getDocumentView();
-
-        fda2887View = fda_2887.getDocumentView();
-
-        documents.put(commercialInvoiceView.getName(), commercialInvoiceView);
-        documents.put(deliveryNoteView.getName(), deliveryNoteView);
-        documents.put(fda2887View.getName(), fda2887View);
     }
 
     private void initProducts() {
@@ -120,40 +94,40 @@ public class ModelFactoryCodeImpl implements ModelFactory {
         //Contact 1
         customerProductDocMappings.addDocument(customer1.getContact(),
                                                product1,
-                                               commercialInvoiceView);
+                                               CommercialInvoice.INVOICE_NAME);
 
         customerProductDocMappings.addDocument(customer1.getContact(),
                                                product1,
-                                               deliveryNoteView);
+                                               DeliveryNote.DELIVERY_NOTE_NAME);
 
         customerProductDocMappings.addDocument(customer1.getContact(),
                                                product2,
-                                               commercialInvoiceView);
+                                               CommercialInvoice.INVOICE_NAME);
 
         customerProductDocMappings.addDocument(customer1.getContact(),
                                                product2,
-                                               deliveryNoteView);
+                                               DeliveryNote.DELIVERY_NOTE_NAME);
 
         //Contact 2
         customerProductDocMappings.addDocument(customer2.getContact(),
                                                product1,
-                                               commercialInvoiceView);
+                                               CommercialInvoice.INVOICE_NAME);
 
         customerProductDocMappings.addDocument(customer2.getContact(),
                                                product1,
-                                               deliveryNoteView);
+                                               DeliveryNote.DELIVERY_NOTE_NAME);
 
         customerProductDocMappings.addDocument(customer2.getContact(),
                                                product2,
-                                               commercialInvoiceView);
+                                               CommercialInvoice.INVOICE_NAME);
 
         customerProductDocMappings.addDocument(customer2.getContact(),
                                                product2,
-                                               deliveryNoteView);
+                                               DeliveryNote.DELIVERY_NOTE_NAME);
 
         customerProductDocMappings.addDocument(customer2.getContact(),
                                                product2,
-                                               fda2887View);
+                                               FDA_2887.FDA_2887_NAME);
 
     }
 
@@ -178,8 +152,43 @@ public class ModelFactoryCodeImpl implements ModelFactory {
         return results;
     }
 
-    public List<DocumentView> getDocuments() {
-        return new ArrayList<>(documents.values());
+    public List<DocumentView> getAllDocuments() {
+
+        DocumentView commercialInvoiceView = getCommercialInvoice().getDocumentView();
+
+        DocumentView deliveryNoteView = getDeliveryNote().getDocumentView();
+
+        DocumentView fda2887View = getFDA2887().getDocumentView();
+
+        return Arrays.asList(commercialInvoiceView,
+                             deliveryNoteView,
+                             fda2887View);
+    }
+
+    @Override
+    public DocumentView getDocument(String documentName) {
+
+        DocumentView result = null;
+
+        switch (documentName) {
+            case CommercialInvoice.INVOICE_NAME:
+                CommercialInvoice commercialInvoice = getCommercialInvoice();
+                result = commercialInvoice.getDocumentView();
+                break;
+            case DeliveryNote.DELIVERY_NOTE_NAME:
+                DeliveryNote deliveryNote = getDeliveryNote();
+                result = deliveryNote.getDocumentView();
+                break;
+            case FDA_2887.FDA_2887_NAME:
+                FDA_2887 fda_2887 = getFDA2887();
+                result = fda_2887.getDocumentView();
+                break;
+            default:
+                String message = String.format("No mapping present for documentName '%s'", documentName);
+                throw new DocGenException(message);
+        }
+
+        return result;
     }
 
     public ContactView getCustomer(String customerName) {
@@ -209,4 +218,10 @@ public class ModelFactoryCodeImpl implements ModelFactory {
     public ContactView getVendor() {
         return vendor;
     }
+
+    public abstract CommercialInvoice getCommercialInvoice();
+
+    public abstract DeliveryNote getDeliveryNote();
+
+    protected abstract FDA_2887 getFDA2887();
 }

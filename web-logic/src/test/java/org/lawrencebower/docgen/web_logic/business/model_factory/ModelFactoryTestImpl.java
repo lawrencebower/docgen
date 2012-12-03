@@ -9,6 +9,9 @@ import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 public class ModelFactoryTestImpl implements ModelFactory {
 
     @Override
@@ -17,8 +20,15 @@ public class ModelFactoryTestImpl implements ModelFactory {
     }
 
     @Override
-    public List<DocumentView> getDocuments() {
+    public List<DocumentView> getAllDocuments() {
         return null;
+    }
+
+    @Override
+    public DocumentView getDocument(String documentName) {
+        DocumentView mock = mock(DocumentView.class);
+        when(mock.getName()).thenReturn(documentName);
+        return mock;
     }
 
     @Override

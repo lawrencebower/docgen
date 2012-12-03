@@ -1,5 +1,6 @@
 package org.lawrencebower.docgen.core.generator.model;
 
+import org.apache.commons.lang.StringUtils;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 
@@ -12,6 +13,7 @@ public class PDFDocumentImpl implements PDFDocument {
 
     private byte[] bytes;
     private String name;
+    private String nameExtension;
     private int copyNumber = 1;
     private File file;
 
@@ -47,6 +49,22 @@ public class PDFDocumentImpl implements PDFDocument {
         return name;
     }
 
+    @Override
+    public void setNameExtension(String nameExtension) {
+        this.nameExtension = nameExtension;
+    }
+
+    public String getNameExtension() {
+
+        String returnString = "";
+
+        if (StringUtils.isNotBlank(nameExtension)) {
+            returnString = "_" + nameExtension;
+        }
+
+        return returnString;
+    }
+
     public void setCopyNumber(int copyNumber) {
         this.copyNumber = copyNumber;
     }
@@ -58,7 +76,7 @@ public class PDFDocumentImpl implements PDFDocument {
 
     @Override
     public void setFile(File fileName) {
-        this.file = fileName;
+        file = fileName;
     }
 
     @Override

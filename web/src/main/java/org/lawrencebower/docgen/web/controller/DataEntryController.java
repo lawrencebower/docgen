@@ -103,29 +103,13 @@ public class DataEntryController {
 
         mapFieldValuesToComponents(webRequest);
 
-        List<PDFDocument> allPdfFiles = generatePDFsAndWriteToFiles();
+        DocumentSet injectedDocuments = injectDocuments();
 
-        concatenatePDFsAndWriteToResponse(outStream, allPdfFiles);
+        List<PDFDocument> pdfFiles = generatePDFsAndWriteToFiles(injectedDocuments);
+
+        concatenatePDFsAndWriteToResponse(outStream, pdfFiles);
 
         return null;
-    }
-
-    private List<PDFDocument> generatePDFsAndWriteToFiles() {
-
-        DocumentSet relevantDocs = sessionData.getDocuments();
-
-        List<PDFDocument> generatedPDFs = business.createPDFs(relevantDocs);
-
-        sessionData.setGeneratedPDFs(generatedPDFs);
-
-        business.writePDFsToFiles(generatedPDFs);
-
-        return generatedPDFs;
-    }
-
-    private void concatenatePDFsAndWriteToResponse(OutputStream outStream, List<PDFDocument> allPdfFiles) {
-        File concatenatedFile = business.makeConcatenatedFile(allPdfFiles);
-        business.writePDFsToStream(outStream, concatenatedFile);
     }
 
     private void mapFieldValuesToComponents(WebRequest webRequest) {
@@ -139,17 +123,42 @@ public class DataEntryController {
         business.mapFieldValuesToComponents(parameterMap, relevantDocs);
     }
 
-/*
-    private void writeParameterVals(Map<String, String[]> parameterMap) {
-        for (String key : parameterMap.keySet()) {
-            System.out.println("key = " + key);
-            String[] values = parameterMap.get(key);
-            for (String value : values) {
-                System.out.println("value = " + value);
+    /*
+        private void writeParameterVals(Map<String, String[]> parameterMap) {
+            for (String key : parameterMap.keySet()) {
+                System.out.println("key = " + key);
+                String[] values = parameterMap.get(key);
+                for (String value : values) {
+                    System.out.println("value = " + value);
+                }
             }
         }
+    */
+
+    private DocumentSet injectDocuments() {
+
+        DocumentSet originalDocuments = sessionData.getDocuments();
+
+        List<ProductView> products = sessionData.getSelectedProducts();
+
+        return business.injectDocuments(originalDocuments, products);
     }
-*/
+
+    private List<PDFDocument> generatePDFsAndWriteToFiles(DocumentSet documents) {
+
+        List<PDFDocument> generatedPDFs = business.createPDFs(documents);
+
+//        sessionData.setGeneratedPDFs(generatedPDFs);
+
+        business.writePDFsToFiles(generatedPDFs);
+
+        return generatedPDFs;
+    }
+
+    private void concatenatePDFsAndWriteToResponse(OutputStream outStream, List<PDFDocument> allPdfFiles) {
+        File concatenatedFile = business.makeConcatenatedFile(allPdfFiles);
+        business.writePDFsToStream(outStream, concatenatedFile);
+    }
 
     public List<DocComponentView> getDocComponentViews() {
 

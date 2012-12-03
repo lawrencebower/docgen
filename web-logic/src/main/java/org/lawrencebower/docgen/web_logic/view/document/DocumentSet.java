@@ -3,6 +3,7 @@ package org.lawrencebower.docgen.web_logic.view.document;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.ViewableComponentFilter;
+import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionInfo;
 import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponentInfo;
 import org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
@@ -20,6 +21,11 @@ public class DocumentSet {
     ViewUtils viewUtils;
     @Autowired
     private ViewableComponentFilter viewableComponentFilter;
+
+    @Autowired
+    DocumentViewFactory documentViewFactory;
+    @Autowired
+    DocumentSetFactory documentSetFactory;
 
     private List<DocumentView> documents = new ArrayList<>();
 
@@ -49,6 +55,9 @@ public class DocumentSet {
 
             String documentName = document.getName();
             pdfDocument.setName(documentName);
+
+            String nameExtension = document.getNameExtension();
+            pdfDocument.setNameExtension(nameExtension);
 
             int copyNumber = document.getCopyNumber();
             pdfDocument.setCopyNumber(copyNumber);
@@ -121,4 +130,37 @@ public class DocumentSet {
         calculation.runOnOperands(this);
     }
 
+    public DocumentSet injectDocuments(List<DocumentInjectionInfo> injectionInfos) {
+
+        List<DocumentView> results = new ArrayList<>();
+
+        for (DocumentView document : documents) {
+            if (document.hasDocumentInjectionFields()) {
+                List<DocumentView> injectedDocuments = injectDocuments(injectionInfos, document);
+                results.addAll(injectedDocuments);
+            } else {
+                results.add(document);//just keep original document
+            }
+        }
+
+        DocumentSet injectedDocumentSet = documentSetFactory.createDocumentInfoSet();
+        injectedDocumentSet.setDocuments(results);
+
+        return injectedDocumentSet;
+    }
+
+    private List<DocumentView> injectDocuments(List<DocumentInjectionInfo> injectionInfos,
+                                               DocumentView document) {
+
+        List<DocumentView> results = new ArrayList<>();
+
+        for (DocumentInjectionInfo injectionInfo : injectionInfos) {
+            DocumentView newDocument = document.copy();
+            newDocument.setDocumentInjectionFields(injectionInfo);
+            injectionInfo.setNameExtension(newDocument);
+            results.add(newDocument);
+        }
+
+        return results;
+    }
 }

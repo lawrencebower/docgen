@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_logic.business.product_injection.component;
+package org.lawrencebower.docgen.web_logic.business.injection.product_injection;
 
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;

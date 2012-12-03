@@ -41,22 +41,22 @@ public class CustomerProduct_Document_MappingsTest {
     public void testGetDocumentsForCustomerAndProduct_validParams_correctDocsReturned_1() {
         List<DocumentView> docs = mappings.getDocumentsForCustomerAndProduct(customer1, product1);
         assertEquals(2, docs.size());
-        assertTrue(docs.get(0).equals(doc1));
-        assertTrue(docs.get(1).equals(doc2));
+        assertTrue(docs.get(0).getName().equals(doc1.getName()));
+        assertTrue(docs.get(1).getName().equals(doc2.getName()));
     }
 
     @Test
     public void testGetDocumentsForCustomerAndProduct_validParams_correctDocsReturned_2() {
         List<DocumentView> docs = mappings.getDocumentsForCustomerAndProduct(customer1, product2);
         assertEquals(1, docs.size());
-        assertTrue(docs.get(0).equals(doc2));
+        assertTrue(docs.get(0).getName().equals(doc2.getName()));
     }
 
     @Test
     public void testGetDocumentsForCustomerAndProduct_validParams_correctDocsReturned_3() {
         List<DocumentView> docs = mappings.getDocumentsForCustomerAndProduct(customer2, product1);
         assertEquals(1, docs.size());
-        assertTrue(docs.get(0).equals(doc1));
+        assertTrue(docs.get(0).getName().equals(doc1.getName()));
     }
 
     @Test
@@ -79,18 +79,18 @@ public class CustomerProduct_Document_MappingsTest {
         //customer 1
         mappings.addDocument(customer1,
                              product1,
-                             doc1);
+                             doc1.getName());
         mappings.addDocument(customer1,
                              product1,
-                             doc2);
+                             doc2.getName());
         mappings.addDocument(customer1,
                              product2,
-                             doc2);
+                             doc2.getName());
 
         //customer 2
         mappings.addDocument(customer2,
                              product1,
-                             doc1);
+                             doc1.getName());
     }
 
     private DocumentView mockDocument(String docName) {
