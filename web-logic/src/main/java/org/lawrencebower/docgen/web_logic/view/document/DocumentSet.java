@@ -155,7 +155,7 @@ public class DocumentSet {
         List<DocumentView> results = new ArrayList<>();
 
         for (DocumentInjectionInfo injectionInfo : injectionInfos) {
-            DocumentView newDocument = document.copy();
+            DocumentView newDocument = document.copyComponentViews();
             newDocument.setDocumentInjectionFields(injectionInfo);
             injectionInfo.setNameExtension(newDocument);
             results.add(newDocument);

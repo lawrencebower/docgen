@@ -155,7 +155,10 @@ public class TableComponentView extends DocComponentView<TableComponent> {
 
     @Override
     public void copyFromDocument(DocumentView document) {
-        //todo
+        /**
+         * not needed yet - if we need to copy a document with a product table this will need to be implemented
+         */
+       //todo
     }
 
     private boolean operandMatched(String operand) {

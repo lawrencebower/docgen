@@ -108,12 +108,6 @@ public class DocumentView {
         return hasDocumentInjectionField;
     }
 
-    public void copyFromDocument(DocumentView document) {
-        for (DocComponentView docComponentView : getComponentViews()) {
-            docComponentView.copyFromDocument(document);
-        }
-    }
-
     @Override
     public boolean equals(Object obj) {
 
@@ -136,11 +130,19 @@ public class DocumentView {
         return builder.toHashCode();
     }
 
-    public DocumentView copy() {
+    /**
+     * This is not a field-for-field copy.
+     */
+    public DocumentView copyComponentViews() {
         String docName = document.getName();
         DocumentView newDocument = modelFactory.getDocument(docName);
-        newDocument.copyFromDocument(this);
+        newDocument.copyComponentViews(this);
         return newDocument;
     }
 
+    private void copyComponentViews(DocumentView document) {
+        for (DocComponentView docComponentView : getComponentViews()) {
+            docComponentView.copyFromDocument(document);
+        }
+    }
 }
