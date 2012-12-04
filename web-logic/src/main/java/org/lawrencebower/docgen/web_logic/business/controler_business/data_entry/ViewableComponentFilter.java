@@ -12,19 +12,23 @@ public class ViewableComponentFilter {
 
         List<DocComponentView> results = filterDuplicatedFields(allComponents);
 
+        results = filterDocumentInjectionFields(results);
+
         return results;
     }
 
     public List<DocComponentView> getNonAutoMappedComponents(List<DocComponentView> allComponents) {
 
-        List<DocComponentView> results = filterAutomapped(allComponents);
+        List<DocComponentView> results = filterAutoMapped(allComponents);
 
         results = filterDuplicatedFields(results);
+
+        results = filterDocumentInjectionFields(results);
 
         return results;
     }
 
-    private List<DocComponentView> filterAutomapped(List<DocComponentView> componentViews) {
+    private List<DocComponentView> filterAutoMapped(List<DocComponentView> componentViews) {
 
         List<DocComponentView> results = new ArrayList<>();
 
@@ -32,9 +36,11 @@ public class ViewableComponentFilter {
             if (docComponentView.isAutoMapped()) {
                 continue;//skip to the next one
             }
+
             results.add(docComponentView);
 
         }
+
         return results;
     }
 
@@ -46,10 +52,28 @@ public class ViewableComponentFilter {
     private ArrayList<DocComponentView> filterDuplicatedFields(List<DocComponentView> documents) {
 
         LinkedHashSet<DocComponentView> filteredViews = new LinkedHashSet<>();
+
         for (DocComponentView document : documents) {
             filteredViews.add(document);
         }
 
         return new ArrayList<>(filteredViews);
     }
+
+    private List<DocComponentView> filterDocumentInjectionFields(List<DocComponentView> componentViews) {
+
+        List<DocComponentView> results = new ArrayList<>();
+
+        for (DocComponentView docComponentView : componentViews) {
+            if (docComponentView.isDocumentInjection()) {
+                continue;//skip to the next one
+            }
+
+            results.add(docComponentView);
+
+        }
+
+        return results;
+    }
+
 }

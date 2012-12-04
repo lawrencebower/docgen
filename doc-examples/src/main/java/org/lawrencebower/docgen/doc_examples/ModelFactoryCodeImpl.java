@@ -54,7 +54,7 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
                                              "36 Billy Bob Street\nColchester\nEssex",
                                              "534546454",
                                              "UK",
-                                             "tax id",
+                                             "123456",
                                              "sales@acme.com"));
     }
 

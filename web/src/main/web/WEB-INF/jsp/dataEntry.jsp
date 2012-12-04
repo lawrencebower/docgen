@@ -57,5 +57,5 @@
         </c:forEach>
     </table>
     <input name="full" type="submit" value="full" onmousedown="setBlankTarget()"/>
-    <input name="partial" type="submit" value="partial" onmousedown="setSelfTarget()"/>
+    <%--<input name="partial" type="submit" value="partial" onmousedown="setSelfTarget()"/>--%>
 </form>

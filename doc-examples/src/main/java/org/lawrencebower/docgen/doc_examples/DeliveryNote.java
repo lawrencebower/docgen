@@ -16,6 +16,7 @@ import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
 import org.lawrencebower.docgen.web_logic.business.injection.product_injection.ProductInjectionField;
+import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
@@ -246,11 +247,10 @@ public class DeliveryNote {
         TableTextComponent addressComponent = new TableTextComponent("Lawrence Bower\n" +
                                                                      "39 York Street\n" +
                                                                      "Cambridge CB12PZ");
-        addressComponent.setName("customerAddress");
+        addressComponent.setName(AutoMappedComponent.CUSTOMER_ADDRESS.getName());
         TableCell addressCell = new TableCell(addressComponent);
 
-        addTextAreaComponent(addressComponent
-                            );
+        addTextAreaComponent(addressComponent);
 
         headerRow.addCell(addressCell, 9);
 
