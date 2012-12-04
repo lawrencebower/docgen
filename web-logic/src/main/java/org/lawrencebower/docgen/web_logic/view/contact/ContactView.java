@@ -12,6 +12,10 @@ public class ContactView {
         return contact.getName();
     }
 
+    public String getContactName(){
+        return contact.getContactName();
+    }
+
     public String getAddress(){
         return contact.getAddress();
     }

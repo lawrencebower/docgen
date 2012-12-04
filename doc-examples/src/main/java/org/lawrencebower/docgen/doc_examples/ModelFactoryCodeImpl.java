@@ -32,10 +32,10 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
     private Product product1;
     private Product product2;
 
-    public static final String CUSTOMER_ID_1 = "Contact 1";
-    public static final String CUSTOMER_ID_2 = "Contact 2";
-    public static final String PRODUCT_ID_1 = "id1";
-    public static final String PRODUCT_ID_2 = "id2";
+    public static final String CUSTOMER_ID_1 = "Billy Bob's products";
+    public static final String CUSTOMER_ID_2 = "David's widgets";
+    public static final String PRODUCT_ID_1 = "W1";
+    public static final String PRODUCT_ID_2 = "W2";
     public static final String DOC_1_NAME = CommercialInvoice.INVOICE_NAME;
     public static final String DOC_2_NAME = DeliveryNote.DELIVERY_NOTE_NAME;
     public static final String AUTO_MAPPED_EXAMPLE_FIELD = "soldToName:";
@@ -60,8 +60,8 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
 
     private void initProducts() {
 
-        product1 = new Product(PRODUCT_ID_1, "name 1", "100.25", "UK");
-        product2 = new Product(PRODUCT_ID_2, "name 2", "200", "UK");
+        product1 = new Product(PRODUCT_ID_1, "Super Widget 1", "100.25", "UK");
+        product2 = new Product(PRODUCT_ID_2, "Mega Widget 2", "200", "UK");
 
         products.put(product1.getProductId(), product1);
         products.put(product2.getProductId(), product2);
@@ -71,13 +71,13 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
     private void initCustomers() {
 
         customer1 = new ContactView(new Contact(CUSTOMER_ID_1,
-                                                "David Davidson",
+                                                "Billy Bob Bobson",
                                                 "Just round the corner",
                                                 "198293893839",
                                                 "UK"));
 
         customer2 = new ContactView(new Contact(CUSTOMER_ID_2,
-                                                "Billy Bob Bobson",
+                                                "David Davidson",
                                                 "miles away",
                                                 "38783478347",
                                                 "USA"));

@@ -20,4 +20,8 @@ public class ProductSelection {
         Collection<ProductView> values = products.values();
         return new ArrayList<>(values);
     }
+
+    public boolean hasProducts(){
+        return !products.isEmpty();
+    }
 }

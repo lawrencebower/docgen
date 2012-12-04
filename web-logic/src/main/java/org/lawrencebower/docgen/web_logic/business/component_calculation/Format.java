@@ -20,7 +20,7 @@ public enum Format {
                 return operand.toString();
         }
 
-        String message = String.format("Operator '%s' not recognized", operator);
+        String message = String.format("Format '%s' not recognized", operator);
         throw new DocGenException(message);
     }
 }

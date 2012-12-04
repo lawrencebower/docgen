@@ -57,6 +57,10 @@ public class SessionData {
         selectedProducts.addProduct(selectedProduct);
     }
 
+    public boolean isHasProducts() {
+        return selectedProducts.hasProducts();
+    }
+
     public boolean isShowAutoMappedFields() {
         return showAutoMappedFields;
     }
