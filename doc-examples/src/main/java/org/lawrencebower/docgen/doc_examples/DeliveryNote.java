@@ -52,6 +52,8 @@ public class DeliveryNote {
 
         documentView = documentViewFactory.createDocumentInfoView(document);
 
+        documentView.setCopyNumber(2);
+
         TableComponent logoTable = makeLogoTable();
 
         convertAndAddComponent(logoTable);

@@ -53,7 +53,7 @@ public class CommercialInvoice {
 
         documentView = documentViewFactory.createDocumentInfoView(document);
 
-        documentView.setCopyNumber(2);
+        documentView.setCopyNumber(5);
 
         TableComponent addressTable = makeInvoiceTable();
 

@@ -45,6 +45,8 @@ public class FDA_2887 {
 
         documentView = documentViewFactory.createDocumentInfoView(document);
 
+        documentView.setCopyNumber(5);
+
         addTextBox("port of entry",
                    new DocCoordinates(27, 658, 285, 18),
                    false);
