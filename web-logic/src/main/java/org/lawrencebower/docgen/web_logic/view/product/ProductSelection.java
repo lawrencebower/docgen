@@ -24,4 +24,8 @@ public class ProductSelection {
     public boolean hasProducts(){
         return !products.isEmpty();
     }
+
+    public void clear() {
+        products.clear();
+    }
 }

@@ -45,6 +45,10 @@ public class SessionData {
         return selectedProducts.getProducts();
     }
 
+    public void clearSelectedProducts() {
+        selectedProducts.clear();
+    }
+
     public List<DocumentView> getDocumentsAsList() {
         return documents.getDocumentsAsList();
     }

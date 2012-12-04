@@ -35,6 +35,29 @@ public class ProductSelectionController {
         this.sessionData = sessionData;
     }
 
+
+    @RequestMapping("/")
+    public String showProducts(Model model){
+
+        List<ProductView> products = business.getProducts();
+
+        model.addAttribute("products", products);
+
+        return "products";
+    }
+
+    @RequestMapping("/clearProducts")
+    public String clearProducts(Model model){
+
+        sessionData.clearSelectedProducts();
+
+        List<ProductView> products = business.getProducts();
+
+        model.addAttribute("products", products);
+
+        return "products";
+    }
+
     @RequestMapping(value = "/productId/{productId}", method = RequestMethod.GET)
     public String selectProduct(@PathVariable String productId,
                                 Model model) {

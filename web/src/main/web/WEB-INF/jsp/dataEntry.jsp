@@ -16,6 +16,17 @@
              type="org.lawrencebower.docgen.web.controller.DataEntryController"/>
 <c:set var="fieldSeperator" value="~" scope="application"/>
 
+<s:url var="customer_url" value="/customerSelect/"/>
+<a href="${customer_url}">Customer</a>
+&nbsp;->&nbsp;
+<s:url var="products_url" value="/productSelect/"/>
+<a href="${products_url}">Select products</a>
+&nbsp;->&nbsp;
+Enter data
+
+<br/>
+<br/>
+
 <s:url var="toggleAutomapped" value="/dataEntry/toggleAutomapped"/>
 
 <a href="${toggleAutomapped}">
@@ -56,6 +67,6 @@
             </tr>
         </c:forEach>
     </table>
-    <input name="full" type="submit" value="full" onmousedown="setBlankTarget()"/>
+    <input name="full" type="submit" value="Generate PDFs" onmousedown="setBlankTarget()"/>
     <%--<input name="partial" type="submit" value="partial" onmousedown="setSelfTarget()"/>--%>
 </form>

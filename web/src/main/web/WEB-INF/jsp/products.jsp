@@ -4,6 +4,9 @@
              type="java.util.List<org.lawrencebower.docgen.web_logic.view.product.ProductView>"/>
 <jsp:useBean id="sessionData" scope="session" type="org.lawrencebower.docgen.web.model.SessionData"/>
 
+<s:url var="customer_url" value="/customerSelect/"/>
+<a href="${customer_url}">Select customer</a>
+&nbsp;->&nbsp;
 Select products
 
 <div>
@@ -19,7 +22,6 @@ Select products
         </a>
         <br/>
     </c:forEach>
-    <br/>
     <br/>
     <c:if test="${sessionData.hasProducts}">
         <table border="1">
@@ -44,8 +46,12 @@ Select products
         <br/>
         <br/>
 
+        <s:url var="clear_products_url" value="/productSelect/clearProducts"/>
+        <a href="${clear_products_url}">
+            <c:out value="Clear products"/>
+        </a>
+        &nbsp;
         <s:url var="data_entry_url" value="/dataEntry/prepareFields"/>
-
         <a href="${data_entry_url}">
             <c:out value="Enter data"/>
         </a>
