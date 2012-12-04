@@ -275,19 +275,19 @@ public class AutoMappedComponentTest {
 
     private DocComponentView makeComponentsAndMap(AutoMappedComponent field) {
 
-        DocComponentView component = mockDocComponent();
+        DocComponentView component = mockDocComponent(field);
 
-        when(component.isAutoMappedComponent()).thenReturn(true);
+        when(component.isAutoMapped()).thenReturn(true);
 
-        AutoMappedComponent.mapComponent(component,
-                                         field,
-                                         mappingInfo);
+        AutoMappedComponent.mapComponent(component, mappingInfo);
 
         return component;
     }
 
-    private DocComponentView mockDocComponent() {
-        return mock(DocComponentView.class);
+    private DocComponentView mockDocComponent(AutoMappedComponent field) {
+        DocComponentView mock = mock(DocComponentView.class);
+        when(mock.getName()).thenReturn(field.getName());
+        return mock;
     }
 
 }

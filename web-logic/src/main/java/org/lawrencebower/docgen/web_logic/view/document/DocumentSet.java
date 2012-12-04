@@ -136,10 +136,10 @@ public class DocumentSet {
 
         for (DocumentView document : documents) {
             if (document.hasDocumentInjectionFields()) {
-                List<DocumentView> injectedDocuments = injectDocuments(injectionInfos, document);
+                List<DocumentView> injectedDocuments = document.injectDocuments(injectionInfos);
                 results.addAll(injectedDocuments);
             } else {
-                results.add(document);//just keep original document
+                results.add(document);//just keep original originalDocument
             }
         }
 
@@ -147,20 +147,5 @@ public class DocumentSet {
         injectedDocumentSet.setDocuments(results);
 
         return injectedDocumentSet;
-    }
-
-    private List<DocumentView> injectDocuments(List<DocumentInjectionInfo> injectionInfos,
-                                               DocumentView document) {
-
-        List<DocumentView> results = new ArrayList<>();
-
-        for (DocumentInjectionInfo injectionInfo : injectionInfos) {
-            DocumentView newDocument = document.copyComponentViews();
-            newDocument.setDocumentInjectionFields(injectionInfo);
-            injectionInfo.setNameExtension(newDocument);
-            results.add(newDocument);
-        }
-
-        return results;
     }
 }

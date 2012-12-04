@@ -16,7 +16,6 @@ import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
 import org.lawrencebower.docgen.web_logic.business.injection.product_injection.ProductInjectionField;
-import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
@@ -26,6 +25,8 @@ import org.lawrencebower.docgen.web_logic.view.document.component.TextComponentV
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
+
+import static org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent.*;
 
 public class DeliveryNote {
 
@@ -51,30 +52,7 @@ public class DeliveryNote {
 
         documentView = documentViewFactory.createDocumentInfoView(document);
 
-        ImageComponent logo = new ImageComponent("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\logo.png");
-        logo.setSize(70, 1);
-
-        TableComponent logoTable = new TableComponent("logo table");
-
-        TableHeaderRow row = new TableHeaderRow();
-
-        TableCell logoCell = new TableCell(logo);
-        row.addCell(logoCell);
-
-        TextBlock sloganBlock = new TextBlock("DELIVERY NOTE",
-                                              new FontInfo(FontInfo.DEFAULT_FONT,
-                                                           24,
-                                                           FontStyle.BOLD));
-
-        TextComponent slogan = new TextComponent(sloganBlock);
-        slogan.setAlignment(HorizontalAlignment.RIGHT);
-        TableCell sloganCell = new TableCell(slogan);
-        sloganCell.setVerticalAlignment(VerticalAlignment.BOTTOM);
-        row.addCell(sloganCell);
-
-        logoTable.setHeaderRow(row);
-
-        logoTable.setWidthPercentage(100);
+        TableComponent logoTable = makeLogoTable();
 
         convertAndAddComponent(logoTable);
 
@@ -101,22 +79,19 @@ public class DeliveryNote {
 
         TextComponent addressComponent = new TextComponent("Suites 11 and 12, Church Farm\n" +
                                                            "Maris Lane, Trumpington, CB29LG, UK");
-        addressComponent.setName("vendorAddress");
+        addressComponent.setName(VENDOR_ADDRESS.getName());
         convertAndAddComponent(addressComponent);
-        addTextComponentView(addressComponent,
-                             AutoMappedComponent.VENDOR_ADDRESS);
+        addTextComponentView(addressComponent);
 
         TextComponent phoneComponent = new TextComponent("Phone +44 (0) 1223 655577");
-        phoneComponent.setName("vendorPhone");
+        phoneComponent.setName(VENDOR_PHONE.getName());
         convertAndAddComponent(phoneComponent);
-        addTextComponentView(phoneComponent,
-                             AutoMappedComponent.VENDOR_PHONE);
+        addTextComponentView(phoneComponent);
 
         TextComponent emailComponent = new TextComponent("sales@acme.com");
-        emailComponent.setName("vendorEmail");
+        emailComponent.setName(VENDOR_EMAIL.getName());
         convertAndAddComponent(emailComponent);
-        addTextComponentView(emailComponent,
-                             AutoMappedComponent.VENDOR_EMAIL);
+        addTextComponentView(emailComponent);
 
         addNewLine();
 
@@ -150,6 +125,35 @@ public class DeliveryNote {
                    HorizontalAlignment.CENTER,
                    false);
 
+    }
+
+    private TableComponent makeLogoTable() {
+
+        ImageComponent logo = new ImageComponent("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\logo.png");
+        logo.setSize(70, 1);
+
+        TableComponent logoTable = new TableComponent("logo table");
+
+        TableHeaderRow row = new TableHeaderRow();
+
+        TableCell logoCell = new TableCell(logo);
+        row.addCell(logoCell);
+
+        TextBlock sloganBlock = new TextBlock("DELIVERY NOTE",
+                                              new FontInfo(FontInfo.DEFAULT_FONT,
+                                                           24,
+                                                           FontStyle.BOLD));
+
+        TextComponent slogan = new TextComponent(sloganBlock);
+        slogan.setAlignment(HorizontalAlignment.RIGHT);
+        TableCell sloganCell = new TableCell(slogan);
+        sloganCell.setVerticalAlignment(VerticalAlignment.BOTTOM);
+        row.addCell(sloganCell);
+
+        logoTable.setHeaderRow(row);
+
+        logoTable.setWidthPercentage(100);
+        return logoTable;
     }
 
     private void convertAndAddComponent(DocComponent component) {
@@ -243,8 +247,8 @@ public class DeliveryNote {
         addressComponent.setName("customerAddress");
         TableCell addressCell = new TableCell(addressComponent);
 
-        addTextAreaComponent(addressComponent,
-                             AutoMappedComponent.CUSTOMER_ADDRESS);
+        addTextAreaComponent(addressComponent
+                            );
 
         headerRow.addCell(addressCell, 9);
 
@@ -341,23 +345,13 @@ public class DeliveryNote {
         documentView.addComponentView(componentView);
     }
 
-    private void addTextComponentView(TableTextComponent textComponent, AutoMappedComponent autoMappedComponent) {
+    private void addTextComponentView(TableTextComponent textComponent) {
         TextComponentView componentView = componentViewFactory.createTextComponentView(textComponent);
-        componentView.setAutoMappedComponent(autoMappedComponent);
         documentView.addComponentView(componentView);
     }
 
-    private void addTextAreaComponent(TableTextComponent textComponent,
-                                      AutoMappedComponent autoMappedComponent) {
+    private void addTextAreaComponent(TableTextComponent textComponent) {
         DocComponentView componentView = componentViewFactory.createTextAreaComponentView(textComponent);
-        componentView.setAutoMappedComponent(autoMappedComponent);
-        documentView.addComponentView(componentView);
-    }
-
-    private void addTextComponentView(TextComponent textComponent,
-                                      AutoMappedComponent autoMappedComponent) {
-        DocComponentView componentView = componentViewFactory.createTextComponentView(textComponent);
-        componentView.setAutoMappedComponent(autoMappedComponent);
         documentView.addComponentView(componentView);
     }
 }

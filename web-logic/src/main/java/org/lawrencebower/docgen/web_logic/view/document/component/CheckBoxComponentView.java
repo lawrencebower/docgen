@@ -110,12 +110,12 @@ public class CheckBoxComponentView extends DocComponentView<CheckBoxComponent> {
     }
 
     @Override
-    public void copyFromDocument(DocumentView document) {
+    public void copyFromDocument(DocumentView documentToCopy) {
         String thisName = getName();
-        List<DocComponentView> matchingComponents = document.getComponentViewsWithName(thisName);
+        List<DocComponentView> matchingComponents = documentToCopy.getComponentViewsWithName(thisName);
         for (DocComponentView matchingComponent : matchingComponents) {
-            Boolean thisValue = getBooleanValue();
-            matchingComponent.setComponentValue(thisValue);
+            Boolean copyValue = matchingComponent.getBooleanValue();
+            this.setComponentValue(copyValue);
         }
     }
 

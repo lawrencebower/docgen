@@ -3,6 +3,7 @@ package org.lawrencebower.docgen.doc_examples;
 import org.lawrencebower.docgen.core.document.component.*;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
+import org.lawrencebower.docgen.core.document.component.position.VerticalAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
@@ -25,6 +26,8 @@ import org.lawrencebower.docgen.web_logic.view.document.component.TextComponentV
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
+
+import static org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent.*;
 
 public class CommercialInvoice {
 
@@ -68,10 +71,12 @@ public class CommercialInvoice {
 
         document.addComponent(convertComponent(new NewLineComponent()));
 
-        TextComponent signature = new TextComponent("David Davidson");
-        signature.setName("signature");
+        TableComponent signatureTable = makeSignatureTable();
 
-        document.addComponent(convertComponent(signature));
+//        ImageComponent sigImage = new ImageComponent("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\signature.gif");
+//        sigImage.setSize(15, 15);
+
+        document.addComponent(convertComponent(signatureTable));
 
         document.addComponent(convertComponent(new LineComponent(70)));
         document.addComponent(convertComponent(new TextComponent("Signature of exporter (print and sign)\n" +
@@ -146,34 +151,30 @@ public class CommercialInvoice {
         headerRow.addCell(shippedToCell);
         table.setHeaderRow(headerRow);
 
-        TableTextComponent textComponent = createTextComponent("soldToName:", "blah");
+        TableTextComponent textComponent = createTextComponent(AutoMappedComponent.BUSINESS_NAME.getName(),
+                                                               "blah");
         table.addRow(createRowWithLabelAndValue("Name:", textComponent));
-        addTextComponent(textComponent,
-                         AutoMappedComponent.BUSINESS_NAME);
+        addTextComponent(textComponent);
 
-        textComponent = createTextComponent("soldToContactName", "David Davidson");
+        textComponent = createTextComponent(BUSINESS_CONTACT_NAME.getName(), "David Davidson");
         table.addRow(createRowWithLabelAndValue("Contact Name:", textComponent));
-        addTextComponent(textComponent,
-                         AutoMappedComponent.BUSINESS_CONTACT_NAME);
+        addTextComponent(textComponent);
 
-        textComponent = createTextComponent("soldToPhone", "123456788");
+        textComponent = createTextComponent(BUSINESS_PHONE.getName(), "123456788");
         table.addRow(createRowWithLabelAndValue("Phone:", textComponent));
-        addTextComponent(textComponent,
-                         AutoMappedComponent.BUSINESS_PHONE);
+        addTextComponent(textComponent);
 
-        textComponent = createTextComponent("soldToCompanyAddress",
+        textComponent = createTextComponent(BUSINESS_ADDRESS.getName(),
                                             "Suites 11 & 12\n" +
                                             "Church Farm,\n" +
                                             "Maris Lane,\n" +
                                             "Trumpington, CB29LG");
         table.addRow(createRowWithLabelAndValue("Company address:", textComponent));
-        addTextComponent(textComponent,
-                         AutoMappedComponent.BUSINESS_ADDRESS);
+        addTextComponent(textComponent);
 
-        textComponent = createTextComponent("soldToCountry", "UNITED KINGDOM");
+        textComponent = createTextComponent(BUSINESS_COUNTRY.getName(), "UNITED KINGDOM");
         table.addRow(createRowWithLabelAndValue("Country:", textComponent));
-        addTextComponent(textComponent,
-                         AutoMappedComponent.BUSINESS_COUNTRY);
+        addTextComponent(textComponent);
 
         return table;
     }
@@ -191,34 +192,29 @@ public class CommercialInvoice {
         headerRow.addCell(shippedToCell);
         table.setHeaderRow(headerRow);
 
-        TableTextComponent textComponent = createTextComponent("customerName", "");
+        TableTextComponent textComponent = createTextComponent(CUSTOMER_NAME.getName(), "");
         table.addRow(createRowWithLabelAndValue("Name:", textComponent));
-        addTextComponent(textComponent,
-                         AutoMappedComponent.CUSTOMER_NAME);
+        addTextComponent(textComponent);
 
-        textComponent = createTextComponent("customerContact", "Billy Bob Bobson");
+        textComponent = createTextComponent(CUSTOMER_CONTACT_NAME.getName(), "Billy Bob Bobson");
         table.addRow(createRowWithLabelAndValue("Contact Name:", textComponent));
-        addTextComponent(textComponent,
-                         AutoMappedComponent.CUSTOMER_CONTACT_NAME);
+        addTextComponent(textComponent);
 
-        textComponent = createTextComponent("Contact phone", "123456788");
+        textComponent = createTextComponent(CUSTOMER_PHONE.getName(), "123456788");
         table.addRow(createRowWithLabelAndValue("Phone:", textComponent));
-        addTextComponent(textComponent,
-                         AutoMappedComponent.CUSTOMER_PHONE);
+        addTextComponent(textComponent);
 
-        textComponent = createTextComponent("customerAddress",
+        textComponent = createTextComponent(CUSTOMER_ADDRESS.getName(),
                                             "Suites 11 & 12\n" +
                                             "Church Farm,\n" +
                                             "Maris Lane,\n" +
                                             "Trumpington, CB29LG");
         table.addRow(createRowWithLabelAndValue("Company address:", textComponent));
-        addTextAreaComponent(textComponent,
-                             AutoMappedComponent.CUSTOMER_ADDRESS);
+        addTextAreaComponent(textComponent);
 
-        textComponent = createTextComponent("customerCountry", "UNITED KINGDOM");
+        textComponent = createTextComponent(CUSTOMER_COUNTRY.getName(), "UNITED KINGDOM");
         table.addRow(createRowWithLabelAndValue("Country:", textComponent));
-        addTextComponent(textComponent,
-                         AutoMappedComponent.CUSTOMER_COUNTRY);
+        addTextComponent(textComponent);
 
         return table;
     }
@@ -273,16 +269,13 @@ public class CommercialInvoice {
         documentView.addComponentView(componentView);
     }
 
-    private void addTextComponent(TableTextComponent textComponent, AutoMappedComponent autoMappedComponent) {
+    private void addTextComponent(TableTextComponent textComponent) {
         DocComponentView componentView = componentViewFactory.createTextComponentView(textComponent);
-        componentView.setAutoMappedComponent(autoMappedComponent);
         documentView.addComponentView(componentView);
     }
 
-    private void addTextAreaComponent(TableTextComponent textComponent,
-                                      AutoMappedComponent autoMappedComponent) {
+    private void addTextAreaComponent(TableTextComponent textComponent) {
         DocComponentView componentView = componentViewFactory.createTextAreaComponentView(textComponent);
-        componentView.setAutoMappedComponent(autoMappedComponent);
         documentView.addComponentView(componentView);
     }
 
@@ -310,38 +303,33 @@ public class CommercialInvoice {
         headerRow.addCell(shippedFromCell);
         table.setHeaderRow(headerRow);
 
-        TableTextComponent textComponent = createTextComponent("shippedFromName", "Acme Ltd");
+        TableTextComponent textComponent = createTextComponent(VENDOR_NAME.getName(), "Acme Ltd");
         table.addRow(createRowWithLabelAndValue("Name:", textComponent));
-        addTextComponent(textComponent, AutoMappedComponent.VENDOR_NAME);
+        addTextComponent(textComponent);
 
-        textComponent = createTextComponent("TAX/VAT NUMBER:", "154487945");
+        textComponent = createTextComponent(VENDOR_TAX_ID.getName(), "154487945");
         table.addRow(createRowWithLabelAndValue("TAX/VAT NUMBER:", textComponent));
-        addTextComponent(textComponent,
-                         AutoMappedComponent.VENDOR_TAX_ID);
+        addTextComponent(textComponent);
 
-        textComponent = createTextComponent("shippedFromContactName", "David Davidson");
+        textComponent = createTextComponent(VENDOR_CONTACT_NAME.getName(), "David Davidson");
         table.addRow(createRowWithLabelAndValue("Contact Name:", textComponent));
-        addTextComponent(textComponent,
-                         AutoMappedComponent.VENDOR_CONTACT_NAME);
+        addTextComponent(textComponent);
 
-        textComponent = createTextComponent("shippedFromPhone", "+44 (0)1223 655577");
+        textComponent = createTextComponent(VENDOR_PHONE.getName(), "+44 (0)1223 655577");
         table.addRow(createRowWithLabelAndValue("Phone:", textComponent));
-        addTextComponent(textComponent,
-                         AutoMappedComponent.VENDOR_PHONE);
+        addTextComponent(textComponent);
 
-        textComponent = createTextComponent("shippedFromTable",
+        textComponent = createTextComponent(VENDOR_ADDRESS.getName(),
                                             "Suites 11 & 12\n" +
                                             "Church Farm,\n" +
                                             "Maris Lane,\n" +
                                             "Trumpington, CB29LG");
         table.addRow(createRowWithLabelAndValue("Company address:", textComponent));
-        addTextAreaComponent(textComponent,
-                             AutoMappedComponent.VENDOR_ADDRESS);
+        addTextAreaComponent(textComponent);
 
-        textComponent = createTextComponent("shippedFromCountry", "UNITED KINGDOM");
+        textComponent = createTextComponent(VENDOR_COUNTRY.getName(), "UNITED KINGDOM");
         table.addRow(createRowWithLabelAndValue("Country:", textComponent));
-        addTextComponent(textComponent,
-                         AutoMappedComponent.VENDOR_COUNTRY);
+        addTextComponent(textComponent);
 
 
         return table;
@@ -529,6 +517,33 @@ public class CommercialInvoice {
 
         return costTable;
     }
+
+    private TableComponent makeSignatureTable() {
+
+        ImageComponent sigImage = new ImageComponent("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\signature.gif");
+        sigImage.setSize(15, 15);
+
+        TextComponent printedSig = new TextComponent("brian");
+        printedSig.setAlignment(HorizontalAlignment.RIGHT);
+
+        TableComponent sigTable = new TableComponent("signature table");
+
+        TableHeaderRow row = new TableHeaderRow();
+
+        TableCell imageCell = new TableCell(sigImage);
+        row.addCell(imageCell);
+
+        TableCell printedCell = new TableCell(printedSig);
+        printedCell.setVerticalAlignment(VerticalAlignment.BOTTOM);
+        row.addCell(printedCell);
+
+        sigTable.setHeaderRow(row);
+
+        sigTable.setWidthPercentage(25);
+
+        return sigTable;
+    }
+
 
     private TableRow createRowWithLabels(String... labels) {
         TableRow row = new TableRow();

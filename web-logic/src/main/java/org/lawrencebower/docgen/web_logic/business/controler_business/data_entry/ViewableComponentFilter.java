@@ -29,7 +29,7 @@ public class ViewableComponentFilter {
         List<DocComponentView> results = new ArrayList<>();
 
         for (DocComponentView docComponentView : componentViews) {
-            if (docComponentView.isAutoMappedComponent()) {
+            if (docComponentView.isAutoMapped()) {
                 continue;//skip to the next one
             }
             results.add(docComponentView);

@@ -70,7 +70,10 @@ public class TextComponentView extends DocComponentView<TextComponent> {
     public Boolean getBooleanValue() {
         String text = docComponent.getTextString();
 
-        if (text.equals(Boolean.TRUE) || text.equals(Boolean.FALSE)) {
+        String trueString = Boolean.TRUE.toString();
+        String falseString = Boolean.FALSE.toString();
+
+        if (text.equals(trueString) || text.equals(falseString)) {
             return Boolean.parseBoolean(text);
         }
 
@@ -129,12 +132,12 @@ public class TextComponentView extends DocComponentView<TextComponent> {
     }
 
     @Override
-    public void copyFromDocument(DocumentView document) {
+    public void copyFromDocument(DocumentView documentToCopy) {
         String thisName = getName();
-        List<DocComponentView> matchingComponents = document.getComponentViewsWithName(thisName);
+        List<DocComponentView> matchingComponents = documentToCopy.getComponentViewsWithName(thisName);
         for (DocComponentView matchingComponent : matchingComponents) {
-            String thisValue = getStringValue();
-            matchingComponent.setComponentValue(thisValue);
+            String copyValue = matchingComponent.getStringValue();
+            setComponentValue(copyValue);
         }
     }
 

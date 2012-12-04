@@ -53,7 +53,7 @@ public class ViewableComponentFilterTest {
     @Test
     public void testGetComponents_validParams_automappedFieldsPresent() throws Exception {
         List<DocComponentView> allComponents = getAllComponents();
-        assertTrue(allComponents.get(1).isAutoMappedComponent());
+        assertTrue(allComponents.get(1).isAutoMapped());
     }
 
     private List<DocComponentView> getAllComponents() {
@@ -79,8 +79,7 @@ public class ViewableComponentFilterTest {
 
     public List<DocComponentView> getDocComponents() {
         DocComponentView view1 = makeDocComponent("comp1");
-        DocComponentView view2 = makeDocComponent("comp2");
-        view2.setAutoMappedComponent(AutoMappedComponent.CUSTOMER_NAME);
+        DocComponentView view2 = makeDocComponent(AutoMappedComponent.CUSTOMER_NAME.getName());
         DocComponentView view3 = makeDocComponent("comp3");
         DocComponentView view4 = makeDocComponent("comp1");//duplicate - should be filtered
 

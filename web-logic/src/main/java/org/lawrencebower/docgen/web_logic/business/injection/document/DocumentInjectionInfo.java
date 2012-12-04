@@ -41,7 +41,7 @@ public class DocumentInjectionInfo {
         return value;
     }
 
-    public void setNameExtension(DocumentView documentView) {
+    public void setDocumentNameExtension(DocumentView documentView) {
         String productId = product.getId();
         documentView.setNameExtension(productId);
     }

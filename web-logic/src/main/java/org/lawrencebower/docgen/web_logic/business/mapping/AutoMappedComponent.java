@@ -1,28 +1,29 @@
 package org.lawrencebower.docgen.web_logic.business.mapping;
 
+import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 
 public enum AutoMappedComponent {
 
-    BUSINESS_NAME("BUSINESS_NAME"),
-    BUSINESS_CONTACT_NAME("BUSINESS_CONTACT_NAME"),
-    BUSINESS_ADDRESS("BUSINESS_ADDRESS"),
-    BUSINESS_PHONE("BUSINESS_PHONE"),
-    BUSINESS_COUNTRY("BUSINESS_COUNTRY"),
+    BUSINESS_NAME("AUTO_MAPPED_BUSINESS_NAME"),
+    BUSINESS_CONTACT_NAME("AUTO_MAPPED_BUSINESS_CONTACT_NAME"),
+    BUSINESS_ADDRESS("AUTO_MAPPED_BUSINESS_ADDRESS"),
+    BUSINESS_PHONE("AUTO_MAPPED_BUSINESS_PHONE"),
+    BUSINESS_COUNTRY("AUTO_MAPPED_BUSINESS_COUNTRY"),
 
-    CUSTOMER_NAME("CUSTOMER_NAME"),
-    CUSTOMER_CONTACT_NAME("CUSTOMER_CONTACT_NAME"),
-    CUSTOMER_ADDRESS("CUSTOMER_ADDRESS"),
-    CUSTOMER_PHONE("CUSTOMER_PHONE"),
-    CUSTOMER_COUNTRY("CUSTOMER_COUNTRY"),
+    CUSTOMER_NAME("AUTO_MAPPED_CUSTOMER_NAME"),
+    CUSTOMER_CONTACT_NAME("AUTO_MAPPED_CUSTOMER_CONTACT_NAME"),
+    CUSTOMER_ADDRESS("AUTO_MAPPED_CUSTOMER_ADDRESS"),
+    CUSTOMER_PHONE("AUTO_MAPPED_CUSTOMER_PHONE"),
+    CUSTOMER_COUNTRY("AUTO_MAPPED_CUSTOMER_COUNTRY"),
 
-    VENDOR_NAME("VENDOR_NAME"),
-    VENDOR_CONTACT_NAME("VENDOR_CONTACT_NAME"),
-    VENDOR_ADDRESS("VENDOR_ADDRESS"),
-    VENDOR_PHONE("VENDOR_PHONE"),
-    VENDOR_TAX_ID("VENDOR_TAX_ID"),
-    VENDOR_COUNTRY("VENDOR_COUNTRY"),
-    VENDOR_EMAIL("VENDOR_EMAIL");
+    VENDOR_NAME("AUTO_MAPPED_VENDOR_NAME"),
+    VENDOR_CONTACT_NAME("AUTO_MAPPED_VENDOR_CONTACT_NAME"),
+    VENDOR_ADDRESS("AUTO_MAPPED_VENDOR_ADDRESS"),
+    VENDOR_PHONE("AUTO_MAPPED_VENDOR_PHONE"),
+    VENDOR_TAX_ID("AUTO_MAPPED_VENDOR_TAX_ID"),
+    VENDOR_COUNTRY("AUTO_MAPPED_VENDOR_COUNTRY"),
+    VENDOR_EMAIL("AUTO_MAPPED_VENDOR_EMAIL");
 
     private String name;
 
@@ -34,43 +35,73 @@ public enum AutoMappedComponent {
         return name;
     }
 
+    public static boolean containsName(String name) {
+
+        boolean containsName = false;
+
+        for (AutoMappedComponent autoMappedField : AutoMappedComponent.values()) {
+            String autoMappedName = autoMappedField.getName();
+            if (autoMappedName.equals(name)) {
+                containsName = true;
+                break;
+            }
+        }
+
+        return containsName;
+    }
+
+    public static AutoMappedComponent getByFieldName(String name) {
+
+        for (AutoMappedComponent autoMappedField : AutoMappedComponent.values()) {
+            String autoMappedName = autoMappedField.getName();
+            if (autoMappedName.equals(name)) {
+                return autoMappedField;
+            }
+        }
+
+        throw new DocGenException("enum productInjectionField not found with name " + name);
+    }
+
     public static void mapComponent(DocComponentView docComponentView,
-                                    AutoMappedComponent component,
                                     AutoMappedComponentInfo info) {
 
-        if (component == VENDOR_ADDRESS) {
+        String componentName = docComponentView.getName();
+
+        AutoMappedComponent field = getByFieldName(componentName);
+
+        if (field == VENDOR_ADDRESS) {
             setComponentText(docComponentView, info.getVendorAddress());
-        } else if (component == VENDOR_CONTACT_NAME) {
+        } else if (field == VENDOR_CONTACT_NAME) {
             setComponentText(docComponentView, info.getVendorContactName());
-        } else if (component == VENDOR_COUNTRY) {
+        } else if (field == VENDOR_COUNTRY) {
             setComponentText(docComponentView, info.getVendorCountry());
-        } else if (component == VENDOR_NAME) {
+        } else if (field == VENDOR_NAME) {
             setComponentText(docComponentView, info.getVendorName());
-        } else if (component == VENDOR_PHONE) {
+        } else if (field == VENDOR_PHONE) {
             setComponentText(docComponentView, info.getVendorPhone());
-        } else if (component == VENDOR_EMAIL) {
+        } else if (field == VENDOR_EMAIL) {
             setComponentText(docComponentView, info.getVendorEmail());
-        } else if (component == VENDOR_TAX_ID) {
+        } else if (field == VENDOR_TAX_ID) {
             setComponentText(docComponentView, info.getVendorTaxId());
-        } else if (component == BUSINESS_ADDRESS) {
+        } else if (field == BUSINESS_ADDRESS) {
             setComponentText(docComponentView, info.getBusinessAddress());
-        } else if (component == BUSINESS_CONTACT_NAME) {
+        } else if (field == BUSINESS_CONTACT_NAME) {
             setComponentText(docComponentView, info.getBusinessContactName());
-        } else if (component == BUSINESS_COUNTRY) {
+        } else if (field == BUSINESS_COUNTRY) {
             setComponentText(docComponentView, info.getBusinessCountry());
-        } else if (component == BUSINESS_NAME) {
+        } else if (field == BUSINESS_NAME) {
             setComponentText(docComponentView, info.getBusinessName());
-        } else if (component == BUSINESS_PHONE) {
+        } else if (field == BUSINESS_PHONE) {
             setComponentText(docComponentView, info.getBusinessPhone());
-        } else if (component == CUSTOMER_ADDRESS) {
+        } else if (field == CUSTOMER_ADDRESS) {
             setComponentText(docComponentView, info.getCustomerAddress());
-        } else if (component == CUSTOMER_CONTACT_NAME) {
+        } else if (field == CUSTOMER_CONTACT_NAME) {
             setComponentText(docComponentView, info.getCustomerContactName());
-        } else if (component == CUSTOMER_COUNTRY) {
+        } else if (field == CUSTOMER_COUNTRY) {
             setComponentText(docComponentView, info.getCustomerCountry());
-        } else if (component == CUSTOMER_NAME) {
+        } else if (field == CUSTOMER_NAME) {
             setComponentText(docComponentView, info.getCustomerName());
-        } else if (component == CUSTOMER_PHONE) {
+        } else if (field == CUSTOMER_PHONE) {
             setComponentText(docComponentView, info.getCustomerPhone());
         }
     }

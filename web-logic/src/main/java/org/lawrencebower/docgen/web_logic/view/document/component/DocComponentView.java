@@ -30,7 +30,6 @@ public abstract class DocComponentView<T extends DocComponent> {
 
     protected T docComponent;
     protected ComponentViewType componentViewType;
-    private AutoMappedComponent autoMappedComponent;
 
     public abstract void setComponentValue(Boolean value);
 
@@ -58,14 +57,14 @@ public abstract class DocComponentView<T extends DocComponent> {
                                                   ComponentCalculation calculation,
                                                   DocumentSet documentSet);
 
-    public abstract void copyFromDocument(DocumentView document);
+    public abstract void copyFromDocument(DocumentView documentToCopy);
 
     public boolean isDocumentInjection() {
         String componentName = getName();
         return DocumentInjectionField.containsName(componentName);
     }
 
-    public void setComponent(T docComponent){
+    public void setComponent(T docComponent) {
         if (docComponent == null) {
             throw new DocGenException(NULL_COMPONENT_MESSAGE);
         }
@@ -77,39 +76,33 @@ public abstract class DocComponentView<T extends DocComponent> {
 
         String name = NOT_SET_MESSAGE;
 
-        if(docComponent.getName() != null){
+        if (docComponent.getName() != null) {
             name = docComponent.getName();
         }
 
         return name;
     }
 
-    public boolean isAutoMappedComponent(){
-        return autoMappedComponent != null;
-    }
-
-    public void setAutoMappedComponent(AutoMappedComponent autoMappedComponent) {
-        this.autoMappedComponent = autoMappedComponent;
-    }
-
     public void mapComponentValue(AutoMappedComponentInfo mappingInfo) {
-        if(isAutoMappedComponent()){
-            AutoMappedComponent.mapComponent(this,
-                                             autoMappedComponent,
-                                             mappingInfo);
-
+        if (isAutoMapped()) {
+            AutoMappedComponent.mapComponent(this, mappingInfo);
         }
     }
 
-    public boolean isText(){
+    public boolean isAutoMapped(){
+        String componentName = getName();
+        return AutoMappedComponent.containsName(componentName);
+    }
+
+    public boolean isText() {
         return componentViewType == ComponentViewType.TEXT;
     }
 
-    public boolean isTextArea(){
+    public boolean isTextArea() {
         return componentViewType == ComponentViewType.TEXT_AREA;
     }
 
-    public boolean isTable(){
+    public boolean isTable() {
         return componentViewType == ComponentViewType.TABLE;
     }
 
@@ -120,7 +113,7 @@ public abstract class DocComponentView<T extends DocComponent> {
     @Override
     public boolean equals(Object obj) {
 
-        if(!(obj instanceof DocComponentView)){
+        if (!(obj instanceof DocComponentView)) {
             return false;
         }
 

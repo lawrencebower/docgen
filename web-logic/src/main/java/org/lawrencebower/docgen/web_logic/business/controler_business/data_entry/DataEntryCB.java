@@ -160,12 +160,14 @@ public class DataEntryCB {
         documentSet.processCalculatedFields();
     }
 
-    public DocumentSet injectDocuments(DocumentSet documents,
+    public DocumentSet injectDocuments(DocumentSet originalDocuments,
                                        List<ProductView> products) {
 
         List<DocumentInjectionInfo> injectionInfos = makeDocumentInjectionInfo(products);
 
-        return documents.injectDocuments(injectionInfos);
+        DocumentSet injectedDocuments = originalDocuments.injectDocuments(injectionInfos);
+
+        return injectedDocuments;
     }
 
     private List<DocumentInjectionInfo> makeDocumentInjectionInfo(List<ProductView> products) {

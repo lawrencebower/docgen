@@ -104,6 +104,7 @@ public class DataEntryController {
         mapFieldValuesToComponents(webRequest);
 
         DocumentSet injectedDocuments = injectDocuments();
+//        DocumentSet injectedDocuments = sessionData.getDocuments();
 
         List<PDFDocument> pdfFiles = generatePDFsAndWriteToFiles(injectedDocuments);
 
@@ -141,7 +142,9 @@ public class DataEntryController {
 
         List<ProductView> products = sessionData.getSelectedProducts();
 
-        return business.injectDocuments(originalDocuments, products);
+        DocumentSet injectedDocumentSet = business.injectDocuments(originalDocuments, products);
+
+        return injectedDocumentSet;
     }
 
     private List<PDFDocument> generatePDFsAndWriteToFiles(DocumentSet documents) {

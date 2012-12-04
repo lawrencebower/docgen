@@ -49,9 +49,9 @@ public class FDA_2887 {
                    new DocCoordinates(27, 658, 285, 18),
                    false);
 
-        addTextBox("Acme products\nBillybob Street\ncb11234",
+        addTextBox(AutoMappedComponent.VENDOR_ADDRESS.getName(),
                    new DocCoordinates(27, 592, 285, 57),
-                   false);
+                   true);
 
         addTextBox(DocumentInjectionField.PRODUCT_NAME.getName(),
                    new DocCoordinates(27, 545, 170, 40),
@@ -69,10 +69,9 @@ public class FDA_2887 {
                    new DocCoordinates(467, 658, 130, 18),
                    false);
 
-        addTextBox("name and address of importer",
+        addTextBox(AutoMappedComponent.CUSTOMER_ADDRESS.getName(),
                    new DocCoordinates(312, 592, 285, 57),
-                   true,
-                   AutoMappedComponent.CUSTOMER_ADDRESS);
+                   true);
 
         addTextBox(DocumentInjectionField.PRODUCT_MODEL.getName(),
                    new DocCoordinates(312, 545, 285, 40),
@@ -193,17 +192,6 @@ public class FDA_2887 {
                             DocCoordinates coordinates,
                             boolean editable) {
 
-        addTextBox(name,
-                   coordinates,
-                   editable,
-                   null);
-    }
-
-    private void addTextBox(String name,
-                            DocCoordinates coordinates,
-                            boolean editable,
-                            AutoMappedComponent automapped) {
-
         TextComponent textComponent = new TextComponent(name);
         textComponent.setCoordinates(coordinates);
         textComponent.setName(name);
@@ -213,11 +201,6 @@ public class FDA_2887 {
 
         if (editable) {
             TextComponentView textComponentView = componentViewFactory.createTextComponentView(textComponent);
-
-            if (automapped != null) {
-                textComponentView.setAutoMappedComponent(automapped);
-            }
-
             documentView.addComponentView(textComponentView);
         }
     }

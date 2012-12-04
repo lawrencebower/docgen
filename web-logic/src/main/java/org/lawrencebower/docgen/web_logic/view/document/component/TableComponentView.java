@@ -154,9 +154,9 @@ public class TableComponentView extends DocComponentView<TableComponent> {
     }
 
     @Override
-    public void copyFromDocument(DocumentView document) {
+    public void copyFromDocument(DocumentView documentToCopy) {
         /**
-         * not needed yet - if we need to copy a document with a product table this will need to be implemented
+         * not needed yet - if we need to copy a documentToCopy with a product table this will need to be implemented
          */
        //todo
     }

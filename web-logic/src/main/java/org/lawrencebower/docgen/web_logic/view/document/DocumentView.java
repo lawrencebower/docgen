@@ -108,28 +108,6 @@ public class DocumentView {
         return hasDocumentInjectionField;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-
-        if (!(obj instanceof DocumentView)) {
-            return false;
-        }
-
-        DocumentView compareTo = (DocumentView) obj;
-        EqualsBuilder builder = new EqualsBuilder();
-        builder.append(getName(), compareTo.getName());
-
-        return builder.isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        HashCodeBuilder builder = new HashCodeBuilder();
-        String name = getName();
-        builder.append(name);
-        return builder.toHashCode();
-    }
-
     /**
      * This is not a field-for-field copy.
      */
@@ -140,9 +118,52 @@ public class DocumentView {
         return newDocument;
     }
 
-    private void copyComponentViews(DocumentView document) {
+    private void copyComponentViews(DocumentView documentToCopy) {
         for (DocComponentView docComponentView : getComponentViews()) {
-            docComponentView.copyFromDocument(document);
+            docComponentView.copyFromDocument(documentToCopy);
         }
+    }
+
+    public List<DocumentView> injectDocuments(List<DocumentInjectionInfo> injectionInfos) {
+
+        List<DocumentView> results = new ArrayList<>();
+
+        for (DocumentInjectionInfo injectionInfo : injectionInfos) {
+            DocumentView newDocument = copyComponentViews();
+            newDocument.setDocumentInjectionFields(injectionInfo);
+            injectionInfo.setDocumentNameExtension(newDocument);
+            results.add(newDocument);
+        }
+
+        return results;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        boolean isEqual = false;
+
+        if ((obj instanceof DocumentView)) {
+
+            DocumentView compareTo = (DocumentView) obj;
+            EqualsBuilder builder = new EqualsBuilder();
+
+            String thisName = getName();
+            String compareToName = compareTo.getName();
+
+            builder.append(thisName, compareToName);
+
+            isEqual = builder.isEquals();
+        }
+
+        return isEqual;
+    }
+
+    @Override
+    public int hashCode() {
+        HashCodeBuilder builder = new HashCodeBuilder();
+        String name = getName();
+        builder.append(name);
+        return builder.toHashCode();
     }
 }

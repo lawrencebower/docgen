@@ -80,6 +80,9 @@ public enum ProductInjectionField {
             case PRODUCT_QUANTITY:
                 value = product.getQuantityString();
                 break;
+            default:
+                String message = String.format("ProductInjectionField '%s' not mapped", productField);
+                throw new DocGenException(message);
         }
 
         return value;
