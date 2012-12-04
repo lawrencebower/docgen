@@ -13,6 +13,7 @@ import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
+import org.lawrencebower.docgen.web_logic.business.component_calculation.Format;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.Operator;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculation;
 import org.lawrencebower.docgen.web_logic.business.injection.product_injection.ProductInjectionField;
@@ -399,6 +400,7 @@ public class CommercialInvoice {
         productTable.setRenderBorder(true);
 
         TableComponentCalculation calculation = new TableComponentCalculation(Operator.MULTIPLY,
+                                                                              Format.CURRENCY,
                                                                               TOTAL_VALUE_NAME,
                                                                               quantityName,
                                                                               productValueName);
@@ -482,6 +484,7 @@ public class CommercialInvoice {
         costTable.addRow(subTotalRow);
 
         ComponentCalculation subtotalCalc = new ComponentCalculation(Operator.PLUS,
+                                                                     Format.CURRENCY,
                                                                      TOTAL_VALUE_NAME);
         addTextComponentView(subTotalComponent, subtotalCalc);
 
@@ -502,6 +505,7 @@ public class CommercialInvoice {
         costTable.addRow(totalRow);
 
         ComponentCalculation totalCalc = new ComponentCalculation(Operator.PLUS,
+                                                                  Format.CURRENCY,
                                                                   TOTAL_VALUE_NAME);
         addTextComponentView(totalComponent, totalCalc);
 

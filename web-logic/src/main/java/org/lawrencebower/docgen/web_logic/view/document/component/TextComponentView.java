@@ -108,7 +108,7 @@ public class TextComponentView extends DocComponentView<TextComponent> {
         if (hasCalculation() && componentCalculation.isNotRun()) {
             componentCalculation.clearResult();
             documentSet.runCalculation(componentCalculation);
-            Float result = componentCalculation.getResult();
+            String result = componentCalculation.getFormattedResult();
             setComponentValue(result);
         }
     }

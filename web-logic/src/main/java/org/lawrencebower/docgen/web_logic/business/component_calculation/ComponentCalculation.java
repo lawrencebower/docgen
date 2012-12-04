@@ -10,20 +10,27 @@ import java.util.List;
 public class ComponentCalculation {
 
     private Operator operator;
+    private Format format;
     private List<String> fields;
     private Float result;
     private boolean isRun;
 
     public static final float NO_RESULT = Float.MAX_VALUE;
 
-    public ComponentCalculation(Operator operator, List<String> fields) {
-        this.operator = operator;
-        this.fields = Collections.unmodifiableList(fields);
+    public ComponentCalculation(Operator operator,
+                                String... fields){
+        this(operator,
+             Format.NONE,
+             fields);
     }
 
-    public ComponentCalculation(Operator operator, String... fields) {
+    public ComponentCalculation(Operator operator,
+                                Format format,
+                                String... fields) {
         this.operator = operator;
-        this.fields = Arrays.asList(fields);
+        this.format = format;
+        List<String> fieldList = Arrays.asList(fields);
+        this.fields = Collections.unmodifiableList(fieldList);
     }
 
     public Operator getOperator() {
@@ -59,6 +66,10 @@ public class ComponentCalculation {
 
     public Float getResult() {
         return result;
+    }
+
+    public String getFormattedResult(){
+        return Format.applyFormat(format, result);
     }
 
     public void runOnOperands(DocumentSet documentSet) {

@@ -55,10 +55,9 @@ public class BasicTableComponentCalculator implements TableComponentCalculator {
                                 operandColIndices,
                                 calculation);
 
-            Float calculationResult = calculation.getResult();
             DocComponentView resultComponent = tableComponentView.getCellComponentView(rowIndex, resultColIndex);
+            String calculationResult = calculation.getFormattedResult();
             resultComponent.setComponentValue(calculationResult);
-
         }
     }
 

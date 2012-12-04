@@ -60,7 +60,7 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
 
     private void initProducts() {
 
-        product1 = new Product(PRODUCT_ID_1, "name 1", "100", "UK");
+        product1 = new Product(PRODUCT_ID_1, "name 1", "100.25", "UK");
         product2 = new Product(PRODUCT_ID_2, "name 2", "200", "UK");
 
         products.put(product1.getProductId(), product1);
