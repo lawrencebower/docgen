@@ -23,4 +23,8 @@ public class ContactView {
     public Contact getContact() {
         return contact;
     }
+
+    public String getCountry() {
+        return contact.getCountry();
+    }
 }

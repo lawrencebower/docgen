@@ -14,13 +14,15 @@ Select customer
                     <td>
                         <c:out value="${product.name}"/><br/>
                         <c:out value="${product.contactName}"/><br/>
-                        <c:out value="${product.address}"/>
+                        <c:out value="${product.address}"/><br/>
+                        <c:out value="${product.country}"/>
                     </td>
                     <td>
                         <c:set var="contact" value="${product.contact}" scope="page"/>
                         <c:out value="${contact.name}"/><br/>
                         <c:out value="${contact.contactName}"/><br/>
-                        <c:out value="${contact.address}"/>
+                        <c:out value="${contact.address}"/><br/>
+                        <c:out value="${contact.country}"/>
                     </td>
                     <td>
                         <s:url var="customer_url" value="/customerSelect/customerName/{customerName}">
