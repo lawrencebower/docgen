@@ -244,15 +244,12 @@ public class DeliveryNote {
         TableCell toCell = new TableCell("To");
         headerRow.addCell(toCell, 1);
 
-        TableTextComponent addressComponent = new TableTextComponent("Lawrence Bower\n" +
-                                                                     "39 York Street\n" +
-                                                                     "Cambridge CB12PZ");
-        addressComponent.setName(AutoMappedComponent.CUSTOMER_ADDRESS.getName());
-        TableCell addressCell = new TableCell(addressComponent);
+        TableTextComponent nameComponent = new TableTextComponent("Lawrence Bower");
+        nameComponent.setName(AutoMappedComponent.CUSTOMER_NAME_AND_ADDRESS.getName());
+        TableCell nameCell = new TableCell(nameComponent);
+        addTextAreaComponent(nameComponent);
 
-        addTextAreaComponent(addressComponent);
-
-        headerRow.addCell(addressCell, 9);
+        headerRow.addCell(nameCell, 9);
 
         table.setHeaderRow(headerRow);
 

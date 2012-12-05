@@ -6,18 +6,21 @@ import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentVi
 public enum AutoMappedComponent {
 
     BUSINESS_NAME("AUTO_MAPPED_BUSINESS_NAME"),
+    BUSINESS_NAME_AND_ADDRESS("AUTO_MAPPED_BUSINESS_NAME_AND_ADDRESS"),
     BUSINESS_CONTACT_NAME("AUTO_MAPPED_BUSINESS_CONTACT_NAME"),
     BUSINESS_ADDRESS("AUTO_MAPPED_BUSINESS_ADDRESS"),
     BUSINESS_PHONE("AUTO_MAPPED_BUSINESS_PHONE"),
     BUSINESS_COUNTRY("AUTO_MAPPED_BUSINESS_COUNTRY"),
 
     CUSTOMER_NAME("AUTO_MAPPED_CUSTOMER_NAME"),
+    CUSTOMER_NAME_AND_ADDRESS("AUTO_MAPPED_CUSTOMER_NAME_AND_ADDRESS"),
     CUSTOMER_CONTACT_NAME("AUTO_MAPPED_CUSTOMER_CONTACT_NAME"),
     CUSTOMER_ADDRESS("AUTO_MAPPED_CUSTOMER_ADDRESS"),
     CUSTOMER_PHONE("AUTO_MAPPED_CUSTOMER_PHONE"),
     CUSTOMER_COUNTRY("AUTO_MAPPED_CUSTOMER_COUNTRY"),
 
     VENDOR_NAME("AUTO_MAPPED_VENDOR_NAME"),
+    VENDOR_NAME_AND_ADDRESS("AUTO_MAPPED_VENDOR_NAME_AND_ADDRESS"),
     VENDOR_CONTACT_NAME("AUTO_MAPPED_VENDOR_CONTACT_NAME"),
     VENDOR_ADDRESS("AUTO_MAPPED_VENDOR_ADDRESS"),
     VENDOR_PHONE("AUTO_MAPPED_VENDOR_PHONE"),
@@ -73,6 +76,10 @@ public enum AutoMappedComponent {
             setComponentText(docComponentView, info.getVendorAddress());
         } else if (field == VENDOR_CONTACT_NAME) {
             setComponentText(docComponentView, info.getVendorContactName());
+        } else if (field == VENDOR_NAME_AND_ADDRESS) {
+            String vendorName = info.getVendorContactName();
+            String vendorAddress = info.getVendorAddress();
+            setComponentText(docComponentView, vendorName + "\n" + vendorAddress);
         } else if (field == VENDOR_COUNTRY) {
             setComponentText(docComponentView, info.getVendorCountry());
         } else if (field == VENDOR_NAME) {
@@ -85,6 +92,10 @@ public enum AutoMappedComponent {
             setComponentText(docComponentView, info.getVendorTaxId());
         } else if (field == BUSINESS_ADDRESS) {
             setComponentText(docComponentView, info.getBusinessAddress());
+        } else if (field == BUSINESS_NAME_AND_ADDRESS) {
+            String businessName = info.getBusinessName();
+            String businessAddress = info.getBusinessAddress();
+            setComponentText(docComponentView, businessName + "\n" + businessAddress);
         } else if (field == BUSINESS_CONTACT_NAME) {
             setComponentText(docComponentView, info.getBusinessContactName());
         } else if (field == BUSINESS_COUNTRY) {
@@ -95,6 +106,10 @@ public enum AutoMappedComponent {
             setComponentText(docComponentView, info.getBusinessPhone());
         } else if (field == CUSTOMER_ADDRESS) {
             setComponentText(docComponentView, info.getCustomerAddress());
+        } else if (field == CUSTOMER_NAME_AND_ADDRESS) {
+            String customerName = info.getCustomerContactName();
+            String customerAddress = info.getCustomerAddress();
+            setComponentText(docComponentView, customerName + "\n" + customerAddress);
         } else if (field == CUSTOMER_CONTACT_NAME) {
             setComponentText(docComponentView, info.getCustomerContactName());
         } else if (field == CUSTOMER_COUNTRY) {
