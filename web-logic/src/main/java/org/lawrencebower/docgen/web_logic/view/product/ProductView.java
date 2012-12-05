@@ -1,5 +1,6 @@
 package org.lawrencebower.docgen.web_logic.view.product;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.lawrencebower.docgen.core.exception.DocGenException;
@@ -25,21 +26,21 @@ public class ProductView {
         return product.getProductName();
     }
 
-    public String getProductValue(){
+    public String getProductValue() {
         return product.getValue();
     }
 
-    public String getProductCountryOfOrigin(){
+    public String getProductCountryOfOrigin() {
         return product.getCountryOfOrigin();
     }
 
-    public void incrementQuantity(){
+    public void incrementQuantity() {
         quantity++;
     }
 
-    public void decrementQuantity(){
+    public void decrementQuantity() {
 
-        if(quantity == 0){
+        if (quantity == 0) {
             String productId = product.getProductId();
             String template = "product %s quantity already zero?!";
             String message = String.format(template, productId);
@@ -57,24 +58,66 @@ public class ProductView {
         return Integer.toString(quantity);
     }
 
+    public String getHarmonizedTariffNumber() {
+        return product.getHarmonizedTariffNumber();
+    }
+
+    public String getCustomsDescription() {
+        return product.getCustomsDescription();
+    }
+
+    public String getCommercialInvoiceDescription() {
+
+        StringBuilder builder = new StringBuilder();
+
+        String productId = product.getProductId();
+        String productName = product.getProductName();
+        String customsDescription = product.getCustomsDescription();
+
+        builder.append(productId);
+        builder.append(" - ");
+        builder.append(productName);
+        builder.append(" ");
+        builder.append(customsDescription);
+
+        if (hasHarmonizedTariffNumber()) {
+            String tariff = product.getHarmonizedTariffNumber();
+            builder.append(" ");
+            builder.append(tariff);
+        }
+
+        return builder.toString();
+    }
+
+    private boolean hasHarmonizedTariffNumber() {
+        String number = getHarmonizedTariffNumber();
+        return StringUtils.isNotBlank(number);
+    }
+
     @Override
     public boolean equals(Object obj) {
 
-        if(!(obj instanceof ProductView)){
-            return false;
+        boolean isEqual = false;
+
+        if ((obj instanceof ProductView)) {
+
+            ProductView compareTo = (ProductView) obj;
+            EqualsBuilder builder = new EqualsBuilder();
+            String thisId = getId();
+            String compareToId = compareTo.getId();
+            builder.append(thisId, compareToId);
+
+            isEqual = builder.isEquals();
         }
 
-        ProductView compareTo = (ProductView) obj;
-        EqualsBuilder builder = new EqualsBuilder();
-        builder.append(this.getId(), compareTo.getId());
-
-        return builder.isEquals();
+        return isEqual;
     }
 
     @Override
     public int hashCode() {
         HashCodeBuilder builder = new HashCodeBuilder();
-        builder.append(this.getId());
+        String id = getId();
+        builder.append(id);
         return builder.toHashCode();
     }
 }

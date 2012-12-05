@@ -60,8 +60,18 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
 
     private void initProducts() {
 
-        product1 = new Product(PRODUCT_ID_1, "Super Widget 1", "100.25", "UK");
-        product2 = new Product(PRODUCT_ID_2, "Mega Widget 2", "200", "UK");
+        product1 = new Product(PRODUCT_ID_1,
+                               "Super Widget 1",
+                               "100.25",
+                               "UK",
+                               "Optical widget (no laser, plastic)");
+
+        product2 = new Product(PRODUCT_ID_2,
+                               "Mega Widget 2",
+                               "200",
+                               "UK",
+                               "Laser widget (contains laser)",
+                               "84562574");
 
         products.put(product1.getProductId(), product1);
         products.put(product2.getProductId(), product2);
@@ -129,6 +139,10 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
                                                product2,
                                                FDA_2887.FDA_2887_NAME);
 
+        customerProductDocMappings.addDocument(customer2.getContact(),
+                                               product2,
+                                               FCC_740.FCC_740_NAME);
+
     }
 
     @Override
@@ -183,6 +197,10 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
                 FDA_2887 fda_2887 = getFDA2887();
                 result = fda_2887.getDocumentView();
                 break;
+            case FCC_740.FCC_740_NAME:
+                FCC_740 fcc_740 = getFCC740();
+                result = fcc_740.getDocumentView();
+                break;
             default:
                 String message = String.format("No mapping present for documentName '%s'", documentName);
                 throw new DocGenException(message);
@@ -224,4 +242,6 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
     public abstract DeliveryNote getDeliveryNote();
 
     protected abstract FDA_2887 getFDA2887();
+
+    protected abstract FCC_740 getFCC740();
 }

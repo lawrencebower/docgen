@@ -371,7 +371,7 @@ public class CommercialInvoice {
         headerRow.addCell(quantityCell);
 
         TextComponent nameComponent = new TextComponent("Description");
-        String productNameName = ProductInjectionField.PRODUCT_NAME.getName();
+        String productNameName = ProductInjectionField.PRODUCT_COMMERCIAL_INVOICE_DESCRIPTION.getName();
         nameComponent.setName(productNameName);
         TableCell nameCell = new TableCell(nameComponent);
         headerRow.addCell(nameCell);

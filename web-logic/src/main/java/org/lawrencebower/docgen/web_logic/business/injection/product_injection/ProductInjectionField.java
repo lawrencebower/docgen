@@ -11,7 +11,9 @@ public enum ProductInjectionField {
     PRODUCT_NAME("PRODUCT_INJECT_NAME"),
     PRODUCT_VALUE("PRODUCT_INJECT_VALUE"),
     PRODUCT_ORIGIN("PRODUCT_INJECT_ORIGIN"),
-    PRODUCT_QUANTITY("PRODUCT_INJECT_QUANTITY");
+    PRODUCT_QUANTITY("PRODUCT_INJECT_QUANTITY"),
+    PRODUCT_COMMERCIAL_INVOICE_DESCRIPTION("PRODUCT_COMMERCIAL_INVOICE_DESCRIPTION"),
+    PRODUCT_HARMONIZED_TARIFF_DESCRIPTION("PRODUCT_HARMONIZED_TARIFF_DESCRIPTION");
 
     private String name;
 
@@ -79,6 +81,12 @@ public enum ProductInjectionField {
                 break;
             case PRODUCT_QUANTITY:
                 value = product.getQuantityString();
+                break;
+            case PRODUCT_COMMERCIAL_INVOICE_DESCRIPTION:
+                value = product.getCommercialInvoiceDescription();
+                break;
+            case PRODUCT_HARMONIZED_TARIFF_DESCRIPTION:
+                value = product.getHarmonizedTariffNumber();
                 break;
             default:
                 String message = String.format("ProductInjectionField '%s' not mapped", productField);
