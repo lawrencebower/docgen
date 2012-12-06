@@ -6,13 +6,13 @@ public class ProductSelection {
 
     private Map<String, ProductView> products = new LinkedHashMap<>();
 
-    public void addProduct(Product product) {
+    public void addProduct(ProductView product) {
         String productId = product.getProductId();
         if (products.containsKey(productId)) {
             ProductView productView = products.get(productId);
             productView.incrementQuantity();
         }else{
-            products.put(productId, new ProductView(product));
+            products.put(productId, product);
         }
     }
 

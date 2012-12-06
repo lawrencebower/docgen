@@ -3,7 +3,6 @@ package org.lawrencebower.docgen.web.model;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
-import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.lawrencebower.docgen.web_logic.view.product.ProductSelection;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 
@@ -57,7 +56,7 @@ public class SessionData {
         return documents;
     }
 
-    public void addSelectedProduct(Product selectedProduct) {
+    public void addSelectedProduct(ProductView selectedProduct) {
         selectedProducts.addProduct(selectedProduct);
     }
 

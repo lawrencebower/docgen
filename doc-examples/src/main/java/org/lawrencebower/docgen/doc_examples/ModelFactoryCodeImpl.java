@@ -10,6 +10,7 @@ import org.lawrencebower.docgen.web_logic.view.contact.ContactViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
+import org.lawrencebower.docgen.web_logic.view.product.ProductViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -23,18 +24,20 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
     private CustomerProduct_Document_Mappings customerProductDocMappings;
     @Autowired
     private ContactViewFactory contactViewFactory;
+    @Autowired
+    private ProductViewFactory productViewFactory;
 
     private LinkedHashMap<String, ContactView> customers = new LinkedHashMap<>();
 
     private LinkedHashMap<String, ContactView> businesses = new LinkedHashMap<>();
 
-    private LinkedHashMap<String, Product> products = new LinkedHashMap<>();
+    private LinkedHashMap<String, ProductView> products = new LinkedHashMap<>();
 
     private ContactView vendor;
     private ContactView customer1;
     private ContactView customer2;
-    private Product product1;
-    private Product product2;
+    private ProductView product1;
+    private ProductView product2;
 
     public static final String CUSTOMER_ID_1 = "Billy Bob's products";
     public static final String CUSTOMER_ID_2 = "David's widgets";
@@ -66,18 +69,18 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
 
     private void initProducts() {
 
-        product1 = new Product(PRODUCT_ID_1,
-                               "Super Widget 1",
-                               "100.25",
-                               "UK",
-                               "(no laser, plastic)");
+        product1 = productViewFactory.createProductView(new Product(PRODUCT_ID_1,
+                                                                    "Super Widget 1",
+                                                                    "100.25",
+                                                                    "UK",
+                                                                    "(no laser, plastic)"));
 
-        product2 = new Product(PRODUCT_ID_2,
-                               "Mega Widget 2",
-                               "200",
-                               "UK",
-                               "(contains laser)",
-                               "84562574");
+        product2 = productViewFactory.createProductView(new Product(PRODUCT_ID_2,
+                                                                    "Mega Widget 2",
+                                                                    "200",
+                                                                    "UK",
+                                                                    "(contains laser)",
+                                                                    "84562574"));
 
         products.put(product1.getProductId(), product1);
         products.put(product2.getProductId(), product2);
@@ -165,8 +168,8 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
     public List<ProductView> getProducts() {
 
         List<ProductView> results = new ArrayList<>();
-        for (Product product : products.values()) {
-            results.add(new ProductView(product));
+        for (ProductView product : products.values()) {
+            results.add(product);
         }
 
         return results;
@@ -231,7 +234,7 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
     }
 
     @Override
-    public Product getProduct(String productId) {
+    public ProductView getProduct(String productId) {
         if (!products.containsKey(productId)) {
             throw new DocGenException(String.format("product '%s' not found?!", productId));
         }

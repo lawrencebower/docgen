@@ -10,7 +10,10 @@ public class ProductView {
     private Product product;
     private int quantity = 1;
 
-    public ProductView(Product product) {
+    private ProductView() {
+    }
+
+    public void setProduct(Product product) {
         this.product = product;
     }
 

@@ -15,7 +15,6 @@ import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSetFactory;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
-import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -62,9 +61,8 @@ public class DataEntryCB {
         Set<DocumentView> documents = new LinkedHashSet<>();
 
         for (ProductView selectedProduct : selectedProducts) {
-            Product product = selectedProduct.getProduct();
             List<DocumentView> documentViews =
-                    customerProductMappings.getDocumentsForCustomerAndProduct(selectedCustomer, product);
+                    customerProductMappings.getDocumentsForCustomerAndProduct(selectedCustomer, selectedProduct);
             documents.addAll(documentViews);
         }
 

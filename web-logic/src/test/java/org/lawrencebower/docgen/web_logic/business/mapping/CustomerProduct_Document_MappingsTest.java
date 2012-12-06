@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
-import org.lawrencebower.docgen.web_logic.view.product.Product;
+import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -26,8 +26,8 @@ public class CustomerProduct_Document_MappingsTest {
 
     private ContactView customer1;
     private ContactView customer2;
-    private Product product1;
-    private Product product2;
+    private ProductView product1;
+    private ProductView product2;
     private DocumentView doc1;
     private DocumentView doc2;
 
@@ -99,8 +99,8 @@ public class CustomerProduct_Document_MappingsTest {
         return mock;
     }
 
-    private Product mockProduct(String productId) {
-        Product mock = mock(Product.class);
+    private ProductView mockProduct(String productId) {
+        ProductView mock = mock(ProductView.class);
         when(mock.getProductId()).thenReturn(productId);
         return mock;
     }

@@ -15,7 +15,6 @@ import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSetFactory;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
-import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
@@ -111,7 +110,7 @@ public class DataEntryCBTest {
         List<DocumentView> list2 = Arrays.asList(docView2, docView3);
 
         given(mockMapper.getDocumentsForCustomerAndProduct(any(ContactView.class),
-                                                           any(Product.class))).willReturn(list1, list1, list2);
+                                                           any(ProductView.class))).willReturn(list1, list1, list2);
 
         dataEntryBusiness.setCustomerProductMappings(mockMapper);
 

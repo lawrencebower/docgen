@@ -4,7 +4,6 @@ import org.lawrencebower.docgen.web_logic.view.contact.Contact;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
-import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -47,7 +46,7 @@ public class ModelFactoryTestImpl implements ModelFactory {
     }
 
     @Override
-    public Product getProduct(String productId) {
+    public ProductView getProduct(String productId) {
         return null;
     }
 

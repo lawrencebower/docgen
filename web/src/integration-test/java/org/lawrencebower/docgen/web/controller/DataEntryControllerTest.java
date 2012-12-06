@@ -14,7 +14,7 @@ import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document.component.TextComponentView;
-import org.lawrencebower.docgen.web_logic.view.product.Product;
+import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
@@ -42,6 +42,7 @@ public class DataEntryControllerTest {
     DataEntryCB business;
     @Autowired
     ModelFactory modelFactory;
+
     SessionData sessionData;
     DataEntryController controller;
 
@@ -88,8 +89,8 @@ public class DataEntryControllerTest {
     }
 
     private void setProductsOnSession() {
-        Product product1 = modelFactory.getProduct(ModelFactoryCodeImpl.PRODUCT_ID_1);
-        Product product2 = modelFactory.getProduct(ModelFactoryCodeImpl.PRODUCT_ID_2);
+        ProductView product1 = modelFactory.getProduct(ModelFactoryCodeImpl.PRODUCT_ID_1);
+        ProductView product2 = modelFactory.getProduct(ModelFactoryCodeImpl.PRODUCT_ID_2);
         sessionData.addSelectedProduct(product1);
         sessionData.addSelectedProduct(product2);
     }

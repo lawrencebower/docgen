@@ -50,7 +50,16 @@
 
     <bean name="contactViewFactory"
           class="org.lawrencebower.docgen.web_logic.view.contact.ContactViewFactory">
-        <lookup-method name="createDocumentInfoView" bean="contactView"/>
+        <lookup-method name="createContactView" bean="contactView"/>
+    </bean>
+
+    <bean name="productView"
+          class="org.lawrencebower.docgen.web_logic.view.product.ProductView"
+          scope="prototype"/>
+
+    <bean name="productViewFactory"
+          class="org.lawrencebower.docgen.web_logic.view.product.ProductViewFactory">
+        <lookup-method name="createProductView" bean="productView"/>
     </bean>
 
     <bean name="documentView"
