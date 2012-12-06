@@ -27,22 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
 
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedBusinessAddress.BUSINESS_ADDRESS;
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedBusinessContactName.BUSINESS_CONTACT_NAME;
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedBusinessCountry.BUSINESS_COUNTRY;
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedBusinessName.BUSINESS_NAME;
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedBusinessPhone.BUSINESS_PHONE;
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedCustomerAddress.CUSTOMER_ADDRESS;
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedCustomerContactName.CUSTOMER_CONTACT_NAME;
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedCustomerCountry.CUSTOMER_COUNTRY;
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedCustomerName.CUSTOMER_NAME;
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedCustomerPhone.CUSTOMER_PHONE;
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedVendorAddress.VENDOR_ADDRESS;
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedVendorContactName.VENDOR_CONTACT_NAME;
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedVendorCountry.VENDOR_COUNTRY;
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedVendorName.VENDOR_NAME;
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedVendorPhone.VENDOR_PHONE;
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedVendorTaxId.VENDOR_TAX_ID;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedComponent.*;
 
 public class CommercialInvoice {
 

@@ -4,8 +4,6 @@ import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentVi
 
 public class AutoMappedBusinessCountry extends AutoMappedComponent {
 
-    public static final String BUSINESS_COUNTRY = "AUTO_MAPPED_BUSINESS_COUNTRY";
-
     public AutoMappedBusinessCountry() {
         name = BUSINESS_COUNTRY;
     }

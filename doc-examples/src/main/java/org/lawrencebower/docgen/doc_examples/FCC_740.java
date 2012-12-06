@@ -17,8 +17,8 @@ import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentVi
 import org.lawrencebower.docgen.web_logic.view.document.component.TextComponentView;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedBusinessAddress.BUSINESS_ADDRESS;
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedCustomerAddress.CUSTOMER_ADDRESS;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedComponent.BUSINESS_ADDRESS;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedComponent.CUSTOMER_ADDRESS;
 
 public class FCC_740 {
 

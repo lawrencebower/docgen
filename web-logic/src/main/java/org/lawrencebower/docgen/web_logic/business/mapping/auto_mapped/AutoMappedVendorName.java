@@ -4,8 +4,6 @@ import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentVi
 
 public class AutoMappedVendorName extends AutoMappedComponent {
 
-    public static final String VENDOR_NAME = "AUTO_MAPPED_VENDOR_NAME";
-
     public AutoMappedVendorName() {
         name = VENDOR_NAME;
     }

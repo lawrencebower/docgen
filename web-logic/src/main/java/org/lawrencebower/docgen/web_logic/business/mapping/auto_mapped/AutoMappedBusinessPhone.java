@@ -4,8 +4,6 @@ import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentVi
 
 public class AutoMappedBusinessPhone extends AutoMappedComponent {
 
-    public static final String BUSINESS_PHONE = "AUTO_MAPPED_BUSINESS_PHONE";
-
     public AutoMappedBusinessPhone() {
         name = BUSINESS_PHONE;
     }

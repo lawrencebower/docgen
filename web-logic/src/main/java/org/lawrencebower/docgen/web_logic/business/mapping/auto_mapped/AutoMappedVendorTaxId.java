@@ -4,8 +4,6 @@ import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentVi
 
 public class AutoMappedVendorTaxId extends AutoMappedComponent {
 
-    public static final String VENDOR_TAX_ID = "AUTO_MAPPED_VENDOR_TAX_ID";
-
     public AutoMappedVendorTaxId() {
         name = VENDOR_TAX_ID;
     }

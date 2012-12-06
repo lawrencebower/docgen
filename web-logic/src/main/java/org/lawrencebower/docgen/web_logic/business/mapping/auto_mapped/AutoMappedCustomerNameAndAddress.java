@@ -4,8 +4,6 @@ import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentVi
 
 public class AutoMappedCustomerNameAndAddress extends AutoMappedComponent {
 
-    public static final String CUSTOMER_NAME_AND_ADDRESS = "AUTO_MAPPED_CUSTOMER_NAME_AND_ADDRESS";
-
     public AutoMappedCustomerNameAndAddress() {
         name = CUSTOMER_NAME_AND_ADDRESS;
     }

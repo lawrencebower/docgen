@@ -2,15 +2,15 @@ subprojects {
     apply plugin: 'java'
 }
 
-project(':doc-examples') {
-    dependencies {
-        compile project(':core'), project(':web-logic')
-    }
-}
-
 project(':web-logic') {
     dependencies {
         compile project(':core')
+    }
+}
+
+project(':doc-examples') {
+    dependencies {
+        compile project(':core'), project(':web-logic')
     }
 }
 
