@@ -13,10 +13,13 @@
           class="org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB"/>
 
     <bean name="viewableComponentFilter"
-          class="org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.ViewableComponentFilter"/>
+          class="org.lawrencebower.docgen.web_logic.business.utils.ViewableComponentFilter"/>
 
     <bean name="customerProductMappings"
           class="org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings"/>
+
+    <bean name="autoMappedComponentMapper"
+          class="org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedComponentMapper"/>
 
     <bean name="fieldMapper"
           class="org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper"/>
@@ -32,22 +35,31 @@
 
     <!--VIEW BEANS-->
 
-    <bean name="documentInfoSet"
+    <bean name="documentSet"
           class="org.lawrencebower.docgen.web_logic.view.document.DocumentSet"
           scope="prototype"/>
 
-    <bean name="documentInfoSetFactory"
+    <bean name="documentSetFactory"
           class="org.lawrencebower.docgen.web_logic.view.document.DocumentSetFactory">
-        <lookup-method name="createDocumentInfoSet" bean="documentInfoSet"/>
+        <lookup-method name="createDocumentInfoSet" bean="documentSet"/>
     </bean>
 
-    <bean name="documentInfoView"
+    <bean name="contactView"
+          class="org.lawrencebower.docgen.web_logic.view.contact.ContactView"
+          scope="prototype"/>
+
+    <bean name="contactViewFactory"
+          class="org.lawrencebower.docgen.web_logic.view.contact.ContactViewFactory">
+        <lookup-method name="createDocumentInfoView" bean="contactView"/>
+    </bean>
+
+    <bean name="documentView"
           class="org.lawrencebower.docgen.web_logic.view.document.DocumentView"
           scope="prototype"/>
 
-    <bean name="documentInfoViewFactory"
+    <bean name="documentViewFactory"
           class="org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory">
-        <lookup-method name="createDocumentInfoView" bean="documentInfoView"/>
+        <lookup-method name="createDocumentView" bean="documentView"/>
     </bean>
 
     <bean name="componentViewFactory"

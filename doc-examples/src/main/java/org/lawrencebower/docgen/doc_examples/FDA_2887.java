@@ -9,7 +9,6 @@ import org.lawrencebower.docgen.core.generator.overlay.OverlayPDFGenerator;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponentFactory;
 import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionField;
-import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document.component.CheckBoxComponentView;
@@ -18,6 +17,9 @@ import org.lawrencebower.docgen.web_logic.view.document.component.TextComponentV
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedCustomerAddress.CUSTOMER_ADDRESS;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedVendorAddress.VENDOR_ADDRESS;
 
 public class FDA_2887 {
 
@@ -43,7 +45,7 @@ public class FDA_2887 {
         document = new OverlayDocument(FDA_2887_NAME, pdfGenerator);
         document.setSourcePDF("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\FDA-2877.pdf");
 
-        documentView = documentViewFactory.createDocumentInfoView(document);
+        documentView = documentViewFactory.createDocumentView(document);
 
         documentView.setCopyNumber(5);
 
@@ -51,7 +53,7 @@ public class FDA_2887 {
                    new DocCoordinates(27, 658, 285, 18),
                    false);
 
-        addTextBox(AutoMappedComponent.VENDOR_ADDRESS.getName(),
+        addTextBox(VENDOR_ADDRESS,
                    new DocCoordinates(27, 592, 285, 57),
                    true);
 
@@ -71,7 +73,7 @@ public class FDA_2887 {
                    new DocCoordinates(467, 658, 130, 18),
                    false);
 
-        addTextBox(AutoMappedComponent.CUSTOMER_ADDRESS.getName(),
+        addTextBox(CUSTOMER_ADDRESS,
                    new DocCoordinates(312, 592, 285, 57),
                    true);
 

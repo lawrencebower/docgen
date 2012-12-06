@@ -1,16 +1,16 @@
-package org.lawrencebower.docgen.web_logic.business.mapping;
+package org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped;
 
-import org.lawrencebower.docgen.web_logic.view.contact.Contact;
+import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 
 public class AutoMappedComponentInfo {
 
-    private Contact customer;
-    private Contact vendor;
-    private Contact business;
+    private ContactView customer;
+    private ContactView vendor;
+    private ContactView business;
 
-    public AutoMappedComponentInfo(Contact customer,
-                                   Contact vendor,
-                                   Contact business) {
+    public AutoMappedComponentInfo(ContactView customer,
+                                   ContactView vendor,
+                                   ContactView business) {
 
         this.customer = customer;
         this.vendor = vendor;

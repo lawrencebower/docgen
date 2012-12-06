@@ -2,9 +2,11 @@ package org.lawrencebower.docgen.web_logic.business.model_factory;
 
 import org.lawrencebower.docgen.web_logic.view.contact.Contact;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
+import org.lawrencebower.docgen.web_logic.view.contact.ContactViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ModelFactoryTestImpl implements ModelFactory {
+
+    @Autowired
+    private ContactViewFactory contactViewFactory;
 
     @Override
     public List<ContactView> getCustomers() {
@@ -48,13 +53,15 @@ public class ModelFactoryTestImpl implements ModelFactory {
 
     @Override
     public ContactView getVendor() {
-        ContactView vendor = new ContactView(new Contact("Billy Bob's Widgets",
-                                                         "Billy Bob",
-                                                         "36 Billy Bob Street\nColchester\nEssex",
-                                                         "534546454",
-                                                         "UK",
-                                                         "tax id",
-                                                         "sales@acme.com"));
+        Contact contact = new Contact("Billy Bob's Widgets",
+                                 "Billy Bob",
+                                 "36 Billy Bob Street\nColchester\nEssex",
+                                 "534546454",
+                                 "UK",
+                                 "tax id",
+                                 "sales@acme.com");
+
+        ContactView vendor = contactViewFactory.createContactView(contact);
 
         return vendor;
     }

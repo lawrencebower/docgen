@@ -4,12 +4,12 @@ import org.lawrencebower.docgen.core.document.Document;
 
 public abstract class DocumentViewFactory {
 
-    public DocumentView createDocumentInfoView(Document doc){
-        DocumentView documentViews = createDocumentInfoView();
-        documentViews.setDocument(doc);
-        return documentViews;
+    public DocumentView createDocumentView(Document doc){
+        DocumentView documentView = createDocumentView();
+        documentView.setDocument(doc);
+        return documentView;
     }
 
-    public abstract DocumentView createDocumentInfoView();
+    public abstract DocumentView createDocumentView();
 
 }

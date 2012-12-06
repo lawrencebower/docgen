@@ -11,7 +11,6 @@ import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
-import org.lawrencebower.docgen.web_logic.view.contact.Contact;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSetFactory;
@@ -111,7 +110,7 @@ public class DataEntryCBTest {
         List<DocumentView> list1 = Arrays.asList(docView1, docView2);
         List<DocumentView> list2 = Arrays.asList(docView2, docView3);
 
-        given(mockMapper.getDocumentsForCustomerAndProduct(any(Contact.class),
+        given(mockMapper.getDocumentsForCustomerAndProduct(any(ContactView.class),
                                                            any(Product.class))).willReturn(list1, list1, list2);
 
         dataEntryBusiness.setCustomerProductMappings(mockMapper);

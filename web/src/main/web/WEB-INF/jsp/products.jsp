@@ -11,14 +11,14 @@ Select products
 
 <div>
     <br/>
-    <c:forEach var="product" items="${products}">
+    <c:forEach var="customer" items="${products}">
 
         <s:url var="product_url" value="/productSelect/productId/{productId}">
-            <s:param name="productId" value="${product.id}"/>
+            <s:param name="productId" value="${customer.id}"/>
         </s:url>
 
         <a href="${product_url}">
-            <c:out value="${product.productName}"/>&nbsp;-&nbsp;<c:out value="${product.id}"/>
+            <c:out value="${customer.productName}"/>&nbsp;-&nbsp;<c:out value="${customer.id}"/>
         </a>
         <br/>
     </c:forEach>
@@ -42,15 +42,14 @@ Select products
                 </tr>
             </c:forEach>
         </table>
-
-        <br/>
-        <br/>
-
         <s:url var="clear_products_url" value="/productSelect/clearProducts"/>
         <a href="${clear_products_url}">
             <c:out value="Clear products"/>
         </a>
-        &nbsp;
+        <br/>
+        <br/>
+        <br/>
+
         <s:url var="data_entry_url" value="/dataEntry/prepareFields"/>
         <a href="${data_entry_url}">
             <c:out value="Enter data"/>

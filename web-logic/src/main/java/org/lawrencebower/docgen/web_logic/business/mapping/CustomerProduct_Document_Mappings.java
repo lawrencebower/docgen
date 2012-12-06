@@ -3,7 +3,7 @@ package org.lawrencebower.docgen.web_logic.business.mapping;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
-import org.lawrencebower.docgen.web_logic.view.contact.Contact;
+import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class CustomerProduct_Document_Mappings {
      */
     protected Map<CustomerProductPair, List<String>> mappings = new LinkedHashMap<>();
 
-    public void addDocument(Contact business,
+    public void addDocument(ContactView business,
                             Product product,
                             String documentName) {
 
@@ -39,7 +39,7 @@ public class CustomerProduct_Document_Mappings {
         }
     }
 
-    public List<DocumentView> getDocumentsForCustomerAndProduct(Contact business, Product product){
+    public List<DocumentView> getDocumentsForCustomerAndProduct(ContactView business, Product product){
 
         List<DocumentView> results = new ArrayList<>();
 
@@ -55,7 +55,7 @@ public class CustomerProduct_Document_Mappings {
         return results;
     }
 
-    private CustomerProductPair makeCustomerProductPair(Contact business, Product product) {
+    private CustomerProductPair makeCustomerProductPair(ContactView business, Product product) {
         String name = business.getName();
         String productId = product.getProductId();
         return new CustomerProductPair(name, productId);

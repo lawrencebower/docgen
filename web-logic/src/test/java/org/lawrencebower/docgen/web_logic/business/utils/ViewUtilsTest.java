@@ -41,7 +41,7 @@ public class ViewUtilsTest {
 
         for (int i = 0; i < documentNumber; i++) {
             Document mock = Mockito.mock(Document.class);
-            DocumentView docView = viewFactory.createDocumentInfoView(mock);
+            DocumentView docView = viewFactory.createDocumentView(mock);
 
             addComponentsToView(componentNumber, docView);
 

@@ -16,7 +16,10 @@ import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
 import org.lawrencebower.docgen.web_logic.business.injection.product_injection.ProductInjectionField;
-import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedCustomerAddress;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedCustomerContactName;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedCustomerCountry;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedCustomerName;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
@@ -27,7 +30,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
 
-import static org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent.*;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedVendorAddress.VENDOR_ADDRESS;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedVendorEmail.VENDOR_EMAIL;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedVendorPhone.VENDOR_PHONE;
 
 public class DeliveryNote {
 
@@ -51,7 +56,7 @@ public class DeliveryNote {
 
         document = new CustomDocument(DELIVERY_NOTE_NAME, pdfGenerator);
 
-        documentView = documentViewFactory.createDocumentInfoView(document);
+        documentView = documentViewFactory.createDocumentView(document);
 
         documentView.setCopyNumber(2);
 
@@ -66,8 +71,9 @@ public class DeliveryNote {
         convertAndAddComponent(yourReftable);
 
         addTextBox("date",
-                   "JULY 2 2012",
-                   HorizontalAlignment.RIGHT);
+                   new TextBlock("JULY 2 2012"),
+                   HorizontalAlignment.RIGHT,
+                   true);
 
         addTextBox("Acme tag",
                    new TextBlock("Acme Ltd", FontInfo.DEFAULT_BOLD()),
@@ -82,17 +88,17 @@ public class DeliveryNote {
 
         TextComponent addressComponent = new TextComponent("Suites 11 and 12, Church Farm\n" +
                                                            "Maris Lane, Trumpington, CB29LG, UK");
-        addressComponent.setName(VENDOR_ADDRESS.getName());
+        addressComponent.setName(VENDOR_ADDRESS);
         convertAndAddComponent(addressComponent);
         addTextComponentView(addressComponent);
 
         TextComponent phoneComponent = new TextComponent("Phone +44 (0) 1223 655577");
-        phoneComponent.setName(VENDOR_PHONE.getName());
+        phoneComponent.setName(VENDOR_PHONE);
         convertAndAddComponent(phoneComponent);
         addTextComponentView(phoneComponent);
 
         TextComponent emailComponent = new TextComponent("sales@acme.com");
-        emailComponent.setName(VENDOR_EMAIL.getName());
+        emailComponent.setName(VENDOR_EMAIL);
         convertAndAddComponent(emailComponent);
         addTextComponentView(emailComponent);
 
@@ -147,7 +153,7 @@ public class DeliveryNote {
                                                            24,
                                                            FontStyle.BOLD));
 
-        TextComponent slogan = new TextComponent(sloganBlock);
+        TableTextComponent slogan = new TableTextComponent(sloganBlock);
         slogan.setAlignment(HorizontalAlignment.RIGHT);
         TableCell sloganCell = new TableCell(slogan);
         sloganCell.setVerticalAlignment(VerticalAlignment.BOTTOM);
@@ -156,6 +162,7 @@ public class DeliveryNote {
         logoTable.setHeaderRow(row);
 
         logoTable.setWidthPercentage(100);
+
         return logoTable;
     }
 
@@ -178,34 +185,12 @@ public class DeliveryNote {
 
         TextComponent desc = new TextComponent(HorizontalAlignment.CENTER,
                                                "DESCRIPTION");
-        desc.setName(ProductInjectionField.PRODUCT_NAME.getName());
+        desc.setName(ProductInjectionField.PRODUCT_NAME_AND_DESCRIPTION.getName());
         TableCell descriptionCell = new TableCell(desc);
         descriptionCell.setBackgroundColor(ACME_BLUE);
         headerRow.addCell(descriptionCell, 80);
 
         table.setHeaderRow(headerRow);
-
-/*
-        TableRow row = new TableRow();
-
-        TextBlock textBlock = new TextBlock("1", FontInfo.DEFAULT_BOLD());
-        TextComponent numberComp = new TextComponent(textBlock);
-        numberComp.setAlignment(HorizontalAlignment.CENTER);
-        TableCell cell = new TableCell(numberComp);
-        cell.setPadding(20);
-        row.addCell(cell);
-
-        TextFragment productFragment = new TextFragment("Z89914 ", FontInfo.DEFAULT_BOLD());
-        TextFragment productFragment2 = new TextFragment("Z89914 Product Scanner");
-        TextBlock productBlock = new TextBlock(productFragment, productFragment2);
-
-        TableCell cell1 = new TableCell(new TextComponent(productBlock));
-        cell1.setVerticalAlignment(VerticalAlignment.MIDDLE);
-        cell1.setPadding(20);
-        row.addCell(cell1);
-
-        table.addRow(row);
-*/
 
         table.setRenderBorder(true);
 
@@ -218,16 +203,18 @@ public class DeliveryNote {
 
         TableHeaderRow headerRow = new TableHeaderRow();
 
-        TableCell detailsCell = new TableCell("DETAILS AND OBSERVATIONS");
-        detailsCell.setBackgroundColor(ACME_BLUE);
-        headerRow.addCell(detailsCell);
+        TableCell headerCell = new TableCell("DETAILS AND OBSERVATIONS");
+        headerCell.setBackgroundColor(ACME_BLUE);
+        headerRow.addCell(headerCell);
 
         table.setHeaderRow(headerRow);
 
         TableRow row = new TableRow();
 
-        TableCell cell = new TableCell("THIS COMPLETES THE ORDER");
-        row.addCell(cell);
+        TableTextComponent detailsComponent = new TableTextComponent("THIS COMPLETES THE ORDER");
+        TableCell detailsCell = new TableCell(detailsComponent);
+        row.addCell(detailsCell);
+        addTextComponentView(detailsComponent);
 
         table.addRow(row);
 
@@ -242,16 +229,40 @@ public class DeliveryNote {
         TableHeaderRow headerRow = new TableHeaderRow();
 
         TableCell toCell = new TableCell("To");
+        toCell.setRowSpan(4);
         headerRow.addCell(toCell, 1);
 
         TableTextComponent nameComponent = new TableTextComponent("Lawrence Bower");
-        nameComponent.setName(AutoMappedComponent.CUSTOMER_NAME_AND_ADDRESS.getName());
+        nameComponent.setName(AutoMappedCustomerContactName.CUSTOMER_CONTACT_NAME);
         TableCell nameCell = new TableCell(nameComponent);
         addTextAreaComponent(nameComponent);
-
         headerRow.addCell(nameCell, 9);
 
         table.setHeaderRow(headerRow);
+
+        TableRow companyRow = new TableRow();
+        TableTextComponent companyComponent = new TableTextComponent("Acme ltd");
+        companyComponent.setName(AutoMappedCustomerName.CUSTOMER_NAME);
+        TableCell companyCell = new TableCell(companyComponent);
+        addTextAreaComponent(companyComponent);
+        companyRow.addCell(companyCell);
+        table.addRow(companyRow);
+
+        TableRow addressRow = new TableRow();
+        TableTextComponent addressComponent = new TableTextComponent("36 BillyBob Street\nEssex");
+        addressComponent.setName(AutoMappedCustomerAddress.CUSTOMER_ADDRESS);
+        TableCell addressCell = new TableCell(addressComponent);
+        addTextAreaComponent(addressComponent);
+        addressRow.addCell(addressCell);
+        table.addRow(addressRow);
+
+        TableRow countryRow = new TableRow();
+        TableTextComponent countryComponent = new TableTextComponent("UK");
+        countryComponent.setName(AutoMappedCustomerCountry.CUSTOMER_COUNTRY);
+        TableCell countryCell = new TableCell(countryComponent);
+        addTextAreaComponent(countryComponent);
+        countryRow.addCell(countryCell);
+        table.addRow(countryRow);
 
         table.setRenderBorder(false);
 

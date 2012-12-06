@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
+import org.lawrencebower.docgen.web_logic.business.utils.ViewableComponentFilter;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentViewFactory;
 import org.mockito.MockitoAnnotations;
@@ -16,7 +17,7 @@ import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent.CUSTOMER_NAME;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedCustomerName.CUSTOMER_NAME;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:META-INF/web-logic-test-context.xml")
@@ -46,7 +47,7 @@ public class ViewableComponentFilterTest {
     public void testGetComponents_validParams_duplicateFieldsFiltered() throws Exception {
         List<DocComponentView> allComponents = getAllComponents();
         assertEquals("comp1", allComponents.get(0).getName());
-        assertEquals(CUSTOMER_NAME.getName(), allComponents.get(1).getName());
+        assertEquals(CUSTOMER_NAME, allComponents.get(1).getName());
         assertEquals("comp3", allComponents.get(2).getName());
     }
 
@@ -79,7 +80,7 @@ public class ViewableComponentFilterTest {
 
     public List<DocComponentView> getDocComponents() {
         DocComponentView view1 = makeDocComponent("comp1");
-        DocComponentView view2 = makeDocComponent(CUSTOMER_NAME.getName());
+        DocComponentView view2 = makeDocComponent(CUSTOMER_NAME);
         DocComponentView view3 = makeDocComponent("comp3");
         DocComponentView view4 = makeDocComponent("comp1");//duplicate - should be filtered
 

@@ -36,6 +36,12 @@ public class DocumentInjectionInfo {
             case PRODUCT_MODEL:
                 value = product.getId();
                 break;
+            case PRODUCT_TARIFF_NUMBER:
+                value = product.getHarmonizedTariffNumber();
+                break;
+            case PRODUCT_CUSTOMS_DESCRIPTION:
+                value = product.getCustomsDescription();
+                break;
         }
 
         return value;

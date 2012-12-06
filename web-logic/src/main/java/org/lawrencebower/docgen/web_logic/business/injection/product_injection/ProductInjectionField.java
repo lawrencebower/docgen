@@ -9,6 +9,7 @@ import java.util.List;
 public enum ProductInjectionField {
 
     PRODUCT_NAME("PRODUCT_INJECT_NAME"),
+    PRODUCT_NAME_AND_DESCRIPTION("PRODUCT_INJECT_NAME_AND_DESCRIPTION"),
     PRODUCT_VALUE("PRODUCT_INJECT_VALUE"),
     PRODUCT_ORIGIN("PRODUCT_INJECT_ORIGIN"),
     PRODUCT_QUANTITY("PRODUCT_INJECT_QUANTITY"),
@@ -72,6 +73,11 @@ public enum ProductInjectionField {
         switch (productField) {
             case PRODUCT_NAME:
                 value = product.getProductName();
+                break;
+            case PRODUCT_NAME_AND_DESCRIPTION:
+                String productId = product.getProductId();
+                String productName = product.getProductName();
+                value = productId + " - " + productName;
                 break;
             case PRODUCT_ORIGIN:
                 value = product.getProductCountryOfOrigin();

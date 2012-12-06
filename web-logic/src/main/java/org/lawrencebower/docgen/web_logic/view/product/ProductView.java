@@ -26,6 +26,10 @@ public class ProductView {
         return product.getProductName();
     }
 
+    public String getProductId() {
+        return product.getProductId();
+    }
+
     public String getProductValue() {
         return product.getValue();
     }

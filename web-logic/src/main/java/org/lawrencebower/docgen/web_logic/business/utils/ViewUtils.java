@@ -51,4 +51,8 @@ public class ViewUtils {
             throw new DocGenException(NO_CUSTOMER_SELECTED);
         }
     }
+
+    public String toHTMLString(String string) {
+        return string.replaceAll("\n","<br/>");
+    }
 }

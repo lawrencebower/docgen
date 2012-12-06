@@ -17,7 +17,6 @@ import org.lawrencebower.docgen.web_logic.business.component_calculation.Format;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.Operator;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculation;
 import org.lawrencebower.docgen.web_logic.business.injection.product_injection.ProductInjectionField;
-import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
@@ -28,7 +27,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
 
-import static org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent.*;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedBusinessAddress.BUSINESS_ADDRESS;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedBusinessContactName.BUSINESS_CONTACT_NAME;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedBusinessCountry.BUSINESS_COUNTRY;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedBusinessName.BUSINESS_NAME;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedBusinessPhone.BUSINESS_PHONE;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedCustomerAddress.CUSTOMER_ADDRESS;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedCustomerContactName.CUSTOMER_CONTACT_NAME;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedCustomerCountry.CUSTOMER_COUNTRY;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedCustomerName.CUSTOMER_NAME;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedCustomerPhone.CUSTOMER_PHONE;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedVendorAddress.VENDOR_ADDRESS;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedVendorContactName.VENDOR_CONTACT_NAME;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedVendorCountry.VENDOR_COUNTRY;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedVendorName.VENDOR_NAME;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedVendorPhone.VENDOR_PHONE;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedVendorTaxId.VENDOR_TAX_ID;
 
 public class CommercialInvoice {
 
@@ -52,7 +66,7 @@ public class CommercialInvoice {
 
         document = new CustomDocument(INVOICE_NAME, pdfGenerator);
 
-        documentView = documentViewFactory.createDocumentInfoView(document);
+        documentView = documentViewFactory.createDocumentView(document);
 
         documentView.setCopyNumber(5);
 
@@ -86,7 +100,7 @@ public class CommercialInvoice {
         document.addComponent(convertComponent(new NewLineComponent()));
 
         TextComponent date = new TextComponent("29th May 2012");
-        date.setName("Date:");
+        date.setName("date");
         document.addComponent(convertComponent(date));
         addTextComponentView(date);
 
@@ -152,20 +166,20 @@ public class CommercialInvoice {
         headerRow.addCell(shippedToCell);
         table.setHeaderRow(headerRow);
 
-        TableTextComponent textComponent = createTextComponent(AutoMappedComponent.BUSINESS_NAME.getName(),
+        TableTextComponent textComponent = createTextComponent(BUSINESS_NAME,
                                                                "blah");
         table.addRow(createRowWithLabelAndValue("Name:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(BUSINESS_CONTACT_NAME.getName(), "David Davidson");
+        textComponent = createTextComponent(BUSINESS_CONTACT_NAME, "David Davidson");
         table.addRow(createRowWithLabelAndValue("Contact Name:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(BUSINESS_PHONE.getName(), "123456788");
+        textComponent = createTextComponent(BUSINESS_PHONE, "123456788");
         table.addRow(createRowWithLabelAndValue("Phone:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(BUSINESS_ADDRESS.getName(),
+        textComponent = createTextComponent(BUSINESS_ADDRESS,
                                             "Suites 11 & 12\n" +
                                             "Church Farm,\n" +
                                             "Maris Lane,\n" +
@@ -173,7 +187,7 @@ public class CommercialInvoice {
         table.addRow(createRowWithLabelAndValue("Company address:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(BUSINESS_COUNTRY.getName(), "UNITED KINGDOM");
+        textComponent = createTextComponent(BUSINESS_COUNTRY, "UNITED KINGDOM");
         table.addRow(createRowWithLabelAndValue("Country:", textComponent));
         addTextComponent(textComponent);
 
@@ -193,19 +207,19 @@ public class CommercialInvoice {
         headerRow.addCell(shippedToCell);
         table.setHeaderRow(headerRow);
 
-        TableTextComponent textComponent = createTextComponent(CUSTOMER_NAME.getName(), "");
+        TableTextComponent textComponent = createTextComponent(CUSTOMER_NAME, "");
         table.addRow(createRowWithLabelAndValue("Name:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(CUSTOMER_CONTACT_NAME.getName(), "Billy Bob Bobson");
+        textComponent = createTextComponent(CUSTOMER_CONTACT_NAME, "Billy Bob Bobson");
         table.addRow(createRowWithLabelAndValue("Contact Name:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(CUSTOMER_PHONE.getName(), "123456788");
+        textComponent = createTextComponent(CUSTOMER_PHONE, "123456788");
         table.addRow(createRowWithLabelAndValue("Phone:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(CUSTOMER_ADDRESS.getName(),
+        textComponent = createTextComponent(CUSTOMER_ADDRESS,
                                             "Suites 11 & 12\n" +
                                             "Church Farm,\n" +
                                             "Maris Lane,\n" +
@@ -213,7 +227,7 @@ public class CommercialInvoice {
         table.addRow(createRowWithLabelAndValue("Company address:", textComponent));
         addTextAreaComponent(textComponent);
 
-        textComponent = createTextComponent(CUSTOMER_COUNTRY.getName(), "UNITED KINGDOM");
+        textComponent = createTextComponent(CUSTOMER_COUNTRY, "UNITED KINGDOM");
         table.addRow(createRowWithLabelAndValue("Country:", textComponent));
         addTextComponent(textComponent);
 
@@ -232,7 +246,7 @@ public class CommercialInvoice {
         headerRow.addCell(shippedFromCell);
         table.setHeaderRow(headerRow);
 
-        TableTextComponent textComponent = createTextComponent("Date:", "29th May 2012");
+        TableTextComponent textComponent = createTextComponent("date", "29th May 2012");
         table.addRow(createRowWithLabelAndValue("Date:", textComponent));
         addTextComponentView(textComponent);
 
@@ -304,23 +318,23 @@ public class CommercialInvoice {
         headerRow.addCell(shippedFromCell);
         table.setHeaderRow(headerRow);
 
-        TableTextComponent textComponent = createTextComponent(VENDOR_NAME.getName(), "Acme Ltd");
+        TableTextComponent textComponent = createTextComponent(VENDOR_NAME, "Acme Ltd");
         table.addRow(createRowWithLabelAndValue("Name:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(VENDOR_TAX_ID.getName(), "154487945");
+        textComponent = createTextComponent(VENDOR_TAX_ID, "154487945");
         table.addRow(createRowWithLabelAndValue("TAX/VAT NUMBER:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(VENDOR_CONTACT_NAME.getName(), "David Davidson");
+        textComponent = createTextComponent(VENDOR_CONTACT_NAME, "David Davidson");
         table.addRow(createRowWithLabelAndValue("Contact Name:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(VENDOR_PHONE.getName(), "+44 (0)1223 655577");
+        textComponent = createTextComponent(VENDOR_PHONE, "+44 (0)1223 655577");
         table.addRow(createRowWithLabelAndValue("Phone:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(VENDOR_ADDRESS.getName(),
+        textComponent = createTextComponent(VENDOR_ADDRESS,
                                             "Suites 11 & 12\n" +
                                             "Church Farm,\n" +
                                             "Maris Lane,\n" +
@@ -328,7 +342,7 @@ public class CommercialInvoice {
         table.addRow(createRowWithLabelAndValue("Company address:", textComponent));
         addTextAreaComponent(textComponent);
 
-        textComponent = createTextComponent(VENDOR_COUNTRY.getName(), "UNITED KINGDOM");
+        textComponent = createTextComponent(VENDOR_COUNTRY, "UNITED KINGDOM");
         table.addRow(createRowWithLabelAndValue("Country:", textComponent));
         addTextComponent(textComponent);
 

@@ -3,7 +3,7 @@ package org.lawrencebower.docgen.web_logic.business.mapping;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lawrencebower.docgen.web_logic.view.contact.Contact;
+import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +24,8 @@ public class CustomerProduct_Document_MappingsTest {
     @Autowired
     CustomerProduct_Document_Mappings mappings;
 
-    private Contact customer1;
-    private Contact customer2;
+    private ContactView customer1;
+    private ContactView customer2;
     private Product product1;
     private Product product2;
     private DocumentView doc1;
@@ -105,8 +105,8 @@ public class CustomerProduct_Document_MappingsTest {
         return mock;
     }
 
-    private Contact mockCustomer(String customerName) {
-        Contact mock = mock(Contact.class);
+    private ContactView mockCustomer(String customerName) {
+        ContactView mock = mock(ContactView.class);
         when(mock.getName()).thenReturn(customerName);
         return mock;
     }

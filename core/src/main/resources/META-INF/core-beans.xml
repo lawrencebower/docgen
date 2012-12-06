@@ -1,9 +1,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="
-             http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd
-             http://www.springframework.org/schema/context classpath:/org/springframework/context/config/spring-context-3.1.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd
+              /org/springframework/context/config/spring-context-3.1.xsd">
 
     <bean id="fileUtils" class="org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils"/>
     <bean id="iTextTableGenerator" class="org.lawrencebower.docgen.core.generator.utils.ITextTableGenerator"/>
@@ -145,10 +143,12 @@
 
     <bean id="pdfGeneratorCustom"
           class="org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator"
-          parent="pdfGeneratorAbstract"/>
+          parent="pdfGeneratorAbstract"
+          scope="prototype"/>
 
     <bean id="pdfGeneratorOverlay"
           class="org.lawrencebower.docgen.core.generator.overlay.OverlayPDFGenerator"
-          parent="pdfGeneratorAbstract"/>
+          parent="pdfGeneratorAbstract"
+          scope="prototype"/>
 
 </beans>

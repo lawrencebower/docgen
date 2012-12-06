@@ -104,7 +104,6 @@ public class DataEntryController {
         mapFieldValuesToComponents(webRequest);
 
         DocumentSet injectedDocuments = injectDocuments();
-//        DocumentSet injectedDocuments = sessionData.getDocuments();
 
         List<PDFDocument> pdfFiles = generatePDFsAndWriteToFiles(injectedDocuments);
 

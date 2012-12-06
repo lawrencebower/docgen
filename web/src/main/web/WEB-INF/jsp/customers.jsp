@@ -8,25 +8,28 @@ Select customer
 <div>
     <ol>
         <table border="1">
-            <tr><td>Contact<td>Company<td></td></tr>
-            <c:forEach var="product" items="${customers}">
+            <tr>
+                <td>Contact<td>
+                <%--<td>Company</td>--%>
+            </tr>
+            <c:forEach var="customer" items="${customers}">
                 <tr>
                     <td>
-                        <c:out value="${product.name}"/><br/>
-                        <c:out value="${product.contactName}"/><br/>
-                        <c:out value="${product.address}"/><br/>
-                        <c:out value="${product.country}"/>
+                        <c:out value="${customer.name}"/><br/>
+                        <c:out value="${customer.contactName}"/><br/>
+                        <c:out value="${customer.HTMLAddress}" escapeXml="false"/><br/>
+                        <c:out value="${customer.country}"/>
                     </td>
-                    <td>
-                        <c:set var="contact" value="${product.contact}" scope="page"/>
-                        <c:out value="${contact.name}"/><br/>
-                        <c:out value="${contact.contactName}"/><br/>
-                        <c:out value="${contact.address}"/><br/>
-                        <c:out value="${contact.country}"/>
-                    </td>
+                    <%--<td>--%>
+                        <%--<c:set var="contact" value="${customer.contact}" scope="page"/>--%>
+                        <%--<c:out value="${contact.name}"/><br/>--%>
+                        <%--<c:out value="${contact.contactName}"/><br/>--%>
+                        <%--<c:out value="${contact.HTMLAddress}"/><br/>--%>
+                        <%--<c:out value="${contact.country}"/>--%>
+                    <%--</td>--%>
                     <td>
                         <s:url var="customer_url" value="/customerSelect/customerName/{customerName}">
-                            <s:param name="customerName" value="${product.name}"/>
+                            <s:param name="customerName" value="${customer.name}"/>
                         </s:url>
                         <a href="${customer_url}">
                             select

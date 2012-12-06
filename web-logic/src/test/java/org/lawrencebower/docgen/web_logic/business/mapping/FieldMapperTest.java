@@ -201,7 +201,7 @@ public class FieldMapperTest {
 
     private DocumentView makeDocumentView() {
         Document mockDoc = mock(Document.class);
-        return documentViewFactory.createDocumentInfoView(mockDoc);
+        return documentViewFactory.createDocumentView(mockDoc);
     }
 
     private Map<String, String[]> makeParameterMap() {

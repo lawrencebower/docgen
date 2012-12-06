@@ -7,15 +7,19 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionField;
 import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionInfo;
-import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponent;
-import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponentInfo;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedComponentInfo;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedComponentMapper;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public abstract class DocComponentView<T extends DocComponent> {
+
+    @Autowired
+    private AutoMappedComponentMapper autoMapper;
 
     protected static final String NULL_COMPONENT_MESSAGE = "DocComponent is null";
     protected static final String NOT_SET_MESSAGE = "not set";
@@ -85,13 +89,13 @@ public abstract class DocComponentView<T extends DocComponent> {
 
     public void mapComponentValue(AutoMappedComponentInfo mappingInfo) {
         if (isAutoMapped()) {
-            AutoMappedComponent.mapComponent(this, mappingInfo);
+            autoMapper.mapComponent(this, mappingInfo);
         }
     }
 
     public boolean isAutoMapped(){
         String componentName = getName();
-        return AutoMappedComponent.containsName(componentName);
+        return autoMapper.matchesName(componentName);
     }
 
     public boolean isText() {

@@ -2,9 +2,11 @@ package org.lawrencebower.docgen.doc_examples;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedCustomerName;
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.view.contact.Contact;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
+import org.lawrencebower.docgen.web_logic.view.contact.ContactViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
@@ -19,6 +21,8 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
 
     @Autowired
     private CustomerProduct_Document_Mappings customerProductDocMappings;
+    @Autowired
+    private ContactViewFactory contactViewFactory;
 
     private LinkedHashMap<String, ContactView> customers = new LinkedHashMap<>();
 
@@ -38,7 +42,7 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
     public static final String PRODUCT_ID_2 = "W2";
     public static final String DOC_1_NAME = CommercialInvoice.INVOICE_NAME;
     public static final String DOC_2_NAME = DeliveryNote.DELIVERY_NOTE_NAME;
-    public static final String AUTO_MAPPED_EXAMPLE_FIELD = "soldToName:";
+    public static final String AUTO_MAPPED_EXAMPLE_FIELD = AutoMappedCustomerName.CUSTOMER_NAME;
     public static final String EXAMPLE_FIELD = "Date:";
 
     public void init() {
@@ -49,13 +53,15 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
     }
 
     private void initVendor() {
-        vendor = new ContactView(new Contact("Billy Bob's Widgets",
-                                             "Billy Bob",
-                                             "36 Billy Bob Street\nColchester\nEssex",
-                                             "534546454",
-                                             "UK",
-                                             "123456",
-                                             "sales@acme.com"));
+        Contact contact = new Contact("Ziath Ltd.",
+                                      "Tim Dilks",
+                                      "Trumpington Farm Company\nMaris Piper lane\nCambs.",
+                                      "534546454",
+                                      "UK",
+                                      "GB890276990",
+                                      "sales@ziath.com");
+
+        vendor = contactViewFactory.createContactView(contact);
     }
 
     private void initProducts() {
@@ -64,13 +70,13 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
                                "Super Widget 1",
                                "100.25",
                                "UK",
-                               "Optical widget (no laser, plastic)");
+                               "(no laser, plastic)");
 
         product2 = new Product(PRODUCT_ID_2,
                                "Mega Widget 2",
                                "200",
                                "UK",
-                               "Laser widget (contains laser)",
+                               "(contains laser)",
                                "84562574");
 
         products.put(product1.getProductId(), product1);
@@ -80,17 +86,17 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
 
     private void initCustomers() {
 
-        customer1 = new ContactView(new Contact(CUSTOMER_ID_1,
-                                                "Billy Bob Bobson",
-                                                "Just round the corner",
-                                                "198293893839",
-                                                "UK"));
+        customer1 = contactViewFactory.createContactView(new Contact(CUSTOMER_ID_1,
+                                                                     "Billy Bob Bobson",
+                                                                     "Just round the corner",
+                                                                     "198293893839",
+                                                                     "UK"));
 
-        customer2 = new ContactView(new Contact(CUSTOMER_ID_2,
-                                                "David Davidson",
-                                                "miles away",
-                                                "38783478347",
-                                                "USA"));
+        customer2 = contactViewFactory.createContactView(new Contact(CUSTOMER_ID_2,
+                                                                     "David Davidson",
+                                                                     "miles away",
+                                                                     "38783478347",
+                                                                     "USA"));
 
         customers.put(customer1.getName(), customer1);
         customers.put(customer2.getName(), customer2);
@@ -102,44 +108,44 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
     private void initCustomerProductDocumentMappings() {
 
         //Contact 1
-        customerProductDocMappings.addDocument(customer1.getContact(),
+        customerProductDocMappings.addDocument(customer1,
                                                product1,
                                                CommercialInvoice.INVOICE_NAME);
 
-        customerProductDocMappings.addDocument(customer1.getContact(),
+        customerProductDocMappings.addDocument(customer1,
                                                product1,
                                                DeliveryNote.DELIVERY_NOTE_NAME);
 
-        customerProductDocMappings.addDocument(customer1.getContact(),
+        customerProductDocMappings.addDocument(customer1,
                                                product2,
                                                CommercialInvoice.INVOICE_NAME);
 
-        customerProductDocMappings.addDocument(customer1.getContact(),
+        customerProductDocMappings.addDocument(customer1,
                                                product2,
                                                DeliveryNote.DELIVERY_NOTE_NAME);
 
         //Contact 2
-        customerProductDocMappings.addDocument(customer2.getContact(),
+        customerProductDocMappings.addDocument(customer2,
                                                product1,
                                                CommercialInvoice.INVOICE_NAME);
 
-        customerProductDocMappings.addDocument(customer2.getContact(),
+        customerProductDocMappings.addDocument(customer2,
                                                product1,
                                                DeliveryNote.DELIVERY_NOTE_NAME);
 
-        customerProductDocMappings.addDocument(customer2.getContact(),
+        customerProductDocMappings.addDocument(customer2,
                                                product2,
                                                CommercialInvoice.INVOICE_NAME);
 
-        customerProductDocMappings.addDocument(customer2.getContact(),
+        customerProductDocMappings.addDocument(customer2,
                                                product2,
                                                DeliveryNote.DELIVERY_NOTE_NAME);
 
-        customerProductDocMappings.addDocument(customer2.getContact(),
+        customerProductDocMappings.addDocument(customer2,
                                                product2,
                                                FDA_2887.FDA_2887_NAME);
 
-        customerProductDocMappings.addDocument(customer2.getContact(),
+        customerProductDocMappings.addDocument(customer2,
                                                product2,
                                                FCC_740.FCC_740_NAME);
 

@@ -5,12 +5,11 @@ import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
 import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionInfo;
-import org.lawrencebower.docgen.web_logic.business.mapping.AutoMappedComponentInfo;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedComponentInfo;
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
-import org.lawrencebower.docgen.web_logic.view.contact.Contact;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSetFactory;
@@ -56,7 +55,6 @@ public class DataEntryCB {
     private DocumentSet getRelevantDocuments(ContactView selectedCustomer,
                                              List<ProductView> selectedProducts) {
 
-        Contact customer = selectedCustomer.getContact();
         /**
          * LinkedHashSet is used to ensure no duplicate Documents are included and the order
          * of insertion is preserved (helpful in tests)
@@ -65,7 +63,8 @@ public class DataEntryCB {
 
         for (ProductView selectedProduct : selectedProducts) {
             Product product = selectedProduct.getProduct();
-            List<DocumentView> documentViews = customerProductMappings.getDocumentsForCustomerAndProduct(customer, product);
+            List<DocumentView> documentViews =
+                    customerProductMappings.getDocumentsForCustomerAndProduct(selectedCustomer, product);
             documents.addAll(documentViews);
         }
 
@@ -131,16 +130,11 @@ public class DataEntryCB {
         viewUtils.checkCustomerSet(selectedCustomer);
         viewUtils.checkBusinessSet(selectedBusiness);
 
-        Contact customerContact = selectedCustomer.getContact();
-
         ContactView vendor = modelFactory.getVendor();
-        Contact vendorContact = vendor.getContact();
 
-        Contact businessContact = selectedBusiness.getContact();
-
-        return new AutoMappedComponentInfo(customerContact,
-                                           vendorContact,
-                                           businessContact);
+        return new AutoMappedComponentInfo(selectedCustomer,
+                                           vendor,
+                                           selectedBusiness);
     }
 
     public List<DocComponentView> getComponentsForViewing(DocumentSet documentSet,
@@ -165,9 +159,7 @@ public class DataEntryCB {
 
         List<DocumentInjectionInfo> injectionInfos = makeDocumentInjectionInfo(products);
 
-        DocumentSet injectedDocuments = originalDocuments.injectDocuments(injectionInfos);
-
-        return injectedDocuments;
+        return originalDocuments.injectDocuments(injectionInfos);
     }
 
     private List<DocumentInjectionInfo> makeDocumentInjectionInfo(List<ProductView> products) {
