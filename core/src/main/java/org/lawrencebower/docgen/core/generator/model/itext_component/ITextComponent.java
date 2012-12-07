@@ -6,9 +6,9 @@ import org.lawrencebower.docgen.core.document.component.position.HorizontalAlign
 
 public interface ITextComponent<T extends Element> {
 
-    public T createITextComponent();
+    T createITextComponent();
 
-    public DocCoordinates getCoordinates();
+    DocCoordinates getCoordinates();
 
     boolean isRenderBorder();
 

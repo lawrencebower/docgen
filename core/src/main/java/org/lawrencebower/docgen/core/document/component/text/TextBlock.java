@@ -22,7 +22,8 @@ public class TextBlock {
     }
 
     public void addFragment(String text) {
-        addFragment(text, FontInfo.createDefaultInfo());
+        FontInfo fontInfo = FontInfo.createDefaultInfo();
+        addFragment(text, fontInfo);
     }
 
     public void addFragment(String text, FontInfo fontInfo) {

@@ -5,8 +5,8 @@ import com.lowagie.text.DocumentException;
 import com.lowagie.text.Element;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.pdf.PdfWriter;
-import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.document.DocComponentRendererInfo;
+import org.lawrencebower.docgen.core.exception.DocGenException;
 
 import java.io.OutputStream;
 
@@ -46,7 +46,7 @@ public class CustomComponentRendererInfo implements DocComponentRendererInfo {
     }
 
     private void makeNewDocument() {
-        this.document = new Document(PageSize.A4);//todo paramaterize page size
+        document = new Document(PageSize.A4);//todo paramaterize page size
     }
 
     public void closeDocument() {

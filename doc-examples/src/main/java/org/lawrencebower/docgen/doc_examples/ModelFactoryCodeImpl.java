@@ -56,13 +56,13 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
     }
 
     private void initVendor() {
-        Contact contact = new Contact("Ziath Ltd.",
-                                      "Tim Dilks",
-                                      "Trumpington Farm Company\nMaris Piper lane\nCambs.",
+        Contact contact = new Contact("Acme Ltd.",
+                                      "Billy Bob",
+                                      "Trumpington Farm Company\nMaris Piper lane\nCambs FG4 566",
                                       "534546454",
                                       "UK",
-                                      "GB890276990",
-                                      "sales@ziath.com");
+                                      "12345677",
+                                      "sales@acme.com");
 
         vendor = contactViewFactory.createContactView(contact);
     }

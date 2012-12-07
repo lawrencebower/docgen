@@ -7,6 +7,6 @@ public interface DocComponentRenderer<
         T extends ITextComponent,
         T2 extends DocComponentRendererInfo> {
 
-    public void createAndRenderComponent(T component, T2 rendererInfo);
+    void createAndRenderComponent(T component, T2 rendererInfo);
 
 }

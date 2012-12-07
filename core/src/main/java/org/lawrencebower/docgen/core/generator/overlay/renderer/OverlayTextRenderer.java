@@ -15,8 +15,10 @@ public class OverlayTextRenderer extends AbstractOverlayRenderer
 
     @Override
     public void createAndRenderComponent(ITextTextComponent component, OverlayComponentRendererInfo rendererInfo) {
-        this.docComponent = component;
-        renderComponent(rendererInfo.getCanvas(), component.createITextComponent());
+        docComponent = component;
+        PdfContentByte canvas = rendererInfo.getCanvas();
+        Phrase iTextComponent = component.createITextComponent();
+        renderComponent(canvas, iTextComponent);
     }
 
     private void renderComponent(PdfContentByte canvas, Phrase phrase) {

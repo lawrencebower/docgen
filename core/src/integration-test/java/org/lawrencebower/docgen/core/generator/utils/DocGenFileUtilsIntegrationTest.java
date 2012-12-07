@@ -35,7 +35,7 @@ public class DocGenFileUtilsIntegrationTest extends AbstractIntegrationTest {
     @Test
     public void testDeleteFileIfAlreadyExists_fileExists_fileDeleted() throws Exception {
         File file = createExampleFileAndCheckExists();
-        fileUtils.deleteFileIfAlreadyExists(file);
+        fileUtils.deleteQuietly(file);
         boolean fileExists = file.exists();
         assertFalse(fileExists);
     }
@@ -43,7 +43,7 @@ public class DocGenFileUtilsIntegrationTest extends AbstractIntegrationTest {
     @Test
     public void testDeleteFileIfAlreadyExists_fileDoesNotExist_noError() throws Exception {
         File file = new File("I was never created");
-        fileUtils.deleteFileIfAlreadyExists(file);
+        fileUtils.deleteQuietly(file);
         boolean fileExists = file.exists();
         assertFalse(fileExists);
     }

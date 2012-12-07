@@ -1,0 +1,13 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd
+              /org/springframework/context/config/spring-context-3.1.xsd">
+
+    <bean name="fcc740Path" class="java.lang.String">
+        <constructor-arg value="C:\GitHub\docgen\doc-examples\src\main\resources\740.pdf"/>
+    </bean>
+    <bean name="signatureImagePath" class="java.lang.String">
+        <constructor-arg value="C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\signature.gif"/>
+    </bean>
+
+</beans>

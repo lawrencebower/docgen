@@ -46,7 +46,7 @@ public abstract class AbstractIntegrationTest {
 
         File outputFile = new File(outputFilePath);
 
-        fileUtils.deleteFileIfAlreadyExists(outputFile);
+        fileUtils.deleteQuietly(outputFile);
 
         pdfDocument.writeToFile(outputFile);
 

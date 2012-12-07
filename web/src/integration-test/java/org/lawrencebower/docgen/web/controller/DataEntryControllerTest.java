@@ -1,10 +1,10 @@
 package org.lawrencebower.docgen.web.controller;
 
-import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.generator.utils.ChecksumUtils;
+import org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils;
 import org.lawrencebower.docgen.doc_examples.ModelFactoryCodeImpl;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB;
@@ -23,7 +23,6 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +41,8 @@ public class DataEntryControllerTest {
     DataEntryCB business;
     @Autowired
     ModelFactory modelFactory;
+    @Autowired
+    private DocGenFileUtils fileUtils;
 
     SessionData sessionData;
     DataEntryController controller;
@@ -172,10 +173,10 @@ public class DataEntryControllerTest {
      * Checks that the bytes written to the output stream are those of the concatenated file written in
      * the output directory
      */
-    private void verifyBytesWrittenToStreamCorrect(ByteArrayOutputStream outStream) throws IOException {
+    private void verifyBytesWrittenToStreamCorrect(ByteArrayOutputStream outStream) {
 
         File expectedConcatenatedFile = new File(testOutputRoot + ViewConstants.CONCATENATED_FILE_NAME);
-        byte[] expectedFileBytes = FileUtils.readFileToByteArray(expectedConcatenatedFile);
+        byte[] expectedFileBytes = fileUtils.readFileToByteArray(expectedConcatenatedFile);
         String expectedChecksum = checksumUtils.getChecksumFromBytes(expectedFileBytes);
 
         String httpResponseChecksum = checksumUtils.getChecksumFromBytes(outStream.toByteArray());

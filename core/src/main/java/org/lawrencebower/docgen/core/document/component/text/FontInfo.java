@@ -48,4 +48,10 @@ public class FontInfo {
                             DEFAULT_FONT_SIZE,
                             FontStyle.PLAIN);
     }
+
+    public static FontInfo SMALL() {
+        return new FontInfo(DEFAULT_FONT,
+                            8,
+                            FontStyle.PLAIN);
+    }
 }

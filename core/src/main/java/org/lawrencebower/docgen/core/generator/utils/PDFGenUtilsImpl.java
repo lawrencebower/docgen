@@ -40,7 +40,7 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
             throw new DocGenException("Document DocType must not be null");
         }
 
-        if (doc.getComponents() == null || doc.getComponents().isEmpty()) {
+        if ((doc.getComponents() == null) || doc.getComponents().isEmpty()) {
             throw new DocGenException("Document Document components are null/empty");
         }
 

@@ -1,8 +1,8 @@
 package org.lawrencebower.docgen.core.generator.custom;
 
 import org.lawrencebower.docgen.core.document.AbstractDocument;
+import org.lawrencebower.docgen.core.document.DocType;
 import org.lawrencebower.docgen.core.document.PDFDocument;
-import org.lawrencebower.docgen.core.document.type.DocType;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 
 public class CustomDocument extends AbstractDocument<CustomComponent> {

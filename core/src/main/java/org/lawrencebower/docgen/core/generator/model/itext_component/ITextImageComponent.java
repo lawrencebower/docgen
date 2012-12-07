@@ -3,7 +3,6 @@ package org.lawrencebower.docgen.core.generator.model.itext_component;
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.Image;
 import org.lawrencebower.docgen.core.document.component.ImageComponent;
-import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 
 import java.io.IOException;
@@ -13,10 +12,11 @@ public class ITextImageComponent extends AbstractITextComponent<Image, ImageComp
     @Override
     public Image createITextComponent() {
         try {
-            String imageFileLocation = component.getImageFileLocation();
-            Image iTextImage = Image.getInstance(imageFileLocation);
 
-            return iTextImage;
+            String imageFileLocation = component.getImageFileLocation();
+
+            return Image.getInstance(imageFileLocation);
+
         } catch (BadElementException | IOException e) {
             throw new DocGenException(e);
         }

@@ -23,6 +23,7 @@ public abstract class AutoMappedComponent {
     public static final String VENDOR_NAME = "AUTO_MAPPED_VENDOR_NAME";
     public static final String VENDOR_PHONE = "AUTO_MAPPED_VENDOR_PHONE";
     public static final String VENDOR_TAX_ID = "AUTO_MAPPED_VENDOR_TAX_ID";
+    public static final String VENDOR_NAME_AND_ADDRESS = "AUTO_MAPPED_VENDOR_NAME_AND_ADDRESS";
 
     protected String name;
 

@@ -5,17 +5,21 @@ import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.ImageComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
+import org.lawrencebower.docgen.core.document.component.text.FontInfo;
+import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayDocument;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayPDFGenerator;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponentFactory;
 import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionField;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedComponent;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document.component.CheckBoxComponentView;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document.component.TextComponentView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedComponent.BUSINESS_ADDRESS;
 import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedComponent.CUSTOMER_ADDRESS;
@@ -29,7 +33,15 @@ public class FCC_740 {
     @Autowired
     private DocComponentViewFactory componentViewFactory;
     @Autowired
-    DocumentViewFactory documentViewFactory;
+    private DocumentViewFactory documentViewFactory;
+
+    @Autowired
+    @Qualifier("signatureImagePath")
+    private String signatureImagePath;
+
+    @Autowired
+    @Qualifier("fcc740Path")
+    private String fcc740Path;
 
     private DocumentView documentView;
     private OverlayDocument document;
@@ -42,7 +54,7 @@ public class FCC_740 {
     private void prepareComponents() {
 
         document = new OverlayDocument(FCC_740_NAME, pdfGenerator);
-        document.setSourcePDF("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\740.pdf");
+        document.setSourcePDF(fcc740Path);
 
         documentView = documentViewFactory.createDocumentView(document);
 
@@ -68,8 +80,8 @@ public class FCC_740 {
                    new DocCoordinates(368, 585, 210, 30),
                    true);
 
-        addTextBox("Manufacturer's address",
-                   new DocCoordinates(25, 489, 175, 60),
+        addTextBox(AutoMappedComponent.VENDOR_NAME_AND_ADDRESS,
+                   new DocCoordinates(25, 489, 175, 70),
                    true);
 
         addTextBox(CUSTOMER_ADDRESS,
@@ -84,7 +96,7 @@ public class FCC_740 {
                    new DocCoordinates(25, 433, 265, 25),
                    true);
 
-        ImageComponent signatureImage = new ImageComponent("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\signature.gif");
+        ImageComponent signatureImage = new ImageComponent(signatureImagePath);
         signatureImage.setCoordinates(new DocCoordinates(295, 433, 190, 25));
         convertAndAddComponent(signatureImage);
 
@@ -105,10 +117,12 @@ public class FCC_740 {
                             DocCoordinates coordinates,
                             boolean editable) {
 
-        TextComponent textComponent = new TextComponent(name);
+        FontInfo fontInfo = FontInfo.SMALL();
+        TextBlock textBlock = new TextBlock(name, fontInfo);
+        TextComponent textComponent = new TextComponent(textBlock);
         textComponent.setCoordinates(coordinates);
         textComponent.setName(name);
-//        textComponent.setRenderBorder(true);
+        textComponent.setRenderBorder(true);
 
         convertAndAddComponent(textComponent);
 

@@ -81,7 +81,7 @@ public class PDFConcatenatorTest extends AbstractIntegrationTest {
         List<PDFDocument> sourceFiles = mockPDFList(inputFile1, inputFile2);
 
         File nonExistantOutput = new File(outputPackage + "non_existant_output.pdf");
-        fileUtils.deleteFileIfAlreadyExists(nonExistantOutput);
+        fileUtils.deleteQuietly(nonExistantOutput);
 
         pdfConcatenator.concatenatePDFs(sourceFiles, nonExistantOutput);
 

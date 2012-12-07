@@ -13,6 +13,8 @@
 
     <import resource="doc-examples-beans.xml"/>
 
+    <import resource="doc-examples-params.xml"/>
+
     <context:component-scan base-package="org.lawrencebower.docgen"/>
 
 </beans>

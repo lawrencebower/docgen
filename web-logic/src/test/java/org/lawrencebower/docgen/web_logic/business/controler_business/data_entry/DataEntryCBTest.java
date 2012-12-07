@@ -1,12 +1,12 @@
 package org.lawrencebower.docgen.web_logic.business.controler_business.data_entry;
 
-import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.PDFDocumentImpl;
+import org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils;
 import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
 import org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
@@ -43,6 +43,8 @@ public class DataEntryCBTest {
     DataEntryCB dataEntryBusiness;
     @Autowired
     DocumentSetFactory documentSetFactory;
+    @Autowired
+    private DocGenFileUtils fileUtils;
 
     @Autowired
     @Qualifier("pdfOutputRoot")
@@ -171,8 +173,8 @@ public class DataEntryCBTest {
         assertEquals(fileRoot + "pdf1.pdf", file1);
         assertEquals(fileRoot + "pdf2.pdf", file2);
 
-        FileUtils.deleteQuietly(new File(file1));
-        FileUtils.deleteQuietly(new File(file2));
+        fileUtils.deleteQuietly(new File(file1));
+        fileUtils.deleteQuietly(new File(file2));
     }
 
     @Test
@@ -199,8 +201,8 @@ public class DataEntryCBTest {
         assertEquals(fileRoot + "pdf1.pdf", file1);
         assertEquals(fileRoot + "pdf2_extension.pdf", file2);
 
-        FileUtils.deleteQuietly(new File(file1));
-        FileUtils.deleteQuietly(new File(file2));
+        fileUtils.deleteQuietly(new File(file1));
+        fileUtils.deleteQuietly(new File(file2));
     }
 
     @Test

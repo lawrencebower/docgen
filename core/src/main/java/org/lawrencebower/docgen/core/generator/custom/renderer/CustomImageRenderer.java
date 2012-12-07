@@ -1,17 +1,11 @@
 package org.lawrencebower.docgen.core.generator.custom.renderer;
 
-import com.lowagie.text.BadElementException;
 import com.lowagie.text.Element;
 import com.lowagie.text.Image;
-import org.lawrencebower.docgen.core.document.component.ImageComponent;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
-import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
 import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 import org.lawrencebower.docgen.core.generator.model.itext_component.ITextImageComponent;
-import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererInfo;
-
-import java.io.IOException;
 
 public class CustomImageRenderer
         implements DocComponentRenderer<ITextImageComponent, CustomComponentRendererInfo> {
@@ -40,7 +34,9 @@ public class CustomImageRenderer
 
     private void scaleImage(ITextImageComponent component, Image iTextImage) {
         if (component.hasSize()) {
-            iTextImage.scalePercent(component.getWidth(), component.getHeight());
+            float width = component.getWidth();
+            float height = component.getHeight();
+            iTextImage.scalePercent(width, height);
         }
     }
 

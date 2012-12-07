@@ -18,9 +18,9 @@ public class OverlayCheckBoxRenderer
     @Override
     public void createAndRenderComponent(ITextCheckBoxComponent component, OverlayComponentRendererInfo rendererInfo) {
         docComponent = component;
-        Phrase phrase = component.createITextComponent();
+        Phrase iTextPhrase = component.createITextComponent();
         PdfContentByte canvas = rendererInfo.getCanvas();
-        renderComponent(canvas, phrase);
+        renderComponent(canvas, iTextPhrase);
     }
 
     private void renderComponent(PdfContentByte canvas, Phrase phrase) {

@@ -1,10 +1,10 @@
 package org.lawrencebower.docgen.core.generator.utils;
 
 import org.junit.runner.RunWith;
+import org.lawrencebower.docgen.core.document.DocType;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
-import org.lawrencebower.docgen.core.document.type.DocType;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponent;
 import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponentFactory;

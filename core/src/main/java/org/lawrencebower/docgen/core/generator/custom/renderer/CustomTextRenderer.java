@@ -3,15 +3,10 @@ package org.lawrencebower.docgen.core.generator.custom.renderer;
 import com.lowagie.text.Element;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
-import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
-import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
 import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 import org.lawrencebower.docgen.core.generator.model.itext_component.ITextTextComponent;
-import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererInfo;
-import org.lawrencebower.docgen.core.generator.utils.PDFGenUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class CustomTextRenderer
         implements DocComponentRenderer<ITextTextComponent, CustomComponentRendererInfo> {
@@ -23,6 +18,7 @@ public class CustomTextRenderer
     }
 
     private Paragraph processPhrase(ITextTextComponent component) {
+
         Phrase iTextPhrase = component.createITextComponent();
 
         Paragraph paragraph = new Paragraph(iTextPhrase);
