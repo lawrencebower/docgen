@@ -33,16 +33,12 @@ public class ComponentCalculation {
         this.fields = Collections.unmodifiableList(fieldList);
     }
 
-    public Operator getOperator() {
-        return operator;
-    }
-
     public List<String> getOperands() {
         return fields;
     }
 
     public boolean isNotRun() {
-        return !isRun;
+        return !isRun();
     }
 
     public boolean isRun() {

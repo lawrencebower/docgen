@@ -106,8 +106,8 @@ public class BasicTableComponentCalculator implements TableComponentCalculator {
         List<Float> operandValues = new ArrayList<>();
 
         for (Integer operandIndex : operandColIndices) {
-            DocComponentView docView = tableComponentView.getCellComponentView(rowIndex, operandIndex);
-            Float value = docView.getFloatValue();
+            DocComponentView componentView = tableComponentView.getCellComponentView(rowIndex, operandIndex);
+            Float value = componentView.getFloatValue();
             operandValues.add(value);
         }
 

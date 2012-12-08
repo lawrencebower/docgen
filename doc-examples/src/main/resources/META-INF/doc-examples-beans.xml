@@ -25,9 +25,6 @@
           init-method="prepareComponents"
           scope="prototype"/>
 
-    <bean id="customComponentConverter" class="org.lawrencebower.docgen.doc_examples.CustomComponentConverter"/>
-    <bean id="overlayComponentConverter" class="org.lawrencebower.docgen.doc_examples.OverlayComponentConverter"/>
-
     <bean name="modelFactory"
           class="org.lawrencebower.docgen.doc_examples.ModelFactoryCodeImpl"
           init-method="init">

@@ -118,9 +118,9 @@ public class DataEntryController {
 
 //        writeParameterVals(parameterMap);
 
-        DocumentSet relevantDocs = sessionData.getDocuments();
+        DocumentSet documents = sessionData.getDocuments();
 
-        business.mapFieldValuesToComponents(parameterMap, relevantDocs);
+        business.mapFieldValuesToComponents(parameterMap, documents);
     }
 
     /*
@@ -141,16 +141,12 @@ public class DataEntryController {
 
         List<ProductView> products = sessionData.getSelectedProducts();
 
-        DocumentSet injectedDocumentSet = business.injectDocuments(originalDocuments, products);
-
-        return injectedDocumentSet;
+        return business.injectDocuments(originalDocuments, products);
     }
 
     private List<PDFDocument> generatePDFsAndWriteToFiles(DocumentSet documents) {
 
         List<PDFDocument> generatedPDFs = business.createPDFs(documents);
-
-//        sessionData.setGeneratedPDFs(generatedPDFs);
 
         business.writePDFsToFiles(generatedPDFs);
 
