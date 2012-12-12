@@ -1,11 +1,11 @@
-package org.lawrencebower.docgen.web.controller;
+package org.lawrencebower.docgen.web.controller.customer_selection;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.lawrencebower.docgen.doc_examples.ModelFactoryCodeImpl;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.customer_selection.CustomerSelectionCB;
-import org.lawrencebower.docgen.doc_examples.ModelFactoryCodeImpl;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,18 +35,6 @@ public class CustomerSelectionControllerTest {
         controller.setBusiness(business);
         sessionData = new SessionData();
         controller.setSessionData(sessionData);
-    }
-
-    @Test
-    public void testShowHomePage_allCustomersPlacedOnModel() throws Exception {
-
-        BindingAwareModelMap model = new BindingAwareModelMap();
-
-        controller.showHomePage(model);
-
-        List<ContactView> customers = (List<ContactView>) model.get("customers");
-
-        assertEquals(2, customers.size());
     }
 
     @Test

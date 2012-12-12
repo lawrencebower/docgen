@@ -1,6 +1,8 @@
 <%@ include file="/WEB-INF/jsp/include.jsp" %>
 
-<jsp:useBean id="sessionData" scope="session" type="org.lawrencebower.docgen.web.model.SessionData"/>
+<jsp:useBean id="sessionData"
+             scope="session"
+             type="org.lawrencebower.docgen.web.model.SessionData"/>
 
 <div>
     <ol>

@@ -2,7 +2,8 @@
 
 Select customer
 
-<jsp:useBean id="customers" scope="request"
+<jsp:useBean id="customers"
+             scope="request"
              type="java.util.List<org.lawrencebower.docgen.web_logic.view.contact.ContactView>"/>
 
 <div>

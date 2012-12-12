@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web.controller;
+package org.lawrencebower.docgen.web.controller.customer_selection;
 
 import org.apache.log4j.Logger;
 import org.lawrencebower.docgen.web.model.SessionData;
@@ -17,7 +17,6 @@ import java.util.List;
 
 @Controller
 @Scope("session")
-@RequestMapping("/customerSelect")
 public class CustomerSelectionController {
 
     static Logger logger = Logger.getLogger(CustomerSelectionController.class);
@@ -35,17 +34,7 @@ public class CustomerSelectionController {
         this.sessionData = sessionData;
     }
 
-    @RequestMapping({"/", "/home"})
-    public String showHomePage(Model model) {
-
-        List<ContactView> customers = business.getCustomers();
-
-        model.addAttribute("customers", customers);
-
-        return "home";
-    }
-
-    @RequestMapping(value = "/customerName/{customerName}", method = RequestMethod.GET)
+    @RequestMapping(value = "/customerSelect/customerName/{customerName}", method = RequestMethod.GET)
     public String selectCustomer(@PathVariable String customerName,
                                  Model model) {
 

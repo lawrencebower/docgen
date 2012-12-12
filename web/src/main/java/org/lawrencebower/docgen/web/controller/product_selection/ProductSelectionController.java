@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web.controller;
+package org.lawrencebower.docgen.web.controller.product_selection;
 
 import org.apache.log4j.Logger;
 import org.lawrencebower.docgen.web.model.SessionData;
@@ -16,7 +16,6 @@ import java.util.List;
 
 @Controller
 @Scope("session")
-@RequestMapping("/productSelect")
 public class ProductSelectionController {
 
     static Logger logger = Logger.getLogger(ProductSelectionController.class);
@@ -34,30 +33,7 @@ public class ProductSelectionController {
         this.sessionData = sessionData;
     }
 
-
-    @RequestMapping("/")
-    public String showProducts(Model model){
-
-        List<ProductView> products = business.getProducts();
-
-        model.addAttribute("products", products);
-
-        return "products";
-    }
-
-    @RequestMapping("/clearProducts")
-    public String clearProducts(Model model){
-
-        sessionData.clearSelectedProducts();
-
-        List<ProductView> products = business.getProducts();
-
-        model.addAttribute("products", products);
-
-        return "products";
-    }
-
-    @RequestMapping(value = "/productId/{productId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/productSelect/productId/{productId}", method = RequestMethod.GET)
     public String selectProduct(@PathVariable String productId,
                                 Model model) {
 

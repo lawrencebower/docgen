@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web.controller;
+package org.lawrencebower.docgen.web.controller.product_selection;
 
 import org.junit.Before;
 import org.junit.Test;

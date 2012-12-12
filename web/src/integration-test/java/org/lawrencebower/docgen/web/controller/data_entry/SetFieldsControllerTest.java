@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web.controller;
+package org.lawrencebower.docgen.web.controller.data_entry;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,11 +10,6 @@ import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB;
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
-import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
-import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
-import org.lawrencebower.docgen.web_logic.view.document.component.TextComponentView;
-import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
@@ -24,10 +19,8 @@ import org.springframework.web.context.request.WebRequest;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -35,17 +28,19 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:META-INF/web-application-test-context.xml")
-public class DataEntryControllerTest {
+public class SetFieldsControllerTest {
 
     @Autowired
     DataEntryCB business;
     @Autowired
     ModelFactory modelFactory;
     @Autowired
-    private DocGenFileUtils fileUtils;
+    DocGenFileUtils fileUtils;
+    @Autowired
+    SessionSetupUtils sessionSetupUtils;
 
     SessionData sessionData;
-    DataEntryController controller;
+    SetFieldsController controller;
 
     @Autowired
     @Qualifier("webTestInputRoot")
@@ -64,9 +59,11 @@ public class DataEntryControllerTest {
     public void setUp() throws Exception {
 
         sessionData = new SessionData();
-        setupSessionData();
 
-        controller = new DataEntryController();
+        setupSessionData();
+        prepareDocumentSetOnSession();
+
+        controller = new SetFieldsController();
         controller.setSessionData(sessionData);
         controller.setBusiness(business);
 
@@ -84,74 +81,7 @@ public class DataEntryControllerTest {
     }
 
     private void setupSessionData() {
-        setBusinessOnSession();
-        setCustomerOnSession();
-        setProductsOnSession();
-    }
-
-    private void setProductsOnSession() {
-        ProductView product1 = modelFactory.getProduct(ModelFactoryCodeImpl.PRODUCT_ID_1);
-        ProductView product2 = modelFactory.getProduct(ModelFactoryCodeImpl.PRODUCT_ID_2);
-        sessionData.addSelectedProduct(product1);
-        sessionData.addSelectedProduct(product2);
-    }
-
-    private void setCustomerOnSession() {
-        ContactView selectedCustomer = modelFactory.getCustomer(ModelFactoryCodeImpl.CUSTOMER_ID_1);
-        sessionData.setSelectedCustomer(selectedCustomer);
-    }
-
-    private void setBusinessOnSession() {
-        ContactView selectedBusiness = modelFactory.getBusinessByCustomerName(ModelFactoryCodeImpl.CUSTOMER_ID_1);
-        sessionData.setSelectedBusiness(selectedBusiness);
-    }
-
-    @Test
-    public void testPrepareFields_validFields_correctDocumentNumberSet() throws Exception {
-        controller.prepareFields();
-        assertEquals(2, sessionData.getDocumentsAsList().size());
-    }
-
-    @Test
-    public void testPrepareFields_validFields_correctDocumentsSet() throws Exception {
-        controller.prepareFields();
-        List<DocumentView> documents = sessionData.getDocumentsAsList();
-        assertEquals(ModelFactoryCodeImpl.DOC_1_NAME, documents.get(0).getName());
-        assertEquals(ModelFactoryCodeImpl.DOC_2_NAME, documents.get(1).getName());
-    }
-
-    @Test
-    public void testPrepareFields_validFields_autoMappedFieldsMapped() throws Exception {
-        controller.prepareFields();
-
-        List<DocumentView> documents = sessionData.getDocumentsAsList();
-        DocumentView doc1 = documents.get(0);
-        assertEquals(ModelFactoryCodeImpl.DOC_1_NAME, doc1.getName());
-
-        List<DocComponentView> components = doc1.getComponentViewsWithName(ModelFactoryCodeImpl.AUTO_MAPPED_EXAMPLE_FIELD);
-        assertEquals("auto mapped field not found",
-                     1,
-                     components.size());
-
-        ContactView selectedBusiness = modelFactory.getBusinessByCustomerName(ModelFactoryCodeImpl.CUSTOMER_ID_1);
-        TextComponentView docComponentView = (TextComponentView) components.get(0);
-        assertEquals("auto mapped field value not correctly mapped",
-                     selectedBusiness.getName(),
-                     docComponentView.getStringValue());
-    }
-
-    @Test
-    public void testToggleShowAutomappedFields_showAutoMappedTrue_valueToggled() throws Exception {
-        sessionData.setShowAutoMappedFields(true);
-        controller.toggleShowAutomappedFields();
-        assertFalse(sessionData.isShowAutoMappedFields());
-    }
-
-    @Test
-    public void testToggleShowAutomappedFields_showAutoMappedFalse_valueToggled() throws Exception {
-        sessionData.setShowAutoMappedFields(false);
-        controller.toggleShowAutomappedFields();
-        assertTrue(sessionData.isShowAutoMappedFields());
+        sessionSetupUtils.setupSessionData(sessionData);
     }
 
     @Test
@@ -161,12 +91,22 @@ public class DataEntryControllerTest {
 
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 
-        controller.prepareFields();
         controller.submitFields(mockRequest, outStream);
 
         verifyExpectedPDFFilesWritten();
 
         verifyBytesWrittenToStreamCorrect(outStream);
+    }
+
+    private void prepareDocumentSetOnSession() {
+
+        PrepareFieldsController prepareFields = new PrepareFieldsController();
+
+        prepareFields.setSessionData(sessionData);
+
+        prepareFields.setBusiness(business);
+
+        prepareFields.prepareFields();
     }
 
     /**
@@ -222,19 +162,4 @@ public class DataEntryControllerTest {
         return mockRequest;
     }
 
-    @Test
-    public void testGetDocComponentViews_showAutoMappedOn_allComponentsReturned() throws Exception {
-        controller.prepareFields();
-        sessionData.setShowAutoMappedFields(true);
-        List<DocComponentView> docComponentViews = controller.getDocComponentViews();
-        assertEquals(23, docComponentViews.size());//all the components
-    }
-
-    @Test
-    public void testGetDocComponentViews_showAutoMappedOff_nonMappedComponentsReturned() throws Exception {
-        controller.prepareFields();
-        sessionData.setShowAutoMappedFields(false);
-        List<DocComponentView> docComponentViews = controller.getDocComponentViews();
-        assertEquals(4, docComponentViews.size());//all the components
-    }
 }

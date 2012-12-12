@@ -1,8 +1,12 @@
 <%@ include file="/WEB-INF/jsp/include.jsp" %>
 
-<jsp:useBean id="products" scope="request"
+<jsp:useBean id="products"
+             scope="request"
              type="java.util.List<org.lawrencebower.docgen.web_logic.view.product.ProductView>"/>
-<jsp:useBean id="sessionData" scope="session" type="org.lawrencebower.docgen.web.model.SessionData"/>
+
+<jsp:useBean id="sessionData"
+             scope="session"
+             type="org.lawrencebower.docgen.web.model.SessionData"/>
 
 <s:url var="customer_url" value="/customerSelect/"/>
 <a href="${customer_url}">Select customer</a>

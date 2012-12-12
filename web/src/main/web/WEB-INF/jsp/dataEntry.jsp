@@ -11,9 +11,14 @@
     }
 </script>
 
-<jsp:useBean id="sessionData" scope="session" type="org.lawrencebower.docgen.web.model.SessionData"/>
-<jsp:useBean id="dataEntryController" scope="session"
-             type="org.lawrencebower.docgen.web.controller.DataEntryController"/>
+<jsp:useBean id="sessionData"
+             scope="session"
+             type="org.lawrencebower.docgen.web.model.SessionData"/>
+
+<jsp:useBean id="prepareFieldsController"
+             scope="session"
+             type="org.lawrencebower.docgen.web.controller.data_entry.PrepareFieldsController"/>
+
 <c:set var="fieldSeperator" value="~" scope="application"/>
 
 <s:url var="customer_url" value="/customerSelect/"/>
@@ -39,7 +44,7 @@ Enter data
 
     <table>
         <c:forEach var="field"
-                   items="${dataEntryController.docComponentViews}"
+                   items="${prepareFieldsController.docComponentViews}"
                    varStatus="fieldIndex">
             <tr>
                 <td>
