@@ -28,6 +28,8 @@ public class TableComponentView extends DocComponentView<TableComponent> {
     TableComponentValueSetter tableValueSetter;
     @Autowired
     protected TableComponentCalculator componentCalculator;
+    @Autowired
+    private TableComponentProductInjector productInjector;
 
     private List<TableComponentCalculation> componentCalculations = new ArrayList<>();
 
@@ -102,7 +104,6 @@ public class TableComponentView extends DocComponentView<TableComponent> {
     }
 
     public void injectProducts(List<ProductView> products) {
-        TableComponentProductInjector productInjector = new TableComponentProductInjector();
         productInjector.injectProducts(docComponent, products);
     }
 

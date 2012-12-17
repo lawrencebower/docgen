@@ -5,10 +5,14 @@ import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
 import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class TableComponentProductInjector implements ComponentProductInjector<TableComponent> {
+
+    @Autowired
+    private ProductInjectionMapper productInjectionMapper;
 
     public void injectProducts(TableComponent tableComponent, List<ProductView> products) {
 
@@ -54,7 +58,7 @@ public class TableComponentProductInjector implements ComponentProductInjector<T
     }
 
     private TableCell makeCellForField(ProductInjectionField productField, ProductView product) {
-        String value = ProductInjectionField.getProductFieldByType(productField, product);
+        String value = productInjectionMapper.getProductFieldByType(productField, product);
         return new TableCell(value);
     }
 }

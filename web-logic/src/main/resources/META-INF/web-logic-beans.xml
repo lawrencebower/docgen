@@ -48,6 +48,35 @@
     <bean name="tableComponentCalculator"
           class="org.lawrencebower.docgen.web_logic.business.component_calculation.table.BasicTableComponentCalculator"/>
 
+    <bean name="tableComponentProductInjector"
+          class="org.lawrencebower.docgen.web_logic.business.injection.product.TableComponentProductInjector"/>
+
+    <bean name="productInjectionMapper"
+          class="org.lawrencebower.docgen.web_logic.business.injection.product.mapper.ProductInjectionMapperImpl">
+
+        <property name="nameMapper">
+            <bean class="org.lawrencebower.docgen.web_logic.business.injection.product.mapper.PINameMapper"/>
+        </property>
+        <property name="nameAndDescriptionMapper">
+            <bean class="org.lawrencebower.docgen.web_logic.business.injection.product.mapper.PINameAndDescriptionMapper"/>
+        </property>
+        <property name="commercialInvoiceMapper">
+            <bean class="org.lawrencebower.docgen.web_logic.business.injection.product.mapper.PICommercialInvoiceMapper"/>
+        </property>
+        <property name="harmonizedTariffMapper">
+            <bean class="org.lawrencebower.docgen.web_logic.business.injection.product.mapper.PIHarmonizedTariffMapper"/>
+        </property>
+        <property name="originMapper">
+            <bean class="org.lawrencebower.docgen.web_logic.business.injection.product.mapper.PIOriginMapper"/>
+        </property>
+        <property name="quantityMapper">
+            <bean class="org.lawrencebower.docgen.web_logic.business.injection.product.mapper.PIQuantityMapper"/>
+        </property>
+        <property name="valueMapper">
+            <bean class="org.lawrencebower.docgen.web_logic.business.injection.product.mapper.PIValueMapper"/>
+        </property>
+    </bean>
+
     <!--VIEW BEANS-->
 
     <bean name="documentSet"
