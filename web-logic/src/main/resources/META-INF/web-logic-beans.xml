@@ -19,7 +19,7 @@
           class="org.lawrencebower.docgen.web_logic.business.mapping.customer_product_document.CustomerProduct_Document_Mappings"/>
 
     <bean name="autoMappedComponentMapper"
-          class="org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.mapper.AutoMappedComponentMapper"
+          class="org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.mapper.AMComponentMapper"
           init-method="initMappers">
 
         <property name="businessMapper">

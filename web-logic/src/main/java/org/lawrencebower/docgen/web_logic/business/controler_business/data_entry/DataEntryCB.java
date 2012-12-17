@@ -5,7 +5,7 @@ import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
 import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionInfo;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AutoMappedComponentInfo;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfo;
 import org.lawrencebower.docgen.web_logic.business.mapping.customer_product_document.CustomerProduct_Document_Mappings;
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
@@ -115,14 +115,14 @@ public class DataEntryCB {
                                      ContactView selectedCustomer,
                                      ContactView selectedBusiness) {
 
-        AutoMappedComponentInfo mappingInfo = createMappingInfo(selectedCustomer,
+        AMComponentInfo mappingInfo = createMappingInfo(selectedCustomer,
                                                                 selectedBusiness);
 
         documentSet.mapAutomappedComponents(mappingInfo);
 
     }
 
-    private AutoMappedComponentInfo createMappingInfo(ContactView selectedCustomer,
+    private AMComponentInfo createMappingInfo(ContactView selectedCustomer,
                                                       ContactView selectedBusiness) {
 
         viewUtils.checkCustomerSet(selectedCustomer);
@@ -130,7 +130,7 @@ public class DataEntryCB {
 
         ContactView vendor = modelFactory.getVendor();
 
-        return new AutoMappedComponentInfo(selectedCustomer,
+        return new AMComponentInfo(selectedCustomer,
                                            vendor,
                                            selectedBusiness);
     }

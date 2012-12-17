@@ -1,18 +1,18 @@
 package org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.mapper;
 
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMapped;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AutoMappedComponentInfo;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfo;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractAutoMappedComponentMapper implements AutoMapped {
+public abstract class AbstractAMComponentMapper implements AutoMapped {
 
     protected List<AutoMapped> componentMappers = new ArrayList<>();
 
     @Override
-    public void mapComponent(DocComponentView componentView, AutoMappedComponentInfo mappingInfo) {
+    public void mapComponent(DocComponentView componentView, AMComponentInfo mappingInfo) {
         for (AutoMapped componentMapper : componentMappers) {
             /**
              * todo

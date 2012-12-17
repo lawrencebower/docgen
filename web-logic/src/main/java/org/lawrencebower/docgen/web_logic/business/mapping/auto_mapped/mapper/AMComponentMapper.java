@@ -4,7 +4,7 @@ import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.customer.CustomerMapper;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.vendor.VendorMapper;
 
-public class AutoMappedComponentMapper extends AbstractAutoMappedComponentMapper {
+public class AMComponentMapper extends AbstractAMComponentMapper {
 
     private BusinessMapper businessMapper;
     private CustomerMapper customerMapper;

@@ -1,19 +1,19 @@
 package org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.vendor;
 
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedFields;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AbstractAutoMappedComponent;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AutoMappedComponentInfo;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfo;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AbstractAMComponent;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 
-public class AutoMappedVendorCountry extends AbstractAutoMappedComponent {
+public class AMVendorCountry extends AbstractAMComponent {
 
-    public AutoMappedVendorCountry() {
+    public AMVendorCountry() {
         name = AutoMappedFields.VENDOR_COUNTRY;
     }
 
     @Override
     public void mapComponent(DocComponentView docComponentView,
-                             AutoMappedComponentInfo info) {
+                             AMComponentInfo info) {
 
         String value = info.getVendorCountry();
         setComponentValueIfMatch(docComponentView, value);

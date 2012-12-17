@@ -1,19 +1,19 @@
 package org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.vendor;
 
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedFields;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AbstractAutoMappedComponent;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AutoMappedComponentInfo;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfo;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AbstractAMComponent;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 
-public class AutoMappedVendorNameAndAddress extends AbstractAutoMappedComponent {
+public class AMVendorNameAndAddress extends AbstractAMComponent {
 
-    public AutoMappedVendorNameAndAddress() {
+    public AMVendorNameAndAddress() {
         name = AutoMappedFields.VENDOR_NAME_AND_ADDRESS;
     }
 
     @Override
     public void mapComponent(DocComponentView docComponentView,
-                             AutoMappedComponentInfo info) {
+                             AMComponentInfo info) {
 
         String vendorName = info.getVendorName();
         String vendorAddress = info.getVendorAddress();

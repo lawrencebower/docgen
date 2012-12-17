@@ -1,19 +1,19 @@
 package org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.business;
 
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedFields;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AbstractAutoMappedComponent;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AutoMappedComponentInfo;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfo;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AbstractAMComponent;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 
-public class AutoMappedBusinessAddress extends AbstractAutoMappedComponent {
+public class AMBusinessAddress extends AbstractAMComponent {
 
-    public AutoMappedBusinessAddress() {
+    public AMBusinessAddress() {
         name = AutoMappedFields.BUSINESS_ADDRESS;
     }
 
     @Override
     public void mapComponent(DocComponentView docComponentView,
-                             AutoMappedComponentInfo info) {
+                             AMComponentInfo info) {
 
         String value = info.getBusinessAddress();
         setComponentValueIfMatch(docComponentView, value);

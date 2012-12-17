@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedFields;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AutoMappedComponentInfo;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfo;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -16,13 +16,13 @@ import static org.mockito.Mockito.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:META-INF/web-logic-test-context.xml")
-public class AutoMappedComponentMapperTest {
+public class AMComponentMapperTest {
 
     @Autowired
-    private AutoMappedComponentMapper mapper;
+    private AMComponentMapper mapper;
 
     @Mock
-    AutoMappedComponentInfo mappingInfo;
+    AMComponentInfo mappingInfo;
 
     public static final String BUSINESS_NAME_STRING = "businessname";
     public static final String BUSINESS_CONTACT_NAME_STRING = "businesscontact";
@@ -52,7 +52,7 @@ public class AutoMappedComponentMapperTest {
 
     private void programMocks() {
 
-        mappingInfo = mock(AutoMappedComponentInfo.class);
+        mappingInfo = mock(AMComponentInfo.class);
 
         when(mappingInfo.getCustomerName()).thenReturn(CUSTOMER_NAME_STRING);
         when(mappingInfo.getCustomerContactName()).thenReturn(CUSTOMER_CONTACT_NAME_STRING);

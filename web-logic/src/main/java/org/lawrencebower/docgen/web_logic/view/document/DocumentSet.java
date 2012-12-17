@@ -3,7 +3,7 @@ package org.lawrencebower.docgen.web_logic.view.document;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionInfo;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AutoMappedComponentInfo;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfo;
 import org.lawrencebower.docgen.web_logic.business.mapping.field_value.FieldMapper;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewableComponentFilter;
@@ -81,7 +81,7 @@ public class DocumentSet {
         viewUtils.checkDocumentsSet(documents);
     }
 
-    public void mapAutomappedComponents(AutoMappedComponentInfo mappingInfo) {
+    public void mapAutomappedComponents(AMComponentInfo mappingInfo) {
 
         checkDocumentsSet();
 

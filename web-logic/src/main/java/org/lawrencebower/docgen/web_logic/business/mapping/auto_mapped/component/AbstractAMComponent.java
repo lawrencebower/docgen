@@ -3,7 +3,7 @@ package org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.componen
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMapped;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 
-public abstract class AbstractAutoMappedComponent implements AutoMapped {
+public abstract class AbstractAMComponent implements AutoMapped {
 
     protected String name;
 

@@ -7,8 +7,8 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionField;
 import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionInfo;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AutoMappedComponentInfo;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.mapper.AutoMappedComponentMapper;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfo;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.mapper.AMComponentMapper;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
@@ -19,7 +19,7 @@ import java.util.List;
 public abstract class DocComponentView<T extends DocComponent> {
 
     @Autowired
-    private AutoMappedComponentMapper autoMapper;
+    private AMComponentMapper autoMapper;
 
     protected static final String NULL_COMPONENT_MESSAGE = "DocComponent is null";
     protected static final String NOT_SET_MESSAGE = "not set";
@@ -87,7 +87,7 @@ public abstract class DocComponentView<T extends DocComponent> {
         return name;
     }
 
-    public void mapComponentValue(AutoMappedComponentInfo mappingInfo) {
+    public void mapComponentValue(AMComponentInfo mappingInfo) {
         if (isAutoMapped()) {
             autoMapper.mapComponent(this, mappingInfo);
         }
