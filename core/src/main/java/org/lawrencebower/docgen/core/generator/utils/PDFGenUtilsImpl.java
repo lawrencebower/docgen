@@ -5,33 +5,21 @@ import com.lowagie.text.DocumentException;
 import com.lowagie.text.Font;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.PdfContentByte;
-import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
 import org.lawrencebower.docgen.core.document.Document;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
-import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.document.component.text.FontStyle;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.document.component.text.TextFragment;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponent;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
-import java.util.List;
 
 public class PDFGenUtilsImpl implements PDFGenUtils {
-
-    @Autowired
-    private ITextTableGenerator iTextTableGenerator;
-
-    public static final int DEFAULT_FONT_SIZE = 10;
-    public static final int DEFAULT_FONT_STYLE = Font.BOLD;
-    public static final int DEFAULT_FONT = Font.HELVETICA;
 
     @Override
     public void checkRequiredValuesPresent(Document doc) {
@@ -48,17 +36,6 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
             throw new DocGenException("Document Name must not be null");
         }
     }
-
-//    @Override
-/*    public Font getBaseFont() {
-        try {
-            BaseFont baseFont = BaseFont.createFont();
-            Font font = new Font(baseFont, DEFAULT_FONT_SIZE);
-            return font;
-        } catch (DocumentException | IOException e) {
-            throw new DocGenException(e);
-        }
-    }*/
 
     @Override
     public PdfReader getPDFReaderAndUnlockForSourcePDF(String sourcePDF) {
@@ -101,26 +78,6 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
         } catch (DocumentException | IOException e) {
             throw new DocGenException(e);
         }
-    }
-
-    @Override
-    public void checkCoordinatesPresent(List<ITextComponent> components) {
-        for (ITextComponent component : components) {
-            checkCoordinatesPresent(component);
-        }
-    }
-
-    @Override
-    public void checkCoordinatesPresent(ITextComponent component) {
-        DocCoordinates coordinates = component.getCoordinates();
-        if (coordinates == null) {
-            throw new DocGenException("Coordinates are null for component " + component.getName());
-        }
-    }
-
-    @Override
-    public PdfPTable generateTable(TableComponent component) {
-        return iTextTableGenerator.generateTable(component);
     }
 
     @Override

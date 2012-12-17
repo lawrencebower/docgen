@@ -13,7 +13,7 @@ import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
 import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
-import org.lawrencebower.docgen.core.generator.utils.ITextTableGeneratorTest;
+import org.lawrencebower.docgen.core.generator.model.itext_component.utils.ITextTableGeneratorTest;
 import org.lawrencebower.docgen.core.generator.utils.TextGenerator;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;

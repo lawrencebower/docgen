@@ -47,7 +47,7 @@ public class ViewableComponentFilterTest {
     public void testGetComponents_validParams_duplicateFieldsFiltered() throws Exception {
         List<DocComponentView> allComponents = getAllComponents();
         assertEquals("comp1", allComponents.get(0).getName());
-        assertEquals(CUSTOMER_NAME, allComponents.get(1).getName());
+        assertEquals(CUSTOMER_NAME.getName(), allComponents.get(1).getName());
         assertEquals("comp3", allComponents.get(2).getName());
     }
 

@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.core.generator.utils;
+package org.lawrencebower.docgen.core.generator.model.itext_component.utils;
 
 import com.lowagie.text.pdf.PdfPTable;
 import org.junit.Test;

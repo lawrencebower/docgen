@@ -1,11 +1,11 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd
-              /org/springframework/context/config/spring-context-3.1.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd">
 
     <bean id="fileUtils" class="org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils"/>
-    <bean id="iTextTableGenerator" class="org.lawrencebower.docgen.core.generator.utils.ITextTableGenerator"/>
+    <bean id="iTextTableGenerator" class="org.lawrencebower.docgen.core.generator.model.itext_component.utils.ITextTableGenerator"/>
     <bean id="pdfGenUtils" class="org.lawrencebower.docgen.core.generator.utils.PDFGenUtilsImpl"/>
+    <bean id="iTextComponentUtils" class="org.lawrencebower.docgen.core.generator.model.itext_component.utils.ITextComponentUtils"/>
     <bean id="pdfConcatenator" class="org.lawrencebower.docgen.core.generator.utils.PDFConcatenator"/>
 
     <!--ITEXT COMPONENTS-->

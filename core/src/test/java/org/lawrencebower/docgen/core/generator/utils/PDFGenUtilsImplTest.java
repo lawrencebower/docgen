@@ -1,16 +1,12 @@
 package org.lawrencebower.docgen.core.generator.utils;
 
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.DocType;
-import org.lawrencebower.docgen.core.document.component.TextComponent;
-import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
-import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponent;
-import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponentFactory;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayDocument;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -24,22 +20,19 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/core-test-context.xml"})
+@ContextConfiguration(locations = "classpath:META-INF/core-test-context.xml")
 public class PDFGenUtilsImplTest {
-
-    @Autowired
-    private ITextComponentFactory componentFactory;
 
     private PDFGenUtilsImpl pdfGenUtils;
     private OverlayDocument document;
 
-    @org.junit.Before
+    @Before
     public void setUp() throws Exception {
-        this.pdfGenUtils = new PDFGenUtilsImpl();
-        this.document = mock(OverlayDocument.class);
+        pdfGenUtils = new PDFGenUtilsImpl();
+        document = mock(OverlayDocument.class);
     }
 
-    @org.junit.Test
+    @Test
     public void testCheckRequiredValuesPresent_noDocType_throwsError() throws Exception {
 
 
@@ -57,7 +50,7 @@ public class PDFGenUtilsImplTest {
         fail();//should not get here
     }
 
-    @org.junit.Test
+    @Test
     public void testCheckRequiredValuesPresent_emptyDocComponents_throwsError() throws Exception {
 
         OverlayDocument testDoc = mock(OverlayDocument.class);
@@ -75,7 +68,7 @@ public class PDFGenUtilsImplTest {
         fail();//should not get here
     }
 
-    @org.junit.Test
+    @Test
     public void testCheckRequiredValuesPresent_nullDocComponents_throwsError() throws Exception {
 
         OverlayDocument testDoc = mock(OverlayDocument.class);
@@ -93,7 +86,7 @@ public class PDFGenUtilsImplTest {
         fail();//should not get here
     }
 
-    @org.junit.Test
+    @Test
     public void testCheckRequiredValuesPresent_nullName_throwsError() throws Exception {
 
         OverlayDocument testDoc = mock(OverlayDocument.class);
@@ -107,30 +100,6 @@ public class PDFGenUtilsImplTest {
             pdfGenUtils.checkRequiredValuesPresent(testDoc);
         } catch (DocGenException e) {
             assertTrue(e.getMessage().equals("Document Name must not be null"));
-            return;
-        }
-        fail();//should not get here
-    }
-
-    @org.junit.Test
-    public void testCheckCoordinates_validCoordinates_noError() {
-
-        TextComponent component = new TextComponent(HorizontalAlignment.LEFT, "value");
-        component.setCoordinates(new DocCoordinates(1, 1, 1, 1));
-        ITextComponent overlayText = componentFactory.createTextComponent(component);
-        pdfGenUtils.checkCoordinatesPresent(Arrays.asList(overlayText));
-    }
-
-    @org.junit.Test
-    public void testCheckCoordinates_nullCoordinate_throwsError() {
-
-        try {
-            TextComponent component = new TextComponent(HorizontalAlignment.LEFT, "value");
-            ITextComponent overlayText = componentFactory.createTextComponent(component);
-            pdfGenUtils.checkCoordinatesPresent(Arrays.asList(overlayText));
-        } catch (DocGenException e) {
-            String message = e.getMessage();
-            assertTrue(message.startsWith("Coordinates are null"));
             return;
         }
         fail();//should not get here
