@@ -5,7 +5,9 @@ import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 
-public abstract class AbstractITextComponent<T extends Element, T2 extends DocComponent> implements ITextComponent<T> {
+public abstract class AbstractITextComponent
+        <T extends Element, T2 extends DocComponent>
+        implements ITextComponent<T> {
 
     protected T2 component;
 

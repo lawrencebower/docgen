@@ -27,7 +27,7 @@ public abstract class AbstractDocument<T extends RenderableComponent> implements
 
     @Override
     public void addComponent(T component) {
-        this.components.add(component);
+        components.add(component);
     }
 
     @Override
