@@ -16,13 +16,28 @@
           class="org.lawrencebower.docgen.web_logic.business.utils.ViewableComponentFilter"/>
 
     <bean name="customerProductMappings"
-          class="org.lawrencebower.docgen.web_logic.business.mapping.CustomerProduct_Document_Mappings"/>
+          class="org.lawrencebower.docgen.web_logic.business.mapping.customer_product_document.CustomerProduct_Document_Mappings"/>
 
     <bean name="autoMappedComponentMapper"
-          class="org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedComponentMapper"/>
+          class="org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.mapper.AutoMappedComponentMapper"
+          init-method="initMappers">
+
+        <property name="businessMapper">
+            <bean class="org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.business.BusinessMapper"
+                  init-method="initMappers"/>
+        </property>
+        <property name="customerMapper">
+            <bean class="org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.customer.CustomerMapper"
+                  init-method="initMappers"/>
+        </property>
+        <property name="vendorMapper">
+            <bean class="org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.vendor.VendorMapper"
+                  init-method="initMappers"/>
+        </property>
+    </bean>
 
     <bean name="fieldMapper"
-          class="org.lawrencebower.docgen.web_logic.business.mapping.FieldMapper"/>
+          class="org.lawrencebower.docgen.web_logic.business.mapping.field_value.FieldMapper"/>
 
     <bean name="viewUtils"
           class="org.lawrencebower.docgen.web_logic.business.utils.ViewUtils"/>

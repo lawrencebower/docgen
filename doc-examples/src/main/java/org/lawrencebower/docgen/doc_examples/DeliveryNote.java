@@ -15,8 +15,8 @@ import org.lawrencebower.docgen.core.generator.custom.CustomDocument;
 import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
-import org.lawrencebower.docgen.web_logic.business.injection.product_injection.ProductInjectionField;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedComponent;
+import org.lawrencebower.docgen.web_logic.business.injection.product.ProductInjectionField;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedFields;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
@@ -27,7 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
 
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedComponent.*;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedFields.*;
 
 public class DeliveryNote {
 
@@ -228,7 +228,7 @@ public class DeliveryNote {
         headerRow.addCell(toCell, 1);
 
         TableTextComponent nameComponent = new TableTextComponent("Lawrence Bower");
-        nameComponent.setName(AutoMappedComponent.CUSTOMER_CONTACT_NAME);
+        nameComponent.setName(AutoMappedFields.CUSTOMER_CONTACT_NAME);
         TableCell nameCell = new TableCell(nameComponent);
         addTextAreaComponent(nameComponent);
         headerRow.addCell(nameCell, 9);
@@ -237,7 +237,7 @@ public class DeliveryNote {
 
         TableRow companyRow = new TableRow();
         TableTextComponent companyComponent = new TableTextComponent("Acme ltd");
-        companyComponent.setName(AutoMappedComponent.CUSTOMER_NAME);
+        companyComponent.setName(AutoMappedFields.CUSTOMER_NAME);
         TableCell companyCell = new TableCell(companyComponent);
         addTextAreaComponent(companyComponent);
         companyRow.addCell(companyCell);
@@ -245,7 +245,7 @@ public class DeliveryNote {
 
         TableRow addressRow = new TableRow();
         TableTextComponent addressComponent = new TableTextComponent("36 BillyBob Street\nEssex");
-        addressComponent.setName(AutoMappedComponent.CUSTOMER_ADDRESS);
+        addressComponent.setName(AutoMappedFields.CUSTOMER_ADDRESS);
         TableCell addressCell = new TableCell(addressComponent);
         addTextAreaComponent(addressComponent);
         addressRow.addCell(addressCell);
@@ -253,7 +253,7 @@ public class DeliveryNote {
 
         TableRow countryRow = new TableRow();
         TableTextComponent countryComponent = new TableTextComponent("UK");
-        countryComponent.setName(AutoMappedComponent.CUSTOMER_COUNTRY);
+        countryComponent.setName(AutoMappedFields.CUSTOMER_COUNTRY);
         TableCell countryCell = new TableCell(countryComponent);
         addTextAreaComponent(countryComponent);
         countryRow.addCell(countryCell);

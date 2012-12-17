@@ -16,7 +16,7 @@ import org.lawrencebower.docgen.web_logic.business.component_calculation.Compone
 import org.lawrencebower.docgen.web_logic.business.component_calculation.Format;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.Operator;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculation;
-import org.lawrencebower.docgen.web_logic.business.injection.product_injection.ProductInjectionField;
+import org.lawrencebower.docgen.web_logic.business.injection.product.ProductInjectionField;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
@@ -27,7 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
 
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedComponent.*;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedFields.*;
 
 public class CommercialInvoice {
 

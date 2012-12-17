@@ -18,8 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedComponent.CUSTOMER_ADDRESS;
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedComponent.VENDOR_ADDRESS;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedFields.CUSTOMER_ADDRESS;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedFields.VENDOR_ADDRESS;
 
 public class FDA_2887 {
 

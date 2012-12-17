@@ -10,7 +10,7 @@ import org.lawrencebower.docgen.web_logic.business.component_calculation.Compone
 import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculation;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculator;
 import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionInfo;
-import org.lawrencebower.docgen.web_logic.business.injection.product_injection.TableComponentProductInjector;
+import org.lawrencebower.docgen.web_logic.business.injection.product.TableComponentProductInjector;
 import org.lawrencebower.docgen.web_logic.business.table_component.TableComponentValueSetter;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;

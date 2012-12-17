@@ -85,7 +85,7 @@ public class SetFieldsControllerTest {
     }
 
     @Test
-    public void testSubmitFields() throws Exception {
+    public void testSubmitFields_validData_validOutput() throws Exception {
 
         WebRequest mockRequest = makeMockRequestWithParamMap();
 
