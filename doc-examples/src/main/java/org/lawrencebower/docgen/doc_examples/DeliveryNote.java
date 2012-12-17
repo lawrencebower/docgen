@@ -16,7 +16,7 @@ import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
 import org.lawrencebower.docgen.web_logic.business.injection.product.ProductInjectionField;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedFields;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
@@ -27,7 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
 
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedFields.*;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField.*;
 
 public class DeliveryNote {
 
@@ -83,17 +83,17 @@ public class DeliveryNote {
 
         TextComponent addressComponent = new TextComponent("Suites 11 and 12, Church Farm\n" +
                                                            "Maris Lane, Trumpington, CB29LG, UK");
-        addressComponent.setName(VENDOR_ADDRESS);
+        addressComponent.setName(VENDOR_ADDRESS.getName());
         convertAndAddComponent(addressComponent);
         addTextComponentView(addressComponent);
 
         TextComponent phoneComponent = new TextComponent("Phone +44 (0) 1223 655577");
-        phoneComponent.setName(VENDOR_PHONE);
+        phoneComponent.setName(VENDOR_PHONE.getName());
         convertAndAddComponent(phoneComponent);
         addTextComponentView(phoneComponent);
 
         TextComponent emailComponent = new TextComponent("sales@acme.com");
-        emailComponent.setName(VENDOR_EMAIL);
+        emailComponent.setName(VENDOR_EMAIL.getName());
         convertAndAddComponent(emailComponent);
         addTextComponentView(emailComponent);
 
@@ -228,7 +228,7 @@ public class DeliveryNote {
         headerRow.addCell(toCell, 1);
 
         TableTextComponent nameComponent = new TableTextComponent("Lawrence Bower");
-        nameComponent.setName(AutoMappedFields.CUSTOMER_CONTACT_NAME);
+        nameComponent.setName(AutoMappedField.CUSTOMER_CONTACT_NAME.getName());
         TableCell nameCell = new TableCell(nameComponent);
         addTextAreaComponent(nameComponent);
         headerRow.addCell(nameCell, 9);
@@ -237,7 +237,7 @@ public class DeliveryNote {
 
         TableRow companyRow = new TableRow();
         TableTextComponent companyComponent = new TableTextComponent("Acme ltd");
-        companyComponent.setName(AutoMappedFields.CUSTOMER_NAME);
+        companyComponent.setName(AutoMappedField.CUSTOMER_NAME.getName());
         TableCell companyCell = new TableCell(companyComponent);
         addTextAreaComponent(companyComponent);
         companyRow.addCell(companyCell);
@@ -245,7 +245,7 @@ public class DeliveryNote {
 
         TableRow addressRow = new TableRow();
         TableTextComponent addressComponent = new TableTextComponent("36 BillyBob Street\nEssex");
-        addressComponent.setName(AutoMappedFields.CUSTOMER_ADDRESS);
+        addressComponent.setName(AutoMappedField.CUSTOMER_ADDRESS.getName());
         TableCell addressCell = new TableCell(addressComponent);
         addTextAreaComponent(addressComponent);
         addressRow.addCell(addressCell);
@@ -253,7 +253,7 @@ public class DeliveryNote {
 
         TableRow countryRow = new TableRow();
         TableTextComponent countryComponent = new TableTextComponent("UK");
-        countryComponent.setName(AutoMappedFields.CUSTOMER_COUNTRY);
+        countryComponent.setName(AutoMappedField.CUSTOMER_COUNTRY.getName());
         TableCell countryCell = new TableCell(countryComponent);
         addTextAreaComponent(countryComponent);
         countryRow.addCell(countryCell);

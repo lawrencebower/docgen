@@ -12,7 +12,7 @@ import org.lawrencebower.docgen.core.generator.overlay.OverlayPDFGenerator;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponentFactory;
 import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionField;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedFields;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document.component.CheckBoxComponentView;
@@ -21,8 +21,8 @@ import org.lawrencebower.docgen.web_logic.view.document.component.TextComponentV
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedFields.BUSINESS_ADDRESS;
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedFields.CUSTOMER_ADDRESS;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField.BUSINESS_ADDRESS;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField.CUSTOMER_ADDRESS;
 
 public class FCC_740 {
 
@@ -80,7 +80,7 @@ public class FCC_740 {
                    new DocCoordinates(368, 585, 210, 30),
                    true);
 
-        addTextBox(AutoMappedFields.VENDOR_NAME_AND_ADDRESS,
+        addTextBox(AutoMappedField.VENDOR_NAME_AND_ADDRESS,
                    new DocCoordinates(25, 489, 175, 70),
                    true);
 
@@ -111,6 +111,15 @@ public class FCC_740 {
                     true);
 
 
+    }
+
+    private void addTextBox(AutoMappedField mappedField,
+                            DocCoordinates coordinates,
+                            boolean editable) {
+
+        addTextBox(mappedField.getName(),
+                   coordinates,
+                   editable);
     }
 
     private void addTextBox(String name,

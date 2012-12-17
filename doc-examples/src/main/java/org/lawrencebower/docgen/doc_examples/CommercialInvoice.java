@@ -27,7 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
 
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedFields.*;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField.*;
 
 public class CommercialInvoice {
 
@@ -151,20 +151,21 @@ public class CommercialInvoice {
         headerRow.addCell(shippedToCell);
         table.setHeaderRow(headerRow);
 
-        TableTextComponent textComponent = createTextComponent(BUSINESS_NAME,
+        TableTextComponent textComponent = createTextComponent(BUSINESS_NAME.getName(),
                                                                "blah");
         table.addRow(createRowWithLabelAndValue("Name:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(BUSINESS_CONTACT_NAME, "David Davidson");
+        textComponent = createTextComponent(BUSINESS_CONTACT_NAME.getName(),
+                                            "David Davidson");
         table.addRow(createRowWithLabelAndValue("Contact Name:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(BUSINESS_PHONE, "123456788");
+        textComponent = createTextComponent(BUSINESS_PHONE.getName(), "123456788");
         table.addRow(createRowWithLabelAndValue("Phone:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(BUSINESS_ADDRESS,
+        textComponent = createTextComponent(BUSINESS_ADDRESS.getName(),
                                             "Suites 11 & 12\n" +
                                             "Church Farm,\n" +
                                             "Maris Lane,\n" +
@@ -172,7 +173,7 @@ public class CommercialInvoice {
         table.addRow(createRowWithLabelAndValue("Company address:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(BUSINESS_COUNTRY, "UNITED KINGDOM");
+        textComponent = createTextComponent(BUSINESS_COUNTRY.getName(), "UNITED KINGDOM");
         table.addRow(createRowWithLabelAndValue("Country:", textComponent));
         addTextComponent(textComponent);
 
@@ -192,19 +193,19 @@ public class CommercialInvoice {
         headerRow.addCell(shippedToCell);
         table.setHeaderRow(headerRow);
 
-        TableTextComponent textComponent = createTextComponent(CUSTOMER_NAME, "");
+        TableTextComponent textComponent = createTextComponent(CUSTOMER_NAME.getName(), "");
         table.addRow(createRowWithLabelAndValue("Name:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(CUSTOMER_CONTACT_NAME, "Billy Bob Bobson");
+        textComponent = createTextComponent(CUSTOMER_CONTACT_NAME.getName(), "Billy Bob Bobson");
         table.addRow(createRowWithLabelAndValue("Contact Name:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(CUSTOMER_PHONE, "123456788");
+        textComponent = createTextComponent(CUSTOMER_PHONE.getName(), "123456788");
         table.addRow(createRowWithLabelAndValue("Phone:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(CUSTOMER_ADDRESS,
+        textComponent = createTextComponent(CUSTOMER_ADDRESS.getName(),
                                             "Suites 11 & 12\n" +
                                             "Church Farm,\n" +
                                             "Maris Lane,\n" +
@@ -212,7 +213,7 @@ public class CommercialInvoice {
         table.addRow(createRowWithLabelAndValue("Company address:", textComponent));
         addTextAreaComponent(textComponent);
 
-        textComponent = createTextComponent(CUSTOMER_COUNTRY, "UNITED KINGDOM");
+        textComponent = createTextComponent(CUSTOMER_COUNTRY.getName(), "UNITED KINGDOM");
         table.addRow(createRowWithLabelAndValue("Country:", textComponent));
         addTextComponent(textComponent);
 
@@ -303,23 +304,23 @@ public class CommercialInvoice {
         headerRow.addCell(shippedFromCell);
         table.setHeaderRow(headerRow);
 
-        TableTextComponent textComponent = createTextComponent(VENDOR_NAME, "Acme Ltd");
+        TableTextComponent textComponent = createTextComponent(VENDOR_NAME.getName(), "Acme Ltd");
         table.addRow(createRowWithLabelAndValue("Name:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(VENDOR_TAX_ID, "154487945");
+        textComponent = createTextComponent(VENDOR_TAX_ID.getName(), "154487945");
         table.addRow(createRowWithLabelAndValue("TAX/VAT NUMBER:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(VENDOR_CONTACT_NAME, "David Davidson");
+        textComponent = createTextComponent(VENDOR_CONTACT_NAME.getName(), "David Davidson");
         table.addRow(createRowWithLabelAndValue("Contact Name:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(VENDOR_PHONE, "+44 (0)1223 655577");
+        textComponent = createTextComponent(VENDOR_PHONE.getName(), "+44 (0)1223 655577");
         table.addRow(createRowWithLabelAndValue("Phone:", textComponent));
         addTextComponent(textComponent);
 
-        textComponent = createTextComponent(VENDOR_ADDRESS,
+        textComponent = createTextComponent(VENDOR_ADDRESS.getName(),
                                             "Suites 11 & 12\n" +
                                             "Church Farm,\n" +
                                             "Maris Lane,\n" +
@@ -327,7 +328,7 @@ public class CommercialInvoice {
         table.addRow(createRowWithLabelAndValue("Company address:", textComponent));
         addTextAreaComponent(textComponent);
 
-        textComponent = createTextComponent(VENDOR_COUNTRY, "UNITED KINGDOM");
+        textComponent = createTextComponent(VENDOR_COUNTRY.getName(), "UNITED KINGDOM");
         table.addRow(createRowWithLabelAndValue("Country:", textComponent));
         addTextComponent(textComponent);
 

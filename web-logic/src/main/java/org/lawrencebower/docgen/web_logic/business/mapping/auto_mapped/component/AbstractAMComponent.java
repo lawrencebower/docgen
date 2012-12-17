@@ -1,14 +1,15 @@
 package org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component;
 
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMapped;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 
 public abstract class AbstractAMComponent implements AutoMapped {
 
-    protected String name;
+    protected AutoMappedField name;
 
     public String getName() {
-        return name;
+        return name.getName();
     }
 
     protected boolean setComponentValueIfMatch(DocComponentView docComponent,
@@ -28,7 +29,8 @@ public abstract class AbstractAMComponent implements AutoMapped {
 
     @Override
     public boolean matchesName(String name) {
-        return this.name.equals(name);
+        String nameString = getName();
+        return nameString.equals(name);
     }
 
     private void setComponentText(DocComponentView docComponent, String text) {

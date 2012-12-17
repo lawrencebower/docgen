@@ -18,8 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedFields.CUSTOMER_ADDRESS;
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedFields.VENDOR_ADDRESS;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField.CUSTOMER_ADDRESS;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField.VENDOR_ADDRESS;
 
 public class FDA_2887 {
 
@@ -53,7 +53,7 @@ public class FDA_2887 {
                    new DocCoordinates(27, 658, 285, 18),
                    false);
 
-        addTextBox(VENDOR_ADDRESS,
+        addTextBox(VENDOR_ADDRESS.getName(),
                    new DocCoordinates(27, 592, 285, 57),
                    true);
 
@@ -73,7 +73,7 @@ public class FDA_2887 {
                    new DocCoordinates(467, 658, 130, 18),
                    false);
 
-        addTextBox(CUSTOMER_ADDRESS,
+        addTextBox(CUSTOMER_ADDRESS.getName(),
                    new DocCoordinates(312, 592, 285, 57),
                    true);
 

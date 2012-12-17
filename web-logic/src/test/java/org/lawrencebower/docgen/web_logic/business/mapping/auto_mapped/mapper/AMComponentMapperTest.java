@@ -3,7 +3,7 @@ package org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.mapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedFields;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfo;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 import org.mockito.Mock;
@@ -79,7 +79,7 @@ public class AMComponentMapperTest {
     @Test
     public void testMapComponent_businessName_correctFieldMapped() {
 
-        DocComponentView component = makeComponentsAndMap(AutoMappedFields.BUSINESS_NAME);
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.BUSINESS_NAME);
 
         verify(component, times(1)).setComponentValue(BUSINESS_NAME_STRING);
 
@@ -89,7 +89,7 @@ public class AMComponentMapperTest {
     @Test
     public void testMapComponent_businessAddress_correctFieldMapped() {
 
-        DocComponentView component = makeComponentsAndMap(AutoMappedFields.BUSINESS_ADDRESS);
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.BUSINESS_ADDRESS);
 
         verify(component, times(1)).setComponentValue(BUSINESS_ADDRESS_STRING);
 
@@ -99,7 +99,7 @@ public class AMComponentMapperTest {
     @Test
     public void testMapComponent_businessContactName_correctFieldMapped() {
 
-        DocComponentView component = makeComponentsAndMap(AutoMappedFields.BUSINESS_CONTACT_NAME);
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.BUSINESS_CONTACT_NAME);
 
         verify(component, times(1)).setComponentValue(BUSINESS_CONTACT_NAME_STRING);
 
@@ -109,7 +109,7 @@ public class AMComponentMapperTest {
     @Test
     public void testMapComponent_businessPhone_correctFieldMapped() {
 
-        DocComponentView component = makeComponentsAndMap(AutoMappedFields.BUSINESS_PHONE);
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.BUSINESS_PHONE);
 
         verify(component, times(1)).setComponentValue(BUSINESS_PHONE_STRING);
 
@@ -119,7 +119,7 @@ public class AMComponentMapperTest {
     @Test
     public void testMapComponent_businessCountry_correctFieldMapped() {
 
-        DocComponentView component = makeComponentsAndMap(AutoMappedFields.BUSINESS_COUNTRY);
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.BUSINESS_COUNTRY);
 
         verify(component, times(1)).setComponentValue(BUSINESS_COUNTRY_STRING);
 
@@ -132,7 +132,7 @@ public class AMComponentMapperTest {
     @Test
     public void testMapComponent_vendorCountry_correctFieldMapped() {
 
-        DocComponentView component = makeComponentsAndMap(AutoMappedFields.VENDOR_COUNTRY);
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_COUNTRY);
 
         verify(component, times(1)).setComponentValue(VENDOR_COUNTRY_STRING);
 
@@ -142,7 +142,7 @@ public class AMComponentMapperTest {
     @Test
     public void testMapComponent_vendorName_correctFieldMapped() {
 
-        DocComponentView component = makeComponentsAndMap(AutoMappedFields.VENDOR_NAME);
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_NAME);
 
         verify(component, times(1)).setComponentValue(VENDOR_NAME_STRING);
 
@@ -152,7 +152,7 @@ public class AMComponentMapperTest {
     @Test
     public void testMapComponent_vendorAddress_correctFieldMapped() {
 
-        DocComponentView component = makeComponentsAndMap(AutoMappedFields.VENDOR_ADDRESS);
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_ADDRESS);
 
         verify(component, times(1)).setComponentValue(VENDOR_ADDRESS_STRING);
 
@@ -162,7 +162,7 @@ public class AMComponentMapperTest {
     @Test
     public void testMapComponent_vendorContactName_correctFieldMapped() {
 
-        DocComponentView component = makeComponentsAndMap(AutoMappedFields.VENDOR_CONTACT_NAME);
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_CONTACT_NAME);
 
         verify(component, times(1)).setComponentValue(VENDOR_CONTACT_NAME_STRING);
 
@@ -172,7 +172,7 @@ public class AMComponentMapperTest {
     @Test
     public void testMapComponent_vendorPhone_correctFieldMapped() {
 
-        DocComponentView component = makeComponentsAndMap(AutoMappedFields.VENDOR_PHONE);
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_PHONE);
 
         verify(component, times(1)).setComponentValue(VENDOR_PHONE_STRING);
 
@@ -182,7 +182,7 @@ public class AMComponentMapperTest {
     @Test
     public void testMapComponent_vendorEmail_correctFieldMapped() {
 
-        DocComponentView component = makeComponentsAndMap(AutoMappedFields.VENDOR_EMAIL);
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_EMAIL);
 
         verify(component, times(1)).setComponentValue(VENDOR_EMAIL_STRING);
 
@@ -192,7 +192,7 @@ public class AMComponentMapperTest {
     @Test
     public void testMapComponent_vendorTaxId_correctFieldMapped() {
 
-        DocComponentView component = makeComponentsAndMap(AutoMappedFields.VENDOR_TAX_ID);
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.VENDOR_TAX_ID);
 
         verify(component, times(1)).setComponentValue(VENDOR_TAXID_STRING);
 
@@ -204,7 +204,7 @@ public class AMComponentMapperTest {
     @Test
     public void testMapComponent_customerName_correctFieldMapped() {
 
-        DocComponentView component = makeComponentsAndMap(AutoMappedFields.CUSTOMER_NAME);
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.CUSTOMER_NAME);
 
         verify(component, times(1)).setComponentValue(CUSTOMER_NAME_STRING);
 
@@ -214,7 +214,7 @@ public class AMComponentMapperTest {
     @Test
     public void testMapComponent_customerAddress_correctFieldMapped() {
 
-        DocComponentView component = makeComponentsAndMap(AutoMappedFields.CUSTOMER_ADDRESS);
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.CUSTOMER_ADDRESS);
 
         verify(component, times(1)).setComponentValue(CUSTOMER_ADDRESS_STRING);
 
@@ -224,7 +224,7 @@ public class AMComponentMapperTest {
     @Test
     public void testMapComponent_customerContactName_correctFieldMapped() {
 
-        DocComponentView component = makeComponentsAndMap(AutoMappedFields.CUSTOMER_CONTACT_NAME);
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.CUSTOMER_CONTACT_NAME);
 
         verify(component, times(1)).setComponentValue(CUSTOMER_CONTACT_NAME_STRING);
 
@@ -234,7 +234,7 @@ public class AMComponentMapperTest {
     @Test
     public void testMapComponent_customerCountry_correctFieldMapped() {
 
-        DocComponentView component = makeComponentsAndMap(AutoMappedFields.CUSTOMER_COUNTRY);
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.CUSTOMER_COUNTRY);
 
         verify(component, times(1)).setComponentValue(CUSTOMER_COUNTRY_STRING);
 
@@ -244,7 +244,7 @@ public class AMComponentMapperTest {
     @Test
     public void testMapComponent_customerPhone_correctFieldMapped() {
 
-        DocComponentView component = makeComponentsAndMap(AutoMappedFields.CUSTOMER_PHONE);
+        DocComponentView component = makeComponentsAndMap(AutoMappedField.CUSTOMER_PHONE);
 
         verify(component, times(1)).setComponentValue(CUSTOMER_PHONE_STRING);
 
@@ -252,6 +252,11 @@ public class AMComponentMapperTest {
     }
 
     //////////////////////////////////
+
+    private DocComponentView makeComponentsAndMap(AutoMappedField field) {
+        String fieldName = field.getName();
+        return makeComponentsAndMap(fieldName);
+    }
 
     private DocComponentView makeComponentsAndMap(String field) {
 

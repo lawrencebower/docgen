@@ -1,6 +1,6 @@
 package org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.customer;
 
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedFields;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfo;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AbstractAMComponent;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
@@ -8,7 +8,7 @@ import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentVi
 public class AMCustomerName extends AbstractAMComponent {
 
     public AMCustomerName() {
-        name = AutoMappedFields.CUSTOMER_NAME;
+        name = AutoMappedField.CUSTOMER_NAME;
     }
 
     @Override

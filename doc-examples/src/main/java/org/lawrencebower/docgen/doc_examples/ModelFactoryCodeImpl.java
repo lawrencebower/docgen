@@ -1,7 +1,7 @@
 package org.lawrencebower.docgen.doc_examples;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedFields;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
 import org.lawrencebower.docgen.web_logic.business.mapping.customer_product_document.CustomerProduct_Document_Mappings;
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.view.contact.Contact;
@@ -45,7 +45,7 @@ public abstract class ModelFactoryCodeImpl implements ModelFactory {
     public static final String PRODUCT_ID_2 = "W2";
     public static final String DOC_1_NAME = CommercialInvoice.INVOICE_NAME;
     public static final String DOC_2_NAME = DeliveryNote.DELIVERY_NOTE_NAME;
-    public static final String AUTO_MAPPED_EXAMPLE_FIELD = AutoMappedFields.CUSTOMER_NAME;
+    public static final String AUTO_MAPPED_EXAMPLE_FIELD = AutoMappedField.CUSTOMER_NAME.getName();
     public static final String EXAMPLE_FIELD = "Date:";
 
     public void init() {
