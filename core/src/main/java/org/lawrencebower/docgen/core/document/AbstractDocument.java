@@ -11,7 +11,8 @@ public abstract class AbstractDocument<T extends RenderableComponent> implements
     protected String name;
     private List<T> components = new ArrayList<>();
 
-    public AbstractDocument(String name) {
+    @Override
+    public void setName(String name) {
 
         if(StringUtils.isWhitespace(name)){
             throw new DocGenException("Name is not set");

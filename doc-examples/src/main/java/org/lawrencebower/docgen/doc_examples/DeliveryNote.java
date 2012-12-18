@@ -12,7 +12,7 @@ import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.document.component.text.FontStyle;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.custom.CustomDocument;
-import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
+import org.lawrencebower.docgen.core.generator.custom.CustomDocumentFactory;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
 import org.lawrencebower.docgen.web_logic.business.injection.product.ProductInjectionField;
@@ -34,7 +34,7 @@ public class DeliveryNote {
     public static final Color ACME_BLUE = Color.decode("#F5FAFF");
 
     @Autowired
-    private CustomPDFGenerator pdfGenerator;
+    private CustomDocumentFactory documentFactory;
     @Autowired
     private CustomComponentFactory componentFactory;
     @Autowired
@@ -49,7 +49,7 @@ public class DeliveryNote {
 
     private void prepareComponents() {
 
-        document = new CustomDocument(DELIVERY_NOTE_NAME, pdfGenerator);
+        document = documentFactory.getCustomDocument(DELIVERY_NOTE_NAME);
 
         documentView = documentViewFactory.createDocumentView(document);
 

@@ -135,6 +135,27 @@
           class="org.lawrencebower.docgen.core.generator.custom.component.CustomNewLineComponent"
           scope="prototype"/>
 
+    <!--DOCUMENTS-->
+
+    <bean id="customDocument"
+          class="org.lawrencebower.docgen.core.generator.custom.CustomDocument"
+          scope="prototype"/>
+
+    <bean id="overlayDocument"
+          class="org.lawrencebower.docgen.core.generator.overlay.OverlayDocument"
+          scope="prototype"/>
+
+    <bean id="customDocumentFactory"
+          class="org.lawrencebower.docgen.core.generator.custom.CustomDocumentFactory">
+        <lookup-method name="getCustomDocument" bean="customDocument"/>
+    </bean>
+
+    <bean id="overlayDocumentFactory"
+          class="org.lawrencebower.docgen.core.generator.overlay.OverlayDocumentFactory">
+        <lookup-method name="getOverlayDocument" bean="overlayDocument"/>
+    </bean>
+
+
     <!--GENERATORS-->
 
     <bean id="pdfGeneratorAbstract"

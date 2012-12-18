@@ -8,7 +8,7 @@ import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayDocument;
-import org.lawrencebower.docgen.core.generator.overlay.OverlayPDFGenerator;
+import org.lawrencebower.docgen.core.generator.overlay.OverlayDocumentFactory;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponentFactory;
 import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionField;
@@ -27,7 +27,7 @@ import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.Au
 public class FCC_740 {
 
     @Autowired
-    private OverlayPDFGenerator pdfGenerator;
+    private OverlayDocumentFactory documentFactory;
     @Autowired
     private OverlayComponentFactory componentFactory;
     @Autowired
@@ -53,7 +53,7 @@ public class FCC_740 {
 
     private void prepareComponents() {
 
-        document = new OverlayDocument(FCC_740_NAME, pdfGenerator);
+        document = documentFactory.getOverlayDocument(FCC_740_NAME);
         document.setSourcePDF(fcc740Path);
 
         documentView = documentViewFactory.createDocumentView(document);

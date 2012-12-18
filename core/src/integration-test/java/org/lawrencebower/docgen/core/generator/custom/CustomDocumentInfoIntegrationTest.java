@@ -20,11 +20,11 @@ import java.util.Arrays;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/integration-test-config.xml"})
+@ContextConfiguration(locations = "classpath:META-INF/integration-test-config.xml")
 public class CustomDocumentInfoIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired
-    private CustomPDFGenerator pdfGenerator;
+    private CustomDocumentFactory documentFactory;
     @Autowired
     private CustomComponentFactory componentFactory;
 
@@ -32,8 +32,8 @@ public class CustomDocumentInfoIntegrationTest extends AbstractIntegrationTest {
 
     @Before
     public void setup() {
-        super.prepareDirs();
-        customDocumentInfo = new CustomDocument("test name", pdfGenerator);
+        prepareDirs();
+        customDocumentInfo = documentFactory.getCustomDocument("test name");
     }
 
     @Test

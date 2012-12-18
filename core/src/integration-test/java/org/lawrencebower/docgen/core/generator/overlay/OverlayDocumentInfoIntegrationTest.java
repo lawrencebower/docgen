@@ -21,17 +21,17 @@ import java.util.Arrays;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/integration-test-config.xml"})
+@ContextConfiguration(locations = "classpath:META-INF/integration-test-config.xml")
 public class OverlayDocumentInfoIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired
-    private OverlayPDFGenerator pdfGenerator;
+    private OverlayDocumentFactory documentFactory;
     @Autowired
     private OverlayComponentFactory componentFactory;
 
     @Before
     public void setup(){
-        super.prepareDirs();
+        prepareDirs();
     }
 
     @Test
@@ -41,7 +41,7 @@ public class OverlayDocumentInfoIntegrationTest extends AbstractIntegrationTest 
         String expectedOutputFilePath = inputPackage + "overlay_expected_output.pdf";
         String outFilePath = outputPackage + "overlay_output.pdf";
 
-        OverlayDocument overlayDocumentInfo = new OverlayDocument("test name", pdfGenerator);
+        OverlayDocument overlayDocumentInfo = documentFactory.getOverlayDocument("test name");
 
         overlayDocumentInfo.setSourcePDF(inputFilePath);
 

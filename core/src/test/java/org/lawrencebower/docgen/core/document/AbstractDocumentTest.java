@@ -1,32 +1,39 @@
 package org.lawrencebower.docgen.core.document;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.core.generator.custom.CustomDocument;
-import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
-import org.mockito.Mockito;
+import org.lawrencebower.docgen.core.generator.custom.CustomDocumentFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static junit.framework.Assert.assertEquals;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:META-INF/core-test-context.xml")
 public class AbstractDocumentTest {
 
+    @Autowired
+    private CustomDocumentFactory factory;
+
     @Test
-    public void testConstructor_emptyNameSet_throwsError() {
+    public void testSetName_emptyNameSet_throwsError() {
         try {
-            CustomPDFGenerator mockGenerator = Mockito.mock(CustomPDFGenerator.class);
-            new CustomDocument("", mockGenerator);
+            factory.getCustomDocument("");
         } catch (DocGenException e) {
-            assertEquals("Name is not set", e.getMessage());
+            String message = e.getMessage();
+            assertEquals("Name is not set", message);
         }
     }
 
     @Test
-    public void testConstructor_nullNameSet_throwsError() {
+    public void testSetName_nullNameSet_throwsError() {
         try {
-            CustomPDFGenerator mockGenerator = Mockito.mock(CustomPDFGenerator.class);
-            new CustomDocument(null, mockGenerator);
+            factory.getCustomDocument(null);
         } catch (DocGenException e) {
-            assertEquals("Name is not set", e.getMessage());
+            String message = e.getMessage();
+            assertEquals("Name is not set", message);
         }
     }
 }

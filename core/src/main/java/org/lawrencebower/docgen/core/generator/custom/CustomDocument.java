@@ -4,15 +4,14 @@ import org.lawrencebower.docgen.core.document.AbstractDocument;
 import org.lawrencebower.docgen.core.document.DocType;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class CustomDocument extends AbstractDocument<CustomComponent> {
 
+    @Autowired
     private CustomPDFGenerator pdfGenerator;
 
-    public CustomDocument(String name,
-                          CustomPDFGenerator pdfGenerator) {
-        super(name);
-        this.pdfGenerator = pdfGenerator;
+    private CustomDocument() {//force spring creation
     }
 
     @Override

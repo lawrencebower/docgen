@@ -42,10 +42,10 @@ public abstract class CustomComponentFactory {
         ITextImageComponent iTextComponent = iTextFactory.getImageComponent();
         iTextComponent.setComponent(component);
 
-        CustomImageComponent overlayComponent = getImageComponent();
-        overlayComponent.setComponent(iTextComponent);
+        CustomImageComponent customComponent = getImageComponent();
+        customComponent.setComponent(iTextComponent);
 
-        return overlayComponent;
+        return customComponent;
     }
 
     public CustomTableComponent createCustomTable(TableComponent component) {
@@ -53,10 +53,10 @@ public abstract class CustomComponentFactory {
         ITextTableComponent iTextComponent = iTextFactory.getTableComponent();
         iTextComponent.setComponent(component);
 
-        CustomTableComponent overlayComponent = getTableComponent();
-        overlayComponent.setComponent(iTextComponent);
+        CustomTableComponent customComponent = getTableComponent();
+        customComponent.setComponent(iTextComponent);
 
-        return overlayComponent;
+        return customComponent;
     }
 
     public CustomTextComponent createCustomText(TextComponent component) {
@@ -64,10 +64,10 @@ public abstract class CustomComponentFactory {
         ITextTextComponent iTextComponent = iTextFactory.getTextComponent();
         iTextComponent.setComponent(component);
 
-        CustomTextComponent overlayComponent = getTextComponent();
-        overlayComponent.setComponent(iTextComponent);
+        CustomTextComponent customComponent = getTextComponent();
+        customComponent.setComponent(iTextComponent);
 
-        return overlayComponent;
+        return customComponent;
     }
 
     public CustomNewLineComponent createCustomNewLine(NewLineComponent component) {
@@ -75,10 +75,10 @@ public abstract class CustomComponentFactory {
         ITextNewLineComponent iTextComponent = iTextFactory.getNewLineComponent();
         iTextComponent.setComponent(component);
 
-        CustomNewLineComponent overlayComponent = getNewLineComponent();
-        overlayComponent.setComponent(iTextComponent);
+        CustomNewLineComponent customComponent = getNewLineComponent();
+        customComponent.setComponent(iTextComponent);
 
-        return overlayComponent;
+        return customComponent;
     }
 
     public CustomLineComponent createCustomLine(LineComponent component) {
@@ -86,9 +86,9 @@ public abstract class CustomComponentFactory {
         ITextLineComponent iTextComponent = iTextFactory.getLineComponent();
         iTextComponent.setComponent(component);
 
-        CustomLineComponent overlayComponent = getLineComponent();
-        overlayComponent.setComponent(iTextComponent);
+        CustomLineComponent customComponent = getLineComponent();
+        customComponent.setComponent(iTextComponent);
 
-        return overlayComponent;
+        return customComponent;
     }
 }

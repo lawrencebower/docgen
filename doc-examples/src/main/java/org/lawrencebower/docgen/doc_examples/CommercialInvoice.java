@@ -9,7 +9,7 @@ import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
 import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.core.generator.custom.CustomDocument;
-import org.lawrencebower.docgen.core.generator.custom.CustomPDFGenerator;
+import org.lawrencebower.docgen.core.generator.custom.CustomDocumentFactory;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
@@ -32,7 +32,7 @@ import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.Au
 public class CommercialInvoice {
 
     @Autowired
-    private CustomPDFGenerator pdfGenerator;
+    private CustomDocumentFactory documentFactory;
     @Autowired
     private CustomComponentFactory componentFactory;
     @Autowired
@@ -49,7 +49,7 @@ public class CommercialInvoice {
 
     private void prepareComponents() {
 
-        document = new CustomDocument(INVOICE_NAME, pdfGenerator);
+        document = documentFactory.getCustomDocument(INVOICE_NAME);
 
         documentView = documentViewFactory.createDocumentView(document);
 

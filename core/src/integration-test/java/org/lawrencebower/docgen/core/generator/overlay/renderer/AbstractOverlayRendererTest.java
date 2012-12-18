@@ -4,7 +4,7 @@ import org.lawrencebower.docgen.core.AbstractIntegrationTest;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayDocument;
-import org.lawrencebower.docgen.core.generator.overlay.OverlayPDFGenerator;
+import org.lawrencebower.docgen.core.generator.overlay.OverlayDocumentFactory;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponentFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +20,14 @@ public abstract class AbstractOverlayRendererTest extends AbstractIntegrationTes
     @Autowired
     private OverlayComponentFactory componentFactory;
     @Autowired
-    private OverlayPDFGenerator overlayGenerator;
+    private OverlayDocumentFactory overlayFactory;
 
     protected void createPDFAndCompareWithExpected(String expectedOutputFilePath,
                                                    String outFilePath,
                                                    String sourcePDF,
                                                    DocComponent... components) {
 
-        OverlayDocument document = new OverlayDocument("Doc name", overlayGenerator);
+        OverlayDocument document = overlayFactory.getOverlayDocument("Doc name");
 
         document.setSourcePDF(sourcePDF);
 
@@ -35,7 +35,7 @@ public abstract class AbstractOverlayRendererTest extends AbstractIntegrationTes
 
         document.setComponents(overlayComponents);
 
-        PDFDocument pdfDocument = overlayGenerator.generatePDF(document);
+        PDFDocument pdfDocument = document.generatePDF();
 
         File outputFile = createOutputFilePathAndWriteFile(outFilePath, pdfDocument);
 

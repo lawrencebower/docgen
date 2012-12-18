@@ -5,7 +5,7 @@ import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayDocument;
-import org.lawrencebower.docgen.core.generator.overlay.OverlayPDFGenerator;
+import org.lawrencebower.docgen.core.generator.overlay.OverlayDocumentFactory;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponentFactory;
 import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionField;
@@ -24,7 +24,7 @@ import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.Au
 public class FDA_2887 {
 
     @Autowired
-    private OverlayPDFGenerator pdfGenerator;
+    private OverlayDocumentFactory documentFactory;
     @Autowired
     private OverlayComponentFactory componentFactory;
     @Autowired
@@ -42,7 +42,7 @@ public class FDA_2887 {
 
     private void prepareComponents() {
 
-        document = new OverlayDocument(FDA_2887_NAME, pdfGenerator);
+        document = documentFactory.getOverlayDocument(FDA_2887_NAME);
         document.setSourcePDF("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\FDA-2877.pdf");
 
         documentView = documentViewFactory.createDocumentView(document);

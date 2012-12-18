@@ -4,17 +4,15 @@ import org.lawrencebower.docgen.core.document.AbstractDocument;
 import org.lawrencebower.docgen.core.document.DocType;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class OverlayDocument extends AbstractDocument<OverlayComponent> {
 
+    @Autowired
     private OverlayPDFGenerator pdfGenerator;
     private String sourcePDF;
 
-    public OverlayDocument(String name,
-                           OverlayPDFGenerator pdfGenerator) {
-
-        super(name);
-        this.pdfGenerator = pdfGenerator;
+    private OverlayDocument() {//force spring creation
     }
 
     public void setSourcePDF(String sourcePDF) {
