@@ -5,18 +5,11 @@ import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayDocument;
-import org.lawrencebower.docgen.core.generator.overlay.OverlayDocumentFactory;
-import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
-import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponentFactory;
+import org.lawrencebower.docgen.core.generator.overlay.OverlayDocumentBuilder;
 import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionField;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
-import org.lawrencebower.docgen.web_logic.view.document.component.CheckBoxComponentView;
-import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentViewFactory;
-import org.lawrencebower.docgen.web_logic.view.document.component.TextComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentViewBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField.CUSTOMER_ADDRESS;
 import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField.VENDOR_ADDRESS;
@@ -24,16 +17,9 @@ import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.Au
 public class FDA_2887 {
 
     @Autowired
-    private OverlayDocumentFactory documentFactory;
+    private DocumentViewBuilder documentViewBuilder;
     @Autowired
-    private OverlayComponentFactory componentFactory;
-    @Autowired
-    private DocComponentViewFactory componentViewFactory;
-    @Autowired
-    DocumentViewFactory documentViewFactory;
-
-    private DocumentView documentView;
-    private OverlayDocument document;
+    private OverlayDocumentBuilder documentBuilder;
 
     public static final String FDA_2887_NAME = "FDA_2887";
 
@@ -42,12 +28,7 @@ public class FDA_2887 {
 
     private void prepareComponents() {
 
-        document = documentFactory.getOverlayDocument(FDA_2887_NAME);
-        document.setSourcePDF("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\FDA-2877.pdf");
-
-        documentView = documentViewFactory.createDocumentView(document);
-
-        documentView.setCopyNumber(5);
+        initDocumentBuilders();
 
         addTextBox("port of entry",
                    new DocCoordinates(27, 658, 285, 18),
@@ -91,7 +72,7 @@ public class FDA_2887 {
                     new DocCoordinates(48, 505, 10, 10),
                     false);
 
-        addTextBox("Date of manufacture",
+        createTextComponent("Date of manufacture",
                    new DocCoordinates(385, 509, 200, 10),
                    false);
 */
@@ -149,7 +130,7 @@ public class FDA_2887 {
                     new DocCoordinates(48, 319, 10, 10),
                     false);
 
-        addTextBox("state reason",
+        createTextComponent("state reason",
                    new DocCoordinates(255, 321, 270, 10),
                    false);
 
@@ -165,7 +146,7 @@ public class FDA_2887 {
                     new DocCoordinates(48, 252, 10, 10),
                     false);
 
-        addTextBox("List dates & restrictions",
+        createTextComponent("List dates & restrictions",
                    new DocCoordinates(257, 254, 270, 10),
                    false);
 
@@ -185,11 +166,17 @@ public class FDA_2887 {
                     new DocCoordinates(358, 195, 10, 10),
                     false);
 
-        addTextBox("Name and title of importer",
+        createTextComponent("Name and title of importer",
                    new DocCoordinates(264, 119, 332, 28),
                    false);
 */
 
+    }
+
+    private void initDocumentBuilders() {
+        documentBuilder.createDocument(FDA_2887_NAME,
+                                       "C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\FDA-2877.pdf");
+        documentViewBuilder.createDocument();
     }
 
     private void addTextBox(String name,
@@ -201,11 +188,10 @@ public class FDA_2887 {
         textComponent.setName(name);
 //        textComponent.setRenderBorder(true);
 
-        convertAndAddComponent(textComponent);
+        addComponent(textComponent);
 
         if (editable) {
-            TextComponentView textComponentView = componentViewFactory.createTextComponentView(textComponent);
-            documentView.addComponentView(textComponentView);
+            addViewableComponent(textComponent);
         }
     }
 
@@ -228,29 +214,26 @@ public class FDA_2887 {
         checkComponent.setCoordinates(coordinates);
         checkComponent.setName(name);
 
-        convertAndAddComponent(checkComponent);
+        addComponent(checkComponent);
 
         if (editable) {
-            CheckBoxComponentView componentView = componentViewFactory.createCheckBoxComponentView(checkComponent);
-            documentView.addComponentView(componentView);
+            addViewableComponent(checkComponent);
         }
     }
 
-    private void convertAndAddComponent(DocComponent component) {
-        OverlayComponent overlayComponent = componentFactory.createOverlayComponent(component);
-        document.addComponent(overlayComponent);
+    private void addViewableComponent(DocComponent component) {
+        documentViewBuilder.addViewableComponent(component);
+    }
+
+    private void addComponent(DocComponent component) {
+        documentBuilder.addComponent(component);
     }
 
     public DocumentView getDocumentView() {
+        DocumentView documentView = documentViewBuilder.getDocumentView();
+        OverlayDocument document = documentBuilder.getDocument();
+        documentView.setDocument(document);
         return documentView;
     }
 
-    public void setComponentValuesAndRenderBorder() {
-        List<OverlayComponent> components = document.getComponents();
-        for (OverlayComponent component : components) {
-//            component.setRenderBorder(true);
-//            component.setComponentValue(component.getName());
-        }
-
-    }
 }

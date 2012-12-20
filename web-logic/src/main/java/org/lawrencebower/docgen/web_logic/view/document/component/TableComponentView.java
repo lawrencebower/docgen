@@ -133,6 +133,20 @@ public class TableComponentView extends DocComponentView<TableComponent> {
         }
     }
 
+    @Override
+    public void setComponentCalculation(ComponentCalculation calculation) {
+
+        if (!(calculation instanceof TableComponentCalculation)) {
+            throw new DocGenException("TableComponentView only accepts TableComponentCalculations");
+        }
+
+        componentCalculations.clear();
+        componentCalculations.add((TableComponentCalculation) calculation);
+    }
+
+    public void addComponentCalculation(TableComponentCalculation calculation) {
+        componentCalculations.add(calculation);
+    }
 
     @Override
     public boolean runCalculationIfMatch(String operand,
@@ -159,7 +173,7 @@ public class TableComponentView extends DocComponentView<TableComponent> {
         /**
          * not needed yet - if we need to copy a documentToCopy with a product table this will need to be implemented
          */
-       //todo
+        //todo
     }
 
     private boolean operandMatched(String operand) {
@@ -171,10 +185,6 @@ public class TableComponentView extends DocComponentView<TableComponent> {
         }
 
         return matched;
-    }
-
-    public void addComponentCalculation(TableComponentCalculation calculation) {
-        componentCalculations.add(calculation);
     }
 
     public boolean hasColumnName(String columnName) {

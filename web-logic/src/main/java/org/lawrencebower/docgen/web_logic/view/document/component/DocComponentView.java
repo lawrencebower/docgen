@@ -55,6 +55,8 @@ public abstract class DocComponentView<T extends DocComponent> {
 
     public abstract boolean hasCalculation();
 
+    public abstract void setComponentCalculation(ComponentCalculation calculation);
+
     public abstract void calculateValueIfNeeded(DocumentSet documentSet);
 
     public abstract boolean runCalculationIfMatch(String operand,

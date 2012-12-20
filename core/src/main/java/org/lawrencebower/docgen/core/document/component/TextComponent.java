@@ -42,7 +42,8 @@ public class TextComponent extends DocComponent {
     public String getTextString() {
         StringBuilder builder = new StringBuilder();
         for (TextFragment textFragment : text.getFragments()) {
-            builder.append(textFragment.getText());
+            String fragment = textFragment.getText();
+            builder.append(fragment);
         }
 
         return builder.toString();

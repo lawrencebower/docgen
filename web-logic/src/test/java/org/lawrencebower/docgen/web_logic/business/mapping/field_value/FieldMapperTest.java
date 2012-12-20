@@ -3,7 +3,6 @@ package org.lawrencebower.docgen.web_logic.business.mapping.field_value;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lawrencebower.docgen.core.document.Document;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
@@ -200,8 +199,7 @@ public class FieldMapperTest {
     }
 
     private DocumentView makeDocumentView() {
-        Document mockDoc = mock(Document.class);
-        return documentViewFactory.createDocumentView(mockDoc);
+        return documentViewFactory.createDocumentView();
     }
 
     private Map<String, String[]> makeParameterMap() {

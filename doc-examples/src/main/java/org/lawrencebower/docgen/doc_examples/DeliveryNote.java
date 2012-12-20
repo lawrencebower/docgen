@@ -1,5 +1,6 @@
 package org.lawrencebower.docgen.doc_examples;
 
+import org.lawrencebower.docgen.core.document.ComponentBuilder;
 import org.lawrencebower.docgen.core.document.component.*;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
@@ -12,17 +13,11 @@ import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.document.component.text.FontStyle;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.custom.CustomDocument;
-import org.lawrencebower.docgen.core.generator.custom.CustomDocumentFactory;
-import org.lawrencebower.docgen.core.generator.custom.component.CustomComponent;
-import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
+import org.lawrencebower.docgen.core.generator.custom.CustomDocumentBuilder;
 import org.lawrencebower.docgen.web_logic.business.injection.product.ProductInjectionField;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
-import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
-import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentViewFactory;
-import org.lawrencebower.docgen.web_logic.view.document.component.TableComponentView;
-import org.lawrencebower.docgen.web_logic.view.document.component.TextComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentViewBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
@@ -34,101 +29,107 @@ public class DeliveryNote {
     public static final Color ACME_BLUE = Color.decode("#F5FAFF");
 
     @Autowired
-    private CustomDocumentFactory documentFactory;
+    private ComponentBuilder componentBuilder;
     @Autowired
-    private CustomComponentFactory componentFactory;
+    private DocumentViewBuilder documentViewBuilder;
     @Autowired
-    private DocComponentViewFactory componentViewFactory;
-    @Autowired
-    DocumentViewFactory documentViewFactory;
-
-    private DocumentView documentView;
-    private CustomDocument document;
+    private CustomDocumentBuilder documentBuilder;
 
     public static final String DELIVERY_NOTE_NAME = "Delivery note";
 
     private void prepareComponents() {
 
-        document = documentFactory.getCustomDocument(DELIVERY_NOTE_NAME);
-
-        documentView = documentViewFactory.createDocumentView(document);
-
-        documentView.setCopyNumber(2);
+        initDocumentBuilders();
 
         TableComponent logoTable = makeLogoTable();
-
-        convertAndAddComponent(logoTable);
+        addComponent(logoTable);
 
         addNewLine();
+
+        makeHeader();
+
+        makeBody();
+
+        addNewLine();
+
+        makeFooter();
+
+    }
+
+    private void initDocumentBuilders() {
+        documentBuilder.createDocument(DELIVERY_NOTE_NAME);
+        documentViewBuilder.createDocument();
+    }
+
+    private void makeHeader() {
 
         DocComponent yourReftable = makeYourRefTable();
+        addComponent(yourReftable);
 
-        convertAndAddComponent(yourReftable);
+        DocComponent component = componentBuilder.createTextComponent("date",
+                                                                      "JULY 2 2012",
+                                                                      HorizontalAlignment.RIGHT);
+        addViewableComponent(component);
 
-        addTextBox("date",
-                   new TextBlock("JULY 2 2012"),
-                   HorizontalAlignment.RIGHT,
-                   true);
+        TextBlock textBlock = new TextBlock("Acme Ltd", FontInfo.DEFAULT_BOLD());
+        TextComponent textComponent = new TextComponent(textBlock);
+        addComponent(textComponent);
 
-        addTextBox("Acme tag",
-                   new TextBlock("Acme Ltd", FontInfo.DEFAULT_BOLD()),
-                   HorizontalAlignment.LEFT,
-                   false);
-
-        addTextBox("innovation",
-                   "Practical products",
-                   HorizontalAlignment.LEFT);
+        component = componentBuilder.createTextComponent("Practical products");
+        addComponent(component);
 
         addNewLine();
 
-        TextComponent addressComponent = new TextComponent("Suites 11 and 12, Church Farm\n" +
-                                                           "Maris Lane, Trumpington, CB29LG, UK");
-        addressComponent.setName(VENDOR_ADDRESS.getName());
-        convertAndAddComponent(addressComponent);
-        addTextComponentView(addressComponent);
+        String addressValue = "Suites 11 and 12, Church Farm\n" +
+                              "Maris Lane, Trumpington, CB29LG, UK";
+        component = componentBuilder.createTextComponent(VENDOR_ADDRESS.getName(),
+                                                         addressValue);
+        addViewableComponent(component);
 
-        TextComponent phoneComponent = new TextComponent("Phone +44 (0) 1223 655577");
-        phoneComponent.setName(VENDOR_PHONE.getName());
-        convertAndAddComponent(phoneComponent);
-        addTextComponentView(phoneComponent);
+        component = componentBuilder.createTextComponent(VENDOR_PHONE.getName(),
+                                                         "Phone +44 (0) 1223 1235455");
+        addViewableComponent(component);
 
-        TextComponent emailComponent = new TextComponent("sales@acme.com");
-        emailComponent.setName(VENDOR_EMAIL.getName());
-        convertAndAddComponent(emailComponent);
-        addTextComponentView(emailComponent);
+        component = componentBuilder.createTextComponent(VENDOR_EMAIL.getName(),
+                                                         "sales@acme.com");
+        addViewableComponent(component);
 
         addNewLine();
 
         DocComponent toTable = makeToTable();
-        convertAndAddComponent(toTable);
+        addComponent(toTable);
+    }
+
+    private void makeBody() {
+
+        DocComponent component;
 
         addNewLine();
 
-        addTextBox("delivery of",
-                   "Acme are pleased to confirm the delivery of:",
-                   HorizontalAlignment.LEFT);
+        component = componentBuilder.createTextComponent("Acme are pleased to confirm the delivery of:");
+        addComponent(component);
 
         addNewLine();
 
         TableComponent table = makeMainOrderTable();
+        addViewableComponent(table);
+    }
 
-        convertAndAddComponent(table);
-        addProductTableComponentView(table);
+    private void makeFooter() {
+
+        DocComponent component;
+
+        component = makeDetailsTable();
+
+        addComponent(component);
 
         addNewLine();
-
-        TableComponent detailsTable = makeDetailsTable();
-
-        convertAndAddComponent(detailsTable);
-
-        addNewLine();
         addNewLine();
 
-        addTextBox("thanks for business",
-                   new TextBlock("THANK YOU FOR YOUR BUSINESS", FontInfo.DEFAULT()),
-                   HorizontalAlignment.CENTER,
-                   false);
-
+        component = componentBuilder.createTextComponent("thanks for business",
+                                                         "THANK YOU FOR YOUR BUSINESS",
+                                                         HorizontalAlignment.CENTER);
+        addViewableComponent(component);
     }
 
     private TableComponent makeLogoTable() {
@@ -159,11 +160,6 @@ public class DeliveryNote {
         logoTable.setWidthPercentage(100);
 
         return logoTable;
-    }
-
-    private void convertAndAddComponent(DocComponent component) {
-        CustomComponent customComponent = convertComponent(component);
-        document.addComponent(customComponent);
     }
 
     private TableComponent makeMainOrderTable() {
@@ -206,10 +202,12 @@ public class DeliveryNote {
 
         TableRow row = new TableRow();
 
-        TableTextComponent detailsComponent = new TableTextComponent("THIS COMPLETES THE ORDER");
+        TableTextComponent detailsComponent =
+                componentBuilder.createTableTextComponent("observations", "THIS COMPLETES THE ORDER");
+
         TableCell detailsCell = new TableCell(detailsComponent);
         row.addCell(detailsCell);
-        addTextComponentView(detailsComponent);
+        documentViewBuilder.addViewableComponent(detailsComponent);
 
         table.addRow(row);
 
@@ -219,6 +217,7 @@ public class DeliveryNote {
     }
 
     private DocComponent makeToTable() {
+
         TableComponent table = new TableComponent("to table");
 
         TableHeaderRow headerRow = new TableHeaderRow();
@@ -230,7 +229,7 @@ public class DeliveryNote {
         TableTextComponent nameComponent = new TableTextComponent("Lawrence Bower");
         nameComponent.setName(AutoMappedField.CUSTOMER_CONTACT_NAME.getName());
         TableCell nameCell = new TableCell(nameComponent);
-        addTextAreaComponent(nameComponent);
+        documentViewBuilder.addViewableComponent(nameComponent);
         headerRow.addCell(nameCell, 9);
 
         table.setHeaderRow(headerRow);
@@ -239,7 +238,7 @@ public class DeliveryNote {
         TableTextComponent companyComponent = new TableTextComponent("Acme ltd");
         companyComponent.setName(AutoMappedField.CUSTOMER_NAME.getName());
         TableCell companyCell = new TableCell(companyComponent);
-        addTextAreaComponent(companyComponent);
+        documentViewBuilder.addViewableComponent(companyComponent);
         companyRow.addCell(companyCell);
         table.addRow(companyRow);
 
@@ -247,7 +246,7 @@ public class DeliveryNote {
         TableTextComponent addressComponent = new TableTextComponent("36 BillyBob Street\nEssex");
         addressComponent.setName(AutoMappedField.CUSTOMER_ADDRESS.getName());
         TableCell addressCell = new TableCell(addressComponent);
-        addTextAreaComponent(addressComponent);
+        documentViewBuilder.addViewableComponent(addressComponent);
         addressRow.addCell(addressCell);
         table.addRow(addressRow);
 
@@ -255,7 +254,7 @@ public class DeliveryNote {
         TableTextComponent countryComponent = new TableTextComponent("UK");
         countryComponent.setName(AutoMappedField.CUSTOMER_COUNTRY.getName());
         TableCell countryCell = new TableCell(countryComponent);
-        addTextAreaComponent(countryComponent);
+        documentViewBuilder.addViewableComponent(countryComponent);
         countryRow.addCell(countryCell);
         table.addRow(countryRow);
 
@@ -280,7 +279,7 @@ public class DeliveryNote {
         refNumberComponent.setAlignment(HorizontalAlignment.RIGHT);
         TableCell addressCell = new TableCell(refNumberComponent);
 
-        addTextComponentView(refNumberComponent);
+        documentViewBuilder.addViewableComponent(refNumberComponent);
 
         headerRow.addCell(addressCell);
 
@@ -297,66 +296,25 @@ public class DeliveryNote {
         return table;
     }
 
-    private void setDefaultAlignment(TableCell cell) {
-        cell.setVerticalAlignment(VerticalAlignment.MIDDLE);
-    }
-
     private void addNewLine() {
-        convertAndAddComponent(new NewLineComponent());
+        NewLineComponent newLine = componentBuilder.createNewLine();
+        addComponent(newLine);
     }
 
-    private void addTextBox(String name,
-                            String value,
-                            HorizontalAlignment alignment) {
-
-        TextBlock textBlock = new TextBlock(value);
-        addTextBox(name,
-                   textBlock,
-                   alignment,
-                   false);
+    private void addComponent(DocComponent component) {
+        documentBuilder.addComponent(component);
     }
 
-    private void addTextBox(String name,
-                            TextBlock value,
-                            HorizontalAlignment alignment,
-                            boolean editable) {
-
-        TextComponent textComponent = new TextComponent(value);
-        textComponent.setName(name);
-        textComponent.setAlignment(alignment);
-
-        convertAndAddComponent(textComponent);
-
-        if (editable) {
-            addTextComponentView(textComponent);
-        }
+    private void addViewableComponent(DocComponent component) {
+        addComponent(component);
+        documentViewBuilder.addViewableComponent(component);
     }
 
     public DocumentView getDocumentView() {
+        DocumentView documentView = documentViewBuilder.getDocumentView();
+        CustomDocument document = documentBuilder.getDocument();
+        documentView.setDocument(document);
+        documentView.setCopyNumber(5);
         return documentView;
-    }
-
-    private CustomComponent convertComponent(DocComponent component) {
-        return componentFactory.createCustomComponent(component);
-    }
-
-    private void addTextComponentView(TextComponent textComponent) {
-        TextComponentView componentView = componentViewFactory.createTextComponentView(textComponent);
-        documentView.addComponentView(componentView);
-    }
-
-    private void addProductTableComponentView(TableComponent tableComponent) {
-        TableComponentView componentView = componentViewFactory.createTableComponentView(tableComponent);
-        documentView.addComponentView(componentView);
-    }
-
-    private void addTextComponentView(TableTextComponent textComponent) {
-        TextComponentView componentView = componentViewFactory.createTextComponentView(textComponent);
-        documentView.addComponentView(componentView);
-    }
-
-    private void addTextAreaComponent(TableTextComponent textComponent) {
-        DocComponentView componentView = componentViewFactory.createTextAreaComponentView(textComponent);
-        documentView.addComponentView(componentView);
     }
 }

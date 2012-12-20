@@ -110,6 +110,10 @@
           class="org.lawrencebower.docgen.web_logic.view.document.DocumentView"
           scope="prototype"/>
 
+    <bean name="documentViewBuilder"
+          class="org.lawrencebower.docgen.web_logic.view.document.DocumentViewBuilder"
+          scope="prototype"/>
+
     <bean name="documentViewFactory"
           class="org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory">
         <lookup-method name="createDocumentView" bean="documentView"/>

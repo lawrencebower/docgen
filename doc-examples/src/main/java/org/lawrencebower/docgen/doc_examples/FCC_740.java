@@ -8,16 +8,12 @@ import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayDocument;
-import org.lawrencebower.docgen.core.generator.overlay.OverlayDocumentFactory;
-import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
-import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponentFactory;
+import org.lawrencebower.docgen.core.generator.overlay.OverlayDocumentBuilder;
 import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionField;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
-import org.lawrencebower.docgen.web_logic.view.document.component.CheckBoxComponentView;
-import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentViewFactory;
-import org.lawrencebower.docgen.web_logic.view.document.component.TextComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentViewBuilder;
+import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -27,13 +23,9 @@ import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.Au
 public class FCC_740 {
 
     @Autowired
-    private OverlayDocumentFactory documentFactory;
+    private DocumentViewBuilder documentViewBuilder;
     @Autowired
-    private OverlayComponentFactory componentFactory;
-    @Autowired
-    private DocComponentViewFactory componentViewFactory;
-    @Autowired
-    private DocumentViewFactory documentViewFactory;
+    private OverlayDocumentBuilder documentBuilder;
 
     @Autowired
     @Qualifier("signatureImagePath")
@@ -43,22 +35,14 @@ public class FCC_740 {
     @Qualifier("fcc740Path")
     private String fcc740Path;
 
-    private DocumentView documentView;
-    private OverlayDocument document;
-
     public static final String FCC_740_NAME = "FCC_740";
 
-    public FCC_740() {
+    private FCC_740() {//force spring creation
     }
 
     private void prepareComponents() {
 
-        document = documentFactory.getOverlayDocument(FCC_740_NAME);
-        document.setSourcePDF(fcc740Path);
-
-        documentView = documentViewFactory.createDocumentView(document);
-
-        documentView.setCopyNumber(5);
+        initDocumentBuilders();
 
         addTextBox(DocumentInjectionField.PRODUCT_TARIFF_NUMBER.getName(),
                    new DocCoordinates(262, 645, 125, 20),
@@ -110,7 +94,20 @@ public class FCC_740 {
                     false,
                     true);
 
+    }
 
+    private void initDocumentBuilders() {
+        documentBuilder.createDocument(FCC_740_NAME, fcc740Path);
+        documentViewBuilder.createDocument();
+    }
+
+    public DocumentView getDocumentView() {
+        DocumentView documentView = documentViewBuilder.getDocumentView();
+        OverlayDocument document = documentBuilder.getDocument();
+        documentView.setDocument(document);
+        documentView.setCopyNumber(5);
+
+        return documentView;
     }
 
     private void addTextBox(AutoMappedField mappedField,
@@ -136,8 +133,7 @@ public class FCC_740 {
         convertAndAddComponent(textComponent);
 
         if (editable) {
-            TextComponentView textComponentView = componentViewFactory.createTextComponentView(textComponent);
-            documentView.addComponentView(textComponentView);
+            addViewableComponent(textComponent);
         }
     }
 
@@ -154,18 +150,16 @@ public class FCC_740 {
         convertAndAddComponent(checkComponent);
 
         if (editable) {
-            CheckBoxComponentView componentView = componentViewFactory.createCheckBoxComponentView(checkComponent);
-            documentView.addComponentView(componentView);
+            addViewableComponent(checkComponent);
         }
     }
 
-    private void convertAndAddComponent(DocComponent component) {
-        OverlayComponent overlayComponent = componentFactory.createOverlayComponent(component);
-        document.addComponent(overlayComponent);
+    private DocComponentView addViewableComponent(DocComponent checkComponent) {
+        return documentViewBuilder.addViewableComponent(checkComponent);
     }
 
-    public DocumentView getDocumentView() {
-        return documentView;
+    private void convertAndAddComponent(DocComponent component) {
+        documentBuilder.addComponent(component);
     }
 
 }

@@ -2,7 +2,6 @@ package org.lawrencebower.docgen.web_logic.business.utils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lawrencebower.docgen.core.document.Document;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
@@ -40,8 +39,7 @@ public class ViewUtilsTest {
         List<DocumentView> documentViews = new ArrayList<>();
 
         for (int i = 0; i < documentNumber; i++) {
-            Document mock = Mockito.mock(Document.class);
-            DocumentView docView = viewFactory.createDocumentView(mock);
+            DocumentView docView = viewFactory.createDocumentView();
 
             addComponentsToView(componentNumber, docView);
 

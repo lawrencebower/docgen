@@ -98,6 +98,11 @@ public class CheckBoxComponentView extends DocComponentView<CheckBoxComponent> {
     }
 
     @Override
+    public void setComponentCalculation(ComponentCalculation calculation) {
+        throw new DocGenException("ComponentCalculation not supported by CheckBoxComponentView");
+    }
+
+    @Override
     public void calculateValueIfNeeded(DocumentSet documentSet) {
         //not implemented - just exit quietly
     }

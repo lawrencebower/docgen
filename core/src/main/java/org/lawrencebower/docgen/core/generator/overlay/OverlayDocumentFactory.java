@@ -3,11 +3,10 @@ package org.lawrencebower.docgen.core.generator.overlay;
 public abstract class OverlayDocumentFactory {
 
     public OverlayDocument getOverlayDocument(String docName){
-        OverlayDocument overlayDocument = getOverlayDocument();
+        OverlayDocument overlayDocument = getOverlayDocumentBean();
         overlayDocument.setName(docName);
         return overlayDocument;
     }
 
-    abstract OverlayDocument getOverlayDocument();
-
+    protected abstract OverlayDocument getOverlayDocumentBean();
 }

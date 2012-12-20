@@ -3,10 +3,17 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd">
 
     <bean id="fileUtils" class="org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils"/>
-    <bean id="iTextTableGenerator" class="org.lawrencebower.docgen.core.generator.model.itext_component.utils.ITextTableGenerator"/>
+    <bean id="iTextTableGenerator"
+          class="org.lawrencebower.docgen.core.generator.model.itext_component.utils.ITextTableGenerator"/>
     <bean id="pdfGenUtils" class="org.lawrencebower.docgen.core.generator.utils.PDFGenUtilsImpl"/>
-    <bean id="iTextComponentUtils" class="org.lawrencebower.docgen.core.generator.model.itext_component.utils.ITextComponentUtils"/>
+    <bean id="iTextComponentUtils"
+          class="org.lawrencebower.docgen.core.generator.model.itext_component.utils.ITextComponentUtils"/>
     <bean id="pdfConcatenator" class="org.lawrencebower.docgen.core.generator.utils.PDFConcatenator"/>
+
+    <!--DOCUMENT COMPONENTS-->
+
+    <bean id="componentFactory"
+          class="org.lawrencebower.docgen.core.document.ComponentBuilder"/>
 
     <!--ITEXT COMPONENTS-->
 
@@ -147,14 +154,21 @@
 
     <bean id="customDocumentFactory"
           class="org.lawrencebower.docgen.core.generator.custom.CustomDocumentFactory">
-        <lookup-method name="getCustomDocument" bean="customDocument"/>
+        <lookup-method name="getCustomDocumentBean" bean="customDocument"/>
     </bean>
 
     <bean id="overlayDocumentFactory"
           class="org.lawrencebower.docgen.core.generator.overlay.OverlayDocumentFactory">
-        <lookup-method name="getOverlayDocument" bean="overlayDocument"/>
+        <lookup-method name="getOverlayDocumentBean" bean="overlayDocument"/>
     </bean>
 
+    <bean id="customDocumentBuilder"
+          class="org.lawrencebower.docgen.core.generator.custom.CustomDocumentBuilder"
+          scope="prototype"/>
+
+    <bean id="overlayDocumentBuilder"
+          class="org.lawrencebower.docgen.core.generator.overlay.OverlayDocumentBuilder"
+          scope="prototype"/>
 
     <!--GENERATORS-->
 
