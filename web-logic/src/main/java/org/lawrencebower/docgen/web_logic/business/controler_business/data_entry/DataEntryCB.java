@@ -6,8 +6,6 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
 import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionInfo;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfo;
-import org.lawrencebower.docgen.web_logic.business.mapping.customer_product_document.CustomerProduct_Document_Mappings;
-import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
@@ -15,6 +13,7 @@ import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSetFactory;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.model_factory.ViewFactory;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -32,9 +31,7 @@ public class DataEntryCB {
     @Autowired
     ViewUtils viewUtils;
     @Autowired
-    ModelFactory modelFactory;
-    @Autowired
-    private CustomerProduct_Document_Mappings customerProductMappings;
+    ViewFactory viewFactory;
     @Autowired
     private DocumentSetFactory documentSetFactory;
 
@@ -62,7 +59,7 @@ public class DataEntryCB {
 
         for (ProductView selectedProduct : selectedProducts) {
             List<DocumentView> documentViews =
-                    customerProductMappings.getDocumentsForCustomerAndProduct(selectedCustomer, selectedProduct);
+                    viewFactory.getDocumentsForCustomerAndProduct(selectedCustomer, selectedProduct);
             documents.addAll(documentViews);
         }
 
@@ -116,23 +113,23 @@ public class DataEntryCB {
                                      ContactView selectedBusiness) {
 
         AMComponentInfo mappingInfo = createMappingInfo(selectedCustomer,
-                                                                selectedBusiness);
+                                                        selectedBusiness);
 
         documentSet.mapAutomappedComponents(mappingInfo);
 
     }
 
     private AMComponentInfo createMappingInfo(ContactView selectedCustomer,
-                                                      ContactView selectedBusiness) {
+                                              ContactView selectedBusiness) {
 
         viewUtils.checkCustomerSet(selectedCustomer);
         viewUtils.checkBusinessSet(selectedBusiness);
 
-        ContactView vendor = modelFactory.getVendor();
+        ContactView vendor = viewFactory.getVendor();
 
         return new AMComponentInfo(selectedCustomer,
-                                           vendor,
-                                           selectedBusiness);
+                                   vendor,
+                                   selectedBusiness);
     }
 
     public List<DocComponentView> getComponentsForViewing(DocumentSet documentSet,
@@ -178,8 +175,8 @@ public class DataEntryCB {
         this.pdfConcatenator = pdfConcatenator;
     }
 
-    protected void setCustomerProductMappings(CustomerProduct_Document_Mappings customerProductMappings) {
-        this.customerProductMappings = customerProductMappings;
+    protected void setViewFactory(ViewFactory viewFactory) {
+        this.viewFactory = viewFactory;
     }
 
 }

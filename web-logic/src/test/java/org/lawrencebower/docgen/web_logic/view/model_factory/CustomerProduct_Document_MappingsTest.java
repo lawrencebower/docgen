@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_logic.business.mapping.customer_product_document;
+package org.lawrencebower.docgen.web_logic.view.model_factory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -6,7 +6,6 @@ import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -21,7 +20,6 @@ import static org.mockito.Mockito.when;
 @ContextConfiguration(locations = "classpath:META-INF/web-logic-test-context.xml")
 public class CustomerProduct_Document_MappingsTest {
 
-    @Autowired
     CustomerProduct_Document_Mappings mappings;
 
     private ContactView customer1;
@@ -33,64 +31,75 @@ public class CustomerProduct_Document_MappingsTest {
 
     @Before
     public void setup() {
-        mappings.mappings.clear();
+        mappings = new CustomerProduct_Document_Mappings();
         addDocumentsToMapper();
     }
 
     @Test
     public void testGetDocumentsForCustomerAndProduct_validParams_correctDocsReturned_1() {
-        List<DocumentView> docs = mappings.getDocumentsForCustomerAndProduct(customer1, product1);
+        List<String> docs = mappings.getDocumentsForCustomerAndProduct(customer1, product1);
         assertEquals(2, docs.size());
-        assertTrue(docs.get(0).getName().equals(doc1.getName()));
-        assertTrue(docs.get(1).getName().equals(doc2.getName()));
+        assertTrue(docs.get(0).equals(doc1.getName()));
+        assertTrue(docs.get(1).equals(doc2.getName()));
     }
 
     @Test
     public void testGetDocumentsForCustomerAndProduct_validParams_correctDocsReturned_2() {
-        List<DocumentView> docs = mappings.getDocumentsForCustomerAndProduct(customer1, product2);
+        List<String> docs = mappings.getDocumentsForCustomerAndProduct(customer1, product2);
         assertEquals(1, docs.size());
-        assertTrue(docs.get(0).getName().equals(doc2.getName()));
+        assertTrue(docs.get(0).equals(doc2.getName()));
     }
 
     @Test
     public void testGetDocumentsForCustomerAndProduct_validParams_correctDocsReturned_3() {
-        List<DocumentView> docs = mappings.getDocumentsForCustomerAndProduct(customer2, product1);
+        List<String> docs = mappings.getDocumentsForCustomerAndProduct(customer2, product1);
         assertEquals(1, docs.size());
-        assertTrue(docs.get(0).getName().equals(doc1.getName()));
+        assertTrue(docs.get(0).equals(doc1.getName()));
     }
 
     @Test
     public void testGetDocumentsForCustomerAndProduct_unmappedProduct_returnsEmpty() {
-        List<DocumentView> docs = mappings.getDocumentsForCustomerAndProduct(customer2, product2);
+        List<String> docs = mappings.getDocumentsForCustomerAndProduct(customer2, product2);
         assertTrue(docs.isEmpty());
     }
 
     private void addDocumentsToMapper() {
 
-        customer1 = mockCustomer("customer1");
-        customer2 = mockCustomer("customer2");
+        String customer1Name = "customer1";
+        String customer2Name = "customer2";
 
-        product1 = mockProduct("product1");
-        product2 = mockProduct("product2");
+        customer1 = mockCustomer(customer1Name);
+        customer2 = mockCustomer(customer2Name);
 
-        doc1 = mockDocument("doc1");
-        doc2 = mockDocument("doc2");
+        String product1Name = "product1";
+        String product2Name = "product2";
+
+        product1 = mockProduct(product1Name);
+        product2 = mockProduct(product2Name);
+
+        String doc1Name = "doc1";
+        String doc2Name = "doc2";
+
+        doc1 = mockDocument(doc1Name);
+        doc2 = mockDocument(doc2Name);
 
         //customer 1
-        mappings.addDocument(customer1,
-                             product1,
-                             doc1.getName());
-        mappings.addDocument(customer1,
-                             product1,
-                             doc2.getName());
-        mappings.addDocument(customer1,
-                             product2,
-                             doc2.getName());
+        mappings.addDocument(customer1Name,
+                             product1Name,
+                             doc1Name);
+
+        mappings.addDocument(customer1Name,
+                             product1Name,
+                             doc2Name);
+
+        mappings.addDocument(customer1Name,
+                             product2Name,
+                             doc2Name);
 
         //customer 2
-        mappings.addDocument(customer2,
-                             product1,
-                             doc1.getName());
+        mappings.addDocument(customer2Name,
+                             product1Name,
+                             doc1Name);
     }
 
     private DocumentView mockDocument(String docName) {

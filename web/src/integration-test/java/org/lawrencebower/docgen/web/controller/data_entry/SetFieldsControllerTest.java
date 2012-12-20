@@ -5,11 +5,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.generator.utils.ChecksumUtils;
 import org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils;
-import org.lawrencebower.docgen.doc_examples.ModelFactoryCodeImpl;
+import org.lawrencebower.docgen.doc_examples.factory.DocumentFactoryTestImpl;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB;
-import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
+import org.lawrencebower.docgen.web_logic.view.model_factory.ViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
@@ -33,7 +33,7 @@ public class SetFieldsControllerTest {
     @Autowired
     DataEntryCB business;
     @Autowired
-    ModelFactory modelFactory;
+    ViewFactory viewFactory;
     @Autowired
     DocGenFileUtils fileUtils;
     @Autowired
@@ -138,13 +138,13 @@ public class SetFieldsControllerTest {
 
     private void checkDoc1() {
         File expectedConcatenatedFile = new File(testInputPath + "EXPECTED_DOC1.pdf");
-        File createdConcatenatedFile = new File(testOutputRoot + ModelFactoryCodeImpl.DOC_1_NAME + ".pdf");
+        File createdConcatenatedFile = new File(testOutputRoot + DocumentFactoryTestImpl.DOC_1_NAME + ".pdf");
         checkFilesAreSame(expectedConcatenatedFile, createdConcatenatedFile);
     }
 
     private void checkDoc2() {
         File expectedConcatenatedFile = new File(testInputPath + "EXPECTED_DOC2.pdf");
-        File createdConcatenatedFile = new File(testOutputRoot + ModelFactoryCodeImpl.DOC_2_NAME + ".pdf");
+        File createdConcatenatedFile = new File(testOutputRoot + DocumentFactoryTestImpl.DOC_2_NAME + ".pdf");
         checkFilesAreSame(expectedConcatenatedFile, createdConcatenatedFile);
     }
 
@@ -157,7 +157,7 @@ public class SetFieldsControllerTest {
     private WebRequest makeMockRequestWithParamMap() {
         WebRequest mockRequest = mock(WebRequest.class);
         Map<String, String[]> paramMap = new HashMap<>();
-        paramMap.put(ModelFactoryCodeImpl.EXAMPLE_FIELD, new String[]{"hello"});
+        paramMap.put(DocumentFactoryTestImpl.EXAMPLE_FIELD, new String[]{"hello"});
         when(mockRequest.getParameterMap()).thenReturn(paramMap);
         return mockRequest;
     }

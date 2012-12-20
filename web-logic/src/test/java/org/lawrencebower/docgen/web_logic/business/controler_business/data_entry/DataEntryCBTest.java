@@ -8,13 +8,13 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.PDFDocumentImpl;
 import org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils;
 import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
-import org.lawrencebower.docgen.web_logic.business.mapping.customer_product_document.CustomerProduct_Document_Mappings;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSetFactory;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
+import org.lawrencebower.docgen.web_logic.view.model_factory.ViewFactory;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
@@ -98,7 +98,7 @@ public class DataEntryCBTest {
     @Test
     public void testGetDocumentsForViewing_validData_returnsCorrectDocs() throws Exception {
 
-        CustomerProduct_Document_Mappings mockMapper = mock(CustomerProduct_Document_Mappings.class);
+        ViewFactory mockFactory = mock(ViewFactory.class);
 
         List<ProductView> products = Arrays.asList(mock(ProductView.class),
                                                    mock(ProductView.class),
@@ -111,10 +111,10 @@ public class DataEntryCBTest {
         List<DocumentView> list1 = Arrays.asList(docView1, docView2);
         List<DocumentView> list2 = Arrays.asList(docView2, docView3);
 
-        given(mockMapper.getDocumentsForCustomerAndProduct(any(ContactView.class),
+        given(mockFactory.getDocumentsForCustomerAndProduct(any(ContactView.class),
                                                            any(ProductView.class))).willReturn(list1, list1, list2);
 
-        dataEntryBusiness.setCustomerProductMappings(mockMapper);
+        dataEntryBusiness.setViewFactory(mockFactory);
 
         DocumentSet docSet =
                 dataEntryBusiness.getDocumentsForViewing(mockCustomer, products);

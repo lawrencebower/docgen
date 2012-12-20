@@ -6,8 +6,8 @@ import org.lawrencebower.docgen.core.document.Document;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionInfo;
-import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.model_factory.ViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
 public class DocumentView {
 
     @Autowired
-    ModelFactory modelFactory;
+    ViewFactory viewFactory;
 
     private Document document;
     private List<DocComponentView> docComponentViews = new ArrayList<>();
@@ -113,7 +113,7 @@ public class DocumentView {
      */
     public DocumentView copyComponentViews() {
         String docName = document.getName();
-        DocumentView newDocument = modelFactory.getDocument(docName);
+        DocumentView newDocument = viewFactory.createDocument(docName);
         newDocument.copyComponentViews(this);
         return newDocument;
     }

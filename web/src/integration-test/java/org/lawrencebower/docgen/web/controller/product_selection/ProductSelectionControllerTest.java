@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.doc_examples.ModelFactoryCodeImpl;
+import org.lawrencebower.docgen.doc_examples.factory.ProductFactoryTestImpl;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.product_selection.ProductSelectionCB;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
@@ -39,8 +39,8 @@ public class ProductSelectionControllerTest {
     @Test
     public void testSelectProduct_validId_allProductsPlacedOnModel() throws Exception {
 
-        String id1 = ModelFactoryCodeImpl.PRODUCT_ID_1;
-        String id2 = ModelFactoryCodeImpl.PRODUCT_ID_2;
+        String id1 = ProductFactoryTestImpl.PRODUCT_ID_1;
+        String id2 = ProductFactoryTestImpl.PRODUCT_ID_2;
 
         BindingAwareModelMap model = new BindingAwareModelMap();
         controller.selectProduct(id1, model);
@@ -55,7 +55,7 @@ public class ProductSelectionControllerTest {
     @Test
     public void testSelectProduct_validId_correctProductPlacedOnSession() throws Exception {
 
-        String id1 = ModelFactoryCodeImpl.PRODUCT_ID_1;
+        String id1 = ProductFactoryTestImpl.PRODUCT_ID_1;
 
         BindingAwareModelMap model = new BindingAwareModelMap();
         controller.selectProduct(id1, model);
@@ -71,8 +71,8 @@ public class ProductSelectionControllerTest {
 
         BindingAwareModelMap model = new BindingAwareModelMap();
 
-        String id1 = ModelFactoryCodeImpl.PRODUCT_ID_1;
-        String id2 = ModelFactoryCodeImpl.PRODUCT_ID_2;
+        String id1 = ProductFactoryTestImpl.PRODUCT_ID_1;
+        String id2 = ProductFactoryTestImpl.PRODUCT_ID_2;
 
         controller.selectProduct(id1, model);
         controller.selectProduct(id2, model);

@@ -4,14 +4,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.generator.utils.ChecksumUtils;
-import org.lawrencebower.docgen.doc_examples.ModelFactoryCodeImpl;
+import org.lawrencebower.docgen.doc_examples.factory.CustomerFactoryTestImpl;
+import org.lawrencebower.docgen.doc_examples.factory.DocumentFactoryTestImpl;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB;
-import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document.component.TextComponentView;
+import org.lawrencebower.docgen.web_logic.view.model_factory.ViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -27,7 +28,7 @@ public class PrepareFieldsControllerTest {
     @Autowired
     DataEntryCB business;
     @Autowired
-    ModelFactory modelFactory;
+    ViewFactory viewFactory;
     @Autowired
     SessionSetupUtils sessionSetupUtils;
 
@@ -62,8 +63,8 @@ public class PrepareFieldsControllerTest {
     public void testPrepareFields_validFields_correctDocumentsSet() throws Exception {
         controller.prepareFields();
         List<DocumentView> documents = sessionData.getDocumentsAsList();
-        assertEquals(ModelFactoryCodeImpl.DOC_1_NAME, documents.get(0).getName());
-        assertEquals(ModelFactoryCodeImpl.DOC_2_NAME, documents.get(1).getName());
+        assertEquals(DocumentFactoryTestImpl.DOC_1_NAME, documents.get(0).getName());
+        assertEquals(DocumentFactoryTestImpl.DOC_2_NAME, documents.get(1).getName());
     }
 
     @Test
@@ -72,14 +73,14 @@ public class PrepareFieldsControllerTest {
 
         List<DocumentView> documents = sessionData.getDocumentsAsList();
         DocumentView doc1 = documents.get(0);
-        assertEquals(ModelFactoryCodeImpl.DOC_1_NAME, doc1.getName());
+        assertEquals(DocumentFactoryTestImpl.DOC_1_NAME, doc1.getName());
 
-        List<DocComponentView> components = doc1.getComponentViewsWithName(ModelFactoryCodeImpl.AUTO_MAPPED_EXAMPLE_FIELD);
+        List<DocComponentView> components = doc1.getComponentViewsWithName(DocumentFactoryTestImpl.AUTO_MAPPED_EXAMPLE_FIELD);
         assertEquals("auto mapped field not found",
                      1,
                      components.size());
 
-        ContactView selectedBusiness = modelFactory.getBusinessByCustomerName(ModelFactoryCodeImpl.CUSTOMER_ID_1);
+        ContactView selectedBusiness = viewFactory.getBusinessByCustomerName(CustomerFactoryTestImpl.CUSTOMER_ID_1);
         TextComponentView docComponentView = (TextComponentView) components.get(0);
         assertEquals("auto mapped field value not correctly mapped",
                      selectedBusiness.getName(),

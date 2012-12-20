@@ -1,12 +1,9 @@
-package org.lawrencebower.docgen.web_logic.business.mapping.customer_product_document;
+package org.lawrencebower.docgen.web_logic.view.model_factory;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -15,19 +12,16 @@ import java.util.Map;
 
 public class CustomerProduct_Document_Mappings {
 
-    @Autowired
-    ModelFactory modelFactory;
-
     /**
      * using linked map as its helpful to preserve the order for tests
      */
     protected Map<CustomerProductPair, List<String>> mappings = new LinkedHashMap<>();
 
-    public void addDocument(ContactView business,
-                            ProductView product,
+    public void addDocument(String customerName,
+                            String productId,
                             String documentName) {
 
-        CustomerProductPair pair = makeCustomerProductPair(business, product);
+        CustomerProductPair pair = makeCustomerProductPair(customerName, productId);
 
         if (mappings.containsKey(pair)) {
             List<String> documentViews = mappings.get(pair);
@@ -39,26 +33,26 @@ public class CustomerProduct_Document_Mappings {
         }
     }
 
-    public List<DocumentView> getDocumentsForCustomerAndProduct(ContactView business, ProductView product){
+    public List<String> getDocumentsForCustomerAndProduct(ContactView business, ProductView product){
 
-        List<DocumentView> results = new ArrayList<>();
+        List<String> results = new ArrayList<>();
 
-        CustomerProductPair customerProductPair = makeCustomerProductPair(business, product);
+        String businessName = business.getName();
+        String productId = product.getProductId();
+        CustomerProductPair customerProductPair = makeCustomerProductPair(businessName, productId);
+
         if(mappings.containsKey(customerProductPair)){
             List<String> documentNames = mappings.get(customerProductPair);
             for (String documentName : documentNames) {
-                DocumentView document = modelFactory.getDocument(documentName);
-                results.add(document);
+                results.add(documentName);
             }
         }
 
         return results;
     }
 
-    private CustomerProductPair makeCustomerProductPair(ContactView business, ProductView product) {
-        String name = business.getName();
-        String productId = product.getProductId();
-        return new CustomerProductPair(name, productId);
+    private CustomerProductPair makeCustomerProductPair(String customerName, String productId) {
+        return new CustomerProductPair(customerName, productId);
     }
 
     class CustomerProductPair {
