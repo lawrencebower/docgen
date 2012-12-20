@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.doc_examples;
+package org.lawrencebower.docgen.doc_examples.fcc_740;
 
 import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
 import org.lawrencebower.docgen.core.document.component.DocComponent;

@@ -6,22 +6,22 @@
              http://www.springframework.org/schema/context classpath:/org/springframework/context/config/spring-context-3.1.xsd">
 
     <bean id="fda2887"
-          class="org.lawrencebower.docgen.doc_examples.FDA_2887"
+          class="org.lawrencebower.docgen.doc_examples.fda_2887.FDA_2887"
           init-method="prepareComponents"
           scope="prototype"/>
 
     <bean id="fcc740"
-          class="org.lawrencebower.docgen.doc_examples.FCC_740"
+          class="org.lawrencebower.docgen.doc_examples.fcc_740.FCC_740"
           init-method="prepareComponents"
           scope="prototype"/>
 
     <bean id="deliveryNote"
-          class="org.lawrencebower.docgen.doc_examples.DeliveryNote"
+          class="org.lawrencebower.docgen.doc_examples.delivery_note.DeliveryNote"
           init-method="prepareComponents"
           scope="prototype"/>
 
     <bean id="commercialInvoice"
-          class="org.lawrencebower.docgen.doc_examples.CommercialInvoice"
+          class="org.lawrencebower.docgen.doc_examples.commercial_invoice.CommercialInvoice"
           init-method="prepareComponents"
           scope="prototype"/>
 

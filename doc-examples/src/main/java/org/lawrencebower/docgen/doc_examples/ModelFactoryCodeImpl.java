@@ -1,6 +1,10 @@
 package org.lawrencebower.docgen.doc_examples;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.doc_examples.commercial_invoice.CommercialInvoice;
+import org.lawrencebower.docgen.doc_examples.delivery_note.DeliveryNote;
+import org.lawrencebower.docgen.doc_examples.fcc_740.FCC_740;
+import org.lawrencebower.docgen.doc_examples.fda_2887.FDA_2887;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
 import org.lawrencebower.docgen.web_logic.business.mapping.customer_product_document.CustomerProduct_Document_Mappings;
 import org.lawrencebower.docgen.web_logic.business.model_factory.ModelFactory;

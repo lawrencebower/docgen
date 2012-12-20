@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.doc_examples;
+package org.lawrencebower.docgen.doc_examples.commercial_invoice;
 
 import org.lawrencebower.docgen.core.document.ComponentBuilder;
 import org.lawrencebower.docgen.core.document.component.*;

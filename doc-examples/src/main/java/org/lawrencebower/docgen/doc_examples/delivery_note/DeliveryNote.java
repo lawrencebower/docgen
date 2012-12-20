@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.doc_examples;
+package org.lawrencebower.docgen.doc_examples.delivery_note;
 
 import org.lawrencebower.docgen.core.document.ComponentBuilder;
 import org.lawrencebower.docgen.core.document.component.*;

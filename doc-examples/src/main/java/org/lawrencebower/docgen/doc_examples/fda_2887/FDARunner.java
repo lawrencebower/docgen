@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.doc_examples;
+package org.lawrencebower.docgen.doc_examples.fda_2887;
 
 import org.lawrencebower.docgen.core.document.Document;
 import org.lawrencebower.docgen.core.document.PDFDocument;
@@ -7,13 +7,15 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.File;
 
-public class CommercialInvoiceRunner {
+public class FDARunner {
 
     public static void main(String[] args) {
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("\\META-INF\\doc-examples-context.xml");
 
-        CommercialInvoice doc = (CommercialInvoice) context.getBean("commercialInvoice");
+        FDA_2887 doc = (FDA_2887) context.getBean("fda2887");
+
+//        doc.setComponentValuesAndRenderBorder();
 
         DocumentView documentView = doc.getDocumentView();
 
@@ -21,7 +23,7 @@ public class CommercialInvoiceRunner {
 
         PDFDocument pdfDocument = document.generatePDF();
 
-        File outFile = new File("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\CommercialInvoice_output.pdf");
+        File outFile = new File("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\FDA-2877_output.pdf");
 
         pdfDocument.writeToFile(outFile);
     }

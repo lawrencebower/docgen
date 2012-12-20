@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.doc_examples;
+package org.lawrencebower.docgen.doc_examples.fda_2887;
 
 import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
