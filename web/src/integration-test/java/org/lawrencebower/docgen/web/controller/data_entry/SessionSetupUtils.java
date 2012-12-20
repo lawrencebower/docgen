@@ -4,8 +4,8 @@ import org.lawrencebower.docgen.doc_examples.factory.CustomerFactoryTestImpl;
 import org.lawrencebower.docgen.doc_examples.factory.ProductFactoryTestImpl;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
-import org.lawrencebower.docgen.web_logic.view.model_factory.ViewFactory;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
+import org.lawrencebower.docgen.web_logic.view.view_factory.ViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class SessionSetupUtils {

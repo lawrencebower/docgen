@@ -9,7 +9,7 @@ import org.lawrencebower.docgen.doc_examples.factory.DocumentFactoryTestImpl;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
-import org.lawrencebower.docgen.web_logic.view.model_factory.ViewFactory;
+import org.lawrencebower.docgen.web_logic.view.view_factory.ViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;

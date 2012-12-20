@@ -7,7 +7,7 @@ import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionInfo;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
-import org.lawrencebower.docgen.web_logic.view.model_factory.ViewFactory;
+import org.lawrencebower.docgen.web_logic.view.view_factory.ViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;

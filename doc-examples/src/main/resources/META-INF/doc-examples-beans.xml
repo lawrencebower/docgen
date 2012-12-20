@@ -25,32 +25,38 @@
           init-method="prepareComponents"
           scope="prototype"/>
 
-    <bean name="modelFactory"
-          class="org.lawrencebower.docgen.web_logic.view.model_factory.ViewFactoryImpl"
-          init-method="init"/>
+    <bean name="viewFactory"
+          class="org.lawrencebower.docgen.web_logic.view.view_factory.ViewFactoryImpl"
+          init-method="init">
 
-    <bean name="vendorFactory"
-          class="org.lawrencebower.docgen.doc_examples.factory.VendorFactoryTestImpl"
-          init-method="initVendor"/>
+        <property name="customerFactory">
+            <bean class="org.lawrencebower.docgen.doc_examples.factory.CustomerFactoryTestImpl"
+                  init-method="initCustomers"/>
+        </property>
 
-    <bean name="productFactory"
-          class="org.lawrencebower.docgen.doc_examples.factory.ProductFactoryTestImpl"
-          init-method="initProducts"/>
+        <property name="customerProductFactory">
+            <bean class="org.lawrencebower.docgen.web_logic.view.view_factory.CustomerProductMappingFactoryTestImpl"
+                  init-method="initMappings"/>
+        </property>
 
-    <bean name="customerFactory"
-          class="org.lawrencebower.docgen.doc_examples.factory.CustomerFactoryTestImpl"
-          init-method="initCustomers"/>
+        <property name="documentFactory">
+            <bean class="org.lawrencebower.docgen.doc_examples.factory.DocumentFactoryTestImpl">
+                <lookup-method name="getCommercialInvoice" bean="commercialInvoice"/>
+                <lookup-method name="getDeliveryNote" bean="deliveryNote"/>
+                <lookup-method name="getFDA2887" bean="fda2887"/>
+                <lookup-method name="getFCC740" bean="fcc740"/>
+            </bean>
+        </property>
 
-    <bean name="customerProductMappingFactory"
-          class="org.lawrencebower.docgen.doc_examples.factory.CustomerProductMappingFactoryTestImpl"
-          init-method="initMappings"/>
+        <property name="productFactory">
+            <bean class="org.lawrencebower.docgen.doc_examples.factory.ProductFactoryTestImpl"
+                  init-method="initProducts"/>
+        </property>
 
-    <bean name="documentFactory"
-          class="org.lawrencebower.docgen.doc_examples.factory.DocumentFactoryTestImpl">
-        <lookup-method name="getCommercialInvoice" bean="commercialInvoice"/>
-        <lookup-method name="getDeliveryNote" bean="deliveryNote"/>
-        <lookup-method name="getFDA2887" bean="fda2887"/>
-        <lookup-method name="getFCC740" bean="fcc740"/>
+        <property name="vendorFactory">
+            <bean class="org.lawrencebower.docgen.doc_examples.factory.VendorFactoryTestImpl"
+                  init-method="initVendor"/>
+        </property>
     </bean>
 
     <context:component-scan base-package="org.lawrencebower.docgen.doc_examples"/>

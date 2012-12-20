@@ -11,8 +11,8 @@
 
     <import resource="web-logic-params.xml"/>
 
-    <bean name="modelFactory"
-          class="org.lawrencebower.docgen.web_logic.view.model_factory.ViewFactoryTestImpl"/>
+    <bean name="viewFactory"
+          class="org.lawrencebower.docgen.web_logic.view.view_factory.ViewFactoryTestImpl"/>
 
     <context:component-scan base-package="org.lawrencebower.docgen.web_logic"/>
 
