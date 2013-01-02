@@ -10,14 +10,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-class CustomerProduct_Document_Mappings {
+public class CustomerProduct_Document_Mappings {
 
     /**
      * using linked map as its helpful to preserve the order for tests
      */
     protected Map<CustomerProductPair, List<String>> mappings = new LinkedHashMap<>();
 
-    protected void addDocument(String customerName,
+    public void addDocument(String customerName,
                             String productId,
                             String documentName) {
 
@@ -33,7 +33,7 @@ class CustomerProduct_Document_Mappings {
         }
     }
 
-    protected List<String> getDocumentsForCustomerAndProduct(ContactView business, ProductView product){
+    public List<String> getDocumentsForCustomerAndProduct(ContactView business, ProductView product){
 
         List<String> results = new ArrayList<>();
 

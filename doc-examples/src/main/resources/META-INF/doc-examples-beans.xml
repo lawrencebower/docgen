@@ -35,7 +35,7 @@
         </property>
 
         <property name="customerProductFactory">
-            <bean class="org.lawrencebower.docgen.web_logic.view.view_factory.CustomerProductMappingFactoryTestImpl"
+            <bean class="org.lawrencebower.docgen.doc_examples.factory.CustomerProductMappingFactoryTestImpl"
                   init-method="initMappings"/>
         </property>
 

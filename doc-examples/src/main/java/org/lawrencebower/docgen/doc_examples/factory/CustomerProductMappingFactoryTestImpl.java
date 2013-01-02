@@ -1,10 +1,11 @@
-package org.lawrencebower.docgen.web_logic.view.view_factory;
+package org.lawrencebower.docgen.doc_examples.factory;
 
 import org.lawrencebower.docgen.doc_examples.commercial_invoice.CommercialInvoice;
 import org.lawrencebower.docgen.doc_examples.delivery_note.DeliveryNote;
-import org.lawrencebower.docgen.doc_examples.factory.ProductFactoryTestImpl;
 import org.lawrencebower.docgen.doc_examples.fcc_740.FCC_740;
 import org.lawrencebower.docgen.doc_examples.fda_2887.FDA_2887;
+import org.lawrencebower.docgen.web_logic.view.view_factory.CustomerProductMappingFactory;
+import org.lawrencebower.docgen.web_logic.view.view_factory.CustomerProduct_Document_Mappings;
 
 import static org.lawrencebower.docgen.doc_examples.factory.CustomerFactoryTestImpl.CUSTOMER_ID_1;
 import static org.lawrencebower.docgen.doc_examples.factory.CustomerFactoryTestImpl.CUSTOMER_ID_2;
