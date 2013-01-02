@@ -5,7 +5,6 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.lawrencebower.docgen.core.document.Document;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionInfo;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.view_factory.ViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,7 +110,7 @@ public class DocumentView {
     /**
      * This is not a field-for-field copy.
      */
-    public DocumentView copyComponentViews() {
+    private DocumentView copyComponentViews() {
         String docName = document.getName();
         DocumentView newDocument = viewFactory.createDocument(docName);
         newDocument.copyComponentViews(this);

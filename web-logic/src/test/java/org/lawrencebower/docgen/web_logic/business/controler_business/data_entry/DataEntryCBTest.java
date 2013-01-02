@@ -8,7 +8,7 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.PDFDocumentImpl;
 import org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils;
 import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
-import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
+import org.lawrencebower.docgen.web_logic.business.utils.ViewUtilsImpl;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
@@ -69,7 +69,7 @@ public class DataEntryCBTest {
             dataEntryBusiness.getDocumentsForViewing(selectedCustomer, mockProducts.capture());
         } catch (DocGenException e) {
             String message = e.getMessage();
-            assertEquals(ViewUtils.NO_CUSTOMER_SELECTED, message);
+            assertEquals(ViewUtilsImpl.NO_CUSTOMER_SELECTED, message);
         }
     }
 
@@ -80,7 +80,7 @@ public class DataEntryCBTest {
             dataEntryBusiness.getDocumentsForViewing(mockCustomer, selectedProducts);
         } catch (DocGenException e) {
             String message = e.getMessage();
-            assertEquals(ViewUtils.NO_PRODUCTS_SELECTED, message);
+            assertEquals(ViewUtilsImpl.NO_PRODUCTS_SELECTED, message);
         }
     }
 
@@ -91,7 +91,7 @@ public class DataEntryCBTest {
             dataEntryBusiness.getDocumentsForViewing(mockCustomer, selectedProducts);
         } catch (DocGenException e) {
             String message = e.getMessage();
-            assertEquals(ViewUtils.NO_PRODUCTS_SELECTED, message);
+            assertEquals(ViewUtilsImpl.NO_PRODUCTS_SELECTED, message);
         }
     }
 
@@ -221,7 +221,7 @@ public class DataEntryCBTest {
                                                    mockBusiness);
         } catch (DocGenException e) {
             String message = e.getMessage();
-            assertEquals(ViewUtils.NO_DOCUMENTS_SELECTED, message);
+            assertEquals(ViewUtilsImpl.NO_DOCUMENTS_SELECTED, message);
         }
 
     }
@@ -234,7 +234,7 @@ public class DataEntryCBTest {
                                                    mockBusiness);
         } catch (DocGenException e) {
             String message = e.getMessage();
-            assertEquals(ViewUtils.NO_CUSTOMER_SELECTED, message);
+            assertEquals(ViewUtilsImpl.NO_CUSTOMER_SELECTED, message);
         }
     }
 
@@ -246,7 +246,7 @@ public class DataEntryCBTest {
                                                    null);
         } catch (DocGenException e) {
             String message = e.getMessage();
-            assertEquals(ViewUtils.NO_BUSINESS_SELECTED, message);
+            assertEquals(ViewUtilsImpl.NO_BUSINESS_SELECTED, message);
         }
     }
 

@@ -4,11 +4,8 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
-import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionField;
-import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionInfo;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfo;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.mapper.AMComponentMapper;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentInjectionField;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentInjectionInfo;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
@@ -19,7 +16,7 @@ import java.util.List;
 public abstract class DocComponentView<T extends DocComponent> {
 
     @Autowired
-    private AMComponentMapper autoMapper;
+    private AutoMapped autoMapper;
 
     protected static final String NULL_COMPONENT_MESSAGE = "DocComponent is null";
     protected static final String NOT_SET_MESSAGE = "not set";

@@ -1,13 +1,15 @@
 package org.lawrencebower.docgen.web_logic.business.utils;
 
+import org.lawrencebower.docgen.web_logic.view.document.ViewableComponentFilter;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 
-public class ViewableComponentFilter {
+public class ViewableComponentFilterImpl implements ViewableComponentFilter {
 
+    @Override
     public List<DocComponentView> getComponents(List<DocComponentView> allComponents) {
 
         List<DocComponentView> results = filterDuplicatedFields(allComponents);
@@ -17,6 +19,7 @@ public class ViewableComponentFilter {
         return results;
     }
 
+    @Override
     public List<DocComponentView> getNonAutoMappedComponents(List<DocComponentView> allComponents) {
 
         List<DocComponentView> results = filterAutoMapped(allComponents);

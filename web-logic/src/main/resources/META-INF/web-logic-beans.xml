@@ -13,7 +13,7 @@
           class="org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB"/>
 
     <bean name="viewableComponentFilter"
-          class="org.lawrencebower.docgen.web_logic.business.utils.ViewableComponentFilter"/>
+          class="org.lawrencebower.docgen.web_logic.business.utils.ViewableComponentFilterImpl"/>
 
     <bean name="autoMappedComponentMapper"
           class="org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.mapper.AMComponentMapper"
@@ -34,19 +34,19 @@
     </bean>
 
     <bean name="fieldMapper"
-          class="org.lawrencebower.docgen.web_logic.business.mapping.field_value.FieldMapper"/>
+          class="org.lawrencebower.docgen.web_logic.business.mapping.field_value.FieldMapperImpl"/>
 
     <bean name="viewUtils"
-          class="org.lawrencebower.docgen.web_logic.business.utils.ViewUtils"/>
+          class="org.lawrencebower.docgen.web_logic.business.utils.ViewUtilsImpl"/>
 
     <bean name="tableComponentValueSetter"
-          class="org.lawrencebower.docgen.web_logic.business.table_component.TableComponentValueSetter"/>
+          class="org.lawrencebower.docgen.web_logic.business.table_component.TableComponentValueSetterImpl"/>
 
     <bean name="tableComponentCalculator"
           class="org.lawrencebower.docgen.web_logic.business.component_calculation.table.BasicTableComponentCalculator"/>
 
     <bean name="tableComponentProductInjector"
-          class="org.lawrencebower.docgen.web_logic.business.injection.product.TableComponentProductInjector"/>
+          class="org.lawrencebower.docgen.web_logic.business.injection.product.TableComponentProductInjectorImpl"/>
 
     <bean name="productInjectionMapper"
           class="org.lawrencebower.docgen.web_logic.business.injection.product.mapper.ProductInjectionMapperImpl">

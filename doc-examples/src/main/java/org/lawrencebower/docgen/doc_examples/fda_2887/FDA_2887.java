@@ -6,7 +6,7 @@ import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayDocument;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayDocumentBuilder;
-import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionField;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentInjectionField;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewBuilder;
 import org.springframework.beans.factory.annotation.Autowired;

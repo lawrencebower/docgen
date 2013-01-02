@@ -1,7 +1,7 @@
 package org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.mapper;
 
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMapped;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfo;
+import org.lawrencebower.docgen.web_logic.view.document.component.AMComponentInfo;
+import org.lawrencebower.docgen.web_logic.view.document.component.AutoMapped;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 
 import java.util.ArrayList;

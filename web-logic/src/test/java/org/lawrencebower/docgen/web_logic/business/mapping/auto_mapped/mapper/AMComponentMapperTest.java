@@ -4,7 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfo;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfoImpl;
+import org.lawrencebower.docgen.web_logic.view.document.component.AMComponentInfo;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -52,7 +53,7 @@ public class AMComponentMapperTest {
 
     private void programMocks() {
 
-        mappingInfo = mock(AMComponentInfo.class);
+        mappingInfo = mock(AMComponentInfoImpl.class);
 
         when(mappingInfo.getCustomerName()).thenReturn(CUSTOMER_NAME_STRING);
         when(mappingInfo.getCustomerContactName()).thenReturn(CUSTOMER_CONTACT_NAME_STRING);

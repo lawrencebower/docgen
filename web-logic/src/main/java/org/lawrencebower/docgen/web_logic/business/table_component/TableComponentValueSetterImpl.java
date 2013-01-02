@@ -3,9 +3,10 @@ package org.lawrencebower.docgen.web_logic.business.table_component;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.component.TableComponentValueSetter;
 import org.lawrencebower.docgen.web_logic.view.document.component.TableComponentView;
 
-public class TableComponentValueSetter {
+public class TableComponentValueSetterImpl implements TableComponentValueSetter {
 
     private TableComponentInfo parseParamString(String paramString, String componentValue) {
         String[] tokens = splitTableParamString(paramString);
@@ -18,6 +19,7 @@ public class TableComponentValueSetter {
         return new TableComponentInfo(componentValue, rowNumber, colNumber);
     }
 
+    @Override
     public void setCellValueIfMatch(String paramString,
                                     String componentValue,
                                     TableComponentView tableView) {
@@ -52,6 +54,7 @@ public class TableComponentValueSetter {
         return tokens;
     }
 
+    @Override
     public boolean checkComponentNameMatch(String paramString, String componentName) {
         return paramString.startsWith(componentName + ViewConstants.DOCUMENT_FIELD_SEPARATOR);
     }

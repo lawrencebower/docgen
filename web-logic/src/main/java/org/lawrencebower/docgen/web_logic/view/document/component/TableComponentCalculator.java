@@ -1,7 +1,6 @@
-package org.lawrencebower.docgen.web_logic.business.component_calculation.table;
+package org.lawrencebower.docgen.web_logic.view.document.component;
 
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
-import org.lawrencebower.docgen.web_logic.view.document.component.TableComponentView;
 
 import java.util.List;
 

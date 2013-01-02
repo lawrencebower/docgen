@@ -1,13 +1,10 @@
 package org.lawrencebower.docgen.web_logic.view.document;
 
 import org.lawrencebower.docgen.core.document.PDFDocument;
-import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
-import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionInfo;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfo;
-import org.lawrencebower.docgen.web_logic.business.mapping.field_value.FieldMapper;
-import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
-import org.lawrencebower.docgen.web_logic.business.utils.ViewableComponentFilter;
+import org.lawrencebower.docgen.web_logic.view.document.component.AMComponentInfo;
+import org.lawrencebower.docgen.web_logic.view.document.component.ComponentCalculation;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.component.FieldMapper;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 

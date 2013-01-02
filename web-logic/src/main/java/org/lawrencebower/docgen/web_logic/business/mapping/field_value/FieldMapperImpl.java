@@ -1,8 +1,9 @@
 package org.lawrencebower.docgen.web_logic.business.mapping.field_value;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
+import org.lawrencebower.docgen.web_logic.view.document.ViewUtils;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.component.FieldMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class FieldMapper {
+public class FieldMapperImpl implements FieldMapper {
 
     @Autowired
     ViewUtils viewUtils;
@@ -23,6 +24,7 @@ public class FieldMapper {
         EXCLUDED_TOKENS.add("partial");
     }
 
+    @Override
     public void mapFieldValuesToComponents(Map<String, String[]> parameterMap,
                                            List<DocComponentView> allViewComponents) {
 
@@ -67,6 +69,7 @@ public class FieldMapper {
         return componentValues[0];
     }
 
+    @Override
     public boolean isExcludedToken(String token) {
         return EXCLUDED_TOKENS.contains(token);
     }

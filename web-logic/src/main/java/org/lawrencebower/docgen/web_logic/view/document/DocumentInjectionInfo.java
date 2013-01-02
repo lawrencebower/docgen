@@ -1,6 +1,5 @@
-package org.lawrencebower.docgen.web_logic.business.injection.document;
+package org.lawrencebower.docgen.web_logic.view.document;
 
-import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 
 public class DocumentInjectionInfo {

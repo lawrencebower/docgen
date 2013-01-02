@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_logic.business.injection.document;
+package org.lawrencebower.docgen.web_logic.view.document;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
 

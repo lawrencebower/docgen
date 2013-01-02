@@ -4,14 +4,10 @@ import org.apache.commons.io.IOUtils;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
-import org.lawrencebower.docgen.web_logic.business.injection.document.DocumentInjectionInfo;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfo;
-import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfoImpl;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentSetFactory;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
+import org.lawrencebower.docgen.web_logic.view.document.*;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.lawrencebower.docgen.web_logic.view.view_factory.ViewFactory;
@@ -112,14 +108,14 @@ public class DataEntryCB {
                                      ContactView selectedCustomer,
                                      ContactView selectedBusiness) {
 
-        AMComponentInfo mappingInfo = createMappingInfo(selectedCustomer,
+        AMComponentInfoImpl mappingInfo = createMappingInfo(selectedCustomer,
                                                         selectedBusiness);
 
         documentSet.mapAutomappedComponents(mappingInfo);
 
     }
 
-    private AMComponentInfo createMappingInfo(ContactView selectedCustomer,
+    private AMComponentInfoImpl createMappingInfo(ContactView selectedCustomer,
                                               ContactView selectedBusiness) {
 
         viewUtils.checkCustomerSet(selectedCustomer);
@@ -127,7 +123,7 @@ public class DataEntryCB {
 
         ContactView vendor = viewFactory.getVendor();
 
-        return new AMComponentInfo(selectedCustomer,
+        return new AMComponentInfoImpl(selectedCustomer,
                                    vendor,
                                    selectedBusiness);
     }

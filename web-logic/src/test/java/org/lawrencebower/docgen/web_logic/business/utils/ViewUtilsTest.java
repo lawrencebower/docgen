@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
+import org.lawrencebower.docgen.web_logic.view.document.ViewUtils;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;

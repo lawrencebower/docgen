@@ -11,13 +11,14 @@ import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
 import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.core.generator.custom.CustomDocument;
 import org.lawrencebower.docgen.core.generator.custom.CustomDocumentBuilder;
-import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
+import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculationImpl;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.Format;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.Operator;
-import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculation;
+import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculationImpl;
 import org.lawrencebower.docgen.web_logic.business.injection.product.ProductInjectionField;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewBuilder;
+import org.lawrencebower.docgen.web_logic.view.document.component.ComponentCalculation;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
@@ -358,7 +359,7 @@ public class CommercialInvoice {
         productTable.setWidthPercentage(100);
         productTable.setRenderBorder(true);
 
-        TableComponentCalculation calculation = new TableComponentCalculation(Operator.MULTIPLY,
+        TableComponentCalculationImpl calculation = new TableComponentCalculationImpl(Operator.MULTIPLY,
                                                                               Format.CURRENCY,
                                                                               TOTAL_VALUE_NAME,
                                                                               quantityName,
@@ -446,7 +447,7 @@ public class CommercialInvoice {
         subTotalRow.addCell(subTotalCell);
         costTable.addRow(subTotalRow);
 
-        ComponentCalculation subtotalCalc = new ComponentCalculation(Operator.PLUS,
+        ComponentCalculation subtotalCalc = new ComponentCalculationImpl(Operator.PLUS,
                                                                      Format.CURRENCY,
                                                                      TOTAL_VALUE_NAME);
         addViewableComponent(subTotalComponent, subtotalCalc);
@@ -467,7 +468,7 @@ public class CommercialInvoice {
         totalRow.addCell(totalCell);
         costTable.addRow(totalRow);
 
-        ComponentCalculation totalCalc = new ComponentCalculation(Operator.PLUS,
+        ComponentCalculation totalCalc = new ComponentCalculationImpl(Operator.PLUS,
                                                                   Format.CURRENCY,
                                                                   TOTAL_VALUE_NAME);
         addViewableComponent(totalComponent, totalCalc);
