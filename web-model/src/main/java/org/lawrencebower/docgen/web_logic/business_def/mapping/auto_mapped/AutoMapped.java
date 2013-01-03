@@ -1,6 +1,6 @@
-package org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped;
+package org.lawrencebower.docgen.web_logic.business_def.mapping.auto_mapped;
 
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfo;
+import org.lawrencebower.docgen.web_logic.business_def.mapping.auto_mapped.component.AMComponentInfo;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 
 public interface AutoMapped {

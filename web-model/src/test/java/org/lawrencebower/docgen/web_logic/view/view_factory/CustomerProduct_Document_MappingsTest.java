@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentViewImpl;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -103,7 +104,7 @@ public class CustomerProduct_Document_MappingsTest {
     }
 
     private DocumentView mockDocument(String docName) {
-        DocumentView mock = mock(DocumentView.class);
+        DocumentView mock = mock(DocumentViewImpl.class);
         when(mock.getName()).thenReturn(docName);
         return mock;
     }

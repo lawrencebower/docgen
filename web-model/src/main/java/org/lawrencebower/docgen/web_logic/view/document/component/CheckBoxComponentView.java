@@ -2,7 +2,7 @@ package org.lawrencebower.docgen.web_logic.view.document.component;
 
 import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
+import org.lawrencebower.docgen.web_logic.business_def.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentInjectionInfo;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
@@ -10,7 +10,7 @@ import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 
 import java.util.List;
 
-public class CheckBoxComponentView extends DocComponentView<CheckBoxComponent> {
+public class CheckBoxComponentView extends DocComponentViewImpl<CheckBoxComponent> {
 
     protected static final String SELECTED_TEXT = "X";
     protected static final String UNSELECTED_TEXT = "";

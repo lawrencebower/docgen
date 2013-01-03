@@ -2,8 +2,8 @@ package org.lawrencebower.docgen.web_logic.view.document;
 
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
-import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
-import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculation;
+import org.lawrencebower.docgen.web_logic.business_def.component_calculation.ComponentCalculation;
+import org.lawrencebower.docgen.web_logic.business_def.component_calculation.table.TableComponentCalculation;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document.component.TableComponentView;
@@ -16,13 +16,13 @@ public class DocumentViewBuilder {
     @Autowired
     private DocComponentViewFactory componentViewFactory;
 
-    private DocumentView docView;
+    private DocumentViewImpl docView;
 
     public void createDocument() {
         docView = viewFactory.createDocumentView();
     }
 
-    public DocumentView getDocumentView() {
+    public DocumentViewImpl getDocumentView() {
         return docView;
     }
 

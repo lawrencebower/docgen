@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
+import org.lawrencebower.docgen.web_logic.business_def.mapping.field_value.FieldMapper;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSetFactory;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;

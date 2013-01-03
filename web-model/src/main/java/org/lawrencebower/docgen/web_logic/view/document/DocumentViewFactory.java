@@ -8,6 +8,6 @@ public abstract class DocumentViewFactory {
 //        return documentView;
 //    }
 
-    public abstract DocumentView createDocumentView();
+    public abstract DocumentViewImpl createDocumentView();
 
 }

@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_logic.business.utils;
+package org.lawrencebower.docgen.web_logic.business_def.utils;
 
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;

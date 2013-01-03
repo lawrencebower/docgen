@@ -7,6 +7,7 @@ import org.lawrencebower.docgen.doc_examples.fcc_740.FCC_740;
 import org.lawrencebower.docgen.doc_examples.fda_2887.FDA_2887;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentViewImpl;
 import org.lawrencebower.docgen.web_logic.view.view_factory.factory.DocumentFactory;
 
 import java.util.Arrays;
@@ -37,9 +38,9 @@ public abstract class DocumentFactoryTestImpl implements DocumentFactory {
     }
 
     @Override
-    public DocumentView createDocument(String documentName) {
+    public DocumentViewImpl createDocument(String documentName) {
 
-        DocumentView result;
+        DocumentViewImpl result;
 
         switch (documentName) {
             case CommercialInvoice.INVOICE_NAME:

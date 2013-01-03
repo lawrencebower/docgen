@@ -1,5 +1,6 @@
 package org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component;
 
+import org.lawrencebower.docgen.web_logic.business_def.mapping.auto_mapped.component.AMComponentInfo;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 
 public class AMComponentInfoImpl implements AMComponentInfo {

@@ -1,6 +1,7 @@
 package org.lawrencebower.docgen.web_logic.business.utils;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.web_logic.business_def.utils.ViewUtils;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;

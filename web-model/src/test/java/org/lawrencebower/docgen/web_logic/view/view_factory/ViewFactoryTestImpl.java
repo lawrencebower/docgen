@@ -4,6 +4,7 @@ import org.lawrencebower.docgen.web_logic.view.contact.Contact;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactViewFactory;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentViewImpl;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,8 +30,8 @@ public class ViewFactoryTestImpl implements ViewFactory {
     }
 
     @Override
-    public DocumentView createDocument(String documentName) {
-        DocumentView mock = mock(DocumentView.class);
+    public DocumentViewImpl createDocument(String documentName) {
+        DocumentViewImpl mock = mock(DocumentViewImpl.class);
         when(mock.getName()).thenReturn(documentName);
         return mock;
     }

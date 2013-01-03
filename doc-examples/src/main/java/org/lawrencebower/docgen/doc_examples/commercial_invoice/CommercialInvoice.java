@@ -11,14 +11,14 @@ import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
 import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.core.generator.custom.CustomDocument;
 import org.lawrencebower.docgen.core.generator.custom.CustomDocumentBuilder;
-import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculationImpl;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.Format;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.Operator;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculationImpl;
 import org.lawrencebower.docgen.web_logic.business.injection.product.ProductInjectionField;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
+import org.lawrencebower.docgen.web_logic.business_def.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewBuilder;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentViewImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
@@ -559,8 +559,8 @@ public class CommercialInvoice {
         return row;
     }
 
-    public DocumentView getDocumentView() {
-        DocumentView documentView = documentViewBuilder.getDocumentView();
+    public DocumentViewImpl getDocumentView() {
+        DocumentViewImpl documentView = documentViewBuilder.getDocumentView();
         CustomDocument document = documentBuilder.getDocument();
         documentView.setDocument(document);
         return documentView;

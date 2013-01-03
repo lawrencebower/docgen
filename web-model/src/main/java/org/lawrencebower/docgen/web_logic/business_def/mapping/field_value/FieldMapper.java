@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_logic.business.mapping.field_value;
+package org.lawrencebower.docgen.web_logic.business_def.mapping.field_value;
 
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 

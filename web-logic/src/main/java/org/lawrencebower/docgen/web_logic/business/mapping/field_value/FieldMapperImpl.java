@@ -1,7 +1,8 @@
 package org.lawrencebower.docgen.web_logic.business.mapping.field_value;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
+import org.lawrencebower.docgen.web_logic.business_def.mapping.field_value.FieldMapper;
+import org.lawrencebower.docgen.web_logic.business_def.utils.ViewUtils;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 import org.springframework.beans.factory.annotation.Autowired;
 

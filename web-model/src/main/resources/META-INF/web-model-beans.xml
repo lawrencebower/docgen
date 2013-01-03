@@ -3,7 +3,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd">
 
     <bean name="documentSet"
-          class="org.lawrencebower.docgen.web_logic.view.document.DocumentSet"
+          class="org.lawrencebower.docgen.web_logic.view.document.DocumentSetImpl"
           scope="prototype"/>
 
     <bean name="documentSetFactory"
@@ -30,7 +30,7 @@
     </bean>
 
     <bean name="documentView"
-          class="org.lawrencebower.docgen.web_logic.view.document.DocumentView"
+          class="org.lawrencebower.docgen.web_logic.view.document.DocumentViewImpl"
           scope="prototype"/>
 
     <bean name="documentViewBuilder"

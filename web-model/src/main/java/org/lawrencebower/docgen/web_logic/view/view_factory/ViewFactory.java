@@ -2,6 +2,7 @@ package org.lawrencebower.docgen.web_logic.view.view_factory;
 
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentViewImpl;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public interface ViewFactory {
 
     List<DocumentView> getAllDocuments();
 
-    DocumentView createDocument(String documentName);
+    DocumentViewImpl createDocument(String documentName);
 
     List<ProductView> getProducts();
 

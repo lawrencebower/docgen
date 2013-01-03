@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
-import org.lawrencebower.docgen.web_logic.business.utils.ViewableComponentFilter;
+import org.lawrencebower.docgen.web_logic.business_def.utils.ViewableComponentFilter;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentViewFactory;
 import org.mockito.MockitoAnnotations;

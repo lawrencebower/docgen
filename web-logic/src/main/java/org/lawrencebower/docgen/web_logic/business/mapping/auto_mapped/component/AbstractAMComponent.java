@@ -1,7 +1,7 @@
 package org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component;
 
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMapped;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
+import org.lawrencebower.docgen.web_logic.business_def.mapping.auto_mapped.AutoMapped;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 
 public abstract class AbstractAMComponent implements AutoMapped {

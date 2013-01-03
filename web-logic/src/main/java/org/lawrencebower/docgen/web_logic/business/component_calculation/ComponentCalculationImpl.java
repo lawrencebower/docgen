@@ -1,5 +1,6 @@
 package org.lawrencebower.docgen.web_logic.business.component_calculation;
 
+import org.lawrencebower.docgen.web_logic.business_def.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 

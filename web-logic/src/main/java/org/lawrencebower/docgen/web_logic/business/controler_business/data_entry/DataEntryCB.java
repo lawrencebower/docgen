@@ -5,7 +5,7 @@ import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfoImpl;
-import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
+import org.lawrencebower.docgen.web_logic.business_def.utils.ViewUtils;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentInjectionInfo;

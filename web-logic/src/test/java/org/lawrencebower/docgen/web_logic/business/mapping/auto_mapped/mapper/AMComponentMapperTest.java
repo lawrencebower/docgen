@@ -4,9 +4,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfo;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfoImpl;
+import org.lawrencebower.docgen.web_logic.business_def.mapping.auto_mapped.component.AMComponentInfo;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
+import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentViewImpl;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -271,7 +272,7 @@ public class AMComponentMapperTest {
     }
 
     private DocComponentView mockDocComponent(String field) {
-        DocComponentView mock = mock(DocComponentView.class);
+        DocComponentView mock = mock(DocComponentViewImpl.class);
         when(mock.getName()).thenReturn(field);
         return mock;
     }

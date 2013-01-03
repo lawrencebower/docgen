@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_logic.business.component_calculation.table;
+package org.lawrencebower.docgen.web_logic.business_def.component_calculation.table;
 
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.document.component.TableComponentView;

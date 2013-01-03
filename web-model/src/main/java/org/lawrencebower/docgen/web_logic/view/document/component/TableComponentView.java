@@ -6,11 +6,11 @@ import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
 import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
-import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculation;
-import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculator;
-import org.lawrencebower.docgen.web_logic.business.injection.TableComponentProductInjector;
-import org.lawrencebower.docgen.web_logic.business.table_component.TableComponentValueSetter;
+import org.lawrencebower.docgen.web_logic.business_def.component_calculation.ComponentCalculation;
+import org.lawrencebower.docgen.web_logic.business_def.component_calculation.table.TableComponentCalculation;
+import org.lawrencebower.docgen.web_logic.business_def.component_calculation.table.TableComponentCalculator;
+import org.lawrencebower.docgen.web_logic.business_def.injection.TableComponentProductInjector;
+import org.lawrencebower.docgen.web_logic.business_def.table_component.TableComponentValueSetter;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentInjectionInfo;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TableComponentView extends DocComponentView<TableComponent> {
+public class TableComponentView extends DocComponentViewImpl<TableComponent> {
 
     @Autowired
     DocComponentViewFactory viewFactory;

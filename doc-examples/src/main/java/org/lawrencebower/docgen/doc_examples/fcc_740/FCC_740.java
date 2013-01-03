@@ -11,8 +11,8 @@ import org.lawrencebower.docgen.core.generator.overlay.OverlayDocument;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayDocumentBuilder;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentInjectionField;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewBuilder;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentViewImpl;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -101,8 +101,8 @@ public class FCC_740 {
         documentViewBuilder.createDocument();
     }
 
-    public DocumentView getDocumentView() {
-        DocumentView documentView = documentViewBuilder.getDocumentView();
+    public DocumentViewImpl getDocumentView() {
+        DocumentViewImpl documentView = documentViewBuilder.getDocumentView();
         OverlayDocument document = documentBuilder.getDocument();
         documentView.setDocument(document);
         documentView.setCopyNumber(5);

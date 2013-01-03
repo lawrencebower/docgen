@@ -11,9 +11,7 @@ import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
 import org.lawrencebower.docgen.web_logic.business.utils.ViewUtilsImpl;
 import org.lawrencebower.docgen.web_logic.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentSetFactory;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
+import org.lawrencebower.docgen.web_logic.view.document.*;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.lawrencebower.docgen.web_logic.view.view_factory.ViewFactory;
 import org.mockito.ArgumentCaptor;
@@ -229,7 +227,7 @@ public class DataEntryCBTest {
     @Test
     public void testMapAutoMapFields_nullCustomer_errorThrown() throws Exception {
         try {
-            dataEntryBusiness.mapAutoMapComponents(mock(DocumentSet.class),
+            dataEntryBusiness.mapAutoMapComponents(mock(DocumentSetImpl.class),
                                                    null,
                                                    mockBusiness);
         } catch (DocGenException e) {
@@ -241,7 +239,7 @@ public class DataEntryCBTest {
     @Test
     public void testMapAutoMapFields_nullBusiness_errorThrown() throws Exception {
         try {
-            dataEntryBusiness.mapAutoMapComponents(mock(DocumentSet.class),
+            dataEntryBusiness.mapAutoMapComponents(mock(DocumentSetImpl.class),
                                                    mockCustomer,
                                                    null);
         } catch (DocGenException e) {
@@ -253,7 +251,7 @@ public class DataEntryCBTest {
     //MOCKING
 
     private DocumentView mockDocumentView(String docName) {
-        DocumentView docView = mock(DocumentView.class);
+        DocumentView docView = mock(DocumentViewImpl.class);
         when(docView.getName()).thenReturn(docName);
         return docView;
     }

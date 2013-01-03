@@ -3,6 +3,7 @@ package org.lawrencebower.docgen.web_logic.view.view_factory;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentViewImpl;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
 import org.lawrencebower.docgen.web_logic.view.view_factory.factory.CustomerFactory;
 import org.lawrencebower.docgen.web_logic.view.view_factory.factory.DocumentFactory;
@@ -84,7 +85,7 @@ public class ViewFactoryImpl implements ViewFactory {
     }
 
     @Override
-    public DocumentView createDocument(String documentName) {
+    public DocumentViewImpl createDocument(String documentName) {
         return documentFactory.createDocument(documentName);
     }
 

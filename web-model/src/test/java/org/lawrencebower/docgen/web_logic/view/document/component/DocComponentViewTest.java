@@ -29,7 +29,7 @@ public class DocComponentViewTest {
             view.setComponent(null);
         } catch (DocGenException e) {
             String message = e.getMessage();
-            assertEquals(DocComponentView.NULL_COMPONENT_MESSAGE, message);
+            assertEquals(DocComponentViewImpl.NULL_COMPONENT_MESSAGE, message);
         }
     }
 
@@ -39,7 +39,7 @@ public class DocComponentViewTest {
         when(mockComponent.getName()).thenReturn(null);
         TextComponentView componentView = viewFactory.createTextComponentView(mockComponent);
         String returnedName = componentView.getName();
-        Assert.assertEquals(DocComponentView.NOT_SET_MESSAGE, returnedName);
+        Assert.assertEquals(DocComponentViewImpl.NOT_SET_MESSAGE, returnedName);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class DocComponentViewTest {
         String name1 = "phillip";
         String name2 = "phillip";
 
-        DocComponentView view1 = makeComponentWithName(name1);
+        DocComponentViewImpl view1 = makeComponentWithName(name1);
         DocComponentView view2 = makeComponentWithName(name2);
 
         assertTrue(view1.equals(view2));
@@ -73,7 +73,7 @@ public class DocComponentViewTest {
         String name1 = "phillip";
         String name2 = "chris";
 
-        DocComponentView view1 = makeComponentWithName(name1);
+        DocComponentViewImpl view1 = makeComponentWithName(name1);
         DocComponentView view2 = makeComponentWithName(name2);
 
         assertFalse(view1.equals(view2));
@@ -85,13 +85,13 @@ public class DocComponentViewTest {
         String name1 = "phillip";
         String name2 = null;
 
-        DocComponentView view1 = makeComponentWithName(name1);
+        DocComponentViewImpl view1 = makeComponentWithName(name1);
         DocComponentView view2 = makeComponentWithName(name2);
 
         assertFalse(view1.equals(view2));
     }
 
-    private DocComponentView makeComponentWithName(String name) {
+    private DocComponentViewImpl makeComponentWithName(String name) {
         TextComponent mockComponent = Mockito.mock(TextComponent.class);
         when(mockComponent.getName()).thenReturn(name);
         return viewFactory.createTextComponentView(mockComponent);

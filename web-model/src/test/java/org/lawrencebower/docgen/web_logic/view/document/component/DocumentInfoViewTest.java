@@ -76,7 +76,7 @@ public class DocumentInfoViewTest {
     }
 
     private DocComponentView mockComponentView(String name) {
-        DocComponentView mock = Mockito.mock(DocComponentView.class);
+        DocComponentView mock = Mockito.mock(DocComponentViewImpl.class);
         when(mock.getName()).thenReturn(name);
         return mock;
     }

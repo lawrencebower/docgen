@@ -1,150 +1,39 @@
 package org.lawrencebower.docgen.web_logic.view.document;
 
 import org.lawrencebower.docgen.core.document.PDFDocument;
-import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfo;
-import org.lawrencebower.docgen.web_logic.business.mapping.field_value.FieldMapper;
-import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
-import org.lawrencebower.docgen.web_logic.business.utils.ViewableComponentFilter;
+import org.lawrencebower.docgen.web_logic.business_def.component_calculation.ComponentCalculation;
+import org.lawrencebower.docgen.web_logic.business_def.mapping.auto_mapped.component.AMComponentInfo;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 import org.lawrencebower.docgen.web_logic.view.product.ProductView;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
-public class DocumentSet {
+public interface DocumentSet {
+    void setDocuments(Collection<DocumentView> documents);
 
-    @Autowired
-    FieldMapper fieldMapper;
-    @Autowired
-    ViewUtils viewUtils;
-    @Autowired
-    private ViewableComponentFilter viewableComponentFilter;
+    void setDocuments(DocumentView... views);
 
-    @Autowired
-    DocumentViewFactory documentViewFactory;
-    @Autowired
-    DocumentSetFactory documentSetFactory;
+    List<DocumentView> getDocumentsAsList();
 
-    private List<DocumentView> documents = new ArrayList<>();
+    List<PDFDocument> createPDFs();
 
-    private DocumentSet() {//force spring creation
-    }
+    void mapFieldValuesToComponents(Map<String, String[]> parameterMap);
 
-    public void setDocuments(Collection<DocumentView> documents) {
-        this.documents = new ArrayList<>(documents);
-    }
+    List<DocComponentView> getAllComponentViewsFromDocs();
 
-    public void setDocuments(DocumentView... views) {
-        List<DocumentView> docList = Arrays.asList(views);
-        documents = new ArrayList<>(docList);
-    }
+    void checkDocumentsSet();
 
-    public List<DocumentView> getDocumentsAsList() {
-        return Collections.unmodifiableList(documents);
-    }
+    void mapAutomappedComponents(AMComponentInfo mappingInfo);
 
-    public List<PDFDocument> createPDFs() {
+    void injectProductFields(List<ProductView> selectedProducts);
 
-        List<PDFDocument> results = new ArrayList<>();
+    List<DocComponentView> getComponentsForViewing(boolean showAutoMappedFields);
 
-        for (DocumentView document : documents) {
+    void processCalculatedFields();
 
-            PDFDocument pdfDocument = document.generatePDF();
+    void runCalculation(ComponentCalculation calculation);
 
-            String documentName = document.getName();
-            pdfDocument.setName(documentName);
-
-            String nameExtension = document.getNameExtension();
-            pdfDocument.setNameExtension(nameExtension);
-
-            int copyNumber = document.getCopyNumber();
-            pdfDocument.setCopyNumber(copyNumber);
-
-            results.add(pdfDocument);
-        }
-
-        return results;
-    }
-
-    public void mapFieldValuesToComponents(Map<String, String[]> parameterMap) {
-        List<DocComponentView> allComponentViews = getAllComponentViewsFromDocs();
-        fieldMapper.mapFieldValuesToComponents(parameterMap, allComponentViews);
-    }
-
-    public List<DocComponentView> getAllComponentViewsFromDocs() {
-        return viewUtils.getAllComponentViewsFromDocs(documents);
-    }
-
-    public void checkDocumentsSet() {
-        viewUtils.checkDocumentsSet(documents);
-    }
-
-    public void mapAutomappedComponents(AMComponentInfo mappingInfo) {
-
-        checkDocumentsSet();
-
-        List<DocComponentView> components = getAllComponentViewsFromDocs();
-
-        for (DocComponentView component : components) {
-            component.mapComponentValue(mappingInfo);
-        }
-    }
-
-    public void injectProductFields(List<ProductView> selectedProducts) {
-
-        List<DocComponentView> componentViews = getAllComponentViewsFromDocs();
-
-        for (DocComponentView componentView : componentViews) {
-            componentView.injectProducts(selectedProducts);
-        }
-    }
-
-    public List<DocComponentView> getComponentsForViewing(boolean showAutoMappedFields) {
-
-        List<DocComponentView> results;
-
-        List<DocComponentView> allComponentViews = getAllComponentViewsFromDocs();
-
-        if (showAutoMappedFields) {
-            results = viewableComponentFilter.getComponents(allComponentViews);
-        } else {
-            results = viewableComponentFilter.getNonAutoMappedComponents(allComponentViews);
-        }
-
-        return results;
-    }
-
-    public void processCalculatedFields() {
-
-        List<DocComponentView> componentViews = getAllComponentViewsFromDocs();
-
-        for (DocComponentView componentView : componentViews) {
-            componentView.calculateValueIfNeeded(this);
-        }
-
-    }
-
-    public void runCalculation(ComponentCalculation calculation) {
-        calculation.runOnOperands(this);
-    }
-
-    public DocumentSet injectDocuments(List<DocumentInjectionInfo> injectionInfos) {
-
-        List<DocumentView> results = new ArrayList<>();
-
-        for (DocumentView document : documents) {
-            if (document.hasDocumentInjectionFields()) {
-                List<DocumentView> injectedDocuments = document.injectDocuments(injectionInfos);
-                results.addAll(injectedDocuments);
-            } else {
-                results.add(document);//just keep original originalDocument
-            }
-        }
-
-        DocumentSet injectedDocumentSet = documentSetFactory.createDocumentInfoSet();
-        injectedDocumentSet.setDocuments(results);
-
-        return injectedDocumentSet;
-    }
+    DocumentSet injectDocuments(List<DocumentInjectionInfo> injectionInfos);
 }

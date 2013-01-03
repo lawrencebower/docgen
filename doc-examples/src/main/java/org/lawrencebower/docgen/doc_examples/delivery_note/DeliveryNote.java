@@ -16,8 +16,8 @@ import org.lawrencebower.docgen.core.generator.custom.CustomDocument;
 import org.lawrencebower.docgen.core.generator.custom.CustomDocumentBuilder;
 import org.lawrencebower.docgen.web_logic.business.injection.product.ProductInjectionField;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewBuilder;
+import org.lawrencebower.docgen.web_logic.view.document.DocumentViewImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
@@ -310,8 +310,8 @@ public class DeliveryNote {
         documentViewBuilder.addViewableComponent(component);
     }
 
-    public DocumentView getDocumentView() {
-        DocumentView documentView = documentViewBuilder.getDocumentView();
+    public DocumentViewImpl getDocumentView() {
+        DocumentViewImpl documentView = documentViewBuilder.getDocumentView();
         CustomDocument document = documentBuilder.getDocument();
         documentView.setDocument(document);
         documentView.setCopyNumber(5);
