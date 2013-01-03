@@ -7,6 +7,8 @@
 
     <import resource="core-beans.xml"/>
 
+    <import resource="web-model-beans.xml"/>
+
     <import resource="web-logic-beans.xml"/>
 
     <import resource="web-logic-params.xml"/>

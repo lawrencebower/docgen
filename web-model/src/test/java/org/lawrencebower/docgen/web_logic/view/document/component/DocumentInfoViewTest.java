@@ -16,7 +16,7 @@ import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:META-INF/web-logic-test-context.xml")
+@ContextConfiguration(locations = "classpath:META-INF/web-model-test-context.xml")
 public class DocumentInfoViewTest {
 
     @Autowired

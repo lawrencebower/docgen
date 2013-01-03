@@ -15,7 +15,7 @@ import java.util.List;
 
 public abstract class DocComponentView<T extends DocComponent> {
 
-    @Autowired
+    @Autowired(required = false)
     private AutoMapped autoMapper;
 
     protected static final String NULL_COMPONENT_MESSAGE = "DocComponent is null";

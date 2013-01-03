@@ -9,14 +9,9 @@
 
     <import resource="web-model-beans.xml"/>
 
-    <import resource="web-logic-beans.xml"/>
+    <bean name="viewFactory"
+          class="org.lawrencebower.docgen.web_logic.view.view_factory.ViewFactoryTestImpl"/>
 
-    <import resource="web-logic-params.xml"/>
-
-    <import resource="doc-examples-beans.xml"/>
-
-    <import resource="doc-examples-params.xml"/>
-
-    <context:component-scan base-package="org.lawrencebower.docgen"/>
+    <context:component-scan base-package="org.lawrencebower.docgen.web_logic"/>
 
 </beans>

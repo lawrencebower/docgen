@@ -8,9 +8,11 @@
 
     <import resource="core-beans.xml"/>
 
-    <import resource="doc-examples-beans.xml"/>
+    <import resource="web-model-beans.xml"/>
 
     <import resource="web-logic-beans.xml"/>
+
+    <import resource="doc-examples-beans.xml"/>
 
     <import resource="web-application-test-params.xml"/>
 
