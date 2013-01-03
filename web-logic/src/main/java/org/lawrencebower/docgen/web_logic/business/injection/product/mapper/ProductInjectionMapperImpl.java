@@ -3,7 +3,7 @@ package org.lawrencebower.docgen.web_logic.business.injection.product.mapper;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.business.injection.product.ProductInjectionField;
 import org.lawrencebower.docgen.web_logic.business.injection.product.ProductInjectionMapper;
-import org.lawrencebower.docgen.web_logic.view.product.ProductView;
+import org.lawrencebower.docgen.web_model.view.product.ProductView;
 
 import java.util.ArrayList;
 import java.util.List;

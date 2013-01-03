@@ -6,9 +6,9 @@ import org.lawrencebower.docgen.doc_examples.delivery_note.DeliveryNote;
 import org.lawrencebower.docgen.doc_examples.fcc_740.FCC_740;
 import org.lawrencebower.docgen.doc_examples.fda_2887.FDA_2887;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentViewImpl;
-import org.lawrencebower.docgen.web_logic.view.view_factory.factory.DocumentFactory;
+import org.lawrencebower.docgen.web_model.view.document.DocumentView;
+import org.lawrencebower.docgen.web_model.view.document.DocumentViewImpl;
+import org.lawrencebower.docgen.web_model.view.view_factory.factory.DocumentFactory;
 
 import java.util.Arrays;
 import java.util.List;

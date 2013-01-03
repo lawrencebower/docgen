@@ -4,7 +4,7 @@ Select customer
 
 <jsp:useBean id="customers"
              scope="request"
-             type="java.util.List<org.lawrencebower.docgen.web_logic.view.contact.ContactView>"/>
+             type="java.util.List<org.lawrencebower.docgen.web_model.view.contact.ContactView>"/>
 
 <div>
     <ol>

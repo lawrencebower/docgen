@@ -1,9 +1,9 @@
 package org.lawrencebower.docgen.doc_examples.factory;
 
-import org.lawrencebower.docgen.web_logic.view.contact.Contact;
-import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
-import org.lawrencebower.docgen.web_logic.view.contact.ContactViewFactory;
-import org.lawrencebower.docgen.web_logic.view.view_factory.factory.CustomerFactory;
+import org.lawrencebower.docgen.web_model.view.contact.Contact;
+import org.lawrencebower.docgen.web_model.view.contact.ContactView;
+import org.lawrencebower.docgen.web_model.view.contact.ContactViewFactory;
+import org.lawrencebower.docgen.web_model.view.view_factory.factory.CustomerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.LinkedHashMap;

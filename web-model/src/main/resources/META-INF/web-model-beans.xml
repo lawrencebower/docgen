@@ -3,47 +3,47 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd">
 
     <bean name="documentSet"
-          class="org.lawrencebower.docgen.web_logic.view.document.DocumentSetImpl"
+          class="org.lawrencebower.docgen.web_model.view.document.DocumentSetImpl"
           scope="prototype"/>
 
     <bean name="documentSetFactory"
-          class="org.lawrencebower.docgen.web_logic.view.document.DocumentSetFactory">
+          class="org.lawrencebower.docgen.web_model.view.document.DocumentSetFactory">
         <lookup-method name="createDocumentInfoSet" bean="documentSet"/>
     </bean>
 
     <bean name="contactView"
-          class="org.lawrencebower.docgen.web_logic.view.contact.ContactView"
+          class="org.lawrencebower.docgen.web_model.view.contact.ContactView"
           scope="prototype"/>
 
     <bean name="contactViewFactory"
-          class="org.lawrencebower.docgen.web_logic.view.contact.ContactViewFactory">
+          class="org.lawrencebower.docgen.web_model.view.contact.ContactViewFactory">
         <lookup-method name="createContactView" bean="contactView"/>
     </bean>
 
     <bean name="productView"
-          class="org.lawrencebower.docgen.web_logic.view.product.ProductView"
+          class="org.lawrencebower.docgen.web_model.view.product.ProductView"
           scope="prototype"/>
 
     <bean name="productViewFactory"
-          class="org.lawrencebower.docgen.web_logic.view.product.ProductViewFactory">
+          class="org.lawrencebower.docgen.web_model.view.product.ProductViewFactory">
         <lookup-method name="createProductView" bean="productView"/>
     </bean>
 
     <bean name="documentView"
-          class="org.lawrencebower.docgen.web_logic.view.document.DocumentViewImpl"
+          class="org.lawrencebower.docgen.web_model.view.document.DocumentViewImpl"
           scope="prototype"/>
 
     <bean name="documentViewBuilder"
-          class="org.lawrencebower.docgen.web_logic.view.document.DocumentViewBuilder"
+          class="org.lawrencebower.docgen.web_model.view.document.DocumentViewBuilder"
           scope="prototype"/>
 
     <bean name="documentViewFactory"
-          class="org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory">
+          class="org.lawrencebower.docgen.web_model.view.document.DocumentViewFactory">
         <lookup-method name="createDocumentView" bean="documentView"/>
     </bean>
 
     <bean name="componentViewFactory"
-          class="org.lawrencebower.docgen.web_logic.view.document.component.DocComponentViewFactory">
+          class="org.lawrencebower.docgen.web_model.view.document.component.DocComponentViewFactory">
         <lookup-method name="getCheckBoxComponentView" bean="checkBoxComponentView"/>
         <lookup-method name="getTableComponentView" bean="tableComponentView"/>
         <lookup-method name="getTextAreaComponentView" bean="textAreaComponentView"/>
@@ -51,16 +51,16 @@
     </bean>
 
     <bean name="checkBoxComponentView"
-          class="org.lawrencebower.docgen.web_logic.view.document.component.CheckBoxComponentView"
+          class="org.lawrencebower.docgen.web_model.view.document.component.CheckBoxComponentView"
           scope="prototype"/>
     <bean name="tableComponentView"
-          class="org.lawrencebower.docgen.web_logic.view.document.component.TableComponentView"
+          class="org.lawrencebower.docgen.web_model.view.document.component.TableComponentView"
           scope="prototype"/>
     <bean name="textAreaComponentView"
-          class="org.lawrencebower.docgen.web_logic.view.document.component.TextAreaComponentView"
+          class="org.lawrencebower.docgen.web_model.view.document.component.TextAreaComponentView"
           scope="prototype"/>
     <bean name="textComponentView"
-          class="org.lawrencebower.docgen.web_logic.view.document.component.TextComponentView"
+          class="org.lawrencebower.docgen.web_model.view.document.component.TextComponentView"
           scope="prototype"/>
 
 </beans>

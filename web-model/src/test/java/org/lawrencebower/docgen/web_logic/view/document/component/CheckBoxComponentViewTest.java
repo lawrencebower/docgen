@@ -2,6 +2,7 @@ package org.lawrencebower.docgen.web_logic.view.document.component;
 
 import org.junit.Test;
 import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
+import org.lawrencebower.docgen.web_model.view.document.component.CheckBoxComponentView;
 import org.mockito.Mockito;
 
 import static junit.framework.Assert.assertEquals;

@@ -7,7 +7,7 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.doc_examples.factory.ProductFactoryTestImpl;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.product_selection.ProductSelectionCB;
-import org.lawrencebower.docgen.web_logic.view.product.ProductView;
+import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;

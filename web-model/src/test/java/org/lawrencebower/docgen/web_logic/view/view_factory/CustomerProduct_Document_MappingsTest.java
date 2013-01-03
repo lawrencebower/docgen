@@ -3,10 +3,11 @@ package org.lawrencebower.docgen.web_logic.view.view_factory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentViewImpl;
-import org.lawrencebower.docgen.web_logic.view.product.ProductView;
+import org.lawrencebower.docgen.web_model.view.contact.ContactView;
+import org.lawrencebower.docgen.web_model.view.document.DocumentView;
+import org.lawrencebower.docgen.web_model.view.document.DocumentViewImpl;
+import org.lawrencebower.docgen.web_model.view.product.ProductView;
+import org.lawrencebower.docgen.web_model.view.view_factory.CustomerProduct_Document_Mappings;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 

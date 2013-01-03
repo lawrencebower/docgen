@@ -10,10 +10,10 @@ import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayDocument;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayDocumentBuilder;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentInjectionField;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentViewBuilder;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentViewImpl;
-import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
+import org.lawrencebower.docgen.web_model.view.document.DocumentInjectionField;
+import org.lawrencebower.docgen.web_model.view.document.DocumentViewBuilder;
+import org.lawrencebower.docgen.web_model.view.document.DocumentViewImpl;
+import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 

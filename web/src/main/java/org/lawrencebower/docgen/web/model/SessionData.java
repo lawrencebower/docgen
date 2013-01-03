@@ -1,10 +1,10 @@
 package org.lawrencebower.docgen.web.model;
 
-import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
-import org.lawrencebower.docgen.web_logic.view.product.ProductSelection;
-import org.lawrencebower.docgen.web_logic.view.product.ProductView;
+import org.lawrencebower.docgen.web_model.view.contact.ContactView;
+import org.lawrencebower.docgen.web_model.view.document.DocumentSet;
+import org.lawrencebower.docgen.web_model.view.document.DocumentView;
+import org.lawrencebower.docgen.web_model.view.product.ProductSelection;
+import org.lawrencebower.docgen.web_model.view.product.ProductView;
 
 import java.util.List;
 

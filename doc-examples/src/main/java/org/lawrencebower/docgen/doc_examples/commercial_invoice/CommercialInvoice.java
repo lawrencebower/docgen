@@ -16,9 +16,9 @@ import org.lawrencebower.docgen.web_logic.business.component_calculation.Format;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.Operator;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.table.TableComponentCalculationImpl;
 import org.lawrencebower.docgen.web_logic.business.injection.product.ProductInjectionField;
-import org.lawrencebower.docgen.web_logic.business_def.component_calculation.ComponentCalculation;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentViewBuilder;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentViewImpl;
+import org.lawrencebower.docgen.web_model.business_def.component_calculation.ComponentCalculation;
+import org.lawrencebower.docgen.web_model.view.document.DocumentViewBuilder;
+import org.lawrencebower.docgen.web_model.view.document.DocumentViewImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;

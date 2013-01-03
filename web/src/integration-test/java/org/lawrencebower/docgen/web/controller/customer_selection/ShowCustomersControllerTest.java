@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.web_logic.business.controler_business.customer_selection.CustomerSelectionCB;
-import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
+import org.lawrencebower.docgen.web_model.view.contact.ContactView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;

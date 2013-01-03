@@ -1,9 +1,9 @@
 package org.lawrencebower.docgen.doc_examples.factory;
 
-import org.lawrencebower.docgen.web_logic.view.product.Product;
-import org.lawrencebower.docgen.web_logic.view.product.ProductView;
-import org.lawrencebower.docgen.web_logic.view.product.ProductViewFactory;
-import org.lawrencebower.docgen.web_logic.view.view_factory.factory.ProductFactory;
+import org.lawrencebower.docgen.web_model.view.product.Product;
+import org.lawrencebower.docgen.web_model.view.product.ProductView;
+import org.lawrencebower.docgen.web_model.view.product.ProductViewFactory;
+import org.lawrencebower.docgen.web_model.view.view_factory.factory.ProductFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.LinkedHashMap;

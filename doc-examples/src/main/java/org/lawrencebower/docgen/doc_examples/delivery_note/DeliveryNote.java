@@ -16,8 +16,8 @@ import org.lawrencebower.docgen.core.generator.custom.CustomDocument;
 import org.lawrencebower.docgen.core.generator.custom.CustomDocumentBuilder;
 import org.lawrencebower.docgen.web_logic.business.injection.product.ProductInjectionField;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentViewBuilder;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentViewImpl;
+import org.lawrencebower.docgen.web_model.view.document.DocumentViewBuilder;
+import org.lawrencebower.docgen.web_model.view.document.DocumentViewImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;

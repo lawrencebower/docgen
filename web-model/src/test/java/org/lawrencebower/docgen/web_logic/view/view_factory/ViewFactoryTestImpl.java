@@ -1,11 +1,12 @@
 package org.lawrencebower.docgen.web_logic.view.view_factory;
 
-import org.lawrencebower.docgen.web_logic.view.contact.Contact;
-import org.lawrencebower.docgen.web_logic.view.contact.ContactView;
-import org.lawrencebower.docgen.web_logic.view.contact.ContactViewFactory;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentViewImpl;
-import org.lawrencebower.docgen.web_logic.view.product.ProductView;
+import org.lawrencebower.docgen.web_model.view.contact.Contact;
+import org.lawrencebower.docgen.web_model.view.contact.ContactView;
+import org.lawrencebower.docgen.web_model.view.contact.ContactViewFactory;
+import org.lawrencebower.docgen.web_model.view.document.DocumentView;
+import org.lawrencebower.docgen.web_model.view.document.DocumentViewImpl;
+import org.lawrencebower.docgen.web_model.view.product.ProductView;
+import org.lawrencebower.docgen.web_model.view.view_factory.ViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;

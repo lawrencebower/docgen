@@ -2,7 +2,7 @@ package org.lawrencebower.docgen.doc_examples.fcc_740;
 
 import org.lawrencebower.docgen.core.document.Document;
 import org.lawrencebower.docgen.core.document.PDFDocument;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
+import org.lawrencebower.docgen.web_model.view.document.DocumentView;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.File;

@@ -1,7 +1,7 @@
 package org.lawrencebower.docgen.web_logic.business.utils;
 
-import org.lawrencebower.docgen.web_logic.business_def.utils.ViewableComponentFilter;
-import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
+import org.lawrencebower.docgen.web_model.business_def.utils.ViewableComponentFilter;
+import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;

@@ -26,7 +26,7 @@
           scope="prototype"/>
 
     <bean name="viewFactory"
-          class="org.lawrencebower.docgen.web_logic.view.view_factory.ViewFactoryImpl"
+          class="org.lawrencebower.docgen.web_model.view.view_factory.ViewFactoryImpl"
           init-method="init">
 
         <property name="customerFactory">

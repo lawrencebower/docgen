@@ -3,7 +3,7 @@
 
 <jsp:useBean id="table"
              scope="request"
-             type="org.lawrencebower.docgen.web_logic.view.document.component.TableComponentView"/>
+             type="org.lawrencebower.docgen.web_model.view.document.component.TableComponentView"/>
 
 <c:set var="fieldSeperator" value="~" scope="application"/>
 

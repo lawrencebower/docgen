@@ -4,8 +4,8 @@ import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
 import org.lawrencebower.docgen.core.document.component.table.TableRow;
-import org.lawrencebower.docgen.web_logic.business_def.injection.TableComponentProductInjector;
-import org.lawrencebower.docgen.web_logic.view.product.ProductView;
+import org.lawrencebower.docgen.web_model.business_def.injection.TableComponentProductInjector;
+import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

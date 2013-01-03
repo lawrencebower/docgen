@@ -2,11 +2,11 @@ package org.lawrencebower.docgen.web_logic.business.utils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lawrencebower.docgen.web_logic.business_def.utils.ViewUtils;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentViewFactory;
-import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
-import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentViewImpl;
+import org.lawrencebower.docgen.web_model.business_def.utils.ViewUtils;
+import org.lawrencebower.docgen.web_model.view.document.DocumentView;
+import org.lawrencebower.docgen.web_model.view.document.DocumentViewFactory;
+import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
+import org.lawrencebower.docgen.web_model.view.document.component.DocComponentViewImpl;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;

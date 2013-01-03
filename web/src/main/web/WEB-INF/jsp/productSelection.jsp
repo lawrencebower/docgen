@@ -2,7 +2,7 @@
 
 <jsp:useBean id="products"
              scope="request"
-             type="java.util.List<org.lawrencebower.docgen.web_logic.view.product.ProductView>"/>
+             type="java.util.List<org.lawrencebower.docgen.web_model.view.product.ProductView>"/>
 
 <jsp:useBean id="sessionData"
              scope="session"

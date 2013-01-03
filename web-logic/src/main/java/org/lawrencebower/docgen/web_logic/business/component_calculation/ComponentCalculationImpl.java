@@ -1,8 +1,8 @@
 package org.lawrencebower.docgen.web_logic.business.component_calculation;
 
-import org.lawrencebower.docgen.web_logic.business_def.component_calculation.ComponentCalculation;
-import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
-import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
+import org.lawrencebower.docgen.web_model.business_def.component_calculation.ComponentCalculation;
+import org.lawrencebower.docgen.web_model.view.document.DocumentSet;
+import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
 
 import java.util.Arrays;
 import java.util.Collections;
