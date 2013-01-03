@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_logic.view.document;
+package org.lawrencebower.docgen.web_logic.business.utils;
 
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 

@@ -1,4 +1,6 @@
-package org.lawrencebower.docgen.web_logic.view.document.component;
+package org.lawrencebower.docgen.web_logic.business.table_component;
+
+import org.lawrencebower.docgen.web_logic.view.document.component.TableComponentView;
 
 public interface TableComponentValueSetter {
     void setCellValueIfMatch(String paramString,

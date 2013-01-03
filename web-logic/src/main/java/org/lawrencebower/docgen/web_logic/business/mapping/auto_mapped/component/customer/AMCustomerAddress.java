@@ -1,8 +1,8 @@
 package org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.customer;
 
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
+import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfo;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AbstractAMComponent;
-import org.lawrencebower.docgen.web_logic.view.document.component.AMComponentInfo;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 
 public class AMCustomerAddress extends AbstractAMComponent {

@@ -1,6 +1,6 @@
 package org.lawrencebower.docgen.web_logic.view.contact;
 
-import org.lawrencebower.docgen.web_logic.view.document.ViewUtils;
+import org.lawrencebower.docgen.web_logic.business.utils.ViewUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ContactView {

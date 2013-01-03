@@ -4,8 +4,6 @@ import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
-import org.lawrencebower.docgen.web_logic.view.document.component.TableComponentCalculation;
-import org.lawrencebower.docgen.web_logic.view.document.component.TableComponentCalculator;
 import org.lawrencebower.docgen.web_logic.view.document.component.TableComponentView;
 
 import java.util.ArrayList;

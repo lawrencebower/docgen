@@ -11,6 +11,7 @@ import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
 import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.core.generator.custom.CustomDocument;
 import org.lawrencebower.docgen.core.generator.custom.CustomDocumentBuilder;
+import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculationImpl;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.Format;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.Operator;
@@ -18,7 +19,6 @@ import org.lawrencebower.docgen.web_logic.business.component_calculation.table.T
 import org.lawrencebower.docgen.web_logic.business.injection.product.ProductInjectionField;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentView;
 import org.lawrencebower.docgen.web_logic.view.document.DocumentViewBuilder;
-import org.lawrencebower.docgen.web_logic.view.document.component.ComponentCalculation;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;

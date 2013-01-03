@@ -3,7 +3,6 @@ package org.lawrencebower.docgen.web_logic.business.component_calculation.table;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculationImpl;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.Format;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.Operator;
-import org.lawrencebower.docgen.web_logic.view.document.component.TableComponentCalculation;
 
 public class TableComponentCalculationImpl extends ComponentCalculationImpl implements TableComponentCalculation {
 

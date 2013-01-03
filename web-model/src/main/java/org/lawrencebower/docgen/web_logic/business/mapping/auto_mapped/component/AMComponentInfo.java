@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_logic.view.document.component;
+package org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component;
 
 public interface AMComponentInfo {
 

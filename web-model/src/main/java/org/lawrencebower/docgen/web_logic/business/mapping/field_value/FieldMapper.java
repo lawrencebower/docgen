@@ -1,4 +1,6 @@
-package org.lawrencebower.docgen.web_logic.view.document.component;
+package org.lawrencebower.docgen.web_logic.business.mapping.field_value;
+
+import org.lawrencebower.docgen.web_logic.view.document.component.DocComponentView;
 
 import java.util.List;
 import java.util.Map;
