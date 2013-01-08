@@ -219,7 +219,7 @@ public class DataEntryCBTest {
                                                    mockBusiness);
         } catch (DocGenException e) {
             String message = e.getMessage();
-            assertEquals(ViewUtilsImpl.NO_DOCUMENTS_SELECTED, message);
+            assertEquals(DocumentSetImpl.NO_DOCUMENTS_SELECTED, message);
         }
 
     }

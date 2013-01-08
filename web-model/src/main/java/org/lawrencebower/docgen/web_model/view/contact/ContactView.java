@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class ContactView {
 
-    @Autowired
+    @Autowired(required = false)
     private ViewUtils viewUtils;
 
     private Contact contact;

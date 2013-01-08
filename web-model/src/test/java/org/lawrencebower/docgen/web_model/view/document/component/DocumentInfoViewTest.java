@@ -1,12 +1,10 @@
-package org.lawrencebower.docgen.web_logic.view.document.component;
+package org.lawrencebower.docgen.web_model.view.document.component;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.Document;
 import org.lawrencebower.docgen.web_model.view.document.DocumentView;
-import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
-import org.lawrencebower.docgen.web_model.view.document.component.DocComponentViewImpl;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;

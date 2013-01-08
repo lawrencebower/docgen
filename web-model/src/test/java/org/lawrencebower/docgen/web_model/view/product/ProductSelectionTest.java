@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_logic.view.product;
+package org.lawrencebower.docgen.web_model.view.product;
 
 import org.junit.Test;
 

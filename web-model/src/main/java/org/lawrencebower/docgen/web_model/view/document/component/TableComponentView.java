@@ -24,11 +24,11 @@ public class TableComponentView extends DocComponentViewImpl<TableComponent> {
 
     @Autowired
     DocComponentViewFactory viewFactory;
-    @Autowired
+    @Autowired(required = false)
     TableComponentValueSetter tableValueSetter;
-    @Autowired
+    @Autowired(required = false)
     protected TableComponentCalculator componentCalculator;
-    @Autowired
+    @Autowired(required = false)
     private TableComponentProductInjector productInjector;
 
     private List<TableComponentCalculation> componentCalculations = new ArrayList<>();

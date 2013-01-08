@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_logic.view.view_factory;
+package org.lawrencebower.docgen.web_model.view.view_factory;
 
 import org.lawrencebower.docgen.web_model.view.contact.Contact;
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
@@ -6,7 +6,6 @@ import org.lawrencebower.docgen.web_model.view.contact.ContactViewFactory;
 import org.lawrencebower.docgen.web_model.view.document.DocumentView;
 import org.lawrencebower.docgen.web_model.view.document.DocumentViewImpl;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
-import org.lawrencebower.docgen.web_model.view.view_factory.ViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -55,12 +54,12 @@ public class ViewFactoryTestImpl implements ViewFactory {
     @Override
     public ContactView getVendor() {
         Contact contact = new Contact("Billy Bob's Widgets",
-                                 "Billy Bob",
-                                 "36 Billy Bob Street\nColchester\nEssex",
-                                 "534546454",
-                                 "UK",
-                                 "tax id",
-                                 "sales@acme.com");
+                                      "Billy Bob",
+                                      "36 Billy Bob Street\nColchester\nEssex",
+                                      "534546454",
+                                      "UK",
+                                      "tax id",
+                                      "sales@acme.com");
 
         ContactView vendor = contactViewFactory.createContactView(contact);
 

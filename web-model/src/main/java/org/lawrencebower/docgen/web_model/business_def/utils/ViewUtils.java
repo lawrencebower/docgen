@@ -1,22 +1,17 @@
 package org.lawrencebower.docgen.web_model.business_def.utils;
 
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
-import org.lawrencebower.docgen.web_model.view.document.DocumentView;
-import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 
 import java.util.List;
 
 public interface ViewUtils {
-    List<DocComponentView> getAllComponentViewsFromDocs(List<DocumentView> documents);
 
-    void checkBusinessSet(ContactView selectedBusiness);
+    void checkBusinessSet(ContactView selectedBusiness);//todo make collection object
 
-    void checkProductsSet(List<ProductView> selectedProducts);
+    void checkProductsSet(List<ProductView> selectedProducts);//todo make collection object
 
-    void checkDocumentsSet(List<DocumentView> selectedDocuments);
-
-    void checkCustomerSet(ContactView selectedCustomer);
+    void checkCustomerSet(ContactView selectedCustomer);//todo make collection object
 
     String toHTMLString(String string);
 }

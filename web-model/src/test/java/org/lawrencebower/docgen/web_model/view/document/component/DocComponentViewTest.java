@@ -1,14 +1,10 @@
-package org.lawrencebower.docgen.web_logic.view.document.component;
+package org.lawrencebower.docgen.web_model.view.document.component;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
-import org.lawrencebower.docgen.web_model.view.document.component.DocComponentViewFactory;
-import org.lawrencebower.docgen.web_model.view.document.component.DocComponentViewImpl;
-import org.lawrencebower.docgen.web_model.view.document.component.TextComponentView;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;

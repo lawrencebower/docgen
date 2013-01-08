@@ -1,6 +1,7 @@
 package org.lawrencebower.docgen.web_model.view.document;
 
 import org.lawrencebower.docgen.core.document.PDFDocument;
+import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_model.business_def.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_model.business_def.mapping.auto_mapped.component.AMComponentInfo;
 import org.lawrencebower.docgen.web_model.business_def.mapping.field_value.FieldMapper;
@@ -25,6 +26,8 @@ public class DocumentSetImpl implements DocumentSet {
     DocumentViewFactory documentViewFactory;
     @Autowired
     DocumentSetFactory documentSetFactory;
+
+    public static final String NO_DOCUMENTS_SELECTED = "No documents selected?!";
 
     private List<DocumentView> documents = new ArrayList<>();
 
@@ -79,12 +82,22 @@ public class DocumentSetImpl implements DocumentSet {
 
     @Override
     public List<DocComponentView> getAllComponentViewsFromDocs() {
-        return viewUtils.getAllComponentViewsFromDocs(documents);
+
+        List<DocComponentView> results = new ArrayList<>();
+
+        for (DocumentView documentView : documents) {
+            List<DocComponentView> docComponentViews = documentView.getComponentViews();
+            results.addAll(docComponentViews);
+        }
+
+        return results;
     }
 
     @Override
     public void checkDocumentsSet() {
-        viewUtils.checkDocumentsSet(documents);
+        if ((documents == null) || documents.isEmpty()) {
+            throw new DocGenException(NO_DOCUMENTS_SELECTED);
+        }
     }
 
     @Override

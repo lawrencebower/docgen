@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface DocumentSet {
+
     void setDocuments(Collection<DocumentView> documents);
 
     void setDocuments(DocumentView... views);
