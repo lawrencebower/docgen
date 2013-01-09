@@ -13,6 +13,7 @@ import org.lawrencebower.docgen.web_model.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSetFactory;
 import org.lawrencebower.docgen.web_model.view.document.DocumentView;
 import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
+import org.lawrencebower.docgen.web_model.view.product.ProductSelection;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.lawrencebower.docgen.web_model.view.view_factory.ViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,12 +41,14 @@ public class DataEntryCB {
     String fileRoot;
 
     public DocumentSet getDocumentsForViewing(ContactView selectedCustomer,
-                                              List<ProductView> selectedProducts) {
+                                              ProductSelection productSelection) {
 
         viewUtils.checkCustomerSet(selectedCustomer);
-        viewUtils.checkProductsSet(selectedProducts);
+        productSelection.checkProductsSet();
 
-        return getRelevantDocuments(selectedCustomer, selectedProducts);
+        List<ProductView> products = productSelection.getProducts();
+
+        return getRelevantDocuments(selectedCustomer, products);
     }
 
     private DocumentSet getRelevantDocuments(ContactView selectedCustomer,

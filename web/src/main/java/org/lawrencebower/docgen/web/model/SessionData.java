@@ -18,7 +18,7 @@ public class SessionData {
 
     private DocumentSet documents;
 
-    private boolean showAutoMappedFields = false;
+    private boolean showAutoMappedFields;
 
     public void setSelectedCustomer(ContactView selectedCustomer) {
         this.selectedCustomer = selectedCustomer;
@@ -42,6 +42,10 @@ public class SessionData {
 
     public List<ProductView> getSelectedProducts() {
         return selectedProducts.getProducts();
+    }
+
+    public ProductSelection getProductSelection(){
+        return selectedProducts;
     }
 
     public void clearSelectedProducts() {

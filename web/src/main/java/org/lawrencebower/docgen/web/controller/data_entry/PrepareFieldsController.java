@@ -5,6 +5,7 @@ import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
+import org.lawrencebower.docgen.web_model.view.product.ProductSelection;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -43,10 +44,10 @@ public class PrepareFieldsController {
     private void setRelevantDocuments() {
 
         ContactView selectedCustomer = sessionData.getSelectedCustomer();
-        List<ProductView> selectedProducts = sessionData.getSelectedProducts();
+        ProductSelection productSelection = sessionData.getProductSelection();
 
         DocumentSet documentsForViewing =
-                business.getDocumentsForViewing(selectedCustomer, selectedProducts);
+                business.getDocumentsForViewing(selectedCustomer, productSelection);
 
         sessionData.setDocuments(documentsForViewing);
     }

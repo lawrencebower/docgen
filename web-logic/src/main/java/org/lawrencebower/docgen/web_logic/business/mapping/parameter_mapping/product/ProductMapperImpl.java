@@ -36,7 +36,6 @@ public class ProductMapperImpl implements ProductMapper {
         String componentValue = getParameterValue(componentName, parameterMap);
 
         for (ProductView product : allViewComponents) {
-            product.checkAndSetValueFromParamString(componentName, componentValue);
         }
     }
 

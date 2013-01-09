@@ -12,6 +12,7 @@ import org.lawrencebower.docgen.web_logic.business.utils.ViewUtilsImpl;
 import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
 import org.lawrencebower.docgen.web_model.view.document.*;
+import org.lawrencebower.docgen.web_model.view.product.ProductSelection;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.lawrencebower.docgen.web_model.view.view_factory.ViewFactory;
 import org.mockito.ArgumentCaptor;
@@ -54,6 +55,8 @@ public class DataEntryCBTest {
     ContactView mockBusiness;
     @Mock
     ArgumentCaptor<ArrayList<ProductView>> mockProducts;
+    @Mock
+    ProductSelection productSelection;
 
     @Before
     public void setup() {
@@ -64,7 +67,7 @@ public class DataEntryCBTest {
     public void testGetDocumentsForViewing_noCustomer_throwsError() throws Exception {
         try {
             ContactView selectedCustomer = null;
-            dataEntryBusiness.getDocumentsForViewing(selectedCustomer, mockProducts.capture());
+            dataEntryBusiness.getDocumentsForViewing(selectedCustomer, productSelection);
         } catch (DocGenException e) {
             String message = e.getMessage();
             assertEquals(ViewUtilsImpl.NO_CUSTOMER_SELECTED, message);
@@ -72,25 +75,9 @@ public class DataEntryCBTest {
     }
 
     @Test
-    public void testGetDocumentsForViewing_nullProducts_throwsError() throws Exception {
-        try {
-            List<ProductView> selectedProducts = null;
-            dataEntryBusiness.getDocumentsForViewing(mockCustomer, selectedProducts);
-        } catch (DocGenException e) {
-            String message = e.getMessage();
-            assertEquals(ViewUtilsImpl.NO_PRODUCTS_SELECTED, message);
-        }
-    }
-
-    @Test
-    public void testGetDocumentsForViewing_emptyProducts_throwsError() throws Exception {
-        try {
-            List<ProductView> selectedProducts = new ArrayList<>();
-            dataEntryBusiness.getDocumentsForViewing(mockCustomer, selectedProducts);
-        } catch (DocGenException e) {
-            String message = e.getMessage();
-            assertEquals(ViewUtilsImpl.NO_PRODUCTS_SELECTED, message);
-        }
+    public void testGetDocumentsForViewing_productCheckCalled() throws Exception {
+        dataEntryBusiness.getDocumentsForViewing(mockCustomer, productSelection);
+        verify(productSelection, times(1)).checkProductsSet();
     }
 
     @Test
@@ -102,6 +89,8 @@ public class DataEntryCBTest {
                                                    mock(ProductView.class),
                                                    mock(ProductView.class));
 
+        when(productSelection.getProducts()).thenReturn(products);
+
         DocumentView docView1 = mockDocumentView("doc1");
         DocumentView docView2 = mockDocumentView("doc2");
         DocumentView docView3 = mockDocumentView("doc3");
@@ -110,12 +99,12 @@ public class DataEntryCBTest {
         List<DocumentView> list2 = Arrays.asList(docView2, docView3);
 
         given(mockFactory.getDocumentsForCustomerAndProduct(any(ContactView.class),
-                                                           any(ProductView.class))).willReturn(list1, list1, list2);
+                                                            any(ProductView.class))).willReturn(list1, list1, list2);
 
         dataEntryBusiness.setViewFactory(mockFactory);
 
         DocumentSet docSet =
-                dataEntryBusiness.getDocumentsForViewing(mockCustomer, products);
+                dataEntryBusiness.getDocumentsForViewing(mockCustomer, productSelection);
 
         List<DocumentView> forViewing = docSet.getDocumentsAsList();
 
