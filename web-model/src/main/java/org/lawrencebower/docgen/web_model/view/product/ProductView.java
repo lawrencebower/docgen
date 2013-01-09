@@ -4,6 +4,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
 
 public class ProductView {
 
@@ -99,6 +100,18 @@ public class ProductView {
     private boolean hasHarmonizedTariffNumber() {
         String number = getHarmonizedTariffNumber();
         return StringUtils.isNotBlank(number);
+    }
+
+    public String getFieldSeparator() {
+        return ViewConstants.DOCUMENT_FIELD_SEPARATOR;
+    }
+
+    public String getQuantityToken() {
+        return ViewConstants.PRODUCT_QUANTITY_TOKEN;
+    }
+
+    public String getCostToken() {
+        return ViewConstants.PRODUCT_COST_TOKEN;
     }
 
     @Override

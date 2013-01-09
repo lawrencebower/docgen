@@ -72,6 +72,6 @@ Enter data
             </tr>
         </c:forEach>
     </table>
-    <input name="full" type="submit" value="Generate PDFs" onmousedown="setBlankTarget()"/>
+    <input type="submit" value="Generate PDFs" onmousedown="setBlankTarget()"/>
     <%--<input name="partial" type="submit" value="partial" onmousedown="setSelfTarget()"/>--%>
 </form>

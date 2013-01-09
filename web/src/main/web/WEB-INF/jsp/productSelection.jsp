@@ -49,12 +49,18 @@ Select products
                             <c:out value="${selectedProduct.id}"/>
                         </td>
                         <td align="center">
+                            <c:set var="fieldName"
+                                   value="${selectedProduct.id}${selectedProduct.fieldSeparator}${selectedProduct.quantityToken}"/>
                             <input value="${selectedProduct.quantity}"
-                                   id="${selectedProduct.id}"/>
+                                   id="${fieldName}"
+                                   name="${fieldName}"/>
                         </td>
                         <td align="center">
+                            <c:set var="fieldName"
+                                   value="${selectedProduct.id}${selectedProduct.fieldSeparator}${selectedProduct.costToken}"/>
                             <input value="${selectedProduct.productValue}"
-                                   id="${selectedProduct.id}"/>
+                                   id="${fieldName}"
+                                   name="${fieldName}"/>
                         </td>
                     </tr>
                 </c:forEach>

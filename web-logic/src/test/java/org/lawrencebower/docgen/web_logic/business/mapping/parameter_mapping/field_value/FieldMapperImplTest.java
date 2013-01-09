@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_logic.business.mapping.field_value;
+package org.lawrencebower.docgen.web_logic.business.mapping.parameter_mapping.field_value;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -6,7 +6,6 @@ import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
-import org.lawrencebower.docgen.web_model.business_def.mapping.field_value.FieldMapper;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSetFactory;
 import org.lawrencebower.docgen.web_model.view.document.DocumentView;
@@ -26,10 +25,10 @@ import static org.mockito.Mockito.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:META-INF/web-logic-test-context.xml")
-public class FieldMapperTest {
+public class FieldMapperImplTest {
 
     @Autowired
-    FieldMapper fieldMapper;
+    org.lawrencebower.docgen.web_model.business_def.mapping.parameter_mapping.field_value.FieldMapper fieldMapper;
     @Autowired
     CustomComponentFactory customComponentFactory;
     @Autowired

@@ -4,7 +4,7 @@ import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_model.business_def.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_model.business_def.mapping.auto_mapped.component.AMComponentInfo;
-import org.lawrencebower.docgen.web_model.business_def.mapping.field_value.FieldMapper;
+import org.lawrencebower.docgen.web_model.business_def.mapping.parameter_mapping.field_value.FieldMapper;
 import org.lawrencebower.docgen.web_model.business_def.utils.ViewUtils;
 import org.lawrencebower.docgen.web_model.business_def.utils.ViewableComponentFilter;
 import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
