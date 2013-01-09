@@ -100,7 +100,7 @@ public class SetFieldsControllerTest {
 
     private void prepareDocumentSetOnSession() {
 
-        PrepareFields prepareFields = new PrepareFields();
+        PrepareFieldsController prepareFields = new PrepareFieldsController();
 
         prepareFields.setSessionData(sessionData);
 

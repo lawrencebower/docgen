@@ -14,7 +14,7 @@ import java.util.List;
 
 @Component
 @Scope("session")
-public class PrepareFields {
+public class PrepareFieldsController {
 
     private DataEntryCB business;
     private SessionData sessionData;
