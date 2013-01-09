@@ -5,6 +5,7 @@ import org.lawrencebower.docgen.web_model.view.view_factory.ViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Map;
 
 public class ProductSelectionCB {
 
@@ -18,4 +19,9 @@ public class ProductSelectionCB {
     public ProductView getProduct(String productId) {
         return viewFactory.getProduct(productId);
     }
+
+    public void mapFieldValuesToProducts(Map<String, String[]> parameterMap,
+                                         List<ProductView> products) {
+    }
+
 }

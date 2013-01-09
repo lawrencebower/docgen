@@ -80,7 +80,8 @@ public class PrepareFieldsControllerTest {
                      1,
                      components.size());
 
-        ContactView selectedBusiness = viewFactory.getBusinessByCustomerName(CustomerFactoryTestImpl.CUSTOMER_ID_1);
+        ContactView selectedBusiness = viewFactory.getCustomer(CustomerFactoryTestImpl.CUSTOMER_ID_1);
+
         TextComponentView docComponentView = (TextComponentView) components.get(0);
         assertEquals("auto mapped field value not correctly mapped",
                      selectedBusiness.getName(),

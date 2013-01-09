@@ -8,56 +8,69 @@
              scope="session"
              type="org.lawrencebower.docgen.web.model.SessionData"/>
 
-<s:url var="customer_url" value="/customerSelect/"/>
+<s:url var="customer_url" value="/customerSelect"/>
 <a href="${customer_url}">Select customer</a>
 &nbsp;->&nbsp;
 Select products
 
 <div>
     <br/>
-    <c:forEach var="customer" items="${products}">
+
+    <c:forEach var="product" items="${products}">
 
         <s:url var="product_url" value="/productSelect/productId/{productId}">
-            <s:param name="productId" value="${customer.id}"/>
+            <s:param name="productId" value="${product.id}"/>
         </s:url>
 
         <a href="${product_url}">
-            <c:out value="${customer.productName}"/>&nbsp;-&nbsp;<c:out value="${customer.id}"/>
+            <c:out value="${product.productName}"/>&nbsp;-&nbsp;<c:out value="${product.id}"/>
         </a>
         <br/>
     </c:forEach>
     <br/>
-    <c:if test="${sessionData.hasProducts}">
-        <table border="1">
-            <tr>
-                <td>Product Name</td>
-                <td>Quantity</td>
-            </tr>
-            <c:forEach var="selectedProduct" items="${sessionData.selectedProducts}">
-                <tr>
-                    <td>
-                        <c:out value="${selectedProduct.productName}"/>
-                        &nbsp;-&nbsp;
-                        <c:out value="${selectedProduct.id}"/>
-                    </td>
-                    <td align="center">
-                        <c:out value="${selectedProduct.quantity}"/>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-        <s:url var="clear_products_url" value="/productSelect/clearProducts"/>
-        <a href="${clear_products_url}">
-            <c:out value="Clear products"/>
-        </a>
-        <br/>
-        <br/>
-        <br/>
 
-        <s:url var="data_entry_url" value="/dataEntry/prepareFields"/>
-        <a href="${data_entry_url}">
-            <c:out value="Enter data"/>
-        </a>
+    <c:if test="${sessionData.hasProducts}">
+
+        <form method="post"
+              name="form"
+              action="/docgen/productSelect/productDetails/">
+
+            <table border="1">
+                <tr>
+                    <td>Product Name</td>
+                    <td>Quantity</td>
+                    <td>Cost</td>
+                </tr>
+                <c:forEach var="selectedProduct" items="${sessionData.selectedProducts}">
+                    <tr>
+                        <td>
+                            <c:out value="${selectedProduct.productName}"/>
+                            &nbsp;-&nbsp;
+                            <c:out value="${selectedProduct.id}"/>
+                        </td>
+                        <td align="center">
+                            <input value="${selectedProduct.quantity}"
+                                   id="${selectedProduct.id}"/>
+                        </td>
+                        <td align="center">
+                            <input value="${selectedProduct.productValue}"
+                                   id="${selectedProduct.id}"/>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+            <s:url var="clear_products_url" value="/productSelect/clearProducts"/>
+            <a href="${clear_products_url}">
+                <c:out value="Clear products"/>
+            </a>
+            <br/>
+            <br/>
+            <br/>
+
+            <input value="enter data" type="submit"/>
+
+
+        </form>
 
     </c:if>
 

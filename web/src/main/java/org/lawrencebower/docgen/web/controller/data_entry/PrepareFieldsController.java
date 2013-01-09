@@ -1,6 +1,5 @@
 package org.lawrencebower.docgen.web.controller.data_entry;
 
-import org.apache.log4j.Logger;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB;
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
@@ -9,17 +8,13 @@ import org.lawrencebower.docgen.web_model.view.document.component.DocComponentVi
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Controller
+@Component
 @Scope("session")
 public class PrepareFieldsController {
-
-    static Logger logger = Logger.getLogger(PrepareFieldsController.class);
 
     private DataEntryCB business;
     private SessionData sessionData;
@@ -34,7 +29,6 @@ public class PrepareFieldsController {
         this.sessionData = sessionData;
     }
 
-    @RequestMapping(value = "/dataEntry/prepareFields", method = RequestMethod.GET)
     public String prepareFields() {
 
         setRelevantDocuments();

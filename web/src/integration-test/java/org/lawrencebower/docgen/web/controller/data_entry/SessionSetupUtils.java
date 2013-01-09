@@ -13,7 +13,7 @@ public class SessionSetupUtils {
     @Autowired
     private ViewFactory viewFactory;
 
-    protected void setupSessionData(SessionData sessionData) {
+    public void setupSessionData(SessionData sessionData) {
         setBusinessOnSession(sessionData);
         setCustomerOnSession(sessionData);
         setProductsOnSession(sessionData);
