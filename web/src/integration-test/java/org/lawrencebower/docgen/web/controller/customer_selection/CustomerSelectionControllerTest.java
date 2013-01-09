@@ -46,7 +46,6 @@ public class CustomerSelectionControllerTest {
 
         ContactView customer = sessionData.getSelectedCustomer();
         assertEquals(CustomerFactoryTestImpl.CUSTOMER_ID_1, customer.getName());
-
     }
 
     @Test

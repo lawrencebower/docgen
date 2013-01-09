@@ -2,7 +2,8 @@ package org.lawrencebower.docgen.web.controller.data_entry;
 
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB;
-import org.lawrencebower.docgen.web_model.view.contact.ContactView;
+import org.lawrencebower.docgen.web_model.view.contact.BusinessSelection;
+import org.lawrencebower.docgen.web_model.view.contact.CustomerSelection;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.product.ProductSelection;
@@ -43,24 +44,24 @@ public class PrepareFieldsController {
 
     private void setRelevantDocuments() {
 
-        ContactView selectedCustomer = sessionData.getSelectedCustomer();
+        CustomerSelection customerSelection = sessionData.getCustomerSelection();
         ProductSelection productSelection = sessionData.getProductSelection();
 
         DocumentSet documentsForViewing =
-                business.getDocumentsForViewing(selectedCustomer, productSelection);
+                business.getDocumentsForViewing(customerSelection, productSelection);
 
         sessionData.setDocuments(documentsForViewing);
     }
 
     private void mapAutoMappedFields() {
 
-        ContactView selectedBusiness = sessionData.getSelectedBusiness();
-        ContactView selectedCustomer = sessionData.getSelectedCustomer();
         DocumentSet documentSet = sessionData.getDocuments();
+        CustomerSelection customerSelection = sessionData.getCustomerSelection();
+        BusinessSelection businessSelection = sessionData.getBusinessSelection();
 
         business.mapAutoMapComponents(documentSet,
-                                      selectedCustomer,
-                                      selectedBusiness);
+                                      customerSelection,
+                                      businessSelection);
     }
 
     private void injectProductFields() {

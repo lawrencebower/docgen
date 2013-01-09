@@ -1,6 +1,8 @@
 package org.lawrencebower.docgen.web.model;
 
+import org.lawrencebower.docgen.web_model.view.contact.BusinessSelection;
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
+import org.lawrencebower.docgen.web_model.view.contact.CustomerSelection;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_model.view.document.DocumentView;
 import org.lawrencebower.docgen.web_model.view.product.ProductSelection;
@@ -10,9 +12,9 @@ import java.util.List;
 
 public class SessionData {
 
-    private ContactView selectedCustomer;
+    private CustomerSelection customerSelection = new CustomerSelection();
 
-    private ContactView selectedBusiness;
+    private BusinessSelection businessSelection = new BusinessSelection();
 
     private ProductSelection selectedProducts = new ProductSelection();
 
@@ -20,20 +22,28 @@ public class SessionData {
 
     private boolean showAutoMappedFields;
 
-    public void setSelectedCustomer(ContactView selectedCustomer) {
-        this.selectedCustomer = selectedCustomer;
+    public void setCustomerSelection(ContactView customerSelection) {
+        this.customerSelection.selectCustomer(customerSelection);
     }
 
     public ContactView getSelectedCustomer() {
-        return selectedCustomer;
+        return customerSelection.getSelectedCustomer();
+    }
+
+    public CustomerSelection getCustomerSelection() {
+        return customerSelection;
     }
 
     public ContactView getSelectedBusiness() {
-        return selectedBusiness;
+        return businessSelection.getSelectedBusiness();
+    }
+
+    public BusinessSelection getBusinessSelection() {
+        return businessSelection;
     }
 
     public void setSelectedBusiness(ContactView selectedBusiness) {
-        this.selectedBusiness = selectedBusiness;
+        businessSelection.selectBusiness(selectedBusiness);
     }
 
     public void setDocuments(DocumentSet documents) {

@@ -41,7 +41,7 @@ public class CustomerSelectionController {
         logger.error("customerName = [" + customerName + "]");
 
         ContactView selectedCustomer = business.getCustomer(customerName);
-        sessionData.setSelectedCustomer(selectedCustomer);
+        sessionData.setCustomerSelection(selectedCustomer);
 
         ContactView selectedBusiness = business.getBusinessByCustomerName(customerName);
         sessionData.setSelectedBusiness(selectedBusiness);

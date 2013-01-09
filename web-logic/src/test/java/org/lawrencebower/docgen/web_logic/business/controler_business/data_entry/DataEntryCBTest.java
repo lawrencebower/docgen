@@ -8,9 +8,10 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.PDFDocumentImpl;
 import org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils;
 import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
-import org.lawrencebower.docgen.web_logic.business.utils.ViewUtilsImpl;
 import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
+import org.lawrencebower.docgen.web_model.view.contact.BusinessSelection;
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
+import org.lawrencebower.docgen.web_model.view.contact.CustomerSelection;
 import org.lawrencebower.docgen.web_model.view.document.*;
 import org.lawrencebower.docgen.web_model.view.product.ProductSelection;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
@@ -50,9 +51,9 @@ public class DataEntryCBTest {
     String fileRoot;
 
     @Mock
-    ContactView mockCustomer;
+    CustomerSelection mockCustomerSelection;
     @Mock
-    ContactView mockBusiness;
+    BusinessSelection mockBusinessSelection;
     @Mock
     ArgumentCaptor<ArrayList<ProductView>> mockProducts;
     @Mock
@@ -61,23 +62,6 @@ public class DataEntryCBTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-    }
-
-    @Test
-    public void testGetDocumentsForViewing_noCustomer_throwsError() throws Exception {
-        try {
-            ContactView selectedCustomer = null;
-            dataEntryBusiness.getDocumentsForViewing(selectedCustomer, productSelection);
-        } catch (DocGenException e) {
-            String message = e.getMessage();
-            assertEquals(ViewUtilsImpl.NO_CUSTOMER_SELECTED, message);
-        }
-    }
-
-    @Test
-    public void testGetDocumentsForViewing_productCheckCalled() throws Exception {
-        dataEntryBusiness.getDocumentsForViewing(mockCustomer, productSelection);
-        verify(productSelection, times(1)).checkProductsSet();
     }
 
     @Test
@@ -104,7 +88,7 @@ public class DataEntryCBTest {
         dataEntryBusiness.setViewFactory(mockFactory);
 
         DocumentSet docSet =
-                dataEntryBusiness.getDocumentsForViewing(mockCustomer, productSelection);
+                dataEntryBusiness.getDocumentsForViewing(mockCustomerSelection, productSelection);
 
         List<DocumentView> forViewing = docSet.getDocumentsAsList();
 
@@ -204,8 +188,8 @@ public class DataEntryCBTest {
         try {
             DocumentSet documentSet = documentSetFactory.createDocumentInfoSet();
             dataEntryBusiness.mapAutoMapComponents(documentSet,
-                                                   mockCustomer,
-                                                   mockBusiness);
+                                                   mockCustomerSelection,
+                                                   mockBusinessSelection);
         } catch (DocGenException e) {
             String message = e.getMessage();
             assertEquals(DocumentSetImpl.NO_DOCUMENTS_SELECTED, message);
@@ -214,27 +198,33 @@ public class DataEntryCBTest {
     }
 
     @Test
-    public void testMapAutoMapFields_nullCustomer_errorThrown() throws Exception {
-        try {
-            dataEntryBusiness.mapAutoMapComponents(mock(DocumentSetImpl.class),
-                                                   null,
-                                                   mockBusiness);
-        } catch (DocGenException e) {
-            String message = e.getMessage();
-            assertEquals(ViewUtilsImpl.NO_CUSTOMER_SELECTED, message);
-        }
+    public void testGetDocumentsForViewing_customerCheckCalled() throws Exception {
+        dataEntryBusiness.getDocumentsForViewing(mockCustomerSelection, productSelection);
+        verify(productSelection, times(1)).checkProductsSet();
     }
 
     @Test
-    public void testMapAutoMapFields_nullBusiness_errorThrown() throws Exception {
-        try {
-            dataEntryBusiness.mapAutoMapComponents(mock(DocumentSetImpl.class),
-                                                   mockCustomer,
-                                                   null);
-        } catch (DocGenException e) {
-            String message = e.getMessage();
-            assertEquals(ViewUtilsImpl.NO_BUSINESS_SELECTED, message);
-        }
+    public void testGetDocumentsForViewing_productCheckCalled() throws Exception {
+        dataEntryBusiness.getDocumentsForViewing(mockCustomerSelection, productSelection);
+        verify(productSelection, times(1)).checkProductsSet();
+    }
+
+    @Test
+    public void testMapAutoMapFields_customerSelectionCheckCalled() throws Exception {
+        dataEntryBusiness.mapAutoMapComponents(mock(DocumentSetImpl.class),
+                                               mockCustomerSelection,
+                                               mockBusinessSelection);
+
+        verify(mockCustomerSelection, times(1)).checkCustomerSet();
+    }
+
+    @Test
+    public void testMapAutoMapFields_businessSelectionCheckCalled() throws Exception {
+        dataEntryBusiness.mapAutoMapComponents(mock(DocumentSetImpl.class),
+                                               mockCustomerSelection,
+                                               mockBusinessSelection);
+
+        verify(mockBusinessSelection, times(1)).checkBusinessSet();
     }
 
     //MOCKING

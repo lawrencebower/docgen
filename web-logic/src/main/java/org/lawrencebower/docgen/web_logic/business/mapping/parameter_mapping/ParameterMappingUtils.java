@@ -12,6 +12,7 @@ public class ParameterMappingUtils {
 
     static {
         EXCLUDED_TOKENS = new HashSet<>();
+        EXCLUDED_TOKENS.add("full");
     }
 
     public String getParameterValue(String key, Map<String, String[]> parameterMap) {

@@ -7,7 +7,9 @@ import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfoImpl;
 import org.lawrencebower.docgen.web_model.business_def.utils.ViewUtils;
 import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
+import org.lawrencebower.docgen.web_model.view.contact.BusinessSelection;
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
+import org.lawrencebower.docgen.web_model.view.contact.CustomerSelection;
 import org.lawrencebower.docgen.web_model.view.document.DocumentInjectionInfo;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSetFactory;
@@ -40,12 +42,13 @@ public class DataEntryCB {
     @Qualifier("pdfOutputRoot")
     String fileRoot;
 
-    public DocumentSet getDocumentsForViewing(ContactView selectedCustomer,
+    public DocumentSet getDocumentsForViewing(CustomerSelection customerSelection,
                                               ProductSelection productSelection) {
 
-        viewUtils.checkCustomerSet(selectedCustomer);
+        customerSelection.checkCustomerSet();
         productSelection.checkProductsSet();
 
+        ContactView selectedCustomer = customerSelection.getSelectedCustomer();
         List<ProductView> products = productSelection.getProducts();
 
         return getRelevantDocuments(selectedCustomer, products);
@@ -112,27 +115,30 @@ public class DataEntryCB {
     }
 
     public void mapAutoMapComponents(DocumentSet documentSet,
-                                     ContactView selectedCustomer,
-                                     ContactView selectedBusiness) {
+                                     CustomerSelection customerSelection,
+                                     BusinessSelection businessSelection) {
 
-        AMComponentInfoImpl mappingInfo = createMappingInfo(selectedCustomer,
-                                                        selectedBusiness);
+        AMComponentInfoImpl mappingInfo = createMappingInfo(customerSelection,
+                                                            businessSelection);
 
         documentSet.mapAutomappedComponents(mappingInfo);
 
     }
 
-    private AMComponentInfoImpl createMappingInfo(ContactView selectedCustomer,
-                                              ContactView selectedBusiness) {
+    private AMComponentInfoImpl createMappingInfo(CustomerSelection customerSelection,
+                                                  BusinessSelection businessSelection) {
 
-        viewUtils.checkCustomerSet(selectedCustomer);
-        viewUtils.checkBusinessSet(selectedBusiness);
+        customerSelection.checkCustomerSet();
+        businessSelection.checkBusinessSet();
 
         ContactView vendor = viewFactory.getVendor();
 
+        ContactView selectedCustomer = customerSelection.getSelectedCustomer();
+        ContactView selectedBusiness = businessSelection.getSelectedBusiness();
+
         return new AMComponentInfoImpl(selectedCustomer,
-                                   vendor,
-                                   selectedBusiness);
+                                       vendor,
+                                       selectedBusiness);
     }
 
     public List<DocComponentView> getComponentsForViewing(DocumentSet documentSet,
