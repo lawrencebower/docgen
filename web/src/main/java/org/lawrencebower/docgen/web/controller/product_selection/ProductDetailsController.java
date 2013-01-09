@@ -1,7 +1,7 @@
 package org.lawrencebower.docgen.web.controller.product_selection;
 
 import org.apache.log4j.Logger;
-import org.lawrencebower.docgen.web.controller.data_entry.PrepareFieldsController;
+import org.lawrencebower.docgen.web.controller.data_entry.PrepareFields;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.product_selection.ProductSelectionCB;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
@@ -23,7 +23,7 @@ public class ProductDetailsController {
 
     private ProductSelectionCB business;
     private SessionData sessionData;
-    private PrepareFieldsController prepareFieldsController;
+    private PrepareFields prepareFields;
 
     @Autowired
     public void setBusiness(ProductSelectionCB business) {
@@ -36,8 +36,8 @@ public class ProductDetailsController {
     }
 
     @Autowired
-    public void setPrepareFieldsController(PrepareFieldsController prepareFieldsController) {
-        this.prepareFieldsController = prepareFieldsController;
+    public void setPrepareFields(PrepareFields prepareFields) {
+        this.prepareFields = prepareFields;
     }
 
     @RequestMapping(value = "/productSelect/productDetails/", method = RequestMethod.POST)
@@ -49,7 +49,7 @@ public class ProductDetailsController {
 
         business.mapFieldValuesToProducts(parameterMap, products);
 
-        prepareFieldsController.prepareFields();
+        prepareFields.prepareFields();
 
         return "dataEntry";
     }

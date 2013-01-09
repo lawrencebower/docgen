@@ -14,7 +14,7 @@ import java.util.List;
 
 @Component
 @Scope("session")
-public class PrepareFieldsController {
+public class PrepareFields {
 
     private DataEntryCB business;
     private SessionData sessionData;
@@ -29,7 +29,7 @@ public class PrepareFieldsController {
         this.sessionData = sessionData;
     }
 
-    public String prepareFields() {
+    public void prepareFields() {
 
         setRelevantDocuments();
 
@@ -38,8 +38,6 @@ public class PrepareFieldsController {
         injectProductFields();
 
         processCalculatedFields();
-
-        return "dataEntry";
     }
 
     private void setRelevantDocuments() {

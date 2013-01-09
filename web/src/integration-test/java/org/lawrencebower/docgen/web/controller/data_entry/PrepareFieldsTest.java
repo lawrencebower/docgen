@@ -23,7 +23,7 @@ import static junit.framework.TestCase.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:META-INF/web-application-test-context.xml")
-public class PrepareFieldsControllerTest {
+public class PrepareFieldsTest {
 
     @Autowired
     DataEntryCB business;
@@ -33,7 +33,7 @@ public class PrepareFieldsControllerTest {
     SessionSetupUtils sessionSetupUtils;
 
     SessionData sessionData;
-    PrepareFieldsController controller;
+    PrepareFields controller;
 
     @Autowired
     ChecksumUtils checksumUtils;
@@ -44,7 +44,7 @@ public class PrepareFieldsControllerTest {
         sessionData = new SessionData();
         setupSessionData();
 
-        controller = new PrepareFieldsController();
+        controller = new PrepareFields();
         controller.setSessionData(sessionData);
         controller.setBusiness(business);
     }

@@ -17,7 +17,7 @@
 
 <jsp:useBean id="prepareFieldsController"
              scope="session"
-             type="org.lawrencebower.docgen.web.controller.data_entry.PrepareFieldsController"/>
+             type="org.lawrencebower.docgen.web.controller.data_entry.PrepareFields"/>
 
 <c:set var="fieldSeperator" value="~" scope="application"/>
 
