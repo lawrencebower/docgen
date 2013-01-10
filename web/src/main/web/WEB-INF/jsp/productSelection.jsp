@@ -57,7 +57,7 @@ Select products
                         </td>
                         <td align="center">
                             <c:set var="fieldName"
-                                   value="${selectedProduct.id}${selectedProduct.fieldSeparator}${selectedProduct.costToken}"/>
+                                   value="${selectedProduct.id}${selectedProduct.fieldSeparator}${selectedProduct.valueToken}"/>
                             <input value="${selectedProduct.productValue}"
                                    id="${fieldName}"
                                    name="${fieldName}"/>

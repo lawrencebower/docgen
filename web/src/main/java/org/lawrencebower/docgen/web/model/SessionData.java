@@ -7,6 +7,7 @@ import org.lawrencebower.docgen.web_model.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_model.view.document.DocumentView;
 import org.lawrencebower.docgen.web_model.view.product.ProductSelection;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class SessionData {
 
     private BusinessSelection businessSelection = new BusinessSelection();
 
-    private ProductSelection selectedProducts = new ProductSelection();
+    private ProductSelection productSelection;
 
     private DocumentSet documents;
 
@@ -51,15 +52,15 @@ public class SessionData {
     }
 
     public List<ProductView> getSelectedProducts() {
-        return selectedProducts.getProducts();
+        return productSelection.getProducts();
     }
 
     public ProductSelection getProductSelection(){
-        return selectedProducts;
+        return productSelection;
     }
 
     public void clearSelectedProducts() {
-        selectedProducts.clear();
+        productSelection.clear();
     }
 
     public List<DocumentView> getDocumentsAsList() {
@@ -71,11 +72,11 @@ public class SessionData {
     }
 
     public void addSelectedProduct(ProductView selectedProduct) {
-        selectedProducts.addProduct(selectedProduct);
+        productSelection.addProduct(selectedProduct);
     }
 
     public boolean isHasProducts() {
-        return selectedProducts.hasProducts();
+        return productSelection.hasProducts();
     }
 
     public boolean isShowAutoMappedFields() {
@@ -84,5 +85,10 @@ public class SessionData {
 
     public void setShowAutoMappedFields(boolean showAutoMappedFields) {
         this.showAutoMappedFields = showAutoMappedFields;
+    }
+
+    @Autowired
+    public void setProductSelection(ProductSelection selectedProducts) {
+        this.productSelection = selectedProducts;
     }
 }

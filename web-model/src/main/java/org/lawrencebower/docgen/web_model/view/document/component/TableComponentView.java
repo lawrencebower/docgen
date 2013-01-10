@@ -10,7 +10,7 @@ import org.lawrencebower.docgen.web_model.business_def.component_calculation.Com
 import org.lawrencebower.docgen.web_model.business_def.component_calculation.table.TableComponentCalculation;
 import org.lawrencebower.docgen.web_model.business_def.component_calculation.table.TableComponentCalculator;
 import org.lawrencebower.docgen.web_model.business_def.injection.TableComponentProductInjector;
-import org.lawrencebower.docgen.web_model.business_def.table_component.TableComponentValueSetter;
+import org.lawrencebower.docgen.web_model.business_def.mapping.parameter_mapping.table_component.TableComponentValueSetter;
 import org.lawrencebower.docgen.web_model.view.document.DocumentInjectionInfo;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_model.view.document.DocumentView;

@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_model.business_def.table_component;
+package org.lawrencebower.docgen.web_model.business_def.mapping.parameter_mapping.table_component;
 
 import org.lawrencebower.docgen.web_model.view.document.component.TableComponentView;
 

@@ -11,6 +11,10 @@
         <lookup-method name="createDocumentInfoSet" bean="documentSet"/>
     </bean>
 
+    <bean name="productSelection"
+          class="org.lawrencebower.docgen.web_model.view.product.ProductSelection"
+          scope="prototype"/>
+
     <bean name="contactView"
           class="org.lawrencebower.docgen.web_model.view.contact.ContactView"
           scope="prototype"/>

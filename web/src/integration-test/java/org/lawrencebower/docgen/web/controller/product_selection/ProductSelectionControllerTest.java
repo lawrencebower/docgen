@@ -7,6 +7,7 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.doc_examples.factory.ProductFactoryTestImpl;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.product_selection.ProductSelectionCB;
+import org.lawrencebower.docgen.web_model.view.product.ProductSelection;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -24,6 +25,8 @@ public class ProductSelectionControllerTest {
 
     @Autowired
     ProductSelectionCB productSelectionBusiness;
+    @Autowired
+    ProductSelection productSelection;
 
     private ProductSelectionController controller;
     private SessionData sessionData;
@@ -33,6 +36,7 @@ public class ProductSelectionControllerTest {
         controller = new ProductSelectionController();
         controller.setBusiness(productSelectionBusiness);
         sessionData = new SessionData();
+        sessionData.setProductSelection(productSelection);
         controller.setSessionData(sessionData);
     }
 

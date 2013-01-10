@@ -46,7 +46,7 @@
           class="org.lawrencebower.docgen.web_logic.business.utils.ViewUtilsImpl"/>
 
     <bean name="tableComponentValueSetter"
-          class="org.lawrencebower.docgen.web_logic.business.table_component.TableComponentValueSetterImpl"/>
+          class="org.lawrencebower.docgen.web_logic.business.mapping.parameter_mapping.table_component.TableComponentValueSetterImpl"/>
 
     <bean name="tableComponentCalculator"
           class="org.lawrencebower.docgen.web_logic.business.component_calculation.table.BasicTableComponentCalculator"/>

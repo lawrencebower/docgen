@@ -4,7 +4,7 @@ public class Product {
 
     private final String productId;
     private final String productName;
-    private final String value;
+    private String value;
     private final String countryOfOrigin;
     private final String harmonizedTariffNumber;
     private final String customsDescription;
@@ -50,6 +50,10 @@ public class Product {
         return value;
     }
 
+    public void setValue(String value) {
+        this.value = value;
+    }
+
     public String getCountryOfOrigin() {
         return countryOfOrigin;
     }
@@ -61,4 +65,5 @@ public class Product {
     public String getCustomsDescription() {
         return customsDescription;
     }
+
 }

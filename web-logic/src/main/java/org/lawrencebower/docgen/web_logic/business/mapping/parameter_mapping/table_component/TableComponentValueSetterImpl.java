@@ -1,23 +1,12 @@
-package org.lawrencebower.docgen.web_logic.business.table_component;
+package org.lawrencebower.docgen.web_logic.business.mapping.parameter_mapping.table_component;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.web_model.business_def.table_component.TableComponentValueSetter;
+import org.lawrencebower.docgen.web_model.business_def.mapping.parameter_mapping.table_component.TableComponentValueSetter;
 import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.document.component.TableComponentView;
 
 public class TableComponentValueSetterImpl implements TableComponentValueSetter {
-
-    private TableComponentInfo parseParamString(String paramString, String componentValue) {
-        String[] tokens = splitTableParamString(paramString);
-
-        int rowNumber = Integer.parseInt(tokens[1]);
-        rowNumber--;//decrement as componentValue from jsp starts at 1, rather than 0
-        int colNumber = Integer.parseInt(tokens[2]);
-        colNumber--;//decrement as componentValue from jsp starts at 1, rather than 0
-
-        return new TableComponentInfo(componentValue, rowNumber, colNumber);
-    }
 
     @Override
     public void setCellValueIfMatch(String paramString,
@@ -39,6 +28,17 @@ public class TableComponentValueSetterImpl implements TableComponentValueSetter 
 
             componentView.setComponentValue(value);
         }
+    }
+
+    private TableComponentInfo parseParamString(String paramString, String componentValue) {
+        String[] tokens = splitTableParamString(paramString);
+
+        int rowNumber = Integer.parseInt(tokens[1]);
+        rowNumber--;//decrement as componentValue from jsp starts at 1, rather than 0
+        int colNumber = Integer.parseInt(tokens[2]);
+        colNumber--;//decrement as componentValue from jsp starts at 1, rather than 0
+
+        return new TableComponentInfo(componentValue, rowNumber, colNumber);
     }
 
     private String[] splitTableParamString(String paramString) {

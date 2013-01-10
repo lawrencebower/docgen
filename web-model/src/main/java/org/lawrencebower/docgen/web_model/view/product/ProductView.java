@@ -107,11 +107,33 @@ public class ProductView {
     }
 
     public String getQuantityToken() {
-        return ViewConstants.PRODUCT_QUANTITY_TOKEN;
+        return ViewConstants.PRODUCT_TOKEN_TYPE.QUANTITY.getName();
     }
 
-    public String getCostToken() {
-        return ViewConstants.PRODUCT_COST_TOKEN;
+    public String getValueToken() {
+        return ViewConstants.PRODUCT_TOKEN_TYPE.VALUE.getName();
+    }
+
+    public void setValue(String valueString) {
+        product.setValue(valueString);
+    }
+
+    public void setQuantity(String quantityString) {
+        try {
+            quantity = Integer.parseInt(quantityString);
+        } catch (NumberFormatException e) {
+            String message = String.format("Can not parse string '%s' into an integer", quantityString);
+            throw new DocGenException(message);
+        }
+    }
+
+    public boolean idMatches(String productId) {
+        String thisId = getProductId();
+        return productId.equals(thisId);
+    }
+
+    public boolean idDoesNotMatch(String productId) {
+        return !idMatches(productId);
     }
 
     @Override
