@@ -10,6 +10,9 @@
         <constructor-arg value="C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\signature.gif"/>
     </bean>
 
+    <bean name="streamFactory"
+          class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.ClassPathStreamFactory"/>
+
     <!--<bean name="TSV_ROOT" class="java.lang.String">-->
         <!--<constructor-arg value="C:\GitHub\docgen\web-model\src\integration_test\resources\tsv"/>-->
     <!--</bean>-->

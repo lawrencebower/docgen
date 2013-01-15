@@ -1,6 +1,7 @@
 package org.lawrencebower.docgen.web.controller.customer_selection;
 
 import org.apache.log4j.Logger;
+import org.lawrencebower.docgen.web.controller.product_selection.ProductSelectionBean;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.customer_selection.CustomerSelectionCB;
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
@@ -49,6 +50,7 @@ public class CustomerSelectionController {
         List<ProductView> products = business.getProducts();
 
         model.addAttribute("products", products);
+        model.addAttribute("productSelection", new ProductSelectionBean());
 
         return "products";
     }

@@ -25,12 +25,6 @@
           init-method="prepareComponents"
           scope="prototype"/>
 
-    <!--<bean name="streamFactory"-->
-    <!--class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.FileStreamFactory"/>-->
-    <bean name="streamFactory"
-          class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.ClassPathStreamFactory"/>
-
-
     <bean class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.CustomerFactoryTsvImpl"
           init-method="initCustomers">
         <property name="customersTSVFile" ref="customersTSVFile"/>

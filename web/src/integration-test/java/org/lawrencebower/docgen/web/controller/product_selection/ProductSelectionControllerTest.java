@@ -47,7 +47,8 @@ public class ProductSelectionControllerTest {
         String id2 = ProductFactoryTestImpl.PRODUCT_ID_2;
 
         BindingAwareModelMap model = new BindingAwareModelMap();
-        controller.selectProduct(id1, model);
+        ProductSelectionBean productSelectionBean = new ProductSelectionBean(id1);
+        controller.selectProduct(productSelectionBean, model);
 
         List<ProductView> products = (List<ProductView>) model.get("products");
 
@@ -62,7 +63,8 @@ public class ProductSelectionControllerTest {
         String id1 = ProductFactoryTestImpl.PRODUCT_ID_1;
 
         BindingAwareModelMap model = new BindingAwareModelMap();
-        controller.selectProduct(id1, model);
+        ProductSelectionBean productSelectionBean = new ProductSelectionBean(id1);
+        controller.selectProduct(productSelectionBean, model);
 
         List<ProductView> products = sessionData.getSelectedProducts();
 
@@ -78,9 +80,11 @@ public class ProductSelectionControllerTest {
         String id1 = ProductFactoryTestImpl.PRODUCT_ID_1;
         String id2 = ProductFactoryTestImpl.PRODUCT_ID_2;
 
-        controller.selectProduct(id1, model);
-        controller.selectProduct(id2, model);
-        controller.selectProduct(id2, model);
+        ProductSelectionBean product1 = new ProductSelectionBean(id1);
+        ProductSelectionBean product2 = new ProductSelectionBean(id2);
+        controller.selectProduct(product1, model);
+        controller.selectProduct(product2, model);
+        controller.selectProduct(product2, model);
 
         List<ProductView> products = sessionData.getSelectedProducts();
 
@@ -95,7 +99,7 @@ public class ProductSelectionControllerTest {
 
         try {
             BindingAwareModelMap model = new BindingAwareModelMap();
-            controller.selectProduct("I dont exist", model);
+            controller.selectProduct(new ProductSelectionBean("I dont exist"), model);
         } catch (DocGenException e) {
             String message = e.getMessage();
             assertEquals("product 'I dont exist' not found?!", message);

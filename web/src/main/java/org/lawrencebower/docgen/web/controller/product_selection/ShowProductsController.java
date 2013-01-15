@@ -30,6 +30,7 @@ public class ShowProductsController {
         List<ProductView> products = business.getProducts();
 
         model.addAttribute("products", products);
+        model.addAttribute("productSelection", new ProductSelectionBean());
 
         return "products";
     }

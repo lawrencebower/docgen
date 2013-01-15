@@ -360,10 +360,10 @@ public class CommercialInvoice {
         productTable.setRenderBorder(true);
 
         TableComponentCalculationImpl calculation = new TableComponentCalculationImpl(Operator.MULTIPLY,
-                                                                              Format.CURRENCY,
-                                                                              TOTAL_VALUE_NAME,
-                                                                              quantityName,
-                                                                              productValueName);
+                                                                                      Format.CURRENCY,
+                                                                                      TOTAL_VALUE_NAME,
+                                                                                      quantityName,
+                                                                                      productValueName);
         addViewableComponent(productTable, calculation);
 
         return productTable;
@@ -448,8 +448,8 @@ public class CommercialInvoice {
         costTable.addRow(subTotalRow);
 
         ComponentCalculation subtotalCalc = new ComponentCalculationImpl(Operator.PLUS,
-                                                                     Format.CURRENCY,
-                                                                     TOTAL_VALUE_NAME);
+                                                                         Format.CURRENCY,
+                                                                         TOTAL_VALUE_NAME);
         addViewableComponent(subTotalComponent, subtotalCalc);
 
         TableRow freightTotalRow = new TableRow();
@@ -469,8 +469,8 @@ public class CommercialInvoice {
         costTable.addRow(totalRow);
 
         ComponentCalculation totalCalc = new ComponentCalculationImpl(Operator.PLUS,
-                                                                  Format.CURRENCY,
-                                                                  TOTAL_VALUE_NAME);
+                                                                      Format.CURRENCY,
+                                                                      TOTAL_VALUE_NAME);
         addViewableComponent(totalComponent, totalCalc);
 
         TableRow currencyRow = new TableRow();

@@ -1,3 +1,4 @@
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="/WEB-INF/jsp/include.jsp" %>
 
 <jsp:useBean id="products"
@@ -16,6 +17,14 @@ Select products
 <div>
     <br/>
 
+    <sf:form method="POST" modelAttribute="productSelection">
+        <sf:select path="productId" >
+            <sf:option value="NONE" label="--- Select ---"/>
+            <sf:options items="${products}" itemLabel="productName" itemValue="productId" />
+        </sf:select>
+        <input name="commit" type="submit"/>
+    </sf:form>
+<%--
     <c:forEach var="product" items="${products}">
 
         <s:url var="product_url" value="/productSelect/productId/{productId}">
@@ -27,6 +36,7 @@ Select products
         </a>
         <br/>
     </c:forEach>
+--%>
     <br/>
 
     <c:if test="${sessionData.hasProducts}">

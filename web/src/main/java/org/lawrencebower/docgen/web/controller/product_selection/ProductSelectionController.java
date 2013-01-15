@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -33,9 +32,11 @@ public class ProductSelectionController {
         this.sessionData = sessionData;
     }
 
-    @RequestMapping(value = "/productSelect/productId/{productId}", method = RequestMethod.GET)
-    public String selectProduct(@PathVariable String productId,
+    @RequestMapping(method = RequestMethod.POST)
+    public String selectProduct(ProductSelectionBean productSelection,
                                 Model model) {
+
+        String productId = productSelection.getProductId();
 
         logger.error("productId = [" + productId + "]");
 
@@ -49,6 +50,7 @@ public class ProductSelectionController {
     private void putAllProductsOnPageModel(Model model) {
         List<ProductView> products = business.getProducts();
         model.addAttribute("products", products);
+        model.addAttribute("productSelection", new ProductSelectionBean());
     }
 
     private void getProductAndAddToSession(String productId) {
