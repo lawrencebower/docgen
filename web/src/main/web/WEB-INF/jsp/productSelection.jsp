@@ -17,26 +17,13 @@ Select products
 <div>
     <br/>
 
-    <sf:form method="POST" modelAttribute="productSelection">
+    <sf:form method="POST" action="/docgen/productSelect" modelAttribute="productSelection">
         <sf:select path="productId" >
             <sf:option value="NONE" label="--- Select ---"/>
             <sf:options items="${products}" itemLabel="productName" itemValue="productId" />
         </sf:select>
         <input name="commit" type="submit"/>
     </sf:form>
-<%--
-    <c:forEach var="product" items="${products}">
-
-        <s:url var="product_url" value="/productSelect/productId/{productId}">
-            <s:param name="productId" value="${product.productId}"/>
-        </s:url>
-
-        <a href="${product_url}">
-            <c:out value="${product.productName}"/>&nbsp;-&nbsp;<c:out value="${product.productId}"/>
-        </a>
-        <br/>
-    </c:forEach>
---%>
     <br/>
 
     <c:if test="${sessionData.hasProducts}">

@@ -2,13 +2,14 @@ package org.lawrencebower.docgen.web_logic.business.component_calculation;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
 
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 
 public enum Format {
     CURRENCY,
     NONE;
 
-    public static String applyFormat(Format operator, Float operand) {
+    public static String applyFormat(Format operator, BigDecimal operand) {
 
         String returnVal = null;
 

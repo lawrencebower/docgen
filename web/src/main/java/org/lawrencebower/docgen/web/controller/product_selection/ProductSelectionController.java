@@ -32,7 +32,7 @@ public class ProductSelectionController {
         this.sessionData = sessionData;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/productSelect", method = RequestMethod.POST)
     public String selectProduct(ProductSelectionBean productSelection,
                                 Model model) {
 

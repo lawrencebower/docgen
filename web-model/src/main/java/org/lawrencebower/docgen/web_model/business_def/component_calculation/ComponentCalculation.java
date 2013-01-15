@@ -2,11 +2,12 @@ package org.lawrencebower.docgen.web_model.business_def.component_calculation;
 
 import org.lawrencebower.docgen.web_model.view.document.DocumentSet;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface ComponentCalculation {
 
-    float NO_RESULT = Float.MAX_VALUE;
+    BigDecimal NO_RESULT = BigDecimal.ZERO;
 
     List<String> getOperands();
 
@@ -16,9 +17,9 @@ public interface ComponentCalculation {
 
     void clearResult();
 
-    void runOnOperand(Float operandValue);
+    void runOnOperand(String operandValue);
 
-    Float getResult();
+    BigDecimal getResult();
 
     String getFormattedResult();
 

@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
@@ -24,8 +25,8 @@ public class ShowProductsController {
         this.business = business;
     }
 
-    @RequestMapping("/productSelect")
-    public String showProducts(Model model){
+    @RequestMapping(value = "/productSelect", method = RequestMethod.GET)
+    public String showProducts(Model model) {
 
         List<ProductView> products = business.getProducts();
 

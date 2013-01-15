@@ -105,11 +105,11 @@ public class BasicTableComponentCalculator implements TableComponentCalculator {
                                      List<Integer> operandColIndices,
                                      TableComponentCalculation calculation) {
 
-        List<Float> operandValues = new ArrayList<>();
+        List<String> operandValues = new ArrayList<>();
 
         for (Integer operandIndex : operandColIndices) {
             DocComponentView componentView = tableComponentView.getCellComponentView(rowIndex, operandIndex);
-            Float value = componentView.getFloatValue();
+            String value = componentView.getStringValue();
             operandValues.add(value);
         }
 
@@ -144,18 +144,18 @@ public class BasicTableComponentCalculator implements TableComponentCalculator {
         return columnIndex;
     }
 
-    private void runCalculation(List<Float> operandValues, TableComponentCalculation calculation) {
+    private void runCalculation(List<String> operandValues, TableComponentCalculation calculation) {
 
         checkOperandSize(operandValues);
         calculation.clearResult();
 
-        for (Float operandValue : operandValues) {
+        for (String operandValue : operandValues) {
             calculation.runOnOperand(operandValue);
         }
 
     }
 
-    private void checkOperandSize(List<Float> operandValues) {
+    private void checkOperandSize(List<String> operandValues) {
         if ((operandValues == null) || operandValues.isEmpty()) {
             throw new DocGenException("List of operands is empty!?");
         }

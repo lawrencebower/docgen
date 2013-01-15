@@ -42,11 +42,6 @@ public class CheckBoxComponentView extends DocComponentViewImpl<CheckBoxComponen
     }
 
     @Override
-    public void setComponentValue(Float value) {
-        throw new DocGenException("Can not set a CheckBox value as Float");
-    }
-
-    @Override
     public void setComponent(CheckBoxComponent docComponent) {
         super.setComponent(docComponent);
     }
@@ -60,11 +55,6 @@ public class CheckBoxComponentView extends DocComponentViewImpl<CheckBoxComponen
         }
 
         return returnValue;
-    }
-
-    @Override
-    public Float getFloatValue() {
-        throw new DocGenException("Can not get a CheckBox value as Float");
     }
 
     @Override

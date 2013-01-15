@@ -16,11 +16,7 @@ public interface DocComponentView<T extends DocComponent> {
 
     void setComponentValue(String value);
 
-    void setComponentValue(Float value);
-
     String getStringValue();
-
-    Float getFloatValue();
 
     Boolean getBooleanValue();
 

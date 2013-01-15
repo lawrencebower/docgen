@@ -35,12 +35,6 @@ public class TextComponentView extends DocComponentViewImpl<TextComponent> {
     }
 
     @Override
-    public void setComponentValue(Float value) {
-        String floatString = value.toString();
-        docComponent.setText(floatString);
-    }
-
-    @Override
     public void checkAndSetValueFromParamString(String componentName, String value) {
 
         String thisComponentName = getName();
@@ -52,18 +46,6 @@ public class TextComponentView extends DocComponentViewImpl<TextComponent> {
 
     public String getStringValue() {
         return docComponent.getTextString();
-    }
-
-    @Override
-    public Float getFloatValue() {
-        String text = docComponent.getTextString();
-        try {
-            return Float.parseFloat(text);
-        } catch (NumberFormatException e) {
-            String messageTemplate = "Could not parse text value '%s' into a Float";
-            String message = String.format(messageTemplate, text);
-            throw new DocGenException(message);
-        }
     }
 
     @Override
@@ -124,7 +106,7 @@ public class TextComponentView extends DocComponentViewImpl<TextComponent> {
 
             calculateValueIfNeeded(documentSet);//calculate this component if necessary
 
-            Float operandValue = getFloatValue();
+            String operandValue = getStringValue();
             calculation.runOnOperand(operandValue);
         }
 

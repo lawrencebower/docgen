@@ -53,18 +53,8 @@ public class TableComponentView extends DocComponentViewImpl<TableComponent> {
     }
 
     @Override
-    public void setComponentValue(Float value) {
-        throw new DocGenException("Table component does not accept Float values as value setter");
-    }
-
-    @Override
     public String getStringValue() {
         throw new DocGenException("Table component does not support getting value as a string");
-    }
-
-    @Override
-    public Float getFloatValue() {
-        throw new DocGenException("Table component does not support getting value as a boolean");
     }
 
     @Override
@@ -158,9 +148,9 @@ public class TableComponentView extends DocComponentViewImpl<TableComponent> {
 
             calculateValueIfNeeded(documentSet);//calculate this component if necessary
 
-            List<Float> operandValues = getColumnValuesAsFloats(operand);
+            List<String> operandValues = getColumnValuesAsFloats(operand);
 
-            for (Float operandValue : operandValues) {
+            for (String operandValue : operandValues) {
                 calculation.runOnOperand(operandValue);
             }
         }
@@ -192,16 +182,16 @@ public class TableComponentView extends DocComponentViewImpl<TableComponent> {
         return headerRow.hasCellName(columnName);
     }
 
-    public List<Float> getColumnValuesAsFloats(String columnName) {
+    public List<String> getColumnValuesAsFloats(String columnName) {
 
-        List<Float> results = new ArrayList<>();
+        List<String> results = new ArrayList<>();
 
         int columnIndex = getColumnIndex(columnName);
 
         List<DocComponentView> columnComponents = getComponentViewsByColumn(columnIndex);
 
         for (DocComponentView columnComponent : columnComponents) {
-            Float value = columnComponent.getFloatValue();
+            String value = columnComponent.getStringValue();
             results.add(value);
         }
 

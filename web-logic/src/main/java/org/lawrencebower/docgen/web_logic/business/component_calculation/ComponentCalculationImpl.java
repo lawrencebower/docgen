@@ -4,6 +4,7 @@ import org.lawrencebower.docgen.web_model.business_def.component_calculation.Com
 import org.lawrencebower.docgen.web_model.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +14,7 @@ public class ComponentCalculationImpl implements ComponentCalculation {
     private Operator operator;
     private Format format;
     private List<String> fields;
-    private Float result;
+    private BigDecimal result;
     private boolean isRun;
 
     public ComponentCalculationImpl(Operator operator,
@@ -53,11 +54,14 @@ public class ComponentCalculationImpl implements ComponentCalculation {
     }
 
     @Override
-    public void runOnOperand(Float operandValue) {
+    public void runOnOperand(String operandString) {
+
+        BigDecimal operandValue = new BigDecimal(operandString);
+
         /**
          * If this is the first term in the calculation, set the operand as the result
          */
-        if(result == NO_RESULT){
+        if(result.equals(NO_RESULT)){
             result = operandValue;
         }else{
             result = Operator.applyOperation(operator, result, operandValue);
@@ -65,7 +69,7 @@ public class ComponentCalculationImpl implements ComponentCalculation {
     }
 
     @Override
-    public Float getResult() {
+    public BigDecimal getResult() {
         return result;
     }
 
