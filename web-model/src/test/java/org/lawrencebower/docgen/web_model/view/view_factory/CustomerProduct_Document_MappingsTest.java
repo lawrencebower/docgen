@@ -85,21 +85,21 @@ public class CustomerProduct_Document_MappingsTest {
         doc2 = mockDocument(doc2Name);
 
         //customer 1
-        mappings.addDocument(customer1Name,
-                             product1Name,
+        mappings.addDocument(customer1,
+                             product1,
                              doc1Name);
 
-        mappings.addDocument(customer1Name,
-                             product1Name,
+        mappings.addDocument(customer1,
+                             product1,
                              doc2Name);
 
-        mappings.addDocument(customer1Name,
-                             product2Name,
+        mappings.addDocument(customer1,
+                             product2,
                              doc2Name);
 
         //customer 2
-        mappings.addDocument(customer2Name,
-                             product1Name,
+        mappings.addDocument(customer2,
+                             product1,
                              doc1Name);
     }
 

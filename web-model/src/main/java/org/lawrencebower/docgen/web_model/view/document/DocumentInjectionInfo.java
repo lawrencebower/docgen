@@ -33,7 +33,7 @@ public class DocumentInjectionInfo {
                 value = product.getQuantityString();
                 break;
             case PRODUCT_MODEL:
-                value = product.getId();
+                value = product.getProductId();
                 break;
             case PRODUCT_TARIFF_NUMBER:
                 value = product.getHarmonizedTariffNumber();
@@ -47,7 +47,7 @@ public class DocumentInjectionInfo {
     }
 
     public void setDocumentNameExtension(DocumentView documentView) {
-        String productId = product.getId();
+        String productId = product.getProductId();
         documentView.setNameExtension(productId);
     }
 }

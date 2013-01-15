@@ -27,7 +27,7 @@ public class SessionSetupUtils {
     }
 
     private void setCustomerOnSession(SessionData sessionData) {
-        ContactView selectedCustomer = viewFactory.getCustomer(CustomerFactoryTestImpl.CUSTOMER_ID_1);
+        ContactView selectedCustomer = viewFactory.getContact(CustomerFactoryTestImpl.CUSTOMER_ID_1);
         sessionData.setCustomerSelection(selectedCustomer);
     }
 

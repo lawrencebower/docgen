@@ -54,6 +54,10 @@ public class DeliveryNote {
 
         makeFooter();
 
+        documentViewBuilder.setCopyNumber(5);
+
+        documentViewBuilder.setCustomerAttributeFilters("USA_EAST_COAST");
+
     }
 
     private void initDocumentBuilders() {
@@ -314,7 +318,6 @@ public class DeliveryNote {
         DocumentViewImpl documentView = documentViewBuilder.getDocumentView();
         CustomDocument document = documentBuilder.getDocument();
         documentView.setDocument(document);
-        documentView.setCopyNumber(5);
         return documentView;
     }
 }

@@ -1,44 +1,51 @@
 package org.lawrencebower.docgen.web_model.view.contact;
 
+import org.lawrencebower.docgen.web_model.view.view_factory.Attributes;
+
 public class Contact {
 
-    private final String name;
-    private final String contactName;
-    private final String phone;
-    private final String country;
-    private final String address;
-    private final String taxId;
-    private final String email;
+    private String name;
+    private String contactName;
+    private String phone;
+    private String country;
+    private String address;
+    private String taxId;
+    private String email;
+    private Attributes attributes;
 
-    public Contact(String name,
-                   String contactName,
-                   String address,
-                   String phone,
-                   String country) {
-        this(name,
-             contactName,
-             address,
-             phone,
-             country,
-             null,
-             null);
+    protected Contact() {//only make with a ContactBuilder
     }
 
-    public Contact(String name,
-                   String contactName,
-                   String address,
-                   String phone,
-                   String country,
-                   String taxId,
-                   String email) {
-
+    protected void setName(String name) {
         this.name = name;
+    }
+
+    protected void setContactName(String contactName) {
         this.contactName = contactName;
-        this.address = address;
+    }
+
+    protected void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    protected void setCountry(String country) {
         this.country = country;
+    }
+
+    protected void setAddress(String address) {
+        this.address = address;
+    }
+
+    protected void setTaxId(String taxId) {
         this.taxId = taxId;
+    }
+
+    protected void setEmail(String email) {
         this.email = email;
+    }
+
+    protected void setAttributes(String... attributes) {
+        this.attributes = new Attributes(attributes);
     }
 
     public String getName() {
@@ -67,5 +74,13 @@ public class Contact {
 
     public String getEmail() {
         return email;
+    }
+
+    public Attributes getAttributes() {
+        return attributes;
+    }
+
+    public boolean isAttributesMatch(Attributes attributes) {
+        return this.attributes.isAttributeMatch(attributes);
     }
 }

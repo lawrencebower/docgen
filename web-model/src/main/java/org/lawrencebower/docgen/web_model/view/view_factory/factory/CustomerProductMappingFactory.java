@@ -1,0 +1,15 @@
+package org.lawrencebower.docgen.web_model.view.view_factory.factory;
+
+import org.lawrencebower.docgen.web_model.view.contact.ContactView;
+import org.lawrencebower.docgen.web_model.view.document.DocumentView;
+import org.lawrencebower.docgen.web_model.view.product.ProductView;
+import org.lawrencebower.docgen.web_model.view.view_factory.CustomerProduct_Document_Mappings;
+
+import java.util.List;
+
+public interface CustomerProductMappingFactory {
+
+    CustomerProduct_Document_Mappings getMappingInfo(List<ContactView> customers,
+                                                     List<ProductView> products,
+                                                     List<DocumentView> documents);
+}

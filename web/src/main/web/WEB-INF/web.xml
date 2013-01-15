@@ -17,11 +17,12 @@
         <param-value>
             classpath:META-INF/core-beans.xml
             classpath:META-INF/web-model-beans.xml
-            classpath:META-INF/web-logic-params.xml
             classpath:META-INF/web-logic-beans.xml
             classpath:META-INF/doc-examples-beans.xml
             classpath:META-INF/doc-examples-params.xml
+            <!--classpath:META-INF/custom-params.xml-->
             classpath:META-INF/web-beans.xml
+            classpath:META-INF/web-params.xml
         </param-value>
     </context-param>
 

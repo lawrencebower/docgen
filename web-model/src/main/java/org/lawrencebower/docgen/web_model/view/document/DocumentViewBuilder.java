@@ -48,4 +48,16 @@ public class DocumentViewBuilder {
             componentView.addComponentCalculation(calculation);
         }
     }
+
+    public void setCustomerAttributeFilters(String... filters){
+        docView.setCustomerAttributes(filters);
+    }
+
+    public void setProductAttributeFilters(String... filters){
+        docView.setProductAttributes(filters);
+    }
+
+    public void setCopyNumber(int copyNumber) {
+        docView.setCopyNumber(copyNumber);
+    }
 }

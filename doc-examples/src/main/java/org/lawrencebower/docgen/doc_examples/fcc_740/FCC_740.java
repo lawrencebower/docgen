@@ -94,6 +94,8 @@ public class FCC_740 {
                     false,
                     true);
 
+        documentViewBuilder.setCopyNumber(5);
+
     }
 
     private void initDocumentBuilders() {
@@ -105,7 +107,6 @@ public class FCC_740 {
         DocumentViewImpl documentView = documentViewBuilder.getDocumentView();
         OverlayDocument document = documentBuilder.getDocument();
         documentView.setDocument(document);
-        documentView.setCopyNumber(5);
 
         return documentView;
     }

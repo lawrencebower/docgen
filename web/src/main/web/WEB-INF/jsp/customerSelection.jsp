@@ -30,8 +30,8 @@ Select customer
                         <%--<c:out value="${contact.country}"/>--%>
                         <%--</td>--%>
                     <td>
-                        <s:url var="customer_url" value="/customerSelect/customerName/{customerName}">
-                            <s:param name="customerName" value="${customer.name}"/>
+                        <s:url var="customer_url" value="/customerSelect/customerName/{customerId}">
+                            <s:param name="customerId" value="${customer.contactId}"/>
                         </s:url>
                         <a href="${customer_url}">
                             select

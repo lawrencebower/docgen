@@ -1,6 +1,7 @@
 package org.lawrencebower.docgen.web_model.view.view_factory;
 
 import org.lawrencebower.docgen.web_model.view.contact.Contact;
+import org.lawrencebower.docgen.web_model.view.contact.ContactBuilder;
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
 import org.lawrencebower.docgen.web_model.view.contact.ContactViewFactory;
 import org.lawrencebower.docgen.web_model.view.document.DocumentView;
@@ -42,7 +43,7 @@ public class ViewFactoryTestImpl implements ViewFactory {
     }
 
     @Override
-    public ContactView getCustomer(String customerName) {
+    public ContactView getContact(String customerName) {
         return null;
     }
 
@@ -53,26 +54,29 @@ public class ViewFactoryTestImpl implements ViewFactory {
 
     @Override
     public ContactView getVendor() {
-        Contact contact = new Contact("Billy Bob's Widgets",
-                                      "Billy Bob",
-                                      "36 Billy Bob Street\nColchester\nEssex",
-                                      "534546454",
-                                      "UK",
-                                      "tax id",
-                                      "sales@acme.com");
 
-        ContactView vendor = contactViewFactory.createContactView(contact);
+        ContactBuilder builder = new ContactBuilder();
+        builder.setName("Billy Bob's Widgets");
+        builder.setContactName("Billy Bob");
+        builder.setAddress("36 Billy Bob Street\n" +
+                           "Colchester\n" +
+                           "Essex");
+        builder.setPhone("534546454");
+        builder.setCountry("UK");
+        builder.setTaxId("tax id");
+        builder.setEmail("sales@acme.com");
+
+        Contact contact = builder.buildContact();
+
+        String vendorId = "1";
+
+        ContactView vendor = contactViewFactory.createContactView(contact, vendorId);
 
         return vendor;
     }
 
     @Override
     public ContactView getBusinessByCustomerName(String customerName) {
-        return null;
-    }
-
-    @Override
-    public ArrayList<ContactView> getBusinesses() {
         return null;
     }
 

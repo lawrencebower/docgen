@@ -34,16 +34,16 @@ public class CustomerSelectionController {
         this.sessionData = sessionData;
     }
 
-    @RequestMapping(value = "/customerSelect/customerName/{customerName}", method = RequestMethod.GET)
-    public String selectCustomer(@PathVariable String customerName,
+    @RequestMapping(value = "/customerSelect/customerName/{customerId}", method = RequestMethod.GET)
+    public String selectCustomer(@PathVariable String customerId,
                                  Model model) {
 
-        logger.error("customerName = [" + customerName + "]");
+        logger.error("customerId = [" + customerId + "]");
 
-        ContactView selectedCustomer = business.getCustomer(customerName);
+        ContactView selectedCustomer = business.getCustomer(customerId);
         sessionData.setCustomerSelection(selectedCustomer);
 
-        ContactView selectedBusiness = business.getBusinessByCustomerName(customerName);
+        ContactView selectedBusiness = business.getBusinessByCustomerId(customerId);
         sessionData.setSelectedBusiness(selectedBusiness);
 
         List<ProductView> products = business.getProducts();

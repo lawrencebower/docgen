@@ -1,0 +1,28 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd">
+
+    <bean name="TSV_ROOT" class="java.lang.String">
+        <constructor-arg value="C:\GitHub\docgen\web-model\src\integration_test\resources\tsv"/>
+    </bean>
+    <!--<bean name="TSV_ROOT" class="java.lang.String">-->
+        <!--<constructor-arg value="/tsv"/>-->
+    <!--</bean>-->
+
+    <bean name="customersTSVFile" class="java.lang.String">
+        <constructor-arg value="#{TSV_ROOT}/test_customers.csv"/>
+    </bean>
+
+    <bean name="businessTSVFile" class="java.lang.String">
+        <constructor-arg value="#{TSV_ROOT}/test_business.csv"/>
+    </bean>
+
+    <bean name="vendorTSVFile" class="java.lang.String">
+        <constructor-arg value="#{TSV_ROOT}/test_vendor.csv"/>
+    </bean>
+
+    <bean name="productsTSVFile" class="java.lang.String">
+        <constructor-arg value="#{TSV_ROOT}/test_products.csv"/>
+    </bean>
+
+</beans>

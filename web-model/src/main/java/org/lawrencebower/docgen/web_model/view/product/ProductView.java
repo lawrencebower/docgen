@@ -5,6 +5,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
+import org.lawrencebower.docgen.web_model.view.view_factory.Attributes;
 
 public class ProductView {
 
@@ -16,14 +17,6 @@ public class ProductView {
 
     public void setProduct(Product product) {
         this.product = product;
-    }
-
-    public String getId() {
-        return product.getProductId();
-    }
-
-    public Product getProduct() {
-        return product;
     }
 
     public String getProductName() {
@@ -46,18 +39,6 @@ public class ProductView {
         quantity++;
     }
 
-    public void decrementQuantity() {
-
-        if (quantity == 0) {
-            String productId = product.getProductId();
-            String template = "product %s quantity already zero?!";
-            String message = String.format(template, productId);
-            throw new DocGenException(message);
-        }
-
-        quantity--;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -72,6 +53,10 @@ public class ProductView {
 
     public String getCustomsDescription() {
         return product.getCustomsDescription();
+    }
+
+    public Attributes getShippingAttributes(){
+        return product.getAttributes();
     }
 
     public String getCommercialInvoiceDescription() {
@@ -145,8 +130,8 @@ public class ProductView {
 
             ProductView compareTo = (ProductView) obj;
             EqualsBuilder builder = new EqualsBuilder();
-            String thisId = getId();
-            String compareToId = compareTo.getId();
+            String thisId = getProductId();
+            String compareToId = compareTo.getProductId();
             builder.append(thisId, compareToId);
 
             isEqual = builder.isEquals();
@@ -158,8 +143,16 @@ public class ProductView {
     @Override
     public int hashCode() {
         HashCodeBuilder builder = new HashCodeBuilder();
-        String id = getId();
+        String id = getProductId();
         builder.append(id);
         return builder.toHashCode();
+    }
+
+    public boolean isAttributesMatch(Attributes attributes) {
+        return product.isAttributesMatch(attributes);
+    }
+
+    public Attributes getAttributes() {
+        return product.getAttributes();
     }
 }

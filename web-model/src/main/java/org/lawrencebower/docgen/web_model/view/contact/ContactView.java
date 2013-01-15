@@ -1,6 +1,7 @@
 package org.lawrencebower.docgen.web_model.view.contact;
 
 import org.lawrencebower.docgen.web_model.business_def.utils.ViewUtils;
+import org.lawrencebower.docgen.web_model.view.view_factory.Attributes;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ContactView {
@@ -8,6 +9,7 @@ public class ContactView {
     @Autowired(required = false)
     private ViewUtils viewUtils;
 
+    private String contactId;
     private Contact contact;
 
     private ContactView() {//force spring creation
@@ -15,6 +17,14 @@ public class ContactView {
 
     public void setContact(Contact contact) {
         this.contact = contact;
+    }
+
+    public void setContactId(String contactId) {
+        this.contactId = contactId;
+    }
+
+    public String getContactId() {
+        return contactId;
     }
 
     public String getName(){
@@ -52,5 +62,13 @@ public class ContactView {
 
     public String getTaxId() {
         return contact.getTaxId();
+    }
+
+    public boolean isAttributeMatch(Attributes attributes) {
+        return contact.isAttributesMatch(attributes);
+    }
+
+    public Attributes getAttributes() {
+        return contact.getAttributes();
     }
 }

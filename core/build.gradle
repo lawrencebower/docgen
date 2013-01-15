@@ -4,6 +4,16 @@ sourceCompatibility = '1.7'
 
 repositories {
     mavenCentral()
+    flatDir {
+        name "fileRepo"
+        dirs "repo"
+    }
+}
+
+uploadArchives {
+    repositories {
+        add project.repositories.fileRepo
+    }
 }
 
 dependencies {

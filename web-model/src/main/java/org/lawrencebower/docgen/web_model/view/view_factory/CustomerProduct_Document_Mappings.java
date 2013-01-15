@@ -1,7 +1,5 @@
 package org.lawrencebower.docgen.web_model.view.view_factory;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 
@@ -17,12 +15,16 @@ public class CustomerProduct_Document_Mappings {
      */
     protected Map<CustomerProductPair, List<String>> mappings = new LinkedHashMap<>();
 
-    public void addDocument(String customerName,
-                            String productId,
+    public void addDocument(ContactView customer,
+                            ProductView product,
                             String documentName) {
 
-        CustomerProductPair pair = makeCustomerProductPair(customerName, productId);
+        CustomerProductPair pair = makeCustomerProductPair(customer, product);
 
+        addDocument(pair, documentName);
+    }
+
+    public void addDocument(CustomerProductPair pair, String documentName) {
         if (mappings.containsKey(pair)) {
             List<String> documentViews = mappings.get(pair);
             documentViews.add(documentName);
@@ -37,9 +39,7 @@ public class CustomerProduct_Document_Mappings {
 
         List<String> results = new ArrayList<>();
 
-        String businessName = business.getName();
-        String productId = product.getProductId();
-        CustomerProductPair customerProductPair = makeCustomerProductPair(businessName, productId);
+        CustomerProductPair customerProductPair = makeCustomerProductPair(business, product);
 
         if(mappings.containsKey(customerProductPair)){
             List<String> documentNames = mappings.get(customerProductPair);
@@ -51,46 +51,8 @@ public class CustomerProduct_Document_Mappings {
         return results;
     }
 
-    private CustomerProductPair makeCustomerProductPair(String customerName, String productId) {
-        return new CustomerProductPair(customerName, productId);
+    private CustomerProductPair makeCustomerProductPair(ContactView customer, ProductView product) {
+        return new CustomerProductPair(customer, product);
     }
 
-    class CustomerProductPair {
-
-        private String customerName;
-        private String productId;
-
-        CustomerProductPair(String customerName, String productId) {
-            this.customerName = customerName;
-            this.productId = productId;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-
-            boolean isEqual = false;
-            if (obj instanceof CustomerProductPair) {
-                CustomerProductPair compareTo = (CustomerProductPair) obj;
-
-                EqualsBuilder builder = new EqualsBuilder();
-
-                builder.append(this.customerName, compareTo.customerName);
-                builder.append(this.productId, compareTo.productId);
-
-                isEqual = builder.isEquals();
-            }
-
-            return isEqual;
-        }
-
-        @Override
-        public int hashCode() {
-            HashCodeBuilder builder = new HashCodeBuilder();
-
-            builder.append(this.customerName);
-            builder.append(this.productId);
-
-            return builder.toHashCode();
-        }
-    }
 }

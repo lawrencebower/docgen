@@ -5,7 +5,10 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.lawrencebower.docgen.core.document.Document;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.web_model.view.contact.ContactView;
 import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
+import org.lawrencebower.docgen.web_model.view.product.ProductView;
+import org.lawrencebower.docgen.web_model.view.view_factory.Attributes;
 import org.lawrencebower.docgen.web_model.view.view_factory.ViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,6 +24,8 @@ public class DocumentViewImpl implements DocumentView {
     private List<DocComponentView> docComponentViews = new ArrayList<>();
     private int copyNumber = 1;//default
     private String nameExtension;
+    private Attributes customerFilterAttributes = new Attributes();
+    private Attributes productFilterAttributes = new Attributes();
 
     private DocumentViewImpl() {//force spring instantiation
     }
@@ -54,8 +59,7 @@ public class DocumentViewImpl implements DocumentView {
         return copyNumber;
     }
 
-    @Override
-    public void setCopyNumber(int copyNumber) {
+    protected void setCopyNumber(int copyNumber) {
         this.copyNumber = copyNumber;
     }
 
@@ -149,6 +153,26 @@ public class DocumentViewImpl implements DocumentView {
         }
 
         return results;
+    }
+
+    protected void setCustomerAttributes(String... attributes){
+        customerFilterAttributes = new Attributes(attributes);
+    }
+
+    @Override
+    public boolean isContactAttributesMatch(ContactView contact) {
+        Attributes attributes = contact.getAttributes();
+        return customerFilterAttributes.isAttributeMatch(attributes);
+    }
+
+    protected void setProductAttributes(String... attributes){
+        productFilterAttributes = new Attributes(attributes);
+    }
+
+    @Override
+    public boolean isProductAttributesMatch(ProductView product) {
+        Attributes attributes = product.getAttributes();
+        return productFilterAttributes.isAttributeMatch(attributes);
     }
 
     @Override

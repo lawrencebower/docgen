@@ -52,8 +52,8 @@ public class ProductSelectionControllerTest {
         List<ProductView> products = (List<ProductView>) model.get("products");
 
         assertEquals(2, products.size());
-        assertTrue(products.get(0).getId().equals(id1));
-        assertTrue(products.get(1).getId().equals(id2));
+        assertTrue(products.get(0).getProductId().equals(id1));
+        assertTrue(products.get(1).getProductId().equals(id2));
     }
 
     @Test
@@ -67,7 +67,7 @@ public class ProductSelectionControllerTest {
         List<ProductView> products = sessionData.getSelectedProducts();
 
         assertTrue(products.size() == 1);
-        assertTrue(products.get(0).getId().equals(id1));
+        assertTrue(products.get(0).getProductId().equals(id1));
     }
 
     @Test
@@ -85,8 +85,8 @@ public class ProductSelectionControllerTest {
         List<ProductView> products = sessionData.getSelectedProducts();
 
         assertTrue(products.size() == 2);
-        assertTrue(products.get(0).getId().equals(id1));
-        assertTrue(products.get(1).getId().equals(id2));
+        assertTrue(products.get(0).getProductId().equals(id1));
+        assertTrue(products.get(1).getProductId().equals(id2));
         assertTrue(products.get(1).getQuantity() == 2);
     }
 

@@ -17,10 +17,10 @@ public class CustomerSelectionCB {
     }
 
     public ContactView getCustomer(String customerName) {
-        return viewFactory.getCustomer(customerName);
+        return viewFactory.getContact(customerName);
     }
 
-    public ContactView getBusinessByCustomerName(String customerName) {
+    public ContactView getBusinessByCustomerId(String customerName) {
         return viewFactory.getBusinessByCustomerName(customerName);
     }
 

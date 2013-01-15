@@ -67,4 +67,14 @@
           class="org.lawrencebower.docgen.web_model.view.document.component.TextComponentView"
           scope="prototype"/>
 
+    <bean name="viewFactory"
+          class="org.lawrencebower.docgen.web_model.view.view_factory.ViewFactoryImpl"
+          init-method="init"/>
+
+    <bean name="tsvReader"
+          class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.TSVReader"/>
+
+    <bean name="contactParser"
+          class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.ContactMapper"/>
+
 </beans>

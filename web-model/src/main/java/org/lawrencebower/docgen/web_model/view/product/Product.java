@@ -1,41 +1,46 @@
 package org.lawrencebower.docgen.web_model.view.product;
 
+import org.lawrencebower.docgen.web_model.view.view_factory.Attributes;
+
 public class Product {
 
-    private final String productId;
-    private final String productName;
+    private String productId;
+    private String productName;
     private String value;
-    private final String countryOfOrigin;
-    private final String harmonizedTariffNumber;
-    private final String customsDescription;
+    private String countryOfOrigin;
+    private String harmonizedTariffNumber;
+    private String customsDescription;
+    private Attributes attributes = new Attributes();
 
-    public Product(String productId,
-                   String productName,
-                   String value,
-                   String countryOfOrigin,
-                   String customsDescription) {
-
-        this(productId,
-             productName,
-             value,
-             countryOfOrigin,
-             customsDescription,
-             "");
+    protected Product() {//only make with a product builder
     }
 
-    public Product(String productId,
-                   String productName,
-                   String value,
-                   String countryOfOrigin,
-                   String customsDescription,
-                   String harmonizedTariffNumber) {
-
+    protected void setProductId(String productId) {
         this.productId = productId;
+    }
+
+    protected void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    protected void setValue(String value) {
         this.value = value;
+    }
+
+    protected void setCountryOfOrigin(String countryOfOrigin) {
         this.countryOfOrigin = countryOfOrigin;
-        this.customsDescription = customsDescription;
+    }
+
+    protected void setHarmonizedTariffNumber(String harmonizedTariffNumber) {
         this.harmonizedTariffNumber = harmonizedTariffNumber;
+    }
+
+    protected void setCustomsDescription(String customsDescription) {
+        this.customsDescription = customsDescription;
+    }
+
+    protected void setAttributes(String... attributes) {
+        this.attributes = new Attributes(attributes);
     }
 
     public String getProductId() {
@@ -50,10 +55,6 @@ public class Product {
         return value;
     }
 
-    public void setValue(String value) {
-        this.value = value;
-    }
-
     public String getCountryOfOrigin() {
         return countryOfOrigin;
     }
@@ -66,4 +67,11 @@ public class Product {
         return customsDescription;
     }
 
+    public Attributes getAttributes() {
+        return attributes;
+    }
+
+    public boolean isAttributesMatch(Attributes attributes) {
+        return this.attributes.isAttributeMatch(attributes);
+    }
 }

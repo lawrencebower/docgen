@@ -19,11 +19,11 @@ Select products
     <c:forEach var="product" items="${products}">
 
         <s:url var="product_url" value="/productSelect/productId/{productId}">
-            <s:param name="productId" value="${product.id}"/>
+            <s:param name="productId" value="${product.productId}"/>
         </s:url>
 
         <a href="${product_url}">
-            <c:out value="${product.productName}"/>&nbsp;-&nbsp;<c:out value="${product.id}"/>
+            <c:out value="${product.productName}"/>&nbsp;-&nbsp;<c:out value="${product.productId}"/>
         </a>
         <br/>
     </c:forEach>
@@ -46,18 +46,18 @@ Select products
                         <td>
                             <c:out value="${selectedProduct.productName}"/>
                             &nbsp;-&nbsp;
-                            <c:out value="${selectedProduct.id}"/>
+                            <c:out value="${selectedProduct.productId}"/>
                         </td>
                         <td align="center">
                             <c:set var="fieldName"
-                                   value="${selectedProduct.id}${selectedProduct.fieldSeparator}${selectedProduct.quantityToken}"/>
+                                   value="${selectedProduct.productId}${selectedProduct.fieldSeparator}${selectedProduct.quantityToken}"/>
                             <input value="${selectedProduct.quantity}"
                                    id="${fieldName}"
                                    name="${fieldName}"/>
                         </td>
                         <td align="center">
                             <c:set var="fieldName"
-                                   value="${selectedProduct.id}${selectedProduct.fieldSeparator}${selectedProduct.valueToken}"/>
+                                   value="${selectedProduct.productId}${selectedProduct.fieldSeparator}${selectedProduct.valueToken}"/>
                             <input value="${selectedProduct.productValue}"
                                    id="${fieldName}"
                                    name="${fieldName}"/>
