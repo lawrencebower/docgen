@@ -56,7 +56,7 @@ public class DeliveryNote {
 
         documentViewBuilder.setCopyNumber(5);
 
-        documentViewBuilder.setCustomerAttributeFilters("USA_EAST_COAST");
+//        documentViewBuilder.setCustomerAttributeFilters("USA_EAST_COAST");
 
     }
 

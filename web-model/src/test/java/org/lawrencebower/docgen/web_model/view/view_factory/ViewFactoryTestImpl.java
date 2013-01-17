@@ -65,14 +65,11 @@ public class ViewFactoryTestImpl implements ViewFactory {
         builder.setCountry("UK");
         builder.setTaxId("tax id");
         builder.setEmail("sales@acme.com");
+        builder.setContactId("1");
 
         Contact contact = builder.buildContact();
 
-        String vendorId = "1";
-
-        ContactView vendor = contactViewFactory.createContactView(contact, vendorId);
-
-        return vendor;
+        return contactViewFactory.createContactView(contact);
     }
 
     @Override

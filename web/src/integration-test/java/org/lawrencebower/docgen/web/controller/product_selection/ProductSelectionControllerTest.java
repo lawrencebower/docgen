@@ -7,7 +7,6 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.doc_examples.factory.ProductFactoryTestImpl;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.product_selection.ProductSelectionCB;
-import org.lawrencebower.docgen.web_model.view.product.ProductSelection;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -26,18 +25,17 @@ public class ProductSelectionControllerTest {
     @Autowired
     ProductSelectionCB productSelectionBusiness;
     @Autowired
-    ProductSelection productSelection;
-
-    private ProductSelectionController controller;
+    private ProductSelectionHelper productHelper;
+    @Autowired
     private SessionData sessionData;
+    private ProductSelectionController controller;
 
     @Before
     public void setup() {
         controller = new ProductSelectionController();
         controller.setBusiness(productSelectionBusiness);
-        sessionData = new SessionData();
-        sessionData.setProductSelection(productSelection);
         controller.setSessionData(sessionData);
+        controller.setProductHelper(productHelper);
     }
 
     @Test
@@ -45,6 +43,7 @@ public class ProductSelectionControllerTest {
 
         String id1 = ProductFactoryTestImpl.PRODUCT_ID_1;
         String id2 = ProductFactoryTestImpl.PRODUCT_ID_2;
+        String id3 = ProductFactoryTestImpl.PRODUCT_ID_3;
 
         BindingAwareModelMap model = new BindingAwareModelMap();
         ProductSelectionBean productSelectionBean = new ProductSelectionBean(id1);
@@ -52,9 +51,10 @@ public class ProductSelectionControllerTest {
 
         List<ProductView> products = (List<ProductView>) model.get("products");
 
-        assertEquals(2, products.size());
+        assertEquals(3, products.size());
         assertTrue(products.get(0).getProductId().equals(id1));
         assertTrue(products.get(1).getProductId().equals(id2));
+        assertTrue(products.get(2).getProductId().equals(id3));
     }
 
     @Test
@@ -88,10 +88,10 @@ public class ProductSelectionControllerTest {
 
         List<ProductView> products = sessionData.getSelectedProducts();
 
-        assertTrue(products.size() == 2);
-        assertTrue(products.get(0).getProductId().equals(id1));
-        assertTrue(products.get(1).getProductId().equals(id2));
-        assertTrue(products.get(1).getQuantity() == 2);
+        assertEquals(2, products.size());
+        assertEquals(id1, products.get(0).getProductId());
+        assertEquals(id2, products.get(1).getProductId());
+        assertEquals(2, products.get(1).getQuantity());
     }
 
     @Test

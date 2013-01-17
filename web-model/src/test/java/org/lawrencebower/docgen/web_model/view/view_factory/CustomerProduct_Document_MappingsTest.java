@@ -32,7 +32,7 @@ public class CustomerProduct_Document_MappingsTest {
 
     @Before
     public void setup() {
-        mappings = new CustomerProduct_Document_Mappings();
+        mappings = new CustomerProduct_Document_MappingsImpl();
         addDocumentsToMapper();
     }
 
@@ -118,6 +118,7 @@ public class CustomerProduct_Document_MappingsTest {
     private ContactView mockCustomer(String customerName) {
         ContactView mock = mock(ContactView.class);
         when(mock.getName()).thenReturn(customerName);
+        when(mock.getContactId()).thenReturn(customerName);
         return mock;
     }
 }

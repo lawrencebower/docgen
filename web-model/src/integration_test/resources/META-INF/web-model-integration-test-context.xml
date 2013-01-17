@@ -13,11 +13,6 @@
 
     <bean name="streamFactory"
           class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.FileStreamFactory"/>
-    <!--<bean name="streamFactory"-->
-          <!--class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.ClassPathStreamFactory"/>-->
-
-    <bean name="viewFactory"
-          class="org.lawrencebower.docgen.web_model.view.view_factory.ViewFactoryImpl"/>
 
     <bean class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.CustomerFactoryTsvImpl"
           init-method="initCustomers">

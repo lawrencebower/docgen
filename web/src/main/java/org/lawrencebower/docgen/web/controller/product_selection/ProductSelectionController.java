@@ -11,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.List;
-
 @Controller
 @Scope("session")
 public class ProductSelectionController {
@@ -20,11 +18,19 @@ public class ProductSelectionController {
     static Logger logger = Logger.getLogger(ProductSelectionController.class);
 
     private ProductSelectionCB business;
+    private ProductSelectionHelper productHelper;
     private SessionData sessionData;
+
+    public static final String NULL_PRODUCT_ID = "NO_PRODUCT";
 
     @Autowired
     protected void setBusiness(ProductSelectionCB business) {
         this.business = business;
+    }
+
+    @Autowired
+    public void setProductHelper(ProductSelectionHelper productHelper) {
+        this.productHelper = productHelper;
     }
 
     @Autowired
@@ -47,14 +53,14 @@ public class ProductSelectionController {
         return "products";
     }
 
-    private void putAllProductsOnPageModel(Model model) {
-        List<ProductView> products = business.getProducts();
-        model.addAttribute("products", products);
-        model.addAttribute("productSelection", new ProductSelectionBean());
+    public void putAllProductsOnPageModel(Model model) {
+        productHelper.putAllProductsOnModel(model);
     }
 
     private void getProductAndAddToSession(String productId) {
-        ProductView selectedProduct = business.getProduct(productId);
-        sessionData.addSelectedProduct(selectedProduct);
+        if (!NULL_PRODUCT_ID.equals(productId)) {
+            ProductView selectedProduct = business.getProduct(productId);
+            sessionData.addSelectedProduct(selectedProduct);
+        }
     }
 }

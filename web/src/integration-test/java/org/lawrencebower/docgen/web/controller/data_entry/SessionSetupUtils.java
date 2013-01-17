@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class SessionSetupUtils {
 
-    @Autowired
+    @Autowired(required = false)
     private ViewFactory viewFactory;
 
     public void setupSessionData(SessionData sessionData) {

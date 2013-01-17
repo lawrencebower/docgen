@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.doc_examples.factory.CustomerFactoryTestImpl;
+import org.lawrencebower.docgen.web.controller.product_selection.ProductSelectionHelper;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.customer_selection.CustomerSelectionCB;
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
@@ -24,17 +25,21 @@ public class CustomerSelectionControllerTest {
 
     @Autowired
     CustomerSelectionCB business;
-
+    @Autowired
     SessionData sessionData;
+    @Autowired
+    ProductSelectionHelper productHelper;
 
     CustomerSelectionController controller;
 
     @Before
     public void setUp() throws Exception {
+
         controller = new CustomerSelectionController();
+
         controller.setBusiness(business);
-        sessionData = new SessionData();
         controller.setSessionData(sessionData);
+        controller.setProductHelper(productHelper);
     }
 
     @Test
@@ -45,7 +50,7 @@ public class CustomerSelectionControllerTest {
         controller.selectCustomer(CustomerFactoryTestImpl.CUSTOMER_ID_1, model);
 
         ContactView customer = sessionData.getSelectedCustomer();
-        assertEquals(CustomerFactoryTestImpl.CUSTOMER_ID_1, customer.getName());
+        assertEquals(CustomerFactoryTestImpl.CUSTOMER_ID_1, customer.getContactId());
     }
 
     @Test
@@ -53,10 +58,10 @@ public class CustomerSelectionControllerTest {
 
         BindingAwareModelMap model = new BindingAwareModelMap();
 
-        controller.selectCustomer(CustomerFactoryTestImpl.CUSTOMER_ID_1, model);
+        controller.selectCustomer(CustomerFactoryTestImpl.CUSTOMER_ID_2, model);
 
         ContactView business = sessionData.getSelectedBusiness();
-        assertEquals(CustomerFactoryTestImpl.CUSTOMER_ID_2, business.getName());
+        assertEquals(CustomerFactoryTestImpl.CUSTOMER_ID_1, business.getContactId());
     }
 
     @Test

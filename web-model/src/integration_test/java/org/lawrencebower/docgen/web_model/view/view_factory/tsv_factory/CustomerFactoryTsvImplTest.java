@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Map;
+import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -21,7 +21,7 @@ public class CustomerFactoryTsvImplTest {
 
     @Test
     public void testGetCustomers_validFile_correctNumberReturned() throws Exception {
-        Map<String, ContactView> customers = customerFactory.getCustomers();
+        List<ContactView> customers = customerFactory.getCustomersAsList();
         assertEquals(2, customers.size());
     }
 }

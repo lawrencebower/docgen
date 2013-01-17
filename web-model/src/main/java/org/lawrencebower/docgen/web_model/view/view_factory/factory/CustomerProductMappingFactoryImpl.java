@@ -5,26 +5,34 @@ import org.lawrencebower.docgen.web_model.view.document.DocumentView;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.lawrencebower.docgen.web_model.view.view_factory.CustomerProductPair;
 import org.lawrencebower.docgen.web_model.view.view_factory.CustomerProduct_Document_Mappings;
+import org.lawrencebower.docgen.web_model.view.view_factory.CustomerProduct_Document_MappingsImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerProductMappingFactoryImpl implements CustomerProductMappingFactory {
 
+    private CustomerProduct_Document_Mappings customerProductDocMappings;
+
     @Override
-    public CustomerProduct_Document_Mappings getMappingInfo(List<ContactView> customers,
-                                                            List<ProductView> products,
-                                                            List<DocumentView> documents) {
+    public void initMappingInfo(List<ContactView> customers,
+                                List<ProductView> products,
+                                List<DocumentView> documents) {
 
         List<CustomerProductPair> customerProductPairs = makeCustomerProductPairs(customers, products);
 
-        return makeMappings(customerProductPairs, documents);
+        customerProductDocMappings = makeMappings(customerProductPairs, documents);
+    }
+
+    @Override
+    public List<String> getDocumentsForCustomerAndProduct(ContactView customer, ProductView product) {
+        return customerProductDocMappings.getDocumentsForCustomerAndProduct(customer, product);
     }
 
     private CustomerProduct_Document_Mappings makeMappings(List<CustomerProductPair> customerProductPairs,
                                                            List<DocumentView> documents) {
 
-        CustomerProduct_Document_Mappings mappings = new CustomerProduct_Document_Mappings();
+        CustomerProduct_Document_Mappings mappings = new CustomerProduct_Document_MappingsImpl();
 
         for (CustomerProductPair customerProductPair : customerProductPairs) {
             addDocumentsWhereMatch(documents,
@@ -44,7 +52,7 @@ public class CustomerProductMappingFactoryImpl implements CustomerProductMapping
 
             boolean documentMatch = customerProductPair.doesDocumentMatch(document);
 
-            if(documentMatch){
+            if (documentMatch) {
                 String documentName = document.getName();
                 mappings.addDocument(customerProductPair, documentName);
             }

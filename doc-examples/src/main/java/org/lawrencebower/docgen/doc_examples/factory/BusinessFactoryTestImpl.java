@@ -18,4 +18,14 @@ public class BusinessFactoryTestImpl implements BusinessFactory {
         return business;
     }
 
+    @Override
+    public boolean containsContactId(String contactId) {
+        return false;
+    }
+
+    @Override
+    public String getMappedBusiness(String contactId) {
+        return null;
+    }
+
 }

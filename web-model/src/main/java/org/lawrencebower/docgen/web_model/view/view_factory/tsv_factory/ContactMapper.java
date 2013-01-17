@@ -2,17 +2,11 @@ package org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory;
 
 import org.lawrencebower.docgen.web_model.view.contact.Contact;
 import org.lawrencebower.docgen.web_model.view.contact.ContactBuilder;
-import org.lawrencebower.docgen.web_model.view.contact.ContactView;
-import org.lawrencebower.docgen.web_model.view.contact.ContactViewFactory;
 import org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.DataRow;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class ContactMapper {
 
-    @Autowired
-    private ContactViewFactory viewFactory;
-
-    public ContactView mapCustomerInfo(DataRow dataRow) {
+    public Contact mapCustomerInfo(DataRow dataRow) {
 
         String id = dataRow.getString(0);
         String name = dataRow.getString(1);
@@ -25,6 +19,7 @@ public class ContactMapper {
         String email = dataRow.getString(8);
 
         ContactBuilder builder = new ContactBuilder();
+        builder.setContactId(id);
         builder.setName(name);
         builder.setContactName(contactName);
         builder.setAddress(address);
@@ -34,9 +29,7 @@ public class ContactMapper {
         builder.setTaxId(taxId);
         builder.setEmail(email);
 
-        Contact contact = builder.buildContact();
-
-        return viewFactory.createContactView(contact, id);
+        return builder.buildContact();
     }
 
 }

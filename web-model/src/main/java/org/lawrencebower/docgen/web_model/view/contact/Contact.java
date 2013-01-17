@@ -11,6 +11,7 @@ public class Contact {
     private String address;
     private String taxId;
     private String email;
+    private String contactId;
     private Attributes attributes;
 
     protected Contact() {//only make with a ContactBuilder
@@ -48,6 +49,10 @@ public class Contact {
         this.attributes = new Attributes(attributes);
     }
 
+    protected void setContactId(String contactId) {
+        this.contactId = contactId;
+    }
+
     public String getName() {
         return name;
     }
@@ -82,5 +87,9 @@ public class Contact {
 
     public boolean isAttributesMatch(Attributes attributes) {
         return this.attributes.isAttributeMatch(attributes);
+    }
+
+    public String getContactId() {
+        return contactId;
     }
 }

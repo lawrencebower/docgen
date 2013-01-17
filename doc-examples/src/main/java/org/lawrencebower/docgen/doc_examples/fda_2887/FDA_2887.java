@@ -171,6 +171,8 @@ public class FDA_2887 {
                    false);
 */
 
+        documentViewBuilder.setProductAttributeFilters("gold");
+
     }
 
     private void initDocumentBuilders() {

@@ -9,21 +9,9 @@ import org.lawrencebower.docgen.web_model.view.view_factory.factory.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 public class ViewFactoryImpl implements ViewFactory {
-
-    private CustomerProduct_Document_Mappings customerProductDocMappings;
-
-    private Map<String, ContactView> customers;
-
-    private Map<String, String> businesses;
-
-    private Map<String, ProductView> products;
-
-    private ContactView vendor;
 
     @Autowired(required = false)
     private VendorFactory vendorFactory;
@@ -34,36 +22,31 @@ public class ViewFactoryImpl implements ViewFactory {
     @Autowired(required = false)
     private BusinessFactory businessFactory;
     @Autowired(required = false)
-    private CustomerProductMappingFactory customerProductFactory;
-    @Autowired(required = false)
     private DocumentFactory documentFactory;
+    @Autowired
+    private CustomerProductMappingFactory customerProductFactory;
 
     public void init() {
-        vendor = vendorFactory.getVendor();
-        products = productFactory.getProducts();
-        customers = customerFactory.getCustomers();
-        businesses = businessFactory.getBusinesses();
 
         List<ContactView> allCustomers = getCustomers();
         List<ProductView> allProducts = getProducts();
         List<DocumentView> allDocuments = getAllDocuments();
 
-        customerProductDocMappings = customerProductFactory.getMappingInfo(allCustomers,
-                                                                           allProducts,
-                                                                           allDocuments);
+        customerProductFactory.initMappingInfo(allCustomers,
+                                               allProducts,
+                                               allDocuments);
     }
 
     @Override
     public List<ContactView> getCustomers() {
-        Collection<ContactView> contactViews = customers.values();
-        return new ArrayList<>(contactViews);
+        return customerFactory.getCustomersAsList();
     }
 
     @Override
     public List<DocumentView> getDocumentsForCustomerAndProduct(ContactView customer, ProductView product) {
 
         List<String> documentNames =
-                customerProductDocMappings.getDocumentsForCustomerAndProduct(customer, product);
+                customerProductFactory.getDocumentsForCustomerAndProduct(customer, product);
 
         List<DocumentView> results = new ArrayList<>();
 
@@ -77,13 +60,7 @@ public class ViewFactoryImpl implements ViewFactory {
 
     @Override
     public List<ProductView> getProducts() {
-
-        List<ProductView> results = new ArrayList<>();
-        for (ProductView product : products.values()) {
-            results.add(product);
-        }
-
-        return results;
+        return productFactory.getProductsAsList();
     }
 
     public List<DocumentView> getAllDocuments() {
@@ -97,12 +74,12 @@ public class ViewFactoryImpl implements ViewFactory {
 
     public ContactView getContact(String contactId) {
 
-        if (!customers.containsKey(contactId)) {
+        if (!customerFactory.hasCustomer(contactId)) {
             String message = String.format("Contact %s not found?!", contactId);
             throw new DocGenException(message);
         }
 
-        return customers.get(contactId);
+        return customerFactory.getCustomer(contactId);
     }
 
     @Override
@@ -110,10 +87,10 @@ public class ViewFactoryImpl implements ViewFactory {
 
         ContactView customer;
 
-        if (!businesses.containsKey(customerContactId)) {
+        if (!businessFactory.containsContactId(customerContactId)) {
             customer = getContact(customerContactId);//use the same customer if no business mapped
         } else {
-            String businessId = businesses.get(customerContactId);
+            String businessId = businessFactory.getMappedBusiness(customerContactId);
             customer = getContact(businessId);
         }
 
@@ -122,39 +99,16 @@ public class ViewFactoryImpl implements ViewFactory {
 
     @Override
     public ProductView getProduct(String productId) {
-        if (!products.containsKey(productId)) {
+        if (!productFactory.hasProduct(productId)) {
             String message = String.format("product '%s' not found?!", productId);
             throw new DocGenException(message);
         }
-        return products.get(productId);
+
+        return productFactory.getProduct(productId);
     }
 
     @Override
     public ContactView getVendor() {
-        return vendor;
-    }
-
-    public void setCustomerProductFactory(CustomerProductMappingFactory customerProductFactory) {
-        this.customerProductFactory = customerProductFactory;
-    }
-
-    public void setDocumentFactory(DocumentFactory documentFactory) {
-        this.documentFactory = documentFactory;
-    }
-
-    public void setVendorFactory(VendorFactory vendorFactory) {
-        this.vendorFactory = vendorFactory;
-    }
-
-    public void setProductFactory(ProductFactory productFactory) {
-        this.productFactory = productFactory;
-    }
-
-    public void setCustomerFactory(CustomerFactory customerFactory) {
-        this.customerFactory = customerFactory;
-    }
-
-    public void setBusinessFactory(BusinessFactory businessFactory) {
-        this.businessFactory = businessFactory;
+        return vendorFactory.getVendor();
     }
 }

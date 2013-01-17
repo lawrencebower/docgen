@@ -1,5 +1,6 @@
 package org.lawrencebower.docgen.doc_examples.factory;
 
+import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_model.view.contact.Contact;
 import org.lawrencebower.docgen.web_model.view.contact.ContactBuilder;
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
@@ -7,15 +8,14 @@ import org.lawrencebower.docgen.web_model.view.contact.ContactViewFactory;
 import org.lawrencebower.docgen.web_model.view.view_factory.factory.CustomerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class CustomerFactoryTestImpl implements CustomerFactory {
 
     @Autowired
     private ContactViewFactory contactViewFactory;
 
-    private Map<String, ContactView> customers = new LinkedHashMap<>();
+    private Map<String, Contact> customers = new LinkedHashMap<>();
 
     public static final String CUSTOMER_ID_1 = "1";
     public static final String CUSTOMER_ID_2 = "2";
@@ -42,17 +42,38 @@ public class CustomerFactoryTestImpl implements CustomerFactory {
 
         Contact contact2 = builder.buildContact();
 
-        ContactView customerView1 = contactViewFactory.createContactView(contact1, CUSTOMER_ID_1);
-        ContactView customerView2 = contactViewFactory.createContactView(contact2, CUSTOMER_ID_2);
-
-
-        customers.put(customerView1.getName(), customerView1);
-        customers.put(customerView2.getName(), customerView2);
-
+        customers.put(contact1.getContactId(), contact1);
+        customers.put(contact2.getContactId(), contact2);
     }
 
     @Override
-    public Map<String, ContactView> getCustomers() {
-        return customers;
+    public List<ContactView> getCustomersAsList() {
+
+        List<ContactView> contactViews = new ArrayList<>();
+        Collection<Contact> values = customers.values();
+        for (Contact contact : values) {
+            ContactView contactView = contactViewFactory.createContactView(contact);
+            contactViews.add(contactView);
+        }
+
+        return contactViews;
+    }
+
+    @Override
+    public ContactView getCustomer(String contactId) {
+
+        if (!customers.containsKey(contactId)) {
+            String message = String.format("Contact %s not found?!", contactId);
+            throw new DocGenException(message);
+        }
+
+        Contact contact = customers.get(contactId);
+
+        return contactViewFactory.createContactView(contact);
+    }
+
+    @Override
+    public boolean hasCustomer(String contactId) {
+        return customers.containsKey(contactId);
     }
 }

@@ -58,6 +58,8 @@ public class DataEntryCBTest {
     ArgumentCaptor<ArrayList<ProductView>> mockProducts;
     @Mock
     ProductSelection productSelection;
+    @Mock
+    ViewFactory mockViewFactory;
 
     @Before
     public void setup() {
@@ -66,8 +68,6 @@ public class DataEntryCBTest {
 
     @Test
     public void testGetDocumentsForViewing_validData_returnsCorrectDocs() throws Exception {
-
-        ViewFactory mockFactory = mock(ViewFactory.class);
 
         List<ProductView> products = Arrays.asList(mock(ProductView.class),
                                                    mock(ProductView.class),
@@ -82,10 +82,10 @@ public class DataEntryCBTest {
         List<DocumentView> list1 = Arrays.asList(docView1, docView2);
         List<DocumentView> list2 = Arrays.asList(docView2, docView3);
 
-        given(mockFactory.getDocumentsForCustomerAndProduct(any(ContactView.class),
-                                                            any(ProductView.class))).willReturn(list1, list1, list2);
+        given(mockViewFactory.getDocumentsForCustomerAndProduct(any(ContactView.class),
+                                                                any(ProductView.class))).willReturn(list1, list1, list2);
 
-        dataEntryBusiness.setViewFactory(mockFactory);
+        dataEntryBusiness.setViewFactory(mockViewFactory);
 
         DocumentSet docSet =
                 dataEntryBusiness.getDocumentsForViewing(mockCustomerSelection, productSelection);
@@ -187,6 +187,7 @@ public class DataEntryCBTest {
     public void testMapAutoMapFields_emptyDocs_errorThrown() throws Exception {
         try {
             DocumentSet documentSet = documentSetFactory.createDocumentInfoSet();
+            dataEntryBusiness.setViewFactory(mockViewFactory);
             dataEntryBusiness.mapAutoMapComponents(documentSet,
                                                    mockCustomerSelection,
                                                    mockBusinessSelection);

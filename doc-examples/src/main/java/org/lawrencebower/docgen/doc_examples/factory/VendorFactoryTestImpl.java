@@ -24,10 +24,11 @@ public class VendorFactoryTestImpl implements VendorFactory {
         builder.setCountry("UK");
         builder.setTaxId("456789");
         builder.setEmail("sales@acme.com");
+        builder.setContactId(VENDOR_TEST_ID);
 
         Contact vendorData = builder.buildContact();
 
-        vendor = contactViewFactory.createContactView(vendorData, VENDOR_TEST_ID);
+        vendor = contactViewFactory.createContactView(vendorData);
     }
 
     @Override

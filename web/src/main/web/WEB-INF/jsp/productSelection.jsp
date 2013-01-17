@@ -9,6 +9,16 @@
              scope="session"
              type="org.lawrencebower.docgen.web.model.SessionData"/>
 
+<jsp:useBean id="noProductId"
+             scope="request"
+             type="java.lang.String"/>
+
+<script type="text/javascript">
+    function formSubmit() {
+        document.getElementById("productSelect").submit();
+    }
+</script>
+
 <s:url var="customer_url" value="/customerSelect"/>
 <a href="${customer_url}">Select customer</a>
 &nbsp;->&nbsp;
@@ -17,12 +27,13 @@ Select products
 <div>
     <br/>
 
-    <sf:form method="POST" action="/docgen/productSelect" modelAttribute="productSelection">
-        <sf:select path="productId" >
-            <sf:option value="NONE" label="--- Select ---"/>
-            <sf:options items="${products}" itemLabel="productName" itemValue="productId" />
+    <sf:form id="productSelect" method="POST" action="/docgen/productSelect" modelAttribute="productSelection">
+        <sf:select path="productId" onchange="formSubmit()">
+            <sf:option value="${noProductId}" label="--- Select ---"/>
+            <c:forEach var="product" items="${products}">
+                <sf:option value="${product.productId}" label="${product.productId} - ${product.productName}"/>
+            </c:forEach>
         </sf:select>
-        <input name="commit" type="submit"/>
     </sf:form>
     <br/>
 

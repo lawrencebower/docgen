@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
+import org.lawrencebower.docgen.web_model.business_def.mapping.parameter_mapping.field_value.FieldMapper;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSetFactory;
 import org.lawrencebower.docgen.web_model.view.document.DocumentView;
@@ -28,7 +29,7 @@ import static org.mockito.Mockito.*;
 public class FieldMapperImplTest {
 
     @Autowired
-    org.lawrencebower.docgen.web_model.business_def.mapping.parameter_mapping.field_value.FieldMapper fieldMapper;
+    FieldMapper fieldMapper;
     @Autowired
     CustomComponentFactory customComponentFactory;
     @Autowired

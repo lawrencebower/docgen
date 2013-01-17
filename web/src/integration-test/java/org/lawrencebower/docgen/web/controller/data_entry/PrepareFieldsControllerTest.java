@@ -31,7 +31,7 @@ public class PrepareFieldsControllerTest {
     ViewFactory viewFactory;
     @Autowired
     SessionSetupUtils sessionSetupUtils;
-
+    @Autowired
     SessionData sessionData;
     PrepareFieldsController controller;
 
@@ -41,7 +41,6 @@ public class PrepareFieldsControllerTest {
     @Before
     public void setUp() throws Exception {
 
-        sessionData = new SessionData();
         setupSessionData();
 
         controller = new PrepareFieldsController();
@@ -56,7 +55,8 @@ public class PrepareFieldsControllerTest {
     @Test
     public void testPrepareFields_validFields_correctDocumentNumberSet() throws Exception {
         controller.prepareFields();
-        assertEquals(2, sessionData.getDocumentsAsList().size());
+        List<DocumentView> documentsAsList = sessionData.getDocumentsAsList();
+        assertEquals(2, documentsAsList.size());
     }
 
     @Test
@@ -93,7 +93,7 @@ public class PrepareFieldsControllerTest {
         controller.prepareFields();
         sessionData.setShowAutoMappedFields(true);
         List<DocComponentView> docComponentViews = controller.getDocComponentViews();
-        assertEquals(23, docComponentViews.size());//all the components
+        assertEquals(29, docComponentViews.size());//all the components
     }
 
     @Test
@@ -101,6 +101,6 @@ public class PrepareFieldsControllerTest {
         controller.prepareFields();
         sessionData.setShowAutoMappedFields(false);
         List<DocComponentView> docComponentViews = controller.getDocComponentViews();
-        assertEquals(4, docComponentViews.size());//all the components
+        assertEquals(12, docComponentViews.size());//all the components
     }
 }

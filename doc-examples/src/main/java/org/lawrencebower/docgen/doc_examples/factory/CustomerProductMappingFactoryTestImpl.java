@@ -14,6 +14,7 @@ import org.lawrencebower.docgen.web_model.view.product.ProductBuilder;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.lawrencebower.docgen.web_model.view.product.ProductViewFactory;
 import org.lawrencebower.docgen.web_model.view.view_factory.CustomerProduct_Document_Mappings;
+import org.lawrencebower.docgen.web_model.view.view_factory.CustomerProduct_Document_MappingsImpl;
 import org.lawrencebower.docgen.web_model.view.view_factory.factory.CustomerProductMappingFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,7 +27,7 @@ import static org.lawrencebower.docgen.doc_examples.factory.ProductFactoryTestIm
 
 class CustomerProductMappingFactoryTestImpl implements CustomerProductMappingFactory {
 
-    private CustomerProduct_Document_Mappings customerProductDocMappings = new CustomerProduct_Document_Mappings();
+    private CustomerProduct_Document_Mappings customerProductDocMappings = new CustomerProduct_Document_MappingsImpl();
 
     @Autowired
     private ContactViewFactory contactViewFactory;
@@ -37,10 +38,15 @@ class CustomerProductMappingFactoryTestImpl implements CustomerProductMappingFac
     private ProductView product2;
 
     @Override
-    public CustomerProduct_Document_Mappings getMappingInfo(List<ContactView> customers,
-                                                            List<ProductView> products,
-                                                            List<DocumentView> documents) {
-        return customerProductDocMappings;
+    public void initMappingInfo(List<ContactView> customers,
+                                List<ProductView> products,
+                                List<DocumentView> documents) {
+        initMappings();
+    }
+
+    @Override
+    public List<String> getDocumentsForCustomerAndProduct(ContactView customer, ProductView product) {
+        return customerProductDocMappings.getDocumentsForCustomerAndProduct(customer, product);
     }
 
     private void initMappings() {
@@ -111,8 +117,9 @@ class CustomerProductMappingFactoryTestImpl implements CustomerProductMappingFac
 
     private ContactView buildContact(String id) {
         ContactBuilder contactBuilder = new ContactBuilder();
+        contactBuilder.setContactId(id);
         Contact customer2 = contactBuilder.buildContact();
-        return contactViewFactory.createContactView(customer2, id);
+        return contactViewFactory.createContactView(customer2);
     }
 
     private void addMappingInfo(ContactView customer,

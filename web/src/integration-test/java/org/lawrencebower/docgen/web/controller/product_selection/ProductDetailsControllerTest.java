@@ -22,15 +22,15 @@ public class ProductDetailsControllerTest {
     ViewFactory viewFactory;
     @Autowired
     SessionSetupUtils sessionSetupUtils;
+    @Autowired
+    private SessionData sessionData;
 
     private ProductDetailsController controller;
-    private SessionData sessionData;
 
     @Before
     public void setup() {
         controller = new ProductDetailsController();
         controller.setBusiness(productSelectionBusiness);
-        sessionData = new SessionData();
         controller.setSessionData(sessionData);
         setupSessionData();
     }

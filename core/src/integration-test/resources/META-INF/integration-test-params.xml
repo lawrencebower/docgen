@@ -5,6 +5,7 @@
     <beans:bean name="coreTestInputRoot" class="java.lang.String">
         <beans:constructor-arg value="C:\GitHub\docgen\core\src\integration-test\resources\"/>
     </beans:bean>
+
     <beans:bean name="testOutputRoot" class="java.lang.String">
         <beans:constructor-arg value="C:\code\output\"/>
     </beans:bean>

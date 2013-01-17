@@ -38,7 +38,7 @@ public class SetFieldsControllerTest {
     DocGenFileUtils fileUtils;
     @Autowired
     SessionSetupUtils sessionSetupUtils;
-
+    @Autowired
     SessionData sessionData;
     SetFieldsController controller;
 
@@ -58,8 +58,6 @@ public class SetFieldsControllerTest {
     @Before
     public void setUp() throws Exception {
 
-        sessionData = new SessionData();
-
         setupSessionData();
         prepareDocumentSetOnSession();
 
@@ -68,6 +66,8 @@ public class SetFieldsControllerTest {
         controller.setBusiness(business);
 
         setupInputPath();
+
+        createOutputPath();
     }
 
     /**
@@ -78,6 +78,10 @@ public class SetFieldsControllerTest {
         packageName = packageName.replaceAll("\\.", "\\\\");
 
         testInputPath = testInputRoot + packageName + File.separator;
+    }
+
+    private void createOutputPath() {
+        fileUtils.makeDirIfNotExists(new File(testOutputRoot));
     }
 
     private void setupSessionData() {

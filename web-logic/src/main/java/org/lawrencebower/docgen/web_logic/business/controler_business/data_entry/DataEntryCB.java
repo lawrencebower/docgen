@@ -33,7 +33,7 @@ public class DataEntryCB {
     PDFConcatenator pdfConcatenator;
     @Autowired
     ViewUtils viewUtils;
-    @Autowired
+    @Autowired(required = false)
     ViewFactory viewFactory;
     @Autowired
     private DocumentSetFactory documentSetFactory;

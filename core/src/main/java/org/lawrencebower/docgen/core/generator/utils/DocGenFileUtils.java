@@ -19,4 +19,15 @@ public class DocGenFileUtils {
             throw new DocGenException(e);
         }
     }
+
+    public void makeDirIfNotExists(File file){
+        if(!file.exists()){
+            boolean success = file.mkdirs();
+            if(!success){
+                String filePath = file.getPath();
+                String message = String.format("Could not make dirs for '%s'", filePath);
+                throw new DocGenException(message);
+            }
+        }
+    }
 }

@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class ProductSelectionCB {
 
-    @Autowired
+    @Autowired(required = false)
     private ViewFactory viewFactory;
 
     public List<ProductView> getProducts() {

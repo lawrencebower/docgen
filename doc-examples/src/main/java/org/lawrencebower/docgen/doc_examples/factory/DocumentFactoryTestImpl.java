@@ -32,9 +32,13 @@ public abstract class DocumentFactoryTestImpl implements DocumentFactory {
         FDA_2887 fda2887 = getFDA2887();
         DocumentView fda2887View = fda2887.getDocumentView();
 
+        FCC_740 fcc740 = getFCC740();
+        DocumentViewImpl fcc740View = fcc740.getDocumentView();
+
         return Arrays.asList(commercialInvoiceView,
                              deliveryNoteView,
-                             fda2887View);
+                             fda2887View,
+                             fcc740View);
     }
 
     @Override

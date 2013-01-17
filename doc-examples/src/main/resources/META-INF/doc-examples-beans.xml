@@ -25,29 +25,32 @@
           init-method="prepareComponents"
           scope="prototype"/>
 
-    <bean class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.CustomerFactoryTsvImpl"
+    <bean id="customerFactory"
+          class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.CustomerFactoryTsvImpl"
           init-method="initCustomers">
         <property name="customersTSVFile" ref="customersTSVFile"/>
     </bean>
 
-    <bean class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.BusinessFactoryTsvImpl"
+    <bean id="businessFactory"
+          class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.BusinessFactoryTsvImpl"
           init-method="initBusiness">
         <property name="businessTSVFile" ref="businessTSVFile"/>
     </bean>
 
-    <bean class="org.lawrencebower.docgen.web_model.view.view_factory.factory.CustomerProductMappingFactoryImpl"/>
-
-    <bean class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.ProductFactoryTsvImpl"
+    <bean id="productFactory"
+          class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.ProductFactoryTsvImpl"
           init-method="initProducts">
         <property name="productsTSVFile" ref="productsTSVFile"/>
     </bean>
 
-    <bean class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.VendorFactoryTsvImpl"
+    <bean id="vendorFactory"
+          class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.VendorFactoryTsvImpl"
           init-method="initVendor">
         <property name="vendorTSVFile" ref="vendorTSVFile"/>
     </bean>
 
-    <bean class="org.lawrencebower.docgen.doc_examples.factory.DocumentFactoryTestImpl">
+    <bean id="documentFactory"
+          class="org.lawrencebower.docgen.doc_examples.factory.DocumentFactoryTestImpl">
         <lookup-method name="getCommercialInvoice" bean="commercialInvoice"/>
         <lookup-method name="getDeliveryNote" bean="deliveryNote"/>
         <lookup-method name="getFDA2887" bean="fda2887"/>

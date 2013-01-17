@@ -17,7 +17,7 @@ import java.util.List;
 
 public class DocumentViewImpl implements DocumentView {
 
-    @Autowired
+    @Autowired(required = false)
     ViewFactory viewFactory;
 
     private Document document;

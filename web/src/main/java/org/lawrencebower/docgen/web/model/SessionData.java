@@ -23,6 +23,9 @@ public class SessionData {
 
     private boolean showAutoMappedFields;
 
+    private SessionData() {//force spring creation
+    }
+
     public void setCustomerSelection(ContactView customerSelection) {
         this.customerSelection.selectCustomer(customerSelection);
     }

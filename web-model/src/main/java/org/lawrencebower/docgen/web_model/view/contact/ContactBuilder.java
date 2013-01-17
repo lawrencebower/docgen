@@ -36,6 +36,10 @@ public class ContactBuilder {
         contact.setEmail(email);
     }
 
+    public void setContactId(String id){
+        contact.setContactId(id);
+    }
+
     public void setAttributes(String... attributes) {
         contact.setAttributes(attributes);
     }

@@ -1,7 +1,9 @@
 package org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.web_model.view.contact.Contact;
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
+import org.lawrencebower.docgen.web_model.view.contact.ContactViewFactory;
 import org.lawrencebower.docgen.web_model.view.view_factory.factory.VendorFactory;
 import org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.DataRow;
 import org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.DataSet;
@@ -18,12 +20,14 @@ public class VendorFactoryTsvImpl implements VendorFactory {
     private TSVReader tsvReader;
     @Autowired
     private ContactMapper contactMapper;
+    @Autowired
+    private ContactViewFactory viewFactory;
 
-    private ContactView vendor;
+    private Contact vendor;
 
     @Override
     public ContactView getVendor() {
-        return vendor;
+        return viewFactory.createContactView(vendor);
     }
 
     public void setVendorTSVFile(String vendorTSVFile) {

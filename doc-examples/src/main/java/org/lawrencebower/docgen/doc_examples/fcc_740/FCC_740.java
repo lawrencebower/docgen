@@ -96,6 +96,8 @@ public class FCC_740 {
 
         documentViewBuilder.setCopyNumber(5);
 
+        documentViewBuilder.setCustomerAttributeFilters("USA_EAST_COAST");
+
     }
 
     private void initDocumentBuilders() {

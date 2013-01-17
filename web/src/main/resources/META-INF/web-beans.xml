@@ -9,4 +9,7 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
           class="org.lawrencebower.docgen.web.model.SessionData"
           scope="session"/>
 
+    <bean name="productSelectionHelper"
+          class="org.lawrencebower.docgen.web.controller.product_selection.ProductSelectionHelper"/>
+
 </beans>

@@ -9,7 +9,6 @@ public class ContactView {
     @Autowired(required = false)
     private ViewUtils viewUtils;
 
-    private String contactId;
     private Contact contact;
 
     private ContactView() {//force spring creation
@@ -19,12 +18,8 @@ public class ContactView {
         this.contact = contact;
     }
 
-    public void setContactId(String contactId) {
-        this.contactId = contactId;
-    }
-
     public String getContactId() {
-        return contactId;
+        return contact.getContactId();
     }
 
     public String getName(){

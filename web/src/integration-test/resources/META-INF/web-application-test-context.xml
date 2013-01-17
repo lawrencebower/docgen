@@ -14,7 +14,17 @@
 
     <import resource="doc-examples-beans.xml"/>
 
+    <import resource="doc-examples-params.xml"/>
+
     <import resource="web-application-test-params.xml"/>
+
+    <bean name="sessionData"
+          class="org.lawrencebower.docgen.web.model.SessionData"
+          scope="prototype"/>
+
+    <bean name="productSelectionHelper"
+          class="org.lawrencebower.docgen.web.controller.product_selection.ProductSelectionHelper"/>
+
 
     <bean id="testFileUtils" class="org.lawrencebower.docgen.core.generator.utils.ChecksumUtils"/>
     <bean id="setupSessionUtils" class="org.lawrencebower.docgen.web.controller.data_entry.SessionSetupUtils"/>

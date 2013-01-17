@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.web.model.SessionData;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -14,14 +15,12 @@ import static junit.framework.Assert.assertTrue;
 @ContextConfiguration(locations = "classpath:META-INF/web-application-test-context.xml")
 public class ToggleAutomappedControllerTest {
 
+    @Autowired
     SessionData sessionData;
     ToggleAutomappedController controller;
 
     @Before
     public void setUp() throws Exception {
-
-        sessionData = new SessionData();
-
         controller = new ToggleAutomappedController();
         controller.setSessionData(sessionData);
     }

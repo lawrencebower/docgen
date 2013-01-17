@@ -1,5 +1,6 @@
 package org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory;
 
+import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_model.view.product.Product;
 import org.lawrencebower.docgen.web_model.view.product.ProductBuilder;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
@@ -10,24 +11,55 @@ import org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.D
 import org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.TSVReader;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ProductFactoryTsvImpl implements ProductFactory {
 
     @Autowired
     private TSVReader tsvReader;
-
-    private String productsTSVFile;
-
     @Autowired
     private ProductViewFactory viewFactory;
 
-    private Map<String, ProductView> products;
+    private String productsTSVFile;
+    private Map<String, Product> products;
 
     @Override
-    public Map<String, ProductView> getProducts() {
+    public Map<String, Product> getProducts() {
         return products;
+    }
+
+    @Override
+    public List<ProductView> getProductsAsList() {
+
+        List<ProductView> results = new ArrayList<>();
+        for (Product product : products.values()) {
+            ProductView productView = viewFactory.createProductView(product);
+            results.add(productView);
+        }
+
+        return results;
+
+    }
+
+    @Override
+    public boolean hasProduct(String productId) {
+        return products.containsKey(productId);
+    }
+
+    @Override
+    public ProductView getProduct(String productId) {
+
+        if(!hasProduct(productId)){
+            String message = String.format("Product it id '%s' not found?!", productId);
+            throw new DocGenException(message);
+        }
+
+        Product product = products.get(productId);
+
+        return viewFactory.createProductView(product);
     }
 
     public void setProductsTSVFile(String productsTSVFile) {
@@ -38,16 +70,16 @@ public class ProductFactoryTsvImpl implements ProductFactory {
 
         DataSet dataSet = tsvReader.readDataSetAsFile(productsTSVFile);
 
-        products = new HashMap<>();
+        products = new LinkedHashMap<>();//use linked map to maintain order for tests
 
         for (DataRow dataRow : dataSet.getRows()) {
-            ProductView product = mapProductInfo(dataRow);
+            Product product = mapProductInfo(dataRow);
             String productId = product.getProductId();
             products.put(productId, product);
         }
     }
 
-    private ProductView mapProductInfo(DataRow dataRow) {
+    private Product mapProductInfo(DataRow dataRow) {
 
         ProductBuilder builder = new ProductBuilder();
 
@@ -74,9 +106,7 @@ public class ProductFactoryTsvImpl implements ProductFactory {
             builder.setAttributes(attributes);
         }
 
-        Product product = builder.buildProduct();
-
-        return viewFactory.createProductView(product);
+        return builder.buildProduct();
     }
 
 }
