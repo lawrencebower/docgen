@@ -50,6 +50,9 @@ public class TSVReader {
             }
 
             String[] tokens = trimmedLine.split(separator);
+
+            processNewlines(tokens);
+
             result.addRow(new DataRow(tokens));
         }
 
@@ -62,5 +65,16 @@ public class TSVReader {
         } catch (IOException e) {
             throw new DocGenException(e);
         }
+    }
+
+    private void processNewlines(String[] tokens) {
+        for(int i = 0; i<tokens.length;i++){
+            String processedToken = replaceNewlineChars(tokens[i]);
+            tokens[i] = processedToken;
+        }
+    }
+
+    private String replaceNewlineChars(String token){
+        return token.replace("\\n","\n");
     }
 }
