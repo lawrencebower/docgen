@@ -47,9 +47,9 @@ public class ProductSelection {
         }
     }
 
-    public void mapFieldValuesToComponents(Map<String, String[]> parameterMap) {
+    public void mapFieldValuesToComponents(List<ProductBindBean> productBindBeans) {
         for (ProductView productView : getProducts()) {
-            productMapper.mapFieldValuesToProduct(parameterMap, productView);
+            productMapper.mapToProducts(productBindBeans, productView);
         }
     }
 }

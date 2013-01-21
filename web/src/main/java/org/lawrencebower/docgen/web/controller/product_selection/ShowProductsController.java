@@ -1,6 +1,7 @@
 package org.lawrencebower.docgen.web.controller.product_selection;
 
 import org.apache.log4j.Logger;
+import org.lawrencebower.docgen.web.model.SessionData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,9 @@ public class ShowProductsController {
 
     static Logger logger = Logger.getLogger(ShowProductsController.class);
 
+    @Autowired
+    private SessionData sessionData;
+
     private ProductSelectionHelper productHelper;
 
     @Autowired
@@ -24,7 +28,7 @@ public class ShowProductsController {
     @RequestMapping(value = "/productSelect", method = RequestMethod.GET)
     public String showProducts(Model model) {
 
-        productHelper.putAllProductsOnModel(model);
+        productHelper.putAllProductsOnModel(model, sessionData);
 
         return "products";
     }

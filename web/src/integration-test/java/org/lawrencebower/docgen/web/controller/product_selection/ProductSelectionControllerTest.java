@@ -7,6 +7,7 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.doc_examples.factory.ProductFactoryTestImpl;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.product_selection.ProductSelectionCB;
+import org.lawrencebower.docgen.web_model.view.product.ProductBindBean;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -46,7 +47,8 @@ public class ProductSelectionControllerTest {
         String id3 = ProductFactoryTestImpl.PRODUCT_ID_3;
 
         BindingAwareModelMap model = new BindingAwareModelMap();
-        ProductSelectionBean productSelectionBean = new ProductSelectionBean(id1);
+        ProductBindBean productSelectionBean = new ProductBindBean();
+        productSelectionBean.setProductId(id1);
         controller.selectProduct(productSelectionBean, model);
 
         List<ProductView> products = (List<ProductView>) model.get("products");
@@ -63,7 +65,8 @@ public class ProductSelectionControllerTest {
         String id1 = ProductFactoryTestImpl.PRODUCT_ID_1;
 
         BindingAwareModelMap model = new BindingAwareModelMap();
-        ProductSelectionBean productSelectionBean = new ProductSelectionBean(id1);
+        ProductBindBean productSelectionBean = new ProductBindBean();
+        productSelectionBean.setProductId(id1);
         controller.selectProduct(productSelectionBean, model);
 
         List<ProductView> products = sessionData.getSelectedProducts();
@@ -80,8 +83,10 @@ public class ProductSelectionControllerTest {
         String id1 = ProductFactoryTestImpl.PRODUCT_ID_1;
         String id2 = ProductFactoryTestImpl.PRODUCT_ID_2;
 
-        ProductSelectionBean product1 = new ProductSelectionBean(id1);
-        ProductSelectionBean product2 = new ProductSelectionBean(id2);
+        ProductBindBean product1 = new ProductBindBean();
+        product1.setProductId(id1);
+        ProductBindBean product2 = new ProductBindBean();
+        product2.setProductId(id2);
         controller.selectProduct(product1, model);
         controller.selectProduct(product2, model);
         controller.selectProduct(product2, model);
@@ -99,7 +104,9 @@ public class ProductSelectionControllerTest {
 
         try {
             BindingAwareModelMap model = new BindingAwareModelMap();
-            controller.selectProduct(new ProductSelectionBean("I dont exist"), model);
+            ProductBindBean productSelection = new ProductBindBean();
+            productSelection.setProductId("I dont exist");
+            controller.selectProduct(productSelection, model);
         } catch (DocGenException e) {
             String message = e.getMessage();
             assertEquals("product 'I dont exist' not found?!", message);

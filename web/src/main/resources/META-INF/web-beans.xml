@@ -10,6 +10,13 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
           scope="session"/>
 
     <bean name="productSelectionHelper"
-          class="org.lawrencebower.docgen.web.controller.product_selection.ProductSelectionHelper"/>
+          class="org.lawrencebower.docgen.web.controller.product_selection.ProductSelectionHelper"
+          scope="session"/>
+
+    <bean name="productSelectionBean"
+          class="org.lawrencebower.docgen.web.controller.product_selection.ProductSelectionBean"
+          init-method="init"
+          scope="session">
+    </bean>
 
 </beans>
