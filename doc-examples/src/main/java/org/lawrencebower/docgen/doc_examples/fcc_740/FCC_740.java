@@ -3,8 +3,12 @@ package org.lawrencebower.docgen.doc_examples.fcc_740;
 import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.ImageComponent;
-import org.lawrencebower.docgen.core.document.component.TextComponent;
+import org.lawrencebower.docgen.core.document.component.TableTextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
+import org.lawrencebower.docgen.core.document.component.table.TableCell;
+import org.lawrencebower.docgen.core.document.component.table.TableComponent;
+import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
+import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayDocument;
@@ -17,8 +21,7 @@ import org.lawrencebower.docgen.web_model.view.document.component.DocComponentVi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField.BUSINESS_ADDRESS;
-import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField.CUSTOMER_ADDRESS;
+import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField.*;
 
 public class FCC_740 {
 
@@ -69,14 +72,14 @@ public class FCC_740 {
                    true);
 
         addTextBox(CUSTOMER_ADDRESS,
-                   new DocCoordinates(205, 489, 185, 60),
+                   new DocCoordinates(205, 489, 185, 70),
                    true);
 
         addTextBox(BUSINESS_ADDRESS,
-                   new DocCoordinates(395, 489, 185, 60),
+                   new DocCoordinates(395, 489, 185, 70),
                    true);
 
-        addTextBox("Signature",
+        addTextBox(VENDOR_CONTACT_NAME,
                    new DocCoordinates(25, 433, 265, 25),
                    true);
 
@@ -96,7 +99,7 @@ public class FCC_740 {
 
         documentViewBuilder.setCopyNumber(5);
 
-        documentViewBuilder.setCustomerAttributeFilters("USA_EAST_COAST");
+        documentViewBuilder.setCustomerAttributeFilters("USA");
 
     }
 
@@ -128,12 +131,23 @@ public class FCC_740 {
 
         FontInfo fontInfo = FontInfo.SMALL();
         TextBlock textBlock = new TextBlock(name, fontInfo);
-        TextComponent textComponent = new TextComponent(textBlock);
-        textComponent.setCoordinates(coordinates);
+        TableTextComponent textComponent = new TableTextComponent(textBlock);
         textComponent.setName(name);
-        textComponent.setRenderBorder(true);
 
-        convertAndAddComponent(textComponent);
+        TableComponent table = new TableComponent("");
+        TableHeaderRow headerRow = new TableHeaderRow();
+        headerRow.setRenderHeader(false);
+        headerRow.addCell(new TableCell());
+        table.setHeaderRow(headerRow);
+
+        TableRow row = new TableRow();
+        row.addCell(new TableCell(textComponent));
+        table.addRow(row);
+
+        table.setCoordinates(coordinates);
+//        table.setRenderBorder(true);
+
+        convertAndAddComponent(table);
 
         if (editable) {
             addViewableComponent(textComponent);

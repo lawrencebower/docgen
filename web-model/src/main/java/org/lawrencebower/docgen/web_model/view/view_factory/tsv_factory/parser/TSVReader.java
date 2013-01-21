@@ -45,6 +45,7 @@ public class TSVReader {
             if (trimmedLine.isEmpty()) {
                 continue; // ignore empty lines
             }
+
             if (trimmedLine.startsWith(comment)) {
                 continue; // ignore comment lines
             }

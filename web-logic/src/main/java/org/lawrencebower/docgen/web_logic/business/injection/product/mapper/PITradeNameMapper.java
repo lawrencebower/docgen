@@ -3,14 +3,14 @@ package org.lawrencebower.docgen.web_logic.business.injection.product.mapper;
 import org.lawrencebower.docgen.web_logic.business.injection.product.ProductInjectionField;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 
-public class PINameMapper extends PIAbstractMapper {
+public class PITradeNameMapper extends PIAbstractMapper {
 
-    private PINameMapper() {
-        super(ProductInjectionField.PRODUCT_NAME);
+    private PITradeNameMapper() {
+        super(ProductInjectionField.PRODUCT_TRADE_NAME);
     }
 
     @Override
     protected String getValue(ProductView product) {
-        return product.getProductName();
+        return product.getTradeName();
     }
 }

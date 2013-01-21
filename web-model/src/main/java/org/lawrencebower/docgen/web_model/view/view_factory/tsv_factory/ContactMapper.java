@@ -15,8 +15,8 @@ public class ContactMapper {
         String phone = dataRow.getString(4);
         String country = dataRow.getString(5);
         String[] attributes = dataRow.getStringArray(6);
-        String taxId = dataRow.getString(7);
-        String email = dataRow.getString(8);
+        String taxId = dataRow.getStringDefault(7, null);
+        String email = dataRow.getStringDefault(8, null);
 
         ContactBuilder builder = new ContactBuilder();
         builder.setContactId(id);

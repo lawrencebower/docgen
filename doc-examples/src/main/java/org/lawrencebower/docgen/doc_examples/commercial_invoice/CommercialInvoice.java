@@ -233,7 +233,7 @@ public class CommercialInvoice {
         table.addRow(createRowWithLabelAndValue("Date:", textComponent));
         addViewableComponent(textComponent);
 
-        textComponent = createTableTextComponent("Reference/Order No:", "154487945");
+        textComponent = createTableTextComponent("refNumber", "154487945");
         table.addRow(createRowWithLabelAndValue("Reference/Order No:", textComponent));
         addViewableComponent(textComponent);
 
@@ -513,7 +513,7 @@ public class CommercialInvoice {
     }
 
     private TextComponent createTextComponent(String value) {
-        return componentBuilder.createTextComponent(value);
+        return componentBuilder.createTextComponentWithValue(value);
     }
 
     private TextComponent createTextComponent(String name, String value) {

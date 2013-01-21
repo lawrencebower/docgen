@@ -89,20 +89,23 @@ public class ProductFactoryTsvImpl implements ProductFactory {
         String name = dataRow.getString(1);
         builder.setProductName(name);
 
-        String value = dataRow.getString(2);
+        String customsDescription = dataRow.getString(2);
+        builder.setCustomsDescription(customsDescription);
+
+        String tradeName = dataRow.getString(3);
+        builder.setTradeName(tradeName);
+
+        String value = dataRow.getString(4);
         builder.setValue(value);
 
-        String country = dataRow.getString(3);
+        String country = dataRow.getString(5);
         builder.setCountryOfOrigin(country);
 
-        String tariffNumber = dataRow.getString(4);
+        String tariffNumber = dataRow.getString(6);
         builder.setHarmonizedTariffNumber(tariffNumber);
 
-        String customsDesc = dataRow.getString(5);
-        builder.setCustomsDescription(customsDesc);
-
-        if (dataRow.hasColumn(6)) {
-            String[] attributes = dataRow.getStringArray(6);
+        if (dataRow.hasColumn(7)) {
+            String[] attributes = dataRow.getStringArray(7);
             builder.setAttributes(attributes);
         }
 

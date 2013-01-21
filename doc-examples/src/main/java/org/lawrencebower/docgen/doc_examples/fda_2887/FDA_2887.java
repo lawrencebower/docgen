@@ -72,7 +72,7 @@ public class FDA_2887 {
                     new DocCoordinates(48, 505, 10, 10),
                     false);
 
-        createTextComponent("Date of manufacture",
+        createTextComponentWithValue("Date of manufacture",
                    new DocCoordinates(385, 509, 200, 10),
                    false);
 */
@@ -130,7 +130,7 @@ public class FDA_2887 {
                     new DocCoordinates(48, 319, 10, 10),
                     false);
 
-        createTextComponent("state reason",
+        createTextComponentWithValue("state reason",
                    new DocCoordinates(255, 321, 270, 10),
                    false);
 
@@ -146,7 +146,7 @@ public class FDA_2887 {
                     new DocCoordinates(48, 252, 10, 10),
                     false);
 
-        createTextComponent("List dates & restrictions",
+        createTextComponentWithValue("List dates & restrictions",
                    new DocCoordinates(257, 254, 270, 10),
                    false);
 
@@ -166,12 +166,12 @@ public class FDA_2887 {
                     new DocCoordinates(358, 195, 10, 10),
                     false);
 
-        createTextComponent("Name and title of importer",
+        createTextComponentWithValue("Name and title of importer",
                    new DocCoordinates(264, 119, 332, 28),
                    false);
 */
 
-        documentViewBuilder.setProductAttributeFilters("gold");
+        documentViewBuilder.setProductAttributeFilters("laser");
 
     }
 

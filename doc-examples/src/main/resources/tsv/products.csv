@@ -1,4 +1,4 @@
-#id	name	value	country	tariffNo	customsDesc	attributes
-W1	super widget	100.25	UK	1234	(no laser)	
-W2	mega widget	200	USA	4566		laser,premium
-W3	giga widget	1000	UK	4555		gold
+#id	name	shot name	trade name	value	country	tariffNo	attributes
+W1	super widget	optical widget	W1	100.25	UK	1234	
+W2	mega widget	laser widget	W2	200	USA	4566	laser,premium
+W3	giga widget	optical widget	AB_1	1000	UK	4555	gold

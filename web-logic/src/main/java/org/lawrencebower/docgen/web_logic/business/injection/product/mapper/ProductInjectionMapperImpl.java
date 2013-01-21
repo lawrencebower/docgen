@@ -6,6 +6,7 @@ import org.lawrencebower.docgen.web_logic.business.injection.product.ProductInje
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ProductInjectionMapperImpl implements ProductInjectionMapper {
@@ -32,31 +33,9 @@ public class ProductInjectionMapperImpl implements ProductInjectionMapper {
         throw new DocGenException(message);
     }
 
-    public void setNameMapper(PINameMapper mapper) {
-        mappers.add(mapper);
+    public void setMappers(ProductInjectionMapper... mappers) {
+        List<ProductInjectionMapper> list = Arrays.asList(mappers);
+        this.mappers.addAll(list);
     }
 
-    public void setNameAndDescriptionMapper(PINameAndDescriptionMapper mapper) {
-        mappers.add(mapper);
-    }
-
-    public void setCommercialInvoiceMapper(PICommercialInvoiceMapper mapper) {
-        mappers.add(mapper);
-    }
-
-    public void setHarmonizedTariffMapper(PIHarmonizedTariffMapper mapper) {
-        mappers.add(mapper);
-    }
-
-    public void setOriginMapper(PIOriginMapper mapper) {
-        mappers.add(mapper);
-    }
-
-    public void setQuantityMapper(PIQuantityMapper mapper) {
-        mappers.add(mapper);
-    }
-
-    public void setValueMapper(PIValueMapper mapper) {
-        mappers.add(mapper);
-    }
 }

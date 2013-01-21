@@ -1,26 +1,16 @@
 package org.lawrencebower.docgen.web_logic.business.injection.product.mapper;
 
 import org.lawrencebower.docgen.web_logic.business.injection.product.ProductInjectionField;
-import org.lawrencebower.docgen.web_logic.business.injection.product.ProductInjectionMapper;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 
-public class PICommercialInvoiceMapper implements ProductInjectionMapper {
-
-    private ProductInjectionField piField = ProductInjectionField.PRODUCT_COMMERCIAL_INVOICE_DESCRIPTION;
+public class PICommercialInvoiceMapper extends PIAbstractMapper {
 
     private PICommercialInvoiceMapper() {
-        //force spring creation
+        super(ProductInjectionField.PRODUCT_COMMERCIAL_INVOICE_DESCRIPTION);//force spring creation
     }
 
     @Override
-    public String getProductFieldByType(ProductInjectionField productField, ProductView product) {
-
-        String value = ProductInjectionMapperImpl.EMPTY_STRING;
-
-        if(piField == productField){
-            value = product.getCommercialInvoiceDescription();
-        }
-
-        return value;
+    protected String getValue(ProductView product) {
+        return product.getCommercialInvoiceDescription();
     }
 }

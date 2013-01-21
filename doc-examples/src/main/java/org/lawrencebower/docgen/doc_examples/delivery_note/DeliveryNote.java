@@ -79,7 +79,7 @@ public class DeliveryNote {
         TextComponent textComponent = new TextComponent(textBlock);
         addComponent(textComponent);
 
-        component = componentBuilder.createTextComponent("Practical products");
+        component = componentBuilder.createTextComponentWithValue("Practical products");
         addComponent(component);
 
         addNewLine();
@@ -110,7 +110,7 @@ public class DeliveryNote {
 
         addNewLine();
 
-        component = componentBuilder.createTextComponent("Acme are pleased to confirm the delivery of:");
+        component = componentBuilder.createTextComponentWithValue("Acme are pleased to confirm the delivery of:");
         addComponent(component);
 
         addNewLine();

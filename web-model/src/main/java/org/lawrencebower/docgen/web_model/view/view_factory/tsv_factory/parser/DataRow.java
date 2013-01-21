@@ -48,7 +48,7 @@ public class DataRow {
 	}
 	
 	public String[] getStringArray(int columnIndex) {
-		String value = getString(columnIndex);
+		String value = getStringDefault(columnIndex, "");
 		String[] result = StringUtils.split(value, ARRAY_SEPARATOR);
         for(int i = 0; i<result.length;i++){
             result[i] = result[i].replace(COMMA_TOKEN,",");

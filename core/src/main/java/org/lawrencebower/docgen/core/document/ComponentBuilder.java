@@ -13,7 +13,13 @@ public class ComponentBuilder {
         return new NewLineComponent();
     }
 
-    public TextComponent createTextComponent(String value) {
+    public TextComponent createTextComponentWithName(String name) {
+        return createTextComponent(name,
+                                   null,
+                                   HorizontalAlignment.LEFT);
+    }
+
+    public TextComponent createTextComponentWithValue(String value) {
         return createTextComponent(null,
                                    value,
                                    HorizontalAlignment.LEFT);
@@ -51,7 +57,7 @@ public class ComponentBuilder {
     }
 
     public TableTextComponent createTableTextComponent(String name) {
-        TextComponent textComponent = createTextComponent(name);
+        TextComponent textComponent = createTextComponentWithName(name);
         return new TableTextComponent(textComponent);
     }
 }

@@ -10,6 +10,7 @@ public class Product {
     private String countryOfOrigin;
     private String harmonizedTariffNumber;
     private String customsDescription;
+    private String tradeName;
     private Attributes attributes = new Attributes();
 
     protected Product() {//only make with a product builder
@@ -39,6 +40,10 @@ public class Product {
         this.customsDescription = customsDescription;
     }
 
+    protected void setTradeName(String tradeName) {
+        this.tradeName = tradeName;
+    }
+
     protected void setAttributes(String... attributes) {
         this.attributes = new Attributes(attributes);
     }
@@ -65,6 +70,10 @@ public class Product {
 
     public String getCustomsDescription() {
         return customsDescription;
+    }
+
+    public String getTradeName() {
+        return tradeName;
     }
 
     public Attributes getAttributes() {

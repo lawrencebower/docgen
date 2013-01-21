@@ -35,6 +35,10 @@ public class ProductView {
         return product.getCountryOfOrigin();
     }
 
+    public String getTradeName() {
+        return product.getTradeName();
+    }
+
     public void incrementQuantity() {
         quantity++;
     }

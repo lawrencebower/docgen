@@ -39,4 +39,8 @@ public class ProductBuilder {
     public Product buildProduct() {
         return product;
     }
+
+    public void setTradeName(String tradeName) {
+        product.setTradeName(tradeName);
+    }
 }

@@ -1,3 +1,3 @@
 #id	name	contact	address	phone	country	attributes	taxId	email
 1	Billy Bob	Billy	37 Widget Street\nCambridge\nCB12YY	01223 456 789	UK		44444	billybob@billybob.com
-2	Sgt Peppercorn	Dave	22 Dongle Street\nNewcastle\nNY662HG	12334 455 455	USA	USA_EAST_COAST	65656	c.peppercorn@watermellon.com
+2	Sgt Peppercorn	Dave	22 Dongle Street\nNewcastle\nNY662HG	12334 455 455	USA	USA,USA_EAST_COAST	65656	c.peppercorn@watermellon.com
