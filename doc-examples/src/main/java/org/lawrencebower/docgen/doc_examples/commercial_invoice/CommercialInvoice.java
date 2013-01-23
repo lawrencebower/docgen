@@ -415,7 +415,8 @@ public class CommercialInvoice {
         TableTextComponent textComponent;
 
         textComponent = createTableTextComponent("Total Number of Packages:", "1");
-        weightTable.addRow(createRowWithLabelAndValue("Total Number of Packages:", textComponent));
+        TableRow rowWithLabelAndValue = createRowWithLabelAndValue("Total Number of Packages:", textComponent);
+        weightTable.addRow(rowWithLabelAndValue);
         addViewableComponent(textComponent);
 
         textComponent = createTableTextComponent("Total Weight:", "4kg");

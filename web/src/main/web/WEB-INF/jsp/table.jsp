@@ -7,26 +7,40 @@
 
 <c:set var="fieldSeperator" value="~" scope="application"/>
 
+<input name="components[${fieldIndex}].tableData.tableName"
+       value="${table.name}"
+       id="${table.name}"
+       type="hidden"/>
+
 <table cellpadding="0" border="1">
     <tr>
-<c:forEach var="headerCell"
-           items="${table.headerCells}">
-    <td>
-        <c:out value="${headerCell.component.textString}"/>
-    </td>
-</c:forEach>
-</tr>
+        <c:forEach var="headerCell"
+                   items="${table.headerCells}">
+            <td>
+                <c:out value="${headerCell.component.textString}"/>
+            </td>
+        </c:forEach>
+    </tr>
     <c:forEach var="row"
                items="${table.tableRows}"
                varStatus="rowIndex">
+
+        <input name="components[${fieldIndex}].tableData.rows[${rowIndex.index}].rowName"
+               value="${row.rowName}"
+               id="${row.rowName}"
+               type="hidden"/>
+
         <tr>
             <c:forEach var="cell"
                        items="${row.cells}"
                        varStatus="cellIndex">
                 <td>
-                    <c:set var="fieldName"
-                           value="${table.name}${fieldSeperator}${rowIndex.count}${fieldSeperator}${cellIndex.count}"/>
-                    <input name="${fieldName}"
+                    <input name="components[${fieldIndex}].tableData.rows[${rowIndex.index}].cells[${cellIndex.index}].name"
+                           value="${table.headerCells[cellIndex.index].component.textString}"
+                           id="${fieldName}"
+                           type="hidden"/>
+
+                    <input name="components[${fieldIndex}].tableData.rows[${rowIndex.index}].cells[${cellIndex.index}].value"
                            value="${cell.component.textString}"
                            id="${fieldName}"/>
                 </td>

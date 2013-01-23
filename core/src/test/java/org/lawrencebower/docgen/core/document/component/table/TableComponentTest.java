@@ -25,7 +25,7 @@ public class TableComponentTest {
     @Test
     public void testGetColumnCount_noCells_returnsZero() throws Exception {
         TableComponent component = new TableComponent("name");
-        TableRow row = new TableRow();
+        TableRow row = new TableRow("row");
         component.addRow(row);
 
         assertEquals(0, component.getColumnCount());
@@ -114,13 +114,13 @@ public class TableComponentTest {
 
         component.setHeaderRow(headerRow);
 
-        TableRow row = new TableRow();
+        TableRow row = new TableRow("row1");
         row.addCell(new TableCell("name1"));
         row.addCell(new TableCell("name2"));
         row.addCell(new TableCell("name3"));
         component.addRow(row);
 
-        TableRow row2 = new TableRow();
+        TableRow row2 = new TableRow("row2");
         row2.addCell(new TableCell("name4"));
         row2.addCell(new TableCell("name5"));
         row2.addCell(new TableCell("name6"));

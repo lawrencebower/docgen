@@ -32,7 +32,7 @@ public class ClearProductsController {
 
         sessionData.clearSelectedProducts();
 
-        productHelper.putAllProductsOnModel(model, sessionData);
+        productHelper.putProductsOnModel(model, sessionData);
 
         return "products";
     }

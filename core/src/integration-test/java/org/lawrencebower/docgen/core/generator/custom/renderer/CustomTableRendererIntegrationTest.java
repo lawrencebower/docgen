@@ -269,7 +269,7 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
                                     new TableCell("col3"));
 
 
-        TableRow row1 = new TableRow();
+        TableRow row1 = new TableRow("row1");
 
         row1.addCell(new TableCell("cel1"));
         TableCell cell2 = new TableCell("colspan 2");
@@ -278,7 +278,7 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         row1.addCell(cell2);
         tableComponent.addRow(row1);
 
-        TableRow row2 = new TableRow();
+        TableRow row2 = new TableRow("row2");
 
         TableCell cell3 = new TableCell("rowspan 2");
         cell3.setRowSpan(2);
@@ -288,7 +288,7 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         row2.addCell(new TableCell("cell 5"));
         tableComponent.addRow(row2);
 
-        TableRow row3 = new TableRow();
+        TableRow row3 = new TableRow("row3");
         row3.addCell(new TableCell("cell6"));
         row3.addCell(new TableCell("cell7"));
         row3.addCell(new TableCell("cell8"));

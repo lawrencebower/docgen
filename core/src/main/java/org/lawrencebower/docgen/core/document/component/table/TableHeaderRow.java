@@ -1,6 +1,7 @@
 package org.lawrencebower.docgen.core.document.component.table;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 
 import java.util.ArrayList;
@@ -9,8 +10,13 @@ import java.util.List;
 
 public class TableHeaderRow extends TableRow {
 
+    public static final String HEADER_NAME = "table header";
     private boolean renderHeader = true;
     private List<Integer> columnWidths = new ArrayList<>();
+
+    public TableHeaderRow() {
+        super(HEADER_NAME);
+    }
 
     public boolean isRenderHeader() {
         return renderHeader;
@@ -47,5 +53,16 @@ public class TableHeaderRow extends TableRow {
         }
 
         columnWidths = new ArrayList<>(Arrays.asList(widths));
+    }
+
+    public boolean hasColumnNames() {
+        for (TableCell tableCell : getCells()) {
+            DocComponent component = tableCell.getComponent();
+            if((component == null) || (component.getName() == null)){
+                return false;
+            }
+        }
+
+        return true;
     }
 }

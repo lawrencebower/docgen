@@ -1,7 +1,7 @@
 package org.lawrencebower.docgen.web.controller.product_selection;
 
-import org.lawrencebower.docgen.web_model.view.product.ProductBindBean;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
+import org.lawrencebower.docgen.web_model.view.product.binding.ProductBindBean;
 import org.springframework.util.AutoPopulatingList;
 
 import java.util.List;

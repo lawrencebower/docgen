@@ -1,4 +1,5 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ include file="/WEB-INF/jsp/include.jsp" %>
 
 
@@ -19,6 +20,10 @@
              scope="session"
              type="org.lawrencebower.docgen.web.controller.data_entry.PrepareFieldsController"/>
 
+<jsp:useBean id="dataEntryBean"
+             scope="request"
+             type="org.lawrencebower.docgen.web_model.view.document.binding.DataEntryBindBean"/>
+
 <c:set var="fieldSeperator" value="~" scope="application"/>
 
 <s:url var="customer_url" value="/customerSelect"/>
@@ -38,14 +43,21 @@ Enter data
     show/hide automapped
 </a>
 
-<form method="post"
-      name="form"
-      action="/docgen/dataEntry/setFields">
+<sf:form method="post"
+         name="form"
+         action="/docgen/dataEntry/setFields"
+         modelAttribute="dataEntryBean">
 
     <table>
         <c:forEach var="field"
                    items="${prepareFieldsController.docComponentViews}"
                    varStatus="fieldIndex">
+
+            <input id="${field.name}"
+                   name="components[${fieldIndex.index}].name"
+                   value="${field.name}"
+                   type="hidden"/>
+
             <tr>
                 <td>
                     <label for="${field.name}">
@@ -53,19 +65,21 @@ Enter data
                     </label>
                 </td>
                 <td>
-                    <c:if test="${field.text }">
-                        <input name="${field.name}"
-                               value="${field.stringValue}"
-                               id="${field.name}"/>
+                    <c:if test="${field.text}">
+                        <input id="${field.name}"
+                               name="components[${fieldIndex.index}].value"
+                               value="${field.stringValue}"/>
                     </c:if>
                     <c:if test="${field.textArea}">
                         <textarea cols="30"
                                   rows="8"
-                                  name="${field.name}"
+                                  name="components[${fieldIndex.index}].value"
                                   id="${field.name}"><c:out value="${field.stringValue}"/></textarea>
                     </c:if>
                     <c:if test="${field.table}">
                         <c:set var="table" value="${field}" scope="request"/>
+                        <c:set var="fieldName" value="${field.name}" scope="request"/>
+                        <c:set var="fieldIndex" value="${fieldIndex.index}" scope="request"/>
                         <jsp:include page="table.jsp"/>
                     </c:if>
                 </td>
@@ -74,4 +88,4 @@ Enter data
     </table>
     <input type="submit" value="Generate PDFs" onmousedown="setBlankTarget()"/>
     <%--<input name="partial" type="submit" value="partial" onmousedown="setSelfTarget()"/>--%>
-</form>
+</sf:form>

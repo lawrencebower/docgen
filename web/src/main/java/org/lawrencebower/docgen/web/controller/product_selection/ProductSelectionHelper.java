@@ -2,8 +2,8 @@ package org.lawrencebower.docgen.web.controller.product_selection;
 
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.product_selection.ProductSelectionCB;
-import org.lawrencebower.docgen.web_model.view.product.ProductBindBean;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
+import org.lawrencebower.docgen.web_model.view.product.binding.ProductBindBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
@@ -16,8 +16,8 @@ public class ProductSelectionHelper {
     @Autowired
     private ProductSelectionBean productSelectionBean;
 
-    public void putAllProductsOnModel(Model model,
-                                      SessionData sessionData) {
+    public void putProductsOnModel(Model model,
+                                   SessionData sessionData) {
 
         addAllProductsToModel(model);
 

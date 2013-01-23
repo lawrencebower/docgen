@@ -2,6 +2,7 @@ package org.lawrencebower.docgen.core.document.component.table;
 
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.DocComponentType;
+import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 
@@ -35,7 +36,8 @@ public class TableComponent extends DocComponent {
 
     public void setHeaderRow(TableCell... cells) {
         headerRow = new TableHeaderRow();
-        headerRow.setCells(Arrays.asList(cells));
+        List<TableCell> cellList = Arrays.asList(cells);
+        headerRow.setCells(cellList);
     }
 
     public TableHeaderRow getHeaderRow() {
@@ -43,7 +45,26 @@ public class TableComponent extends DocComponent {
     }
 
     public void addRow(TableRow row) {
+        setCellNamesFromHeader(row);
         rows.add(row);
+    }
+
+    private void setCellNamesFromHeader(TableRow row) {
+
+        List<TableCell> headerCells = headerRow.getCells();
+
+        int headerColumnCount = headerRow.getColumnCount();
+
+        if (headerRow.hasColumnNames() && (headerColumnCount == row.getColumnCount())) {
+            for (int i = 0; i < headerCells.size(); i++) {
+
+                TableCell headerCell = headerCells.get(i);
+                String columnName = ((TextComponent) headerCell.getComponent()).getTextString();
+
+                TableCell cell = row.getCell(i);
+                cell.setName(columnName);
+            }
+        }
     }
 
     public List<TableRow> getRows() {
@@ -58,11 +79,13 @@ public class TableComponent extends DocComponent {
         List<TableCell> allCells = new ArrayList<>();
 
         if (headerRow.isRenderHeader()) {
-            allCells.addAll(headerRow.getCells());
+            List<TableCell> headerCells = headerRow.getCells();
+            allCells.addAll(headerCells);
         }
 
         for (TableRow row : rows) {
-            allCells.addAll(row.getCells());
+            List<TableCell> rowCells = row.getCells();
+            allCells.addAll(rowCells);
         }
 
         return allCells;
@@ -98,7 +121,7 @@ public class TableComponent extends DocComponent {
 
     public TableRow getRow(int rowNum) {
 
-        if(rows.size() <=  rowNum){
+        if (rows.size() <= rowNum) {
             String messageTemplate = "Cant retrieve row number '%s' from table '%s' - only has %s rows";
             String componentName = getName();
             int actualRowNum = rows.size();

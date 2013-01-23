@@ -28,7 +28,7 @@ public class ShowProductsController {
     @RequestMapping(value = "/productSelect", method = RequestMethod.GET)
     public String showProducts(Model model) {
 
-        productHelper.putAllProductsOnModel(model, sessionData);
+        productHelper.putProductsOnModel(model, sessionData);
 
         return "products";
     }

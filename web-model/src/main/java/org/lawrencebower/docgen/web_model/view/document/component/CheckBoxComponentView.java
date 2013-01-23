@@ -63,16 +63,6 @@ public class CheckBoxComponentView extends DocComponentViewImpl<CheckBoxComponen
     }
 
     @Override
-    public void checkAndSetValueFromParamString(String componentName, String value) {
-
-        String thisComponentName = getName();
-
-        if (componentName.equals(thisComponentName)) {
-            setComponentValue(value);
-        }
-    }
-
-    @Override
     public void injectProducts(List<ProductView> products) {
         //not implemented - just exit quietly
     }

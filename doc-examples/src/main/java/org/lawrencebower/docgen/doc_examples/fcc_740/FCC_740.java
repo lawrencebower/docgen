@@ -140,7 +140,7 @@ public class FCC_740 {
         headerRow.addCell(new TableCell());
         table.setHeaderRow(headerRow);
 
-        TableRow row = new TableRow();
+        TableRow row = new TableRow(textComponent.getName());
         row.addCell(new TableCell(textComponent));
         table.addRow(row);
 

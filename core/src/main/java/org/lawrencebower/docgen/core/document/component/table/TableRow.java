@@ -8,6 +8,14 @@ import java.util.List;
 public class TableRow {
 
     private List<TableCell> cells = new ArrayList<>();
+    private String rowName;
+
+    public TableRow() {
+    }
+
+    public TableRow(String rowName) {
+        this.rowName = rowName;
+    }
 
     /**
      * the column count needs to take into account the col span of cells
@@ -58,4 +66,9 @@ public class TableRow {
 
         return hasCell;
     }
+
+    public String getRowName() {
+        return rowName;
+    }
+
 }

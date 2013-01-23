@@ -4,24 +4,21 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
-import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
 import org.lawrencebower.docgen.web_model.business_def.mapping.parameter_mapping.field_value.FieldMapper;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSetFactory;
 import org.lawrencebower.docgen.web_model.view.document.DocumentView;
 import org.lawrencebower.docgen.web_model.view.document.DocumentViewFactory;
+import org.lawrencebower.docgen.web_model.view.document.binding.DataEntryBindBean;
 import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.document.component.DocComponentViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -60,7 +57,7 @@ public class FieldMapperImplTest {
     @Test
     public void testMapFieldValuesToComponents_validParams_correctComponentSet() {
 
-        Map<String, String[]> paramMap = makeParameterMap();
+        DataEntryBindBean bindBean = makeBindingBean();
 
         //define mock behaviour
         when(component1.getName()).thenReturn(fieldName1);
@@ -76,7 +73,7 @@ public class FieldMapperImplTest {
         List<DocComponentView> allComponents = documentSet.getAllComponentViewsFromDocs();
 
         //run mapping
-        fieldMapper.mapFieldValuesToComponents(paramMap, allComponents);
+        fieldMapper.mapFieldValuesToComponents(bindBean, allComponents);
 
         //verify
         verify(component1, times(1)).setText(value1);
@@ -88,96 +85,6 @@ public class FieldMapperImplTest {
         verify(component3, never()).setText(anyString());
 
         verify(component4, times(1)).setText(value1);
-    }
-
-    @Test
-    public void testMapFieldValuesToComponents_excludedField_excludedFieldSkipped() {
-
-        String excludedTokenName = "full";
-        Map<String, String[]> paramMap = makeParameterMap();
-        paramMap.put(excludedTokenName,new String[]{"this value should not be set"});
-
-
-        //define mock behaviour
-        when(component1.getName()).thenReturn(fieldName1);
-        component2 = mock(TextComponent.class);
-        when(component2.getName()).thenReturn(excludedTokenName);
-        component3 = mock(TextComponent.class);
-        when(component3.getName()).thenReturn("some value not in the params");
-        component4 = mock(TextComponent.class);
-        when(component4.getName()).thenReturn("some value not in the params");
-
-        //add mocks to Documents
-        DocumentSet documentSet = addMocksToDocuments();
-        List<DocComponentView> allComponents = documentSet.getAllComponentViewsFromDocs();
-
-        //run mapping
-        fieldMapper.mapFieldValuesToComponents(paramMap, allComponents);
-
-        //verify
-        verify(component1, times(1)).setText(value1);
-        verify(component2, atLeastOnce()).getName();
-        verify(component2, never()).setText(anyString());
-        verify(component3, atLeastOnce()).getName();
-        verify(component3, never()).setText(anyString());
-        verify(component4, atLeastOnce()).getName();
-        verify(component4, never()).setText(anyString());
-    }
-
-    @Test
-    public void testMapFieldValuesToComponents_missingValuesInParamMap_throwsError() {
-
-        try {
-            Map<String, String[]> paramMap = makeParameterMap();
-            paramMap.put("token with no values", new String[]{});
-
-            //define mock behaviour
-            when(component1.getName()).thenReturn(fieldName1);
-            component2 = mock(TextComponent.class);
-            when(component2.getName()).thenReturn(fieldName2);
-            component3 = mock(TextComponent.class);
-            when(component3.getName()).thenReturn(fieldName3);
-            component4 = mock(TextComponent.class);
-            when(component4.getName()).thenReturn(fieldName1);
-
-            //add mocks to Documents
-            DocumentSet documentSet = addMocksToDocuments();
-            List<DocComponentView> allComponents = documentSet.getAllComponentViewsFromDocs();
-
-            //run mapping
-            fieldMapper.mapFieldValuesToComponents(paramMap, allComponents);
-        } catch (DocGenException e) {
-            String message = e.getMessage();
-            assertEquals("No values bound to field 'token with no values'", message);
-        }
-    }
-
-    @Test
-    public void testMapFieldValuesToComponents_moreThanOneBoundValueInParamMap_throwsError() {
-
-        try {
-            Map<String, String[]> paramMap = makeParameterMap();
-            paramMap.put("token with no values", new String[]{"value1","value2"});
-
-            //define mock behaviour
-            when(component1.getName()).thenReturn(fieldName1);
-            component2 = mock(TextComponent.class);
-            when(component2.getName()).thenReturn(fieldName2);
-            component3 = mock(TextComponent.class);
-            when(component3.getName()).thenReturn(fieldName3);
-            component4 = mock(TextComponent.class);
-            when(component4.getName()).thenReturn(fieldName1);
-
-            //add mocks to Documents
-            DocumentSet documentSet = addMocksToDocuments();
-            List<DocComponentView> allComponents = documentSet.getAllComponentViewsFromDocs();
-
-            //run mapping
-            fieldMapper.mapFieldValuesToComponents(paramMap, allComponents);
-        } catch (DocGenException e) {
-            String message = e.getMessage();
-            assertEquals("more than 1 value bound to field 'token with no values'", message);
-        }
     }
 
     //UTIL METHODS//
@@ -203,12 +110,21 @@ public class FieldMapperImplTest {
         return documentViewFactory.createDocumentView();
     }
 
-    private Map<String, String[]> makeParameterMap() {
-        Map<String, String[]> paramMap = new HashMap<>();
-        paramMap.put(fieldName1, new String[]{value1});
-        paramMap.put(fieldName2, new String[]{value2});
-        paramMap.put(fieldName3, new String[]{value3});
-        return paramMap;
+    private DataEntryBindBean makeBindingBean() {
+
+        //autopopulating bean
+        DataEntryBindBean bindBean = new DataEntryBindBean();
+
+        bindBean.getComponents().get(0).setName(fieldName1);
+        bindBean.getComponents().get(0).setValue(value1);
+
+        bindBean.getComponents().get(1).setName(fieldName2);
+        bindBean.getComponents().get(1).setValue(value2);
+
+        bindBean.getComponents().get(2).setName(fieldName3);
+        bindBean.getComponents().get(2).setValue(value3);
+
+        return bindBean;
     }
 
 }

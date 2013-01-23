@@ -25,6 +25,10 @@
     <bean name="productSelectionHelper"
           class="org.lawrencebower.docgen.web.controller.product_selection.ProductSelectionHelper"/>
 
+    <bean name="productSelectionBean"
+          class="org.lawrencebower.docgen.web.controller.product_selection.ProductSelectionBean"
+          init-method="init">
+    </bean>
 
     <bean id="testFileUtils" class="org.lawrencebower.docgen.core.generator.utils.ChecksumUtils"/>
     <bean id="setupSessionUtils" class="org.lawrencebower.docgen.web.controller.data_entry.SessionSetupUtils"/>

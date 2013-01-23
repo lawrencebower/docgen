@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.web_model.view.product;
+package org.lawrencebower.docgen.web_model.view.product.binding;
 
 public class ProductBindBean {
 

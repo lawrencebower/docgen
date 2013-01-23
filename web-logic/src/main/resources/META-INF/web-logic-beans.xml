@@ -33,9 +33,6 @@
         </property>
     </bean>
 
-    <bean name="parameterMappingUtils"
-          class="org.lawrencebower.docgen.web_logic.business.mapping.parameter_mapping.ParameterMappingUtils"/>
-
     <bean name="fieldMapper"
           class="org.lawrencebower.docgen.web_logic.business.mapping.parameter_mapping.field_value.FieldMapperImpl"/>
 

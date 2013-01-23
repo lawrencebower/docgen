@@ -32,7 +32,9 @@ public class TableComponentProductInjectorImpl implements ComponentProductInject
 
     private TableRow getProductRow(TableComponent docComponent, ProductView product) {
 
-        TableRow row = new TableRow();
+        String productId = product.getProductId();
+
+        TableRow row = new TableRow(productId);
 
         TableHeaderRow headerRow = docComponent.getHeaderRow();
         List<TableCell> headerCells = headerRow.getCells();

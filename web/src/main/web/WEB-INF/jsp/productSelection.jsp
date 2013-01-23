@@ -43,7 +43,8 @@ Select products
             <sf:option value="${noProductId}" label="--- Select ---"/>
 
             <c:forEach var="product" items="${allProducts}">
-                <sf:option value="${product.productId}" label="${product.productId} - ${product.productName}"/>
+                <sf:option value="${product.productId}"
+                           label="${product.productId} - ${product.productName}"/>
             </c:forEach>
         </sf:select>
     </sf:form>

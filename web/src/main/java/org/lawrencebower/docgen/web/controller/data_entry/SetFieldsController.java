@@ -5,18 +5,19 @@ import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSet;
+import org.lawrencebower.docgen.web_model.view.document.binding.DataEntryBindBean;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.request.WebRequest;
 
 import java.io.File;
 import java.io.OutputStream;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @Scope("session")
@@ -37,11 +38,16 @@ public class SetFieldsController {
         this.sessionData = sessionData;
     }
 
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.setAutoGrowNestedPaths(false);
+    }
+
     @RequestMapping(value = "/dataEntry/setFields", method = RequestMethod.POST)
-    public String submitFields(WebRequest webRequest,
+    public String submitFields(DataEntryBindBean bindBean,
                                OutputStream outStream) {
 
-        mapFieldValuesToComponents(webRequest);
+        mapFieldValuesToComponents(bindBean);
 
         DocumentSet injectedDocuments = injectDocuments();
 
@@ -52,28 +58,12 @@ public class SetFieldsController {
         return null;
     }
 
-    private void mapFieldValuesToComponents(WebRequest webRequest) {
-
-        Map<String, String[]> parameterMap = webRequest.getParameterMap();
-
-//        writeParameterVals(parameterMap);
+    private void mapFieldValuesToComponents(DataEntryBindBean bindBean) {
 
         DocumentSet documents = sessionData.getDocuments();
 
-        business.mapFieldValuesToComponents(parameterMap, documents);
+        business.mapFieldValuesToComponents(bindBean, documents);
     }
-
-    /*
-        private void writeParameterVals(Map<String, String[]> parameterMap) {
-            for (String key : parameterMap.keySet()) {
-                System.out.println("key = " + key);
-                String[] values = parameterMap.get(key);
-                for (String value : values) {
-                    System.out.println("value = " + value);
-                }
-            }
-        }
-    */
 
     private DocumentSet injectDocuments() {
 

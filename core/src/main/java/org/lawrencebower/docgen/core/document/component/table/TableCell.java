@@ -46,6 +46,10 @@ public class TableCell {
         component = new TableTextComponent(textBlock);
     }
 
+    public void setName(String name) {
+        component.setName(name);
+    }
+
     public String getName() {
         return component.getName();
     }

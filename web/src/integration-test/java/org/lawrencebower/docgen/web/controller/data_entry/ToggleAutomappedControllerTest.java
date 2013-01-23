@@ -7,6 +7,7 @@ import org.lawrencebower.docgen.web.model.SessionData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.validation.support.BindingAwareModelMap;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
@@ -28,14 +29,14 @@ public class ToggleAutomappedControllerTest {
     @Test
     public void testToggleShowAutomappedFields_showAutoMappedTrue_valueToggled() throws Exception {
         sessionData.setShowAutoMappedFields(true);
-        controller.toggleShowAutomappedFields();
+        controller.toggleShowAutomappedFields(new BindingAwareModelMap());
         assertFalse(sessionData.isShowAutoMappedFields());
     }
 
     @Test
     public void testToggleShowAutomappedFields_showAutoMappedFalse_valueToggled() throws Exception {
         sessionData.setShowAutoMappedFields(false);
-        controller.toggleShowAutomappedFields();
+        controller.toggleShowAutomappedFields(new BindingAwareModelMap());
         assertTrue(sessionData.isShowAutoMappedFields());
     }
 }

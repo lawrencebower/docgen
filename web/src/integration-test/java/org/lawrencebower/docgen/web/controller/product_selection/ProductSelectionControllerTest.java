@@ -7,8 +7,8 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.doc_examples.factory.ProductFactoryTestImpl;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.product_selection.ProductSelectionCB;
-import org.lawrencebower.docgen.web_model.view.product.ProductBindBean;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
+import org.lawrencebower.docgen.web_model.view.product.binding.ProductBindBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -51,7 +51,7 @@ public class ProductSelectionControllerTest {
         productSelectionBean.setProductId(id1);
         controller.selectProduct(productSelectionBean, model);
 
-        List<ProductView> products = (List<ProductView>) model.get("products");
+        List<ProductView> products = (List<ProductView>) model.get("allProducts");
 
         assertEquals(3, products.size());
         assertTrue(products.get(0).getProductId().equals(id1));

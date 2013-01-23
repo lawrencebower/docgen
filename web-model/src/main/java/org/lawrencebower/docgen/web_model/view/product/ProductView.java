@@ -4,7 +4,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
+import org.lawrencebower.docgen.web_model.view.product.binding.ProductBindBean;
 import org.lawrencebower.docgen.web_model.view.view_factory.Attributes;
 
 public class ProductView {
@@ -91,18 +91,6 @@ public class ProductView {
         return StringUtils.isNotBlank(number);
     }
 
-    public String getFieldSeparator() {
-        return ViewConstants.DOCUMENT_FIELD_SEPARATOR;
-    }
-
-    public String getQuantityToken() {
-        return ViewConstants.PRODUCT_TOKEN_TYPE.QUANTITY.getName();
-    }
-
-    public String getValueToken() {
-        return ViewConstants.PRODUCT_TOKEN_TYPE.VALUE.getName();
-    }
-
     public void setValue(String valueString) {
         product.setValue(valueString);
     }
@@ -121,8 +109,18 @@ public class ProductView {
         return productId.equals(thisId);
     }
 
-    public boolean idDoesNotMatch(String productId) {
-        return !idMatches(productId);
+    public void checkAndSetValuesFromBindBean(ProductBindBean productBindBean) {
+
+        String bindId = productBindBean.getProductId();
+        String productId = getProductId();
+
+        if(bindId.equals(productId)){
+            String bindValue = productBindBean.getValue();
+            String bindQuantity = productBindBean.getQuantity();
+
+            setValue(bindValue);
+            setQuantity(bindQuantity);
+        }
     }
 
     @Override

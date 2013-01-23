@@ -7,6 +7,7 @@ import org.lawrencebower.docgen.web_model.business_def.mapping.auto_mapped.compo
 import org.lawrencebower.docgen.web_model.business_def.mapping.parameter_mapping.field_value.FieldMapper;
 import org.lawrencebower.docgen.web_model.business_def.utils.ViewUtils;
 import org.lawrencebower.docgen.web_model.business_def.utils.ViewableComponentFilter;
+import org.lawrencebower.docgen.web_model.view.document.binding.DataEntryBindBean;
 import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,9 +76,9 @@ public class DocumentSetImpl implements DocumentSet {
     }
 
     @Override
-    public void mapFieldValuesToComponents(Map<String, String[]> parameterMap) {
+    public void mapFieldValuesToComponents(DataEntryBindBean bindBean) {
         List<DocComponentView> allComponentViews = getAllComponentViewsFromDocs();
-        fieldMapper.mapFieldValuesToComponents(parameterMap, allComponentViews);
+        fieldMapper.mapFieldValuesToComponents(bindBean, allComponentViews);
     }
 
     @Override

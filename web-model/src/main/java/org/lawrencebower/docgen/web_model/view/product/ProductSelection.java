@@ -2,6 +2,7 @@ package org.lawrencebower.docgen.web_model.view.product;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_model.business_def.mapping.parameter_mapping.product.ProductMapper;
+import org.lawrencebower.docgen.web_model.view.product.binding.ProductBindBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;

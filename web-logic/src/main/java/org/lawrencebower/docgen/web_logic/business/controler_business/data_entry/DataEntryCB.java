@@ -14,6 +14,7 @@ import org.lawrencebower.docgen.web_model.view.document.DocumentInjectionInfo;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSetFactory;
 import org.lawrencebower.docgen.web_model.view.document.DocumentView;
+import org.lawrencebower.docgen.web_model.view.document.binding.DataEntryBindBean;
 import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.product.ProductSelection;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
@@ -25,7 +26,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 public class DataEntryCB {
 
@@ -72,10 +76,10 @@ public class DataEntryCB {
         return documentSetFactory.createDocumentInfoSet(documents);
     }
 
-    public void mapFieldValuesToComponents(Map<String, String[]> parameterMap,
+    public void mapFieldValuesToComponents(DataEntryBindBean bindBean,
                                            DocumentSet documentSet) {
 
-        documentSet.mapFieldValuesToComponents(parameterMap);
+        documentSet.mapFieldValuesToComponents(bindBean);
     }
 
     public List<PDFDocument> createPDFs(DocumentSet documentSet) {

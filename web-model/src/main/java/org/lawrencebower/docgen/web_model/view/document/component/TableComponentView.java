@@ -10,10 +10,10 @@ import org.lawrencebower.docgen.web_model.business_def.component_calculation.Com
 import org.lawrencebower.docgen.web_model.business_def.component_calculation.table.TableComponentCalculation;
 import org.lawrencebower.docgen.web_model.business_def.component_calculation.table.TableComponentCalculator;
 import org.lawrencebower.docgen.web_model.business_def.injection.TableComponentProductInjector;
-import org.lawrencebower.docgen.web_model.business_def.mapping.parameter_mapping.table_component.TableComponentValueSetter;
 import org.lawrencebower.docgen.web_model.view.document.DocumentInjectionInfo;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_model.view.document.DocumentView;
+import org.lawrencebower.docgen.web_model.view.document.binding.DocComponentBindBean;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,8 +24,8 @@ public class TableComponentView extends DocComponentViewImpl<TableComponent> {
 
     @Autowired
     DocComponentViewFactory viewFactory;
-    @Autowired(required = false)
-    TableComponentValueSetter tableValueSetter;
+//    @Autowired(required = false)
+//    TableComponentValueSetter tableValueSetter;
     @Autowired(required = false)
     protected TableComponentCalculator componentCalculator;
     @Autowired(required = false)
@@ -63,8 +63,8 @@ public class TableComponentView extends DocComponentViewImpl<TableComponent> {
     }
 
     @Override
-    public void checkAndSetValueFromParamString(String paramString, String value) {
-        tableValueSetter.setCellValueIfMatch(paramString, value, this);
+    public void checkAndSetValueFromBindBean(DocComponentBindBean bindBean) {
+        bindBean.setTableCellValuesIfMatch(this);
     }
 
     public int getColumnIndex(String colName) {
@@ -107,6 +107,10 @@ public class TableComponentView extends DocComponentViewImpl<TableComponent> {
         TableCell cell = row.getCell(colNum);
         DocComponent component = cell.getComponent();
         return viewFactory.createComponentView(component);
+    }
+
+    public List<TableCell> getAllRenderableCells() {
+        return docComponent.getAllRenderableCells();
     }
 
     @Override

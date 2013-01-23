@@ -34,16 +34,6 @@ public class TextComponentView extends DocComponentViewImpl<TextComponent> {
         docComponent.setText(value);
     }
 
-    @Override
-    public void checkAndSetValueFromParamString(String componentName, String value) {
-
-        String thisComponentName = getName();
-
-        if (componentName.equals(thisComponentName)) {
-            setComponentValue(value);
-        }
-    }
-
     public String getStringValue() {
         return docComponent.getTextString();
     }

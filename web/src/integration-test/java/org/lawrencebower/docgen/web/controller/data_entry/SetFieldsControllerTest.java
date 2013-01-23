@@ -9,6 +9,7 @@ import org.lawrencebower.docgen.doc_examples.factory.DocumentFactoryTestImpl;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB;
 import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
+import org.lawrencebower.docgen.web_model.view.document.binding.DataEntryBindBean;
 import org.lawrencebower.docgen.web_model.view.view_factory.ViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -91,11 +92,9 @@ public class SetFieldsControllerTest {
     @Test
     public void testSubmitFields_validData_validOutput() throws Exception {
 
-        WebRequest mockRequest = makeMockRequestWithParamMap();
-
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 
-        controller.submitFields(mockRequest, outStream);
+        controller.submitFields(new DataEntryBindBean(), outStream);
 
         verifyExpectedPDFFilesWritten();
 

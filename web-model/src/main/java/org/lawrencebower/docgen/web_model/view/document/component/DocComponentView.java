@@ -6,6 +6,7 @@ import org.lawrencebower.docgen.web_model.business_def.mapping.auto_mapped.compo
 import org.lawrencebower.docgen.web_model.view.document.DocumentInjectionInfo;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_model.view.document.DocumentView;
+import org.lawrencebower.docgen.web_model.view.document.binding.DocComponentBindBean;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public interface DocComponentView<T extends DocComponent> {
 
     Boolean getBooleanValue();
 
-    void checkAndSetValueFromParamString(String componentName, String value);
+    void checkAndSetValueFromBindBean(DocComponentBindBean bindBean);
 
     void injectProducts(List<ProductView> products);
 

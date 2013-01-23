@@ -71,7 +71,7 @@ public class CustomerSelectionControllerTest {
 
         controller.selectCustomer(CustomerFactoryTestImpl.CUSTOMER_ID_1, model);
 
-        List<Product> products = (List<Product>) model.get("products");
+        List<Product> products = (List<Product>) model.get("allProducts");
 
         boolean empty = products.isEmpty();
         assertTrue("No products set on page model", !empty);

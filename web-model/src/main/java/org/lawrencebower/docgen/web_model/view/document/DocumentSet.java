@@ -3,12 +3,12 @@ package org.lawrencebower.docgen.web_model.view.document;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.web_model.business_def.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_model.business_def.mapping.auto_mapped.component.AMComponentInfo;
+import org.lawrencebower.docgen.web_model.view.document.binding.DataEntryBindBean;
 import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 public interface DocumentSet {
 
@@ -20,7 +20,7 @@ public interface DocumentSet {
 
     List<PDFDocument> createPDFs();
 
-    void mapFieldValuesToComponents(Map<String, String[]> parameterMap);
+    void mapFieldValuesToComponents(DataEntryBindBean bindBean);
 
     List<DocComponentView> getAllComponentViewsFromDocs();
 

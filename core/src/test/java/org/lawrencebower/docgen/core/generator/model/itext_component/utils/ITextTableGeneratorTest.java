@@ -74,7 +74,7 @@ public class ITextTableGeneratorTest {
         tableComponent.setHeaderRow(headerRow);
 
         for (int i = 0; i < rowNumber; i++) {
-            TableRow tableRow = new TableRow();
+            TableRow tableRow = new TableRow(Integer.toString(i));
             fillTableRow(tableRow, colNumber);
             tableComponent.addRow(tableRow);
         }

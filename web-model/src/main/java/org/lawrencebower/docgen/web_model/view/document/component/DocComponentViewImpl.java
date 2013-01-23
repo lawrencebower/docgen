@@ -7,6 +7,7 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_model.business_def.mapping.auto_mapped.AutoMapped;
 import org.lawrencebower.docgen.web_model.business_def.mapping.auto_mapped.component.AMComponentInfo;
 import org.lawrencebower.docgen.web_model.view.document.DocumentInjectionField;
+import org.lawrencebower.docgen.web_model.view.document.binding.DocComponentBindBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class DocComponentViewImpl<T extends DocComponent> implements DocComponentView<T> {
@@ -86,6 +87,18 @@ public abstract class DocComponentViewImpl<T extends DocComponent> implements Do
     @Override
     public void setRenderBorder(boolean renderBorder) {
         docComponent.setRenderBorder(renderBorder);
+    }
+
+    @Override
+    public void checkAndSetValueFromBindBean(DocComponentBindBean bindBean) {
+
+        String thisComponentName = getName();
+        String bindName = bindBean.getName();
+        String bindValue = bindBean.getValue();
+
+        if (bindName.equals(thisComponentName)) {
+            setComponentValue(bindValue);
+        }
     }
 
     @Override
