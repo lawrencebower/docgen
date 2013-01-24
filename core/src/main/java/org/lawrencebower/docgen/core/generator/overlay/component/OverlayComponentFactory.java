@@ -26,7 +26,7 @@ public abstract class OverlayComponentFactory {
         switch (component.getComponentType()) {
             case TEXT:
                 return createOverlayText((TextComponent) component);
-            case TABLE:
+            case LAYOUT_TABLE:
                 return createOverlayTable((TableComponent) component);
             case IMAGE:
                 return createOverlayImage((ImageComponent) component);

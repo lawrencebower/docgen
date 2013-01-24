@@ -3,52 +3,23 @@ package org.lawrencebower.docgen.core.document.component;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 
-public abstract class DocComponent {
+public interface DocComponent {
 
-    private String name;
-    private HorizontalAlignment alignment;
-    private DocCoordinates coordinates;
-    protected boolean renderBorder;
+    String getName();
 
-    protected DocComponent() {
-        this.alignment = HorizontalAlignment.LEFT;
-    }
+    void setName(String name);
 
-    protected DocComponent(HorizontalAlignment alignment) {
-        this.alignment = alignment;
-    }
+    HorizontalAlignment getAlignment();
 
-    public String getName() {
-        return name;
-    }
+    void setAlignment(HorizontalAlignment alignment);
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    DocCoordinates getCoordinates();
 
-    public HorizontalAlignment getAlignment() {
-        return alignment;
-    }
+    void setCoordinates(DocCoordinates coordinates);
 
-    public void setAlignment(HorizontalAlignment alignment) {
-        this.alignment = alignment;
-    }
+    DocComponentType getComponentType();
 
-    public DocCoordinates getCoordinates() {
-        return coordinates;
-    }
+    void setRenderBorder(boolean renderBorder);
 
-    public void setCoordinates(DocCoordinates coordinates) {
-        this.coordinates = coordinates;
-    }
-
-    public abstract DocComponentType getComponentType();
-
-    public void setRenderBorder(boolean renderBorder) {
-        this.renderBorder = renderBorder;
-    }
-
-    public boolean isRenderBorder() {
-        return renderBorder;
-    }
+    boolean isRenderBorder();
 }

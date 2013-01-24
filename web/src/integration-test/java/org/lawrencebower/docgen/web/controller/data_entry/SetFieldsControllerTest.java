@@ -128,9 +128,9 @@ public class SetFieldsControllerTest {
     }
 
     private void verifyExpectedPDFFilesWritten() {
-        checkConcatenatedFiles();
         checkDoc1();
         checkDoc2();
+        checkConcatenatedFiles();
     }
 
     private void checkConcatenatedFiles() {
@@ -154,7 +154,12 @@ public class SetFieldsControllerTest {
     private void checkFilesAreSame(File expectedConcatenatedFile, File createdConcatenatedFile) {
         boolean filesAreSame =
                 checksumUtils.filteredFileChecksumsAreSame(expectedConcatenatedFile, createdConcatenatedFile);
-        assertTrue(filesAreSame);
+
+        String createdName = createdConcatenatedFile.getName();
+        String expectedName = expectedConcatenatedFile.getName();
+        String message = String.format("File '%s' is not the same as expected file '%s'", createdName, expectedName);
+
+        assertTrue(message, filesAreSame);
     }
 
     private WebRequest makeMockRequestWithParamMap() {

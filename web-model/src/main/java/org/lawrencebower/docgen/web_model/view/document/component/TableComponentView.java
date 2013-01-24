@@ -2,9 +2,11 @@ package org.lawrencebower.docgen.web_model.view.document.component;
 
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
-import org.lawrencebower.docgen.core.document.component.table.TableComponent;
-import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
 import org.lawrencebower.docgen.core.document.component.table.TableRow;
+import org.lawrencebower.docgen.core.document.component.table.view_table.ViewHeaderCell;
+import org.lawrencebower.docgen.core.document.component.table.view_table.ViewTableComponent;
+import org.lawrencebower.docgen.core.document.component.table.view_table.ViewTableRow;
+import org.lawrencebower.docgen.core.document.component.table.view_table.WebTableHeaderRow;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_model.business_def.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_model.business_def.component_calculation.table.TableComponentCalculation;
@@ -20,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TableComponentView extends DocComponentViewImpl<TableComponent> {
+public class TableComponentView extends DocComponentViewImpl<ViewTableComponent> {
 
     @Autowired
     DocComponentViewFactory viewFactory;
@@ -38,7 +40,7 @@ public class TableComponentView extends DocComponentViewImpl<TableComponent> {
     }
 
     @Override
-    public void setComponent(TableComponent docComponent) {
+    public void setComponent(ViewTableComponent docComponent) {
         super.setComponent(docComponent);
     }
 
@@ -71,10 +73,10 @@ public class TableComponentView extends DocComponentViewImpl<TableComponent> {
 
         int colIndex = -1;
 
-        List<TableCell> headerCells = getHeaderCells();
+        List<ViewHeaderCell> headerCells = getHeaderCells();
 
         for (int i = 0; i < headerCells.size(); i++) {
-            TableCell headerCell = headerCells.get(i);
+            ViewHeaderCell headerCell = headerCells.get(i);
             String name = headerCell.getName();
             if (colName.equals(name)) {
                 colIndex = i;
@@ -84,12 +86,12 @@ public class TableComponentView extends DocComponentViewImpl<TableComponent> {
         return colIndex;
     }
 
-    public List<TableRow> getTableRows() {
+    public List<ViewTableRow> getTableRows() {
         return docComponent.getRows();
     }
 
-    public List<TableCell> getHeaderCells() {
-        TableHeaderRow headerRow = docComponent.getHeaderRow();
+    public List<ViewHeaderCell> getHeaderCells() {
+        WebTableHeaderRow headerRow = docComponent.getHeaderRow();
         return headerRow.getCells();
     }
 
@@ -182,8 +184,8 @@ public class TableComponentView extends DocComponentViewImpl<TableComponent> {
     }
 
     public boolean hasColumnName(String columnName) {
-        TableHeaderRow headerRow = docComponent.getHeaderRow();
-        return headerRow.hasCellName(columnName);
+        WebTableHeaderRow headerRow = docComponent.getHeaderRow();
+        return headerRow.hasColumnName(columnName);
     }
 
     public List<String> getColumnValuesAsFloats(String columnName) {
@@ -206,7 +208,7 @@ public class TableComponentView extends DocComponentViewImpl<TableComponent> {
 
         List<DocComponentView> results = new ArrayList<>();
 
-        List<TableRow> rows = getTableRows();
+        List<ViewTableRow> rows = getTableRows();
 
         for (int rowIndex = 0; rowIndex < rows.size(); rowIndex++) {
             DocComponentView view = getCellComponentView(rowIndex, columnIndex);

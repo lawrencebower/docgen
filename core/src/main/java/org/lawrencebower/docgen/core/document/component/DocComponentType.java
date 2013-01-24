@@ -7,5 +7,6 @@ public enum DocComponentType {
     NEWLINE,
     IMAGE,
     LINE,
-    TABLE
+    LAYOUT_TABLE,
+    VIEW_TABLE
 }

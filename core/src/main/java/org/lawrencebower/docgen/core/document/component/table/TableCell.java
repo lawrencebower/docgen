@@ -1,101 +1,35 @@
 package org.lawrencebower.docgen.core.document.component.table;
 
 import org.lawrencebower.docgen.core.document.component.DocComponent;
-import org.lawrencebower.docgen.core.document.component.TableTextComponent;
 import org.lawrencebower.docgen.core.document.component.position.VerticalAlignment;
-import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 
 import java.awt.*;
 
-public class TableCell {
+public interface TableCell {
 
-    private DocComponent component;
+    VerticalAlignment getVerticalAlignment();
 
-    /**
-     * horizontal alignment is sourced from the inner DocComponent
-     */
-    private VerticalAlignment verticalAlignment = VerticalAlignment.TOP;//default
+    void setVerticalAlignment(VerticalAlignment verticalAlignment);
 
-    private Color backgroundColor;
-    private float padding = -1;//negative by default - tableCellPadding is used unless this is positive
-    private int rowSpan = 1;//default
-    private int colSpan = 1;//default
+    void setBackgroundColor(Color backgroundColor);
 
-    public TableCell() {
-    }
+    Color getBackgroundColor();
 
-    public TableCell(DocComponent component) {
-        this.component = component;
-    }
+    boolean hasBackgroundColor();
 
-    public TableCell(String text) {
-        TextBlock textBlock = new TextBlock(text);
-        component = new TableTextComponent(textBlock);
-    }
+    void setPadding(float padding);
 
-    public void setComponent(DocComponent component) {
-        this.component = component;
-    }
+    float getPadding();
 
-    public DocComponent getComponent() {
-        return component;
-    }
+    void setRowSpan(int rowSpan);
 
-    public void setText(String text) {
-        TextBlock textBlock = new TextBlock(text);
-        component = new TableTextComponent(textBlock);
-    }
+    int getRowSpan();
 
-    public void setName(String name) {
-        component.setName(name);
-    }
+    void setColSpan(int colSpan);
 
-    public String getName() {
-        return component.getName();
-    }
+    int getColSpan();
 
-    public VerticalAlignment getVerticalAlignment() {
-        return verticalAlignment;
-    }
+    DocComponent getComponent();
 
-    public void setVerticalAlignment(VerticalAlignment verticalAlignment) {
-        this.verticalAlignment = verticalAlignment;
-    }
-
-    public void setBackgroundColor(Color backgroundColor) {
-        this.backgroundColor = backgroundColor;
-    }
-
-    public Color getBackgroundColor() {
-        return backgroundColor;
-    }
-
-    public boolean hasBackgroundColor(){
-        return backgroundColor != null;
-    }
-
-    public void setPadding(float padding) {
-        this.padding = padding;
-    }
-
-    public float getPadding() {
-        return padding;
-    }
-
-    public void setRowSpan(int rowSpan) {
-        this.rowSpan = rowSpan;
-    }
-
-    public int getRowSpan() {
-        return rowSpan;
-    }
-
-    public void setColSpan(int colSpan) {
-        this.colSpan = colSpan;
-    }
-
-    public int getColSpan() {
-        return colSpan;
-    }
-
+    void setComponent(DocComponent component);
 }

@@ -10,7 +10,7 @@ public class DocComponentTest {
     @Test
     public void testGetPosition_defaultValue_isLeft() throws Exception {
 
-        DocComponent genericDocComponent = new DocComponent() {
+        DocComponent genericDocComponent = new AbstractDocComponent() {
             @Override
             public DocComponentType getComponentType() {
                 return null;

@@ -7,19 +7,19 @@ import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
-import org.lawrencebower.docgen.core.generator.model.itext_component.utils.ITextTableGeneratorTest;
+import org.lawrencebower.docgen.core.generator.model.itext_component.utils.LayoutTableGenerator;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/integration-test-config.xml"})
+@ContextConfiguration(locations = "classpath:META-INF/integration-test-config.xml")
 public class OverlayTableRendererIntegrationTest extends AbstractOverlayRendererTest {
 
     @Before
     public void setup() {
-        super.prepareDirs();
+        prepareDirs();
     }
 
     @Test
@@ -74,7 +74,7 @@ public class OverlayTableRendererIntegrationTest extends AbstractOverlayRenderer
 
         List<TableCell> allCells = tableComponent.getAllRenderableCells();
 
-        TableComponent nestedTableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        TableComponent nestedTableComponent = LayoutTableGenerator.makeLayoutTableComponent(3, 3);
         nestedTableComponent.setName("nested table");
         nestedTableComponent.setWidthPercentage(100);
         TableCell tableCell = allCells.get(3);
@@ -92,7 +92,7 @@ public class OverlayTableRendererIntegrationTest extends AbstractOverlayRenderer
     }
 
     public TableComponent getTableComponent(DocCoordinates coordinates) {
-        TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        TableComponent tableComponent = LayoutTableGenerator.makeLayoutTableComponent(3, 3);
         tableComponent.setCoordinates(coordinates);
         return tableComponent;
     }

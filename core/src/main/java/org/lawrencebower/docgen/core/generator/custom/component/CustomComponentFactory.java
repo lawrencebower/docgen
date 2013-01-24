@@ -25,7 +25,9 @@ public abstract class CustomComponentFactory {
         switch (component.getComponentType()) {
             case TEXT:
                 return createCustomText((TextComponent) component);
-            case TABLE:
+            case LAYOUT_TABLE:
+                return createCustomTable((TableComponent) component);
+            case VIEW_TABLE:
                 return createCustomTable((TableComponent) component);
             case IMAGE:
                 return createCustomImage((ImageComponent) component);

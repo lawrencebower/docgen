@@ -1,6 +1,6 @@
 package org.lawrencebower.docgen.core.document.component;
 
-public class NewLineComponent extends DocComponent {
+public class NewLineComponent extends AbstractDocComponent {
 
     public static final String NEWLINE_NAME = "newline";
 

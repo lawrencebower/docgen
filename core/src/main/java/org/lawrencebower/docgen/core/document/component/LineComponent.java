@@ -2,7 +2,7 @@ package org.lawrencebower.docgen.core.document.component;
 
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 
-public class LineComponent extends DocComponent {
+public class LineComponent extends AbstractDocComponent {
 
     private int widthPercentage;
 

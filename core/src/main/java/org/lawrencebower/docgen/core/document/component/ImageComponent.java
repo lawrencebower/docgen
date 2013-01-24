@@ -2,7 +2,7 @@ package org.lawrencebower.docgen.core.document.component;
 
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 
-public class ImageComponent extends DocComponent {
+public class ImageComponent extends AbstractDocComponent {
 
     private String imageFileLocation;
     private int width;

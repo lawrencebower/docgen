@@ -1,74 +1,18 @@
 package org.lawrencebower.docgen.core.document.component.table;
 
-import org.lawrencebower.docgen.core.exception.DocGenException;
-
-import java.util.ArrayList;
 import java.util.List;
 
-public class TableRow {
+public interface TableRow<T extends TableCell> {
 
-    private List<TableCell> cells = new ArrayList<>();
-    private String rowName;
+    int getColumnCount();
 
-    public TableRow() {
-    }
+    void addCell(T cell);
 
-    public TableRow(String rowName) {
-        this.rowName = rowName;
-    }
+    List<T> getCells();
 
-    /**
-     * the column count needs to take into account the col span of cells
-     */
-    public int getColumnCount() {
-        int colCount = 0;
-        for (TableCell cell : cells) {
-            colCount += cell.getColSpan();
-        }
+    T getCell(int colNum);
 
-        return colCount;
-    }
+    void setCells(List<T> cells);
 
-    public void addCell(TableCell cell) {
-        cells.add(cell);
-    }
-
-    public void setCells(List<TableCell> cells) {
-        this.cells = cells;
-    }
-
-    public List<TableCell> getCells() {
-        return cells;
-    }
-
-    public TableCell getCell(int colNum) {
-
-        if (cells.size() <= colNum) {
-            String messageTemplate = "Cant retrieve cell number '%s' from table - only has %s cells";
-            int actualRowNum = cells.size();
-            String message = String.format(messageTemplate, colNum, actualRowNum);
-            throw new DocGenException(message);
-        }
-
-        return cells.get(colNum);
-    }
-
-    public boolean hasCellName(String cellName) {
-
-        boolean hasCell = false;
-
-        for (TableCell cell : cells) {
-            String name = cell.getName();
-            if(name.equals(cellName)){
-                hasCell = true;
-            }
-        }
-
-        return hasCell;
-    }
-
-    public String getRowName() {
-        return rowName;
-    }
-
+    int getCellCount();
 }

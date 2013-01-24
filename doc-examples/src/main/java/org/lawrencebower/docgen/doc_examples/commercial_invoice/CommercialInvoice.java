@@ -5,10 +5,11 @@ import org.lawrencebower.docgen.core.document.component.*;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.component.position.VerticalAlignment;
-import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
-import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
-import org.lawrencebower.docgen.core.document.component.table.TableRow;
+import org.lawrencebower.docgen.core.document.component.table.layout_table.*;
+import org.lawrencebower.docgen.core.document.component.table.view_table.ViewHeaderCell;
+import org.lawrencebower.docgen.core.document.component.table.view_table.ViewTableComponent;
+import org.lawrencebower.docgen.core.document.component.table.view_table.WebTableHeaderRow;
 import org.lawrencebower.docgen.core.generator.custom.CustomDocument;
 import org.lawrencebower.docgen.core.generator.custom.CustomDocumentBuilder;
 import org.lawrencebower.docgen.web_logic.business.component_calculation.ComponentCalculationImpl;
@@ -42,8 +43,8 @@ public class CommercialInvoice {
 
         initDocumentBuilders();
 
-        TableComponent addressTable = makeInvoiceTable();
-        addComponent(addressTable);
+        TableComponent invoiceTable = makeInvoiceTable();
+        addComponent(invoiceTable);
 
         addNewLine();
 
@@ -89,14 +90,15 @@ public class CommercialInvoice {
 
     private TableComponent makeInvoiceTable() {
 
-        TableComponent invoiceTable = new TableComponent("invoice table");
+        LayoutTableComponent invoiceTable = new LayoutTableComponent("invoice table");
         invoiceTable.setTablePadding(0);
 
-        TableHeaderRow headerRow = new TableHeaderRow();
+        LayoutHeaderRow headerRow = new LayoutHeaderRow();
+        headerRow.setRenderHeader(true);
 
         TableTextComponent headerComponent = new TableTextComponent(HorizontalAlignment.CENTER,
                                                                     "Commercial Invoice");
-        TableCell headerCell = new TableCell(headerComponent);
+        LayoutHeaderCell headerCell = new LayoutHeaderCell(headerComponent);
         headerCell.setPadding(3);
         headerCell.setBackgroundColor(Color.LIGHT_GRAY);
         headerCell.setColSpan(2);
@@ -109,15 +111,15 @@ public class CommercialInvoice {
         TableComponent shippedToTable = makeShippedToTable();
         TableComponent soldToTable = makeSoldToTable();
 
-        TableRow row1 = new TableRow();
-        row1.addCell(new TableCell(shippedFrom1Table));
-        row1.addCell(new TableCell(shippedFrom2Table));
+        LayoutRow row1 = new LayoutRow();
+        row1.addCell(new LayoutCell(shippedFrom1Table));
+        row1.addCell(new LayoutCell(shippedFrom2Table));
 
         invoiceTable.addRow(row1);
 
-        TableRow row2 = new TableRow();
-        row2.addCell(new TableCell(shippedToTable));
-        row2.addCell(new TableCell(soldToTable));
+        LayoutRow row2 = new LayoutRow();
+        row2.addCell(new LayoutCell(shippedToTable));
+        row2.addCell(new LayoutCell(soldToTable));
 
         invoiceTable.addRow(row2);
 
@@ -130,12 +132,13 @@ public class CommercialInvoice {
 
     private TableComponent makeSoldToTable() {
 
-        TableComponent table = new TableComponent("sold to");
+        LayoutTableComponent table = new LayoutTableComponent("sold to");
 
         table.setWidthPercentage(100);
 
-        TableHeaderRow headerRow = new TableHeaderRow();
-        TableCell shippedToCell = new TableCell("SOLD TO");
+        LayoutHeaderRow headerRow = new LayoutHeaderRow();
+        headerRow.setRenderHeader(true);
+        LayoutHeaderCell shippedToCell = new LayoutHeaderCell("SOLD TO");
         shippedToCell.setBackgroundColor(Color.LIGHT_GRAY);
         shippedToCell.setColSpan(2);
         headerRow.addCell(shippedToCell);
@@ -144,7 +147,7 @@ public class CommercialInvoice {
         TableTextComponent textComponent;
 
         textComponent = createTableTextComponent(BUSINESS_NAME.getName(), "blah");
-        TableRow row = createRowWithLabelAndValue("Name:", textComponent);
+        LayoutRow row = createRowWithLabelAndValue("Name:", textComponent);
         table.addRow(row);
         documentViewBuilder.addViewableComponent(textComponent);
 
@@ -175,12 +178,13 @@ public class CommercialInvoice {
 
     private TableComponent makeShippedToTable() {
 
-        TableComponent table = new TableComponent("shipped to");
+        LayoutTableComponent table = new LayoutTableComponent("shipped to");
 
         table.setWidthPercentage(100);
 
-        TableHeaderRow headerRow = new TableHeaderRow();
-        TableCell shippedToCell = new TableCell("SHIPPED TO");
+        LayoutHeaderRow headerRow = new LayoutHeaderRow();
+        headerRow.setRenderHeader(true);
+        LayoutHeaderCell shippedToCell = new LayoutHeaderCell("SHIPPED TO");
         shippedToCell.setBackgroundColor(Color.LIGHT_GRAY);
         shippedToCell.setColSpan(2);
         headerRow.addCell(shippedToCell);
@@ -217,12 +221,12 @@ public class CommercialInvoice {
 
     private TableComponent makeShippedFrom2Table() {
 
-        TableComponent table = new TableComponent("shipped from 2");
+        LayoutTableComponent table = new LayoutTableComponent("shipped from 2");
 
         table.setWidthPercentage(100);
 
-        TableHeaderRow headerRow = new TableHeaderRow();
-        TableCell shippedFromCell = new TableCell("");
+        LayoutHeaderRow headerRow = new LayoutHeaderRow();
+        LayoutHeaderCell shippedFromCell = new LayoutHeaderCell();
         shippedFromCell.setColSpan(2);
         headerRow.addCell(shippedFromCell);
         table.setHeaderRow(headerRow);
@@ -251,12 +255,14 @@ public class CommercialInvoice {
     }
 
     private TableComponent makeShippedFrom1Table() {
-        TableComponent table = new TableComponent("shipped from");
+
+        LayoutTableComponent table = new LayoutTableComponent("shipped from");
 
         table.setWidthPercentage(100);
 
-        TableHeaderRow headerRow = new TableHeaderRow();
-        TableCell shippedFromCell = new TableCell("SHIPPED FROM");
+        LayoutHeaderRow headerRow = new LayoutHeaderRow();
+        headerRow.setRenderHeader(true);
+        LayoutHeaderCell shippedFromCell = new LayoutHeaderCell("SHIPPED FROM");
         shippedFromCell.setBackgroundColor(Color.LIGHT_GRAY);
         shippedFromCell.setColSpan(2);
         headerRow.addCell(shippedFromCell);
@@ -297,18 +303,19 @@ public class CommercialInvoice {
     }
 
     private TableComponent makePackageInformationTable() {
-        TableComponent table = new TableComponent("package information");
+        LayoutTableComponent table = new LayoutTableComponent("package information");
 
-        TableHeaderRow headerRow = new TableHeaderRow();
-        TableCell shippedFromCell = new TableCell("Package Information");
+        LayoutHeaderRow headerRow = new LayoutHeaderRow();
+        headerRow.setRenderHeader(true);
+        LayoutHeaderCell shippedFromCell = new LayoutHeaderCell("Package Information");
         shippedFromCell.setBackgroundColor(Color.LIGHT_GRAY);
         headerRow.addCell(shippedFromCell);
         table.setHeaderRow(headerRow);
 
         TableComponent productTable = makeProductTable();
 
-        TableRow row = new TableRow();
-        row.addCell(new TableCell(productTable));
+        LayoutRow row = new LayoutRow();
+        row.addCell(new LayoutCell(productTable));
         table.addRow(row);
 
         table.setWidthPercentage(100);
@@ -320,38 +327,33 @@ public class CommercialInvoice {
 
     private TableComponent makeProductTable() {
 
-        TableComponent productTable = new TableComponent("product table");
+        ViewTableComponent productTable = new ViewTableComponent("product table");
 
-        TableHeaderRow headerRow = new TableHeaderRow();
+        WebTableHeaderRow headerRow = new WebTableHeaderRow();
 
-        TextComponent quantityComponent = new TextComponent("Number of Units");
+        String quantityDisplayName = "Number of Units";
         String quantityName = ProductInjectionField.PRODUCT_QUANTITY.getName();
-        quantityComponent.setName(quantityName);
-        TableCell quantityCell = new TableCell(quantityComponent);
+        ViewHeaderCell quantityCell = new ViewHeaderCell(quantityName);
+        quantityCell.setText(quantityDisplayName);
         headerRow.addCell(quantityCell);
 
-        TextComponent nameComponent = new TextComponent("Description");
         String productNameName = ProductInjectionField.PRODUCT_COMMERCIAL_INVOICE_DESCRIPTION.getName();
-        nameComponent.setName(productNameName);
-        TableCell nameCell = new TableCell(nameComponent);
+        ViewHeaderCell nameCell = new ViewHeaderCell(productNameName);
+        nameCell.setText("Description");
         headerRow.addCell(nameCell);
 
-        TextComponent valueComponent = new TextComponent("Unit Value");
         String productValueName = ProductInjectionField.PRODUCT_VALUE.getName();
-        valueComponent.setName(productValueName);
-        TableCell valueCell = new TableCell(valueComponent);
+        ViewHeaderCell valueCell = new ViewHeaderCell(productValueName);
+        valueCell.setText("Unit Value");
         headerRow.addCell(valueCell);
 
-        TextComponent originComponent = new TextComponent("Country of origin");
         String productOriginName = ProductInjectionField.PRODUCT_ORIGIN.getName();
-        originComponent.setName(productOriginName);
-        TableCell originCell = new TableCell(originComponent);
+        ViewHeaderCell originCell = new ViewHeaderCell(productOriginName);
+        originCell.setText("Country of origin");
         headerRow.addCell(originCell);
 
-        TextComponent totalValueComponent = new TextComponent("Total Value");
-        totalValueComponent.setName(TOTAL_VALUE_NAME);
-        TableCell totalCell = new TableCell(totalValueComponent);
-
+        ViewHeaderCell totalCell = new ViewHeaderCell(TOTAL_VALUE_NAME);
+        totalCell.setText("Total Value");
         headerRow.addCell(totalCell);
 
         productTable.setHeaderRow(headerRow);
@@ -371,27 +373,25 @@ public class CommercialInvoice {
 
     private TableComponent makeTotalsTable() {
 
-        TableComponent totalsTable = new TableComponent("totals table");
+        LayoutTableComponent totalsTable = new LayoutTableComponent("totals table");
 
         totalsTable.setWidthPercentage(100);
         totalsTable.setTablePadding(0);
 
-        TableHeaderRow headerRow = new TableHeaderRow();
+        LayoutHeaderRow headerRow = new LayoutHeaderRow();
         headerRow.setRenderHeader(false);
-        TableCell headerCell = new TableCell();
-        headerCell.setColSpan(2);
-        headerRow.addCell(headerCell);
-        headerRow.setColumnWidths(70, 30);
+        headerRow.addCell(new LayoutHeaderCell(70));
+        headerRow.addCell(new LayoutHeaderCell(30));
         totalsTable.setHeaderRow(headerRow);
 
-        TableRow contentsRow = new TableRow();
+        LayoutRow contentsRow = new LayoutRow();
 
         TableComponent weightTable = makeWeightTable();
 
         TableComponent costTable = makeCostTable();
 
-        contentsRow.addCell(new TableCell(weightTable));
-        contentsRow.addCell(new TableCell(costTable));
+        contentsRow.addCell(new LayoutCell(weightTable));
+        contentsRow.addCell(new LayoutCell(costTable));
 
         totalsTable.addRow(contentsRow);
 
@@ -400,14 +400,13 @@ public class CommercialInvoice {
 
     private TableComponent makeWeightTable() {
 
-        TableComponent weightTable = new TableComponent("weight table");
+        LayoutTableComponent weightTable = new LayoutTableComponent("weight table");
 
         weightTable.setWidthPercentage(100);
         weightTable.setRenderBorder(true);
 
-        TableHeaderRow headerRow = new TableHeaderRow();
-        headerRow.setRenderHeader(false);
-        TableCell cell = new TableCell();
+        LayoutHeaderRow headerRow = new LayoutHeaderRow();
+        LayoutHeaderCell cell = new LayoutHeaderCell();
         cell.setColSpan(2);
         headerRow.addCell(cell);
         weightTable.setHeaderRow(headerRow);
@@ -415,7 +414,7 @@ public class CommercialInvoice {
         TableTextComponent textComponent;
 
         textComponent = createTableTextComponent("Total Number of Packages:", "1");
-        TableRow rowWithLabelAndValue = createRowWithLabelAndValue("Total Number of Packages:", textComponent);
+        LayoutRow rowWithLabelAndValue = createRowWithLabelAndValue("Total Number of Packages:", textComponent);
         weightTable.addRow(rowWithLabelAndValue);
         addViewableComponent(textComponent);
 
@@ -428,23 +427,22 @@ public class CommercialInvoice {
 
     private TableComponent makeCostTable() {
 
-        TableComponent costTable = new TableComponent("cost table");
+        LayoutTableComponent costTable = new LayoutTableComponent("cost table");
 
         costTable.setWidthPercentage(100);
         costTable.setRenderBorder(true);
 
-        TableHeaderRow headerRow = new TableHeaderRow();
-        headerRow.setRenderHeader(false);
-        TableCell cell = new TableCell();
+        LayoutHeaderRow headerRow = new LayoutHeaderRow();
+        LayoutHeaderCell cell = new LayoutHeaderCell();
         cell.setColSpan(2);
         headerRow.addCell(cell);
         costTable.setHeaderRow(headerRow);
 
-        TableRow subTotalRow = new TableRow();
-        subTotalRow.addCell(new TableCell("Subtotal"));
+        LayoutRow subTotalRow = new LayoutRow();
+        subTotalRow.addCell(new LayoutCell("Subtotal"));
         String subTotalName = "subTotal";
         TableTextComponent subTotalComponent = createTableTextComponent(subTotalName);
-        TableCell subTotalCell = new TableCell(subTotalComponent);
+        LayoutCell subTotalCell = new LayoutCell(subTotalComponent);
         subTotalRow.addCell(subTotalCell);
         costTable.addRow(subTotalRow);
 
@@ -453,19 +451,19 @@ public class CommercialInvoice {
                                                                          TOTAL_VALUE_NAME);
         addViewableComponent(subTotalComponent, subtotalCalc);
 
-        TableRow freightTotalRow = new TableRow();
-        freightTotalRow.addCell(new TableCell("Freight"));
+        LayoutRow freightTotalRow = new LayoutRow();
+        freightTotalRow.addCell(new LayoutCell("Freight"));
         String freightName = "freight";
         TableTextComponent freightComponent = createTableTextComponent(freightName, "0");
-        TableCell freightCell = new TableCell(freightComponent);
+        LayoutCell freightCell = new LayoutCell(freightComponent);
         freightTotalRow.addCell(freightCell);
         costTable.addRow(freightTotalRow);
 
-        TableRow totalRow = new TableRow();
-        totalRow.addCell(new TableCell("Total"));
+        LayoutRow totalRow = new LayoutRow();
+        totalRow.addCell(new LayoutCell("Total"));
         String totalName = "total";
         TableTextComponent totalComponent = createTableTextComponent(totalName);
-        TableCell totalCell = new TableCell(totalComponent);
+        LayoutCell totalCell = new LayoutCell(totalComponent);
         totalRow.addCell(totalCell);
         costTable.addRow(totalRow);
 
@@ -474,11 +472,11 @@ public class CommercialInvoice {
                                                                       TOTAL_VALUE_NAME);
         addViewableComponent(totalComponent, totalCalc);
 
-        TableRow currencyRow = new TableRow();
-        currencyRow.addCell(new TableCell("Currency Code"));
+        LayoutRow currencyRow = new LayoutRow();
+        currencyRow.addCell(new LayoutCell("Currency Code"));
         String currencyName = "currency";
         TableTextComponent currencyComponent = createTableTextComponent(currencyName, "");
-        TableCell currencyCell = new TableCell(currencyComponent);
+        LayoutCell currencyCell = new LayoutCell(currencyComponent);
         currencyRow.addCell(currencyCell);
         costTable.addRow(currencyRow);
 
@@ -495,18 +493,20 @@ public class CommercialInvoice {
         TextComponent printedSig = new TextComponent("brian");
         printedSig.setAlignment(HorizontalAlignment.RIGHT);
 
-        TableComponent sigTable = new TableComponent("signature table");
+        LayoutTableComponent sigTable = new LayoutTableComponent("signature table");
+        sigTable.getHeaderRow().addCell(new LayoutHeaderCell());
+        sigTable.getHeaderRow().addCell(new LayoutHeaderCell());
 
-        TableHeaderRow row = new TableHeaderRow();
+        LayoutRow row = new LayoutRow();
 
-        TableCell imageCell = new TableCell(sigImage);
+        LayoutCell imageCell = new LayoutCell(sigImage);
         row.addCell(imageCell);
 
-        TableCell printedCell = new TableCell(printedSig);
+        LayoutCell printedCell = new LayoutCell(printedSig);
         printedCell.setVerticalAlignment(VerticalAlignment.BOTTOM);
         row.addCell(printedCell);
 
-        sigTable.setHeaderRow(row);
+        sigTable.addRow(row);
 
         sigTable.setWidthPercentage(25);
 
@@ -547,16 +547,16 @@ public class CommercialInvoice {
         documentViewBuilder.addViewableComponent(component, calculation);
     }
 
-    private TableRow createRowWithLabelAndValue(String label,
+    private LayoutRow createRowWithLabelAndValue(String label,
                                                 TableTextComponent textComponent) {
 
         return createTableRow(label, textComponent);
     }
 
-    private TableRow createTableRow(String label, TableTextComponent textComponent) {
-        TableRow row = new TableRow();
-        row.addCell(new TableCell(label));
-        row.addCell(new TableCell(textComponent));
+    private LayoutRow createTableRow(String label, TableTextComponent textComponent) {
+        LayoutRow row = new LayoutRow();
+        row.addCell(new LayoutCell(label));
+        row.addCell(new LayoutCell(textComponent));
         return row;
     }
 

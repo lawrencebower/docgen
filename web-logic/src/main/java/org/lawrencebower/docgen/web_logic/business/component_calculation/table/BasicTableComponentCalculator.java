@@ -1,6 +1,5 @@
 package org.lawrencebower.docgen.web_logic.business.component_calculation.table;
 
-import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_model.business_def.component_calculation.table.TableComponentCalculation;
 import org.lawrencebower.docgen.web_model.business_def.component_calculation.table.TableComponentCalculator;
@@ -49,7 +48,7 @@ public class BasicTableComponentCalculator implements TableComponentCalculator {
 
         runCalculationOnOperandsIfNeeded(operands, documentSet);
 
-        List<TableRow> tableRows = tableComponentView.getTableRows();
+        List tableRows = tableComponentView.getTableRows();
 
         for (int rowIndex = 0; rowIndex < tableRows.size(); rowIndex++) {
 

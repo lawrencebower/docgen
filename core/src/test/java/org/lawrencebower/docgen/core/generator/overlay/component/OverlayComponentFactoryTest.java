@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.*;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
-import org.lawrencebower.docgen.core.document.component.table.TableComponent;
+import org.lawrencebower.docgen.core.document.component.table.layout_table.LayoutTableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +49,7 @@ public class OverlayComponentFactoryTest {
 
     @Test
     public void testCreateOverlayComponent_tableComponent_correctComponentReturned() {
-        DocComponent tableComponent = new TableComponent("Table");
+        DocComponent tableComponent = new LayoutTableComponent("Table");
         tableComponent.setCoordinates(new DocCoordinates(1, 2, 3, 4));
         OverlayComponent overlayText = factory.createOverlayComponent(tableComponent);
         assertTrue(overlayText instanceof OverlayTableComponent);
@@ -79,7 +79,7 @@ public class OverlayComponentFactoryTest {
 
     @Test
     public void testCreateOverlayTable_noCoordinates_errorThrown() {
-        DocComponent component = new TableComponent("Table");
+        DocComponent component = new LayoutTableComponent("Table");
         testThrowsErrorIfCoordinatesNotSet(component);
     }
 

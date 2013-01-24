@@ -1,27 +1,25 @@
 package org.lawrencebower.docgen.web_logic.business.injection.product;
 
-import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
-import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
-import org.lawrencebower.docgen.core.document.component.table.TableRow;
+import org.lawrencebower.docgen.core.document.component.table.view_table.*;
 import org.lawrencebower.docgen.web_model.business_def.injection.TableComponentProductInjector;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public class TableComponentProductInjectorImpl implements ComponentProductInjector<TableComponent>, TableComponentProductInjector {
+public class TableComponentProductInjectorImpl implements ComponentProductInjector<ViewTableComponent>, TableComponentProductInjector {
 
     @Autowired
     private ProductInjectionMapper productInjectionMapper;
 
     @Override
-    public void injectProducts(TableComponent tableComponent, List<ProductView> products) {
+    public void injectProducts(ViewTableComponent tableComponent, List<ProductView> products) {
 
         clearExistingProducts(tableComponent);
 
         for (ProductView product : products) {
-            TableRow row = getProductRow(tableComponent, product);
+            ViewTableRow row = getProductRow(tableComponent, product);
             tableComponent.addRow(row);
         }
     }
@@ -30,39 +28,39 @@ public class TableComponentProductInjectorImpl implements ComponentProductInject
         docComponent.clearRows();
     }
 
-    private TableRow getProductRow(TableComponent docComponent, ProductView product) {
+    private ViewTableRow getProductRow(ViewTableComponent tableComponent, ProductView product) {
 
         String productId = product.getProductId();
 
-        TableRow row = new TableRow(productId);
+        ViewTableRow row = new ViewTableRow(productId);
 
-        TableHeaderRow headerRow = docComponent.getHeaderRow();
-        List<TableCell> headerCells = headerRow.getCells();
-        for (TableCell headerCell : headerCells) {
-            TableCell cell = getCellForColumn(headerCell, product);
+        WebTableHeaderRow headerRow = tableComponent.getHeaderRow();
+        List<ViewHeaderCell> headerCells = headerRow.getCells();
+        for (ViewHeaderCell headerCell : headerCells) {
+            ViewTableCell cell = getCellForColumn(headerCell, product);
             row.addCell(cell);
         }
 
         return row;
     }
 
-    private TableCell getCellForColumn(TableCell headerCell, ProductView product) {
+    private ViewTableCell getCellForColumn(ViewHeaderCell headerCell, ProductView product) {
 
-        TableCell newCell;
+        ViewTableCell newCell;
 
         String columnName = headerCell.getName();
         if(ProductInjectionField.containsName(columnName)){
             ProductInjectionField productField = ProductInjectionField.getByFieldName(columnName);
             newCell = makeCellForField(productField, product);
         }else{
-            newCell = new TableCell("");//empty cell
+            newCell = new ViewTableCell();//empty cell
         }
 
         return newCell;
     }
 
-    private TableCell makeCellForField(ProductInjectionField productField, ProductView product) {
+    private ViewTableCell makeCellForField(ProductInjectionField productField, ProductView product) {
         String value = productInjectionMapper.getProductFieldByType(productField, product);
-        return new TableCell(value);
+        return new ViewTableCell(value);
     }
 }

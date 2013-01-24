@@ -5,10 +5,11 @@ import org.lawrencebower.docgen.core.document.component.*;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.component.position.VerticalAlignment;
-import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
-import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
-import org.lawrencebower.docgen.core.document.component.table.TableRow;
+import org.lawrencebower.docgen.core.document.component.table.layout_table.*;
+import org.lawrencebower.docgen.core.document.component.table.view_table.ViewHeaderCell;
+import org.lawrencebower.docgen.core.document.component.table.view_table.ViewTableComponent;
+import org.lawrencebower.docgen.core.document.component.table.view_table.WebTableHeaderRow;
 import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.document.component.text.FontStyle;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
@@ -141,11 +142,12 @@ public class DeliveryNote {
         ImageComponent logo = new ImageComponent("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\logo.png");
         logo.setSize(70, 1);
 
-        TableComponent logoTable = new TableComponent("logo table");
+        LayoutTableComponent logoTable = new LayoutTableComponent("logo table");
 
-        TableHeaderRow row = new TableHeaderRow();
+        LayoutHeaderRow row = new LayoutHeaderRow();
+        row.setRenderHeader(true);
 
-        TableCell logoCell = new TableCell(logo);
+        LayoutHeaderCell logoCell = new LayoutHeaderCell(logo);
         row.addCell(logoCell);
 
         TextBlock sloganBlock = new TextBlock("DELIVERY NOTE",
@@ -155,7 +157,7 @@ public class DeliveryNote {
 
         TableTextComponent slogan = new TableTextComponent(sloganBlock);
         slogan.setAlignment(HorizontalAlignment.RIGHT);
-        TableCell sloganCell = new TableCell(slogan);
+        LayoutHeaderCell sloganCell = new LayoutHeaderCell(slogan);
         sloganCell.setVerticalAlignment(VerticalAlignment.BOTTOM);
         row.addCell(sloganCell);
 
@@ -167,23 +169,27 @@ public class DeliveryNote {
     }
 
     private TableComponent makeMainOrderTable() {
-        TableComponent table = new TableComponent("Items table");
+
+        ViewTableComponent table = new ViewTableComponent("Items table");
         table.setWidthPercentage(100);
 
-        TableHeaderRow headerRow = new TableHeaderRow();
+        WebTableHeaderRow headerRow = new WebTableHeaderRow();
 
         TextComponent qty = new TextComponent(HorizontalAlignment.CENTER, "QTY");
-        qty.setName(ProductInjectionField.PRODUCT_QUANTITY.getName());
-        TableCell qtyCell = new TableCell(qty);
+        ViewHeaderCell qtyCell = new ViewHeaderCell(ProductInjectionField.PRODUCT_QUANTITY.getName());
+        qtyCell.setText("QTY");
+        qtyCell.setColumnWidth(20);
         qtyCell.setBackgroundColor(ACME_BLUE);
-        headerRow.addCell(qtyCell, 20);
+        qtyCell.setComponent(qty);
+        headerRow.addCell(qtyCell);
 
-        TextComponent desc = new TextComponent(HorizontalAlignment.CENTER,
-                                               "DESCRIPTION");
-        desc.setName(ProductInjectionField.PRODUCT_NAME_AND_DESCRIPTION.getName());
-        TableCell descriptionCell = new TableCell(desc);
+        ViewHeaderCell descriptionCell = new ViewHeaderCell(ProductInjectionField.PRODUCT_NAME_AND_DESCRIPTION.getName());
+        descriptionCell.setText("DESCRIPTION");
+        descriptionCell.setColumnWidth(80);
         descriptionCell.setBackgroundColor(ACME_BLUE);
-        headerRow.addCell(descriptionCell, 80);
+        TextComponent desc = new TextComponent(HorizontalAlignment.CENTER, "DESCRIPTION");
+        descriptionCell.setComponent(desc);
+        headerRow.addCell(descriptionCell);
 
         table.setHeaderRow(headerRow);
 
@@ -193,23 +199,24 @@ public class DeliveryNote {
     }
 
     private TableComponent makeDetailsTable() {
-        TableComponent table = new TableComponent("Details table");
+        LayoutTableComponent table = new LayoutTableComponent("Details table");
         table.setWidthPercentage(100);
 
-        TableHeaderRow headerRow = new TableHeaderRow();
+        LayoutHeaderRow headerRow = new LayoutHeaderRow();
+        headerRow.setRenderHeader(true);
 
-        TableCell headerCell = new TableCell("DETAILS AND OBSERVATIONS");
+        LayoutHeaderCell headerCell = new LayoutHeaderCell("DETAILS AND OBSERVATIONS");
         headerCell.setBackgroundColor(ACME_BLUE);
         headerRow.addCell(headerCell);
 
         table.setHeaderRow(headerRow);
 
-        TableRow row = new TableRow();
+        LayoutRow row = new LayoutRow();
 
         TableTextComponent detailsComponent =
                 componentBuilder.createTableTextComponent("observations", "THIS COMPLETES THE ORDER");
 
-        TableCell detailsCell = new TableCell(detailsComponent);
+        LayoutCell detailsCell = new LayoutCell(detailsComponent);
         row.addCell(detailsCell);
         documentViewBuilder.addViewableComponent(detailsComponent);
 
@@ -222,42 +229,45 @@ public class DeliveryNote {
 
     private DocComponent makeToTable() {
 
-        TableComponent table = new TableComponent("to table");
+        LayoutTableComponent table = new LayoutTableComponent("to table");
 
-        TableHeaderRow headerRow = new TableHeaderRow();
+        LayoutHeaderRow headerRow = new LayoutHeaderRow();
+        headerRow.setRenderHeader(true);
 
-        TableCell toCell = new TableCell("To");
+        LayoutHeaderCell toCell = new LayoutHeaderCell("To");
+        toCell.setColumnWidth(1);
         toCell.setRowSpan(4);
-        headerRow.addCell(toCell, 1);
+        headerRow.addCell(toCell);
 
         TableTextComponent nameComponent = new TableTextComponent("Lawrence Bower");
         nameComponent.setName(AutoMappedField.CUSTOMER_CONTACT_NAME.getName());
-        TableCell nameCell = new TableCell(nameComponent);
+        LayoutHeaderCell nameCell = new LayoutHeaderCell(nameComponent);
         documentViewBuilder.addViewableComponent(nameComponent);
-        headerRow.addCell(nameCell, 9);
+        nameCell.setColumnWidth(9);
+        headerRow.addCell(nameCell);
 
         table.setHeaderRow(headerRow);
 
-        TableRow companyRow = new TableRow();
+        LayoutRow companyRow = new LayoutRow();
         TableTextComponent companyComponent = new TableTextComponent("Acme ltd");
         companyComponent.setName(AutoMappedField.CUSTOMER_NAME.getName());
-        TableCell companyCell = new TableCell(companyComponent);
+        LayoutCell companyCell = new LayoutCell(companyComponent);
         documentViewBuilder.addViewableComponent(companyComponent);
         companyRow.addCell(companyCell);
         table.addRow(companyRow);
 
-        TableRow addressRow = new TableRow();
+        LayoutRow addressRow = new LayoutRow();
         TableTextComponent addressComponent = new TableTextComponent("36 BillyBob Street\nEssex");
         addressComponent.setName(AutoMappedField.CUSTOMER_ADDRESS.getName());
-        TableCell addressCell = new TableCell(addressComponent);
+        LayoutCell addressCell = new LayoutCell(addressComponent);
         documentViewBuilder.addViewableComponent(addressComponent);
         addressRow.addCell(addressCell);
         table.addRow(addressRow);
 
-        TableRow countryRow = new TableRow();
+        LayoutRow countryRow = new LayoutRow();
         TableTextComponent countryComponent = new TableTextComponent("UK");
         countryComponent.setName(AutoMappedField.CUSTOMER_COUNTRY.getName());
-        TableCell countryCell = new TableCell(countryComponent);
+        LayoutCell countryCell = new LayoutCell(countryComponent);
         documentViewBuilder.addViewableComponent(countryComponent);
         countryRow.addCell(countryCell);
         table.addRow(countryRow);
@@ -268,20 +278,21 @@ public class DeliveryNote {
     }
 
     private DocComponent makeYourRefTable() {
-        TableComponent table = new TableComponent("your ref table");
+        LayoutTableComponent table = new LayoutTableComponent("your ref table");
 
-        TableHeaderRow headerRow = new TableHeaderRow();
+        LayoutHeaderRow headerRow = new LayoutHeaderRow();
+        headerRow.setRenderHeader(true);
 
         TableTextComponent yourRefComponent = new TableTextComponent("your ref -");
         yourRefComponent.setAlignment(HorizontalAlignment.RIGHT);
-        TableCell toCell = new TableCell(yourRefComponent);
+        LayoutHeaderCell toCell = new LayoutHeaderCell(yourRefComponent);
         headerRow.addCell(toCell);
 
         TextBlock refNoBlock = new TextBlock("PO 42464", FontInfo.DEFAULT_BOLD());
         TableTextComponent refNumberComponent = new TableTextComponent(refNoBlock);
         refNumberComponent.setName("refNumber");
         refNumberComponent.setAlignment(HorizontalAlignment.RIGHT);
-        TableCell addressCell = new TableCell(refNumberComponent);
+        LayoutHeaderCell addressCell = new LayoutHeaderCell(refNumberComponent);
 
         documentViewBuilder.addViewableComponent(refNumberComponent);
 

@@ -17,6 +17,9 @@ import org.lawrencebower.docgen.core.generator.model.itext_component.ITextCompon
 import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponentFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.awt.*;
+import java.util.List;
+
 public class ITextTableGenerator {
 
     @Autowired
@@ -45,19 +48,19 @@ public class ITextTableGenerator {
 
     private PdfPTable makeTable(TableComponent tableComponent) {
         int columnCount = tableComponent.getColumnCount();
+        if(columnCount == 0){
+            int i = 0;
+        }
         return new PdfPTable(columnCount);
     }
 
     private void setColumnWidths(TableComponent tableComponent, PdfPTable iTextTable) {
-
-        int[] relativeWidths = tableComponent.getColumnWidths();
-
-        if (relativeWidths.length == 0) {
-            return;
-        }
-
         try {
-            iTextTable.setWidths(relativeWidths);
+            int[] relativeWidths = tableComponent.getColumnWidths();
+
+            if (relativeWidths.length != 0) {
+                iTextTable.setWidths(relativeWidths);
+            }
         } catch (DocumentException e) {
             throw new DocGenException(e);
         }
@@ -72,7 +75,9 @@ public class ITextTableGenerator {
 
     private void mapCells(TableComponent tableComponent, PdfPTable iTextTable) {
 
-        for (TableCell tableCell : tableComponent.getAllRenderableCells()) {
+        List<TableCell> allRenderableCells = tableComponent.getAllRenderableCells();
+
+        for (TableCell tableCell : allRenderableCells) {
 
             PdfPCell iTextCell = processCell(tableCell);
 
@@ -84,15 +89,20 @@ public class ITextTableGenerator {
 
             setCellPadding(tableComponent, tableCell, iTextCell);
 
-            setCellBorder(tableComponent.isRenderBorder(), iTextCell);
+            boolean renderBorder = tableComponent.isRenderBorder();
+            setCellBorder(renderBorder, iTextCell);
 
             iTextTable.addCell(iTextCell);
         }
     }
 
     private void mapCellSpans(TableCell tableCell, PdfPCell iTextCell) {
-        iTextCell.setRowspan(tableCell.getRowSpan());
-        iTextCell.setColspan(tableCell.getColSpan());
+
+        int rowSpan = tableCell.getRowSpan();
+        int colSpan = tableCell.getColSpan();
+
+        iTextCell.setRowspan(rowSpan);
+        iTextCell.setColspan(colSpan);
     }
 
     private void setCellBorder(boolean renderBorder,
@@ -117,7 +127,7 @@ public class ITextTableGenerator {
         /**
          * cell padding over rides table padding
          */
-        if(tableCell.getPadding() != -1){
+        if (tableCell.getPadding() != -1) {
             padding = tableCell.getPadding();
         }
 
@@ -126,7 +136,8 @@ public class ITextTableGenerator {
 
     private void setCellColor(TableCell tableCell, PdfPCell iTextCell) {
         if (tableCell.hasBackgroundColor()) {
-            iTextCell.setBackgroundColor(tableCell.getBackgroundColor());
+            Color backgroundColor = tableCell.getBackgroundColor();
+            iTextCell.setBackgroundColor(backgroundColor);
         }
     }
 
@@ -151,7 +162,7 @@ public class ITextTableGenerator {
      */
     private void mapHorizontalAlignment(TableCell tableCell, PdfPCell iTextCell) {
 
-        DocComponent component = tableCell.getComponent();
+        DocComponent component = getCellComponent(tableCell);
         HorizontalAlignment horizontalAlignment = component.getAlignment();
 
         int iTextHorizontalAlignment = HorizontalAlignment.mapToITextAlignment(horizontalAlignment);
@@ -164,7 +175,7 @@ public class ITextTableGenerator {
      */
     private PdfPCell processCell(TableCell tableCell) {
 
-        DocComponent component = tableCell.getComponent();
+        DocComponent component = getCellComponent(tableCell);
 
         ITextComponent iTextComponent = componentFactory.createComponent(component);
 
@@ -172,13 +183,23 @@ public class ITextTableGenerator {
 
         PdfPCell iTextCell;
 
-        if(component.getComponentType() == DocComponentType.TABLE_TEXT){
+        if (component.getComponentType() == DocComponentType.TABLE_TEXT) {
             iTextCell = new PdfPCell((Phrase) iTextElement);
-        }else{
+        } else {
             iTextCell = new PdfPCell();
             iTextCell.addElement(iTextElement);
         }
 
         return iTextCell;
+    }
+
+    private DocComponent getCellComponent(TableCell tableCell) {
+
+        if(tableCell.getComponent() == null){
+            String message = String.format("TableCell '%s' has null component", tableCell);
+            throw new DocGenException(message);
+        }
+
+        return tableCell.getComponent();
     }
 }

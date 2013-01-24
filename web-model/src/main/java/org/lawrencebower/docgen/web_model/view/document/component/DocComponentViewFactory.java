@@ -4,12 +4,12 @@ import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.TableTextComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
-import org.lawrencebower.docgen.core.document.component.table.TableComponent;
+import org.lawrencebower.docgen.core.document.component.table.view_table.ViewTableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 
 public abstract class DocComponentViewFactory {
 
-    public TableComponentView createTableComponentView(TableComponent tableComponent) {
+    public TableComponentView createTableComponentView(ViewTableComponent tableComponent) {
         TableComponentView view = getTableComponentView();
         view.setComponent(tableComponent);
         return view;
@@ -47,8 +47,8 @@ public abstract class DocComponentViewFactory {
                 return createTextComponentView((TextComponent) component);
             case TABLE_TEXT:
                 return createTextComponentView((TableTextComponent) component);
-            case TABLE:
-                return createTableComponentView((TableComponent) component);
+            case VIEW_TABLE:
+                return createTableComponentView((ViewTableComponent) component);
             case CHECKBOX:
                 return createCheckBoxComponentView((CheckBoxComponent) component);
         }

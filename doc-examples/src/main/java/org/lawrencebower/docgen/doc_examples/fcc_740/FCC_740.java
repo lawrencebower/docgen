@@ -5,10 +5,10 @@ import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.ImageComponent;
 import org.lawrencebower.docgen.core.document.component.TableTextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
-import org.lawrencebower.docgen.core.document.component.table.TableCell;
-import org.lawrencebower.docgen.core.document.component.table.TableComponent;
-import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
-import org.lawrencebower.docgen.core.document.component.table.TableRow;
+import org.lawrencebower.docgen.core.document.component.table.layout_table.LayoutCell;
+import org.lawrencebower.docgen.core.document.component.table.layout_table.LayoutHeaderCell;
+import org.lawrencebower.docgen.core.document.component.table.layout_table.LayoutRow;
+import org.lawrencebower.docgen.core.document.component.table.layout_table.LayoutTableComponent;
 import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayDocument;
@@ -134,14 +134,11 @@ public class FCC_740 {
         TableTextComponent textComponent = new TableTextComponent(textBlock);
         textComponent.setName(name);
 
-        TableComponent table = new TableComponent("");
-        TableHeaderRow headerRow = new TableHeaderRow();
-        headerRow.setRenderHeader(false);
-        headerRow.addCell(new TableCell());
-        table.setHeaderRow(headerRow);
+        LayoutTableComponent table = new LayoutTableComponent();
+        table.getHeaderRow().addCell(new LayoutHeaderCell());
 
-        TableRow row = new TableRow(textComponent.getName());
-        row.addCell(new TableCell(textComponent));
+        LayoutRow row = new LayoutRow();
+        row.addCell(new LayoutCell(textComponent));
         table.addRow(row);
 
         table.setCoordinates(coordinates);

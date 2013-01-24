@@ -3,7 +3,7 @@ package org.lawrencebower.docgen.core.generator.model.itext_component;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.*;
-import org.lawrencebower.docgen.core.document.component.table.TableComponent;
+import org.lawrencebower.docgen.core.document.component.table.layout_table.LayoutTableComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -26,7 +26,7 @@ public class ITextComponentFactoryTest {
 
     @Test
     public void testCreateTextComponent_tableComponent_returnsValidIText() throws Exception {
-        DocComponent component = new TableComponent("");
+        DocComponent component = new LayoutTableComponent("");
         ITextComponent iTextComponent = factory.createComponent(component);
         assertTrue(iTextComponent instanceof ITextTableComponent);
     }

@@ -24,7 +24,9 @@ public abstract class ITextComponentFactory {
         switch (component.getComponentType()) {
             case TEXT:
                 return createTextComponent((TextComponent) component);
-            case TABLE:
+            case LAYOUT_TABLE:
+                return createTableComponent((TableComponent) component);
+            case VIEW_TABLE:
                 return createTableComponent((TableComponent) component);
             case TABLE_TEXT:
                 return createTableTextComponent((TableTextComponent) component);

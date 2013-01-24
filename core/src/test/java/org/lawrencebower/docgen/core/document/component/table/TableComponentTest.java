@@ -2,6 +2,7 @@ package org.lawrencebower.docgen.core.document.component.table;
 
 import org.junit.Test;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
+import org.lawrencebower.docgen.core.document.component.table.layout_table.*;
 
 import java.util.List;
 
@@ -12,11 +13,11 @@ public class TableComponentTest {
     @Test
     public void testGetColumnCount_hasColumns_returnsCorrectNumber() throws Exception {
 
-        TableComponent component = new TableComponent("name");
-        TableHeaderRow row = new TableHeaderRow();
-        row.addCell(new TableCell("name"));
-        row.addCell(new TableCell("name"));
-        row.addCell(new TableCell("name"));
+        LayoutTableComponent component = new LayoutTableComponent("name");
+        LayoutHeaderRow row = new LayoutHeaderRow();
+        row.addCell(new LayoutHeaderCell());
+        row.addCell(new LayoutHeaderCell());
+        row.addCell(new LayoutHeaderCell());
         component.setHeaderRow(row);
 
         assertEquals(3, component.getColumnCount());
@@ -24,8 +25,8 @@ public class TableComponentTest {
 
     @Test
     public void testGetColumnCount_noCells_returnsZero() throws Exception {
-        TableComponent component = new TableComponent("name");
-        TableRow row = new TableRow("row");
+        LayoutTableComponent component = new LayoutTableComponent("name");
+        LayoutRow row = new LayoutRow();
         component.addRow(row);
 
         assertEquals(0, component.getColumnCount());
@@ -33,14 +34,14 @@ public class TableComponentTest {
 
     @Test
     public void testGetColumnCount_noRows_returnsZero() throws Exception {
-        TableComponent component = new TableComponent("name");
+        TableComponent component = new LayoutTableComponent("name");
 
         assertEquals(0, component.getColumnCount());
     }
 
     @Test
     public void testGetAllCells_noRows_returnsEmpty() throws Exception {
-        TableComponent component = new TableComponent("name");
+        TableComponent component = new LayoutTableComponent("name");
 
         assertEquals(0, component.getAllRenderableCells().size());
     }
@@ -65,23 +66,23 @@ public class TableComponentTest {
 
     @Test
     public void testSetHeaderRow_validHeader_correctCount() throws Exception {
-        TableComponent component = new TableComponent("name");
-        component.setHeaderRow(new TableCell("cell1"),
-                               new TableCell("cell2"),
-                               new TableCell("cell3"));
+        LayoutTableComponent component = new LayoutTableComponent("name");
+        component.setHeaderRow(new LayoutHeaderCell(),
+                               new LayoutHeaderCell(),
+                               new LayoutHeaderCell());
 
         assertEquals(3, component.getHeaderRow().getColumnCount());
     }
 
     @Test
     public void testSetHeaderRow_validHeader_correctOrder() throws Exception {
-        TableComponent component = new TableComponent("name");
-        component.setHeaderRow(new TableCell("cell1"),
-                               new TableCell("cell2"),
-                               new TableCell("cell3"));
+        LayoutTableComponent component = new LayoutTableComponent("name");
+        component.setHeaderRow(new LayoutHeaderCell("cell1"),
+                               new LayoutHeaderCell("cell2"),
+                               new LayoutHeaderCell("cell3"));
 
-        TableHeaderRow headerRow = component.getHeaderRow();
-        List<TableCell> headerCells = headerRow.getCells();
+        AbstractTableHeaderRow headerRow = component.getHeaderRow();
+        List<LayoutHeaderCell> headerCells = headerRow.getCells();
         TextComponent cellComponent = (TextComponent) headerCells.get(2).getComponent();
         assertEquals("cell3", cellComponent.getTextString());
     }
@@ -105,25 +106,27 @@ public class TableComponentTest {
     }
 
     private TableComponent makeTableComponentWith6Cells() {
-        TableComponent component = new TableComponent("name");
 
-        TableHeaderRow headerRow = new TableHeaderRow();
-        headerRow.addCell(new TableCell("Col1"));
-        headerRow.addCell(new TableCell("Col2"));
-        headerRow.addCell(new TableCell("Col3"));
+        LayoutTableComponent component = new LayoutTableComponent("name");
+
+        LayoutHeaderRow headerRow = new LayoutHeaderRow();
+        headerRow.setRenderHeader(true);
+        headerRow.addCell(new LayoutHeaderCell("Col1"));
+        headerRow.addCell(new LayoutHeaderCell("Col2"));
+        headerRow.addCell(new LayoutHeaderCell("Col3"));
 
         component.setHeaderRow(headerRow);
 
-        TableRow row = new TableRow("row1");
-        row.addCell(new TableCell("name1"));
-        row.addCell(new TableCell("name2"));
-        row.addCell(new TableCell("name3"));
+        LayoutRow row = new LayoutRow();
+        row.addCell(new LayoutCell("name1"));
+        row.addCell(new LayoutCell("name2"));
+        row.addCell(new LayoutCell("name3"));
         component.addRow(row);
 
-        TableRow row2 = new TableRow("row2");
-        row2.addCell(new TableCell("name4"));
-        row2.addCell(new TableCell("name5"));
-        row2.addCell(new TableCell("name6"));
+        LayoutRow row2 = new LayoutRow();
+        row2.addCell(new LayoutCell("name4"));
+        row2.addCell(new LayoutCell("name5"));
+        row2.addCell(new LayoutCell("name6"));
         component.addRow(row2);
 
         return component;

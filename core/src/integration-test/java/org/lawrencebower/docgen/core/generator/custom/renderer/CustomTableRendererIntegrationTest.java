@@ -10,10 +10,9 @@ import org.lawrencebower.docgen.core.document.component.position.HorizontalAlign
 import org.lawrencebower.docgen.core.document.component.position.VerticalAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
-import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
-import org.lawrencebower.docgen.core.document.component.table.TableRow;
+import org.lawrencebower.docgen.core.document.component.table.view_table.*;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
-import org.lawrencebower.docgen.core.generator.model.itext_component.utils.ITextTableGeneratorTest;
+import org.lawrencebower.docgen.core.generator.model.itext_component.utils.WebTableGenerator;
 import org.lawrencebower.docgen.core.generator.utils.TextGenerator;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -22,12 +21,12 @@ import java.awt.*;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/integration-test-config.xml"})
+@ContextConfiguration(locations = "classpath:META-INF/integration-test-config.xml")
 public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTest {
 
     @Before
     public void setup() {
-        super.prepareDirs();
+        prepareDirs();
     }
 
     @Test
@@ -36,7 +35,7 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_1.pdf";
         String outFilePath = outputPackage + "table_renderer_output_1.pdf";
 
-        TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        TableComponent tableComponent = WebTableGenerator.makeWebTableComponent(3, 3);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
                                         outFilePath,
@@ -50,16 +49,16 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_2.pdf";
         String outFilePath = outputPackage + "table_renderer_output_2.pdf";
 
-        TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(4, 2);
+        TableComponent tableComponent = WebTableGenerator.makeWebTableComponent(4, 2);
         List<TableCell> allCells = tableComponent.getAllRenderableCells();
 
-        allCells.get(0).setText("\n\n\n\n");//make the cell deep
+        allCells.get(0).setComponent(new TableTextComponent("\n\n\n\n"));//make the cell deep
 
         allCells.get(1).setVerticalAlignment(VerticalAlignment.TOP);
         allCells.get(2).setVerticalAlignment(VerticalAlignment.MIDDLE);
         allCells.get(3).setVerticalAlignment(VerticalAlignment.BOTTOM);
 
-        allCells.get(4).setText("\n\n\n\n");//make the cell deep
+        allCells.get(4).setComponent(new TableTextComponent("\n\n\n\n"));//make the cell deep
 
         TableTextComponent leftAlignedComponent = new TableTextComponent("1");
         leftAlignedComponent.setAlignment(HorizontalAlignment.LEFT);
@@ -73,7 +72,7 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
                                                                           "3");
         allCells.get(7).setComponent(rightAlignedComponent);
 
-        allCells.get(8).setText("\n\n\n\n");//make the cell deep
+        allCells.get(8).setComponent(new TableTextComponent("\n\n\n\n"));//make the cell deep
 
         allCells.get(9).getComponent().setAlignment(HorizontalAlignment.LEFT);
         allCells.get(9).setVerticalAlignment(VerticalAlignment.BOTTOM);
@@ -94,14 +93,14 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_3.pdf";
         String outFilePath = outputPackage + "table_renderer_output_3.pdf";
 
-        TableComponent tableComponent1 = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
-        TableHeaderRow headerRow = tableComponent1.getHeaderRow();
+        ViewTableComponent tableComponent1 = WebTableGenerator.makeWebTableComponent(3, 3);
+        WebTableHeaderRow headerRow = tableComponent1.getHeaderRow();
         headerRow.getCells().clear();
-        headerRow.addCell(new TableCell("col0"), 20);
-        headerRow.addCell(new TableCell("col1"), 20);
-        headerRow.addCell(new TableCell("col2"), 60);
+        headerRow.addCell(new ViewHeaderCell("col0", 20));
+        headerRow.addCell(new ViewHeaderCell("col1", 20));
+        headerRow.addCell(new ViewHeaderCell("col2", 60));
 
-        TableComponent tableComponent2 = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        TableComponent tableComponent2 = WebTableGenerator.makeWebTableComponent(3, 3);
         tableComponent2.getHeaderRow().setColumnWidths(60, 10, 30);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
@@ -118,7 +117,7 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_4.pdf";
         String outFilePath = outputPackage + "table_renderer_output_4.pdf";
 
-        TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        TableComponent tableComponent = WebTableGenerator.makeWebTableComponent(3, 3);
         List<TableCell> allCells = tableComponent.getAllRenderableCells();
         allCells.get(0).setBackgroundColor(Color.cyan);
         allCells.get(2).setBackgroundColor(Color.pink);
@@ -136,7 +135,7 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_5.pdf";
         String outFilePath = outputPackage + "table_renderer_output_5.pdf";
 
-        TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        TableComponent tableComponent = WebTableGenerator.makeWebTableComponent(3, 3);
         List<TableCell> allCells = tableComponent.getAllRenderableCells();
         allCells.get(0).setPadding(0);
         allCells.get(4).setPadding(20);
@@ -157,7 +156,7 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         List<TextBlock> textBlocks = TextGenerator.createVariedTextBlocks();
         TextBlock variedTxtBlock = TextGenerator.createVariedTextBlock();
 
-        TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        TableComponent tableComponent = WebTableGenerator.makeWebTableComponent(3, 3);
         List<TableCell> allCells = tableComponent.getAllRenderableCells();
         allCells.get(0).setComponent(new TableTextComponent(textBlocks.get(0)));
         allCells.get(4).setComponent(new TableTextComponent(textBlocks.get(1)));
@@ -176,7 +175,7 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_7.pdf";
         String outFilePath = outputPackage + "table_renderer_output_7.pdf";
 
-        TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        TableComponent tableComponent = WebTableGenerator.makeWebTableComponent(3, 3);
         tableComponent.setRenderBorder(false);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
@@ -191,12 +190,12 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_8.pdf";
         String outFilePath = outputPackage + "table_renderer_output_8.pdf";
 
-        TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        TableComponent tableComponent = WebTableGenerator.makeWebTableComponent(3, 3);
         tableComponent.setName("main table");
 
         List<TableCell> allCells = tableComponent.getAllRenderableCells();
 
-        TableComponent nestedTableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        TableComponent nestedTableComponent = WebTableGenerator.makeWebTableComponent(3, 3);
         nestedTableComponent.setName("nested table");
         nestedTableComponent.setWidthPercentage(100);
         TableCell tableCell = allCells.get(3);
@@ -218,7 +217,7 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_9.pdf";
         String outFilePath = outputPackage + "table_renderer_output_9.pdf";
 
-        TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        TableComponent tableComponent = WebTableGenerator.makeWebTableComponent(3, 3);
         tableComponent.setName("main table");
         tableComponent.setTablePadding(5);
 
@@ -240,11 +239,11 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_10.pdf";
         String outFilePath = outputPackage + "table_renderer_output_10.pdf";
 
-        TableComponent tableComponent = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        TableComponent tableComponent = WebTableGenerator.makeWebTableComponent(3, 3);
         tableComponent.setName("main table");
         tableComponent.getHeaderRow().setRenderHeader(false);
 
-        TableComponent tableComponent2 = ITextTableGeneratorTest.makeStandardTableComponent(3, 3);
+        TableComponent tableComponent2 = WebTableGenerator.makeWebTableComponent(3, 3);
         tableComponent2.setName("main table 2");
         tableComponent2.getHeaderRow().setRenderHeader(true);
 
@@ -261,37 +260,37 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_11.pdf";
         String outFilePath = outputPackage + "table_renderer_output_11.pdf";
 
-        TableComponent tableComponent = new TableComponent("table");
+        ViewTableComponent tableComponent = new ViewTableComponent("table");
         tableComponent.setRenderBorder(true);
 
-        tableComponent.setHeaderRow(new TableCell("col1"),
-                                    new TableCell("col2"),
-                                    new TableCell("col3"));
+        tableComponent.setHeaderRow(new ViewHeaderCell("col1"),
+                                    new ViewHeaderCell("col2"),
+                                    new ViewHeaderCell("col3"));
 
 
-        TableRow row1 = new TableRow("row1");
+        ViewTableRow row1 = new ViewTableRow("row1");
 
-        row1.addCell(new TableCell("cel1"));
-        TableCell cell2 = new TableCell("colspan 2");
+        row1.addCell(new ViewTableCell("cel1"));
+        ViewTableCell cell2 = new ViewTableCell("colspan 2");
         cell2.setColSpan(2);
 
         row1.addCell(cell2);
         tableComponent.addRow(row1);
 
-        TableRow row2 = new TableRow("row2");
+        ViewTableRow row2 = new ViewTableRow("row2");
 
-        TableCell cell3 = new TableCell("rowspan 2");
+        ViewTableCell cell3 = new ViewTableCell("rowspan 2");
         cell3.setRowSpan(2);
 
         row2.addCell(cell3);
-        row2.addCell(new TableCell("cell 4"));
-        row2.addCell(new TableCell("cell 5"));
+        row2.addCell(new ViewTableCell("cell 4"));
+        row2.addCell(new ViewTableCell("cell 5"));
         tableComponent.addRow(row2);
 
-        TableRow row3 = new TableRow("row3");
-        row3.addCell(new TableCell("cell6"));
-        row3.addCell(new TableCell("cell7"));
-        row3.addCell(new TableCell("cell8"));
+        ViewTableRow row3 = new ViewTableRow("row3");
+        row3.addCell(new ViewTableCell("cell6"));
+        row3.addCell(new ViewTableCell("cell7"));
+        row3.addCell(new ViewTableCell("cell8"));
 
         tableComponent.addRow(row3);
 

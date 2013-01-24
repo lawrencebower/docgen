@@ -4,7 +4,7 @@ import org.lawrencebower.docgen.core.document.component.position.HorizontalAlign
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.document.component.text.TextFragment;
 
-public class TextComponent extends DocComponent {
+public class TextComponent extends AbstractDocComponent {
 
     private TextBlock text;
 

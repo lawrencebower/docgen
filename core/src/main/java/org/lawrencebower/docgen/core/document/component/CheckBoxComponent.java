@@ -2,7 +2,7 @@ package org.lawrencebower.docgen.core.document.component;
 
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 
-public class CheckBoxComponent extends DocComponent {
+public class CheckBoxComponent extends AbstractDocComponent {
 
     private boolean selected;
 
