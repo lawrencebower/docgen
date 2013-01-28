@@ -94,7 +94,7 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
         String outFilePath = outputPackage + "table_renderer_output_3.pdf";
 
         ViewTableComponent tableComponent1 = WebTableGenerator.makeWebTableComponent(3, 3);
-        WebTableHeaderRow headerRow = tableComponent1.getHeaderRow();
+        ViewHeaderRow headerRow = tableComponent1.getHeaderRow();
         headerRow.getCells().clear();
         headerRow.addCell(new ViewHeaderCell("col0", 20));
         headerRow.addCell(new ViewHeaderCell("col1", 20));
@@ -268,29 +268,29 @@ public class CustomTableRendererIntegrationTest extends AbstractCustomRendererTe
                                     new ViewHeaderCell("col3"));
 
 
-        ViewTableRow row1 = new ViewTableRow("row1");
+        ViewRow row1 = new ViewRow("row1");
 
-        row1.addCell(new ViewTableCell("cel1"));
-        ViewTableCell cell2 = new ViewTableCell("colspan 2");
+        row1.addCell(new ViewCell("cel1"));
+        ViewCell cell2 = new ViewCell("colspan 2");
         cell2.setColSpan(2);
 
         row1.addCell(cell2);
         tableComponent.addRow(row1);
 
-        ViewTableRow row2 = new ViewTableRow("row2");
+        ViewRow row2 = new ViewRow("row2");
 
-        ViewTableCell cell3 = new ViewTableCell("rowspan 2");
+        ViewCell cell3 = new ViewCell("rowspan 2");
         cell3.setRowSpan(2);
 
         row2.addCell(cell3);
-        row2.addCell(new ViewTableCell("cell 4"));
-        row2.addCell(new ViewTableCell("cell 5"));
+        row2.addCell(new ViewCell("cell 4"));
+        row2.addCell(new ViewCell("cell 5"));
         tableComponent.addRow(row2);
 
-        ViewTableRow row3 = new ViewTableRow("row3");
-        row3.addCell(new ViewTableCell("cell6"));
-        row3.addCell(new ViewTableCell("cell7"));
-        row3.addCell(new ViewTableCell("cell8"));
+        ViewRow row3 = new ViewRow("row3");
+        row3.addCell(new ViewCell("cell6"));
+        row3.addCell(new ViewCell("cell7"));
+        row3.addCell(new ViewCell("cell8"));
 
         tableComponent.addRow(row3);
 

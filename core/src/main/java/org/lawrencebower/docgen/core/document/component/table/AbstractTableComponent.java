@@ -92,4 +92,11 @@ public abstract class AbstractTableComponent<
 
         return rows.get(rowNum);
     }
+
+    @Override
+    public void setRenderHeader(boolean renderHeader) {
+        if(headerRow != null){
+            headerRow.setRenderHeader(renderHeader);
+        }
+    }
 }

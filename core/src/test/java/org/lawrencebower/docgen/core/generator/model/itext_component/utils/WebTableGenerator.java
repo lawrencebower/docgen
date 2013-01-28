@@ -9,12 +9,12 @@ public class WebTableGenerator {
 
         ViewTableComponent tableComponent = new ViewTableComponent("Table Name");
 
-        WebTableHeaderRow headerRow = new WebTableHeaderRow();
+        ViewHeaderRow headerRow = new ViewHeaderRow();
         fillHeaderRow(headerRow, "col", colNumber);
         tableComponent.setHeaderRow(headerRow);
 
         for (int i = 0; i < rowNumber; i++) {
-            ViewTableRow tableRow = new ViewTableRow("row" + i);
+            ViewRow tableRow = new ViewRow("row" + i);
             fillTableRow(tableRow, colNumber);
             tableComponent.addRow(tableRow);
         }
@@ -25,24 +25,24 @@ public class WebTableGenerator {
         return tableComponent;
     }
 
-    static void fillTableRow(ViewTableRow tableRow,
+    static void fillTableRow(ViewRow tableRow,
                              int colNumber) {
         fillTableRow(tableRow,
                      "",
                      colNumber);
     }
 
-    static void fillTableRow(ViewTableRow tableRow,
+    static void fillTableRow(ViewRow tableRow,
                              String prefix,
                              int colNumber) {
 
         for (int i = 0; i < colNumber; i++) {
-            ViewTableCell layoutCell = getLayoutCell(prefix, i);
+            ViewCell layoutCell = getLayoutCell(prefix, i);
             tableRow.addCell(layoutCell);
         }
     }
 
-    static void fillHeaderRow(WebTableHeaderRow tableRow,
+    static void fillHeaderRow(ViewHeaderRow tableRow,
                               String prefix,
                               int colNumber) {
 
@@ -52,8 +52,8 @@ public class WebTableGenerator {
         }
     }
 
-    private static ViewTableCell getLayoutCell(String prefix, int number) {
-        return new ViewTableCell(prefix + number);
+    private static ViewCell getLayoutCell(String prefix, int number) {
+        return new ViewCell(prefix + number);
     }
 
     private static ViewHeaderCell getLayoutHeaderCell(String prefix, int number) {

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ViewTableComponent extends AbstractTableComponent<ViewTableRow, ViewTableCell, ViewHeaderCell, WebTableHeaderRow> {
+public class ViewTableComponent extends AbstractTableComponent<ViewRow, ViewCell, ViewHeaderCell, ViewHeaderRow> {
 
     public ViewTableComponent(String name) {
         super(HorizontalAlignment.LEFT);
@@ -22,12 +22,12 @@ public class ViewTableComponent extends AbstractTableComponent<ViewTableRow, Vie
     }
 
     @Override
-    public void addRow(ViewTableRow row) {
+    public void addRow(ViewRow row) {
         super.addRow(row);
         setCellNamesFromHeader(row);
     }
 
-    private void setCellNamesFromHeader(ViewTableRow row) {
+    private void setCellNamesFromHeader(ViewRow row) {
 
         List<ViewHeaderCell> headerCells = headerRow.getCells();
 
@@ -39,7 +39,7 @@ public class ViewTableComponent extends AbstractTableComponent<ViewTableRow, Vie
                 ViewHeaderCell headerCell = headerCells.get(i);
                 String columnName = headerCell.getName();
 
-                ViewTableCell cell = row.getCell(i);
+                ViewCell cell = row.getCell(i);
                 cell.setName(columnName);
             }
         }
@@ -47,7 +47,7 @@ public class ViewTableComponent extends AbstractTableComponent<ViewTableRow, Vie
 
     public void setHeaderRow(ViewHeaderCell... cells) {
         List<ViewHeaderCell> cellList = Arrays.asList(cells);
-        headerRow = new WebTableHeaderRow(cellList);
+        headerRow = new ViewHeaderRow(cellList);
     }
 
     @Override
@@ -60,8 +60,8 @@ public class ViewTableComponent extends AbstractTableComponent<ViewTableRow, Vie
             allCells.addAll(headerCells);
         }
 
-        for (ViewTableRow row : rows) {
-            List<ViewTableCell> rowCells = row.getCells();
+        for (ViewRow row : rows) {
+            List<ViewCell> rowCells = row.getCells();
             allCells.addAll(rowCells);
         }
 

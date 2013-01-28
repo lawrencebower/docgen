@@ -4,12 +4,12 @@ import org.lawrencebower.docgen.core.document.component.table.AbstractTableHeade
 
 import java.util.List;
 
-public class WebTableHeaderRow extends AbstractTableHeaderRow<ViewHeaderCell> {
+public class ViewHeaderRow extends AbstractTableHeaderRow<ViewHeaderCell> {
 
-    public WebTableHeaderRow() {
+    public ViewHeaderRow() {
     }
 
-    public WebTableHeaderRow(List<ViewHeaderCell> cells) {
+    public ViewHeaderRow(List<ViewHeaderCell> cells) {
         super(cells);
     }
 

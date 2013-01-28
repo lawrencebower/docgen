@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.generator.utils.ChecksumUtils;
-import org.lawrencebower.docgen.doc_examples.factory.CustomerFactoryTestImpl;
+import org.lawrencebower.docgen.doc_examples.factory.CustomerFactoryTestConstants;
 import org.lawrencebower.docgen.doc_examples.factory.DocumentFactoryTestImpl;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB;
@@ -80,7 +80,7 @@ public class PrepareFieldsControllerTest {
                      1,
                      components.size());
 
-        ContactView selectedBusiness = viewFactory.getContact(CustomerFactoryTestImpl.CUSTOMER_ID_1);
+        ContactView selectedBusiness = viewFactory.getContact(CustomerFactoryTestConstants.CUSTOMER_ID_1);
 
         TextComponentView docComponentView = (TextComponentView) components.get(0);
         assertEquals("auto mapped field value not correctly mapped",

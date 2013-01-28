@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.doc_examples.factory.ProductFactoryTestImpl;
+import org.lawrencebower.docgen.doc_examples.factory.ProductTestConstants;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_logic.business.controler_business.product_selection.ProductSelectionCB;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
@@ -42,9 +42,9 @@ public class ProductSelectionControllerTest {
     @Test
     public void testSelectProduct_validId_allProductsPlacedOnModel() throws Exception {
 
-        String id1 = ProductFactoryTestImpl.PRODUCT_ID_1;
-        String id2 = ProductFactoryTestImpl.PRODUCT_ID_2;
-        String id3 = ProductFactoryTestImpl.PRODUCT_ID_3;
+        String id1 = ProductTestConstants.PRODUCT_ID_1;
+        String id2 = ProductTestConstants.PRODUCT_ID_2;
+        String id3 = ProductTestConstants.PRODUCT_ID_3;
 
         BindingAwareModelMap model = new BindingAwareModelMap();
         ProductBindBean productSelectionBean = new ProductBindBean();
@@ -62,7 +62,7 @@ public class ProductSelectionControllerTest {
     @Test
     public void testSelectProduct_validId_correctProductPlacedOnSession() throws Exception {
 
-        String id1 = ProductFactoryTestImpl.PRODUCT_ID_1;
+        String id1 = ProductTestConstants.PRODUCT_ID_1;
 
         BindingAwareModelMap model = new BindingAwareModelMap();
         ProductBindBean productSelectionBean = new ProductBindBean();
@@ -80,8 +80,8 @@ public class ProductSelectionControllerTest {
 
         BindingAwareModelMap model = new BindingAwareModelMap();
 
-        String id1 = ProductFactoryTestImpl.PRODUCT_ID_1;
-        String id2 = ProductFactoryTestImpl.PRODUCT_ID_2;
+        String id1 = ProductTestConstants.PRODUCT_ID_1;
+        String id2 = ProductTestConstants.PRODUCT_ID_2;
 
         ProductBindBean product1 = new ProductBindBean();
         product1.setProductId(id1);

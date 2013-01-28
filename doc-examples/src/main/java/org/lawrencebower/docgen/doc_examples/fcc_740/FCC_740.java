@@ -5,9 +5,7 @@ import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.ImageComponent;
 import org.lawrencebower.docgen.core.document.component.TableTextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
-import org.lawrencebower.docgen.core.document.component.table.layout_table.LayoutCell;
-import org.lawrencebower.docgen.core.document.component.table.layout_table.LayoutHeaderCell;
-import org.lawrencebower.docgen.core.document.component.table.layout_table.LayoutRow;
+import org.lawrencebower.docgen.core.document.component.table.layout_table.LayoutTableBuilder;
 import org.lawrencebower.docgen.core.document.component.table.layout_table.LayoutTableComponent;
 import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
@@ -47,27 +45,34 @@ public class FCC_740 {
 
         initDocumentBuilders();
 
-        addTextBox(DocumentInjectionField.PRODUCT_TARIFF_NUMBER.getName(),
+        String name;
+
+        name = DocumentInjectionField.PRODUCT_TARIFF_NUMBER.getName();
+        addTextBox(name,
                    new DocCoordinates(262, 645, 125, 20),
                    true);
 
-        addTextBox(DocumentInjectionField.PRODUCT_QUANTITY.getName(),
+        name = DocumentInjectionField.PRODUCT_QUANTITY.getName();
+        addTextBox(name,
                    new DocCoordinates(390, 645, 180, 20),
                    true);
 
-        addTextBox(DocumentInjectionField.PRODUCT_NAME.getName(),
+        name = DocumentInjectionField.PRODUCT_NAME.getName();
+        addTextBox(name,
                    new DocCoordinates(25, 585, 135, 30),
                    true);
 
-        addTextBox(DocumentInjectionField.PRODUCT_MODEL.getName(),
+        name = DocumentInjectionField.PRODUCT_MODEL.getName();
+        addTextBox(name,
                    new DocCoordinates(165, 585, 70, 30),
                    true);
 
-        addTextBox(DocumentInjectionField.PRODUCT_CUSTOMS_DESCRIPTION.getName(),
+        name = DocumentInjectionField.PRODUCT_CUSTOMS_DESCRIPTION.getName();
+        addTextBox(name,
                    new DocCoordinates(368, 585, 210, 30),
                    true);
 
-        addTextBox(AutoMappedField.VENDOR_NAME_AND_ADDRESS,
+        addTextBox(VENDOR_NAME_AND_ADDRESS,
                    new DocCoordinates(25, 489, 175, 70),
                    true);
 
@@ -120,7 +125,8 @@ public class FCC_740 {
                             DocCoordinates coordinates,
                             boolean editable) {
 
-        addTextBox(mappedField.getName(),
+        String name = mappedField.getName();
+        addTextBox(name,
                    coordinates,
                    editable);
     }
@@ -134,15 +140,15 @@ public class FCC_740 {
         TableTextComponent textComponent = new TableTextComponent(textBlock);
         textComponent.setName(name);
 
-        LayoutTableComponent table = new LayoutTableComponent();
-        table.getHeaderRow().addCell(new LayoutHeaderCell());
+        LayoutTableBuilder tableBuilder = new LayoutTableBuilder();
+        tableBuilder.makeEmptyHeaderRowWithColSpans(1);
 
-        LayoutRow row = new LayoutRow();
-        row.addCell(new LayoutCell(textComponent));
-        table.addRow(row);
+        tableBuilder.addRowWithComponents(textComponent);
 
-        table.setCoordinates(coordinates);
+        tableBuilder.setCoordinates(coordinates);
 //        table.setRenderBorder(true);
+
+        LayoutTableComponent table = tableBuilder.getTable();
 
         convertAndAddComponent(table);
 

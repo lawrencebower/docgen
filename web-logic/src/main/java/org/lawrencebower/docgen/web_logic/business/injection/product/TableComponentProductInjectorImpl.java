@@ -19,7 +19,7 @@ public class TableComponentProductInjectorImpl implements ComponentProductInject
         clearExistingProducts(tableComponent);
 
         for (ProductView product : products) {
-            ViewTableRow row = getProductRow(tableComponent, product);
+            ViewRow row = getProductRow(tableComponent, product);
             tableComponent.addRow(row);
         }
     }
@@ -28,39 +28,39 @@ public class TableComponentProductInjectorImpl implements ComponentProductInject
         docComponent.clearRows();
     }
 
-    private ViewTableRow getProductRow(ViewTableComponent tableComponent, ProductView product) {
+    private ViewRow getProductRow(ViewTableComponent tableComponent, ProductView product) {
 
         String productId = product.getProductId();
 
-        ViewTableRow row = new ViewTableRow(productId);
+        ViewRow row = new ViewRow(productId);
 
-        WebTableHeaderRow headerRow = tableComponent.getHeaderRow();
+        ViewHeaderRow headerRow = tableComponent.getHeaderRow();
         List<ViewHeaderCell> headerCells = headerRow.getCells();
         for (ViewHeaderCell headerCell : headerCells) {
-            ViewTableCell cell = getCellForColumn(headerCell, product);
+            ViewCell cell = getCellForColumn(headerCell, product);
             row.addCell(cell);
         }
 
         return row;
     }
 
-    private ViewTableCell getCellForColumn(ViewHeaderCell headerCell, ProductView product) {
+    private ViewCell getCellForColumn(ViewHeaderCell headerCell, ProductView product) {
 
-        ViewTableCell newCell;
+        ViewCell newCell;
 
         String columnName = headerCell.getName();
         if(ProductInjectionField.containsName(columnName)){
             ProductInjectionField productField = ProductInjectionField.getByFieldName(columnName);
             newCell = makeCellForField(productField, product);
         }else{
-            newCell = new ViewTableCell();//empty cell
+            newCell = new ViewCell();//empty cell
         }
 
         return newCell;
     }
 
-    private ViewTableCell makeCellForField(ProductInjectionField productField, ProductView product) {
+    private ViewCell makeCellForField(ProductInjectionField productField, ProductView product) {
         String value = productInjectionMapper.getProductFieldByType(productField, product);
-        return new ViewTableCell(value);
+        return new ViewCell(value);
     }
 }

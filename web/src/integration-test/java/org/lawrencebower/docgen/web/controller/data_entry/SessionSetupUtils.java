@@ -1,7 +1,7 @@
 package org.lawrencebower.docgen.web.controller.data_entry;
 
-import org.lawrencebower.docgen.doc_examples.factory.CustomerFactoryTestImpl;
-import org.lawrencebower.docgen.doc_examples.factory.ProductFactoryTestImpl;
+import org.lawrencebower.docgen.doc_examples.factory.CustomerFactoryTestConstants;
+import org.lawrencebower.docgen.doc_examples.factory.ProductTestConstants;
 import org.lawrencebower.docgen.web.model.SessionData;
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
@@ -20,19 +20,19 @@ public class SessionSetupUtils {
     }
 
     private void setProductsOnSession(SessionData sessionData) {
-        ProductView product1 = viewFactory.getProduct(ProductFactoryTestImpl.PRODUCT_ID_1);
-        ProductView product2 = viewFactory.getProduct(ProductFactoryTestImpl.PRODUCT_ID_2);
+        ProductView product1 = viewFactory.getProduct(ProductTestConstants.PRODUCT_ID_1);
+        ProductView product2 = viewFactory.getProduct(ProductTestConstants.PRODUCT_ID_2);
         sessionData.addSelectedProduct(product1);
         sessionData.addSelectedProduct(product2);
     }
 
     private void setCustomerOnSession(SessionData sessionData) {
-        ContactView selectedCustomer = viewFactory.getContact(CustomerFactoryTestImpl.CUSTOMER_ID_1);
+        ContactView selectedCustomer = viewFactory.getContact(CustomerFactoryTestConstants.CUSTOMER_ID_1);
         sessionData.setCustomerSelection(selectedCustomer);
     }
 
     private void setBusinessOnSession(SessionData sessionData) {
-        ContactView selectedBusiness = viewFactory.getBusinessByCustomerName(CustomerFactoryTestImpl.CUSTOMER_ID_1);
+        ContactView selectedBusiness = viewFactory.getBusinessByCustomerName(CustomerFactoryTestConstants.CUSTOMER_ID_1);
         sessionData.setSelectedBusiness(selectedBusiness);
     }
 

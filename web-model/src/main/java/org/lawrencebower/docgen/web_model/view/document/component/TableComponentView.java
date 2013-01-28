@@ -4,9 +4,9 @@ import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.core.document.component.table.view_table.ViewHeaderCell;
+import org.lawrencebower.docgen.core.document.component.table.view_table.ViewHeaderRow;
+import org.lawrencebower.docgen.core.document.component.table.view_table.ViewRow;
 import org.lawrencebower.docgen.core.document.component.table.view_table.ViewTableComponent;
-import org.lawrencebower.docgen.core.document.component.table.view_table.ViewTableRow;
-import org.lawrencebower.docgen.core.document.component.table.view_table.WebTableHeaderRow;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_model.business_def.component_calculation.ComponentCalculation;
 import org.lawrencebower.docgen.web_model.business_def.component_calculation.table.TableComponentCalculation;
@@ -86,12 +86,12 @@ public class TableComponentView extends DocComponentViewImpl<ViewTableComponent>
         return colIndex;
     }
 
-    public List<ViewTableRow> getTableRows() {
+    public List<ViewRow> getTableRows() {
         return docComponent.getRows();
     }
 
     public List<ViewHeaderCell> getHeaderCells() {
-        WebTableHeaderRow headerRow = docComponent.getHeaderRow();
+        ViewHeaderRow headerRow = docComponent.getHeaderRow();
         return headerRow.getCells();
     }
 
@@ -184,7 +184,7 @@ public class TableComponentView extends DocComponentViewImpl<ViewTableComponent>
     }
 
     public boolean hasColumnName(String columnName) {
-        WebTableHeaderRow headerRow = docComponent.getHeaderRow();
+        ViewHeaderRow headerRow = docComponent.getHeaderRow();
         return headerRow.hasColumnName(columnName);
     }
 
@@ -208,7 +208,7 @@ public class TableComponentView extends DocComponentViewImpl<ViewTableComponent>
 
         List<DocComponentView> results = new ArrayList<>();
 
-        List<ViewTableRow> rows = getTableRows();
+        List<ViewRow> rows = getTableRows();
 
         for (int rowIndex = 0; rowIndex < rows.size(); rowIndex++) {
             DocComponentView view = getCellComponentView(rowIndex, columnIndex);

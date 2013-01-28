@@ -5,17 +5,17 @@ import org.lawrencebower.docgen.core.document.component.TableTextComponent;
 import org.lawrencebower.docgen.core.document.component.table.AbstractTableCell;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 
-public class ViewTableCell extends AbstractTableCell {
+public class ViewCell extends AbstractTableCell {
 
-    public ViewTableCell() {
+    public ViewCell() {
         this("");//default
     }
 
-    public ViewTableCell(DocComponent component) {
+    public ViewCell(DocComponent component) {
         this.component = component;
     }
 
-    public ViewTableCell(String text) {
+    public ViewCell(String text) {
         TextBlock textBlock = new TextBlock(text);
         component = new TableTextComponent(textBlock);
     }

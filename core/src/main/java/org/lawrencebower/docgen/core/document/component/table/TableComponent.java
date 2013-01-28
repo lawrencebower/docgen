@@ -33,4 +33,6 @@ public interface TableComponent<
     int getTablePadding();
 
     T getRow(int rowNum);
+
+    void setRenderHeader(boolean renderHeader);
 }

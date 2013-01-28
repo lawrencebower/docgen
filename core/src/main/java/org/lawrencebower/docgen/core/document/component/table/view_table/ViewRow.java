@@ -2,11 +2,11 @@ package org.lawrencebower.docgen.core.document.component.table.view_table;
 
 import org.lawrencebower.docgen.core.document.component.table.AbstractTableRow;
 
-public class ViewTableRow extends AbstractTableRow<ViewTableCell> {
+public class ViewRow extends AbstractTableRow<ViewCell> {
 
     protected String rowName;
 
-    public ViewTableRow(String rowName) {
+    public ViewRow(String rowName) {
         this.rowName = rowName;
     }
 
@@ -14,7 +14,7 @@ public class ViewTableRow extends AbstractTableRow<ViewTableCell> {
 
         boolean hasCell = false;
 
-        for (ViewTableCell cell : cells) {
+        for (ViewCell cell : cells) {
             String name = cell.getName();
             if(name.equals(cellName)){
                 hasCell = true;

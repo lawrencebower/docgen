@@ -1,8 +1,8 @@
 package org.lawrencebower.docgen.web_model.view.document.binding;
 
 import org.lawrencebower.docgen.core.document.component.TextComponent;
-import org.lawrencebower.docgen.core.document.component.table.view_table.ViewTableCell;
-import org.lawrencebower.docgen.core.document.component.table.view_table.ViewTableRow;
+import org.lawrencebower.docgen.core.document.component.table.view_table.ViewCell;
+import org.lawrencebower.docgen.core.document.component.table.view_table.ViewRow;
 
 import java.util.List;
 
@@ -27,11 +27,11 @@ public class NameValueBind {
         this.value = value;
     }
 
-    public void bindCellValueIfMatch(ViewTableRow tableRow) {
+    public void bindCellValueIfMatch(ViewRow tableRow) {
 
-        List<ViewTableCell> tableCells = tableRow.getCells();
+        List<ViewCell> tableCells = tableRow.getCells();
 
-        for (ViewTableCell tableCell : tableCells) {
+        for (ViewCell tableCell : tableCells) {
             String cellName = tableCell.getName();
             if(name.equals(cellName)){
                 TextComponent component = (TextComponent) tableCell.getComponent();

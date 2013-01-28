@@ -8,8 +8,8 @@ import org.lawrencebower.docgen.core.document.component.position.VerticalAlignme
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.table.layout_table.*;
 import org.lawrencebower.docgen.core.document.component.table.view_table.ViewHeaderCell;
+import org.lawrencebower.docgen.core.document.component.table.view_table.ViewHeaderRow;
 import org.lawrencebower.docgen.core.document.component.table.view_table.ViewTableComponent;
-import org.lawrencebower.docgen.core.document.component.table.view_table.WebTableHeaderRow;
 import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.document.component.text.FontStyle;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
@@ -173,7 +173,7 @@ public class DeliveryNote {
         ViewTableComponent table = new ViewTableComponent("Items table");
         table.setWidthPercentage(100);
 
-        WebTableHeaderRow headerRow = new WebTableHeaderRow();
+        ViewHeaderRow headerRow = new ViewHeaderRow();
 
         TextComponent qty = new TextComponent(HorizontalAlignment.CENTER, "QTY");
         ViewHeaderCell qtyCell = new ViewHeaderCell(ProductInjectionField.PRODUCT_QUANTITY.getName());

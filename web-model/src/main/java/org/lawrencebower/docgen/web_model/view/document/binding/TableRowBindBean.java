@@ -1,6 +1,6 @@
 package org.lawrencebower.docgen.web_model.view.document.binding;
 
-import org.lawrencebower.docgen.core.document.component.table.view_table.ViewTableRow;
+import org.lawrencebower.docgen.core.document.component.table.view_table.ViewRow;
 import org.lawrencebower.docgen.web_model.view.document.component.TableComponentView;
 import org.springframework.util.AutoPopulatingList;
 
@@ -28,7 +28,7 @@ public class TableRowBindBean {
     }
 
     public void bindRowValuesIfMatch(TableComponentView tableView) {
-        for (ViewTableRow tableRow : tableView.getTableRows()) {
+        for (ViewRow tableRow : tableView.getTableRows()) {
             String tableRowName = tableRow.getRowName();
             if (tableRowName.equals(rowName)) {
                 bindCellsIfMatch(tableRow);
@@ -36,7 +36,7 @@ public class TableRowBindBean {
         }
     }
 
-    private void bindCellsIfMatch(ViewTableRow tableRow) {
+    private void bindCellsIfMatch(ViewRow tableRow) {
         for (NameValueBind bindCell : cells) {
             bindCell.bindCellValueIfMatch(tableRow);
         }
