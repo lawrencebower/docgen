@@ -6,13 +6,11 @@ import java.util.List;
 
 public interface TableComponent<
         T extends TableRow,
-        T2 extends TableCell,
-        T3 extends HeaderCell,
-        T4 extends TableHeaderRow> extends DocComponent {
+        T2 extends TableHeaderRow> extends DocComponent {
 
     int getColumnCount();
 
-    T4 getHeaderRow();
+    T2 getHeaderRow();
 
     void addRow(T row);
 

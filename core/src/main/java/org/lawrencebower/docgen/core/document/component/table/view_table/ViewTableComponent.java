@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ViewTableComponent extends AbstractTableComponent<ViewRow, ViewCell, ViewHeaderCell, ViewHeaderRow> {
+public class ViewTableComponent extends AbstractTableComponent<ViewRow, ViewHeaderRow> {
 
     public ViewTableComponent(String name) {
         super(HorizontalAlignment.LEFT);

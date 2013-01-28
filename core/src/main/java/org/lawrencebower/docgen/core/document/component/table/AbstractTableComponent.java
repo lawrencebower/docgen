@@ -9,11 +9,9 @@ import java.util.List;
 
 public abstract class AbstractTableComponent<
         T extends TableRow,
-        T2 extends TableCell,
-        T3 extends HeaderCell,
-        T4 extends TableHeaderRow> extends AbstractDocComponent implements TableComponent<T, T2, T3, T4> {
+        T2 extends TableHeaderRow> extends AbstractDocComponent implements TableComponent<T, T2> {
 
-    protected T4 headerRow;
+    protected T2 headerRow;
     protected List<T> rows = new ArrayList<>();
     private float widthPercentage;
     private int tablePadding = 3;//default
@@ -27,12 +25,12 @@ public abstract class AbstractTableComponent<
         return headerRow.getColumnCount();
     }
 
-    public void setHeaderRow(T4 row) {
+    public void setHeaderRow(T2 row) {
         headerRow = row;
     }
 
     @Override
-    public T4 getHeaderRow() {
+    public T2 getHeaderRow() {
         return headerRow;
     }
 
