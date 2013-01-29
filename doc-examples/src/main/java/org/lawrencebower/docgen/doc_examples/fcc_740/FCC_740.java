@@ -90,7 +90,7 @@ public class FCC_740 {
 
         ImageComponent signatureImage = new ImageComponent(signatureImagePath);
         signatureImage.setCoordinates(new DocCoordinates(295, 433, 190, 25));
-        convertAndAddComponent(signatureImage);
+        addComponent(signatureImage);
 
         addTextBox("date",
                    new DocCoordinates(490, 433, 90, 25),
@@ -150,7 +150,7 @@ public class FCC_740 {
 
         LayoutTableComponent table = tableBuilder.getTable();
 
-        convertAndAddComponent(table);
+        addComponent(table);
 
         if (editable) {
             addViewableComponent(textComponent);
@@ -167,7 +167,7 @@ public class FCC_740 {
         checkComponent.setName(name);
 //        checkComponent.setRenderBorder(true);
 
-        convertAndAddComponent(checkComponent);
+        addComponent(checkComponent);
 
         if (editable) {
             addViewableComponent(checkComponent);
@@ -178,7 +178,7 @@ public class FCC_740 {
         return documentViewBuilder.addViewableComponent(checkComponent);
     }
 
-    private void convertAndAddComponent(DocComponent component) {
+    private void addComponent(DocComponent component) {
         documentBuilder.addComponent(component);
     }
 

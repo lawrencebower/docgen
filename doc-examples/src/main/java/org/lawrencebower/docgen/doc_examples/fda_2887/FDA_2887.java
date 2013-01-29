@@ -2,8 +2,12 @@ package org.lawrencebower.docgen.doc_examples.fda_2887;
 
 import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
-import org.lawrencebower.docgen.core.document.component.TextComponent;
+import org.lawrencebower.docgen.core.document.component.TableTextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
+import org.lawrencebower.docgen.core.document.component.table.layout_table.LayoutTableBuilder;
+import org.lawrencebower.docgen.core.document.component.table.layout_table.LayoutTableComponent;
+import org.lawrencebower.docgen.core.document.component.text.FontInfo;
+import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayDocument;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayDocumentBuilder;
 import org.lawrencebower.docgen.web_model.view.document.DocumentInjectionField;
@@ -23,7 +27,7 @@ public class FDA_2887 {
 
     public static final String FDA_2887_NAME = "FDA_2887";
 
-    public FDA_2887() {
+    private FDA_2887() {//force spring creation
     }
 
     private void prepareComponents() {
@@ -185,12 +189,22 @@ public class FDA_2887 {
                             DocCoordinates coordinates,
                             boolean editable) {
 
-        TextComponent textComponent = new TextComponent(name);
-        textComponent.setCoordinates(coordinates);
+        FontInfo fontInfo = FontInfo.SMALL();
+        TextBlock textBlock = new TextBlock(name, fontInfo);
+        TableTextComponent textComponent = new TableTextComponent(textBlock);
         textComponent.setName(name);
-//        textComponent.setRenderBorder(true);
 
-        addComponent(textComponent);
+        LayoutTableBuilder tableBuilder = new LayoutTableBuilder();
+        tableBuilder.makeEmptyHeaderRowWithColSpans(1);
+
+        tableBuilder.addRowWithComponents(textComponent);
+
+        tableBuilder.setCoordinates(coordinates);
+//        table.setRenderBorder(true);
+
+        LayoutTableComponent table = tableBuilder.getTable();
+
+        addComponent(table);
 
         if (editable) {
             addViewableComponent(textComponent);
