@@ -1,22 +1,16 @@
 package org.lawrencebower.docgen.doc_examples.delivery_note;
 
 import org.lawrencebower.docgen.core.document.ComponentBuilder;
-import org.lawrencebower.docgen.core.document.component.*;
+import org.lawrencebower.docgen.core.document.component.DocComponent;
+import org.lawrencebower.docgen.core.document.component.NewLineComponent;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
-import org.lawrencebower.docgen.core.document.component.position.VerticalAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
-import org.lawrencebower.docgen.core.document.component.table.layout_table.*;
-import org.lawrencebower.docgen.core.document.component.table.view_table.ViewHeaderCell;
-import org.lawrencebower.docgen.core.document.component.table.view_table.ViewHeaderRow;
-import org.lawrencebower.docgen.core.document.component.table.view_table.ViewTableComponent;
 import org.lawrencebower.docgen.core.document.component.text.FontInfo;
-import org.lawrencebower.docgen.core.document.component.text.FontStyle;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.custom.CustomDocument;
 import org.lawrencebower.docgen.core.generator.custom.CustomDocumentBuilder;
-import org.lawrencebower.docgen.web_logic.business.injection.product.ProductInjectionField;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
+import org.lawrencebower.docgen.doc_examples.delivery_note.components.*;
 import org.lawrencebower.docgen.web_model.view.document.DocumentViewBuilder;
 import org.lawrencebower.docgen.web_model.view.document.DocumentViewImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +51,6 @@ public class DeliveryNote {
 
         documentViewBuilder.setCopyNumber(5);
 
-//        documentViewBuilder.setCustomerAttributeFilters("USA_EAST_COAST");
-
     }
 
     private void initDocumentBuilders() {
@@ -76,7 +68,8 @@ public class DeliveryNote {
                                                                       HorizontalAlignment.RIGHT);
         addViewableComponent(component);
 
-        TextBlock textBlock = new TextBlock("Acme Ltd", FontInfo.DEFAULT_BOLD());
+        FontInfo fontInfo = FontInfo.DEFAULT_BOLD();
+        TextBlock textBlock = new TextBlock("Acme Ltd", fontInfo);
         TextComponent textComponent = new TextComponent(textBlock);
         addComponent(textComponent);
 
@@ -139,176 +132,37 @@ public class DeliveryNote {
 
     private TableComponent makeLogoTable() {
 
-        ImageComponent logo = new ImageComponent("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\logo.png");
-        logo.setSize(70, 1);
+        LogoTableBuilder logoTableBuilder = new LogoTableBuilder();
 
-        LayoutTableComponent logoTable = new LayoutTableComponent("logo table");
-
-        LayoutHeaderRow row = new LayoutHeaderRow();
-        row.setRenderHeader(true);
-
-        LayoutHeaderCell logoCell = new LayoutHeaderCell(logo);
-        row.addCell(logoCell);
-
-        TextBlock sloganBlock = new TextBlock("DELIVERY NOTE",
-                                              new FontInfo(FontInfo.DEFAULT_FONT,
-                                                           24,
-                                                           FontStyle.BOLD));
-
-        TableTextComponent slogan = new TableTextComponent(sloganBlock);
-        slogan.setAlignment(HorizontalAlignment.RIGHT);
-        LayoutHeaderCell sloganCell = new LayoutHeaderCell(slogan);
-        sloganCell.setVerticalAlignment(VerticalAlignment.BOTTOM);
-        row.addCell(sloganCell);
-
-        logoTable.setHeaderRow(row);
-
-        logoTable.setWidthPercentage(100);
-
-        return logoTable;
+        return logoTableBuilder.buildLogoTable();
     }
 
     private TableComponent makeMainOrderTable() {
 
-        ViewTableComponent table = new ViewTableComponent("Items table");
-        table.setWidthPercentage(100);
+        MainOrderTableBuilder mainOrderTableBuilder = new MainOrderTableBuilder();
 
-        ViewHeaderRow headerRow = new ViewHeaderRow();
-
-        TextComponent qty = new TextComponent(HorizontalAlignment.CENTER, "QTY");
-        ViewHeaderCell qtyCell = new ViewHeaderCell(ProductInjectionField.PRODUCT_QUANTITY.getName());
-        qtyCell.setText("QTY");
-        qtyCell.setColumnWidth(20);
-        qtyCell.setBackgroundColor(ACME_BLUE);
-        qtyCell.setComponent(qty);
-        headerRow.addCell(qtyCell);
-
-        ViewHeaderCell descriptionCell = new ViewHeaderCell(ProductInjectionField.PRODUCT_NAME_AND_DESCRIPTION.getName());
-        descriptionCell.setText("DESCRIPTION");
-        descriptionCell.setColumnWidth(80);
-        descriptionCell.setBackgroundColor(ACME_BLUE);
-        TextComponent desc = new TextComponent(HorizontalAlignment.CENTER, "DESCRIPTION");
-        descriptionCell.setComponent(desc);
-        headerRow.addCell(descriptionCell);
-
-        table.setHeaderRow(headerRow);
-
-        table.setRenderBorder(true);
-
-        return table;
+        return mainOrderTableBuilder.buildMainOrderTable();
     }
 
     private TableComponent makeDetailsTable() {
-        LayoutTableComponent table = new LayoutTableComponent("Details table");
-        table.setWidthPercentage(100);
 
-        LayoutHeaderRow headerRow = new LayoutHeaderRow();
-        headerRow.setRenderHeader(true);
+        DetailsTableBuilder detailsTableBuilder = new DetailsTableBuilder(componentBuilder, documentViewBuilder);
 
-        LayoutHeaderCell headerCell = new LayoutHeaderCell("DETAILS AND OBSERVATIONS");
-        headerCell.setBackgroundColor(ACME_BLUE);
-        headerRow.addCell(headerCell);
-
-        table.setHeaderRow(headerRow);
-
-        LayoutRow row = new LayoutRow();
-
-        TableTextComponent detailsComponent =
-                componentBuilder.createTableTextComponent("observations", "THIS COMPLETES THE ORDER");
-
-        LayoutCell detailsCell = new LayoutCell(detailsComponent);
-        row.addCell(detailsCell);
-        documentViewBuilder.addViewableComponent(detailsComponent);
-
-        table.addRow(row);
-
-        table.setRenderBorder(true);
-
-        return table;
+        return detailsTableBuilder.buildDetailsTable();
     }
 
     private DocComponent makeToTable() {
 
-        LayoutTableComponent table = new LayoutTableComponent("to table");
+        ToTableBuilder toTableBuilder = new ToTableBuilder(documentViewBuilder);
 
-        LayoutHeaderRow headerRow = new LayoutHeaderRow();
-        headerRow.setRenderHeader(true);
-
-        LayoutHeaderCell toCell = new LayoutHeaderCell("To");
-        toCell.setColumnWidth(1);
-        toCell.setRowSpan(4);
-        headerRow.addCell(toCell);
-
-        TableTextComponent nameComponent = new TableTextComponent("Lawrence Bower");
-        nameComponent.setName(AutoMappedField.CUSTOMER_CONTACT_NAME.getName());
-        LayoutHeaderCell nameCell = new LayoutHeaderCell(nameComponent);
-        documentViewBuilder.addViewableComponent(nameComponent);
-        nameCell.setColumnWidth(9);
-        headerRow.addCell(nameCell);
-
-        table.setHeaderRow(headerRow);
-
-        LayoutRow companyRow = new LayoutRow();
-        TableTextComponent companyComponent = new TableTextComponent("Acme ltd");
-        companyComponent.setName(AutoMappedField.CUSTOMER_NAME.getName());
-        LayoutCell companyCell = new LayoutCell(companyComponent);
-        documentViewBuilder.addViewableComponent(companyComponent);
-        companyRow.addCell(companyCell);
-        table.addRow(companyRow);
-
-        LayoutRow addressRow = new LayoutRow();
-        TableTextComponent addressComponent = new TableTextComponent("36 BillyBob Street\nEssex");
-        addressComponent.setName(AutoMappedField.CUSTOMER_ADDRESS.getName());
-        LayoutCell addressCell = new LayoutCell(addressComponent);
-        documentViewBuilder.addViewableComponent(addressComponent);
-        addressRow.addCell(addressCell);
-        table.addRow(addressRow);
-
-        LayoutRow countryRow = new LayoutRow();
-        TableTextComponent countryComponent = new TableTextComponent("UK");
-        countryComponent.setName(AutoMappedField.CUSTOMER_COUNTRY.getName());
-        LayoutCell countryCell = new LayoutCell(countryComponent);
-        documentViewBuilder.addViewableComponent(countryComponent);
-        countryRow.addCell(countryCell);
-        table.addRow(countryRow);
-
-        table.setRenderBorder(false);
-
-        return table;
+        return toTableBuilder.buildToTable();
     }
 
     private DocComponent makeYourRefTable() {
-        LayoutTableComponent table = new LayoutTableComponent("your ref table");
 
-        LayoutHeaderRow headerRow = new LayoutHeaderRow();
-        headerRow.setRenderHeader(true);
+        YourRefTableBuilder yourRefTableBuilder = new YourRefTableBuilder(documentViewBuilder);
 
-        TableTextComponent yourRefComponent = new TableTextComponent("your ref -");
-        yourRefComponent.setAlignment(HorizontalAlignment.RIGHT);
-        LayoutHeaderCell toCell = new LayoutHeaderCell(yourRefComponent);
-        headerRow.addCell(toCell);
-
-        TextBlock refNoBlock = new TextBlock("PO 42464", FontInfo.DEFAULT_BOLD());
-        TableTextComponent refNumberComponent = new TableTextComponent(refNoBlock);
-        refNumberComponent.setName("refNumber");
-        refNumberComponent.setAlignment(HorizontalAlignment.RIGHT);
-        LayoutHeaderCell addressCell = new LayoutHeaderCell(refNumberComponent);
-
-        documentViewBuilder.addViewableComponent(refNumberComponent);
-
-        headerRow.addCell(addressCell);
-
-        table.setHeaderRow(headerRow);
-
-        table.setRenderBorder(false);
-
-        table.setAlignment(HorizontalAlignment.RIGHT);
-
-        table.setWidthPercentage(20);
-
-        table.setTablePadding(0);
-
-        return table;
+        return yourRefTableBuilder.buildYourRefTable();
     }
 
     private void addNewLine() {

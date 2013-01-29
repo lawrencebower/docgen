@@ -60,9 +60,9 @@ public class LayoutTableBuilder extends AbstractTableBuilder<LayoutTableComponen
     public void makeEmptyHeaderRowWithColWidths(int... colWidths) {
 
         LayoutHeaderRow headerRow = new LayoutHeaderRow();
-        LayoutHeaderCell cell = new LayoutHeaderCell();
 
         for (int colWidth : colWidths) {
+            LayoutHeaderCell cell = new LayoutHeaderCell();
             cell.setColumnWidth(colWidth);
             headerRow.addCell(cell);
         }

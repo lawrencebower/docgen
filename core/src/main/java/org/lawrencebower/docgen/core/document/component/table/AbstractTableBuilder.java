@@ -1,6 +1,7 @@
 package org.lawrencebower.docgen.core.document.component.table;
 
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
+import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 
 public abstract class AbstractTableBuilder<T extends TableComponent> {
 
@@ -26,4 +27,7 @@ public abstract class AbstractTableBuilder<T extends TableComponent> {
         table.setCoordinates(coordinates);
     }
 
+    public void setAlignment(HorizontalAlignment alignment){
+        table.setAlignment(alignment);
+    }
 }

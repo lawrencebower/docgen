@@ -11,6 +11,8 @@ public class ChecksumUtils {
 
     @Autowired
     private TestFileLineFilter lineFilter;
+    @Autowired
+    private DocGenFileUtils fileUtils;
 
     public String getChecksumFromFile(File inputFile) {
         String result;
@@ -80,9 +82,11 @@ public class ChecksumUtils {
 
         byte[] filteredExpectedFile = lineFilter.filterFileLines(expectedFile);
         String expectedChecksum = getChecksumFromBytes(filteredExpectedFile);
+//        fileUtils.writeBytesToFile(filteredExpectedFile, new File("C:\\code\\expected_" + expectedFile.getName()));
 
         byte[] filteredOutputFile = lineFilter.filterFileLines(outputFile);
         String outputChecksum = getChecksumFromBytes(filteredOutputFile);
+//        fileUtils.writeBytesToFile(filteredExpectedFile, new File("C:\\code\\actual_" + outputFile.getName()));
 
         return expectedChecksum.equals(outputChecksum);
     }

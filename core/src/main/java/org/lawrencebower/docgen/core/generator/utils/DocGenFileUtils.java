@@ -30,4 +30,12 @@ public class DocGenFileUtils {
             }
         }
     }
+
+    public void writeBytesToFile(byte[] bytes, File file){
+        try {
+            FileUtils.writeByteArrayToFile(file, bytes);
+        } catch (IOException e) {
+            throw new DocGenException(e);
+        }
+    }
 }
