@@ -11,8 +11,8 @@
 
     <import resource="web-model-integration-test-params.xml"/>
 
-    <bean name="streamFactory"
-          class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.FileStreamFactory"/>
+    <bean name="tsvStreamFactory"
+          class="org.lawrencebower.docgen.core.generator.utils.ClassPathStreamFactory"/>
 
     <bean class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.CustomerFactoryTsvImpl"
           init-method="initCustomers">

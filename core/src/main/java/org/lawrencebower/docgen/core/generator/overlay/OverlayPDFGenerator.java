@@ -5,12 +5,24 @@ import com.lowagie.text.pdf.PdfStamper;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.generator.model.AbstractPDFGenerator;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
+import org.lawrencebower.docgen.core.generator.utils.StreamFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
+import java.io.InputStream;
 import java.util.List;
 
 public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocument> {
 
+    private StreamFactory streamFactory;
+
     private OverlayDocument document;
+
+    @Autowired(required = false)
+    @Qualifier("pdfStreamFactory")
+    public void setStreamFactory(StreamFactory streamFactory) {
+        this.streamFactory = streamFactory;
+    }
 
     @Override
     public PDFDocument generatePDF(OverlayDocument document) {
@@ -54,7 +66,10 @@ public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocument> {
     }
 
     private PdfReader getPDFReaderForSourcePDF(String sourcePDF) {
-        return pdfGenUtils.getPDFReaderAndUnlockForSourcePDF(sourcePDF);
+
+        InputStream inStream = streamFactory.getStreamFromFile(sourcePDF);
+
+        return pdfGenUtils.getPDFReaderAndUnlockForSourcePDF(inStream);
     }
 
     @Override

@@ -1,14 +1,13 @@
-package org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser;
+package org.lawrencebower.docgen.core.generator.utils;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
 
 import java.io.InputStream;
-import java.io.InputStreamReader;
 
 public class ClassPathStreamFactory implements StreamFactory {
 
     @Override
-    public InputStreamReader getStreamFromFile(String fileName) {
+    public InputStream getStreamFromFile(String fileName) {
 
         Class<? extends ClassPathStreamFactory> aClass = getClass();
 
@@ -18,7 +17,7 @@ public class ClassPathStreamFactory implements StreamFactory {
             throw new DocGenException("Failed to load stream for resource: " + fileName);
         }
 
-        return new InputStreamReader(stream);
+        return stream;
     }
 
 }

@@ -1,16 +1,16 @@
-package org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser;
+package org.lawrencebower.docgen.core.generator.utils;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 
 public class FileStreamFactory implements StreamFactory {
 
     @Override
-    public InputStreamReader getStreamFromFile(String fileName) {
+    public InputStream getStreamFromFile(String fileName) {
 
         File file = new File(fileName);
 
@@ -18,14 +18,14 @@ public class FileStreamFactory implements StreamFactory {
             throw new DocGenException("Failed to load fileName for resource: " + fileName);
         }
 
-        InputStreamReader streamReader;
+        InputStream stream;
 
         try {
-            streamReader = new FileReader(file);
+            stream = new FileInputStream(file);
         } catch (FileNotFoundException e) {
             throw new DocGenException("Failed to load fileName for resource: " + fileName);
         }
 
-        return streamReader;
+        return stream;
     }
 }

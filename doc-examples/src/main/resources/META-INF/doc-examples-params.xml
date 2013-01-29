@@ -3,15 +3,22 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd">
 
     <bean name="fcc740Path" class="java.lang.String">
-        <constructor-arg value="C:\GitHub\docgen\doc-examples\src\main\resources\740.pdf"/>
+        <constructor-arg value="/overlay_pdf/740.pdf"/>
+    </bean>
+
+    <bean name="fda2887Path" class="java.lang.String">
+        <constructor-arg value="/overlay_pdf/FDA-2887.pdf"/>
     </bean>
 
     <bean name="signatureImagePath" class="java.lang.String">
         <constructor-arg value="C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\signature.gif"/>
     </bean>
 
-    <bean name="streamFactory"
-          class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.ClassPathStreamFactory"/>
+    <bean name="pdfStreamFactory"
+          class="org.lawrencebower.docgen.core.generator.utils.ClassPathStreamFactory"/>
+
+    <bean name="tsvStreamFactory"
+          class="org.lawrencebower.docgen.core.generator.utils.ClassPathStreamFactory"/>
 
     <bean name="viewFactory"
           class="org.lawrencebower.docgen.web_model.view.view_factory.ViewFactoryImpl"

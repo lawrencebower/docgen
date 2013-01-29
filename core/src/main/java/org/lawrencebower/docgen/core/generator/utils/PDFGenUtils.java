@@ -8,13 +8,14 @@ import org.lawrencebower.docgen.core.document.Document;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 
+import java.io.InputStream;
 import java.io.OutputStream;
 
 public interface PDFGenUtils {
 
     void checkRequiredValuesPresent(Document doc);
 
-    PdfReader getPDFReaderAndUnlockForSourcePDF(String sourcePDF);
+    PdfReader getPDFReaderAndUnlockForSourcePDF(InputStream sourcePDF);
 
     PdfStamper getPDFStamper(PdfReader pdfReader, OutputStream pdfOutStream);
 

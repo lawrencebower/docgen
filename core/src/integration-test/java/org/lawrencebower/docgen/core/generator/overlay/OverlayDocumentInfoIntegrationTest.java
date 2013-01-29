@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
@@ -37,7 +38,14 @@ public class OverlayDocumentInfoIntegrationTest extends AbstractIntegrationTest 
     @Test
     public void testGeneratePDF_validObject_producesValidPDF() {
 
-        String inputFilePath = inputPackage + "overlay_input.pdf";
+        /**
+         * this is read from the classpath
+         */
+        String inputFilePath = "/org/lawrencebower/docgen/core/generator/overlay/overlay_input.pdf";
+
+        /**
+         * these are read from file system
+         */
         String expectedOutputFilePath = inputPackage + "overlay_expected_output.pdf";
         String outFilePath = outputPackage + "overlay_output.pdf";
 
@@ -47,7 +55,9 @@ public class OverlayDocumentInfoIntegrationTest extends AbstractIntegrationTest 
 
         OverlayComponent textComponent = generateSimpleTextComponent();
 
-        overlayDocumentInfo.setComponents(Arrays.asList(textComponent));
+        List<OverlayComponent> components = Arrays.asList(textComponent);
+
+        overlayDocumentInfo.setComponents(components);
 
         PDFDocument pdfDocument = overlayDocumentInfo.generatePDF();
 

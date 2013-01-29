@@ -1,12 +1,14 @@
 package org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.core.generator.utils.StreamFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 
 /** A file with rows with tab (\t) separated values. Comment lines
  * starting with a hash (#) and empty lines will be ignored.
@@ -14,6 +16,7 @@ import java.io.Reader;
 public class TSVReader {
 
     @Autowired(required = false)
+    @Qualifier("tsvStreamFactory")
     private StreamFactory streamFactory;
 
 	public static final String separator = "\t";
@@ -22,12 +25,14 @@ public class TSVReader {
 
     public DataSet readDataSetAsFile(String fileName) {
 
-        InputStreamReader streamReader = streamFactory.getStreamFromFile(fileName);
+        InputStream inputStream = streamFactory.getStreamFromFile(fileName);
 
-        return readTSV(streamReader);
+        return readTSV(inputStream);
     }
 
-    private DataSet readTSV(Reader streamReader) {
+    private DataSet readTSV(InputStream inputStream) {
+
+        InputStreamReader streamReader = new InputStreamReader(inputStream);
 
         BufferedReader reader = new BufferedReader(streamReader);
 

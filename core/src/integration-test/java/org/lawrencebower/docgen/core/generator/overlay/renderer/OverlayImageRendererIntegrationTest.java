@@ -14,15 +14,19 @@ public class OverlayImageRendererIntegrationTest extends AbstractOverlayRenderer
 
     private String imageFileLocation = "L:\\pictures\\random\\bod.bmp";
 
+    /**
+     * read from classpath
+     */
+    String inputFilePath = "/org/lawrencebower/docgen/core/generator/overlay/renderer/image_renderer_input.pdf";
+
     @Before
     public void setup() {
-        super.prepareDirs();
+        prepareDirs();
     }
 
     @Test
     public void testRenderComponent_imagePositions_IsValid() {
 
-        String inputFilePath = inputPackage + "image_renderer_input.pdf";
         String expectedOutputFilePath = inputPackage + "image_renderer_expected_output.pdf";
         String outFilePath = outputPackage + "image_renderer_output.pdf";
 

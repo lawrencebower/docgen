@@ -17,6 +17,11 @@ import java.util.List;
 @ContextConfiguration(locations = "classpath:META-INF/integration-test-config.xml")
 public class OverlayTableRendererIntegrationTest extends AbstractOverlayRendererTest {
 
+    /**
+     * read from classpath
+     */
+    String inputFilePath = "/org/lawrencebower/docgen/core/generator/overlay/renderer/table_renderer_input.pdf";
+
     @Before
     public void setup() {
         prepareDirs();
@@ -25,7 +30,6 @@ public class OverlayTableRendererIntegrationTest extends AbstractOverlayRenderer
     @Test
     public void testRenderComponent_textAlignment_IsValid() {
 
-        String inputFilePath = inputPackage + "table_renderer_input.pdf";
         String expectedOutputFilePath = inputPackage + "table_renderer_expected_output.pdf";
         String outFilePath = outputPackage + "table_renderer_output.pdf";
 
@@ -57,7 +61,6 @@ public class OverlayTableRendererIntegrationTest extends AbstractOverlayRenderer
     @Test
     public void testRenderComponent_mixedCellContent_createsValidFile() {
 
-        String inputFilePath = inputPackage + "table_renderer_input.pdf";
         String expectedOutputFilePath = inputPackage + "table_renderer_expected_output_2.pdf";
         String outFilePath = outputPackage + "table_renderer_output_2.pdf";
 

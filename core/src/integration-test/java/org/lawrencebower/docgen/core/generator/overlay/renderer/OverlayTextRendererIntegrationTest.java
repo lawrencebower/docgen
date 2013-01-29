@@ -14,18 +14,22 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/integration-test-config.xml"})
+@ContextConfiguration(locations = "classpath:META-INF/integration-test-config.xml")
 public class OverlayTextRendererIntegrationTest extends AbstractOverlayRendererTest {
+
+    /**
+     * read from classpath
+     */
+    String inputFilePath = "/org/lawrencebower/docgen/core/generator/overlay/renderer/text_renderer_input.pdf";
 
     @Before
     public void setup() {
-        super.prepareDirs();
+        prepareDirs();
     }
 
     @Test
     public void testRenderComponent_textAlignment_IsValid() {
 
-        String inputFilePath = inputPackage + "text_renderer_input.pdf";
         String expectedOutputFilePath = inputPackage + "text_renderer_expected_output.pdf";
         String outFilePath = outputPackage + "text_renderer_output.pdf";
 
@@ -59,7 +63,6 @@ public class OverlayTextRendererIntegrationTest extends AbstractOverlayRendererT
     @Test
     public void testRenderComponent_longText_IsValid() {
 
-        String inputFilePath = inputPackage + "text_renderer_input.pdf";
         String expectedOutputFilePath = inputPackage + "text_renderer_expected_output_2.pdf";
         String outFilePath = outputPackage + "text_renderer_output_2.pdf";
 
@@ -84,7 +87,6 @@ public class OverlayTextRendererIntegrationTest extends AbstractOverlayRendererT
     @Test
     public void testRenderComponent_variedFonts_IsValid() {
 
-        String inputFilePath = inputPackage + "text_renderer_input.pdf";
         String expectedOutputFilePath = inputPackage + "text_renderer_expected_output_3.pdf";
         String outFilePath = outputPackage + "text_renderer_output_3.pdf";
 

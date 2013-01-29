@@ -14,6 +14,7 @@ import org.lawrencebower.docgen.web_model.view.document.DocumentInjectionField;
 import org.lawrencebower.docgen.web_model.view.document.DocumentViewBuilder;
 import org.lawrencebower.docgen.web_model.view.document.DocumentViewImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField.CUSTOMER_ADDRESS;
 import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField.VENDOR_ADDRESS;
@@ -24,6 +25,10 @@ public class FDA_2887 {
     private DocumentViewBuilder documentViewBuilder;
     @Autowired
     private OverlayDocumentBuilder documentBuilder;
+
+    @Autowired
+    @Qualifier("fda2887Path")
+    private String fda2887Path;
 
     public static final String FDA_2887_NAME = "FDA_2887";
 
@@ -180,8 +185,7 @@ public class FDA_2887 {
     }
 
     private void initDocumentBuilders() {
-        documentBuilder.createDocument(FDA_2887_NAME,
-                                       "C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\FDA-2877.pdf");
+        documentBuilder.createDocument(FDA_2887_NAME, fda2887Path);
         documentViewBuilder.createDocument();
     }
 

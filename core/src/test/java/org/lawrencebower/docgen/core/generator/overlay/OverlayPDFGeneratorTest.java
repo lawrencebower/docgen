@@ -7,20 +7,21 @@ import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayTextComponent;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtilsImpl;
+import org.lawrencebower.docgen.core.generator.utils.StreamFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/core-test-context.xml"})
+@ContextConfiguration(locations = "classpath:META-INF/core-test-context.xml")
 public class OverlayPDFGeneratorTest {
 
     @Autowired
@@ -32,6 +33,9 @@ public class OverlayPDFGeneratorTest {
         PDFGenUtilsImpl mockUtils = mockPDFUtils();
 
         pdfGenerator.setPdfGenUtils(mockUtils);
+
+        StreamFactory mockStreamFactory = mock(StreamFactory.class);
+        pdfGenerator.setStreamFactory(mockStreamFactory);
 
         OverlayDocument document = stubDocument();
 
@@ -49,7 +53,7 @@ public class OverlayPDFGeneratorTest {
 
         PdfStamper mockPdfStamper = mock(PdfStamper.class);
 
-        when(mockPDFUtils.getPDFReaderAndUnlockForSourcePDF(anyString())).thenReturn(mockPDFReader);
+        when(mockPDFUtils.getPDFReaderAndUnlockForSourcePDF(any(InputStream.class))).thenReturn(mockPDFReader);
         when(mockPDFUtils.getPDFStamper(any(PdfReader.class), any(OutputStream.class))).thenReturn(mockPdfStamper);
 
         return mockPDFUtils;

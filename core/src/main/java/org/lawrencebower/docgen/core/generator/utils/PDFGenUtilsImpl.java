@@ -16,6 +16,7 @@ import org.lawrencebower.docgen.core.document.component.text.TextFragment;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 
@@ -38,7 +39,7 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
     }
 
     @Override
-    public PdfReader getPDFReaderAndUnlockForSourcePDF(String sourcePDF) {
+    public PdfReader getPDFReaderAndUnlockForSourcePDF(InputStream sourcePDF) {
         try {
             PdfReader pdfReader = new PdfReader(sourcePDF);
             unlockPdf(pdfReader);

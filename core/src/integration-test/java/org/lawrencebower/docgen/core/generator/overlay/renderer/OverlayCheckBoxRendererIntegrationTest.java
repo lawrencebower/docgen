@@ -10,18 +10,22 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/integration-test-config.xml"})
+@ContextConfiguration(locations = "classpath:META-INF/integration-test-config.xml")
 public class OverlayCheckBoxRendererIntegrationTest extends AbstractOverlayRendererTest {
 
     @Before
     public void setup() {
-        super.prepareDirs();
+        prepareDirs();
     }
 
     @Test
     public void testRenderComponent_componentAlignment_IsValid() {
 
-        String inputFilePath = inputPackage + "checkbox_renderer_input.pdf";
+        /**
+         * read from classpath
+         */
+        String inputFilePath = "/org/lawrencebower/docgen/core/generator/overlay/renderer/checkbox_renderer_input.pdf";
+
         String expectedOutputFilePath = inputPackage + "checkbox_renderer_expected_output.pdf";
         String outFilePath = outputPackage + "checkbox_renderer_output.pdf";
 
