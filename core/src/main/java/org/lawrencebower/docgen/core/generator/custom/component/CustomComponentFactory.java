@@ -2,6 +2,10 @@ package org.lawrencebower.docgen.core.generator.custom.component;
 
 import org.lawrencebower.docgen.core.document.component.*;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
+import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
+import org.lawrencebower.docgen.core.document.component.table.TableRow;
+import org.lawrencebower.docgen.core.document.component.table.layout_table.LayoutTableComponent;
+import org.lawrencebower.docgen.core.document.component.table.view_table.ViewTableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.itext_component.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,21 +26,34 @@ public abstract class CustomComponentFactory {
     public abstract CustomNewLineComponent getNewLineComponent();
 
     public CustomComponent createCustomComponent(DocComponent component) {
+
+        CustomComponent returnComponent;
+
         switch (component.getComponentType()) {
             case TEXT:
-                return createCustomText((TextComponent) component);
+                returnComponent = createCustomText((TextComponent) component);
+                break;
             case LAYOUT_TABLE:
-                return createCustomTable((TableComponent) component);
+                returnComponent = createCustomTable((LayoutTableComponent) component);
+                break;
             case VIEW_TABLE:
-                return createCustomTable((TableComponent) component);
+                returnComponent = createCustomTable((ViewTableComponent) component);
+                break;
             case IMAGE:
-                return createCustomImage((ImageComponent) component);
+                returnComponent = createCustomImage((ImageComponent) component);
+                break;
             case LINE:
-                return createCustomLine((LineComponent) component);
+                returnComponent = createCustomLine((LineComponent) component);
+                break;
             case NEWLINE:
-                return createCustomNewLine((NewLineComponent) component);
+                returnComponent = createCustomNewLine((NewLineComponent) component);
+                break;
+            default:
+                Class<? extends DocComponent> componentClass = component.getClass();
+                throw new DocGenException("DocComponent not mapped to CustomComponent? " + componentClass);
         }
-        throw new DocGenException("DocComponent not mapped to CustomComponent? " + component.getClass());
+
+        return returnComponent;
     }
 
     public CustomImageComponent createCustomImage(ImageComponent component) {
@@ -50,7 +67,7 @@ public abstract class CustomComponentFactory {
         return customComponent;
     }
 
-    public CustomTableComponent createCustomTable(TableComponent component) {
+    public CustomTableComponent createCustomTable(TableComponent<? extends TableRow,? extends TableHeaderRow> component) {
 
         ITextTableComponent iTextComponent = iTextFactory.getTableComponent();
         iTextComponent.setComponent(component);

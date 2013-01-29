@@ -12,6 +12,8 @@ import org.lawrencebower.docgen.core.document.component.position.HorizontalAlign
 import org.lawrencebower.docgen.core.document.component.position.VerticalAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
+import org.lawrencebower.docgen.core.document.component.table.TableHeaderRow;
+import org.lawrencebower.docgen.core.document.component.table.TableRow;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponent;
 import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponentFactory;
@@ -25,7 +27,7 @@ public class ITextTableGenerator {
     @Autowired
     private ITextComponentFactory componentFactory;
 
-    public PdfPTable generateTable(TableComponent tableComponent) {
+    public PdfPTable generateTable(TableComponent<? extends TableRow, ? extends TableHeaderRow> tableComponent) {
 
         PdfPTable iTextTable = makeTable(tableComponent);
 
@@ -48,9 +50,6 @@ public class ITextTableGenerator {
 
     private PdfPTable makeTable(TableComponent tableComponent) {
         int columnCount = tableComponent.getColumnCount();
-        if(columnCount == 0){
-            int i = 0;
-        }
         return new PdfPTable(columnCount);
     }
 
@@ -73,7 +72,8 @@ public class ITextTableGenerator {
         }
     }
 
-    private void mapCells(TableComponent tableComponent, PdfPTable iTextTable) {
+    private void mapCells(TableComponent<? extends TableRow, ? extends TableHeaderRow> tableComponent,
+                          PdfPTable iTextTable) {
 
         List<TableCell> allRenderableCells = tableComponent.getAllRenderableCells();
 

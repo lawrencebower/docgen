@@ -3,7 +3,7 @@ package org.lawrencebower.docgen.core.generator.model.itext_component.utils;
 import com.lowagie.text.pdf.PdfPTable;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lawrencebower.docgen.core.document.component.table.TableComponent;
+import org.lawrencebower.docgen.core.document.component.table.layout_table.LayoutTableComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -21,7 +21,7 @@ public class ITextTableGeneratorTest {
     @Test
     public void testMakeTable_standardComponent_returnsValidRowCount() {
 
-        TableComponent tableComponent = LayoutTableGenerator.makeLayoutTableComponent(3, 3);
+        LayoutTableComponent tableComponent = LayoutTableGenerator.makeLayoutTableComponent(3, 3);
         PdfPTable iTextTable = tableGenerator.generateTable(tableComponent);
         assertEquals(4, iTextTable.getRows().size());//includes header
     }
@@ -29,7 +29,7 @@ public class ITextTableGeneratorTest {
     @Test
     public void testMakeTable_standardComponent_returnsValidColCount() {
 
-        TableComponent tableComponent = LayoutTableGenerator.makeLayoutTableComponent(3, 3);
+        LayoutTableComponent tableComponent = LayoutTableGenerator.makeLayoutTableComponent(3, 3);
         PdfPTable iTextTable = tableGenerator.generateTable(tableComponent);
         assertEquals(3, iTextTable.getNumberOfColumns());
     }
@@ -37,7 +37,7 @@ public class ITextTableGeneratorTest {
     @Test
     public void testMakeTable_setWidthPercentage_successfullySet() {
 
-        TableComponent tableComponent = LayoutTableGenerator.makeLayoutTableComponent(3, 3);
+        LayoutTableComponent tableComponent = LayoutTableGenerator.makeLayoutTableComponent(3, 3);
         tableComponent.setWidthPercentage(12.5f);
         PdfPTable iTextTable = tableGenerator.generateTable(tableComponent);
         assertEquals(12.5f, iTextTable.getWidthPercentage());
@@ -45,7 +45,7 @@ public class ITextTableGeneratorTest {
 
     @Test
     public void testMakeTable_validColumnWidths_noError() {
-        TableComponent tableComponent = LayoutTableGenerator.makeLayoutTableComponent(3, 3);
+        LayoutTableComponent tableComponent = LayoutTableGenerator.makeLayoutTableComponent(3, 3);
         tableComponent.getHeaderRow().setColumnWidths(20,20,60);
         tableGenerator.generateTable(tableComponent);
     }
@@ -53,7 +53,7 @@ public class ITextTableGeneratorTest {
     @Test
     public void testMakeTable_badColumnWidths_throwsError() {
         try {
-            TableComponent tableComponent = LayoutTableGenerator.makeLayoutTableComponent(3, 3);
+            LayoutTableComponent tableComponent = LayoutTableGenerator.makeLayoutTableComponent(3, 3);
             tableComponent.getHeaderRow().setColumnWidths(20,20,60,10);//different number of specified widths to columns
             tableGenerator.generateTable(tableComponent);
         } catch (DocGenException e) {

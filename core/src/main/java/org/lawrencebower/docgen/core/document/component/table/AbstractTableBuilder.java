@@ -2,7 +2,7 @@ package org.lawrencebower.docgen.core.document.component.table;
 
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 
-public class AbstractTableBuilder<T extends TableComponent> {
+public abstract class AbstractTableBuilder<T extends TableComponent> {
 
     protected T table;
 

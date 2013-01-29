@@ -9,7 +9,7 @@ public class DataSet {
 	private List<DataRow> dataRows;
 	
 	public DataSet() {
-        dataRows = new ArrayList<DataRow>();
+        dataRows = new ArrayList<>();
 	}
 	
 	public void addRow(DataRow dataRow) {
