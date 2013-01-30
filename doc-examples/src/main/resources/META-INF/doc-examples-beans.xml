@@ -28,25 +28,21 @@
     <bean id="customerFactory"
           class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.CustomerFactoryTsvImpl"
           init-method="initCustomers">
-        <property name="customersTSVFile" ref="customersTSVFile"/>
     </bean>
 
     <bean id="businessFactory"
           class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.BusinessFactoryTsvImpl"
           init-method="initBusiness">
-        <property name="businessTSVFile" ref="businessTSVFile"/>
     </bean>
 
     <bean id="productFactory"
           class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.ProductFactoryTsvImpl"
           init-method="initProducts">
-        <property name="productsTSVFile" ref="productsTSVFile"/>
     </bean>
 
     <bean id="vendorFactory"
           class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.VendorFactoryTsvImpl"
           init-method="initVendor">
-        <property name="vendorTSVFile" ref="vendorTSVFile"/>
     </bean>
 
     <bean id="documentFactory"

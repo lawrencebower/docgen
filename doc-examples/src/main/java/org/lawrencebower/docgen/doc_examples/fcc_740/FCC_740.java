@@ -18,6 +18,7 @@ import org.lawrencebower.docgen.web_model.view.document.DocumentViewImpl;
 import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.Resource;
 
 import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField.*;
 
@@ -28,13 +29,13 @@ public class FCC_740 {
     @Autowired
     private OverlayDocumentBuilder documentBuilder;
 
-    @Autowired
-    @Qualifier("signatureImagePath")
-    private String signatureImagePath;
+    @javax.annotation.Resource
+    @Qualifier("signatureResource")
+    private Resource signatureResource;
 
-    @Autowired
-    @Qualifier("fcc740Path")
-    private String fcc740Path;
+    @javax.annotation.Resource
+    @Qualifier("fcc740Resource")
+    private Resource fcc740Resource;
 
     public static final String FCC_740_NAME = "FCC_740";
 
@@ -88,7 +89,7 @@ public class FCC_740 {
                    new DocCoordinates(25, 433, 265, 25),
                    true);
 
-        ImageComponent signatureImage = new ImageComponent(signatureImagePath);
+        ImageComponent signatureImage = new ImageComponent(signatureResource);
         signatureImage.setCoordinates(new DocCoordinates(295, 433, 190, 25));
         addComponent(signatureImage);
 
@@ -109,7 +110,7 @@ public class FCC_740 {
     }
 
     private void initDocumentBuilders() {
-        documentBuilder.createDocument(FCC_740_NAME, fcc740Path);
+        documentBuilder.createDocument(FCC_740_NAME, fcc740Resource);
         documentViewBuilder.createDocument();
     }
 

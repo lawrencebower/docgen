@@ -2,30 +2,29 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd">
 
-    <bean name="fcc740Path" class="java.lang.String">
-        <constructor-arg value="/overlay_pdf/740.pdf"/>
+    <bean name="fcc740Resource" class="java.lang.String">
+        <constructor-arg value="classpath:/overlay_pdf/740.pdf"/>
     </bean>
 
-    <bean name="fda2887Path" class="java.lang.String">
-        <constructor-arg value="/overlay_pdf/FDA-2887.pdf"/>
+    <bean name="fda2887Resource" class="java.lang.String">
+        <constructor-arg value="classpath:/overlay_pdf/FDA-2887.pdf"/>
     </bean>
 
-    <bean name="signatureImagePath" class="java.lang.String">
-        <constructor-arg value="C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\signature.gif"/>
+    <bean name="signatureResource" class="java.lang.String">
+        <!--<constructor-arg value="file:C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\signature.gif"/>-->
+        <constructor-arg value="classpath:/signature.gif"/>
     </bean>
 
-    <bean name="pdfStreamFactory"
-          class="org.lawrencebower.docgen.core.generator.utils.ClassPathStreamFactory"/>
-
-    <bean name="tsvStreamFactory"
-          class="org.lawrencebower.docgen.core.generator.utils.ClassPathStreamFactory"/>
+    <bean name="logoResource" class="java.lang.String">
+        <constructor-arg value="classpath:/logo.png"/>
+    </bean>
 
     <bean name="viewFactory"
           class="org.lawrencebower.docgen.web_model.view.view_factory.ViewFactoryImpl"
           init-method="init"/>
 
     <bean name="TSV_ROOT" class="java.lang.String">
-        <constructor-arg value="/tsv"/>
+        <constructor-arg value="classpath:/tsv"/>
     </bean>
 
     <bean name="customersTSVFile" class="java.lang.String">

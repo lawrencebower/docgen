@@ -9,15 +9,15 @@ import org.lawrencebower.docgen.core.document.component.table.layout_table.Layou
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/core-test-context.xml"})
+@ContextConfiguration(locations = "classpath:META-INF/core-test-context.xml")
 public class OverlayComponentFactoryTest {
 
     @Autowired
@@ -35,7 +35,9 @@ public class OverlayComponentFactoryTest {
             DocComponent unknownComponent = new TableTextComponent("I am unsupported");
             factory.createOverlayComponent(unknownComponent);
         } catch (DocGenException e) {
-            assertTrue(e.getMessage().contains("DocComponent not mapped to OverlayComponent?"));
+            String message = e.getMessage();
+            boolean condition = message.contains("DocComponent not mapped to OverlayComponent?");
+            assertTrue(condition);
         }
     }
 
@@ -57,7 +59,8 @@ public class OverlayComponentFactoryTest {
 
     @Test
     public void testCreateOverlayComponent_imageComponent_correctComponentReturned() {
-        DocComponent imageComponent = new ImageComponent("Image");
+        Resource mockResource = mock(Resource.class);
+        DocComponent imageComponent = new ImageComponent(mockResource);
         imageComponent.setCoordinates(new DocCoordinates(1, 2, 3, 4));
         OverlayComponent overlayText = factory.createOverlayComponent(imageComponent);
         assertTrue(overlayText instanceof OverlayImageComponent);
@@ -85,7 +88,8 @@ public class OverlayComponentFactoryTest {
 
     @Test
     public void testCreateOverlayImage_noCoordinates_errorThrown() {
-        DocComponent component = new ImageComponent("Image");
+        Resource mockResource = mock(Resource.class);
+        DocComponent component = new ImageComponent(mockResource);
         testThrowsErrorIfCoordinatesNotSet(component);
     }
 
@@ -96,13 +100,16 @@ public class OverlayComponentFactoryTest {
     }
 
     private void testThrowsErrorIfCoordinatesNotSet(DocComponent component) {
+
+        String message = "MESSAGE NOT SET";
+
         try {
             factory.createOverlayComponent(component);
         } catch (DocGenException e) {
-            String message = e.getMessage();
-            assertTrue(message.contains("Coordinates are null for component"));
-            return;
+            message = e.getMessage();
         }
-        fail();//should not get here
+
+        boolean condition = message.contains("Coordinates are null for component");
+        assertTrue(condition);
     }
 }

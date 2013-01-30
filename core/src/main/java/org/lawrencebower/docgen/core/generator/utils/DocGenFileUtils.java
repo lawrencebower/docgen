@@ -1,10 +1,13 @@
 package org.lawrencebower.docgen.core.generator.utils;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.springframework.core.io.Resource;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class DocGenFileUtils {
 
@@ -34,6 +37,22 @@ public class DocGenFileUtils {
     public void writeBytesToFile(byte[] bytes, File file){
         try {
             FileUtils.writeByteArrayToFile(file, bytes);
+        } catch (IOException e) {
+            throw new DocGenException(e);
+        }
+    }
+
+    public byte[] getAllBytesFromStream(InputStream inputStream) {
+        try {
+            return IOUtils.toByteArray(inputStream);
+        } catch (IOException e) {
+            throw new DocGenException(e);
+        }
+    }
+
+    public InputStream getInputStreamFromResource(Resource resource) {
+        try {
+            return resource.getInputStream();
         } catch (IOException e) {
             throw new DocGenException(e);
         }

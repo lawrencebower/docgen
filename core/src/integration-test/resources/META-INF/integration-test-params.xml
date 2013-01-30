@@ -10,7 +10,4 @@
         <constructor-arg value="C:\code\output\"/>
     </bean>
 
-    <bean name="pdfStreamFactory"
-          class="org.lawrencebower.docgen.core.generator.utils.ClassPathStreamFactory"/>
-
 </beans>

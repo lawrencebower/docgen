@@ -5,10 +5,12 @@ import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.*;
 import org.lawrencebower.docgen.core.document.component.table.layout_table.LayoutTableComponent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:META-INF/core-test-context.xml"})
@@ -40,7 +42,8 @@ public class ITextComponentFactoryTest {
 
     @Test
     public void testCreateTextComponent_imageComponent_returnsValidIText() throws Exception {
-        DocComponent component = new ImageComponent("");
+        Resource mockResource = mock(Resource.class);
+        DocComponent component = new ImageComponent(mockResource);
         ITextComponent iTextComponent = factory.createComponent(component);
         assertTrue(iTextComponent instanceof ITextImageComponent);
     }

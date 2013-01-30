@@ -1,9 +1,9 @@
 package org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.core.generator.utils.StreamFactory;
+import org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.Resource;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,16 +16,15 @@ import java.io.InputStreamReader;
 public class TSVReader {
 
     @Autowired(required = false)
-    @Qualifier("tsvStreamFactory")
-    private StreamFactory streamFactory;
+    private DocGenFileUtils fileUtils;
 
 	public static final String separator = "\t";
 	public static final String comment = "#";
     public static final String EMPTY_COL = "(null)";
 
-    public DataSet readDataSetAsFile(String fileName) {
+    public DataSet readDataSetAsFile(Resource fileName) {
 
-        InputStream inputStream = streamFactory.getStreamFromFile(fileName);
+        InputStream inputStream = fileUtils.getInputStreamFromResource(fileName);
 
         return readTSV(inputStream);
     }

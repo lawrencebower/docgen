@@ -7,8 +7,8 @@ import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayTextComponent;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtilsImpl;
-import org.lawrencebower.docgen.core.generator.utils.StreamFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -33,9 +33,6 @@ public class OverlayPDFGeneratorTest {
         PDFGenUtilsImpl mockUtils = mockPDFUtils();
 
         pdfGenerator.setPdfGenUtils(mockUtils);
-
-        StreamFactory mockStreamFactory = mock(StreamFactory.class);
-        pdfGenerator.setStreamFactory(mockStreamFactory);
 
         OverlayDocument document = stubDocument();
 
@@ -67,6 +64,7 @@ public class OverlayPDFGeneratorTest {
         List<OverlayComponent> textComponents = (Arrays.asList((OverlayComponent) mock(OverlayTextComponent.class)));
         when(document.getComponents()).thenReturn(textComponents);
         when(document.getName()).thenReturn("name");
+        when(document.getSourcePDF()).thenReturn(mock(Resource.class));
 
         return document;
     }

@@ -12,6 +12,8 @@ import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponen
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponentFactory;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayTextComponent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -41,7 +43,7 @@ public class OverlayDocumentInfoIntegrationTest extends AbstractIntegrationTest 
         /**
          * this is read from the classpath
          */
-        String inputFilePath = "/org/lawrencebower/docgen/core/generator/overlay/overlay_input.pdf";
+        Resource inputFilePath = new ClassPathResource("/org/lawrencebower/docgen/core/generator/overlay/overlay_input.pdf");
 
         /**
          * these are read from file system

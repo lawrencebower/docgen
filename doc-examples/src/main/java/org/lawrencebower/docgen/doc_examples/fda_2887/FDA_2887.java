@@ -15,6 +15,7 @@ import org.lawrencebower.docgen.web_model.view.document.DocumentViewBuilder;
 import org.lawrencebower.docgen.web_model.view.document.DocumentViewImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.Resource;
 
 import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField.CUSTOMER_ADDRESS;
 import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField.VENDOR_ADDRESS;
@@ -26,9 +27,9 @@ public class FDA_2887 {
     @Autowired
     private OverlayDocumentBuilder documentBuilder;
 
-    @Autowired
-    @Qualifier("fda2887Path")
-    private String fda2887Path;
+    @javax.annotation.Resource
+    @Qualifier("fda2887Resource")
+    private Resource fda2887Resource;
 
     public static final String FDA_2887_NAME = "FDA_2887";
 
@@ -185,7 +186,7 @@ public class FDA_2887 {
     }
 
     private void initDocumentBuilders() {
-        documentBuilder.createDocument(FDA_2887_NAME, fda2887Path);
+        documentBuilder.createDocument(FDA_2887_NAME, fda2887Resource);
         documentViewBuilder.createDocument();
     }
 

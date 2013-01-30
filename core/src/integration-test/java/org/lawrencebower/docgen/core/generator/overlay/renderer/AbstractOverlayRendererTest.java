@@ -8,6 +8,7 @@ import org.lawrencebower.docgen.core.generator.overlay.OverlayDocumentFactory;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponentFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public abstract class AbstractOverlayRendererTest extends AbstractIntegrationTes
 
     protected void createPDFAndCompareWithExpected(String expectedOutputFilePath,
                                                    String outFilePath,
-                                                   String sourcePDF,
+                                                   Resource sourcePDF,
                                                    DocComponent... components) {
 
         OverlayDocument document = overlayFactory.getOverlayDocument("Doc name");

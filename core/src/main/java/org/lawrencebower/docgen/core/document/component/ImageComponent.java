@@ -1,19 +1,19 @@
 package org.lawrencebower.docgen.core.document.component;
 
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
+import org.springframework.core.io.Resource;
 
 public class ImageComponent extends AbstractDocComponent {
 
-    private String imageFileLocation;
+    private Resource imageFileLocation;
     private int width;
     private int height;
 
-    public ImageComponent(String imageFileLocation) {
-        super();
+    public ImageComponent(Resource imageFileLocation) {
         this.imageFileLocation = imageFileLocation;
     }
 
-    public ImageComponent(HorizontalAlignment alignment, String imageFileLocation) {
+    public ImageComponent(HorizontalAlignment alignment, Resource imageFileLocation) {
         super(alignment);
         this.imageFileLocation = imageFileLocation;
     }
@@ -23,7 +23,7 @@ public class ImageComponent extends AbstractDocComponent {
         return DocComponentType.IMAGE;
     }
 
-    public String getImageFileLocation() {
+    public Resource getImageFileLocation() {
         return imageFileLocation;
     }
 
@@ -41,6 +41,6 @@ public class ImageComponent extends AbstractDocComponent {
     }
 
     public boolean hasSize() {
-        return width != 0 && height != 0;
+        return (width != 0) && (height != 0);
     }
 }

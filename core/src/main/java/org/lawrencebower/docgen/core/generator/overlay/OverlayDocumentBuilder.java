@@ -4,6 +4,7 @@ import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponentFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 
 public class OverlayDocumentBuilder {
 
@@ -18,7 +19,7 @@ public class OverlayDocumentBuilder {
         return document;
     }
 
-    public void createDocument(String name, String overlayPath) {
+    public void createDocument(String name, Resource overlayPath) {
         document = documentFactory.getOverlayDocument(name);
         document.setSourcePDF(overlayPath);
     }

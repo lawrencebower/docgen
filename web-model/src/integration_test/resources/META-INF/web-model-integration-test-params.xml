@@ -3,10 +3,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd">
 
     <!--<bean name="TSV_ROOT" class="java.lang.String">-->
-        <!--<constructor-arg value="C:\GitHub\docgen\web-model\src\integration_test\resources\tsv"/>-->
+        <!--<constructor-arg value="file:C:\GitHub\docgen\web-model\src\integration_test\resources\tsv"/>-->
     <!--</bean>-->
     <bean name="TSV_ROOT" class="java.lang.String">
-        <constructor-arg value="/tsv"/>
+        <constructor-arg value="classpath:/tsv"/>
     </bean>
 
     <bean name="customersTSVFile" class="java.lang.String">

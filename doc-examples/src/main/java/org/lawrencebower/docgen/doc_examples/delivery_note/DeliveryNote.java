@@ -14,6 +14,8 @@ import org.lawrencebower.docgen.doc_examples.delivery_note.components.*;
 import org.lawrencebower.docgen.web_model.view.document.DocumentViewBuilder;
 import org.lawrencebower.docgen.web_model.view.document.DocumentViewImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.Resource;
 
 import java.awt.*;
 
@@ -29,6 +31,9 @@ public class DeliveryNote {
     private DocumentViewBuilder documentViewBuilder;
     @Autowired
     private CustomDocumentBuilder documentBuilder;
+    @javax.annotation.Resource
+    @Qualifier("logoResource")
+    private Resource logoResource;
 
     public static final String DELIVERY_NOTE_NAME = "Delivery note";
 
@@ -134,7 +139,7 @@ public class DeliveryNote {
 
         LogoTableBuilder logoTableBuilder = new LogoTableBuilder();
 
-        return logoTableBuilder.buildLogoTable();
+        return logoTableBuilder.buildLogoTable(logoResource);
     }
 
     private TableComponent makeMainOrderTable() {

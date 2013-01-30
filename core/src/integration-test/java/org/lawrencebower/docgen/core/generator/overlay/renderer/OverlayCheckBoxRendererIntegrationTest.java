@@ -6,6 +6,8 @@ import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -24,7 +26,7 @@ public class OverlayCheckBoxRendererIntegrationTest extends AbstractOverlayRende
         /**
          * read from classpath
          */
-        String inputFilePath = "/org/lawrencebower/docgen/core/generator/overlay/renderer/checkbox_renderer_input.pdf";
+        Resource inputFilePath = new ClassPathResource("/org/lawrencebower/docgen/core/generator/overlay/renderer/checkbox_renderer_input.pdf");
 
         String expectedOutputFilePath = inputPackage + "checkbox_renderer_expected_output.pdf";
         String outFilePath = outputPackage + "checkbox_renderer_output.pdf";

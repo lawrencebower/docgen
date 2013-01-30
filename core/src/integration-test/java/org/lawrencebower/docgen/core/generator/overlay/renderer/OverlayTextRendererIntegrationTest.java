@@ -10,6 +10,8 @@ import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.document.component.text.FontStyle;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.utils.TextGenerator;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -20,7 +22,7 @@ public class OverlayTextRendererIntegrationTest extends AbstractOverlayRendererT
     /**
      * read from classpath
      */
-    String inputFilePath = "/org/lawrencebower/docgen/core/generator/overlay/renderer/text_renderer_input.pdf";
+    Resource inputFilePath = new ClassPathResource("/org/lawrencebower/docgen/core/generator/overlay/renderer/text_renderer_input.pdf");
 
     @Before
     public void setup() {

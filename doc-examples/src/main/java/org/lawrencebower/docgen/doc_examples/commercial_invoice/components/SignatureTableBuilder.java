@@ -8,12 +8,13 @@ import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.table.layout_table.LayoutCell;
 import org.lawrencebower.docgen.core.document.component.table.layout_table.LayoutRow;
 import org.lawrencebower.docgen.core.document.component.table.layout_table.LayoutTableBuilder;
+import org.springframework.core.io.Resource;
 
 public class SignatureTableBuilder {
 
-    public TableComponent buildTable() {
+    public TableComponent buildTable(Resource signatureResource) {
 
-        ImageComponent sigImage = new ImageComponent("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\signature.gif");
+        ImageComponent sigImage = new ImageComponent(signatureResource);
         sigImage.setSize(15, 15);
 
         TextComponent printedSig = new TextComponent("brian");

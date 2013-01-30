@@ -15,6 +15,8 @@ import org.lawrencebower.docgen.doc_examples.commercial_invoice.components.Total
 import org.lawrencebower.docgen.web_model.view.document.DocumentViewBuilder;
 import org.lawrencebower.docgen.web_model.view.document.DocumentViewImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.Resource;
 
 public class CommercialInvoice {
 
@@ -24,6 +26,9 @@ public class CommercialInvoice {
     private CustomDocumentBuilder documentBuilder;
     @Autowired
     DocumentViewBuilder documentViewBuilder;
+    @javax.annotation.Resource
+    @Qualifier("signatureResource")
+    private Resource signatureResource;
 
     public static final String INVOICE_NAME = "invoice";
     public static final String TOTAL_VALUE_NAME = "totalValue";
@@ -103,7 +108,7 @@ public class CommercialInvoice {
 
         SignatureTableBuilder signatureTableBuilder = new SignatureTableBuilder();
 
-        return signatureTableBuilder.buildTable();
+        return signatureTableBuilder.buildTable(signatureResource);
     }
 
     private TextComponent createTextComponent(String value) {

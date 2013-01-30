@@ -8,6 +8,8 @@ import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.generator.model.itext_component.utils.LayoutTableGenerator;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -20,7 +22,7 @@ public class OverlayTableRendererIntegrationTest extends AbstractOverlayRenderer
     /**
      * read from classpath
      */
-    String inputFilePath = "/org/lawrencebower/docgen/core/generator/overlay/renderer/table_renderer_input.pdf";
+    Resource inputFilePath = new ClassPathResource("/org/lawrencebower/docgen/core/generator/overlay/renderer/table_renderer_input.pdf");
 
     @Before
     public void setup() {

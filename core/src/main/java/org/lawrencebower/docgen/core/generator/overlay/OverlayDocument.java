@@ -5,21 +5,22 @@ import org.lawrencebower.docgen.core.document.DocType;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 
 public class OverlayDocument extends AbstractDocument<OverlayComponent> {
 
     @Autowired
     private OverlayPDFGenerator pdfGenerator;
-    private String sourcePDF;
+    private Resource sourcePDF;
 
     private OverlayDocument() {//force spring creation
     }
 
-    public void setSourcePDF(String sourcePDF) {
+    public void setSourcePDF(Resource sourcePDF) {
         this.sourcePDF = sourcePDF;
     }
 
-    public String getSourcePDF() {
+    public Resource getSourcePDF() {
         return sourcePDF;
     }
 

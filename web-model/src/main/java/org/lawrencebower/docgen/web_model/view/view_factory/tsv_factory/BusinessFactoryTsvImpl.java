@@ -6,6 +6,8 @@ import org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.D
 import org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.DataSet;
 import org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.TSVReader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.Resource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,13 +17,11 @@ public class BusinessFactoryTsvImpl implements BusinessFactory {
     @Autowired
     private TSVReader tsvReader;
 
-    private String businessTSVFile;
+    @javax.annotation.Resource
+    @Qualifier("businessTSVFile")
+    private Resource businessTSVFile;
 
     private Map<String, String> businesss;
-
-    public void setBusinessTSVFile(String businessTSVFile) {
-        this.businessTSVFile = businessTSVFile;
-    }
 
     private void initBusiness(){
 

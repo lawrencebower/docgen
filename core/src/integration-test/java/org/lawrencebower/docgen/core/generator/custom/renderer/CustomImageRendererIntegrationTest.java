@@ -7,22 +7,23 @@ import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.ImageComponent;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static junit.framework.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/integration-test-config.xml"})
+@ContextConfiguration(locations = "classpath:META-INF/integration-test-config.xml")
 public class CustomImageRendererIntegrationTest extends AbstractCustomRendererTest {
 
-    private String imageFileLocation;
+    private Resource imageFileLocation;
 
     @Before
     public void setup() {
-        super.prepareDirs();
-        imageFileLocation = inputPackage + "bod.bmp";
+        prepareDirs();
+        imageFileLocation = new ClassPathResource("/org/lawrencebower/docgen/core/generator/overlay/renderer/bod.bmp");
     }
 
     @Test
@@ -70,10 +71,13 @@ public class CustomImageRendererIntegrationTest extends AbstractCustomRendererTe
     @Test
     public void testRenderComponent_invalidFilePath_throwsError() {
 
+        String message = "MESSAGE NOT SET";
+        String expected = "java.io.FileNotFoundException: class path resource [i dont exist] cannot be opened because it does not exist";
+
         String expectedOutputFilePath = inputPackage + "image_renderer_expected_output2.pdf";
         String outFilePath = outputPackage + "image_renderer_output2.pdf";
 
-        ImageComponent imageComponent = new ImageComponent(HorizontalAlignment.LEFT, "i dont exist");
+        ImageComponent imageComponent = new ImageComponent(HorizontalAlignment.LEFT, new ClassPathResource("i dont exist"));
         imageComponent.setSize(10, 10);
 
         try {
@@ -81,10 +85,9 @@ public class CustomImageRendererIntegrationTest extends AbstractCustomRendererTe
                                             outFilePath,
                                             imageComponent);
         } catch (DocGenException e) {
-            assertTrue(e.getMessage().contains("i dont exist (The system cannot find the file specified)"));
-            return;
+            message = e.getMessage();
         }
 
-        fail();
+        assertEquals(expected, message);
     }
 }

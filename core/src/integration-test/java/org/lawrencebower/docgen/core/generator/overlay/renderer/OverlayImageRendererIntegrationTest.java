@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.component.ImageComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -12,16 +14,17 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = "classpath:META-INF/integration-test-config.xml")
 public class OverlayImageRendererIntegrationTest extends AbstractOverlayRendererTest {
 
-    private String imageFileLocation = "L:\\pictures\\random\\bod.bmp";
+    private Resource imageFileLocation;
 
     /**
      * read from classpath
      */
-    String inputFilePath = "/org/lawrencebower/docgen/core/generator/overlay/renderer/image_renderer_input.pdf";
+    Resource inputFilePath = new ClassPathResource("/org/lawrencebower/docgen/core/generator/overlay/renderer/image_renderer_input.pdf");
 
     @Before
     public void setup() {
         prepareDirs();
+        imageFileLocation = new ClassPathResource("/org/lawrencebower/docgen/core/generator/overlay/renderer/bod.bmp");
     }
 
     @Test

@@ -11,12 +11,13 @@ import org.lawrencebower.docgen.core.document.component.table.layout_table.Layou
 import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.document.component.text.FontStyle;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
+import org.springframework.core.io.Resource;
 
 public class LogoTableBuilder {
 
-    public TableComponent buildLogoTable() {
+    public TableComponent buildLogoTable(Resource imageResource) {
 
-        ImageComponent logo = new ImageComponent("C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\logo.png");
+        ImageComponent logo = new ImageComponent(imageResource);
         logo.setSize(70, 1);
 
         LayoutTableBuilder tableBuilder = new LayoutTableBuilder("logo table");

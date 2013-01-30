@@ -3,26 +3,18 @@ package org.lawrencebower.docgen.core.generator.overlay;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
 import org.lawrencebower.docgen.core.document.PDFDocument;
+import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.AbstractPDFGenerator;
 import org.lawrencebower.docgen.core.generator.overlay.component.OverlayComponent;
-import org.lawrencebower.docgen.core.generator.utils.StreamFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.Resource;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
 public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocument> {
 
-    private StreamFactory streamFactory;
-
     private OverlayDocument document;
-
-    @Autowired(required = false)
-    @Qualifier("pdfStreamFactory")
-    public void setStreamFactory(StreamFactory streamFactory) {
-        this.streamFactory = streamFactory;
-    }
 
     @Override
     public PDFDocument generatePDF(OverlayDocument document) {
@@ -31,7 +23,7 @@ public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocument> {
 
         checkRequiredValuesPresent();
 
-        String sourcePDF = document.getSourcePDF();
+        Resource sourcePDF = document.getSourcePDF();
 
         PdfReader pdfReader = getPDFReaderForSourcePDF(sourcePDF);
 
@@ -65,11 +57,19 @@ public class OverlayPDFGenerator extends AbstractPDFGenerator<OverlayDocument> {
         return pdfGenUtils.getPDFStamper(pdfReader, pdfOutStream);
     }
 
-    private PdfReader getPDFReaderForSourcePDF(String sourcePDF) {
+    private PdfReader getPDFReaderForSourcePDF(Resource sourcePDF) {
 
-        InputStream inStream = streamFactory.getStreamFromFile(sourcePDF);
+        InputStream inStream = getInstreamFromSource(sourcePDF);
 
         return pdfGenUtils.getPDFReaderAndUnlockForSourcePDF(inStream);
+    }
+
+    private InputStream getInstreamFromSource(Resource sourcePDF) {
+        try {
+            return sourcePDF.getInputStream();
+        } catch (IOException e) {
+            throw new DocGenException(e);
+        }
     }
 
     @Override

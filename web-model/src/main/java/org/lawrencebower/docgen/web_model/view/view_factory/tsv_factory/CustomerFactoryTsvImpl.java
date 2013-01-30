@@ -9,12 +9,16 @@ import org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.D
 import org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.DataSet;
 import org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.TSVReader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.Resource;
 
 import java.util.*;
 
 public class CustomerFactoryTsvImpl implements CustomerFactory {
 
-    private String customersTSVFile;
+    @javax.annotation.Resource
+    @Qualifier("customersTSVFile")
+    private Resource customersTSVFile;
 
     @Autowired
     private TSVReader tsvReader;
@@ -24,10 +28,6 @@ public class CustomerFactoryTsvImpl implements CustomerFactory {
     private ContactViewFactory viewFactory;
 
     private Map<String, Contact> customers;
-
-    public void setCustomersTSVFile(String customersTSVFile) {
-        this.customersTSVFile = customersTSVFile;
-    }
 
     private void initCustomers() {
 

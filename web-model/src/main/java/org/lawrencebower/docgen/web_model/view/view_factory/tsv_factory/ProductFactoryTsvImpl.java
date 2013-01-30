@@ -10,6 +10,8 @@ import org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.D
 import org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.DataSet;
 import org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser.TSVReader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.Resource;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -22,8 +24,10 @@ public class ProductFactoryTsvImpl implements ProductFactory {
     private TSVReader tsvReader;
     @Autowired
     private ProductViewFactory viewFactory;
+    @javax.annotation.Resource
+    @Qualifier("productsTSVFile")
+    private Resource productsTSVFile;
 
-    private String productsTSVFile;
     private Map<String, Product> products;
 
     @Override
@@ -60,10 +64,6 @@ public class ProductFactoryTsvImpl implements ProductFactory {
         Product product = products.get(productId);
 
         return viewFactory.createProductView(product);
-    }
-
-    public void setProductsTSVFile(String productsTSVFile) {
-        this.productsTSVFile = productsTSVFile;
     }
 
     public void initProducts() {
