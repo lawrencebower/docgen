@@ -12,7 +12,5 @@ public interface TableRow<T extends TableCell> {
 
     T getCell(int colNum);
 
-    void setCells(List<T> cells);
-
     int getCellCount();
 }

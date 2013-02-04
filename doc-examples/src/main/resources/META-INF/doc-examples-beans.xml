@@ -46,7 +46,7 @@
     </bean>
 
     <bean id="documentFactory"
-          class="org.lawrencebower.docgen.doc_examples.factory.DocumentFactoryTestImpl">
+          class="org.lawrencebower.docgen.doc_examples.factory.DocumentFactoryExampleImpl">
         <lookup-method name="getCommercialInvoice" bean="commercialInvoice"/>
         <lookup-method name="getDeliveryNote" bean="deliveryNote"/>
         <lookup-method name="getFDA2887" bean="fda2887"/>

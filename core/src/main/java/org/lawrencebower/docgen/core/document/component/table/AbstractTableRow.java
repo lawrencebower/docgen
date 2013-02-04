@@ -39,7 +39,6 @@ public abstract class AbstractTableRow<T extends TableCell> implements TableRow<
         return cells;
     }
 
-    @Override
     public void setCells(List<T> cells) {
         this.cells.clear();
         this.cells.addAll(cells);

@@ -74,7 +74,7 @@ Select products
                         <td>
                             <c:out value="${selectedProduct.productName}"/>
                             &nbsp;-&nbsp;
-                            <c:out value="${selectedProduct.productId}"/>
+                            <c:out value="${selectedProduct.productUniqueId}"/>
                         </td>
                         <td align="center">
                             <spring:bind path="productSelectionBean.products[${count}].quantity">

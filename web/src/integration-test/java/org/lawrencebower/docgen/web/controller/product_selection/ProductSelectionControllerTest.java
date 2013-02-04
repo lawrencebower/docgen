@@ -4,8 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.exception.DocGenException;
-import org.lawrencebower.docgen.doc_examples.factory.ProductTestConstants;
 import org.lawrencebower.docgen.web.model.SessionData;
+import org.lawrencebower.docgen.web.test_examples.factory.DocumentFactoryTestImpl;
 import org.lawrencebower.docgen.web_logic.business.controler_business.product_selection.ProductSelectionCB;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.lawrencebower.docgen.web_model.view.product.binding.ProductBindBean;
@@ -42,9 +42,10 @@ public class ProductSelectionControllerTest {
     @Test
     public void testSelectProduct_validId_allProductsPlacedOnModel() throws Exception {
 
-        String id1 = ProductTestConstants.PRODUCT_ID_1;
-        String id2 = ProductTestConstants.PRODUCT_ID_2;
-        String id3 = ProductTestConstants.PRODUCT_ID_3;
+        String id1 = DocumentFactoryTestImpl.PRODUCT_ID_1;
+        String id2 = DocumentFactoryTestImpl.PRODUCT_ID_2;
+        String id3 = DocumentFactoryTestImpl.PRODUCT_ID_3;
+        String id4 = DocumentFactoryTestImpl.PRODUCT_ID_4;
 
         BindingAwareModelMap model = new BindingAwareModelMap();
         ProductBindBean productSelectionBean = new ProductBindBean();
@@ -53,16 +54,17 @@ public class ProductSelectionControllerTest {
 
         List<ProductView> products = (List<ProductView>) model.get("allProducts");
 
-        assertEquals(3, products.size());
+        assertEquals(4, products.size());
         assertTrue(products.get(0).getProductId().equals(id1));
         assertTrue(products.get(1).getProductId().equals(id2));
         assertTrue(products.get(2).getProductId().equals(id3));
+        assertTrue(products.get(3).getProductId().equals(id4));
     }
 
     @Test
     public void testSelectProduct_validId_correctProductPlacedOnSession() throws Exception {
 
-        String id1 = ProductTestConstants.PRODUCT_ID_1;
+        String id1 = DocumentFactoryTestImpl.PRODUCT_ID_1;
 
         BindingAwareModelMap model = new BindingAwareModelMap();
         ProductBindBean productSelectionBean = new ProductBindBean();
@@ -80,8 +82,8 @@ public class ProductSelectionControllerTest {
 
         BindingAwareModelMap model = new BindingAwareModelMap();
 
-        String id1 = ProductTestConstants.PRODUCT_ID_1;
-        String id2 = ProductTestConstants.PRODUCT_ID_2;
+        String id1 = DocumentFactoryTestImpl.PRODUCT_ID_1;
+        String id2 = DocumentFactoryTestImpl.PRODUCT_ID_2;
 
         ProductBindBean product1 = new ProductBindBean();
         product1.setProductId(id1);

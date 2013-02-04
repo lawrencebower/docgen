@@ -12,10 +12,6 @@
 
     <import resource="web-logic-beans.xml"/>
 
-    <import resource="doc-examples-beans.xml"/>
-
-    <import resource="doc-examples-params.xml"/>
-
     <import resource="web-application-test-params.xml"/>
 
     <bean name="sessionData"
@@ -35,6 +31,42 @@
     <bean id="testFileLineFilter" class="org.lawrencebower.docgen.core.generator.utils.TestFileLineFilter"/>
 
     <import resource="integration-test-params.xml"/>
+
+    <bean id="fcc740"
+          class="org.lawrencebower.docgen.web.test_examples.test_doc_2.TestDocument2"
+          init-method="prepareComponents"
+          scope="prototype"/>
+
+    <bean id="deliveryNote"
+          class="org.lawrencebower.docgen.web.test_examples.test_doc_1.TestDocument1"
+          init-method="prepareComponents"
+          scope="prototype"/>
+
+    <bean id="customerFactory"
+          class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.CustomerFactoryTsvImpl"
+          init-method="initCustomers">
+    </bean>
+
+    <bean id="businessFactory"
+          class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.BusinessFactoryTsvImpl"
+          init-method="initBusiness">
+    </bean>
+
+    <bean id="productFactory"
+          class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.ProductFactoryTsvImpl"
+          init-method="initProducts">
+    </bean>
+
+    <bean id="vendorFactory"
+          class="org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.VendorFactoryTsvImpl"
+          init-method="initVendor">
+    </bean>
+
+    <bean id="documentFactory"
+          class="org.lawrencebower.docgen.web.test_examples.factory.DocumentFactoryTestImpl">
+        <lookup-method name="getDeliveryNote" bean="deliveryNote"/>
+        <lookup-method name="getFCC740" bean="fcc740"/>
+    </bean>
 
     <context:component-scan base-package="org.lawrencebower.docgen"/>
 

@@ -1,6 +1,7 @@
 package org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory;
 
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils;
 import org.lawrencebower.docgen.web_model.view.product.Product;
 import org.lawrencebower.docgen.web_model.view.product.ProductBuilder;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
@@ -24,6 +25,9 @@ public class ProductFactoryTsvImpl implements ProductFactory {
     private TSVReader tsvReader;
     @Autowired
     private ProductViewFactory viewFactory;
+    @Autowired
+    private DocGenFileUtils fileUtils;
+
     @javax.annotation.Resource
     @Qualifier("productsTSVFile")
     private Resource productsTSVFile;

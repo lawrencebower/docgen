@@ -8,6 +8,7 @@ import org.springframework.core.io.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.UUID;
 
 public class DocGenFileUtils {
 
@@ -56,5 +57,10 @@ public class DocGenFileUtils {
         } catch (IOException e) {
             throw new DocGenException(e);
         }
+    }
+
+    public String createUUID() {
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString();
     }
 }

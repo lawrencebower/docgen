@@ -1,5 +1,6 @@
 package org.lawrencebower.docgen.web_model.view.view_factory.tsv_factory.parser;
 
+import org.apache.commons.lang.StringUtils;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class TSVReader {
                 continue; // ignore comment lines
             }
 
-            String[] tokens = trimmedLine.split(separator);
+            String[] tokens = StringUtils.splitPreserveAllTokens(line, separator);
 
             processNewlines(tokens);
 

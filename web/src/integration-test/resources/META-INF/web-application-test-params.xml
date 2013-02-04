@@ -11,4 +11,41 @@
         <constructor-arg value="C:\code\output\integration_tests_output\SetFieldsControler\"/>
     </bean>
 
+    <bean name="fcc740Resource" class="java.lang.String">
+        <constructor-arg value="classpath:/overlay_pdf/overlay_input.pdf"/>
+    </bean>
+
+    <bean name="signatureResource" class="java.lang.String">
+        <!--<constructor-arg value="file:C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\signature.gif"/>-->
+        <constructor-arg value="classpath:/signature.gif"/>
+    </bean>
+
+    <bean name="logoResource" class="java.lang.String">
+        <constructor-arg value="classpath:/logo.png"/>
+    </bean>
+
+    <bean name="viewFactory"
+          class="org.lawrencebower.docgen.web_model.view.view_factory.ViewFactoryImpl"
+          init-method="init"/>
+
+    <bean name="TSV_ROOT" class="java.lang.String">
+        <constructor-arg value="classpath:/tsv"/>
+    </bean>
+
+    <bean name="customersTSVFile" class="java.lang.String">
+        <constructor-arg value="#{TSV_ROOT}/test_customers.csv"/>
+    </bean>
+
+    <bean name="businessTSVFile" class="java.lang.String">
+        <constructor-arg value="#{TSV_ROOT}/test_business.csv"/>
+    </bean>
+
+    <bean name="vendorTSVFile" class="java.lang.String">
+        <constructor-arg value="#{TSV_ROOT}/test_vendor.csv"/>
+    </bean>
+
+    <bean name="productsTSVFile" class="java.lang.String">
+        <constructor-arg value="#{TSV_ROOT}/test_products.csv"/>
+    </bean>
+
 </beans>

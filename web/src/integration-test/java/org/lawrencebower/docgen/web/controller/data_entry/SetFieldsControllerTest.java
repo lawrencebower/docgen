@@ -5,8 +5,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.generator.utils.ChecksumUtils;
 import org.lawrencebower.docgen.core.generator.utils.DocGenFileUtils;
-import org.lawrencebower.docgen.doc_examples.factory.DocumentFactoryTestImpl;
 import org.lawrencebower.docgen.web.model.SessionData;
+import org.lawrencebower.docgen.web.test_examples.factory.DocumentFactoryTestImpl;
 import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB;
 import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_model.view.document.binding.DataEntryBindBean;
@@ -24,6 +24,7 @@ import java.util.Map;
 
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertEquals;
+import static org.lawrencebower.docgen.web.test_examples.factory.DocumentFactoryTestImpl.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -141,13 +142,13 @@ public class SetFieldsControllerTest {
 
     private void checkDoc1() {
         File expectedConcatenatedFile = new File(testInputPath + "EXPECTED_DOC1.pdf");
-        File createdConcatenatedFile = new File(testOutputRoot + DocumentFactoryTestImpl.DOC_1_NAME + ".pdf");
+        File createdConcatenatedFile = new File(testOutputRoot + DOC_1_NAME + ".pdf");
         checkFilesAreSame(expectedConcatenatedFile, createdConcatenatedFile);
     }
 
     private void checkDoc2() {
         File expectedConcatenatedFile = new File(testInputPath + "EXPECTED_DOC2.pdf");
-        File createdConcatenatedFile = new File(testOutputRoot + DocumentFactoryTestImpl.DOC_2_NAME + ".pdf");
+        File createdConcatenatedFile = new File(testOutputRoot + DOC_2_NAME + "_" + PRODUCT_ID_1 + ".pdf");
         checkFilesAreSame(expectedConcatenatedFile, createdConcatenatedFile);
     }
 

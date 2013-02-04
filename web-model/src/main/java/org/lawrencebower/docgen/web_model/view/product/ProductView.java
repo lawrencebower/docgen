@@ -68,12 +68,9 @@ public class ProductView {
         StringBuilder builder = new StringBuilder();
 
         String productId = product.getProductId();
-        String productName = product.getProductName();
         String customsDescription = product.getCustomsDescription();
 
         builder.append(productId);
-        builder.append(" - ");
-        builder.append(productName);
         builder.append(" ");
         builder.append(customsDescription);
 

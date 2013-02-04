@@ -5,7 +5,6 @@ import org.lawrencebower.docgen.doc_examples.commercial_invoice.CommercialInvoic
 import org.lawrencebower.docgen.doc_examples.delivery_note.DeliveryNote;
 import org.lawrencebower.docgen.doc_examples.fcc_740.FCC_740;
 import org.lawrencebower.docgen.doc_examples.fda_2887.FDA_2887;
-import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField;
 import org.lawrencebower.docgen.web_model.view.document.DocumentView;
 import org.lawrencebower.docgen.web_model.view.document.DocumentViewImpl;
 import org.lawrencebower.docgen.web_model.view.view_factory.factory.DocumentFactory;
@@ -13,12 +12,7 @@ import org.lawrencebower.docgen.web_model.view.view_factory.factory.DocumentFact
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class DocumentFactoryTestImpl implements DocumentFactory {
-
-    public static final String DOC_1_NAME = CommercialInvoice.INVOICE_NAME;
-    public static final String DOC_2_NAME = DeliveryNote.DELIVERY_NOTE_NAME;
-    public static final String AUTO_MAPPED_EXAMPLE_FIELD = AutoMappedField.CUSTOMER_NAME.getName();
-    public static final String EXAMPLE_FIELD = "Date:";
+public abstract class DocumentFactoryExampleImpl implements DocumentFactory {
 
     @Override
     public List<DocumentView> getAllDocuments() {

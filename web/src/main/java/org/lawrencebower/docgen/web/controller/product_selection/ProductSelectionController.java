@@ -58,9 +58,9 @@ public class ProductSelectionController {
         productHelper.putProductsOnModel(model, sessionData);
     }
 
-    private void getProductAndAddToSession(String productId) {
-        if (!NULL_PRODUCT_ID.equals(productId)) {
-            ProductView selectedProduct = business.getProduct(productId);
+    private void getProductAndAddToSession(String uniqueProductId) {
+        if (!NULL_PRODUCT_ID.equals(uniqueProductId)) {
+            ProductView selectedProduct = business.getProduct(uniqueProductId);
             sessionData.addSelectedProduct(selectedProduct);
         }
     }

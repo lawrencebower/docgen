@@ -22,6 +22,6 @@ public class ProductFactoryTsvImplTest {
     @Test
     public void testGetCustomers_validFile_correctNumberReturned() throws Exception {
         List<ProductView> products = productFactory.getProductsAsList();
-        assertEquals(3, products.size());
+        assertEquals(4, products.size());
     }
 }

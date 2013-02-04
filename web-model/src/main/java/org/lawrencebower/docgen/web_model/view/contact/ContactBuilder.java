@@ -45,6 +45,11 @@ public class ContactBuilder {
     }
 
     public Contact buildContact(){
+        checkRequiredFields();
         return contact;
+    }
+
+    private void checkRequiredFields() {
+        //todo
     }
 }

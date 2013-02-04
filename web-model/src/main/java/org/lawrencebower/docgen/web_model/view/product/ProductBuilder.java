@@ -36,11 +36,17 @@ public class ProductBuilder {
         product.setAttributes(attributes);
     }
 
-    public Product buildProduct() {
-        return product;
-    }
-
     public void setTradeName(String tradeName) {
         product.setTradeName(tradeName);
     }
+
+    public Product buildProduct() {
+        checkRequiredFields();
+        return product;
+    }
+
+    private void checkRequiredFields() {
+        //todo
+    }
+
 }

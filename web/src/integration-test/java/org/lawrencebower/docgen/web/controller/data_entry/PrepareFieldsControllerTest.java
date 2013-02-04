@@ -4,9 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.generator.utils.ChecksumUtils;
-import org.lawrencebower.docgen.doc_examples.factory.CustomerFactoryTestConstants;
-import org.lawrencebower.docgen.doc_examples.factory.DocumentFactoryTestImpl;
 import org.lawrencebower.docgen.web.model.SessionData;
+import org.lawrencebower.docgen.web.test_examples.factory.DocumentFactoryTestImpl;
 import org.lawrencebower.docgen.web_logic.business.controler_business.data_entry.DataEntryCB;
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
 import org.lawrencebower.docgen.web_model.view.document.DocumentView;
@@ -80,11 +79,11 @@ public class PrepareFieldsControllerTest {
                      1,
                      components.size());
 
-        ContactView selectedBusiness = viewFactory.getContact(CustomerFactoryTestConstants.CUSTOMER_ID_1);
+        ContactView vendor = viewFactory.getVendor();
 
         TextComponentView docComponentView = (TextComponentView) components.get(0);
         assertEquals("auto mapped field value not correctly mapped",
-                     selectedBusiness.getName(),
+                     vendor.getAddress(),
                      docComponentView.getStringValue());
     }
 
@@ -93,7 +92,7 @@ public class PrepareFieldsControllerTest {
         controller.prepareFields();
         sessionData.setShowAutoMappedFields(true);
         List<DocComponentView> docComponentViews = controller.getDocComponentViews();
-        assertEquals(29, docComponentViews.size());//all the components
+        assertEquals(6, docComponentViews.size());//all the components
     }
 
     @Test
@@ -101,6 +100,6 @@ public class PrepareFieldsControllerTest {
         controller.prepareFields();
         sessionData.setShowAutoMappedFields(false);
         List<DocComponentView> docComponentViews = controller.getDocComponentViews();
-        assertEquals(12, docComponentViews.size());//all the components
+        assertEquals(1, docComponentViews.size());//all the components
     }
 }
