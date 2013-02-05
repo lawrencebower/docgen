@@ -4,16 +4,16 @@ public class ProductBuilder {
 
     private Product product;
 
-    public ProductBuilder() {
-        product = new Product();
-    }
-
-    public void setProductId(String productId) {
-        product.setProductId(productId);
+    public ProductBuilder(String productId) {
+        product = new Product(productId);
     }
 
     public void setProductName(String productName) {
         product.setProductName(productName);
+    }
+
+    public void setModelNumber(String modelNumber) {
+        product.setModelNumber(modelNumber);
     }
 
     public void setValue(String value){

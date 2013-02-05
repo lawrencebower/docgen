@@ -4,8 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.web.controller.data_entry.SessionSetupUtils;
 import org.lawrencebower.docgen.web.model.SessionData;
-import org.lawrencebower.docgen.web.test_examples.factory.DocumentFactoryTestImpl;
 import org.lawrencebower.docgen.web_logic.business.controler_business.product_selection.ProductSelectionCB;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.lawrencebower.docgen.web_model.view.product.binding.ProductBindBean;
@@ -18,6 +18,7 @@ import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
+import static org.lawrencebower.docgen.web.test_examples.factory.DocumentFactoryTestImpl.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:META-INF/web-application-test-context.xml")
@@ -29,6 +30,9 @@ public class ProductSelectionControllerTest {
     private ProductSelectionHelper productHelper;
     @Autowired
     private SessionData sessionData;
+    @Autowired
+    private SessionSetupUtils sessionUtils;
+
     private ProductSelectionController controller;
 
     @Before
@@ -42,10 +46,10 @@ public class ProductSelectionControllerTest {
     @Test
     public void testSelectProduct_validId_allProductsPlacedOnModel() throws Exception {
 
-        String id1 = DocumentFactoryTestImpl.PRODUCT_ID_1;
-        String id2 = DocumentFactoryTestImpl.PRODUCT_ID_2;
-        String id3 = DocumentFactoryTestImpl.PRODUCT_ID_3;
-        String id4 = DocumentFactoryTestImpl.PRODUCT_ID_4;
+        String id1 = getProductIdFromProductModel(PRODUCT_MODEL_1);
+        String id2 = getProductIdFromProductModel(PRODUCT_MODEL_2);
+        String id3 = getProductIdFromProductModel(PRODUCT_MODEL_3);
+        String id4 = getProductIdFromProductModel(PRODUCT_MODEL_4);
 
         BindingAwareModelMap model = new BindingAwareModelMap();
         ProductBindBean productSelectionBean = new ProductBindBean();
@@ -64,7 +68,7 @@ public class ProductSelectionControllerTest {
     @Test
     public void testSelectProduct_validId_correctProductPlacedOnSession() throws Exception {
 
-        String id1 = DocumentFactoryTestImpl.PRODUCT_ID_1;
+        String id1 = getProductIdFromProductModel(PRODUCT_MODEL_1);
 
         BindingAwareModelMap model = new BindingAwareModelMap();
         ProductBindBean productSelectionBean = new ProductBindBean();
@@ -82,16 +86,17 @@ public class ProductSelectionControllerTest {
 
         BindingAwareModelMap model = new BindingAwareModelMap();
 
-        String id1 = DocumentFactoryTestImpl.PRODUCT_ID_1;
-        String id2 = DocumentFactoryTestImpl.PRODUCT_ID_2;
+        String id1 = getProductIdFromProductModel(PRODUCT_MODEL_1);
+        String id2 = getProductIdFromProductModel(PRODUCT_MODEL_2);
 
-        ProductBindBean product1 = new ProductBindBean();
-        product1.setProductId(id1);
-        ProductBindBean product2 = new ProductBindBean();
-        product2.setProductId(id2);
-        controller.selectProduct(product1, model);
-        controller.selectProduct(product2, model);
-        controller.selectProduct(product2, model);
+        ProductBindBean productBind1 = new ProductBindBean();
+        productBind1.setProductId(id1);
+        ProductBindBean productBind2 = new ProductBindBean();
+        productBind2.setProductId(id2);
+
+        controller.selectProduct(productBind1, model);
+        controller.selectProduct(productBind2, model);
+        controller.selectProduct(productBind2, model);
 
         List<ProductView> products = sessionData.getSelectedProducts();
 
@@ -99,6 +104,11 @@ public class ProductSelectionControllerTest {
         assertEquals(id1, products.get(0).getProductId());
         assertEquals(id2, products.get(1).getProductId());
         assertEquals(2, products.get(1).getQuantity());
+    }
+
+    private String getProductIdFromProductModel(String productId) {
+        ProductView product = sessionUtils.getProductWithModelNo(productId);
+        return product.getProductId();
     }
 
     @Test

@@ -8,12 +8,17 @@ public class TextComponent extends AbstractDocComponent {
 
     private TextBlock text;
 
+    public TextComponent() {
+        this("");
+    }
+
     public TextComponent(TextBlock text) {
         this.text = text;
     }
 
     public TextComponent(String text) {
         this.text = new TextBlock(text);
+
     }
 
     public TextComponent(HorizontalAlignment alignment,

@@ -27,6 +27,10 @@ public class ProductView {
         return product.getProductId();
     }
 
+    public String getModelNumber() {
+        return product.getModelNumber();
+    }
+
     public String getProductValue() {
         return product.getValue();
     }
@@ -59,7 +63,7 @@ public class ProductView {
         return product.getCustomsDescription();
     }
 
-    public Attributes getShippingAttributes(){
+    public Attributes getShippingAttributes() {
         return product.getAttributes();
     }
 
@@ -67,11 +71,13 @@ public class ProductView {
 
         StringBuilder builder = new StringBuilder();
 
-        String productId = product.getProductId();
-        String customsDescription = product.getCustomsDescription();
+        if (hasModelNumber()) {
+            String modelNumber = product.getModelNumber();
+            builder.append(modelNumber);
+            builder.append(" ");
+        }
 
-        builder.append(productId);
-        builder.append(" ");
+        String customsDescription = product.getCustomsDescription();
         builder.append(customsDescription);
 
         if (hasHarmonizedTariffNumber()) {
@@ -85,6 +91,11 @@ public class ProductView {
 
     private boolean hasHarmonizedTariffNumber() {
         String number = getHarmonizedTariffNumber();
+        return StringUtils.isNotBlank(number);
+    }
+
+    private boolean hasModelNumber() {
+        String number = getModelNumber();
         return StringUtils.isNotBlank(number);
     }
 
@@ -111,7 +122,7 @@ public class ProductView {
         String bindId = productBindBean.getProductId();
         String productId = getProductId();
 
-        if(bindId.equals(productId)){
+        if (bindId.equals(productId)) {
             String bindValue = productBindBean.getValue();
             String bindQuantity = productBindBean.getQuantity();
 

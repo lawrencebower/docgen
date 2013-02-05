@@ -44,7 +44,7 @@ Select products
 
             <c:forEach var="product" items="${allProducts}">
                 <sf:option value="${product.productId}"
-                           label="${product.productId} - ${product.productName}"/>
+                           label="${product.modelNumber} - ${product.productName}"/>
             </c:forEach>
         </sf:select>
     </sf:form>
@@ -59,7 +59,7 @@ Select products
 
             <table border="1">
                 <tr>
-                    <td>Product Nameddd</td>
+                    <td>Product Name</td>
                     <td>Quantity</td>
                     <td>Cost</td>
                 </tr>
@@ -74,7 +74,7 @@ Select products
                         <td>
                             <c:out value="${selectedProduct.productName}"/>
                             &nbsp;-&nbsp;
-                            <c:out value="${selectedProduct.productUniqueId}"/>
+                            <c:out value="${selectedProduct.productModel}"/>
                         </td>
                         <td align="center">
                             <spring:bind path="productSelectionBean.products[${count}].quantity">

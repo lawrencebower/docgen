@@ -33,7 +33,7 @@ public class DocumentInjectionInfo {
                 value = product.getQuantityString();
                 break;
             case PRODUCT_MODEL:
-                value = product.getProductId();
+                value = product.getModelNumber();
                 break;
             case PRODUCT_TARIFF_NUMBER:
                 value = product.getHarmonizedTariffNumber();

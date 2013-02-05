@@ -85,10 +85,11 @@ public class ProductFactoryTsvImpl implements ProductFactory {
 
     private Product mapProductInfo(DataRow dataRow) {
 
-        ProductBuilder builder = new ProductBuilder();
+        String productId = fileUtils.createUUID();
+        ProductBuilder builder = new ProductBuilder(productId);
 
-        String id = dataRow.getString(0);
-        builder.setProductId(id);
+        String modelNumber = dataRow.getString(0);
+        builder.setModelNumber(modelNumber);
 
         String name = dataRow.getString(1);
         builder.setProductName(name);

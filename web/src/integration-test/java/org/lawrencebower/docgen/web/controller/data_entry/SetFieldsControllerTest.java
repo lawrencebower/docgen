@@ -148,7 +148,7 @@ public class SetFieldsControllerTest {
 
     private void checkDoc2() {
         File expectedConcatenatedFile = new File(testInputPath + "EXPECTED_DOC2.pdf");
-        File createdConcatenatedFile = new File(testOutputRoot + DOC_2_NAME + "_" + PRODUCT_ID_1 + ".pdf");
+        File createdConcatenatedFile = new File(testOutputRoot + DOC_2_NAME + "_" + PRODUCT_MODEL_1 + ".pdf");
         checkFilesAreSame(expectedConcatenatedFile, createdConcatenatedFile);
     }
 

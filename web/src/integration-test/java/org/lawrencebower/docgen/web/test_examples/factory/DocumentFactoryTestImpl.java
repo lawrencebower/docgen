@@ -17,10 +17,10 @@ public abstract class DocumentFactoryTestImpl implements DocumentFactory {
     public static final String DOC_2_NAME = TestDocument2.TEST_DOC_2_NAME;
     public static final String AUTO_MAPPED_EXAMPLE_FIELD = AutoMappedField.VENDOR_ADDRESS.getName();
     public static final String EXAMPLE_FIELD = "Date:";
-    public static final String PRODUCT_ID_1 = "W1";
-    public static final String PRODUCT_ID_2 = "W2";
-    public static final String PRODUCT_ID_3 = "W3";
-    public static final String PRODUCT_ID_4 = "";//product 4 has no id
+    public static final String PRODUCT_MODEL_1 = "W1";
+    public static final String PRODUCT_MODEL_2 = "W2";
+    public static final String PRODUCT_MODEL_3 = "W3";
+    public static final String PRODUCT_MODEL_4 = "";//product 4 has no model number
     public static final String CUSTOMER_ID_1 = "1";
     public static final String CUSTOMER_ID_2 = "2";
 

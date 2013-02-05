@@ -36,7 +36,7 @@
                        varStatus="cellIndex">
                 <td>
                     <input name="components[${fieldIndex}].tableData.rows[${rowIndex.index}].cells[${cellIndex.index}].name"
-                           value="${table.headerCells[cellIndex.index].component.textString}"
+                           value="${table.headerCells[cellIndex.index].name}"
                            id="${fieldName}"
                            type="hidden"/>
 

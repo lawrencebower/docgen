@@ -5,6 +5,7 @@ public class ProductBindBean {
     private String productName;
     private String quantity;
     private String productId;
+    private String productModel;
     private String value;
 
     public String getProductId() {
@@ -13,6 +14,14 @@ public class ProductBindBean {
 
     public void setProductId(String productId) {
         this.productId = productId;
+    }
+
+    public String getProductModel() {
+        return productModel;
+    }
+
+    public void setProductModel(String productModel) {
+        this.productModel = productModel;
     }
 
     public String getProductName() {

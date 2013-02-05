@@ -7,6 +7,9 @@ import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.lawrencebower.docgen.web_model.view.view_factory.ViewFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static org.lawrencebower.docgen.web.test_examples.factory.DocumentFactoryTestImpl.PRODUCT_MODEL_1;
+import static org.lawrencebower.docgen.web.test_examples.factory.DocumentFactoryTestImpl.PRODUCT_MODEL_2;
+
 public class SessionSetupUtils {
 
     @Autowired(required = false)
@@ -19,10 +22,24 @@ public class SessionSetupUtils {
     }
 
     private void setProductsOnSession(SessionData sessionData) {
-        ProductView product1 = viewFactory.getProduct(DocumentFactoryTestImpl.PRODUCT_ID_1);
-        ProductView product2 = viewFactory.getProduct(DocumentFactoryTestImpl.PRODUCT_ID_2);
+        ProductView product1 = getProductWithModelNo(PRODUCT_MODEL_1);
+        ProductView product2 = getProductWithModelNo(PRODUCT_MODEL_2);
         sessionData.addSelectedProduct(product1);
         sessionData.addSelectedProduct(product2);
+    }
+
+    public ProductView getProductWithModelNo(String productId) {
+
+        ProductView result = null;
+
+        for (ProductView productView : viewFactory.getProducts()) {
+            String modelNumber = productView.getModelNumber();
+            if(modelNumber.equals(productId)){
+                result = productView;
+            }
+        }
+
+        return result;
     }
 
     private void setCustomerOnSession(SessionData sessionData) {

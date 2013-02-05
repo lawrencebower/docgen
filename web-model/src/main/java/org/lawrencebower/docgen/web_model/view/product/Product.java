@@ -6,6 +6,7 @@ public class Product {
 
     private String productId;
     private String productName;
+    private String modelNumber;
     private String value;
     private String countryOfOrigin;
     private String harmonizedTariffNumber;
@@ -13,11 +14,12 @@ public class Product {
     private String tradeName;
     private Attributes attributes = new Attributes();
 
-    protected Product() {//only make with a product builder
+    protected Product(String productId) {//only make with a product builder
+        this.productId = productId;
     }
 
-    protected void setProductId(String productId) {
-        this.productId = productId;
+    public void setModelNumber(String modelNumber) {
+        this.modelNumber = modelNumber;
     }
 
     protected void setProductName(String productName) {
@@ -50,6 +52,10 @@ public class Product {
 
     public String getProductId() {
         return productId;
+    }
+
+    public String getModelNumber() {
+        return modelNumber;
     }
 
     public String getProductName() {

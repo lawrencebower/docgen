@@ -11,8 +11,8 @@ public class PINameAndDescriptionMapper extends PIAbstractMapper {
 
     @Override
     protected String getValue(ProductView product) {
-        String productId = product.getProductId();
+        String productModel = product.getModelNumber();
         String productName = product.getProductName();
-        return productId + " - " + productName;
+        return productModel + " " + productName;
     }
 }

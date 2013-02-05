@@ -35,11 +35,13 @@ public class ProductSelectionBean {
             ProductBindBean productBindBean = new ProductBindBean();
 
             String id = productView.getProductId();
+            String model = productView.getModelNumber();
             String quantityString = productView.getQuantityString();
             String productValue = productView.getProductValue();
             String productName = productView.getProductName();
 
             productBindBean.setProductId(id);
+            productBindBean.setProductModel(model);
             productBindBean.setQuantity(quantityString);
             productBindBean.setValue(productValue);
             productBindBean.setProductName(productName);
