@@ -17,7 +17,6 @@ import java.util.List;
 
 public class DocumentViewImpl implements DocumentView {
 
-    @Autowired(required = false)
     ViewFactory viewFactory;
 
     private Document document;
@@ -28,6 +27,11 @@ public class DocumentViewImpl implements DocumentView {
     private Attributes productFilterAttributes = new Attributes();
 
     private DocumentViewImpl() {//force spring instantiation
+    }
+
+    @Autowired(required = false)
+    public void setViewFactory(ViewFactory viewFactory) {
+        this.viewFactory = viewFactory;
     }
 
     @Override
@@ -103,11 +107,9 @@ public class DocumentViewImpl implements DocumentView {
 
     @Override
     public void setDocumentInjectionFields(DocumentInjectionInfo injectionInfo) {
-
         for (DocComponentView docComponentView : getComponentViews()) {
             docComponentView.setDocumentInjectionFields(injectionInfo);
         }
-
     }
 
     @Override
@@ -146,10 +148,12 @@ public class DocumentViewImpl implements DocumentView {
         List<DocumentView> results = new ArrayList<>();
 
         for (DocumentInjectionInfo injectionInfo : injectionInfos) {
-            DocumentView newDocument = copyComponentViews();
-            newDocument.setDocumentInjectionFields(injectionInfo);
-            injectionInfo.setDocumentNameExtension(newDocument);
-            results.add(newDocument);
+            if (injectionInfo.attributesMatch(this)) {
+                DocumentView newDocument = copyComponentViews();
+                newDocument.setDocumentInjectionFields(injectionInfo);
+                injectionInfo.setDocumentNameExtension(newDocument);
+                results.add(newDocument);
+            }
         }
 
         return results;

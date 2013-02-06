@@ -111,7 +111,7 @@ public class TotalsTableBuilder {
     }
 
     private TableTextComponent createTableTextComponentWithName(String name) {
-        return componentBuilder.createTableTextComponent(name);
+        return componentBuilder.createTableTextComponentWithName(name);
     }
 
     private TableTextComponent createTableTextComponentWithNameAndValue(String name) {

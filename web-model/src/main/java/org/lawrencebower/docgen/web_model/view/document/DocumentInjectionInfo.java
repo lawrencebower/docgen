@@ -50,4 +50,8 @@ public class DocumentInjectionInfo {
         String productId = product.getProductId();
         documentView.setNameExtension(productId);
     }
+
+    public boolean attributesMatch(DocumentView documentView) {
+        return documentView.isProductAttributesMatch(product);
+    }
 }
