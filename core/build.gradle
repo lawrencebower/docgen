@@ -6,12 +6,6 @@ repositories {
     mavenCentral()
 }
 
-uploadArchives {
-    repositories {
-        add project.repositories.fileRepo
-    }
-}
-
 dependencies {
 
     compile 'junit:junit:4.+',

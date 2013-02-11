@@ -47,8 +47,14 @@ public class DocumentInjectionInfo {
     }
 
     public void setDocumentNameExtension(DocumentView documentView) {
-        String productId = product.getProductId();
-        documentView.setNameExtension(productId);
+
+        String extension = product.getModelNumber();
+
+        if(extension.isEmpty()){
+            extension = product.getCommercialInvoiceDescription();
+        }
+
+        documentView.setNameExtension(extension);
     }
 
     public boolean attributesMatch(DocumentView documentView) {

@@ -3,6 +3,7 @@ package org.lawrencebower.docgen.core.generator.model;
 import org.apache.commons.lang.StringUtils;
 import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.lawrencebower.docgen.core.generator.utils.FilePermissionSetter;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,9 +26,15 @@ public class PDFDocumentImpl implements PDFDocument {
         try {
             FileOutputStream outStream = new FileOutputStream(file);
             writeToStream(outStream);
+            setFilePermissions(file);
         } catch (IOException e) {
             throw new DocGenException(e);
         }
+    }
+
+    private void setFilePermissions(File file) {
+        FilePermissionSetter setter = FilePermissionSetter.getPermissionSetter();
+        setter.setFilePermissions(file);
     }
 
     @Override

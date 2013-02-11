@@ -1,3 +1,4 @@
+/*
 subprojects {
     apply plugin: 'java'
 }
@@ -25,3 +26,4 @@ project(':web') {
          compile project(':core'), project(':doc-examples'), project(':web-model'), project(':web-logic')
     }
 }
+*/
