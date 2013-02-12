@@ -17,10 +17,9 @@ Select customer
             <c:forEach var="customer" items="${customers}">
                 <tr>
                     <td>
-                        <c:out value="${customer.name}"/><br/>
-                        <c:out value="${customer.contactName}"/><br/>
-                        <c:out value="${customer.HTMLAddress}" escapeXml="false"/><br/>
-                        <c:out value="${customer.country}"/>
+                        <abbr title="${customer.HTMLAddress}&nbsp;${customer.country}"><c:out value="${customer.contactName}"/> - <c:out value="${customer.name}"/></abbr>
+                        <%--<c:out value="${customer.HTMLAddress}" escapeXml="false"/><br/>--%>
+                        <%--<c:out value="${customer.country}"/>--%>
                     </td>
                         <%--<td>--%>
                         <%--<c:set var="contact" value="${customer.contact}" scope="page"/>--%>

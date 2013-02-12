@@ -5,6 +5,7 @@ import org.lawrencebower.docgen.core.document.PDFDocument;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.utils.PDFConcatenator;
 import org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.AMComponentInfoImpl;
+import org.lawrencebower.docgen.web_model.business_def.utils.PdfDirWriter;
 import org.lawrencebower.docgen.web_model.business_def.utils.ViewUtils;
 import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_model.view.contact.BusinessSelection;
@@ -41,6 +42,8 @@ public class DataEntryCB {
     ViewFactory viewFactory;
     @Autowired
     private DocumentSetFactory documentSetFactory;
+    @Autowired
+    private PdfDirWriter pdfDirWriter;
 
     @Autowired
     @Qualifier("pdfOutputRoot")
@@ -98,12 +101,22 @@ public class DataEntryCB {
 
     public void writePDFsToFiles(List<PDFDocument> pdfDocuments) {
 
+        if (!pdfDocuments.isEmpty()) {
+            File outputDir = pdfDirWriter.createPDFDir(fileRoot);
+            writePDFsToFile(pdfDocuments, outputDir);
+        }
+    }
+
+    private void writePDFsToFile(List<PDFDocument> pdfDocuments, File outputDir) {
+
         for (PDFDocument pdfDocument : pdfDocuments) {
 
             String docName = pdfDocument.getName();
             String nameExtension = pdfDocument.getNameExtension();
-            String fileName = fileRoot + docName + nameExtension + ".pdf";
-            File file = new File(fileName);
+            String fileName = docName + nameExtension + ".pdf";
+            String filePath = outputDir.getPath();
+
+            File file = new File(filePath + File.separator + fileName);
 
             pdfDocument.setFile(file);
             pdfDocument.writeToFile(file);

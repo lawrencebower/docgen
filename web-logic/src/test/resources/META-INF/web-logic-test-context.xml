@@ -11,10 +11,7 @@
 
     <import resource="web-logic-beans.xml"/>
 
-    <import resource="web-logic-params.xml"/>
-
-    <!--<bean name="viewFactory"-->
-          <!--class="org.lawrencebower.docgen.web_model.view.view_factory.ViewFactoryTestImpl"/>-->
+    <import resource="web-logic-test-params.xml"/>
 
     <context:component-scan base-package="org.lawrencebower.docgen.web_logic"/>
 
