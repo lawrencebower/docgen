@@ -6,8 +6,8 @@
         <constructor-arg value="classpath:/overlay_pdf/740.pdf"/>
     </bean>
 
-    <bean name="fda2887Resource" class="java.lang.String">
-        <constructor-arg value="classpath:/overlay_pdf/FDA-2887.pdf"/>
+    <bean name="fda2877Resource" class="java.lang.String">
+        <constructor-arg value="classpath:/overlay_pdf/FDA-2877.pdf"/>
     </bean>
 
     <bean name="signatureResource" class="java.lang.String">

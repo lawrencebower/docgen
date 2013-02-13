@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.doc_examples.fda_2887;
+package org.lawrencebower.docgen.doc_examples.fda_2877;
 
 import org.lawrencebower.docgen.core.document.component.CheckBoxComponent;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
@@ -20,7 +20,7 @@ import org.springframework.core.io.Resource;
 import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField.CUSTOMER_ADDRESS;
 import static org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.AutoMappedField.VENDOR_ADDRESS;
 
-public class FDA_2887 {
+public class FDA_2877 {
 
     @Autowired
     private DocumentViewBuilder documentViewBuilder;
@@ -28,12 +28,12 @@ public class FDA_2887 {
     private OverlayDocumentBuilder documentBuilder;
 
     @javax.annotation.Resource
-    @Qualifier("fda2887Resource")
-    private Resource fda2887Resource;
+    @Qualifier("fda2877Resource")
+    private Resource fda2877Resource;
 
-    public static final String FDA_2887_NAME = "FDA_2887";
+    public static final String FDA_2877_NAME = "FDA_2877";
 
-    private FDA_2887() {//force spring creation
+    private FDA_2877() {//force spring creation
     }
 
     private void prepareComponents() {
@@ -181,12 +181,12 @@ public class FDA_2887 {
                    false);
 */
 
-        documentViewBuilder.setProductAttributeFilters("laser");
+        documentViewBuilder.setProductAttributeFilters("gold");
 
     }
 
     private void initDocumentBuilders() {
-        documentBuilder.createDocument(FDA_2887_NAME, fda2887Resource);
+        documentBuilder.createDocument(FDA_2877_NAME, fda2877Resource);
         documentViewBuilder.createDocument();
     }
 

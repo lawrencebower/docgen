@@ -4,7 +4,7 @@ import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.doc_examples.commercial_invoice.CommercialInvoice;
 import org.lawrencebower.docgen.doc_examples.delivery_note.DeliveryNote;
 import org.lawrencebower.docgen.doc_examples.fcc_740.FCC_740;
-import org.lawrencebower.docgen.doc_examples.fda_2887.FDA_2887;
+import org.lawrencebower.docgen.doc_examples.fda_2877.FDA_2877;
 import org.lawrencebower.docgen.web_model.view.document.DocumentView;
 import org.lawrencebower.docgen.web_model.view.document.DocumentViewImpl;
 import org.lawrencebower.docgen.web_model.view.view_factory.factory.DocumentFactory;
@@ -23,8 +23,8 @@ public abstract class DocumentFactoryExampleImpl implements DocumentFactory {
         DeliveryNote deliveryNote = getDeliveryNote();
         DocumentView deliveryNoteView = deliveryNote.getDocumentView();
 
-        FDA_2887 fda2887 = getFDA2887();
-        DocumentView fda2887View = fda2887.getDocumentView();
+        FDA_2877 fda2877 = getFDA2887();
+        DocumentView fda2887View = fda2877.getDocumentView();
 
         FCC_740 fcc740 = getFCC740();
         DocumentViewImpl fcc740View = fcc740.getDocumentView();
@@ -49,9 +49,9 @@ public abstract class DocumentFactoryExampleImpl implements DocumentFactory {
                 DeliveryNote deliveryNote = getDeliveryNote();
                 result = deliveryNote.getDocumentView();
                 break;
-            case FDA_2887.FDA_2887_NAME:
-                FDA_2887 fda_2887 = getFDA2887();
-                result = fda_2887.getDocumentView();
+            case FDA_2877.FDA_2877_NAME:
+                FDA_2877 fda_2877 = getFDA2887();
+                result = fda_2877.getDocumentView();
                 break;
             case FCC_740.FCC_740_NAME:
                 FCC_740 fcc_740 = getFCC740();
@@ -69,7 +69,7 @@ public abstract class DocumentFactoryExampleImpl implements DocumentFactory {
 
     protected abstract DeliveryNote getDeliveryNote();
 
-    protected abstract FDA_2887 getFDA2887();
+    protected abstract FDA_2877 getFDA2887();
 
     protected abstract FCC_740 getFCC740();
 }

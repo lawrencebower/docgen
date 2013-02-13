@@ -5,8 +5,8 @@
              http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd
              http://www.springframework.org/schema/context classpath:/org/springframework/context/config/spring-context-3.1.xsd">
 
-    <bean id="fda2887"
-          class="org.lawrencebower.docgen.doc_examples.fda_2887.FDA_2887"
+    <bean id="fda2877"
+          class="org.lawrencebower.docgen.doc_examples.fda_2877.FDA_2877"
           init-method="prepareComponents"
           scope="prototype"/>
 
@@ -49,7 +49,7 @@
           class="org.lawrencebower.docgen.doc_examples.factory.DocumentFactoryExampleImpl">
         <lookup-method name="getCommercialInvoice" bean="commercialInvoice"/>
         <lookup-method name="getDeliveryNote" bean="deliveryNote"/>
-        <lookup-method name="getFDA2887" bean="fda2887"/>
+        <lookup-method name="getFDA2887" bean="fda2877"/>
         <lookup-method name="getFCC740" bean="fcc740"/>
     </bean>
 

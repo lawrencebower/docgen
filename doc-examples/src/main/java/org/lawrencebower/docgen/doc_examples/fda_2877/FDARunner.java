@@ -1,4 +1,4 @@
-package org.lawrencebower.docgen.doc_examples.fda_2887;
+package org.lawrencebower.docgen.doc_examples.fda_2877;
 
 import org.lawrencebower.docgen.core.document.Document;
 import org.lawrencebower.docgen.core.document.PDFDocument;
@@ -13,7 +13,7 @@ public class FDARunner {
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("\\META-INF\\doc-examples-context.xml");
 
-        FDA_2887 doc = (FDA_2887) context.getBean("fda2887");
+        FDA_2877 doc = (FDA_2877) context.getBean("fda2877");
 
 //        doc.setComponentValuesAndRenderBorder();
 
