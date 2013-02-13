@@ -33,4 +33,8 @@ public class ViewCell extends AbstractTableCell {
         return component.getName();
     }
 
+    public boolean isTextArea(){//todo this will go when fully nested TableViewComponent is implemented
+        String textString = ((TableTextComponent) component).getTextString();
+        return textString.length() > 20;
+    }
 }

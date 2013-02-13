@@ -10,7 +10,8 @@ public class TextAreaComponentView extends TextComponentView {
     }
 
     @Override
-    public void setComponentValue(Boolean value) {
-        super.setComponentValue(value);
+    public boolean isTextArea() {
+        return true;
     }
+
 }

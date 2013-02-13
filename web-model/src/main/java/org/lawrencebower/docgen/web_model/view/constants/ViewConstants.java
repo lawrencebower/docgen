@@ -1,13 +1,15 @@
 package org.lawrencebower.docgen.web_model.view.constants;
 
-import org.lawrencebower.docgen.core.exception.DocGenException;
-
 public class ViewConstants {
 
     public static final String DOCUMENT_FIELD_SEPARATOR = "~";
     public static final String CONCATENATED_FILE_NAME = "CONCATENATED_FILES.pdf";
+    /**
+     * length threshold at which text input become text area (in jsp)
+     */
+    public static final int TEXT_AREA_THRESHOLD = 40;
 
-    public enum PRODUCT_TOKEN_TYPE {
+/*    public enum PRODUCT_TOKEN_TYPE {
         VALUE("cost"),
         QUANTITY("quantity");
 
@@ -33,9 +35,10 @@ public class ViewConstants {
             String message = String.format("PRODUCT_TOKEN_TYPE '%s' not recognised?!", string);
             throw new DocGenException(message);
         }
-    }
+    }*/
 
 
+/*
     public String getDocumentFieldSeparator() {
         return DOCUMENT_FIELD_SEPARATOR;
     }
@@ -47,4 +50,5 @@ public class ViewConstants {
     public static String getProductValueToken() {
         return PRODUCT_TOKEN_TYPE.VALUE.getName();
     }
+*/
 }

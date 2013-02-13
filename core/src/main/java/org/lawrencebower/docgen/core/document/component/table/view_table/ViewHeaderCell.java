@@ -26,9 +26,9 @@ public class ViewHeaderCell extends AbstractTableCell implements HeaderCell {
         this.text = text;
     }
 
-    public String getText() {
-        return text;
-    }
+//    public String getText() {
+//        return text;
+//    }
 
     public String getName() {
         return name;

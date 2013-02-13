@@ -20,11 +20,11 @@
 
     <bean name="signatureResource" class="java.lang.String">
         <!--<constructor-arg value="file:C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\signature.gif"/>-->
-        <constructor-arg value="classpath:/signature.gif"/>
+        <constructor-arg value="classpath:/test_signature.gif"/>
     </bean>
 
     <bean name="logoResource" class="java.lang.String">
-        <constructor-arg value="classpath:/logo.png"/>
+        <constructor-arg value="classpath:/test_logo.png"/>
     </bean>
 
     <bean name="viewFactory"

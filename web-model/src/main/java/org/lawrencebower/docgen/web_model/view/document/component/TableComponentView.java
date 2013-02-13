@@ -45,6 +45,11 @@ public class TableComponentView extends DocComponentViewImpl<ViewTableComponent>
     }
 
     @Override
+    public boolean isTable() {
+        return true;
+    }
+
+    @Override
     public void setComponentValue(Boolean value) {
         throw new DocGenException("Table component does not accept boolean values as value setter");
     }

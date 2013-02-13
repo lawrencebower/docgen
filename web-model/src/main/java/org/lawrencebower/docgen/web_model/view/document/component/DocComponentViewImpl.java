@@ -64,24 +64,28 @@ public abstract class DocComponentViewImpl<T extends DocComponent> implements Do
     }
 
     @Override
-    public boolean isAutoMapped(){
+    public boolean isAutoMapped() {
         String componentName = getName();
         return autoMapper.matchesName(componentName);
     }
 
     @Override
     public boolean isText() {
-        return componentViewType == ComponentViewType.TEXT;
+        return false;
     }
 
     @Override
     public boolean isTextArea() {
-        return componentViewType == ComponentViewType.TEXT_AREA;
+        return false;
     }
 
     @Override
     public boolean isTable() {
-        return componentViewType == ComponentViewType.TABLE;
+        return false;
+    }
+
+    protected ComponentViewType getComponentViewType() {
+        return componentViewType;
     }
 
     @Override
@@ -118,7 +122,8 @@ public abstract class DocComponentViewImpl<T extends DocComponent> implements Do
     @Override
     public int hashCode() {
         HashCodeBuilder builder = new HashCodeBuilder();
-        builder.append(this.getName());
+        String name = this.getName();
+        builder.append(name);
         return builder.toHashCode();
     }
 }

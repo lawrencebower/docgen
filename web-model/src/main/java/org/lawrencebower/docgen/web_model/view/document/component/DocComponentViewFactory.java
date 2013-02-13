@@ -21,7 +21,7 @@ public abstract class DocComponentViewFactory {
         return view;
     }
 
-    public TextAreaComponentView createTextAreaComponentView(TableTextComponent textComponent) {
+    public TextAreaComponentView createTextAreaComponentView(TextComponent textComponent) {
         TextAreaComponentView view = getTextAreaComponentView();
         view.setComponent(textComponent);
         return view;

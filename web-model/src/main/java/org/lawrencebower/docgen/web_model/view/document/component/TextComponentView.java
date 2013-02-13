@@ -3,6 +3,7 @@ package org.lawrencebower.docgen.web_model.view.document.component;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_model.business_def.component_calculation.ComponentCalculation;
+import org.lawrencebower.docgen.web_model.view.constants.ViewConstants;
 import org.lawrencebower.docgen.web_model.view.document.DocumentInjectionInfo;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_model.view.document.DocumentView;
@@ -21,6 +22,33 @@ public class TextComponentView extends DocComponentViewImpl<TextComponent> {
     @Override
     public void setComponent(TextComponent docComponent) {
         super.setComponent(docComponent);
+    }
+
+    @Override
+    public boolean isText() {
+        boolean isTextComponent = getComponentViewType() == ComponentViewType.TEXT;
+        return isTextComponent && !isTextArea();
+    }
+
+    @Override
+    public boolean isTextArea() {
+        boolean textArea = false;
+
+        ComponentViewType viewType = getComponentViewType();
+
+        if ((viewType == ComponentViewType.TEXT)) {
+
+            String text = getStringValue();
+
+            boolean containsNewLine = text.contains("\n");
+            boolean exceedsLengthThreshold = text.length() > ViewConstants.TEXT_AREA_THRESHOLD;
+
+            if (containsNewLine || exceedsLengthThreshold) {
+                textArea = true;
+            }
+        }
+
+        return textArea;
     }
 
     @Override
