@@ -9,4 +9,6 @@ public interface BusinessFactory {
     boolean containsContactId(String contactId);
 
     String getMappedBusiness(String contactId);
+
+    void reloadBusiness();
 }

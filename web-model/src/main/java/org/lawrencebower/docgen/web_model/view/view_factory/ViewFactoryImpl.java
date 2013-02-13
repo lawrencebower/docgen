@@ -59,6 +59,16 @@ public class ViewFactoryImpl implements ViewFactory {
     }
 
     @Override
+    public void reloadData() {
+        System.out.println("ViewFactoryImpl.reloadData");
+        customerFactory.reloadCustomers();
+        businessFactory.reloadBusiness();
+        vendorFactory.reloadVendor();
+        productFactory.reloadProducts();
+        init();
+    }
+
+    @Override
     public List<ProductView> getProducts() {
         return productFactory.getProductsAsList();
     }

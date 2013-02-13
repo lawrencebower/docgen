@@ -23,4 +23,7 @@ public class CustomerSelectionCB {
         return viewFactory.getBusinessByCustomerName(customerName);
     }
 
+    public void reloadCustomers() {
+        viewFactory.reloadData();
+    }
 }

@@ -48,6 +48,9 @@ Select products
             </c:forEach>
         </sf:select>
     </sf:form>
+    <s:url var="reload_url" value="/reloadProducts"/>
+    <a href="${reload_url}">reload products</a>
+    <br/>
     <br/>
 
     <c:if test="${sessionData.hasProducts}">

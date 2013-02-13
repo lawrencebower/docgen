@@ -39,5 +39,9 @@ Select customer
                 </tr>
             </c:forEach>
         </table>
+
     </ol>
+
+    <s:url var="reload_url" value="/reloadCustomers"/>
+    <a href="${reload_url}">reload customers</a>
 </div>

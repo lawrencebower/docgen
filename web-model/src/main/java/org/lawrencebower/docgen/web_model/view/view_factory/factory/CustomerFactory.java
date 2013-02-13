@@ -11,4 +11,6 @@ public interface CustomerFactory {
     ContactView getCustomer(String contactId);
 
     boolean hasCustomer(String contactId);
+
+    void reloadCustomers();
 }

@@ -70,7 +70,7 @@ public class ProductFactoryTsvImpl implements ProductFactory {
         return viewFactory.createProductView(product);
     }
 
-    public void initProducts() {
+    private void initProducts() {
 
         DataSet dataSet = tsvReader.readDataSetAsFile(productsTSVFile);
 
@@ -81,6 +81,11 @@ public class ProductFactoryTsvImpl implements ProductFactory {
             String productId = product.getProductId();
             products.put(productId, product);
         }
+    }
+
+    @Override
+    public void reloadProducts(){
+        initProducts();;
     }
 
     private Product mapProductInfo(DataRow dataRow) {

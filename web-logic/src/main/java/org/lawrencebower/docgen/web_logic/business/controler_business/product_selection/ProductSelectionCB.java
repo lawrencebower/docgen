@@ -27,4 +27,7 @@ public class ProductSelectionCB {
         productSelection.mapFieldValuesToComponents(productBindBeans);
     }
 
+    public void reloadProducts() {
+        viewFactory.reloadData();
+    }
 }

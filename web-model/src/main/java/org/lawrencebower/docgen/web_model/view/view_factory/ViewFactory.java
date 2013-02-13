@@ -26,4 +26,6 @@ public interface ViewFactory {
     ContactView getBusinessByCustomerName(String customerName);
 
     List<DocumentView> getDocumentsForCustomerAndProduct(ContactView customer, ProductView product);
+
+    void reloadData();
 }

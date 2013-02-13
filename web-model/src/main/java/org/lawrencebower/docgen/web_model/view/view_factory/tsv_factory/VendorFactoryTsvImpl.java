@@ -34,7 +34,7 @@ public class VendorFactoryTsvImpl implements VendorFactory {
         return viewFactory.createContactView(vendor);
     }
 
-    public void initVendor() {
+    private void initVendor() {
         DataSet dataSet = tsvReader.readDataSetAsFile(vendorTSVFile);
         List<DataRow> rows = dataSet.getRows();
 
@@ -43,6 +43,11 @@ public class VendorFactoryTsvImpl implements VendorFactory {
         DataRow dataRow = rows.get(0);
 
         vendor = contactMapper.mapCustomerInfo(dataRow);
+    }
+
+    @Override
+    public void reloadVendor(){
+        initVendor();
     }
 
     private void checkRowCount(List<DataRow> rows) {

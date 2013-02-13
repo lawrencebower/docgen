@@ -15,4 +15,6 @@ public interface ProductFactory {
     boolean hasProduct(String productId);
 
     ProductView getProduct(String productId);
+
+    void reloadProducts();
 }

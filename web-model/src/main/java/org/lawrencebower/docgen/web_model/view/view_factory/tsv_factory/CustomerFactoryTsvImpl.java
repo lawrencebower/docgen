@@ -47,6 +47,11 @@ public class CustomerFactoryTsvImpl implements CustomerFactory {
     }
 
     @Override
+    public void reloadCustomers(){
+        initCustomers();
+    }
+
+    @Override
     public List<ContactView> getCustomersAsList() {
 
         List<ContactView> contactViews = new ArrayList<>();

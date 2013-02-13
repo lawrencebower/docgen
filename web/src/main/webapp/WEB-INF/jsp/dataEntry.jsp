@@ -26,7 +26,7 @@
 
 <c:set var="fieldSeperator" value="~" scope="application"/>
 
-<s:url var="customer_url" value="/customerSelect"/>
+<s:url var="reload_url" value="/customerSelect"/>
 <a href="${customer_url}">Customer</a>
 &nbsp;->&nbsp;
 <s:url var="products_url" value="/productSelect"/>

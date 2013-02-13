@@ -38,6 +38,11 @@ public class BusinessFactoryTsvImpl implements BusinessFactory {
     }
 
     @Override
+    public void reloadBusiness(){
+        initBusiness();
+    }
+
+    @Override
     public Map<String, String> getBusinesses() {
         return businesss;
     }

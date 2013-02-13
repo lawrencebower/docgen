@@ -11,9 +11,6 @@
 
     <import resource="web-model-test-params.xml"/>
 
-    <!--<bean name="viewFactory"-->
-          <!--class="org.lawrencebower.docgen.web_model.view.view_factory.ViewFactoryTestImpl"/>-->
-
     <context:component-scan base-package="org.lawrencebower.docgen.web_logic"/>
 
 </beans>

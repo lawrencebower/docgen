@@ -6,4 +6,5 @@ public interface VendorFactory {
 
     ContactView getVendor();
 
+    void reloadVendor();
 }
