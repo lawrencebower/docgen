@@ -27,6 +27,8 @@ public class ShowCustomersController {
     @RequestMapping({"/customerSelect", "/", "/home"})
     public String showHomePage(Model model) {
 
+        System.out.println("ShowCustomersController.showHomePage");
+
         List<ContactView> customers = business.getCustomers();
 
         model.addAttribute("customers", customers);

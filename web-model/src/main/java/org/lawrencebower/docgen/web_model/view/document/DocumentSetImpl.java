@@ -174,4 +174,9 @@ public class DocumentSetImpl implements DocumentSet {
 
         return injectedDocumentSet;
     }
+
+    @Override
+    public void clear() {
+        documents.clear();
+    }
 }

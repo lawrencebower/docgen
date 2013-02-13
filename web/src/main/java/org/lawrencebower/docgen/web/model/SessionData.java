@@ -58,7 +58,7 @@ public class SessionData {
         return productSelection.getProducts();
     }
 
-    public ProductSelection getProductSelection(){
+    public ProductSelection getProductSelection() {
         return productSelection;
     }
 
@@ -93,5 +93,14 @@ public class SessionData {
     @Autowired
     public void setProductSelection(ProductSelection selectedProducts) {
         this.productSelection = selectedProducts;
+    }
+
+    public void clear() {
+        customerSelection.clear();
+        businessSelection.clear();
+        productSelection.clear();
+        if (documents != null) {
+            documents.clear();
+        }
     }
 }

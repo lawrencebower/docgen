@@ -8,7 +8,7 @@ public class BusinessSelection {
 
     private ContactView selectedBusiness;
 
-    public void selectBusiness(ContactView contact){
+    public void selectBusiness(ContactView contact) {
         selectedBusiness = contact;
     }
 
@@ -20,5 +20,9 @@ public class BusinessSelection {
         if (selectedBusiness == null) {
             throw new DocGenException(NO_BUSINESS_SELECTED);
         }
+    }
+
+    public void clear() {
+        selectedBusiness = null;
     }
 }

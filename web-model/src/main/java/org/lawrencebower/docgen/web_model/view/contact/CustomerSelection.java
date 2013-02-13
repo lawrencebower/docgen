@@ -21,4 +21,8 @@ public class CustomerSelection {
             throw new DocGenException(NO_CUSTOMER_SELECTED);
         }
     }
+
+    public void clear() {
+        selectedCustomer = null;
+    }
 }

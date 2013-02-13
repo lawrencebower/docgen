@@ -37,4 +37,6 @@ public interface DocumentSet {
     void runCalculation(ComponentCalculation calculation);
 
     DocumentSet injectDocuments(List<DocumentInjectionInfo> injectionInfos);
+
+    void clear();
 }
