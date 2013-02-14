@@ -15,9 +15,14 @@ public class AMBusinessNameAndAddress extends AbstractAMComponent {
     public void mapComponent(DocComponentView docComponentView,
                              AMComponentInfo info) {
 
-        String businessName = info.getBusinessName();
+        String businessContact = info.getBusinessContactName();
+        String businessBusiness = info.getBusinessName();
         String businessAddress = info.getBusinessAddress();
-        String value = businessName + "\n" + businessAddress;
+        String businessCountry = info.getBusinessCountry();
+        String value = businessContact + "\n" +
+                       businessBusiness + "\n" +
+                       businessAddress + "\n" +
+                       businessCountry;
         setComponentValueIfMatch(docComponentView, value);
     }
 }

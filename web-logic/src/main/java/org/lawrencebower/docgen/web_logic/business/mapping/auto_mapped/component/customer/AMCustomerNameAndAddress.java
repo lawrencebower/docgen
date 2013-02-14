@@ -15,9 +15,14 @@ public class AMCustomerNameAndAddress extends AbstractAMComponent {
     public void mapComponent(DocComponentView docComponentView,
                              AMComponentInfo info) {
 
-        String customerName = info.getCustomerContactName();
+        String customerContact = info.getCustomerContactName();
+        String customerBusiness = info.getCustomerContactName();
         String customerAddress = info.getCustomerAddress();
-        String value = customerName + "\n" + customerAddress;
+        String customerCountry = info.getCustomerCountry();
+        String value = customerContact + "\n" +
+                       customerBusiness + "\n" +
+                       customerAddress + "\n" +
+                       customerCountry;
         setComponentValueIfMatch(docComponentView, value);
     }
 }

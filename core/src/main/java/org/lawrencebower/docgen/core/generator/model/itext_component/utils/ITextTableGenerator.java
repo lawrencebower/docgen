@@ -1,8 +1,7 @@
 package org.lawrencebower.docgen.core.generator.model.itext_component.utils;
 
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Element;
-import com.lowagie.text.Phrase;
+import com.lowagie.text.*;
+import com.lowagie.text.Image;
 import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
@@ -20,6 +19,7 @@ import org.lawrencebower.docgen.core.generator.model.itext_component.ITextCompon
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
+import java.util.List;
 import java.util.List;
 
 public class ITextTableGenerator {
@@ -185,6 +185,9 @@ public class ITextTableGenerator {
 
         if (component.getComponentType() == DocComponentType.TABLE_TEXT) {
             iTextCell = new PdfPCell((Phrase) iTextElement);
+        } else if(component.getComponentType() == DocComponentType.IMAGE){
+            Image image = (Image) iTextElement;
+            iTextCell = new PdfPCell(image, false);//dont resize image to fit cell - respect natural size
         } else {
             iTextCell = new PdfPCell();
             iTextCell.addElement(iTextElement);

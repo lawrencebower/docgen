@@ -11,6 +11,8 @@ import org.lawrencebower.docgen.core.generator.model.itext_component.ITextTextCo
 public class CustomTextRenderer
         implements DocComponentRenderer<ITextTextComponent, CustomComponentRendererInfo> {
 
+    public static final int DEFAULT_LEADING = 12;
+
     @Override
     public void createAndRenderComponent(ITextTextComponent component, CustomComponentRendererInfo rendererInfo) {
         Paragraph paragraph = processPhrase(component);
@@ -26,6 +28,7 @@ public class CustomTextRenderer
         HorizontalAlignment alignment = component.getAlignment();
         int boxAlignment = HorizontalAlignment.mapToITextAlignment(alignment);
         paragraph.setAlignment(boxAlignment);
+        paragraph.setLeading(DEFAULT_LEADING);
 
         return paragraph;
     }
