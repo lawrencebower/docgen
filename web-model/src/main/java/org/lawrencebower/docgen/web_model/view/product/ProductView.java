@@ -63,6 +63,10 @@ public class ProductView {
         return product.getCustomsDescription();
     }
 
+    public String getProductDescription(){
+        return product.getProductDescription();
+    }
+
     public Attributes getShippingAttributes() {
         return product.getAttributes();
     }
@@ -77,8 +81,8 @@ public class ProductView {
             builder.append(" ");
         }
 
-        String customsDescription = product.getCustomsDescription();
-        builder.append(customsDescription);
+        String productDescription = product.getProductDescription();
+        builder.append(productDescription);
 
         if (hasHarmonizedTariffNumber()) {
             String tariff = product.getHarmonizedTariffNumber();

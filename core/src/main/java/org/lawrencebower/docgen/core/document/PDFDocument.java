@@ -21,7 +21,5 @@ public interface PDFDocument {
 
     void setCopyNumber(int copyNumber);
 
-    void setFile(File fileName);
-
     File getFile();
 }

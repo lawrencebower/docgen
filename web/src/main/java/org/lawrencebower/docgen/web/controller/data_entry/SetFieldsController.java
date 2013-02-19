@@ -83,7 +83,8 @@ public class SetFieldsController {
         return generatedPDFs;
     }
 
-    private void concatenatePDFsAndWriteToResponse(OutputStream outStream, List<PDFDocument> allPdfFiles) {
+    private void concatenatePDFsAndWriteToResponse(OutputStream outStream,
+                                                   List<PDFDocument> allPdfFiles) {
         File concatenatedFile = business.makeConcatenatedFile(allPdfFiles);
         business.writePDFsToStream(outStream, concatenatedFile);
     }

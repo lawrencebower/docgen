@@ -118,7 +118,6 @@ public class DataEntryCB {
 
             File file = new File(filePath + File.separator + fileName);
 
-            pdfDocument.setFile(file);
             pdfDocument.writeToFile(file);
         }
     }

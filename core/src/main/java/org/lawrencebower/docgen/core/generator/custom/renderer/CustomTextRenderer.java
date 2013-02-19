@@ -4,14 +4,13 @@ import com.lowagie.text.Element;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
+import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.generator.custom.CustomComponentRendererInfo;
 import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 import org.lawrencebower.docgen.core.generator.model.itext_component.ITextTextComponent;
 
 public class CustomTextRenderer
         implements DocComponentRenderer<ITextTextComponent, CustomComponentRendererInfo> {
-
-    public static final int DEFAULT_LEADING = 12;
 
     @Override
     public void createAndRenderComponent(ITextTextComponent component, CustomComponentRendererInfo rendererInfo) {
@@ -28,7 +27,7 @@ public class CustomTextRenderer
         HorizontalAlignment alignment = component.getAlignment();
         int boxAlignment = HorizontalAlignment.mapToITextAlignment(alignment);
         paragraph.setAlignment(boxAlignment);
-        paragraph.setLeading(DEFAULT_LEADING);
+        paragraph.setLeading(FontInfo.DEFAULT_LEADING);
 
         return paragraph;
     }

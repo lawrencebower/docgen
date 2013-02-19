@@ -36,8 +36,12 @@ public class TextComponent extends AbstractDocComponent {
         return DocComponentType.TEXT;
     }
 
+    public void setText(TextBlock textBlock) {
+        this.text = textBlock;
+    }
+
     public void setText(String text) {
-        this.text = new TextBlock(text);
+        this.text.setText(text);
     }
 
     public TextBlock getText() {

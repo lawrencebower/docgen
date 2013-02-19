@@ -11,6 +11,7 @@ public class Product {
     private String countryOfOrigin;
     private String harmonizedTariffNumber;
     private String customsDescription;
+    private String productDescription;
     private String tradeName;
     private Attributes attributes = new Attributes();
 
@@ -40,6 +41,10 @@ public class Product {
 
     protected void setCustomsDescription(String customsDescription) {
         this.customsDescription = customsDescription;
+    }
+
+    protected void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
     }
 
     protected void setTradeName(String tradeName) {
@@ -76,6 +81,10 @@ public class Product {
 
     public String getCustomsDescription() {
         return customsDescription;
+    }
+
+    public String getProductDescription() {
+        return productDescription;
     }
 
     public String getTradeName() {

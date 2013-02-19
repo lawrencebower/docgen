@@ -8,6 +8,10 @@ public class ImageComponent extends AbstractDocComponent {
     private Resource imageFileLocation;
     private int width;
     private int height;
+    /**
+     * set to true if image should be scaled to fit table cell when nested - otherwise native size is used
+     */
+    private boolean fitToTable;
 
     public ImageComponent(Resource imageFileLocation) {
         this.imageFileLocation = imageFileLocation;
@@ -25,6 +29,14 @@ public class ImageComponent extends AbstractDocComponent {
 
     public Resource getImageFileLocation() {
         return imageFileLocation;
+    }
+
+    public void setFitToTable(boolean fitToTable) {
+        this.fitToTable = fitToTable;
+    }
+
+    public boolean isFitToTable() {
+        return fitToTable;
     }
 
     public void setSize(int width, int height) {

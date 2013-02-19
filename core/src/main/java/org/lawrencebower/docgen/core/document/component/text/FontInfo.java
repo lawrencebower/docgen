@@ -7,6 +7,7 @@ public class FontInfo {
     private FontStyle style;
 
     public static final int DEFAULT_FONT_SIZE = 10;
+    public static final int DEFAULT_LEADING = 12;
     public static final String DEFAULT_FONT = "Helvetica";
     public static final FontStyle DEFAULT_FONT_STYLE = FontStyle.PLAIN;
 
@@ -52,6 +53,12 @@ public class FontInfo {
     public static FontInfo SMALL() {
         return new FontInfo(DEFAULT_FONT,
                             8,
+                            FontStyle.PLAIN);
+    }
+
+    public static FontInfo VERY_SMALL() {
+        return new FontInfo(DEFAULT_FONT,
+                            6,
                             FontStyle.PLAIN);
     }
 }

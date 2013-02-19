@@ -85,7 +85,7 @@ public class ProductFactoryTsvImpl implements ProductFactory {
 
     @Override
     public void reloadProducts(){
-        initProducts();;
+        initProducts();
     }
 
     private Product mapProductInfo(DataRow dataRow) {
@@ -99,8 +99,8 @@ public class ProductFactoryTsvImpl implements ProductFactory {
         String name = dataRow.getString(1);
         builder.setProductName(name);
 
-        String customsDescription = dataRow.getString(2);
-        builder.setCustomsDescription(customsDescription);
+        String productDescription = dataRow.getString(2);
+        builder.setProductDescription(productDescription);
 
         String tradeName = dataRow.getString(3);
         builder.setTradeName(tradeName);
@@ -117,6 +117,11 @@ public class ProductFactoryTsvImpl implements ProductFactory {
         if (dataRow.hasColumn(7)) {
             String[] attributes = dataRow.getStringArray(7);
             builder.setAttributes(attributes);
+        }
+
+        if (dataRow.hasColumn(8)) {
+            String customsDescription = dataRow.getString(8);
+            builder.setCustomsDescription(customsDescription);
         }
 
         return builder.buildProduct();

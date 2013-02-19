@@ -16,6 +16,10 @@ public class TextFragment {
         this.fontInfo = FontInfo.DEFAULT();
     }
 
+    public void setText(String text) {
+        this.text = text;
+    }
+
     public FontInfo getFontInfo() {
         return fontInfo;
     }

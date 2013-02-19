@@ -32,6 +32,10 @@ public class ProductBuilder {
         product.setCustomsDescription(customsDescription);
     }
 
+    public void setProductDescription(String productDescription) {
+        product.setProductDescription(productDescription);
+    }
+
     public void setAttributes(String... attributes) {
         product.setAttributes(attributes);
     }

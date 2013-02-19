@@ -6,7 +6,6 @@ import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 public class TableTextComponent extends TextComponent {
 
     public TableTextComponent() {
-        super();
     }
 
     public TableTextComponent(TextComponent component) {

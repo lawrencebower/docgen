@@ -24,6 +24,7 @@ public class PDFDocumentImpl implements PDFDocument {
 
     public void writeToFile(File file) {
         try {
+            setFile(file);
             FileOutputStream outStream = new FileOutputStream(file);
             writeToStream(outStream);
             setFilePermissions(file);
@@ -81,8 +82,7 @@ public class PDFDocumentImpl implements PDFDocument {
         return copyNumber;
     }
 
-    @Override
-    public void setFile(File fileName) {
+    private void setFile(File fileName) {
         file = fileName;
     }
 

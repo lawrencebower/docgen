@@ -15,7 +15,7 @@ public class DocumentInjectionInfo {
         return getFieldValueByType(injectionField);
     }
 
-    public String getFieldValueByType(DocumentInjectionField field) {
+    private String getFieldValueByType(DocumentInjectionField field) {
 
         String value = "";
 
@@ -37,6 +37,9 @@ public class DocumentInjectionInfo {
                 break;
             case PRODUCT_TARIFF_NUMBER:
                 value = product.getHarmonizedTariffNumber();
+                break;
+            case PRODUCT_DESCRIPTION:
+                value = product.getProductDescription();
                 break;
             case PRODUCT_CUSTOMS_DESCRIPTION:
                 value = product.getCustomsDescription();

@@ -7,6 +7,7 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.DocComponentType;
+import org.lawrencebower.docgen.core.document.component.ImageComponent;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
 import org.lawrencebower.docgen.core.document.component.position.VerticalAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
@@ -187,7 +188,9 @@ public class ITextTableGenerator {
             iTextCell = new PdfPCell((Phrase) iTextElement);
         } else if(component.getComponentType() == DocComponentType.IMAGE){
             Image image = (Image) iTextElement;
-            iTextCell = new PdfPCell(image, false);//dont resize image to fit cell - respect natural size
+            ImageComponent imageComponent = (ImageComponent) component;
+            boolean fitToTable = imageComponent.isFitToTable();
+            iTextCell = new PdfPCell(image, fitToTable);
         } else {
             iTextCell = new PdfPCell();
             iTextCell.addElement(iTextElement);

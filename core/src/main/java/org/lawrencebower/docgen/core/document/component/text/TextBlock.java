@@ -21,6 +21,14 @@ public class TextBlock {
         addFragment(text, fontInfo);
     }
 
+    public void setText(String text) {
+        if(fragments.size() == 1){
+            fragments.get(0).setText(text);
+        }else{
+            addFragment(text);
+        }
+    }
+
     public void addFragment(String text) {
         FontInfo fontInfo = FontInfo.createDefaultInfo();
         addFragment(text, fontInfo);

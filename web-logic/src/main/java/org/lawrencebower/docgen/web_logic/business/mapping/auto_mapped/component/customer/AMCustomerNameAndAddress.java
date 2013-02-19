@@ -16,7 +16,7 @@ public class AMCustomerNameAndAddress extends AbstractAMComponent {
                              AMComponentInfo info) {
 
         String customerContact = info.getCustomerContactName();
-        String customerBusiness = info.getCustomerContactName();
+        String customerBusiness = info.getBusinessName();
         String customerAddress = info.getCustomerAddress();
         String customerCountry = info.getCustomerCountry();
         String value = customerContact + "\n" +
