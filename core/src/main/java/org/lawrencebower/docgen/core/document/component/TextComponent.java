@@ -28,7 +28,7 @@ public class TextComponent extends AbstractDocComponent {
     }
 
     public TextComponent(HorizontalAlignment alignment) {
-        super(alignment);
+        this(alignment, "");
     }
 
     @Override

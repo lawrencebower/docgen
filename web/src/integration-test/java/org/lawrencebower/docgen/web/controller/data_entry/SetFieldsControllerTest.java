@@ -131,6 +131,7 @@ public class SetFieldsControllerTest {
     private void verifyExpectedPDFFilesWritten() {
         checkDoc1();
         checkDoc2();
+        checkDoc3();
         checkConcatenatedFiles();
     }
 
@@ -149,6 +150,12 @@ public class SetFieldsControllerTest {
     private void checkDoc2() {
         File expectedConcatenatedFile = new File(testInputPath + "EXPECTED_DOC2.pdf");
         File createdConcatenatedFile = new File(testOutputRoot + DOC_2_NAME + "_" + PRODUCT_MODEL_1 + ".pdf");
+        checkFilesAreSame(expectedConcatenatedFile, createdConcatenatedFile);
+    }
+
+    private void checkDoc3() {
+        File expectedConcatenatedFile = new File(testInputPath + "EXPECTED_DOC3.pdf");
+        File createdConcatenatedFile = new File(testOutputRoot + DOC_2_NAME + "_" + PRODUCT_MODEL_2 + ".pdf");
         checkFilesAreSame(expectedConcatenatedFile, createdConcatenatedFile);
     }
 
