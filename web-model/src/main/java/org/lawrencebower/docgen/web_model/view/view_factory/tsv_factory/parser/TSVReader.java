@@ -30,7 +30,7 @@ public class TSVReader {
         return readTSV(inputStream);
     }
 
-    private DataSet readTSV(InputStream inputStream) {
+    protected DataSet readTSV(InputStream inputStream) {
 
         InputStreamReader streamReader = new InputStreamReader(inputStream);
 
@@ -51,13 +51,15 @@ public class TSVReader {
                 continue; // ignore empty lines
             }
 
+            trimmedLine = removeLeadingAndTrailingQuotes(trimmedLine);
+
             if (trimmedLine.startsWith(comment)) {
                 continue; // ignore comment lines
             }
 
             String[] tokens = StringUtils.splitPreserveAllTokens(line, separator);
 
-            processNewlines(tokens);
+            processTokens(tokens);
 
             result.addRow(new DataRow(tokens));
         }
@@ -73,14 +75,28 @@ public class TSVReader {
         }
     }
 
-    private void processNewlines(String[] tokens) {
+    private void processTokens(String[] tokens) {
         for(int i = 0; i<tokens.length;i++){
             String processedToken = replaceNewlineChars(tokens[i]);
+            processedToken = removeLeadingAndTrailingQuotes(processedToken);
             tokens[i] = processedToken;
         }
     }
 
     private String replaceNewlineChars(String token){
         return token.replace("\\n","\n");
+    }
+
+    private String removeLeadingAndTrailingQuotes(String string) {
+
+        if(string.startsWith("\"")){
+            string = string.replaceAll("^\"", "");
+        }
+
+        if(string.endsWith("\"")){
+            string = string.replaceAll("\"$", "");
+        }
+
+        return string;
     }
 }
