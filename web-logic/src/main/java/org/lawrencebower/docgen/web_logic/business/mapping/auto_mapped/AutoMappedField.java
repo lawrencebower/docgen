@@ -2,6 +2,7 @@ package org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped;
 
 public enum AutoMappedField {
 
+    DATE("DATE"),
     BUSINESS_ADDRESS("AUTO_MAPPED_BUSINESS_ADDRESS"),
     BUSINESS_CONTACT_NAME("AUTO_MAPPED_BUSINESS_CONTACT_NAME"),
     BUSINESS_COUNTRY("AUTO_MAPPED_BUSINESS_COUNTRY"),

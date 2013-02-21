@@ -31,6 +31,10 @@
             <bean class="org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.vendor.VendorMapper"
                   init-method="initMappers"/>
         </property>
+        <property name="dateMapper">
+            <bean class="org.lawrencebower.docgen.web_logic.business.mapping.auto_mapped.component.date.DateMapper"
+                  init-method="initMappers"/>
+        </property>
     </bean>
 
     <bean name="fieldMapper"
