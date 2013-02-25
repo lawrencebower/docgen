@@ -10,6 +10,6 @@ public abstract class FilePermissionSetter {
         /**
          * feel free to implement other os-specific permission setters...
          */
-        return new PosixFilePermissionSetter();
+        return new LinuxFilePermissionSetter();
     }
 }
