@@ -51,9 +51,7 @@ public class SetFieldsController {
 
         DocumentSet injectedDocuments = injectDocuments();
 
-        List<PDFDocument> pdfFiles = generatePDFsAndWriteToFiles(injectedDocuments);
-
-        concatenatePDFsAndWriteToResponse(outStream, pdfFiles);
+        writeFilesToDiskAndResponse(injectedDocuments, outStream);
 
         return null;
     }
@@ -74,18 +72,34 @@ public class SetFieldsController {
         return business.injectDocuments(originalDocuments, products);
     }
 
-    private List<PDFDocument> generatePDFsAndWriteToFiles(DocumentSet documents) {
+    private void writeFilesToDiskAndResponse(DocumentSet documents,
+                                             OutputStream outputStream) {
+
+        File outputDir = business.createOutputDir();
+
+        List<PDFDocument> pdfDocuments = generatePDFsAndWriteToFiles(documents, outputDir);
+
+        concatenatePDFsAndWriteToResponse(outputStream,
+                                          pdfDocuments,
+                                          outputDir);
+    }
+
+    private List<PDFDocument> generatePDFsAndWriteToFiles(DocumentSet documents,
+                                                          File outputDir) {
 
         List<PDFDocument> generatedPDFs = business.createPDFs(documents);
 
-        business.writePDFsToFiles(generatedPDFs);
+        business.writePDFsToFiles(generatedPDFs, outputDir);
 
         return generatedPDFs;
     }
 
     private void concatenatePDFsAndWriteToResponse(OutputStream outStream,
-                                                   List<PDFDocument> allPdfFiles) {
-        File concatenatedFile = business.makeConcatenatedFile(allPdfFiles);
+                                                   List<PDFDocument> allPdfFiles,
+                                                   File outputDir) {
+
+        File concatenatedFile = business.makeConcatenatedFile(allPdfFiles, outputDir);
+
         business.writePDFsToStream(outStream, concatenatedFile);
     }
 

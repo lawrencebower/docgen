@@ -99,10 +99,14 @@ public class DataEntryCB {
         }
     }
 
-    public void writePDFsToFiles(List<PDFDocument> pdfDocuments) {
+    public File createOutputDir() {
+        return pdfDirWriter.createPDFDir(fileRoot);
+    }
+
+    public void writePDFsToFiles(List<PDFDocument> pdfDocuments,
+                                 File outputDir) {
 
         if (!pdfDocuments.isEmpty()) {
-            File outputDir = pdfDirWriter.createPDFDir(fileRoot);
             writePDFsToFile(pdfDocuments, outputDir);
         }
     }
@@ -122,8 +126,11 @@ public class DataEntryCB {
         }
     }
 
-    public File makeConcatenatedFile(List<PDFDocument> allFiles) {
-        String pathName = fileRoot + ViewConstants.CONCATENATED_FILE_NAME;
+    public File makeConcatenatedFile(List<PDFDocument> allFiles,
+                                     File outputDir) {
+
+        String outputPath = outputDir.getPath();
+        String pathName = outputPath + File.separator + ViewConstants.CONCATENATED_FILE_NAME;
         File concatenatedFile = new File(pathName);
         pdfConcatenator.concatenatePDFs(allFiles, concatenatedFile);
 

@@ -136,7 +136,8 @@ public class DataEntryCBTest {
 
         List<PDFDocument> pdfDocuments = Arrays.asList(pdf1, pdf2);
 
-        dataEntryBusiness.writePDFsToFiles(pdfDocuments);
+        File outputDir = dataEntryBusiness.createOutputDir();
+        dataEntryBusiness.writePDFsToFiles(pdfDocuments, outputDir);
 
         String file1 = pdfDocuments.get(0).getFile().getPath();
         String file2 = pdfDocuments.get(1).getFile().getPath();
@@ -164,7 +165,8 @@ public class DataEntryCBTest {
 
         List<PDFDocument> pdfDocuments = Arrays.asList(pdf1, pdf2);
 
-        dataEntryBusiness.writePDFsToFiles(pdfDocuments);
+        File outputDir = dataEntryBusiness.createOutputDir();
+        dataEntryBusiness.writePDFsToFiles(pdfDocuments, outputDir);
 
         String file1 = pdfDocuments.get(0).getFile().getPath();
         String file2 = pdfDocuments.get(1).getFile().getPath();
@@ -179,7 +181,8 @@ public class DataEntryCBTest {
     @Test
     public void testMakeConcatenatedFile_validParams_returnsCorrectFileName() throws Exception {
         dataEntryBusiness.setPdfConcatenator(mock(PDFConcatenator.class));
-        File file = dataEntryBusiness.makeConcatenatedFile(new ArrayList<PDFDocument>());
+        File outputDir = dataEntryBusiness.createOutputDir();
+        File file = dataEntryBusiness.makeConcatenatedFile(new ArrayList<PDFDocument>(), outputDir);
         assertEquals(fileRoot + ViewConstants.CONCATENATED_FILE_NAME, file.getPath());
     }
 
