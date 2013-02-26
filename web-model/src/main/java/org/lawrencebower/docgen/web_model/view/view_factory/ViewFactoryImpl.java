@@ -3,7 +3,6 @@ package org.lawrencebower.docgen.web_model.view.view_factory;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.web_model.view.contact.ContactView;
 import org.lawrencebower.docgen.web_model.view.document.DocumentView;
-import org.lawrencebower.docgen.web_model.view.document.DocumentViewImpl;
 import org.lawrencebower.docgen.web_model.view.product.ProductView;
 import org.lawrencebower.docgen.web_model.view.view_factory.factory.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,7 +77,7 @@ public class ViewFactoryImpl implements ViewFactory {
     }
 
     @Override
-    public DocumentViewImpl createDocument(String documentName) {
+    public DocumentView createDocument(String documentName) {
         return documentFactory.createDocument(documentName);
     }
 

@@ -131,12 +131,13 @@ public class DocumentViewImpl implements DocumentView {
      */
     private DocumentView copyComponentViews() {
         String docName = document.getName();
-        DocumentViewImpl newDocument = viewFactory.createDocument(docName);
+        DocumentView newDocument = viewFactory.createDocument(docName);
         newDocument.copyComponentViews(this);
         return newDocument;
     }
 
-    private void copyComponentViews(DocumentView documentToCopy) {
+    @Override
+    public void copyComponentViews(DocumentView documentToCopy) {
         for (DocComponentView docComponentView : getComponentViews()) {
             docComponentView.copyFromDocument(documentToCopy);
         }

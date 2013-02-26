@@ -38,4 +38,6 @@ public interface DocumentView {
     boolean isContactAttributesMatch(ContactView contact);
 
     boolean isProductAttributesMatch(ProductView product);
+
+    void copyComponentViews(DocumentView documentToCopy);
 }
