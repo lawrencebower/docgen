@@ -1,0 +1,24 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+             http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd
+             http://www.springframework.org/schema/context classpath:/org/springframework/context/config/spring-context-3.1.xsd">
+
+    <import resource="global-params.xml"/>
+
+    <import resource="core-beans.xml"/>
+
+    <import resource="web-model-beans.xml"/>
+
+    <import resource="web-logic-beans.xml"/>
+
+    <import resource="web-logic-params.xml"/>
+
+    <import resource="doc-examples-beans.xml"/>
+
+    <import resource="doc-examples-test-params.xml"/>
+
+    <context:component-scan base-package="org.lawrencebower.docgen"/>
+
+</beans>
