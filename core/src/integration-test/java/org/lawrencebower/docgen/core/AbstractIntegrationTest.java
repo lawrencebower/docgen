@@ -17,11 +17,7 @@ public abstract class AbstractIntegrationTest {
     protected ChecksumUtils checksumUtils;
 
     @Autowired
-    @Qualifier("coreTestInputRoot")
-    String testInputRoot;
-
-    @Autowired
-    @Qualifier("testOutputRoot")
+    @Qualifier("pdfOutputRoot")
     String testOutputRoot;
 
     protected String inputPackage;
@@ -32,7 +28,7 @@ public abstract class AbstractIntegrationTest {
         String packageName = getClass().getPackage().getName();
         packageName = packageName.replaceAll("\\.", "\\\\");
 
-        inputPackage = testInputRoot + packageName + File.separator;
+        inputPackage = packageName + File.separator;
         outputPackage = testOutputRoot + packageName + File.separator;
 
         makeOutputDirs(outputPackage);
@@ -51,5 +47,9 @@ public abstract class AbstractIntegrationTest {
         pdfDocument.writeToFile(outputFile);
 
         return outputFile;
+    }
+
+    protected File classPathResourceToFile(String path) {
+        return fileUtils.classPathResourceToFile(path);
     }
 }

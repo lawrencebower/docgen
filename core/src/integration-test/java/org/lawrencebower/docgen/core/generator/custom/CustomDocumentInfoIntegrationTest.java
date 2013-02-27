@@ -50,7 +50,7 @@ public class CustomDocumentInfoIntegrationTest extends AbstractIntegrationTest {
 
         File outputFile = createOutputFilePathAndWriteFile(outFilePath, pdfDocument);
 
-        File expectedFile = new File(expectedOutFilePath);
+        File expectedFile = classPathResourceToFile(expectedOutFilePath);
 
         boolean fileSameAsExpected = checksumUtils.filteredFileChecksumsAreSame(expectedFile, outputFile);
 

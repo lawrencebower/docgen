@@ -7,6 +7,14 @@
 
     <import resource="core-beans.xml"/>
 
-    <context:component-scan base-package="org.lawrencebower.docgen.core"/>
+    <import resource="web-model-beans.xml"/>
+
+    <import resource="web-logic-beans.xml"/>
+
+    <import resource="web-logic-test-params.xml"/>
+
+    <import resource="global-params.xml"/>
+
+    <context:component-scan base-package="org.lawrencebower.docgen.web_logic"/>
 
 </beans>

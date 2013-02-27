@@ -44,10 +44,10 @@ public class PDFConcatenatorTest extends AbstractIntegrationTest {
 
     @Before
     public void setUp() {
-        super.prepareDirs();
+        prepareDirs();
         this.outputFile = new File(outputPackage + outputFileName);
-        this.inputFile1 = new File(inputPackage + inputFile1Name);
-        this.inputFile2 = new File(inputPackage + inputFile2Name);
+        this.inputFile1 = classPathResourceToFile(inputPackage + inputFile1Name);
+        this.inputFile2 = classPathResourceToFile(inputPackage + inputFile2Name);
     }
 
     @Test
@@ -108,7 +108,7 @@ public class PDFConcatenatorTest extends AbstractIntegrationTest {
 
         pdfConcatenator.concatenatePDFs(sourceFiles, outputFile);
 
-        File expectedOutputFile = new File(inputPackage + expectedOut_2_files_Name);
+        File expectedOutputFile = classPathResourceToFile(inputPackage + expectedOut_2_files_Name);
 
         boolean filesAreSame = checksumUtils.filteredFileChecksumsAreSame(expectedOutputFile, outputFile);
 
@@ -122,7 +122,7 @@ public class PDFConcatenatorTest extends AbstractIntegrationTest {
 
         pdfConcatenator.concatenatePDFs(sourceFiles, outputFile);
 
-        File expectedOutputFile = new File(inputPackage + expectedOut_1_file_Name);
+        File expectedOutputFile = classPathResourceToFile(inputPackage + expectedOut_1_file_Name);
 
         boolean filesAreSame = checksumUtils.filteredFileChecksumsAreSame(expectedOutputFile, outputFile);
 
@@ -140,7 +140,7 @@ public class PDFConcatenatorTest extends AbstractIntegrationTest {
 
         pdfConcatenator.concatenatePDFs(sourceFiles, outputFile);
 
-        File expectedOutputFile = new File(inputPackage + expectedOut_3_files_Name);
+        File expectedOutputFile = classPathResourceToFile(inputPackage + expectedOut_3_files_Name);
 
         boolean filesAreSame = checksumUtils.filteredFileChecksumsAreSame(expectedOutputFile, outputFile);
 
@@ -162,7 +162,7 @@ public class PDFConcatenatorTest extends AbstractIntegrationTest {
 
         pdfConcatenator.concatenatePDFs(sourceFiles, outputFile);
 
-        File expectedOutputFile = new File(inputPackage + expectedOut_4_files_Name);
+        File expectedOutputFile = classPathResourceToFile(inputPackage + expectedOut_4_files_Name);
 
         boolean filesAreSame = checksumUtils.filteredFileChecksumsAreSame(expectedOutputFile, outputFile);
 

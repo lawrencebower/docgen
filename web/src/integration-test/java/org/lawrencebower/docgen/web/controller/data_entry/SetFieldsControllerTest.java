@@ -45,10 +45,6 @@ public class SetFieldsControllerTest {
     SetFieldsController controller;
 
     @Autowired
-    @Qualifier("webTestInputRoot")
-    String testInputRoot;
-
-    @Autowired
     @Qualifier("pdfOutputRoot")
     String testOutputRoot;
 
@@ -79,7 +75,7 @@ public class SetFieldsControllerTest {
         String packageName = getClass().getPackage().getName();
         packageName = packageName.replaceAll("\\.", "\\\\");
 
-        testInputPath = testInputRoot + packageName + File.separator;
+        testInputPath = packageName + File.separator;
     }
 
     private void createOutputPath() {
@@ -136,25 +132,25 @@ public class SetFieldsControllerTest {
     }
 
     private void checkConcatenatedFiles() {
-        File expectedConcatenatedFile = new File(testInputPath + "EXPECTED_CONCATENATED_FILE.pdf");
+        File expectedConcatenatedFile = fileUtils.classPathResourceToFile(testInputPath + "EXPECTED_CONCATENATED_FILE.pdf");
         File createdConcatenatedFile = new File(testOutputRoot + ViewConstants.CONCATENATED_FILE_NAME);
         checkFilesAreSame(expectedConcatenatedFile, createdConcatenatedFile);
     }
 
     private void checkDoc1() {
-        File expectedConcatenatedFile = new File(testInputPath + "EXPECTED_DOC1.pdf");
+        File expectedConcatenatedFile = fileUtils.classPathResourceToFile(testInputPath + "EXPECTED_DOC1.pdf");
         File createdConcatenatedFile = new File(testOutputRoot + DOC_1_NAME + ".pdf");
         checkFilesAreSame(expectedConcatenatedFile, createdConcatenatedFile);
     }
 
     private void checkDoc2() {
-        File expectedConcatenatedFile = new File(testInputPath + "EXPECTED_DOC2.pdf");
+        File expectedConcatenatedFile = fileUtils.classPathResourceToFile(testInputPath + "EXPECTED_DOC2.pdf");
         File createdConcatenatedFile = new File(testOutputRoot + DOC_2_NAME + "_" + PRODUCT_MODEL_1 + ".pdf");
         checkFilesAreSame(expectedConcatenatedFile, createdConcatenatedFile);
     }
 
     private void checkDoc3() {
-        File expectedConcatenatedFile = new File(testInputPath + "EXPECTED_DOC3.pdf");
+        File expectedConcatenatedFile = fileUtils.classPathResourceToFile(testInputPath + "EXPECTED_DOC3.pdf");
         File createdConcatenatedFile = new File(testOutputRoot + DOC_2_NAME + "_" + PRODUCT_MODEL_2 + ".pdf");
         checkFilesAreSame(expectedConcatenatedFile, createdConcatenatedFile);
     }

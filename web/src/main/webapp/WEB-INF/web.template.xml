@@ -19,11 +19,8 @@
             classpath:META-INF/core-beans.xml
             classpath:META-INF/web-model-beans.xml
             classpath:META-INF/web-logic-beans.xml
-            classpath:META-INF/web-logic-params.xml
-            <!--classpath:META-INF/doc-examples-beans.xml-->
-            <!--classpath:META-INF/doc-examples-params.xml-->
-            classpath:META-INF/custom-docs-beans.xml
-            classpath:META-INF/custom-docs-params.xml
+            classpath:META-INF/doc-examples-beans.xml
+            classpath:META-INF/doc-examples-params.xml
             classpath:META-INF/web-beans.xml
         </param-value>
     </context-param>

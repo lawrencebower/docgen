@@ -39,7 +39,7 @@ public abstract class AbstractCustomRendererTest extends AbstractIntegrationTest
 
         File outputFile = createOutputFilePathAndWriteFile(outFilePath, pdfDocument);
 
-        File expectedFile = new File(expectedOutputFilePath);
+        File expectedFile = classPathResourceToFile(expectedOutputFilePath);
 
         boolean fileSameAsExpected = checksumUtils.filteredFileChecksumsAreSame(expectedFile, outputFile);
 

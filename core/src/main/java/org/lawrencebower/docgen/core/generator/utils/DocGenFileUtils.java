@@ -3,6 +3,7 @@ package org.lawrencebower.docgen.core.generator.utils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.lawrencebower.docgen.core.exception.DocGenException;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 import java.io.File;
@@ -24,10 +25,10 @@ public class DocGenFileUtils {
         }
     }
 
-    public void makeDirIfNotExists(File file){
-        if(!file.exists()){
+    public void makeDirIfNotExists(File file) {
+        if (!file.exists()) {
             boolean success = file.mkdirs();
-            if(!success){
+            if (!success) {
                 String filePath = file.getPath();
                 String message = String.format("Could not make dirs for '%s'", filePath);
                 throw new DocGenException(message);
@@ -35,7 +36,7 @@ public class DocGenFileUtils {
         }
     }
 
-    public void writeBytesToFile(byte[] bytes, File file){
+    public void writeBytesToFile(byte[] bytes, File file) {
         try {
             FileUtils.writeByteArrayToFile(file, bytes);
         } catch (IOException e) {
@@ -62,5 +63,14 @@ public class DocGenFileUtils {
     public String createUUID() {
         UUID uuid = UUID.randomUUID();
         return uuid.toString();
+    }
+
+    public File classPathResourceToFile(String path) {
+        try {
+            Resource resource = new ClassPathResource(path);
+            return resource.getFile();
+        } catch (IOException e) {
+            throw new DocGenException(e);
+        }
     }
 }

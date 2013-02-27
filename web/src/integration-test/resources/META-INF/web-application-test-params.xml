@@ -6,20 +6,11 @@
     <bean name="pdfDirWriter"
           class="org.lawrencebower.docgen.web_logic.business.utils.PdfDirWriterTestImpl"/>
 
-    <bean name="webTestInputRoot" class="java.lang.String">
-        <constructor-arg value="C:\GitHub\docgen\web\src\integration-test\resources\"/>
-    </bean>
-
-    <bean name="pdfOutputRoot" class="java.lang.String">
-        <constructor-arg value="C:\code\output\integration_tests_output\SetFieldsControler\"/>
-    </bean>
-
     <bean name="fcc740Resource" class="java.lang.String">
         <constructor-arg value="classpath:/overlay_pdf/overlay_input.pdf"/>
     </bean>
 
     <bean name="signatureResource" class="java.lang.String">
-        <!--<constructor-arg value="file:C:\\GitHub\\docgen\\doc-examples\\src\\main\\resources\\signature.gif"/>-->
         <constructor-arg value="classpath:/test_signature.gif"/>
     </bean>
 

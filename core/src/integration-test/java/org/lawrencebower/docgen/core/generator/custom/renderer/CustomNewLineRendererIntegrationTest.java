@@ -10,12 +10,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:META-INF/integration-test-config.xml"})
+@ContextConfiguration(locations = "classpath:META-INF/integration-test-config.xml")
 public class CustomNewLineRendererIntegrationTest extends AbstractCustomRendererTest {
 
     @Before
     public void setup() {
-        super.prepareDirs();
+        prepareDirs();
     }
 
     @Test

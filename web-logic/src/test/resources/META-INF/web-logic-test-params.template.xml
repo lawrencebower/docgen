@@ -1,0 +1,8 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd">
+
+    <bean name="pdfDirWriter"
+          class="org.lawrencebower.docgen.web_logic.business.utils.PdfDirWriterTestImpl"/>
+
+</beans>
