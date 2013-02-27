@@ -19,15 +19,11 @@ to a local directory.
 
 3: Make a copy of "build.gradle.template" to "build.gradle"
 
-4: Rename the following config xml files from *.template.xml to *.xml"and modify the output paths to write to a file on your machine where you want output to go:
+4: copy and rename the following config xml file from *.template.xml to *.xml"and modify the output paths to write to a file on your machine where you want output to go:
 
-docgen/core/src/integration-test/resources/META-INF/integration-test-params.template.xml
+docgen/core/src/main/resources/META-INF/global-params.template.xml
 
-docgen/web-model/src/test/resources/META-INF/web-model-test-params.template.xml
+5: make a copy of docgen/web/src/main/webapp/WEB-INF/web.template.xml and rename to web.xml
 
-docgen/web-logic/src/test/resources/META-INF/web-logic-test-params.template.xml
 
-docgen/doc-examples/src/test/resources/META-INF/doc-examples-test-params.template.xml
-
-docgen/web/src/main/resources/META-INF/web-params.template.xml
 

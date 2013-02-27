@@ -44,6 +44,12 @@ public class FontInfo {
                             FontStyle.BOLD);
     }
 
+    public static FontInfo DEFAULT_ITALIC() {
+        return new FontInfo(DEFAULT_FONT,
+                            DEFAULT_FONT_SIZE,
+                            FontStyle.ITALIC);
+    }
+
     public static FontInfo DEFAULT() {
         return new FontInfo(DEFAULT_FONT,
                             DEFAULT_FONT_SIZE,
