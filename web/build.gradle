@@ -7,6 +7,13 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    integrationTest {
+        java.srcDir file('src/integration-test/java')
+        resources.srcDir file('src/integration-test/resources')
+    }
+}
+
 war {
     baseName = 'docgen' // leads to docgen.war
 }
@@ -20,5 +27,18 @@ dependencies {
             'jstl:jstl:1.2'
 
     testCompile 'org.mockito:mockito-core:1.9.0',
-            'junit:junit:4.+'
+                'junit:junit:4.+'
+
+    integrationTestCompile sourceSets.main.output
+    integrationTestCompile configurations.testCompile
+    integrationTestCompile sourceSets.test.output
+    integrationTestRuntime configurations.testRuntime
+
 }
+
+task integrationTest(type: Test, dependsOn: jar) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    systemProperties['jar.path'] = jar.archivePath
+}
+check.dependsOn integrationTest

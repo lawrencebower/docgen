@@ -23,6 +23,9 @@ project(':doc-examples') {
 
 project(':web') {
     dependencies {
-         compile project(':core'), project(':doc-examples'), project(':web-model'), project(':web-logic')
+        compile project(':core'), project(':doc-examples'), project(':web-model'), project(':web-logic')
+        testCompile project(':core').sourceSets.test.output,
+                project(':web-logic').sourceSets.test.output,
+                project(':web-model').sourceSets.test.output
     }
 }
