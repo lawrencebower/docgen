@@ -69,7 +69,7 @@ public class SetFieldsControllerTest {
     }
 
     /**
-     * sets the directory where the expected file templates are written
+     * sets the directory where the expected file templates are read
      */
     private void setupInputPath() {
         String packageName = getClass().getPackage().getName();

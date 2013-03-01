@@ -10,6 +10,7 @@ public class ViewHeaderCell extends AbstractTableCell implements HeaderCell {
     private String name;
     private String text;
     private Integer columnWidth;
+    private boolean copyAlignment;
 
     public ViewHeaderCell(String name, Integer columnWidth) {
         this.name = name;
@@ -56,4 +57,11 @@ public class ViewHeaderCell extends AbstractTableCell implements HeaderCell {
         return columnWidth != null;
     }
 
+    public void setCopyAlignment(boolean copyAlignment) {
+        this.copyAlignment = copyAlignment;
+    }
+
+    public boolean isCopyAlignment() {
+        return copyAlignment;
+    }
 }

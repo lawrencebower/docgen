@@ -24,6 +24,7 @@ public class SessionSetupUtils {
     private void setProductsOnSession(SessionData sessionData) {
         ProductView product1 = getProductWithModelNo(PRODUCT_MODEL_1);
         ProductView product2 = getProductWithModelNo(PRODUCT_MODEL_2);
+        product2.setQuantity("2");
         sessionData.addSelectedProduct(product1);
         sessionData.addSelectedProduct(product2);
     }

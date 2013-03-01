@@ -17,6 +17,7 @@ import org.lawrencebower.docgen.core.document.component.text.TextBlock;
 import org.lawrencebower.docgen.core.generator.custom.CustomDocument;
 import org.lawrencebower.docgen.core.generator.custom.CustomDocumentBuilder;
 import org.lawrencebower.docgen.web.test_examples.factory.DocumentFactoryTestImpl;
+import org.lawrencebower.docgen.web.test_examples.test_doc_1.components.Doc1PackageInformationTableBuilder;
 import org.lawrencebower.docgen.web_model.view.document.DocumentViewBuilder;
 import org.lawrencebower.docgen.web_model.view.document.DocumentViewImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,12 @@ public class TestDocument1 {
 
         DocComponent component = componentBuilder.createTextComponentWithName(DocumentFactoryTestImpl.AUTO_MAPPED_EXAMPLE_FIELD);
         addViewableComponent(component);
+
+        addNewLine();
+
+        TableComponent packageInformationTable = makePackageInformationTable();
+
+        addComponent(packageInformationTable);
 
         documentViewBuilder.setCopyNumber(2);
 
@@ -109,4 +116,12 @@ public class TestDocument1 {
         documentView.setDocument(document);
         return documentView;
     }
+
+    private TableComponent makePackageInformationTable() {
+
+        Doc1PackageInformationTableBuilder packageInformationTableBuilder = new Doc1PackageInformationTableBuilder();
+
+        return packageInformationTableBuilder.buildTablePackageInformationTable(documentViewBuilder);
+    }
+
 }

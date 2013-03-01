@@ -1,5 +1,8 @@
 package org.lawrencebower.docgen.web_logic.business.injection.product;
 
+import org.lawrencebower.docgen.core.document.component.DocComponent;
+import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
+import org.lawrencebower.docgen.core.document.component.position.VerticalAlignment;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
 import org.lawrencebower.docgen.core.document.component.table.view_table.*;
 import org.lawrencebower.docgen.web_model.business_def.injection.TableComponentProductInjector;
@@ -49,10 +52,11 @@ public class TableComponentProductInjectorImpl implements ComponentProductInject
         ViewCell newCell;
 
         String columnName = headerCell.getName();
-        if(ProductInjectionField.containsName(columnName)){
+        if (ProductInjectionField.containsName(columnName)) {
             ProductInjectionField productField = ProductInjectionField.getByFieldName(columnName);
             newCell = makeCellForField(productField, product);
-        }else{
+            copyCellFormatIfRequired(headerCell, newCell);
+        } else {
             newCell = new ViewCell();//empty cell
         }
 
@@ -62,5 +66,19 @@ public class TableComponentProductInjectorImpl implements ComponentProductInject
     private ViewCell makeCellForField(ProductInjectionField productField, ProductView product) {
         String value = productInjectionMapper.getProductFieldByType(productField, product);
         return new ViewCell(value);
+    }
+
+    private void copyCellFormatIfRequired(ViewHeaderCell headerCell, ViewCell newCell) {
+
+        if (headerCell.isCopyAlignment()) {
+            DocComponent headerCellComponent = headerCell.getComponent();
+
+            HorizontalAlignment headerCellAlignment = headerCellComponent.getAlignment();
+            VerticalAlignment headerCellVerticalAlignment = headerCell.getVerticalAlignment();
+
+            newCell.setVerticalAlignment(headerCellVerticalAlignment);
+            DocComponent newCellComponent = newCell.getComponent();
+            newCellComponent.setAlignment(headerCellAlignment);
+        }
     }
 }

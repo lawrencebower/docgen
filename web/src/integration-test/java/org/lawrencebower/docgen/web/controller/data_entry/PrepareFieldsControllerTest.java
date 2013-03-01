@@ -92,7 +92,7 @@ public class PrepareFieldsControllerTest {
         controller.prepareFields();
         sessionData.setShowAutoMappedFields(true);
         List<DocComponentView> docComponentViews = controller.getDocComponentViews();
-        assertEquals(6, docComponentViews.size());//all the components
+        assertEquals(7, docComponentViews.size());//all the components
     }
 
     @Test
@@ -100,6 +100,6 @@ public class PrepareFieldsControllerTest {
         controller.prepareFields();
         sessionData.setShowAutoMappedFields(false);
         List<DocComponentView> docComponentViews = controller.getDocComponentViews();
-        assertEquals(1, docComponentViews.size());//all the components
+        assertEquals(2, docComponentViews.size());//all the components
     }
 }
