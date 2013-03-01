@@ -8,8 +8,8 @@ import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentF
 import org.lawrencebower.docgen.web_model.business_def.mapping.parameter_mapping.field_value.FieldMapper;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSet;
 import org.lawrencebower.docgen.web_model.view.document.DocumentSetFactory;
-import org.lawrencebower.docgen.web_model.view.document.DocumentView;
-import org.lawrencebower.docgen.web_model.view.document.DocumentViewFactory;
+import org.lawrencebower.docgen.web_model.view.document.DocumentViewBuilder;
+import org.lawrencebower.docgen.web_model.view.document.DocumentViewImpl;
 import org.lawrencebower.docgen.web_model.view.document.binding.DataEntryBindBean;
 import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
 import org.lawrencebower.docgen.web_model.view.document.component.DocComponentViewFactory;
@@ -32,7 +32,7 @@ public class FieldMapperImplTest {
     @Autowired
     DocComponentViewFactory componentViewFactory;
     @Autowired
-    DocumentViewFactory documentViewFactory;
+    DocumentViewBuilder documentViewBuilder;
     @Autowired
     DocumentSetFactory documentSetFactory;
 
@@ -90,24 +90,17 @@ public class FieldMapperImplTest {
     //UTIL METHODS//
 
     private DocumentSet addMocksToDocuments() {
-        DocumentView documentView1 = makeDocumentView();
-        addComponentViewToDoc(documentView1, component1);
-        addComponentViewToDoc(documentView1, component2);
+        documentViewBuilder.createDocument();
+        documentViewBuilder.addViewableComponent(component1);
+        documentViewBuilder.addViewableComponent(component2);
+        DocumentViewImpl documentView1 = documentViewBuilder.getDocumentView();
 
-        DocumentView documentView2 = makeDocumentView();
-        addComponentViewToDoc(documentView2, component3);
-        addComponentViewToDoc(documentView2, component4);
+        documentViewBuilder.createDocument();
+        documentViewBuilder.addViewableComponent(component3);
+        documentViewBuilder.addViewableComponent(component4);
+        DocumentViewImpl documentView2 = documentViewBuilder.getDocumentView();
 
         return documentSetFactory.createDocumentInfoSet(documentView1, documentView2);
-    }
-
-    private void addComponentViewToDoc(DocumentView documentView, TextComponent component) {
-        DocComponentView componentView = componentViewFactory.createTextComponentView(component);
-        documentView.addComponentView(componentView);
-    }
-
-    private DocumentView makeDocumentView() {
-        return documentViewFactory.createDocumentView();
     }
 
     private DataEntryBindBean makeBindingBean() {

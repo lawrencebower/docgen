@@ -50,7 +50,7 @@ public class CustomerSelectionController {
         ContactView selectedBusiness = business.getBusinessByCustomerId(customerId);
         sessionData.setSelectedBusiness(selectedBusiness);
 
-        productHelper.putProductsOnModel(model, sessionData);
+        productHelper.putProductsOnModel(model);
 
         return "products";
     }

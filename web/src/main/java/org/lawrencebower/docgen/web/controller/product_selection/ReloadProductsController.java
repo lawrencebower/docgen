@@ -33,7 +33,7 @@ public class ReloadProductsController {
 
         productSelectionBusiness.reloadProducts();
 
-        productHelper.putProductsOnModel(model, sessionData);
+        productHelper.putProductsOnModel(model);
 
         return "products";
     }

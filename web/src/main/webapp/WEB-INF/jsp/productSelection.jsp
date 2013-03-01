@@ -7,10 +7,6 @@
              scope="request"
              type="java.util.List<org.lawrencebower.docgen.web_model.view.product.ProductView>"/>
 
-<jsp:useBean id="productSelectionBean"
-             scope="request"
-             type="org.lawrencebower.docgen.web.controller.product_selection.ProductSelectionBean"/>
-
 <jsp:useBean id="sessionData"
              scope="session"
              type="org.lawrencebower.docgen.web.model.SessionData"/>
@@ -66,28 +62,29 @@ Select products
                     <td>Quantity</td>
                     <td>Cost</td>
                 </tr>
-                <c:forEach var="selectedProduct" items="${productSelectionBean.products}" varStatus="index">
+                <c:forEach var="selectedProduct" items="${sessionData.selectedProducts}" varStatus="index">
                     <c:set var="count" value="${index.index}"/>
 
-                    <spring:bind path="productSelectionBean.products[${count}].productId">
-                        <sf:hidden path="${status.expression}"/>
-                    </spring:bind>
+                    <input id="${selectedProduct.productId}"
+                           name="products[${count}].productId"
+                           value="${selectedProduct.productId}"
+                           type="hidden"/>
 
                     <tr>
                         <td>
                             <c:out value="${selectedProduct.productName}"/>
                             &nbsp;-&nbsp;
-                            <c:out value="${selectedProduct.productModel}"/>
+                            <c:out value="${selectedProduct.modelNumber}"/>
                         </td>
                         <td align="center">
-                            <spring:bind path="productSelectionBean.products[${count}].quantity">
-                                <sf:input path="${status.expression}"/>
-                            </spring:bind>
+                            <input id="${selectedProduct.quantity}"
+                                   name="products[${count}].quantity"
+                                   value="${selectedProduct.quantity}"/>
                         </td>
                         <td align="center">
-                            <spring:bind path="productSelectionBean.products[${count}].value">
-                                <sf:input path="${status.expression}"/>
-                            </spring:bind>
+                            <input id="${selectedProduct.productValue}"
+                                   name="products[${count}].value"
+                                   value="${selectedProduct.productValue}"/>
                         </td>
                     </tr>
                 </c:forEach>

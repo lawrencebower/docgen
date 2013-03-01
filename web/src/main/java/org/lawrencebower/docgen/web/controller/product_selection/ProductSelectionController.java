@@ -55,7 +55,7 @@ public class ProductSelectionController {
     }
 
     public void putAllProductsOnPageModel(Model model) {
-        productHelper.putProductsOnModel(model, sessionData);
+        productHelper.putProductsOnModel(model);
     }
 
     private void getProductAndAddToSession(String productId) {
