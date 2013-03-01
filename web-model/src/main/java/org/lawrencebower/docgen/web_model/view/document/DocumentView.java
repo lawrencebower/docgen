@@ -21,8 +21,6 @@ public interface DocumentView {
 
     Document getDocument();
 
-    void addComponentView(DocComponentView componentView);
-
     List<DocComponentView> getComponentViews();
 
     List<DocComponentView> getComponentViewsWithName(String componentName);

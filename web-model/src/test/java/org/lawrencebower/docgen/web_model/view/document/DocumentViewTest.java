@@ -1,10 +1,11 @@
-package org.lawrencebower.docgen.web_model.view.document.component;
+package org.lawrencebower.docgen.web_model.view.document;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lawrencebower.docgen.core.document.Document;
-import org.lawrencebower.docgen.web_model.view.document.DocumentView;
+import org.lawrencebower.docgen.web_model.view.document.component.DocComponentView;
+import org.lawrencebower.docgen.web_model.view.document.component.DocComponentViewImpl;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,10 +18,10 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:META-INF/web-model-test-context.xml")
-public class DocumentInfoViewTest {
+public class DocumentViewTest {
 
     @Autowired
-    private DocumentView documentView;
+    private DocumentViewImpl documentView;
 
     @Before
     public void setUp(){
@@ -29,8 +30,9 @@ public class DocumentInfoViewTest {
     }
 
     @Test
-    public void testGetComponentsWithName_noComponents_returnsNull() {
-        documentView.addComponentView(mockComponentView("name1"));
+    public void testGetComponentsWithName_noComponents_returnsEmptyList() {
+        List<DocComponentView> result = documentView.getComponentViewsWithName("I dont exist");
+        assertEquals(0, result.size());
     }
 
     @Test

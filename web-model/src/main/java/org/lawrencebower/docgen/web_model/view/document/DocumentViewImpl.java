@@ -72,8 +72,7 @@ public class DocumentViewImpl implements DocumentView {
         return document;
     }
 
-    @Override
-    public void addComponentView(DocComponentView componentView) {
+    protected void addComponentView(DocComponentView componentView) {
         docComponentViews.add(componentView);
     }
 
