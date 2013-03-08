@@ -9,11 +9,14 @@ import org.lawrencebower.docgen.core.document.component.position.HorizontalAlign
 import org.lawrencebower.docgen.core.document.component.text.FontInfo;
 import org.lawrencebower.docgen.core.document.component.text.FontStyle;
 import org.lawrencebower.docgen.core.document.component.text.TextBlock;
+import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.utils.TextGenerator;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import static junit.framework.TestCase.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:META-INF/integration-test-config.xml")
@@ -69,14 +72,14 @@ public class OverlayTextRendererIntegrationTest extends AbstractOverlayRendererT
         String outFilePath = outputPackage + "text_renderer_output_2.pdf";
 
         int width = 300;
-        int height = 200;
+        int height = 300;
 
-        DocCoordinates leftCoordinates = new DocCoordinates(10, 545, width, height);
+        DocCoordinates coordinates = new DocCoordinates(10, 445, width, height);
         String longText = TextGenerator.multiplyText("text ");
         TextBlock textBlock = new TextBlock(longText, new FontInfo("Serif",20, FontStyle.BOLD_ITALIC));
         TextComponent textComponent = new TextComponent(textBlock);
         textComponent.setAlignment(HorizontalAlignment.LEFT);
-        textComponent.setCoordinates(leftCoordinates);
+        textComponent.setCoordinates(coordinates);
         textComponent.setRenderBorder(true);
 
         createPDFAndCompareWithExpected(expectedOutputFilePath,
@@ -107,5 +110,41 @@ public class OverlayTextRendererIntegrationTest extends AbstractOverlayRendererT
                                         inputFilePath,
                                         textComponent);
 
+    }
+
+    @Test
+    public void testRenderComponent_textDoesntFit_ThrowsError() {
+
+        String message = "not set";
+        String expectedMessage = "Can not fit value into box - Value : 'text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  text  \n" +
+                                 "\n" +
+                                 "'\n" +
+                                 "Component : 'component name'";
+
+        try {
+            String expectedOutputFilePath = inputPackage + "not needed";
+            String outFilePath = outputPackage + "not needed";
+
+            int width = 300;
+            int height = 200;//wont fit in this size
+
+            DocCoordinates coordinates = new DocCoordinates(10, 445, width, height);
+            String longText = TextGenerator.multiplyText("text ");
+            TextBlock textBlock = new TextBlock(longText, new FontInfo("Serif",20, FontStyle.BOLD_ITALIC));
+            TextComponent textComponent = new TextComponent(textBlock);
+            textComponent.setName("component name");
+            textComponent.setAlignment(HorizontalAlignment.LEFT);
+            textComponent.setCoordinates(coordinates);
+            textComponent.setRenderBorder(true);
+
+            createPDFAndCompareWithExpected(expectedOutputFilePath,
+                                            outFilePath,
+                                            inputFilePath,
+                                            textComponent);
+        } catch (DocGenException e) {
+            message = e.getMessage();
+        }
+
+        assertEquals(expectedMessage, message);
     }
 }

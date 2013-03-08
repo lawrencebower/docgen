@@ -3,6 +3,7 @@ package org.lawrencebower.docgen.web_logic.business.mapping.parameter_mapping.fi
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.lawrencebower.docgen.core.document.component.DocComponentType;
 import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.generator.custom.component.CustomComponentFactory;
 import org.lawrencebower.docgen.web_model.business_def.mapping.parameter_mapping.field_value.FieldMapper;
@@ -51,7 +52,16 @@ public class FieldMapperImplTest {
 
     @Before
     public void setup() {
-        component1 = mock(TextComponent.class);
+        component1 = mockTextField();
+        component2 = mockTextField();
+        component3 = mockTextField();
+        component4 = mockTextField();
+    }
+
+    private TextComponent mockTextField() {
+        TextComponent component = mock(TextComponent.class);
+        when(component.getComponentType()).thenReturn(DocComponentType.TEXT);
+        return component;
     }
 
     @Test
@@ -61,11 +71,8 @@ public class FieldMapperImplTest {
 
         //define mock behaviour
         when(component1.getName()).thenReturn(fieldName1);
-        component2 = mock(TextComponent.class);
         when(component2.getName()).thenReturn("some value not in the params");
-        component3 = mock(TextComponent.class);
         when(component3.getName()).thenReturn("some value not in the params");
-        component4 = mock(TextComponent.class);
         when(component4.getName()).thenReturn(fieldName1);
 
         //add mocks to Documents

@@ -5,19 +5,19 @@ import com.lowagie.text.Element;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfContentByte;
-import org.lawrencebower.docgen.core.document.component.DocComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
+import org.lawrencebower.docgen.core.exception.ComponentDidntFitException;
 import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.itext_component.ITextComponent;
 import org.lawrencebower.docgen.core.generator.utils.PDFGenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public abstract class AbstractOverlayRenderer {
+public abstract class AbstractOverlayRenderer<T extends ITextComponent> {
 
     @Autowired
     protected PDFGenUtils pdfUtils;
 
-    protected ITextComponent docComponent;
+    protected T docComponent;
 
     protected ColumnText createTextColumn(PdfContentByte canvas,
                                           int boxAlignment,
@@ -65,9 +65,16 @@ public abstract class AbstractOverlayRenderer {
 
     protected void drawColumn(ColumnText column) {
         try {
-            column.go();
+            int status = column.go();
+            checkIfComponentFitted(status);
         } catch (DocumentException e) {
             throw new DocGenException(e);
+        }
+    }
+
+    protected void checkIfComponentFitted(int status) {
+        if (ColumnText.hasMoreText(status)) {
+            throw new ComponentDidntFitException("didnt fit");
         }
     }
 

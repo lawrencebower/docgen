@@ -7,6 +7,7 @@ import org.lawrencebower.docgen.core.document.component.TextComponent;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.table.TableCell;
 import org.lawrencebower.docgen.core.document.component.table.TableComponent;
+import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.itext_component.utils.LayoutTableGenerator;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -14,6 +15,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
+
+import static junit.framework.TestCase.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:META-INF/integration-test-config.xml")
@@ -94,6 +97,50 @@ public class OverlayTableRendererIntegrationTest extends AbstractOverlayRenderer
                                         inputFilePath,
                                         tableComponent);
 
+    }
+
+    @Test
+    public void testRenderComponent_doesntFitInArea_throwsError() {
+
+        String message = "not set";
+        String expectedMessage = "Can not fit table into box - 'main table'";
+
+        try {
+            String expectedOutputFilePath = inputPackage + "not_needed";
+            String outFilePath = outputPackage + "not needed";
+
+            int width = 10;
+            int height = 10;
+
+            DocCoordinates tableCoordinates = new DocCoordinates(100, 345, width, height);
+
+            TableComponent tableComponent = getTableComponent(tableCoordinates);
+
+            tableComponent.setRenderBorder(true);
+
+            tableComponent.setName("main table");
+
+            List<TableCell> allCells = tableComponent.getAllRenderableCells();
+
+            TableComponent nestedTableComponent = LayoutTableGenerator.makeLayoutTableComponent(3, 3);
+            nestedTableComponent.setName("nested table");
+            nestedTableComponent.setWidthPercentage(100);
+            TableCell tableCell = allCells.get(3);
+            tableCell.setPadding(0);
+            tableCell.setComponent(nestedTableComponent);
+
+            TextComponent nestedTextComponent = new TextComponent("This is a text component");
+            allCells.get(4).setComponent(nestedTextComponent);
+
+            createPDFAndCompareWithExpected(expectedOutputFilePath,
+                                            outFilePath,
+                                            inputFilePath,
+                                            tableComponent);
+        } catch (DocGenException e) {
+            message = e.getMessage();
+        }
+
+        assertEquals(expectedMessage, message);
     }
 
     public TableComponent getTableComponent(DocCoordinates coordinates) {

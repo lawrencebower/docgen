@@ -5,6 +5,8 @@ import com.lowagie.text.pdf.ColumnText;
 import com.lowagie.text.pdf.PdfContentByte;
 import org.lawrencebower.docgen.core.document.component.position.DocCoordinates;
 import org.lawrencebower.docgen.core.document.component.position.HorizontalAlignment;
+import org.lawrencebower.docgen.core.exception.ComponentDidntFitException;
+import org.lawrencebower.docgen.core.exception.DocGenException;
 import org.lawrencebower.docgen.core.generator.model.DocComponentRenderer;
 import org.lawrencebower.docgen.core.generator.model.itext_component.ITextCheckBoxComponent;
 import org.lawrencebower.docgen.core.generator.overlay.OverlayComponentRendererInfo;
@@ -56,5 +58,14 @@ public class OverlayCheckBoxRenderer
         drawColumn(column);
     }
 
-
+    @Override
+    protected void checkIfComponentFitted(int status) {
+        try {
+            super.checkIfComponentFitted(status);
+        } catch (ComponentDidntFitException e) {
+            String componentName = docComponent.getName();
+            String message = String.format("Can not fit checkbox into area - Component : '%s'", componentName);
+            throw new DocGenException(message);
+        }
+    }
 }

@@ -14,6 +14,10 @@ public class ITextTextComponent extends AbstractITextComponent<Phrase, TextCompo
     private ITextTextComponent() {
     }
 
+    public String getStringValue() {
+        return component.getTextString();
+    }
+
     @Override
     public Phrase createITextComponent() {
 
