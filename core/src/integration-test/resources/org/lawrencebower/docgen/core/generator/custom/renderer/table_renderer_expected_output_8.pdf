@@ -162,10 +162,10 @@ BT
 (2)Tj
 ET
 BT
-1 0 0 1 230.77 771 Tm
+1 0 0 1 230.77 777 Tm
 /F1 10 Tf
 (This is a TextComponent, not)Tj
-1 0 0 1 230.77 755 Tm
+1 0 0 1 230.77 767 Tm
 (a TableTextComponent)Tj
 ET
 BT
@@ -203,7 +203,7 @@ BT
 /F1 10 Tf
 (2)Tj
 ET
-◊Å7
+%7Å@
 endstream
 endobj
 4 0 obj
@@ -219,7 +219,7 @@ endobj
 <</Type/Catalog/Pages 3 0 R>>
 endobj
 6 0 obj
-<</Producer(iText 2.1.7 by 1T3XT)/ModDate(D:20120907124818+01'00')/CreationDate(D:20120907124818+01'00')>>
+<</Producer(iText 2.1.7 by 1T3XT)/ModDate(D:20130308173640Z)/CreationDate(D:20130308173640Z)>>
 endobj
 xref
 0 7
@@ -231,7 +231,7 @@ xref
 0000002278 00000 n 
 0000002323 00000 n 
 trailer
-<</Root 5 0 R/ID [<84f133dddb32347500faea65ae5db49a><310dd818a70355e0d4836746fe1ac6d6>]/Info 6 0 R/Size 7>>
+<</Root 5 0 R/ID [<4944cf538fb54436be44339131cd3698><d0f7adbaf3f19914ac2ab1a99de6fd67>]/Info 6 0 R/Size 7>>
 startxref
-2445
+2433
 %%EOF

@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.util.List;
 
 public class PDFGenUtilsImpl implements PDFGenUtils {
 
@@ -94,18 +95,41 @@ public class PDFGenUtilsImpl implements PDFGenUtils {
 
         Phrase iTextPhrase = new Phrase();
 
-        for (TextFragment textFragment : textBlock.getFragments()) {
+        List<TextFragment> fragments = textBlock.getFragments();
 
-            if(textFragment.getText() == null){
+        for (TextFragment textFragment : fragments) {
+
+            String text = textFragment.getText();
+
+            if(text == null){
                 continue;
             }
 
-            Font iTextFont = mapFont(textFragment.getFontInfo());
-            Chunk iTextChunk = new Chunk(textFragment.getText(), iTextFont);
+            FontInfo fontInfo = textFragment.getFontInfo();
+            Font iTextFont = mapFont(fontInfo);
+            Chunk iTextChunk = new Chunk(text, iTextFont);
             iTextPhrase.add(iTextChunk);
         }
 
+        float largestFontSize = getLargestFontSize(fragments);
+        iTextPhrase.setLeading(largestFontSize);
+
         return iTextPhrase;
+    }
+
+    public float getLargestFontSize(List<TextFragment> fragments) {
+
+        float largestFont = 0;
+
+        for (TextFragment fragment : fragments) {
+            FontInfo fontInfo = fragment.getFontInfo();
+            int fontSize = fontInfo.getFontSize();
+            if(largestFont < fontSize){
+                largestFont = fontSize;
+            }
+        }
+
+        return largestFont;
     }
 
     private Font mapFont(FontInfo fontInfo) {

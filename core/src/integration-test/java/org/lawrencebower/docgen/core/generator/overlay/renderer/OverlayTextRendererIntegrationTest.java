@@ -72,9 +72,9 @@ public class OverlayTextRendererIntegrationTest extends AbstractOverlayRendererT
         String outFilePath = outputPackage + "text_renderer_output_2.pdf";
 
         int width = 300;
-        int height = 300;
+        int height = 400;
 
-        DocCoordinates coordinates = new DocCoordinates(10, 445, width, height);
+        DocCoordinates coordinates = new DocCoordinates(10, 345, width, height);
         String longText = TextGenerator.multiplyText("text ");
         TextBlock textBlock = new TextBlock(longText, new FontInfo("Serif",20, FontStyle.BOLD_ITALIC));
         TextComponent textComponent = new TextComponent(textBlock);
