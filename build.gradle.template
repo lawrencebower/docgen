@@ -14,8 +14,8 @@ project(':web-model') {
 project(':web-logic') {
     dependencies {
         compile project(':core'), project(':web-model')
-        testCompile project(':docgen:core').sourceSets.test.output,
-                project(':docgen:web-model').sourceSets.test.output
+        testCompile project(':core').sourceSets.test.output,
+                project(':web-model').sourceSets.test.output
     }
 }
 
