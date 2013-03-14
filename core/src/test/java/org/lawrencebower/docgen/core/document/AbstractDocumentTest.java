@@ -19,6 +19,7 @@ public class AbstractDocumentTest {
 
     @Test
     public void testSetName_emptyNameSet_throwsError() {
+        System.out.println("AbstractDocumentTest.testSetName_emptyNameSet_throwsError");
         try {
             factory.getCustomDocument("");
         } catch (DocGenException e) {

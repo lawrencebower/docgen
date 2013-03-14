@@ -41,4 +41,5 @@ task integrationTest(type: Test, dependsOn: jar) {
     classpath = sourceSets.integrationTest.runtimeClasspath
     systemProperties['jar.path'] = jar.archivePath
 }
+
 check.dependsOn integrationTest

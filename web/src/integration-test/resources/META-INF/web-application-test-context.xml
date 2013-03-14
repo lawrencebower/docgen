@@ -14,7 +14,7 @@
 
     <import resource="web-application-test-params.xml"/>
 
-    <import resource="global-params.xml"/>
+    <import resource="global-test-params.xml"/>
 
     <bean name="sessionData"
           class="org.lawrencebower.docgen.web.model.SessionData"

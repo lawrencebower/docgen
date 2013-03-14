@@ -13,7 +13,7 @@
 
     <import resource="web-logic-test-params.xml"/>
 
-    <import resource="global-params.xml"/>
+    <import resource="global-test-params.xml"/>
 
     <context:component-scan base-package="org.lawrencebower.docgen.web_logic"/>
 
