@@ -17,7 +17,7 @@ to a local directory.
 
 2: Make a copy of "settings.gradle.template" to file "settings.gradle" and modify the contents to point to your local install of java 1.7
 
-3: Make a copy of "build.gradle.template" to "build.gradle"
+3: Make a copy of "gradle.properties.template" to "gradle.properties"
 
 4: copy and rename the following config xml files from *.template.xml to *.xml"and modify the output paths to write to a file on your machine where you want output to go:
 
