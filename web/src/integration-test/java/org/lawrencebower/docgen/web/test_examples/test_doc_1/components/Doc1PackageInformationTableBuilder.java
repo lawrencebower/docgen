@@ -17,8 +17,6 @@ import org.lawrencebower.docgen.web_model.view.document.DocumentViewBuilder;
 
 import java.awt.*;
 
-import static org.lawrencebower.docgen.custom_docs.commercial_invoice.CommercialInvoice.TOTAL_VALUE_NAME;
-
 public class Doc1PackageInformationTableBuilder {
 
     private DocumentViewBuilder documentViewBuilder;
@@ -73,6 +71,8 @@ public class Doc1PackageInformationTableBuilder {
         ViewHeaderCell originCell = new ViewHeaderCell(productOriginName);
         originCell.setText("Country of origin");
         headerRow.addCell(originCell);
+
+        String TOTAL_VALUE_NAME = "totalValue";
 
         ViewHeaderCell totalCell = new ViewHeaderCell(TOTAL_VALUE_NAME);
         totalCell.setText("Total Value");
