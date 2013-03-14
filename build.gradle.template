@@ -3,6 +3,8 @@ subprojects {
     apply plugin: 'war'
 }
 
+defaultTasks 'clean', 'test', 'integrationTest', 'war'
+
 project(':web-model') {
     dependencies {
         compile project(':core')
@@ -12,6 +14,8 @@ project(':web-model') {
 project(':web-logic') {
     dependencies {
         compile project(':core'), project(':web-model')
+        testCompile project(':docgen:core').sourceSets.test.output,
+                project(':docgen:web-model').sourceSets.test.output
     }
 }
 
