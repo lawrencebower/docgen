@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class PdfDirWriterImpl implements PdfDirWriter {
 
-    private DateFormat format = new SimpleDateFormat("dd_MM_yyyy-HH-mm-ss");
+    private DateFormat format = new SimpleDateFormat("yyyy_MM_dd-HH-mm-ss");
 
     @Override
     public File createPDFDir(String dirRoot) {
