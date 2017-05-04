@@ -32,3 +32,4 @@ docgen/core/src/test/resources/META-INF/global-test-params.template.xml
 7: Run 'gradle war' to build the war file which will be written to docgen/web/build/libs/docgen.war
 
 
+
