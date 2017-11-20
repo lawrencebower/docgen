@@ -15,7 +15,7 @@ public abstract class AbstractDocument<T extends RenderableComponent> implements
     public void setName(String name) {
 
         if(StringUtils.isWhitespace(name)){
-            throw new DocGenException("Name is not set");
+            throw new DocGenException("Name is not set ");
         }
 
         this.name = name;
